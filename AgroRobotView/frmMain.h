@@ -178,6 +178,7 @@ namespace AgroRobotView {
 				this->Hide(); // Ocultar el formulario de login
 				frmMenu^ menu = gcnew frmMenu(u); // Pasar el usuario autenticado
 				menu->ShowDialog(); // Mostrar el formulario del menú principal
+				this->Close(); // Cerrar el formulario de login al volver del menú
 				return;
 			}
 		}

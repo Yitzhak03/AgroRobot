@@ -1,5 +1,5 @@
 #pragma once
-
+#include "frmMantUsuarios.h"
 namespace AgroRobotView {
 
 	using namespace System;
@@ -12,8 +12,7 @@ namespace AgroRobotView {
 	/// <summary>
 	/// Resumen de frmMenu
 	/// </summary>
-	public ref class frmMenu : public System::Windows::Forms::Form
-	{
+	public ref class frmMenu : public System::Windows::Forms::Form {
 	public:
 		frmMenu(void)
 		{
@@ -26,7 +25,7 @@ namespace AgroRobotView {
 		frmMenu(Usuario^ user)
 		{
 			InitializeComponent();
-		
+
 		}
 	protected:
 		/// <summary>
@@ -34,8 +33,7 @@ namespace AgroRobotView {
 		/// </summary>
 		~frmMenu()
 		{
-			if (components)
-			{
+			if (components) {
 				delete components;
 			}
 		}
@@ -46,13 +44,14 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::ToolStripMenuItem^ planDeAlimentacionToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ almacenToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ reportesToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^ salirToolStripMenuItem;
-	private: 
+	private: System::Windows::Forms::ToolStripMenuItem^ volverToolStripMenuItem;
+
+	private:
 	private:
 		/// <summary>
 		/// Variable del diseñador necesaria.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -67,7 +66,7 @@ namespace AgroRobotView {
 			this->planDeAlimentacionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->almacenToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->reportesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->salirToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->volverToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -77,11 +76,11 @@ namespace AgroRobotView {
 			{
 				this->admnistracionToolStripMenuItem,
 					this->diagnosticoToolStripMenuItem, this->planDeAlimentacionToolStripMenuItem, this->almacenToolStripMenuItem, this->reportesToolStripMenuItem,
-					this->salirToolStripMenuItem
+					this->volverToolStripMenuItem
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(710, 24);
+			this->menuStrip1->Size = System::Drawing::Size(854, 24);
 			this->menuStrip1->TabIndex = 1;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -90,6 +89,7 @@ namespace AgroRobotView {
 			this->admnistracionToolStripMenuItem->Name = L"admnistracionToolStripMenuItem";
 			this->admnistracionToolStripMenuItem->Size = System::Drawing::Size(100, 20);
 			this->admnistracionToolStripMenuItem->Text = L"Administracion";
+			this->admnistracionToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::admnistracionToolStripMenuItem_Click);
 			// 
 			// diagnosticoToolStripMenuItem
 			// 
@@ -115,17 +115,17 @@ namespace AgroRobotView {
 			this->reportesToolStripMenuItem->Size = System::Drawing::Size(65, 20);
 			this->reportesToolStripMenuItem->Text = L"Reportes";
 			// 
-			// salirToolStripMenuItem
+			// volverToolStripMenuItem
 			// 
-			this->salirToolStripMenuItem->Name = L"salirToolStripMenuItem";
-			this->salirToolStripMenuItem->Size = System::Drawing::Size(41, 20);
-			this->salirToolStripMenuItem->Text = L"Salir";
+			this->volverToolStripMenuItem->Name = L"volverToolStripMenuItem";
+			this->volverToolStripMenuItem->Size = System::Drawing::Size(51, 20);
+			this->volverToolStripMenuItem->Text = L"Volver";
 			// 
 			// frmMenu
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(710, 527);
+			this->ClientSize = System::Drawing::Size(854, 527);
 			this->Controls->Add(this->menuStrip1);
 			this->IsMdiContainer = true;
 			this->Name = L"frmMenu";
@@ -137,5 +137,14 @@ namespace AgroRobotView {
 
 		}
 #pragma endregion
+	//===============================================================================
+	//==============================Administracion===================================
+	//===============================================================================
+	private: System::Void admnistracionToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		frmMantUsuarios^ frm = gcnew frmMantUsuarios();
+		frm->MdiParent = this;
+		frm->Show();
+	}
 	};
 }

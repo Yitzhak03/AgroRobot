@@ -114,9 +114,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="frmMain.cpp" />
+    <ClCompile Include="frmMantUsuarios.cpp" />
     <ClCompile Include="frmMenu.cpp" />
-    <ClCompile Include="frmNuevoDiagnostico.cpp" />
-    <ClCompile Include="frmNuevoDieta.cpp" />
+    <ClCompile Include="frmNuevoUsuario.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -130,13 +130,13 @@
     <ClInclude Include="frmMain.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="frmMantUsuarios.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="frmMenu.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="frmNuevoDiagnostico.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="frmNuevoDieta.h">
+    <ClInclude Include="frmNuevoUsuario.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
@@ -144,14 +144,14 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmMantUsuarios.resx">
+      <DependentUpon>frmMantUsuarios.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMenu.resx">
       <DependentUpon>frmMenu.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmNuevoDiagnostico.resx">
-      <DependentUpon>frmNuevoDiagnostico.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmNuevoDieta.resx">
-      <DependentUpon>frmNuevoDieta.h</DependentUpon>
+    <EmbeddedResource Include="frmNuevoUsuario.resx">
+      <DependentUpon>frmNuevoUsuario.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

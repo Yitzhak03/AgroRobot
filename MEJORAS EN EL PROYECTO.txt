@@ -1,0 +1,4 @@
+MEJORAS EN EL PROYECTO
+======================
+frmMain: no dejar pasar a los baneados, eliminados y suspendidos.
+frmNuevoUsuario: mostrar el id de manera automatica (en orden que esta disponible) cuando se ejecuta.
