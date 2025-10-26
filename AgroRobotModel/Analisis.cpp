@@ -2,7 +2,7 @@
 #include "Muestra.h"    // include real porque aquí necesitamos la definición completa
 #include "Dieta.h"      // include real para usar Dieta en implementaciones
 
-using namespace AGROModel;
+using namespace AgroRobotModel;
 
 Analisis::Analisis()
 {

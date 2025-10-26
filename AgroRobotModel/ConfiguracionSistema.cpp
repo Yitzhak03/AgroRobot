@@ -1,6 +1,6 @@
 #include "ConfiguracionSistema.h"
 
-using namespace AGROModel;
+using namespace AgroRobotModel;
 
 ConfiguracionSistema::ConfiguracionSistema() {
 

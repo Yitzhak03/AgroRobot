@@ -1,6 +1,6 @@
 #pragma once
 #include "RegistroActividad.h"
-namespace AGROModel {
+namespace AgroRobotModel {
     using namespace System;
 
     // Forward declarations to avoid circular includes

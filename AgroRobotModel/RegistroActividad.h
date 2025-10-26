@@ -1,6 +1,6 @@
 #pragma once
 #include "Usuario.h"
-namespace AGROModel {
+namespace AgroRobotModel {
     using namespace System;
 
     public ref class RegistroActividad {

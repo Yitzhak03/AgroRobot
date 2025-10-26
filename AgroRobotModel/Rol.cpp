@@ -1,13 +1,13 @@
 #include "Rol.h"
 
-using namespace AGROModel;
+using namespace AgroRobotModel;
 
 Rol::Rol() {
 
 }
 
-Rol::Rol(int idRol, String^ nombreRol, String^ permisos) {
-	IdRol = idRol;
-	NombreRol = nombreRol;
+Rol::Rol(int id, String^ nombre, String^ permisos) {
+	Id = id;
+	Nombre = nombre;
 	Permisos = permisos;
 }

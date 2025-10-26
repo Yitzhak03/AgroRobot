@@ -1,6 +1,6 @@
 #pragma once
 #include "Robot.h"
-namespace AGROModel {
+namespace AgroRobotModel {
     public ref class RobotSuplementos: Robot {
     public:
         property int Dispensadores;

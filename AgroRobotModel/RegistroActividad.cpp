@@ -1,6 +1,6 @@
 #include "RegistroActividad.h"
 
-using namespace AGROModel;
+using namespace AgroRobotModel;
 
 RegistroActividad::RegistroActividad() {
 

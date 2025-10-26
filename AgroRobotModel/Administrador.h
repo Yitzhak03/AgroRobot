@@ -1,7 +1,7 @@
 #pragma once
 #include "Usuario.h"
 #include "ConfiguracionSistema.h"
-namespace AGROModel {
+namespace AgroRobotModel {
     using namespace System;
     using namespace System::Collections::Generic;
     public ref class Administrador : public Usuario {

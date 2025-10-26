@@ -1,6 +1,6 @@
 #include "RobotSuplementos.h"
 
-using namespace AGROModel;
+using namespace AgroRobotModel;
 
 RobotSuplementos::RobotSuplementos()
 {

@@ -1,6 +1,6 @@
 #include "Usuario.h"
 
-using namespace AGROModel;
+using namespace AgroRobotModel;
 
 Usuario::Usuario() {
 
@@ -13,7 +13,7 @@ Usuario::Usuario(
 	String^ ultimoAcceso,
 	String^ estadoCuenta,
 	List<Rol^>^ roles,
-	Alerta^ alertasUsuario) 
+	List<Alerta^>^ alerts)
 {
 	Id = id;
 	Nombre = nombre;
@@ -22,5 +22,5 @@ Usuario::Usuario(
 	UltimoAcceso = ultimoAcceso;
 	EstadoCuenta = estadoCuenta;
 	Roles = roles;
-	AlertasUsuario = alertasUsuario;
+	Alerts = alerts;
 }

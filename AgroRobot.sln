@@ -5,6 +5,10 @@ VisualStudioVersion = 17.14.36616.10 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AgroRobotModel", "AgroRobotModel\AgroRobotModel.vcxproj", "{867E236B-108B-6A22-58CA-FC27C6D1021E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AgroRobotView", "AgroRobotView\AgroRobotView.vcxproj", "{3DA4225D-5BDE-CF41-D2C0-96E9492F7DDD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AgroRobotController", "AgroRobotController\AgroRobotController.vcxproj", "{39588BCD-891C-E2FD-8D97-1B6613B6D0E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +25,22 @@ Global
 		{867E236B-108B-6A22-58CA-FC27C6D1021E}.Release|x64.Build.0 = Release|x64
 		{867E236B-108B-6A22-58CA-FC27C6D1021E}.Release|x86.ActiveCfg = Release|Win32
 		{867E236B-108B-6A22-58CA-FC27C6D1021E}.Release|x86.Build.0 = Release|Win32
+		{3DA4225D-5BDE-CF41-D2C0-96E9492F7DDD}.Debug|x64.ActiveCfg = Debug|x64
+		{3DA4225D-5BDE-CF41-D2C0-96E9492F7DDD}.Debug|x64.Build.0 = Debug|x64
+		{3DA4225D-5BDE-CF41-D2C0-96E9492F7DDD}.Debug|x86.ActiveCfg = Debug|Win32
+		{3DA4225D-5BDE-CF41-D2C0-96E9492F7DDD}.Debug|x86.Build.0 = Debug|Win32
+		{3DA4225D-5BDE-CF41-D2C0-96E9492F7DDD}.Release|x64.ActiveCfg = Release|x64
+		{3DA4225D-5BDE-CF41-D2C0-96E9492F7DDD}.Release|x64.Build.0 = Release|x64
+		{3DA4225D-5BDE-CF41-D2C0-96E9492F7DDD}.Release|x86.ActiveCfg = Release|Win32
+		{3DA4225D-5BDE-CF41-D2C0-96E9492F7DDD}.Release|x86.Build.0 = Release|Win32
+		{39588BCD-891C-E2FD-8D97-1B6613B6D0E0}.Debug|x64.ActiveCfg = Debug|x64
+		{39588BCD-891C-E2FD-8D97-1B6613B6D0E0}.Debug|x64.Build.0 = Debug|x64
+		{39588BCD-891C-E2FD-8D97-1B6613B6D0E0}.Debug|x86.ActiveCfg = Debug|Win32
+		{39588BCD-891C-E2FD-8D97-1B6613B6D0E0}.Debug|x86.Build.0 = Debug|Win32
+		{39588BCD-891C-E2FD-8D97-1B6613B6D0E0}.Release|x64.ActiveCfg = Release|x64
+		{39588BCD-891C-E2FD-8D97-1B6613B6D0E0}.Release|x64.Build.0 = Release|x64
+		{39588BCD-891C-E2FD-8D97-1B6613B6D0E0}.Release|x86.ActiveCfg = Release|Win32
+		{39588BCD-891C-E2FD-8D97-1B6613B6D0E0}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

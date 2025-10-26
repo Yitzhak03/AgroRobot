@@ -1,6 +1,6 @@
 #include "HistoriaClinica.h"
 
-using namespace AGROModel;
+using namespace AgroRobotModel;
 
 HistoriaClinica::HistoriaClinica() {
 }

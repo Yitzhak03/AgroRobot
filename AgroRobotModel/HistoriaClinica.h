@@ -1,7 +1,7 @@
 #pragma once
 #include "Reporte.h"
 #include "Analisis.h"
-namespace AGROModel {
+namespace AgroRobotModel {
     using namespace System;
 	using namespace System::Collections::Generic;
     public ref class HistoriaClinica {

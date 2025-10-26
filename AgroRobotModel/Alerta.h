@@ -1,6 +1,6 @@
 #pragma once
 #include "Reporte.h"
-namespace AGROModel {
+namespace AgroRobotModel {
     using namespace System;
     public ref class Alerta {
     public: 

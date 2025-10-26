@@ -1,16 +1,16 @@
 #pragma once
-namespace AGROModel {
+namespace AgroRobotModel {
     using namespace System;
 
     public ref class Rol {
     public: 
-        property int IdRol;
-        property String^ NombreRol;
+        property int Id;
+        property String^ Nombre;
         property String^ Permisos;
         Rol();
         Rol(
-            int idRol,
-            String^ nombreRol,
+            int id,
+            String^ nombre,
             String^ permisos
         );
     };
