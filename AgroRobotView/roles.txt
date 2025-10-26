@@ -1,0 +1,5 @@
+1;Super;S
+2;Mante;M
+3;Regu;R
+4;Carga;C
+5;Limpi;L

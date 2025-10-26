@@ -15,15 +15,20 @@ namespace AgroRobotView {
 	/// <summary>
 	/// Resumen de frmNuevoUsuario
 	/// </summary>
-	public ref class frmNuevoUsuario : public System::Windows::Forms::Form
-	{
+	public ref class frmNuevoUsuario : public System::Windows::Forms::Form {
 	public:
 		frmNuevoUsuario(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: agregar código de constructor aquí
-			//
+			// Obtener los roles desde el controlador
+			RolController^ rolCtrl = gcnew RolController();
+			List<Rol^>^ listaRoles = rolCtrl->readTxt();
+			// Limpiar los items existentes
+			checkedListBox1->Items->Clear();
+			// Agregar los nombres de los roles al CheckedListBox
+			for each (Rol ^ rol in listaRoles) {
+				checkedListBox1->Items->Add(rol->Nombre);
+			}
 		}
 
 	protected:
@@ -32,8 +37,7 @@ namespace AgroRobotView {
 		/// </summary>
 		~frmNuevoUsuario()
 		{
-			if (components)
-			{
+			if (components) {
 				delete components;
 			}
 		}
@@ -64,7 +68,7 @@ namespace AgroRobotView {
 		/// <summary>
 		/// Variable del diseñador necesaria.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -76,6 +80,7 @@ namespace AgroRobotView {
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->checkedListBox1 = (gcnew System::Windows::Forms::CheckedListBox());
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
@@ -85,7 +90,6 @@ namespace AgroRobotView {
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->checkedListBox1 = (gcnew System::Windows::Forms::CheckedListBox());
 			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -131,6 +135,15 @@ namespace AgroRobotView {
 			this->groupBox1->TabIndex = 3;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Datos del Usuario";
+			// 
+			// checkedListBox1
+			// 
+			this->checkedListBox1->CheckOnClick = true;
+			this->checkedListBox1->FormattingEnabled = true;
+			this->checkedListBox1->Location = System::Drawing::Point(137, 225);
+			this->checkedListBox1->Name = L"checkedListBox1";
+			this->checkedListBox1->Size = System::Drawing::Size(101, 79);
+			this->checkedListBox1->TabIndex = 16;
 			// 
 			// label7
 			// 
@@ -214,20 +227,6 @@ namespace AgroRobotView {
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Id: ";
 			// 
-			// checkedListBox1
-			// 
-			this->checkedListBox1->CheckOnClick = true;
-			this->checkedListBox1->FormattingEnabled = true;
-			this->checkedListBox1->Items->AddRange(gcnew cli::array< System::Object^  >(5)
-			{
-				L"Supervisión", L"Mantenimiento", L"Regulación",
-					L"Carga", L"Limpieza"
-			});
-			this->checkedListBox1->Location = System::Drawing::Point(137, 225);
-			this->checkedListBox1->Name = L"checkedListBox1";
-			this->checkedListBox1->Size = System::Drawing::Size(101, 79);
-			this->checkedListBox1->TabIndex = 16;
-			// 
 			// frmNuevoUsuario
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -244,9 +243,9 @@ namespace AgroRobotView {
 
 		}
 #pragma endregion
-	//===============================================================================
-	//==============================Grabar===========================================
-	//===============================================================================
+		//===============================================================================
+		//==============================Grabar===========================================
+		//===============================================================================
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		// Crear el objeto Usuario
@@ -255,33 +254,33 @@ namespace AgroRobotView {
 		nuevoUsuario->Nombre = textBox2->Text;
 		nuevoUsuario->Email = textBox3->Text;
 		nuevoUsuario->Contrasenha = textBox4->Text;
-		// Agregar los roles seleccionados
-		for (int i = 0; i < checkedListBox1->Items->Count; i++)
-		{
-			if (checkedListBox1->GetItemChecked(i))
-			{
-				nuevoUsuario->Roles->Add(checkedListBox1->Items[i]->ToString());
-			}
-		}
-		// Llamar al controlador para agregar el nuevo usuario
-		ControladorUsuario^ controlador = gcnew ControladorUsuario();
-		bool exito = controlador->AgregarUsuario(nuevoUsuario);
-		if (exito)
-		{
-			MessageBox::Show("Usuario agregado exitosamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
-			this->Close();
-		}
-		else
-		{
-			MessageBox::Show("Error al agregar el usuario.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-		}
+		//// Agregar los roles seleccionados
+		//for (int i = 0; i < checkedListBox1->Items->Count; i++)
+		//{
+		//	if (checkedListBox1->GetItemChecked(i))
+		//	{
+		//		nuevoUsuario->Roles->Add(checkedListBox1->Items[i]->ToString());
+		//	}
+		//}
+		//// Llamar al controlador para agregar el nuevo usuario
+		//ControladorUsuario^ controlador = gcnew ControladorUsuario();
+		//bool exito = controlador->AgregarUsuario(nuevoUsuario);
+		//if (exito)
+		//{
+		//	MessageBox::Show("Usuario agregado exitosamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+		//	this->Close();
+		//}
+		//else
+		//{
+		//	MessageBox::Show("Error al agregar el usuario.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		//}
 	}
-	//===============================================================================
-	//==============================Cancelar=========================================
-	//===============================================================================
+		   //===============================================================================
+		   //==============================Cancelar=========================================
+		   //===============================================================================
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		this->Close();
 	}
-};
+	};
 }
