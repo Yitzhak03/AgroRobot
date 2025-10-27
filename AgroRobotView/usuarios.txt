@@ -5,3 +5,4 @@
 8;cvb;cvb;cvb;;Nuevo;2|5;
 12;asdas;asd;asd;;Nuevo;2;
 11;Daniel;asd@asd.com;qwe;;Nuevo;2|3|4;
+1;Usuario;admin@pucp.edu.pe;admin;;Nuevo;1;
