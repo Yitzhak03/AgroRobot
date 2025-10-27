@@ -8,5 +8,6 @@ namespace AgroRobotController {
 		RolController();
 		List<Rol^>^ readTxt();
 		void writeTxt(List<Rol^>^ lista);
+		int obtenerIdPorNombre(String^ nombre);
 	};
 }

@@ -254,26 +254,29 @@ namespace AgroRobotView {
 		nuevoUsuario->Nombre = textBox2->Text;
 		nuevoUsuario->Email = textBox3->Text;
 		nuevoUsuario->Contrasenha = textBox4->Text;
-		//// Agregar los roles seleccionados
-		//for (int i = 0; i < checkedListBox1->Items->Count; i++)
-		//{
-		//	if (checkedListBox1->GetItemChecked(i))
-		//	{
-		//		nuevoUsuario->Roles->Add(checkedListBox1->Items[i]->ToString());
-		//	}
-		//}
-		//// Llamar al controlador para agregar el nuevo usuario
-		//ControladorUsuario^ controlador = gcnew ControladorUsuario();
-		//bool exito = controlador->AgregarUsuario(nuevoUsuario);
-		//if (exito)
-		//{
-		//	MessageBox::Show("Usuario agregado exitosamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
-		//	this->Close();
-		//}
-		//else
-		//{
-		//	MessageBox::Show("Error al agregar el usuario.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-		//}
+		nuevoUsuario->UltimoAcceso = ""; // Inicialmente vacío
+		nuevoUsuario->EstadoCuenta = "Nuevo"; // Estado por defecto
+		nuevoUsuario->IdsAlertas = nullptr; // Inicialmente sin alertas
+		// Creación de la lista de IdsRoles
+		nuevoUsuario->IdsRoles = gcnew List<int>();
+		//Crear el controlador de roles
+		RolController^ rolCtrl = gcnew RolController();
+		// Agregar los roles seleccionados
+		for (int i = 0; i < checkedListBox1->Items->Count; i++) {
+			if (checkedListBox1->GetItemChecked(i)) {
+				String^ rolNombre = checkedListBox1->Items[i]->ToString();
+				// Obtener el Id del rol
+				int rolId = rolCtrl->obtenerIdPorNombre(rolNombre);
+				// Agregar el Id del rol a la lista de IdsRoles del usuario
+				nuevoUsuario->IdsRoles->Add(rolId);
+			}
+		}
+		// Llamar al controlador para agregar el nuevo usuario
+		UsuarioController^ userCtrl = gcnew UsuarioController();
+		userCtrl->agregarUsuario(nuevoUsuario);
+		// Confirmación
+		MessageBox::Show("Usuario agregado correctamente.", "Nuevo Usuario", MessageBoxButtons::OK, MessageBoxIcon::Information);
+		this->Close();
 	}
 		   //===============================================================================
 		   //==============================Cancelar=========================================

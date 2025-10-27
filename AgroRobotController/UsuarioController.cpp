@@ -14,69 +14,62 @@ List<Usuario^>^ UsuarioController::readTxt()
 		array<String^>^ datos = linea->Split(';');
 		Usuario^ user = gcnew Usuario();
 		user->Id = Convert::ToInt32(datos[0]);
-        user->Nombre = datos[1]->Trim();
-        user->Email = datos[2]->Trim();
-        user->Contrasenha = datos[3]->Trim();
-        user->UltimoAcceso = datos[4]->Trim();
-        user->EstadoCuenta = datos[5]->Trim();
+		user->Nombre = datos[1];
+		user->Email = datos[2];
+		user->Contrasenha = datos[3];
+		user->UltimoAcceso = datos[4];
+		user->EstadoCuenta = datos[5];
 		// Parsear Roles usando '|' como separador
-		user->Roles = gcnew List<Rol^>();
-		String^ rolesField = datos[6]->Trim();
-		array<String^>^ rolesNames = rolesField->Split('|');
-		for each (String^ rn in rolesNames) {
-			String^ name = rn->Trim();
-			Rol^ r = gcnew Rol();
-			r->Nombre = name;
-			user->Roles->Add(r);
-		}
+		user->IdsRoles = gcnew List<int>();
+		String^ rolesField = datos[6];
+		array<String^>^ rolesIds = rolesField->Split('|');
+		for each (String ^ rolId in rolesIds)
+			user->IdsRoles->Add(Convert::ToInt32(rolId));
 		// Parsear Alertas usando '|' como separador
-		user->Alerts = gcnew List<Alerta^>();
-		String^ alertsField = datos[7]->Trim();
-		array<String^>^ alertsNames = alertsField->Split('|');
+		user->IdsAlertas = gcnew List<int>();
+		String^ alertsField = datos[7];
+		array<String^>^ alertasIds = alertsField->Split('|');
 		if (!String::IsNullOrEmpty(alertsField)) {
-			for each (String^ alert in alertsNames) {
-				String^ type = alert->Trim();
-				Alerta^ a = gcnew Alerta();
-				a->Tipo = type;
-				user->Alerts->Add(a);
-			}
-		} else user->Alerts = nullptr;
+			for each (String ^ alertaId in alertasIds)
+				user->IdsAlertas->Add(Convert::ToInt32(alertaId));
+		} else user->IdsAlertas = nullptr;
 		lista->Add(user);
 	}
 	return lista;
 }
+
 void UsuarioController::writeTxt(List<Usuario^>^ lista)
 {
 	String^ path = "usuarios.txt";
 	// Preparamos el array de líneas con la misma cantidad que la lista
 	array<String^>^ lineas = gcnew array<String^>(lista->Count);
 	for (int i = 0; i < lista->Count; ++i) {
-		Usuario^ usuario = lista[i];
+		Usuario^ u = lista[i];
 		// Construir campo roles (separador '|')
 		String^ rolesField = "";
-		if (usuario->Roles != nullptr && usuario->Roles->Count > 0) {
-			List<String^>^ roleNames = gcnew List<String^>();
-			for each (Rol^ r in usuario->Roles) {
-				roleNames->Add((r->Nombre != nullptr) ? r->Nombre->Trim() : "");
+		if (u->IdsRoles != nullptr && u->IdsRoles->Count > 0) {
+			for (int j = 0; j < u->IdsRoles->Count; ++j) {
+				rolesField += u->IdsRoles[j].ToString();
+				if (j < u->IdsRoles->Count - 1) // Agregar separador solo si no es el último
+					rolesField += "|";
 			}
-			rolesField = String::Join("|", roleNames->ToArray());
 		}
 		// Construir campo alerts (separador '|')
 		String^ alertsField = "";
-		if (usuario->Alerts != nullptr && usuario->Alerts->Count > 0) {
-			List<String^>^ alertNames = gcnew List<String^>();
-			for each (Alerta ^ a in usuario->Alerts) {
-				alertNames->Add((a->Tipo != nullptr) ? a->Tipo->Trim() : "");
+		if (u->IdsAlertas != nullptr && u->IdsAlertas->Count > 0) {
+			for (int j = 0; j < u->IdsAlertas->Count; ++j) {
+				alertsField += u->IdsAlertas[j].ToString();
+				if (j < u->IdsAlertas->Count - 1) // Agregar separador solo si no es el último
+					alertsField += "|";
 			}
-			alertsField = String::Join("|", alertNames->ToArray());
 		}
 		lineas[i] = String::Format("{0};{1};{2};{3};{4};{5};{6};{7}",
-			usuario->Id,
-			(usuario->Nombre != nullptr) ? usuario->Nombre->Trim() : "",
-			(usuario->Email != nullptr) ? usuario->Email->Trim() : "",
-			(usuario->Contrasenha != nullptr) ? usuario->Contrasenha->Trim() : "",
-			(usuario->UltimoAcceso != nullptr) ? usuario->UltimoAcceso->Trim() : "",
-			(usuario->EstadoCuenta != nullptr) ? usuario->EstadoCuenta->Trim() : "",
+			u->Id,
+			u->Nombre,
+			u->Email,
+			u->Contrasenha,
+			u->UltimoAcceso,
+			u->EstadoCuenta,
 			rolesField,
 			alertsField
 		);

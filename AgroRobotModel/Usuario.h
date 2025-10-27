@@ -1,6 +1,4 @@
 #pragma once
-#include "Rol.h"
-#include "Alerta.h"
 namespace AgroRobotModel {
 	using namespace System;
 	using namespace System::Collections::Generic;
@@ -12,8 +10,8 @@ namespace AgroRobotModel {
 		property String^ Contrasenha;
 		property String^ UltimoAcceso;
 		property String^ EstadoCuenta;
-		property List<Rol^>^ Roles;
-		property List<Alerta^>^ Alerts;
+		property List<int>^ IdsRoles;
+		property List<int>^ IdsAlertas;
 		Usuario();
 		Usuario(
 			int id,
@@ -22,8 +20,8 @@ namespace AgroRobotModel {
 			String^ contrasenha,
 			String^ ultimoAcceso,
 			String^ estadoCuenta,
-			List<Rol^>^ roles,
-			List<Alerta^>^ alerts
+			List<int>^ idsRoles,
+			List<int>^ idsAlertas
 		);
 	};
 }

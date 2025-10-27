@@ -1,5 +1,5 @@
-1;Super;S
-2;Mante;M
-3;Regu;R
+1;Supervisión;S
+2;Mantenimiento;M
+3;Regulación;R
 4;Carga;C
-5;Limpi;L
+5;Limpieza;L

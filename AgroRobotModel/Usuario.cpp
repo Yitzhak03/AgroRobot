@@ -12,8 +12,8 @@ Usuario::Usuario(
 	String^ contrasenha,
 	String^ ultimoAcceso,
 	String^ estadoCuenta,
-	List<Rol^>^ roles,
-	List<Alerta^>^ alerts)
+	List<int>^ idsRoles,
+	List<int>^ idsAlertas)
 {
 	Id = id;
 	Nombre = nombre;
@@ -21,6 +21,6 @@ Usuario::Usuario(
 	Contrasenha = contrasenha;
 	UltimoAcceso = ultimoAcceso;
 	EstadoCuenta = estadoCuenta;
-	Roles = roles;
-	Alerts = alerts;
+	IdsRoles = idsRoles;
+	IdsAlertas = idsAlertas;
 }

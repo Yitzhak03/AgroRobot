@@ -36,3 +36,12 @@ void RolController::writeTxt(List<Rol^>^ lista)
 	// Escribimos todas las líneas al archivo (sobrescribe)
 	File::WriteAllLines(path, lineas);
 }
+int RolController::obtenerIdPorNombre(String^ nombre)
+{
+	List<Rol^>^ lista = readTxt();
+	for each (Rol ^ rol in lista) {
+		if (rol->Nombre->Equals(nombre)) {
+			return rol->Id;
+		}
+	}
+}
