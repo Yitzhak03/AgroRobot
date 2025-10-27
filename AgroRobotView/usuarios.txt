@@ -5,4 +5,5 @@
 8;cvb;cvb;cvb;;Nuevo;2|5;
 12;asdas;asd;asd;;Nuevo;2;
 11;Daniel;asd@asd.com;qwe;;Nuevo;2|3|4;
-1;Usuario;admin@pucp.edu.pe;admin;;Nuevo;1;
+18;Leonardo;leonar1420@gmail.com;31416;271025;Inactivo;1|2;1|1
+1304;Farid;faridssj@gmail.com;faridssj;;Nuevo;4;

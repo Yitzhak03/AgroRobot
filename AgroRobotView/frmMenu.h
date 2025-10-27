@@ -22,8 +22,9 @@ namespace AgroRobotView {
 			//
 		}
 		// Nuevo constructor para recibir el usuario autenticado
-		frmMenu(Usuario^ user)
+		frmMenu(Usuario^ usuario)
 		{
+			this->usuario = usuario;
 			InitializeComponent();
 
 		}
@@ -45,6 +46,7 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::ToolStripMenuItem^ almacenToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ reportesToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ volverToolStripMenuItem;
+	private: Usuario^ usuario;
 
 	private:
 	private:
@@ -72,8 +74,7 @@ namespace AgroRobotView {
 			// 
 			// menuStrip1
 			// 
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6)
-			{
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6) {
 				this->admnistracionToolStripMenuItem,
 					this->diagnosticoToolStripMenuItem, this->planDeAlimentacionToolStripMenuItem, this->almacenToolStripMenuItem, this->reportesToolStripMenuItem,
 					this->volverToolStripMenuItem
@@ -96,6 +97,7 @@ namespace AgroRobotView {
 			this->diagnosticoToolStripMenuItem->Name = L"diagnosticoToolStripMenuItem";
 			this->diagnosticoToolStripMenuItem->Size = System::Drawing::Size(82, 20);
 			this->diagnosticoToolStripMenuItem->Text = L"Diagnostico";
+			this->diagnosticoToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::diagnosticoToolStripMenuItem_Click);
 			// 
 			// planDeAlimentacionToolStripMenuItem
 			// 
@@ -143,8 +145,17 @@ namespace AgroRobotView {
 	private: System::Void admnistracionToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		frmMantUsuarios^ frm = gcnew frmMantUsuarios();
-		frm->MdiParent = this;
-		frm->Show();
+		if (this->usuario->Nombre == "Becquer") {
+			frm->MdiParent = this;
+			frm->Show();
+		}
+		else {
+			MessageBox::Show("Usted no tiene acceso al módulo de Administración.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
+		
 	}
-	};
+	
+	private: System::Void diagnosticoToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+};
 }

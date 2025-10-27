@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "frmNuevoUsuario.h"
 namespace AgroRobotView {
 
@@ -19,13 +19,13 @@ namespace AgroRobotView {
 		{
 			InitializeComponent();
 			//
-			//TODO: agregar código de constructor aquí
+			//TODO: agregar cÃ³digo de constructor aquÃ­
 			//
 		}
 
 	protected:
 		/// <summary>
-		/// Limpiar los recursos que se estén usando.
+		/// Limpiar los recursos que se estÃ©n usando.
 		/// </summary>
 		~frmMantUsuarios()
 		{
@@ -64,14 +64,14 @@ namespace AgroRobotView {
 
 	private:
 		/// <summary>
-		/// Variable del diseñador necesaria.
+		/// Variable del diseÃ±ador necesaria.
 		/// </summary>
 		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Método necesario para admitir el Diseñador. No se puede modificar
-		/// el contenido de este método con el editor de código.
+		/// MÃ©todo necesario para admitir el DiseÃ±ador. No se puede modificar
+		/// el contenido de este mÃ©todo con el editor de cÃ³digo.
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -142,8 +142,7 @@ namespace AgroRobotView {
 			// dataGridView1
 			// 
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(7)
-			{
+			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(7) {
 				this->Column1,
 					this->Column2, this->Column3, this->Column4, this->Column5, this->Column6, this->Column7
 			});
@@ -173,7 +172,7 @@ namespace AgroRobotView {
 			// 
 			// Column3
 			// 
-			this->Column3->HeaderText = L"Contraseña";
+			this->Column3->HeaderText = L"ContraseÃ±a";
 			this->Column3->MinimumWidth = 6;
 			this->Column3->Name = L"Column3";
 			this->Column3->Width = 125;
@@ -216,7 +215,7 @@ namespace AgroRobotView {
 			this->groupBox1->Size = System::Drawing::Size(804, 101);
 			this->groupBox1->TabIndex = 11;
 			this->groupBox1->TabStop = false;
-			this->groupBox1->Text = L"Criterios de Búsqueda";
+			this->groupBox1->Text = L"Criterios de BÃºsqueda";
 			// 
 			// button1
 			// 
@@ -227,6 +226,7 @@ namespace AgroRobotView {
 			this->button1->TabIndex = 4;
 			this->button1->Text = L"Buscar";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &frmMantUsuarios::button1_Click);
 			// 
 			// textBox2
 			// 
@@ -235,6 +235,7 @@ namespace AgroRobotView {
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(128, 20);
 			this->textBox2->TabIndex = 3;
+			this->textBox2->Text = L"-";
 			// 
 			// label2
 			// 
@@ -287,14 +288,34 @@ namespace AgroRobotView {
 		//===============================================================================
 		//==============================Show All==========================================
 		//===============================================================================
-	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e)
+public:	void mostrarGrilla(List<Usuario^>^ listaUsuarios)
+{
+	this->dataGridView1->Rows->Clear();
+	for (int i = 0; i < listaUsuarios->Count; i++)
+	{
+		Usuario^ usuario = listaUsuarios[i];
+		array<String^>^ filaGrilla = gcnew array<String^>(7);
+		filaGrilla[0] = Convert::ToString(usuario->Id);
+		filaGrilla[1] = usuario->Nombre;
+		filaGrilla[2] = usuario->Contrasenha;
+		filaGrilla[3] = usuario->UltimoAcceso;
+		filaGrilla[4] = usuario->EstadoCuenta;
+		filaGrilla[5] = Convert::ToString(usuario->IdsRoles);
+		filaGrilla[6] = Convert::ToString(usuario->IdsAlertas);
+		this->dataGridView1->Rows->Add(filaGrilla);
+	}
+	this->dataGridView1->AutoGenerateColumns = false; // Desactivar la generaciï¿½n automï¿½tica de columnas
+	this->dataGridView1->AllowUserToAddRows = false;	 // Evitar que el usuario pueda agregar filas manualmente
+}
+
+private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		// Limpiar el DataGridView antes de mostrar todos los usuarios
 		this->dataGridView1->Rows->Clear();
 		// Crear el controlador de usuarios
 		UsuarioController^ ctrl = gcnew UsuarioController();
 		// Leer la lista de usuarios desde el archivo
-		List<Usuario^>^ lista = ctrl->readTxt();
+		//List<Usuario^>^ lista = ctrl->obtenerTodosUsuarios();
 		// Llenar el DataGridView con los datos de los usuarios
 		/*for each (Usuario ^ u in lista) {
 			this->dataGridView1->Rows->Add(
@@ -314,5 +335,25 @@ namespace AgroRobotView {
 		frmNuevoUsuario^ nuevoUsuarioForm = gcnew frmNuevoUsuario();
 		nuevoUsuarioForm->ShowDialog();
 	}
-	};
+
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		String^ nombreUsuario = "";
+		String^ estadoUsuario = "";
+		if (!textBox1->Text->Equals("-"))
+		{
+			//Obterne el nombre del usuario a buscar
+			nombreUsuario = textBox1->Text;
+		}
+		if (!textBox2->Text->Equals("-"))
+		{
+			// Obtener el nombre del operador a buscar
+			estadoUsuario = textBox2->Text;
+		}
+		// Crear una instancia del controlador y buscar el operador por nombre
+		UsuarioController^ ctrl = gcnew UsuarioController();
+		List<Usuario^>^ listaUsuarios = ctrl->obtenerUsuarioPorNombreEstado(nombreUsuario, estadoUsuario);
+		// Mostrar los resultados en el DataGridView
+		mostrarGrilla(listaUsuarios);
+	}
+};
 }

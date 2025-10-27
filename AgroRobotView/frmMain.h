@@ -161,17 +161,20 @@ namespace AgroRobotView {
 	{
 		String^ usuario = textBox1->Text;
 		String^ contrasenha = textBox2->Text;
+		
 		// Validar campos vacíos
 		if (String::IsNullOrEmpty(usuario) || String::IsNullOrEmpty(contrasenha)) {
 			MessageBox::Show("Ingrese usuario y contraseña.", "Login", MessageBoxButtons::OK, MessageBoxIcon::Warning);
 			return;
 		}
+
 		UsuarioController^ ctrl = gcnew UsuarioController();
-		List<Usuario^>^ lista = ctrl->readTxt();
+		List<Usuario^>^ lista = ctrl->obtenerTodosUsuarios();
+		
 		for each (Usuario ^ u in lista) {
 			// comparar nombre de usuario sin distinguir mayúsculas/minúsculas,
 			// pero la contraseña sí (por convención)
-			if (String::Compare(u->Nombre, usuario, true) == 0 && u->Contrasenha->Equals(contrasenha)) {
+			if (String::Compare(u->Nombre, usuario, false) == 0 && u->Contrasenha->Equals(contrasenha)) {
 				// Autenticado
 				MessageBox::Show("Acceso correcto. Bienvenido " + u->Nombre, "Login", MessageBoxButtons::OK, MessageBoxIcon::Information);
 				// Aquí puedes guardar el usuario actual en una variable global/static o abrir el formulario principal
