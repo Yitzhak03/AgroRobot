@@ -144,7 +144,6 @@ namespace AgroRobotView {
 			this->checkedListBox1->Name = L"checkedListBox1";
 			this->checkedListBox1->Size = System::Drawing::Size(101, 79);
 			this->checkedListBox1->TabIndex = 16;
-			this->checkedListBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &frmNuevoUsuario::checkedListBox1_SelectedIndexChanged);
 			// 
 			// label7
 			// 
@@ -286,7 +285,5 @@ namespace AgroRobotView {
 	{
 		this->Close();
 	}
-	private: System::Void checkedListBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
-	}
-};
+	};
 }

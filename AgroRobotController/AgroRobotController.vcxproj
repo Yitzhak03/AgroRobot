@@ -111,6 +111,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="GestorNutricionalController.h" />
     <ClInclude Include="RolController.h" />
     <ClInclude Include="UsuarioController.h" />
   </ItemGroup>
@@ -120,6 +121,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GestorNutricionalController.cpp" />
     <ClCompile Include="RolController.cpp" />
     <ClCompile Include="UsuarioController.cpp" />
   </ItemGroup>

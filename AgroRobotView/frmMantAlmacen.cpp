@@ -1,0 +1,2 @@
+#include "frmMantAlmacen.h"
+
