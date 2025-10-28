@@ -1,4 +1,6 @@
 #pragma once
+#include "frmNuevoAnimal.h"
+#include "frmEditarAnimal.h"
 
 namespace AgroRobotView {
 
@@ -6,8 +8,11 @@ namespace AgroRobotView {
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
 	using namespace System::Windows::Forms;
+	using namespace System::Collections::Generic;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace AgroRobotController;
+	using namespace AgroRobotModel;
 
 	/// <summary>
 	/// Resumen de frmMantAnimales
@@ -21,6 +26,7 @@ namespace AgroRobotView {
 			//
 			//TODO: agregar código de constructor aquí
 			//
+			this->animalController = gcnew GestorNutricionalController();
 		}
 
 	protected:
@@ -39,18 +45,25 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::Button^ button3;
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
+
+
+
+
+
+
 	private: System::Windows::Forms::GroupBox^ groupBox1;
 	private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::TextBox^ textBox2;
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Label^ label1;
+	private: GestorNutricionalController^ animalController;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
 
 	private:
 		/// <summary>
@@ -69,18 +82,18 @@ namespace AgroRobotView {
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
@@ -94,6 +107,7 @@ namespace AgroRobotView {
 			this->button4->TabIndex = 15;
 			this->button4->Text = L"Eliminar";
 			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &frmMantAnimales::button4_Click);
 			// 
 			// button3
 			// 
@@ -104,6 +118,7 @@ namespace AgroRobotView {
 			this->button3->TabIndex = 14;
 			this->button3->Text = L"Editar";
 			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &frmMantAnimales::button3_Click);
 			// 
 			// button2
 			// 
@@ -114,6 +129,7 @@ namespace AgroRobotView {
 			this->button2->TabIndex = 13;
 			this->button2->Text = L"Agregar";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &frmMantAnimales::button2_Click);
 			// 
 			// dataGridView1
 			// 
@@ -129,48 +145,6 @@ namespace AgroRobotView {
 			this->dataGridView1->RowTemplate->Height = 24;
 			this->dataGridView1->Size = System::Drawing::Size(801, 235);
 			this->dataGridView1->TabIndex = 12;
-			// 
-			// Column1
-			// 
-			this->Column1->HeaderText = L"ID Animal";
-			this->Column1->MinimumWidth = 6;
-			this->Column1->Name = L"Column1";
-			this->Column1->Width = 125;
-			// 
-			// Column2
-			// 
-			this->Column2->HeaderText = L"Especie";
-			this->Column2->MinimumWidth = 6;
-			this->Column2->Name = L"Column2";
-			this->Column2->Width = 125;
-			// 
-			// Column3
-			// 
-			this->Column3->HeaderText = L"Dieta";
-			this->Column3->MinimumWidth = 6;
-			this->Column3->Name = L"Column3";
-			this->Column3->Width = 125;
-			// 
-			// Column4
-			// 
-			this->Column4->HeaderText = L"Fecha Registro";
-			this->Column4->MinimumWidth = 6;
-			this->Column4->Name = L"Column4";
-			this->Column4->Width = 125;
-			// 
-			// Column5
-			// 
-			this->Column5->HeaderText = L"Estado";
-			this->Column5->MinimumWidth = 6;
-			this->Column5->Name = L"Column5";
-			this->Column5->Width = 125;
-			// 
-			// Column6
-			// 
-			this->Column6->HeaderText = L"Alimentos";
-			this->Column6->MinimumWidth = 6;
-			this->Column6->Name = L"Column6";
-			this->Column6->Width = 125;
 			// 
 			// groupBox1
 			// 
@@ -197,6 +171,7 @@ namespace AgroRobotView {
 			this->button1->TabIndex = 4;
 			this->button1->Text = L"Buscar";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &frmMantAnimales::button1_Click);
 			// 
 			// textBox2
 			// 
@@ -232,6 +207,48 @@ namespace AgroRobotView {
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"ID Animal:";
 			// 
+			// Column1
+			// 
+			this->Column1->HeaderText = L"ID Animal";
+			this->Column1->MinimumWidth = 6;
+			this->Column1->Name = L"Column1";
+			this->Column1->Width = 125;
+			// 
+			// Column2
+			// 
+			this->Column2->HeaderText = L"Especie";
+			this->Column2->MinimumWidth = 6;
+			this->Column2->Name = L"Column2";
+			this->Column2->Width = 125;
+			// 
+			// Column3
+			// 
+			this->Column3->HeaderText = L"Peso";
+			this->Column3->MinimumWidth = 6;
+			this->Column3->Name = L"Column3";
+			this->Column3->Width = 125;
+			// 
+			// Column4
+			// 
+			this->Column4->HeaderText = L"Edad";
+			this->Column4->MinimumWidth = 6;
+			this->Column4->Name = L"Column4";
+			this->Column4->Width = 125;
+			// 
+			// Column5
+			// 
+			this->Column5->HeaderText = L"Estado de salud:";
+			this->Column5->MinimumWidth = 6;
+			this->Column5->Name = L"Column5";
+			this->Column5->Width = 125;
+			// 
+			// Column6
+			// 
+			this->Column6->HeaderText = L"Ultima dieta:";
+			this->Column6->MinimumWidth = 6;
+			this->Column6->Name = L"Column6";
+			this->Column6->Width = 125;
+			// 
 			// frmMantAnimales
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
@@ -244,6 +261,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmMantAnimales";
 			this->Text = L"frmMantAnimales";
+			this->Load += gcnew System::EventHandler(this, &frmMantAnimales::frmMantAnimales_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
@@ -251,6 +269,107 @@ namespace AgroRobotView {
 
 		}
 #pragma endregion
+	private: System::Void frmMantAnimales_Load(System::Object^ sender, System::EventArgs^ e) {
+		List<Animal^>^ listaAnimales = this->animalController->obtenerTodosAnimales();
+		mostrarGrilla(listaAnimales);
+	}
+
+		//================================================Nuevo============================================//
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+		frmNuevoAnimal^ nuevoAnimalForm = gcnew frmNuevoAnimal(this->animalController);
+		nuevoAnimalForm->ShowDialog(this);
+		List<Animal^>^ listaAnimales = this->animalController->obtenerTodosAnimales();
+		mostrarGrilla(listaAnimales);
+	}
+
+		   //================================================Eliminar============================================//
+	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (this->dataGridView1->SelectedRows->Count > 0)
+		{
+
+			System::Windows::Forms::DialogResult resultado = MessageBox::Show("¿Está seguro de que desea eliminar el animal seleccionado?",
+				"Confirmación de eliminación", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
+
+			if (resultado == System::Windows::Forms::DialogResult::No)
+			{
+				return;
+			}
+
+			int selectedRowIndex = this->dataGridView1->SelectedRows[0]->Index;
+			int id = Convert::ToInt32(this->dataGridView1->Rows[selectedRowIndex]->Cells[0]->Value);
+			this->animalController->eliminarAnimal(id);
+			List<Animal^>^ listaAnimales = this->animalController->obtenerTodosAnimales();
+			mostrarGrilla(listaAnimales);
+		}
+		else
+		{
+			MessageBox::Show("Por favor, seleccione un operador para eliminar.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+		}
+	}
+
+		   //================================================Buscar============================================//
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		int id = 0;
+		String^ especie = "";
+		if (!textBox1->Text->Equals(""))
+		{
+			//Obterne el id del operador a buscar
+			id = Convert::ToInt32(textBox1->Text);
+		}
+		if (!textBox2->Text->Equals(""))
+		{
+			// Obtener el nombre del operador a buscar
+			especie = textBox2->Text;
+		}
+		// Crear una instancia del controlador y buscar el operador por nombre
+		List<Animal^>^ listaAnimales = this->animalController->consultarAnimalporIdEspecie(id, especie);
+		// Mostrar los resultados en el DataGridView
+		mostrarGrilla(listaAnimales);
+	}
+
+
+		   //================================================Editar============================================//
+	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (this->dataGridView1->SelectedRows->Count > 0)
+		{
+			int filaSeleccionada = this->dataGridView1->SelectedRows[0]->Index;
+			int id = Convert::ToInt32(this->dataGridView1->Rows[filaSeleccionada]->Cells[0]->Value);
+
+			Animal^ animalSeleccionado = this->animalController->consultarAnimalporId(id);
+			if (animalSeleccionado == nullptr)
+			{
+				MessageBox::Show("No se encontró el animal seleccionado.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				return;
+			}
+			frmEditarAnimal^ editarAnimalForm = gcnew frmEditarAnimal(this->animalController, animalSeleccionado);
+			editarAnimalForm->ShowDialog();
+			// Llamar al m?todo para cargar la lista de maquinas nuevamente
+			List<Animal^>^ listaAnimales = this->animalController->obtenerTodosAnimales();
+			mostrarGrilla(listaAnimales);
+		}
+		else
+		{
+			MessageBox::Show("Por favor, seleccione un operador para editar.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+		}
+	}
+
+	public:	void mostrarGrilla(List<Animal^>^ listaAnimales)
+	{
+		this->dataGridView1->Rows->Clear();
+		for (int i = 0; i < listaAnimales->Count; i++)
+		{
+			Animal^ animal = listaAnimales[i];
+			array<String^>^ filaGrilla = gcnew array<String^>(7);
+			filaGrilla[0] = Convert::ToString(animal->IdAnimal);
+			filaGrilla[1] = animal->Especie;
+			filaGrilla[2] = Convert::ToString(animal->Peso);
+			filaGrilla[3] = Convert::ToString(animal->Edad);
+			filaGrilla[4] = animal->EstadoSalud;
+			filaGrilla[5] = animal->UltimaDieta;
+			this->dataGridView1->Rows->Add(filaGrilla);
+		}
+	}
+
 	};
 }
 

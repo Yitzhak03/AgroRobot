@@ -228,6 +228,7 @@ namespace AgroRobotView {
 			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"frmMantDietas";
 			this->Text = L"frmMantDietas";
+			this->Load += gcnew System::EventHandler(this, &frmMantDietas::frmMantDietas_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
@@ -235,6 +236,11 @@ namespace AgroRobotView {
 
 		}
 #pragma endregion
+	private: System::Void frmMantDietas_Load(System::Object^ sender, System::EventArgs^ e) {
+		List<Dieta^>^ listaDietas = this->dietaController->obtenerTodasDietas();
+		mostrarGrilla(listaDietas);
+	}
+
 	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 

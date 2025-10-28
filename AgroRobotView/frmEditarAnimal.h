@@ -4,7 +4,6 @@ namespace AgroRobotView {
 
 	using namespace System;
 	using namespace System::ComponentModel;
-	using namespace System::Collections::Generic;
 	using namespace System::Collections;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
@@ -13,12 +12,12 @@ namespace AgroRobotView {
 	using namespace AgroRobotModel;
 
 	/// <summary>
-	/// Resumen de frmNuevoAnimal
+	/// Resumen de frmEditarAnimal
 	/// </summary>
-	public ref class frmNuevoAnimal : public System::Windows::Forms::Form
+	public ref class frmEditarAnimal : public System::Windows::Forms::Form
 	{
 	public:
-		frmNuevoAnimal(void)
+		frmEditarAnimal(void)
 		{
 			InitializeComponent();
 			//
@@ -26,17 +25,18 @@ namespace AgroRobotView {
 			//
 		}
 
-		frmNuevoAnimal(GestorNutricionalController^ animalController)
+		frmEditarAnimal(GestorNutricionalController^ animalController, Animal^ objAnimal)
 		{
 			InitializeComponent();
 			this->animalController = animalController;
+			this->objAnimal = objAnimal;
 		}
 
 	protected:
 		/// <summary>
 		/// Limpiar los recursos que se estén usando.
 		/// </summary>
-		~frmNuevoAnimal()
+		~frmEditarAnimal()
 		{
 			if (components)
 			{
@@ -60,6 +60,7 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::Label^ label2;
 	private: GestorNutricionalController^ animalController;
+	private: Animal^ objAnimal;
 
 	private:
 		/// <summary>
@@ -94,25 +95,25 @@ namespace AgroRobotView {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(232, 405);
+			this->button2->Location = System::Drawing::Point(243, 412);
 			this->button2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(81, 23);
-			this->button2->TabIndex = 5;
+			this->button2->TabIndex = 8;
 			this->button2->Text = L"Cancelar";
 			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &frmNuevoAnimal::button2_Click);
+			this->button2->Click += gcnew System::EventHandler(this, &frmEditarAnimal::button2_Click);
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(84, 405);
+			this->button1->Location = System::Drawing::Point(95, 412);
 			this->button1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(75, 23);
-			this->button1->TabIndex = 4;
-			this->button1->Text = L"Guardar";
+			this->button1->TabIndex = 7;
+			this->button1->Text = L"Modificar";
 			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &frmNuevoAnimal::button1_Click);
+			this->button1->Click += gcnew System::EventHandler(this, &frmEditarAnimal::button1_Click);
 			// 
 			// groupBox1
 			// 
@@ -128,12 +129,12 @@ namespace AgroRobotView {
 			this->groupBox1->Controls->Add(this->label4);
 			this->groupBox1->Controls->Add(this->label3);
 			this->groupBox1->Controls->Add(this->label2);
-			this->groupBox1->Location = System::Drawing::Point(15, 14);
+			this->groupBox1->Location = System::Drawing::Point(26, 21);
 			this->groupBox1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->groupBox1->Name = L"groupBox1";
 			this->groupBox1->Padding = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->groupBox1->Size = System::Drawing::Size(369, 356);
-			this->groupBox1->TabIndex = 3;
+			this->groupBox1->TabIndex = 6;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Datos:";
 			// 
@@ -179,6 +180,7 @@ namespace AgroRobotView {
 			// 
 			// textBox1
 			// 
+			this->textBox1->Enabled = false;
 			this->textBox1->Location = System::Drawing::Point(219, 41);
 			this->textBox1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->textBox1->Name = L"textBox1";
@@ -217,9 +219,9 @@ namespace AgroRobotView {
 			this->label4->AutoSize = true;
 			this->label4->Location = System::Drawing::Point(51, 146);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(45, 16);
+			this->label4->Size = System::Drawing::Size(42, 16);
 			this->label4->TabIndex = 3;
-			this->label4->Text = L"Peso: ";
+			this->label4->Text = L"Peso:";
 			// 
 			// label3
 			// 
@@ -239,25 +241,30 @@ namespace AgroRobotView {
 			this->label2->TabIndex = 1;
 			this->label2->Text = L"ID Animal:";
 			// 
-			// frmNuevoAnimal
+			// frmEditarAnimal
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(411, 478);
+			this->ClientSize = System::Drawing::Size(431, 483);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->groupBox1);
-			this->Margin = System::Windows::Forms::Padding(4);
-			this->Name = L"frmNuevoAnimal";
-			this->Text = L"frmNuevoAnimal";
-			this->Load += gcnew System::EventHandler(this, &frmNuevoAnimal::frmNuevoAnimal_Load);
+			this->Name = L"frmEditarAnimal";
+			this->Text = L"frmEditarAnimal";
+			this->Load += gcnew System::EventHandler(this, &frmEditarAnimal::frmEditarAnimal_Load);
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
-	private: System::Void frmNuevoAnimal_Load(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void frmEditarAnimal_Load(System::Object^ sender, System::EventArgs^ e) {
+		this->textBox1->Text = this->objAnimal->IdAnimal.ToString();
+		this->textBox2->Text = this->objAnimal->Especie;
+		this->textBox3->Text = this->objAnimal->Peso.ToString();
+		this->textBox4->Text = this->objAnimal->Edad.ToString();
+		this->textBox5->Text = this->objAnimal->EstadoSalud;
+		this->textBox6->Text = this->objAnimal->UltimaDieta;
 	}
 
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -267,21 +274,13 @@ namespace AgroRobotView {
 		double edad = Convert::ToDouble(this->textBox4->Text);
 		String^ estadoSalud = this->textBox5->Text;
 		String^ ultimaDieta = this->textBox6->Text;
-		if (id == 0 || especie->Equals("") || peso == 0.0 || edad == 0.0 || estadoSalud->Equals("") || ultimaDieta->Equals("")) {
-			MessageBox::Show("Por favor, complete todos los campos.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
-			return;
-		}
-
-		Animal^ nuevoAnimal = gcnew Animal(id, especie, peso, edad, estadoSalud, ultimaDieta, gcnew List<Muestra^>(), gcnew Dieta(), gcnew List<HistoriaClinica^>());
-		this->animalController->registrarAnimal(nuevoAnimal);
-		MessageBox::Show("Animal agregado correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+		this->animalController->modificarAnimal(id, especie, peso, edad, estadoSalud, ultimaDieta);
 		this->Close();
 	}
 
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
 	}
-
 
 	};
 }

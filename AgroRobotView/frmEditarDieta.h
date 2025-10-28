@@ -78,15 +78,15 @@ namespace AgroRobotView {
 			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
+			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->label5 = (gcnew System::Windows::Forms::Label());
-			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
 			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -144,6 +144,14 @@ namespace AgroRobotView {
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &frmEditarDieta::button1_Click);
 			// 
+			// textBox5
+			// 
+			this->textBox5->Location = System::Drawing::Point(153, 248);
+			this->textBox5->Margin = System::Windows::Forms::Padding(4);
+			this->textBox5->Name = L"textBox5";
+			this->textBox5->Size = System::Drawing::Size(132, 22);
+			this->textBox5->TabIndex = 5;
+			// 
 			// textBox3
 			// 
 			this->textBox3->Location = System::Drawing::Point(153, 139);
@@ -151,6 +159,15 @@ namespace AgroRobotView {
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->Size = System::Drawing::Size(132, 22);
 			this->textBox3->TabIndex = 5;
+			// 
+			// label5
+			// 
+			this->label5->Location = System::Drawing::Point(36, 251);
+			this->label5->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(124, 25);
+			this->label5->TabIndex = 4;
+			this->label5->Text = L"Frecuencia:";
 			// 
 			// label4
 			// 
@@ -205,28 +222,11 @@ namespace AgroRobotView {
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"ID:";
 			// 
-			// label5
-			// 
-			this->label5->Location = System::Drawing::Point(36, 251);
-			this->label5->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
-			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(124, 25);
-			this->label5->TabIndex = 4;
-			this->label5->Text = L"Frecuencia:";
-			// 
-			// textBox5
-			// 
-			this->textBox5->Location = System::Drawing::Point(153, 248);
-			this->textBox5->Margin = System::Windows::Forms::Padding(4);
-			this->textBox5->Name = L"textBox5";
-			this->textBox5->Size = System::Drawing::Size(132, 22);
-			this->textBox5->TabIndex = 5;
-			// 
 			// frmEditarDieta
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(392, 406);
+			this->ClientSize = System::Drawing::Size(392, 455);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmEditarDieta";
 			this->Text = L"frmEditarDieta";

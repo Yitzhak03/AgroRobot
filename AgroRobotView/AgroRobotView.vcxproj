@@ -113,6 +113,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="frmEditarAnimal.cpp" />
     <ClCompile Include="frmEditarDieta.cpp" />
     <ClCompile Include="frmEditInsumo.cpp" />
     <ClCompile Include="frmMain.cpp" />
@@ -141,6 +142,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="frmEditarAnimal.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="frmEditarDieta.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -203,6 +207,12 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmEditarAnimal.resx">
+      <DependentUpon>frmEditarAnimal.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEditarDieta.resx">
+      <DependentUpon>frmEditarDieta.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmEditarReporte.resx">
       <DependentUpon>frmEditarReporte.h</DependentUpon>
     </EmbeddedResource>
@@ -214,6 +224,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMantAlmacen.resx">
       <DependentUpon>frmMantAlmacen.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMantAnimales.resx">
+      <DependentUpon>frmMantAnimales.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMantDiagnostico.resx">
       <DependentUpon>frmMantDiagnostico.h</DependentUpon>
