@@ -40,9 +40,9 @@ namespace AgroRobotController {
 		void closeDieta();
 
 		/*AlertaDeConsumo*/
-		String^ recibirAlertaConsumo(int idAnimal, double consumo);
-		OrdenDistribucion^ enviarOrdenAlmacen(int id);
-		bool guardarHistorialDieta(int idAnimal, Dieta^ nuevaDieta);
-		List<Animal^>^ alertaNuevoAnimal();
+		void enviarOrdenAlimentacion(int idDieta, String^ prioridad);
+		/*void verificarConsumoAnimal(int idAnimal, double consumoEsperado, double consumoReal);
+		void recibirNuevaDieta(Dieta^ nuevaDieta);
+		void generarAlerta(String^ mensaje);*/
 	};
 }

@@ -134,6 +134,7 @@
     <ClCompile Include="frmNuevoMuestraH.cpp" />
     <ClCompile Include="frmNuevoMuestraS.cpp" />
     <ClCompile Include="frmNuevoUsuario.cpp" />
+    <ClCompile Include="frmOrdenesAlimentacion.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -211,6 +212,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmNuevoUsuario.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="frmOrdenesAlimentacion.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>

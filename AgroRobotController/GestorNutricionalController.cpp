@@ -1,5 +1,6 @@
 #pragma once
 #include "GestorNutricionalController.h"
+#include "AlmacenController.h"
 
 using namespace System::Runtime::Serialization::Formatters::Binary;
 using namespace System::IO;
@@ -209,111 +210,12 @@ void GestorNutricionalController::closeDieta() {
 }
 
 
-String^ GestorNutricionalController::recibirAlertaConsumo(int idAnimal, double consumo) {
-	Animal^ animal = nullptr;
-	for each (Animal ^ a in this->listaAnimales) {
-		if (a->IdAnimal == idAnimal) {
-			animal = a;
-			break;
-		}
-	}
-	if (animal == nullptr) {
-		return "Animal no encontrado.";
-	} 
-	if (animal->Dietaa == nullptr) {
-		return "El animal no tiene dieta asignada.";
-	}
+void GestorNutricionalController::enviarOrdenAlimentacion(int idDieta, String^ prioridad) {
+	AlmacenController^ gestorAlmacen = gcnew AlmacenController();
 
-	double consumoEsperado = 100.0;
-	double diferencia = consumo - consumoEsperado;
+	int nuevoId = gestorAlmacen->listarOrdenes()->Count + 1;
+	String^ fecha = DateTime::Now.ToString("yyyy-MM-dd");
 
-	if (Math::Abs(diferencia) < 10) {
-		return "Consumo normal para el animal." + animal->Especie + ".";
-	}
-	if (diferencia < 0) {
-		return "El animal " + animal->Especie + " está consumiendo menos de lo esperado.";
-	}
-	return "El animal " + animal->Especie + " está consumiendo más de lo esperado.";
-}
-
-OrdenDistribucion^ GestorNutricionalController::enviarOrdenAlmacen(int id) {
-	Dieta^ dieta = nullptr;
-	for each (Dieta ^ d in this->listaDietas) {
-		if (d->Id == id) {
-			dieta = d;
-			break;
-		}
-	}
-
-	if (dieta == nullptr) {
-		return nullptr;
-	}
-
-	OrdenDistribucion^ orden = gcnew OrdenDistribucion(
-		listaOrdenes->Count + 1,
-		id,
-		"AgroRobot",
-		DateTime::Now.ToString("yyyy-MM-dd HH:mm:ss"),
-		"Ruta",
-		"Normal",
-		nullptr,
-		nullptr,
-		gcnew List<Insumo^>());
-
-	dieta->OrdenesDistribucion->Add(orden);
-	listaOrdenes->Add(orden);
-
-	return orden;
-}
-
-bool GestorNutricionalController::guardarHistorialDieta(int idAnimal, Dieta^ nuevaDieta) {
-	Animal^ animal = nullptr;
-	for each (Animal ^ a in this->listaAnimales) {
-		if (a->IdAnimal == idAnimal) {
-			animal = a;
-			break;
-		}
-	}
-
-	if (animal == nullptr) {
-		return false;
-	}
-
-	HistoriaClinica^ nuevaHistoria = gcnew HistoriaClinica();
-	nuevaHistoria->IdAnimal = idAnimal;
-	nuevaHistoria->RegistrarAnalisis = "";
-	nuevaHistoria->RegistrarDietas = "";
-	
-	if (animal->Dietaa != nullptr) {
-		nuevaHistoria->RegistrarDietas = "Cambio de dieta: de [" + animal->Dietaa->Alimentos + "] a [" + nuevaDieta->Alimentos + "]";
-	}
-	else {
-		nuevaHistoria->RegistrarDietas = "Asignación inicial de dieta: [" + nuevaDieta->Alimentos + "]";
-	}
-
-	nuevaHistoria->EvolucionSalud = "Pendiente de evaluación";
-	nuevaHistoria->PlanesNutricionales = "Dieta actual inciada el " + DateTime::Now.ToString("yyyy-MM-dd");
-	nuevaHistoria->ReporteAsociado = nullptr;
-	nuevaHistoria->AnalisisRealizados = gcnew List<Analisis^>();
-
-	if (animal->HistoriasClinicas == nullptr) {
-		animal->HistoriasClinicas = gcnew List<HistoriaClinica^>();
-	}
-
-	animal->HistoriasClinicas->Add(nuevaHistoria);
-
-	animal->Dietaa = nuevaDieta;
-	animal->UltimaDieta = DateTime::Now.ToString("yyyy-MM-dd");
-	
-	return true;
-}
-
-List<Animal^>^ GestorNutricionalController::alertaNuevoAnimal() {
-	List<Animal^>^ animalesSinDieta = gcnew List <Animal^>();
-	for each (Animal ^ animal in this->listaAnimales) {
-		if (animal->Dietaa == nullptr) {
-			animalesSinDieta->Add(animal);
-		}
-	}
-	return animalesSinDieta;
+	OrdenDistribucion^ nuevaOrden = gcnew OrdenDistribucion(nuevoId, idDieta, "AgroRobot", fecha, "Ruta X", prioridad, nullptr, nullptr, gcnew List<Insumo^>());
+	gestorAlmacen->registrarOrden(nuevaOrden);
 }

@@ -8,7 +8,7 @@ namespace AgroRobotView {
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
 	using namespace System::Windows::Forms;
-	using namespace System::Collections::Generic; 
+	using namespace System::Collections::Generic;
 	using namespace System::Data;
 	using namespace System::Drawing;
 	using namespace AgroRobotController;
@@ -58,6 +58,13 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
 	private: GestorNutricionalController^ dietaController;
+	private: System::Windows::Forms::Button^ button5;
+	private: System::Windows::Forms::GroupBox^ groupBox2;
+
+	private: System::Windows::Forms::TextBox^ txtID;
+	private: System::Windows::Forms::Label^ label3;
+	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::ComboBox^ comboBox1;
 
 	private:
 		/// <summary>
@@ -85,13 +92,20 @@ namespace AgroRobotView {
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->button5 = (gcnew System::Windows::Forms::Button());
+			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
+			this->txtID = (gcnew System::Windows::Forms::TextBox());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBox1->SuspendLayout();
+			this->groupBox2->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// button4
 			// 
-			this->button4->Location = System::Drawing::Point(672, 444);
+			this->button4->Location = System::Drawing::Point(578, 422);
 			this->button4->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(75, 23);
@@ -102,7 +116,7 @@ namespace AgroRobotView {
 			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(419, 444);
+			this->button3->Location = System::Drawing::Point(325, 422);
 			this->button3->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(75, 23);
@@ -113,7 +127,7 @@ namespace AgroRobotView {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(136, 444);
+			this->button2->Location = System::Drawing::Point(42, 422);
 			this->button2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(75, 23);
@@ -129,12 +143,12 @@ namespace AgroRobotView {
 				this->Column1,
 					this->Column2, this->Column3, this->Column4, this->Column5
 			});
-			this->dataGridView1->Location = System::Drawing::Point(67, 183);
+			this->dataGridView1->Location = System::Drawing::Point(24, 164);
 			this->dataGridView1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersWidth = 51;
 			this->dataGridView1->RowTemplate->Height = 24;
-			this->dataGridView1->Size = System::Drawing::Size(801, 235);
+			this->dataGridView1->Size = System::Drawing::Size(680, 235);
 			this->dataGridView1->TabIndex = 7;
 			// 
 			// Column1
@@ -177,11 +191,11 @@ namespace AgroRobotView {
 			this->groupBox1->Controls->Add(this->button1);
 			this->groupBox1->Controls->Add(this->textBox1);
 			this->groupBox1->Controls->Add(this->label1);
-			this->groupBox1->Location = System::Drawing::Point(67, 41);
+			this->groupBox1->Location = System::Drawing::Point(24, 22);
 			this->groupBox1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->groupBox1->Name = L"groupBox1";
 			this->groupBox1->Padding = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->groupBox1->Size = System::Drawing::Size(801, 122);
+			this->groupBox1->Size = System::Drawing::Size(680, 122);
 			this->groupBox1->TabIndex = 6;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Criterios de Búsqueda";
@@ -215,11 +229,71 @@ namespace AgroRobotView {
 			this->label1->Text = L"ID:";
 			this->label1->Click += gcnew System::EventHandler(this, &frmMantDietas::label1_Click);
 			// 
+			// button5
+			// 
+			this->button5->Location = System::Drawing::Point(67, 141);
+			this->button5->Name = L"button5";
+			this->button5->Size = System::Drawing::Size(172, 23);
+			this->button5->TabIndex = 11;
+			this->button5->Text = L"Enviar orden";
+			this->button5->UseVisualStyleBackColor = true;
+			this->button5->Click += gcnew System::EventHandler(this, &frmMantDietas::button5_Click);
+			// 
+			// groupBox2
+			// 
+			this->groupBox2->Controls->Add(this->comboBox1);
+			this->groupBox2->Controls->Add(this->txtID);
+			this->groupBox2->Controls->Add(this->label3);
+			this->groupBox2->Controls->Add(this->button5);
+			this->groupBox2->Controls->Add(this->label2);
+			this->groupBox2->Location = System::Drawing::Point(733, 22);
+			this->groupBox2->Name = L"groupBox2";
+			this->groupBox2->Size = System::Drawing::Size(317, 183);
+			this->groupBox2->TabIndex = 12;
+			this->groupBox2->TabStop = false;
+			this->groupBox2->Text = L"Envio de órdenes";
+			// 
+			// txtID
+			// 
+			this->txtID->Location = System::Drawing::Point(157, 39);
+			this->txtID->Name = L"txtID";
+			this->txtID->Size = System::Drawing::Size(100, 22);
+			this->txtID->TabIndex = 12;
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Location = System::Drawing::Point(50, 94);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(65, 16);
+			this->label3->TabIndex = 1;
+			this->label3->Text = L"Prioridad:";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(50, 45);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(58, 16);
+			this->label2->TabIndex = 0;
+			this->label2->Text = L"ID Dieta:";
+			// 
+			// comboBox1
+			// 
+			this->comboBox1->FormattingEnabled = true;
+			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Alta", L"Media", L"Baja" });
+			this->comboBox1->Location = System::Drawing::Point(157, 86);
+			this->comboBox1->Name = L"comboBox1";
+			this->comboBox1->Size = System::Drawing::Size(121, 24);
+			this->comboBox1->TabIndex = 13;
+			this->comboBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &frmMantDietas::comboBox1_SelectedIndexChanged);
+			// 
 			// frmMantDietas
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(965, 679);
+			this->ClientSize = System::Drawing::Size(1091, 679);
+			this->Controls->Add(this->groupBox2);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->button2);
@@ -232,6 +306,8 @@ namespace AgroRobotView {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
+			this->groupBox2->ResumeLayout(false);
+			this->groupBox2->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
@@ -262,7 +338,7 @@ namespace AgroRobotView {
 
 			if (resultado == System::Windows::Forms::DialogResult::No)
 			{
-				return; 
+				return;
 			}
 
 			int selectedRowIndex = this->dataGridView1->SelectedRows[0]->Index;
@@ -355,6 +431,52 @@ namespace AgroRobotView {
 			filaGrilla[4] = dieta->Frecuencia;
 			this->dataGridView1->Rows->Add(filaGrilla);
 		}
+	}
+
+	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
+		try {
+			if (txtID->Text->Trim() == "") {
+				MessageBox::Show("Por favor, ingrese el ID de la dieta antes de enviar la orden.",
+					"Advertencia", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+				return;
+			}
+
+			int idDieta = Convert::ToInt32(txtID->Text);
+
+			if (comboBox1->Text->Trim() == "") {
+				MessageBox::Show("Seleccione una prioridad para la orden (Alta, Media, Baja).",
+					"Advertencia", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+				return;
+			}
+			String^ prioridad = comboBox1->Text;
+
+			System::Windows::Forms::DialogResult confirmacion =
+				MessageBox::Show("¿Desea enviar esta orden al módulo de Almacén?",
+					"Confirmar envío", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
+
+			if (confirmacion == System::Windows::Forms::DialogResult::No) {
+				return;
+			}
+
+			this->dietaController->enviarOrdenAlimentacion(idDieta, prioridad);
+
+			MessageBox::Show("La orden de alimentación fue enviada correctamente al módulo de Almacén.",
+				"Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+
+			txtID->Clear();
+			comboBox1->SelectedIndex = -1;
+		}
+		catch (FormatException^) {
+			MessageBox::Show("El ID ingresado no tiene un formato válido. Debe ser un número entero.",
+				"Error de formato", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
+		catch (Exception^ ex) {
+			MessageBox::Show("Ocurrió un error inesperado al enviar la orden:\n" + ex->Message,
+				"Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
+	}
+
+	private: System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
 	};
 }
