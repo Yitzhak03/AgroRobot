@@ -54,7 +54,7 @@ namespace AgroRobotView {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(446, 447);
+			this->ClientSize = System::Drawing::Size(772, 510);
 			this->Name = L"frmMantAlmacen";
 			this->Text = L"frmMantAlmacen";
 			this->ResumeLayout(false);

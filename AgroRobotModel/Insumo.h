@@ -1,5 +1,4 @@
 #pragma once
-#include "Alerta.h"
 namespace AgroRobotModel {
     using namespace System;
     public ref class Insumo {
@@ -7,17 +6,15 @@ namespace AgroRobotModel {
         property int Id;
         property String^ Nombre;
         property String^ Tipo;
-        property String^ StockActual;
-        property String^ StockMinimo;
-        property Alerta^ AlertasInsumo;
+		property float Stock;
+        property String^ Unidad;
         Insumo();
         Insumo(
             int id,
             String^ nombre,
             String^ tipo,
-            String^ stockActual,
-            String^ stockMinimo,
-            Alerta^ alertasInsumo
+            float stock,
+            String^ unidad
         );
     };
 }

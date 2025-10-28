@@ -10,14 +10,13 @@ Insumo::Insumo(
     int id,
     String^ nombre,
     String^ tipo,
-    String^ stockActual,
-    String^ stockMinimo,
-    Alerta^ alertasInsumo) 
+    float stock,
+	String^ unidad
+) 
 {
 	Id = id;
 	Nombre = nombre;
 	Tipo = tipo;
-	StockActual = stockActual;
-	StockMinimo = stockMinimo;
-	AlertasInsumo = alertasInsumo;
+	Stock = stock;
+	Unidad = unidad;
 }
