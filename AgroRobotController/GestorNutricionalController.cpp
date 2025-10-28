@@ -4,6 +4,7 @@
 using namespace System::Runtime::Serialization::Formatters::Binary;
 using namespace System::IO;
 using namespace AgroRobotController;
+using namespace System::Collections::Generic;
 
 GestorNutricionalController::GestorNutricionalController() {
 	this->listaDietas = gcnew List<Dieta^>();
@@ -97,6 +98,7 @@ void GestorNutricionalController::escribirArchivoAnimal() {
 								   animal->EstadoSalud + ";" + 
 								   animal->UltimaDieta;
 	}
+	File::WriteAllLines("animales.txt", lineasArchivoAnimales);
 }
 
 List<Animal^>^ GestorNutricionalController::consultarAnimalporIdEspecie(int idAnimal, String^ especie) {
@@ -155,6 +157,10 @@ bool GestorNutricionalController::existeDieta(int id) {
 }
 
 Dieta^ GestorNutricionalController::consultarDietaporId(int id) {
+	if (this->listaDietas == nullptr) {
+		this->listaDietas = gcnew List<Dieta^>();
+	}
+
 	for each (Dieta ^ dieta in this->listaDietas) {
 		if (dieta->Id == id) {
 			return dieta;
@@ -173,6 +179,7 @@ void GestorNutricionalController::escribirArchivoDieta() {
 								 dieta->Alimentos + ";" +
 								 dieta->Frecuencia;
 	}
+	File::WriteAllLines("dietas.txt", lineasArchivoDietas);
 }
 
 bool GestorNutricionalController::modificarDieta(int id, int idAnimal, String^ fechaInicio, String^ alimentos, String^ frecuencia) {
