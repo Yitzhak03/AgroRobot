@@ -135,6 +135,7 @@
     <ClCompile Include="frmNuevoMuestraS.cpp" />
     <ClCompile Include="frmNuevoUsuario.cpp" />
     <ClCompile Include="frmOrdenesAlimentacion.cpp" />
+    <ClCompile Include="frmVerificarPeso.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -217,6 +218,9 @@
     <ClInclude Include="frmOrdenesAlimentacion.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="frmVerificarPeso.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="frmEditarAnimal.resx">
@@ -287,6 +291,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmNuevoUsuario.resx">
       <DependentUpon>frmNuevoUsuario.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmVerificarPeso.resx">
+      <DependentUpon>frmVerificarPeso.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

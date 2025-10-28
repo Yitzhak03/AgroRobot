@@ -219,3 +219,43 @@ void GestorNutricionalController::enviarOrdenAlimentacion(int idDieta, String^ p
 	OrdenDistribucion^ nuevaOrden = gcnew OrdenDistribucion(nuevoId, idDieta, "AgroRobot", fecha, "Ruta X", prioridad, nullptr, nullptr, gcnew List<Insumo^>());
 	gestorAlmacen->registrarOrden(nuevaOrden);
 }
+
+String^ GestorNutricionalController::verificarPesoAnimal(int idAnimal, double pesoEsperado, double peso) {
+	Animal^ animal = consultarAnimalporId(idAnimal);
+	if (animal == nullptr) {
+		return "No se encontró el animal con el ID especificado.";
+	}
+
+	// Calculamos diferencia y porcentaje
+	double diferencia = peso - pesoEsperado;
+	double porcentaje = (diferencia / pesoEsperado) * 100.0;
+
+	String^ mensaje;
+
+	// Determinamos estado según la diferencia
+	if (Math::Abs(porcentaje) <= 5) {
+		mensaje = "El peso del animal está dentro del rango adecuado.";
+		animal->EstadoSalud = "Normal";
+	}
+	else if (porcentaje > 5) {
+		mensaje = String::Format("El animal presenta sobrepeso (+{0:F2}%).", porcentaje);
+		animal->EstadoSalud = "Sobrepeso";
+	}
+	else {
+		mensaje = String::Format("El animal presenta bajo peso ({0:F2}%).", porcentaje);
+		animal->EstadoSalud = "Bajo peso";
+	}
+
+	modificarAnimal(
+		idAnimal,
+		animal->Especie,
+		peso,                      
+		animal->Edad,
+		animal->EstadoSalud,
+		animal->UltimaDieta
+	);
+
+	escribirArchivoAnimal();
+
+	return mensaje;
+}

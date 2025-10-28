@@ -1,6 +1,7 @@
 #pragma once
 #include "frmNuevoAnimal.h"
 #include "frmEditarAnimal.h"
+#include "frmVerificarPeso.h"
 
 namespace AgroRobotView {
 
@@ -46,11 +47,6 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
 
-
-
-
-
-
 	private: System::Windows::Forms::GroupBox^ groupBox1;
 	private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::TextBox^ textBox2;
@@ -64,6 +60,8 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
+	private: System::Windows::Forms::GroupBox^ groupBox2;
+	private: System::Windows::Forms::Button^ button5;
 
 	private:
 		/// <summary>
@@ -82,20 +80,23 @@ namespace AgroRobotView {
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
+			this->button5 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBox1->SuspendLayout();
+			this->groupBox2->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// button4
@@ -146,6 +147,48 @@ namespace AgroRobotView {
 			this->dataGridView1->Size = System::Drawing::Size(801, 235);
 			this->dataGridView1->TabIndex = 12;
 			// 
+			// Column1
+			// 
+			this->Column1->HeaderText = L"ID Animal";
+			this->Column1->MinimumWidth = 6;
+			this->Column1->Name = L"Column1";
+			this->Column1->Width = 125;
+			// 
+			// Column2
+			// 
+			this->Column2->HeaderText = L"Especie";
+			this->Column2->MinimumWidth = 6;
+			this->Column2->Name = L"Column2";
+			this->Column2->Width = 125;
+			// 
+			// Column3
+			// 
+			this->Column3->HeaderText = L"Peso";
+			this->Column3->MinimumWidth = 6;
+			this->Column3->Name = L"Column3";
+			this->Column3->Width = 125;
+			// 
+			// Column4
+			// 
+			this->Column4->HeaderText = L"Edad";
+			this->Column4->MinimumWidth = 6;
+			this->Column4->Name = L"Column4";
+			this->Column4->Width = 125;
+			// 
+			// Column5
+			// 
+			this->Column5->HeaderText = L"Estado de salud:";
+			this->Column5->MinimumWidth = 6;
+			this->Column5->Name = L"Column5";
+			this->Column5->Width = 125;
+			// 
+			// Column6
+			// 
+			this->Column6->HeaderText = L"Ultima dieta:";
+			this->Column6->MinimumWidth = 6;
+			this->Column6->Name = L"Column6";
+			this->Column6->Width = 125;
+			// 
 			// groupBox1
 			// 
 			this->groupBox1->Controls->Add(this->button1);
@@ -157,7 +200,7 @@ namespace AgroRobotView {
 			this->groupBox1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->groupBox1->Name = L"groupBox1";
 			this->groupBox1->Padding = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->groupBox1->Size = System::Drawing::Size(835, 122);
+			this->groupBox1->Size = System::Drawing::Size(801, 122);
 			this->groupBox1->TabIndex = 11;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Criterios de Búsqueda";
@@ -207,53 +250,32 @@ namespace AgroRobotView {
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"ID Animal:";
 			// 
-			// Column1
+			// groupBox2
 			// 
-			this->Column1->HeaderText = L"ID Animal";
-			this->Column1->MinimumWidth = 6;
-			this->Column1->Name = L"Column1";
-			this->Column1->Width = 125;
+			this->groupBox2->Controls->Add(this->button5);
+			this->groupBox2->Location = System::Drawing::Point(24, 494);
+			this->groupBox2->Name = L"groupBox2";
+			this->groupBox2->Size = System::Drawing::Size(800, 67);
+			this->groupBox2->TabIndex = 16;
+			this->groupBox2->TabStop = false;
+			this->groupBox2->Text = L"Cuidado de animales";
 			// 
-			// Column2
+			// button5
 			// 
-			this->Column2->HeaderText = L"Especie";
-			this->Column2->MinimumWidth = 6;
-			this->Column2->Name = L"Column2";
-			this->Column2->Width = 125;
-			// 
-			// Column3
-			// 
-			this->Column3->HeaderText = L"Peso";
-			this->Column3->MinimumWidth = 6;
-			this->Column3->Name = L"Column3";
-			this->Column3->Width = 125;
-			// 
-			// Column4
-			// 
-			this->Column4->HeaderText = L"Edad";
-			this->Column4->MinimumWidth = 6;
-			this->Column4->Name = L"Column4";
-			this->Column4->Width = 125;
-			// 
-			// Column5
-			// 
-			this->Column5->HeaderText = L"Estado de salud:";
-			this->Column5->MinimumWidth = 6;
-			this->Column5->Name = L"Column5";
-			this->Column5->Width = 125;
-			// 
-			// Column6
-			// 
-			this->Column6->HeaderText = L"Ultima dieta:";
-			this->Column6->MinimumWidth = 6;
-			this->Column6->Name = L"Column6";
-			this->Column6->Width = 125;
+			this->button5->Location = System::Drawing::Point(328, 21);
+			this->button5->Name = L"button5";
+			this->button5->Size = System::Drawing::Size(137, 23);
+			this->button5->TabIndex = 0;
+			this->button5->Text = L"Verificar peso";
+			this->button5->UseVisualStyleBackColor = true;
+			this->button5->Click += gcnew System::EventHandler(this, &frmMantAnimales::button5_Click);
 			// 
 			// frmMantAnimales
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(901, 571);
+			this->ClientSize = System::Drawing::Size(875, 603);
+			this->Controls->Add(this->groupBox2);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->button2);
@@ -265,6 +287,7 @@ namespace AgroRobotView {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
+			this->groupBox2->ResumeLayout(false);
 			this->ResumeLayout(false);
 
 		}
@@ -368,6 +391,33 @@ namespace AgroRobotView {
 			filaGrilla[5] = animal->UltimaDieta;
 			this->dataGridView1->Rows->Add(filaGrilla);
 		}
+	}
+
+		  //================================================Verificar peso============================================//
+	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (this->dataGridView1->SelectedRows->Count == 0) {
+			MessageBox::Show("Seleccione un animal para verificar su peso.", "Atención", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+			return;
+		}
+
+		int fila = this->dataGridView1->SelectedRows[0]->Index;
+		int idAnimal = Convert::ToInt32(this->dataGridView1->Rows[fila]->Cells[0]->Value);
+		double pesoActual = Convert::ToDouble(this->dataGridView1->Rows[fila]->Cells[2]->Value);
+
+		// Abrir formulario de verificación
+		frmVerificarPeso^ frm = gcnew frmVerificarPeso();
+		frm->ShowDialog();
+
+		if (!frm->confirmado) return;
+
+		double pesoEsperado = frm->pesoEsperado;
+
+		String^ mensaje = this->animalController->verificarPesoAnimal(idAnimal, pesoEsperado, pesoActual);
+
+		MessageBox::Show(mensaje, "Resultado", MessageBoxButtons::OK, MessageBoxIcon::Information);
+
+		List<Animal^>^ listaAnimales = this->animalController->obtenerTodosAnimales();
+		mostrarGrilla(listaAnimales);
 	}
 
 	};

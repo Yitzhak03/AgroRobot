@@ -1,4 +1,4 @@
-1;Vaca;510.3;6.2;Estable;Pasto verde
+1;Vaca;510.3;6.2;Sobrepeso;Pasto verde
 2;Ternerito;82.7;2.4;Excelente;Maíz molido
 3;Gallina;2.6;1.1;Excelente;Granos mixtos
 4;Oveja;68.9;3.7;Estable;Heno seco

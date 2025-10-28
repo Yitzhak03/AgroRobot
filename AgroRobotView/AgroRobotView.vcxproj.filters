@@ -84,6 +84,9 @@
     <ClCompile Include="frmOrdenesAlimentacion.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="frmVerificarPeso.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="frmMain.h">
@@ -156,6 +159,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="frmOrdenesAlimentacion.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="frmVerificarPeso.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
