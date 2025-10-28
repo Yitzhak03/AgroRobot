@@ -1,0 +1,35 @@
+======================
+MODULO ADMINISTRACIÓN
+======================
+• frmMain: no dejar pasar a los baneados, eliminados y suspendidos.
+• frmNuevoUsuario: mostrar el id de manera automatica (en orden que esta disponible) cuando se ejecuta.
+• frmAdministracion: solo permite el acceso a cierto tipo de usuarios (por ahora solo a Becquer)
+• frmMantUsuario: boton buscar funcional
+=====================
+MODULO ALMACÉN
+======================
+• Implementación de frmMantInsumos ✅
+• Implementación de frmMantAlmacen ✅
+• Implementar conexión entre frmMantAlmacen e Insumos:
+  Posibilidad de reparticiones a varios almacenes de acuerdo al stock. (validación de unidades enteras)
+  1 Insumo -> varios Almacenes
+  1 Almacen -> solo un tipo de Insumo
+• Mostrar insumos dinámicos para agregar insumos al almacen de acuerdo a los nombres existentes (no checkbox).
+• Implementar paint de acuerdo al estado y alertas de cada Almacen.
+• Generar grafico de barras de insumos, de acuerdo al stock e unidades
+=====================
+MODULO DIAGNÓSTICO
+======================
+•
+•
+=====================
+MODULO DIETA
+======================
+•
+•
+=====================
+MODULO REPORTES
+======================
+•
+•
+•
