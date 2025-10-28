@@ -8,17 +8,13 @@ Almacen::Almacen()
 
 Almacen::Almacen(
 	int id,
-	String^ nombre,
 	String^ ubicacion,
-	String^ capacidad,
-	String^ zonasAlmacenamiento,
-	List<Insumo^>^ insumosAlmacenados
+	float capacidad,
+	List<Insumo^>^ insumos
 )
 {
 	Id = id;
-	Nombre = nombre;
 	Ubicacion = ubicacion;
 	Capacidad = capacidad;
-	ZonasAlmacenamiento = zonasAlmacenamiento;
-	InsumosAlmacenados = insumosAlmacenados;
+	Insumos = insumos;
 }

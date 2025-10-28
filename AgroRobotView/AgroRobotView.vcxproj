@@ -113,16 +113,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="frmEditInsumo.cpp" />
     <ClCompile Include="frmMain.cpp" />
     <ClCompile Include="frmMantAlmacen.cpp" />
     <ClCompile Include="frmMantDiagnostico.cpp" />
     <ClCompile Include="frmMantDietas.cpp" />
+    <ClCompile Include="frmMantInsumo.cpp" />
     <ClCompile Include="frmMantUsuarios.cpp" />
     <ClCompile Include="frmMenu.cpp" />
     <ClCompile Include="frmNuevoAlmacen.cpp" />
     <ClCompile Include="frmNuevoAnalisis.cpp" />
     <ClCompile Include="frmNuevoAnimal.cpp" />
     <ClCompile Include="frmNuevoDieta.cpp" />
+    <ClCompile Include="frmNuevoInsumo.cpp" />
     <ClCompile Include="frmNuevoMuestraH.cpp" />
     <ClCompile Include="frmNuevoMuestraS.cpp" />
     <ClCompile Include="frmNuevoUsuario.cpp" />
@@ -136,6 +139,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="frmEditInsumo.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="frmMain.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -146,6 +152,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmMantDietas.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="frmMantInsumo.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmMantUsuarios.h">
@@ -166,6 +175,9 @@
     <ClInclude Include="frmNuevoDieta.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="frmNuevoInsumo.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="frmNuevoMuestraH.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -177,6 +189,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmEditInsumo.resx">
+      <DependentUpon>frmEditInsumo.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.h</DependentUpon>
     </EmbeddedResource>
@@ -188,6 +203,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMantDietas.resx">
       <DependentUpon>frmMantDietas.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMantInsumo.resx">
+      <DependentUpon>frmMantInsumo.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMantUsuarios.resx">
       <DependentUpon>frmMantUsuarios.h</DependentUpon>
@@ -206,6 +224,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmNuevoDieta.resx">
       <DependentUpon>frmNuevoDieta.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNuevoInsumo.resx">
+      <DependentUpon>frmNuevoInsumo.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNuevoMuestraH.resx">
       <DependentUpon>frmNuevoMuestraH.h</DependentUpon>

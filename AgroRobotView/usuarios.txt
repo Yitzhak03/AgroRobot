@@ -7,3 +7,4 @@
 11;Daniel;asd@asd.com;qwe;;Nuevo;2|3|4;
 18;Leonardo;leonar1420@gmail.com;31416;271025;Inactivo;1|2;1|1
 1304;Farid;faridssj@gmail.com;faridssj;;Nuevo;4;
+13;Mateo;asd@asd;mateo;;Nuevo;1|5;
