@@ -157,6 +157,9 @@
     <ClInclude Include="frmMantInsumo.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="frmMantReportes.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="frmMantUsuarios.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -206,6 +209,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMantInsumo.resx">
       <DependentUpon>frmMantInsumo.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMantReportes.resx">
+      <DependentUpon>frmMantReportes.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMantUsuarios.resx">
       <DependentUpon>frmMantUsuarios.h</DependentUpon>
