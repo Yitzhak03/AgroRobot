@@ -113,9 +113,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="frmEditarDieta.cpp" />
     <ClCompile Include="frmEditInsumo.cpp" />
     <ClCompile Include="frmMain.cpp" />
     <ClCompile Include="frmMantAlmacen.cpp" />
+    <ClCompile Include="frmMantAnimales.cpp" />
     <ClCompile Include="frmMantDiagnostico.cpp" />
     <ClCompile Include="frmMantDietas.cpp" />
     <ClCompile Include="frmMantInsumo.cpp" />
@@ -139,6 +141,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="frmEditarDieta.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="frmEditarReporte.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -149,6 +154,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmMantAlmacen.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="frmMantAnimales.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmMantDiagnostico.h">
