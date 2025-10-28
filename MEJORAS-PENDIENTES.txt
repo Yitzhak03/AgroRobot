@@ -23,10 +23,15 @@ MODULO DIAGNÓSTICO
 •
 •
 =====================
-MODULO DIETA
+MODULO GESTOR ALIMENTICIO
 ======================
-•
-•
+• Se implementó frmMantDietas
+• Se implementó frmMantAnimales
+Pendientes:
+ - Recibir alertas cuando un animal no consuma su alimento o lo haga en exceso
+ - Enviar órdenes de alimentación al modulo de almacén
+ - El sistema debe almacenar el historial de dietas (cumplido)
+ - Recibir alertas sobre nuevos planes alimenticios
 =====================
 MODULO REPORTES
 ======================
