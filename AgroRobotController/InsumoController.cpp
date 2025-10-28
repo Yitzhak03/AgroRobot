@@ -69,7 +69,7 @@ void InsumoController::actualizarInsumo(Insumo^ insumo)
 	}
 	writeTxt(lista);
 }
-Insumo^ InsumoController::findInsumoById(int id)
+Insumo^ InsumoController::BuscarPorId(int id)
 {
 	List<Insumo^>^ lista = readTxt();
 	for each (Insumo ^ insumo in lista) {

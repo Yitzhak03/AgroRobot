@@ -10,7 +10,7 @@ namespace AgroRobotController {
 		void agregarInsumo(Insumo^ insumo);
 		void eliminarInsumo(int id);
 		void actualizarInsumo(Insumo^ insumo);
-		Insumo^ findInsumoById(int id);
+		Insumo^ BuscarPorId(int id);
 
 	};
 }

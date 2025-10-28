@@ -1,4 +1,4 @@
-1;Maíz;Grano;200;kg
+1;Maíz;Grano;20;kg
 2;Trigo;Grano;40;kg
 3;Melaza;Líquido;8;litros
 4;Aceite vegetal;Líquido;5;litros
