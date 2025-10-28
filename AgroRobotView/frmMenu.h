@@ -157,7 +157,7 @@ namespace AgroRobotView {
 	private: System::Void admnistracionToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		frmMantUsuarios^ frm = gcnew frmMantUsuarios();
-		if (this->usuario->Nombre == "Becquer") {
+		if (this->usuario->GetNombre() == "Becquer") {
 			frm->MdiParent = this;
 			frm->Show();
 		} else {

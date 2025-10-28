@@ -12,30 +12,31 @@ UsuarioController::UsuarioController(){
 	for each (String ^ linea in lineas) {
 		if (String::IsNullOrWhiteSpace(linea)) continue;
 		array<String^>^ datos = linea->Split(';');
-		Usuario^ user = gcnew Usuario();
-		user->Id = Convert::ToInt32(datos[0]);
-		user->Nombre = datos[1];
-		user->Email = datos[2];
-		user->Contrasenha = datos[3];
-		user->UltimoAcceso = datos[4];
-		user->EstadoCuenta = datos[5];
+		int id = Convert::ToInt32(datos[0]);
+		String^ nombre = datos[1];
+		String^ email = datos[2];
+		String^ contrasenha = datos[3];
+		String^ ultimoAcceso = datos[4];
+		String^ estadoCuenta = datos[5];
 
 		// Parsear Roles usando '|' como separador
-		user->IdsRoles = gcnew List<int>();
+		List<int>^ idsRoles = gcnew List<int>();
 		String^ rolesField = datos[6];
 		array<String^>^ rolesIds = rolesField->Split('|');
 		for each (String ^ rolId in rolesIds)
-			user->IdsRoles->Add(Convert::ToInt32(rolId));
+			idsRoles->Add(Convert::ToInt32(rolId));
 
 		// Parsear Alertas usando '|' como separador
-		user->IdsAlertas = gcnew List<int>();
+		List<int>^ idsAlertas = gcnew List<int>();
 		String^ alertsField = datos[7];
 		array<String^>^ alertasIds = alertsField->Split('|');
 		if (!String::IsNullOrEmpty(alertsField)) {
 			for each (String ^ alertaId in alertasIds)
-				user->IdsAlertas->Add(Convert::ToInt32(alertaId));
+				idsAlertas->Add(Convert::ToInt32(alertaId));
 		}
-		else user->IdsAlertas = nullptr;
+		else idsAlertas = nullptr;
+		
+		Usuario^ user = gcnew Usuario(id, nombre, email, contrasenha, ultimoAcceso, estadoCuenta, idsRoles, idsAlertas);
 		listaUsuarios->Add(user);
 	}
 
@@ -86,29 +87,29 @@ void UsuarioController::writeTxt(List<Usuario^>^ lista)
 		Usuario^ u = lista[i];
 		// Construir campo roles (separador '|')
 		String^ rolesField = "";
-		if (u->IdsRoles != nullptr && u->IdsRoles->Count > 0) {
-			for (int j = 0; j < u->IdsRoles->Count; ++j) {
-				rolesField += u->IdsRoles[j].ToString();
-				if (j < u->IdsRoles->Count - 1) // Agregar separador solo si no es el último
+		if (u->GetIdsRoles() != nullptr && u->GetIdsRoles()->Count > 0) {
+			for (int j = 0; j < u->GetIdsRoles()->Count; ++j) {
+				rolesField += u->GetIdsRoles()[j].ToString();
+				if (j < u->GetIdsRoles()->Count - 1) // Agregar separador solo si no es el último
 					rolesField += "|";
 			}
 		}
 		// Construir campo alerts (separador '|')
 		String^ alertsField = "";
-		if (u->IdsAlertas != nullptr && u->IdsAlertas->Count > 0) {
-			for (int j = 0; j < u->IdsAlertas->Count; ++j) {
-				alertsField += u->IdsAlertas[j].ToString();
-				if (j < u->IdsAlertas->Count - 1) // Agregar separador solo si no es el último
+		if (u->GetIdsAlertas() != nullptr && u->GetIdsAlertas()->Count > 0) {
+			for (int j = 0; j < u->GetIdsAlertas()->Count; ++j) {
+				alertsField += u->GetIdsAlertas()[j].ToString();
+				if (j < u->GetIdsAlertas()->Count - 1) // Agregar separador solo si no es el último
 					alertsField += "|";
 			}
 		}
 		lineas[i] = String::Format("{0};{1};{2};{3};{4};{5};{6};{7}",
-			u->Id,
-			u->Nombre,
-			u->Email,
-			u->Contrasenha,
-			u->UltimoAcceso,
-			u->EstadoCuenta,
+			u->GetId(),
+			u->GetNombre(),
+			u->GetEmail(),
+			u->GetContrasenha(),
+			u->GetUltimoAcceso(),
+			u->GetEstadoCuenta(),
 			rolesField,
 			alertsField
 		);
@@ -131,7 +132,7 @@ List<Usuario^>^ UsuarioController::obtenerTodosUsuarios() {
 void UsuarioController::eliminarUsuario(int id)
 {
 	for each (Usuario ^ usuario in this->listaUsuarios) {
-		if (usuario->Id == id) {
+		if (usuario->GetId() == id) {
 			this->listaUsuarios->Remove(usuario);
 			break;
 		}
@@ -142,7 +143,7 @@ void UsuarioController::eliminarUsuario(int id)
 void UsuarioController::actualizarUsuario(Usuario^ usuario)
 {
 	for (int i = 0; i < this->listaUsuarios->Count; ++i) {
-		if (this->listaUsuarios[i]->Id == usuario->Id) {
+		if (this->listaUsuarios[i]->GetId() == usuario->GetId() ) {
 			this->listaUsuarios[i] = usuario;
 			break;
 		}
@@ -152,7 +153,7 @@ void UsuarioController::actualizarUsuario(Usuario^ usuario)
 
 Usuario^ UsuarioController::obtenerUsuarioPorId(int id){
 	for each (Usuario ^ usuario in this->listaUsuarios) {
-		if (usuario->Id == id) {
+		if (usuario->GetId() == id) {
 			return usuario;
 		}
 	}
@@ -162,8 +163,8 @@ List<Usuario^>^ UsuarioController::obtenerUsuarioPorNombreEstado(String^ nombre,
 	List<Usuario^>^ resultados = gcnew List<Usuario^>();
 
 	for each (Usuario ^ usuario in this->listaUsuarios) {
-		bool coincideNombre = (String::IsNullOrEmpty(nombre) || usuario->EstadoCuenta == nombre);
-		bool coincideEstado = (String::IsNullOrEmpty(estado) || usuario->EstadoCuenta == estado);
+		bool coincideNombre = (String::IsNullOrEmpty(nombre) || usuario->GetNombre() == nombre);
+		bool coincideEstado = (String::IsNullOrEmpty(estado) || usuario->GetEstadoCuenta() == estado);
 
 		if (coincideNombre && coincideEstado) {
 			resultados->Add(usuario);

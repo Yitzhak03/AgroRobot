@@ -235,7 +235,6 @@ namespace AgroRobotView {
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(128, 20);
 			this->textBox2->TabIndex = 3;
-			this->textBox2->Text = L"-";
 			// 
 			// label2
 			// 
@@ -295,13 +294,13 @@ public:	void mostrarGrilla(List<Usuario^>^ listaUsuarios)
 	{
 		Usuario^ usuario = listaUsuarios[i];
 		array<String^>^ filaGrilla = gcnew array<String^>(7);
-		filaGrilla[0] = Convert::ToString(usuario->Id);
-		filaGrilla[1] = usuario->Nombre;
-		filaGrilla[2] = usuario->Contrasenha;
-		filaGrilla[3] = usuario->UltimoAcceso;
-		filaGrilla[4] = usuario->EstadoCuenta;
-		filaGrilla[5] = Convert::ToString(usuario->IdsRoles);
-		filaGrilla[6] = Convert::ToString(usuario->IdsAlertas);
+		filaGrilla[0] = Convert::ToString(usuario->GetId());
+		filaGrilla[1] = usuario->GetNombre();
+		filaGrilla[2] = usuario->GetContrasenha();
+		filaGrilla[3] = Convert::ToString(usuario->GetUltimoAcceso());
+		filaGrilla[4] = usuario->GetEstadoCuenta();
+		filaGrilla[5] = Convert::ToString(usuario->GetIdsRoles());
+		filaGrilla[6] = Convert::ToString(usuario->GetIdsAlertas());
 		this->dataGridView1->Rows->Add(filaGrilla);
 	}
 	this->dataGridView1->AutoGenerateColumns = false; // Desactivar la generaci�n autom�tica de columnas
@@ -339,12 +338,12 @@ private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ nombreUsuario = "";
 		String^ estadoUsuario = "";
-		if (!textBox1->Text->Equals("-"))
+		if (!textBox1->Text->Equals(""))
 		{
 			//Obterne el nombre del usuario a buscar
 			nombreUsuario = textBox1->Text;
 		}
-		if (!textBox2->Text->Equals("-"))
+		if (!textBox2->Text->Equals(""))
 		{
 			// Obtener el nombre del operador a buscar
 			estadoUsuario = textBox2->Text;
