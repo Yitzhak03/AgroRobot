@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <ProjectGuid>{3DA4225D-5BDE-CF41-D2C0-96E9492F7DDD}</ProjectGuid>
-    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <Keyword>ManagedCProj</Keyword>
     <RootNamespace>AgroRobotView</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
@@ -139,6 +139,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="frmEditarReporte.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="frmEditInsumo.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -155,6 +158,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmMantInsumo.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="frmMantReportes.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmMantUsuarios.h">
@@ -189,6 +195,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmEditarReporte.resx">
+      <DependentUpon>frmEditarReporte.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmEditInsumo.resx">
       <DependentUpon>frmEditInsumo.h</DependentUpon>
     </EmbeddedResource>
@@ -206,6 +215,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMantInsumo.resx">
       <DependentUpon>frmMantInsumo.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMantReportes.resx">
+      <DependentUpon>frmMantReportes.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMantUsuarios.resx">
       <DependentUpon>frmMantUsuarios.h</DependentUpon>
