@@ -40,10 +40,12 @@ namespace AgroRobotView {
 	protected:
 
 	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::Windows::Forms::TextBox^ txtUsuario;
+
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label3;
-	private: System::Windows::Forms::TextBox^ textBox2;
+	private: System::Windows::Forms::TextBox^ txtContrasenha;
+
 	private: System::Windows::Forms::Button^ button2;
 
 	private:
@@ -61,10 +63,10 @@ namespace AgroRobotView {
 		{
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->txtUsuario = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->txtContrasenha = (gcnew System::Windows::Forms::TextBox());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
@@ -87,12 +89,13 @@ namespace AgroRobotView {
 			this->label2->TabIndex = 7;
 			this->label2->Text = L"Contraseña:";
 			// 
-			// textBox1
+			// txtUsuario
 			// 
-			this->textBox1->Location = System::Drawing::Point(117, 88);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(176, 20);
-			this->textBox1->TabIndex = 6;
+			this->txtUsuario->Location = System::Drawing::Point(117, 88);
+			this->txtUsuario->Name = L"txtUsuario";
+			this->txtUsuario->Size = System::Drawing::Size(176, 20);
+			this->txtUsuario->TabIndex = 6;
+			this->txtUsuario->Text = "Becquer";
 			// 
 			// label1
 			// 
@@ -114,13 +117,14 @@ namespace AgroRobotView {
 			this->label3->TabIndex = 10;
 			this->label3->Text = L"Bienvenido!";
 			// 
-			// textBox2
+			// txtContrasenha
 			// 
-			this->textBox2->Location = System::Drawing::Point(117, 132);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(176, 20);
-			this->textBox2->TabIndex = 11;
-			this->textBox2->UseSystemPasswordChar = true;
+			this->txtContrasenha->Location = System::Drawing::Point(117, 132);
+			this->txtContrasenha->Name = L"txtContrasenha";
+			this->txtContrasenha->Size = System::Drawing::Size(176, 20);
+			this->txtContrasenha->TabIndex = 11;
+			this->txtContrasenha->UseSystemPasswordChar = true;
+			this->txtContrasenha->Text = "123456";
 			// 
 			// button2
 			// 
@@ -140,11 +144,11 @@ namespace AgroRobotView {
 			this->AutoSize = true;
 			this->ClientSize = System::Drawing::Size(358, 244);
 			this->Controls->Add(this->button2);
-			this->Controls->Add(this->textBox2);
+			this->Controls->Add(this->txtContrasenha);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->label2);
-			this->Controls->Add(this->textBox1);
+			this->Controls->Add(this->txtUsuario);
 			this->Controls->Add(this->label1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedToolWindow;
 			this->Name = L"frmMain";
@@ -159,8 +163,8 @@ namespace AgroRobotView {
 	//==============================================================================
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e)
 	{
-		String^ usuario = textBox1->Text;
-		String^ contrasenha = textBox2->Text;
+		String^ usuario = txtUsuario->Text;
+		String^ contrasenha = txtContrasenha->Text;
 		
 		// Validar campos vacíos
 		if (String::IsNullOrEmpty(usuario) || String::IsNullOrEmpty(contrasenha)) {
@@ -174,9 +178,9 @@ namespace AgroRobotView {
 		for each (Usuario ^ u in lista) {
 			// comparar nombre de usuario sin distinguir mayúsculas/minúsculas,
 			// pero la contraseña sí (por convención)
-			if (String::Compare(u->Nombre, usuario, false) == 0 && u->Contrasenha->Equals(contrasenha)) {
+			if (String::Compare(u->GetNombre(), usuario, false) == 0 && u->GetContrasenha()->Equals(contrasenha)) {
 				// Autenticado
-				MessageBox::Show("Acceso correcto. Bienvenido " + u->Nombre, "Login", MessageBoxButtons::OK, MessageBoxIcon::Information);
+				MessageBox::Show("Acceso correcto. Bienvenido " + u->GetNombre(), "Login", MessageBoxButtons::OK, MessageBoxIcon::Information);
 				// Aquí puedes guardar el usuario actual en una variable global/static o abrir el formulario principal
 				this->Hide(); // Ocultar el formulario de login
 				frmMenu^ menu = gcnew frmMenu(u); // Pasar el usuario autenticado
@@ -193,11 +197,11 @@ namespace AgroRobotView {
 	//==============================================================================
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e)
 	{
-		if (textBox2->UseSystemPasswordChar) {
-			textBox2->UseSystemPasswordChar = false; // Mostrar contraseña
+		if (txtContrasenha->UseSystemPasswordChar) {
+			txtContrasenha->UseSystemPasswordChar = false; // Mostrar contraseña
 		}
 		else {
-			textBox2->UseSystemPasswordChar = true; // Ocultar contraseña
+			txtContrasenha->UseSystemPasswordChar = true; // Ocultar contraseña
 		}
 	}
 };

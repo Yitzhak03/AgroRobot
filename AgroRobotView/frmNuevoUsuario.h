@@ -250,15 +250,15 @@ namespace AgroRobotView {
 	{
 		// Crear el objeto Usuario
 		Usuario^ nuevoUsuario = gcnew Usuario();
-		nuevoUsuario->Id = Convert::ToInt32(textBox1->Text);
-		nuevoUsuario->Nombre = textBox2->Text;
-		nuevoUsuario->Email = textBox3->Text;
-		nuevoUsuario->Contrasenha = textBox4->Text;
-		nuevoUsuario->UltimoAcceso = ""; // Inicialmente vacío
-		nuevoUsuario->EstadoCuenta = "Nuevo"; // Estado por defecto
-		nuevoUsuario->IdsAlertas = nullptr; // Inicialmente sin alertas
+		nuevoUsuario->SetId(Convert::ToInt32(textBox1->Text));
+		nuevoUsuario->SetNombre(textBox2->Text);
+		nuevoUsuario->SetEmail(textBox3->Text);
+		nuevoUsuario->SetContrasenha(textBox4->Text);
+		nuevoUsuario->SetUltimoAcceso(""); // Inicialmente vacío
+		nuevoUsuario->SetEstadoCuenta("Activo"); // Estado por defecto
+		nuevoUsuario->SetIdsAlertas(nullptr); // Inicialmente sin alertas
 		// Creación de la lista de IdsRoles
-		nuevoUsuario->IdsRoles = gcnew List<int>();
+		List<int>^ idsRoles = gcnew List<int>();
 		//Crear el controlador de roles
 		RolController^ rolCtrl = gcnew RolController();
 		// Agregar los roles seleccionados
@@ -268,10 +268,12 @@ namespace AgroRobotView {
 				// Obtener el Id del rol
 				int rolId = rolCtrl->obtenerIdPorNombre(rolNombre);
 				// Agregar el Id del rol a la lista de IdsRoles del usuario
-				nuevoUsuario->IdsRoles->Add(rolId);
+				idsRoles->Add(rolId);
 			}
 		}
+		nuevoUsuario->SetIdsRoles(idsRoles);
 		// Llamar al controlador para agregar el nuevo usuario
+
 		UsuarioController^ userCtrl = gcnew UsuarioController();
 		userCtrl->agregarUsuario(nuevoUsuario);
 		// Confirmación
