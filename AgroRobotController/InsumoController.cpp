@@ -90,14 +90,14 @@ List<Insumo^>^ InsumoController::buscarPorTipo(String^ tipo)
 	}
 	return resultados;
 }
-List<Insumo^>^ InsumoController::buscarPorUnidad(String^ unidad)
+List<String^>^ InsumoController::obtenerTiposInsumos()
 {
 	List<Insumo^>^ lista = readTxt();
-	List<Insumo^>^ resultados = gcnew List<Insumo^>();
+	List<String^>^ tipos = gcnew List<String^>();
 	for each (Insumo ^ insumo in lista) {
-		if (insumo->Unidad->Equals(unidad, StringComparison::OrdinalIgnoreCase)) {
-			resultados->Add(insumo);
+		if (!tipos->Contains(insumo->Tipo)) {
+			tipos->Add(insumo->Tipo);
 		}
 	}
-	return resultados;
+	return tipos;
 }

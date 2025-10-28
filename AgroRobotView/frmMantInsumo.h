@@ -46,12 +46,13 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
 	private: System::Windows::Forms::GroupBox^ groupBox1;
-	private: System::Windows::Forms::TextBox^ textBox2;
-	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::TextBox^ textBox1;
+
+
+
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Button^ button4;
 	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::ComboBox^ comboBox1;
 
 	private:
 		/// <summary>
@@ -76,10 +77,8 @@ namespace AgroRobotView {
 			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
@@ -176,10 +175,8 @@ namespace AgroRobotView {
 			// 
 			// groupBox1
 			// 
-			this->groupBox1->Controls->Add(this->textBox2);
+			this->groupBox1->Controls->Add(this->comboBox1);
 			this->groupBox1->Controls->Add(this->button1);
-			this->groupBox1->Controls->Add(this->label2);
-			this->groupBox1->Controls->Add(this->textBox1);
 			this->groupBox1->Controls->Add(this->label1);
 			this->groupBox1->Location = System::Drawing::Point(11, 11);
 			this->groupBox1->Margin = System::Windows::Forms::Padding(2);
@@ -190,17 +187,20 @@ namespace AgroRobotView {
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Criterios de Búsqueda";
 			// 
-			// textBox2
+			// comboBox1
 			// 
-			this->textBox2->Location = System::Drawing::Point(299, 28);
-			this->textBox2->Margin = System::Windows::Forms::Padding(2);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(128, 20);
-			this->textBox2->TabIndex = 1;
+			this->comboBox1->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->comboBox1->FormattingEnabled = true;
+			this->comboBox1->Location = System::Drawing::Point(71, 26);
+			this->comboBox1->MaxDropDownItems = 15;
+			this->comboBox1->Name = L"comboBox1";
+			this->comboBox1->Size = System::Drawing::Size(210, 21);
+			this->comboBox1->TabIndex = 22;
+			this->comboBox1->DropDown += gcnew System::EventHandler(this, &frmMantInsumo::comboBox1_DropDown);
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(485, 31);
+			this->button1->Location = System::Drawing::Point(304, 28);
 			this->button1->Margin = System::Windows::Forms::Padding(2);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(56, 19);
@@ -208,24 +208,6 @@ namespace AgroRobotView {
 			this->button1->Text = L"Buscar";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &frmMantInsumo::button1_Click);
-			// 
-			// label2
-			// 
-			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(239, 31);
-			this->label2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(47, 13);
-			this->label2->TabIndex = 0;
-			this->label2->Text = L"Unidad :";
-			// 
-			// textBox1
-			// 
-			this->textBox1->Location = System::Drawing::Point(82, 28);
-			this->textBox1->Margin = System::Windows::Forms::Padding(2);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(128, 20);
-			this->textBox1->TabIndex = 1;
 			// 
 			// label1
 			// 
@@ -333,6 +315,31 @@ namespace AgroRobotView {
 		   //===============================================================================
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e)
 	{
+		//Validar campo vacio con trim
+		if (String::IsNullOrWhiteSpace(comboBox1->Text->Trim())) {
+			MessageBox::Show(
+				"Debe ingresar un tipo para buscar.",
+				"Error",
+				MessageBoxButtons::OK,
+				MessageBoxIcon::Error
+			);
+			return;
+		}
+		//Limpiar el DataGridView
+		dataGridView1->Rows->Clear();
+		//Crear el controlador
+		InsumoController^ insumoCtrl = gcnew InsumoController();
+		List<Insumo^>^ lista = insumoCtrl->buscarPorTipo(comboBox1->Text->Trim());
+		//Cargar los insumos en el DataGridView
+		for each (Insumo ^ insumo in lista) {
+			dataGridView1->Rows->Add(
+				Convert::ToString(insumo->Id),
+				insumo->Nombre,
+				insumo->Tipo,
+				Convert::ToString(insumo->Stock),
+				insumo->Unidad
+			);
+		}
 	}
 	private: System::Void dataGridView1_UserDeletingRow(System::Object^ sender, System::Windows::Forms::DataGridViewRowCancelEventArgs^ e)
 	{
@@ -366,6 +373,16 @@ namespace AgroRobotView {
 		frm->ShowDialog();
 		//Actualizar la vista
 		button5_Click(sender, e);
+	}
+	private: System::Void comboBox1_DropDown(System::Object^ sender, System::EventArgs^ e)
+	{
+		//Cargar los tipos de insumos en el comboBox
+		comboBox1->Items->Clear();
+		InsumoController^ insumoCtrl = gcnew InsumoController();
+		List<String^>^ tipos = insumoCtrl->obtenerTiposInsumos();
+		for each (String ^ tipo in tipos) {
+			comboBox1->Items->Add(tipo);
+		}
 	}
 	};
 }
