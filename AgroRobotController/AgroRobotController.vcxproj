@@ -114,6 +114,7 @@
     <ClInclude Include="AlmacenController.h" />
     <ClInclude Include="GestorNutricionalController.h" />
     <ClInclude Include="InsumoController.h" />
+    <ClInclude Include="MuestraController.h" />
     <ClInclude Include="ReporteController.h" />
     <ClInclude Include="RolController.h" />
     <ClInclude Include="UsuarioController.h" />
@@ -127,6 +128,7 @@
     <ClCompile Include="AlmacenController.cpp" />
     <ClCompile Include="GestorNutricionalController.cpp" />
     <ClCompile Include="InsumoController.cpp" />
+    <ClCompile Include="MuestraController.cpp" />
     <ClCompile Include="ReporteController.cpp" />
     <ClCompile Include="RolController.cpp" />
     <ClCompile Include="UsuarioController.cpp" />
