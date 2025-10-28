@@ -87,6 +87,12 @@
     <ClCompile Include="frmVerificarPeso.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="frmEditarMuestraH.cpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClCompile>
+    <ClCompile Include="frmEditarMuestraS.cpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="frmMain.h">
@@ -162,6 +168,12 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="frmVerificarPeso.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="frmEditarMuestraH.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="frmEditarMuestraS.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

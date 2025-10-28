@@ -115,6 +115,8 @@
   <ItemGroup>
     <ClCompile Include="frmEditarAnimal.cpp" />
     <ClCompile Include="frmEditarDieta.cpp" />
+    <ClCompile Include="frmEditarMuestraH.cpp" />
+    <ClCompile Include="frmEditarMuestraS.cpp" />
     <ClCompile Include="frmEditInsumo.cpp" />
     <ClCompile Include="frmMain.cpp" />
     <ClCompile Include="frmMantAlmacen.cpp" />
@@ -150,6 +152,12 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmEditarDieta.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="frmEditarMuestraH.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="frmEditarMuestraS.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmEditarReporte.h">
@@ -228,6 +236,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmEditarDieta.resx">
       <DependentUpon>frmEditarDieta.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEditarMuestraH.resx">
+      <DependentUpon>frmEditarMuestraH.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEditarMuestraS.resx">
+      <DependentUpon>frmEditarMuestraS.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEditarReporte.resx">
       <DependentUpon>frmEditarReporte.h</DependentUpon>
