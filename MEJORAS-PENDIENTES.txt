@@ -29,7 +29,7 @@ MODULO GESTOR ALIMENTICIO
 • Se implementó frmMantAnimales
 Pendientes:
  - Recibir alertas cuando un animal no consuma su alimento o lo haga en exceso
- - Enviar órdenes de alimentación al modulo de almacén
+ - Enviar órdenes de alimentación al modulo de almacén (cumplido pero puede mejorarse)
  - El sistema debe almacenar el historial de dietas (cumplido)
  - Recibir alertas sobre nuevos planes alimenticios
 =====================
