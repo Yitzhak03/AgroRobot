@@ -1,20 +1,16 @@
-1;Vaca;510.3;6.2;Sobrepeso;Pasto verde
-2;Ternerito;82.7;2.4;Excelente;Maíz molido
-3;Gallina;2.6;1.1;Excelente;Granos mixtos
-4;Oveja;68.9;3.7;Estable;Heno seco
-5;Caballo;460.5;8.3;Excelente;Avena y pasto
-6;Vaca;495.8;5.8;Delicada;Heno húmedo
-7;Cerdo;90.2;3.1;Estable;Maíz y restos vegetales
-8;Gallina;3.1;1.5;Excelente;Maíz molido
-9;Oveja;72.4;4;Excelente;Alfalfa
-10;Caballo;480;7.9;Estable;Heno y avena
-11;Pato;3.4;1.2;Excelente;Maíz y arroz
-12;Burro;305.6;9.6;Estable;Heno y alfalfa
-13;Vaca;520.2;6.9;Excelente;Pasto y avena
-14;Cerdo;86;2.6;Estable;Maíz molido
-15;Gallina;2.8;0.9;Excelente;Granos y maíz
-16;Oveja;70.1;3.4;Estable;Heno seco
-17;Caballo;445.3;8.1;Excelente;Avena y pasto
-18;Vaca;515.5;6;Delicada;Pasto húmedo
-19;Cerdo;92.3;3.5;Excelente;Cebada molida
-20;Gallina;3;1.4;Estable;Granos mixtos
+1;Vaca;523.4;5.2;Saludable;DietaPastura
+2;Pollo;2.1;1.0;Saludable;DietaMaiz
+3;Cerdo;97.8;2.5;Saludable;DietaCereal
+4;Oveja;68.3;3.8;Saludable;DietaForraje
+5;Cabra;56.9;3.1;Saludable;DietaHeno
+6;Pato;3.5;1.8;Saludable;DietaGrano
+7;Conejo;4.4;1.2;Saludable;DietaVerdura
+8;Pavo;8.9;2.3;Saludable;DietaGrano
+9;Cerdo;113.6;3.4;Sobrepeso;DietaCereal
+10;Vaca;478.7;6.0;BajoPeso;DietaPastura
+11;Oveja;72.1;4.2;Saludable;DietaForraje
+12;Cabra;52.5;2.9;BajoPeso;DietaHeno
+13;Pollo;1.8;0.9;BajoPeso;DietaMaiz
+14;Pavo;9.6;2.7;Saludable;DietaGrano
+15;Conejo;3.9;1.0;Saludable;DietaVerdura
+

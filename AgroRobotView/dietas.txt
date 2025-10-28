@@ -1,15 +1,15 @@
-1;1;2025-10-02;Heno y Albaca;Diaria
-2;2;2025-10-02;Zanahorias;Interdiaria
-3;3;2025-10-03;Maíz molido y pasto seco;Diaria
-4;4;2025-10-03;Frutas mixtas y avena;Semanal
-5;5;2025-10-04;Concentrado proteico;Diaria
-6;6;2025-10-04;Hortalizas frescas y alfalfa;Interdiaria
-7;7;2025-10-05;Pasto natural y melaza;Diaria
-8;8;2025-10-05;Pescado picado y arroz;Semanal
-9;9;2025-10-06;Maíz, avena y cebada;Interdiaria
-10;10;2025-10-06;Heno seco y granos mixtos;Diaria
-11;11;2025-10-07;Pienso balanceado con vitaminas;Diaria
-12;12;2025-10-07;Hierbas verdes y zanahoria rallada;Interdiaria
-13;13;2025-10-08;Forraje húmedo y sal mineralizada;Semanal
-14;14;2025-10-08;Vegetales trozados y maíz dulce;Diaria
-15;15;2025-10-09;Mezcla de heno y avena;Interdiaria
+1;1;2025-08-01;Pasto fresco y heno;2 veces al día
+2;2;2025-09-12;Maíz molido y granos mixtos;3 veces al día
+3;3;2025-07-05;Cereal balanceado y residuos vegetales;2 veces al día
+4;4;2025-06-28;Forraje seco y sal mineral;2 veces al día
+5;5;2025-09-03;Heno y hojas verdes;2 veces al día
+6;6;2025-08-15;Granos triturados y verduras;2 veces al día
+7;7;2025-09-20;Zanahoria, alfalfa y hojas frescas;3 veces al día
+8;8;2025-07-30;Granos, maíz y suplemento proteico;2 veces al día
+9;9;2025-09-25;Cereal balanceado alto en energía;2 veces al día
+10;10;2025-08-10;Pasto seco y suplemento vitamínico;2 veces al día
+11;11;2025-07-19;Forraje fresco y sal mineralizada;2 veces al día
+12;12;2025-09-02;Heno seco y suplemento proteico;2 veces al día
+13;13;2025-09-21;Maíz triturado y sorgo;3 veces al día
+14;14;2025-08-17;Granos integrales y maíz molido;2 veces al día
+15;15;2025-07-26;Alfalfa, zanahoria y hojas verdes;3 veces al día
