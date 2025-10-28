@@ -1,4 +1,5 @@
 #pragma once
+#include "frmEditarReporte.h"
 
 namespace AgroRobotView {
 
@@ -23,7 +24,8 @@ namespace AgroRobotView {
 			InitializeComponent();
 			this->reporteController = gcnew ReporteController();
 			this->dataGridView1->SelectionChanged += gcnew System::EventHandler(this, &frmMantReportes::dataGridView1_SelectionChanged);
-
+			this->button4->Click += gcnew System::EventHandler(this, &frmMantReportes::button4_Click);
+			hayCambiosPendientes = false;
 			//
 			//TODO: agregar código de constructor aquí
 			//
@@ -392,6 +394,7 @@ namespace AgroRobotView {
 			this->button4->TabIndex = 10;
 			this->button4->Text = L"Cancelar";
 			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &frmMantReportes::button4_Click);
 			// 
 			// button3
 			// 
@@ -410,6 +413,7 @@ namespace AgroRobotView {
 			this->button2->TabIndex = 8;
 			this->button2->Text = L"Editar";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &frmMantReportes::button2_Click);
 			// 
 			// button1
 			// 
@@ -651,6 +655,101 @@ private: void ActualizarPanelMonitoreo(String^ estado) {
 }
 
 
+private:
+	bool hayCambiosPendientes = false; // Variable para rastrear cambios
 
+private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
+	CerrarFormulario();
+
+}
+
+private: void CerrarFormulario() {
+	// Verificar si hay cambios pendientes
+	if (hayCambiosPendientes) {
+		System::Windows::Forms::DialogResult resultado = MessageBox::Show(
+			"Tiene cambios sin guardar. ¿Está seguro que desea salir?\n\nLos cambios se perderán.",
+			"Cambios sin guardar",
+			MessageBoxButtons::YesNo,
+			MessageBoxIcon::Warning,
+			MessageBoxDefaultButton::Button2  // No por defecto
+		);
+
+		if (resultado == System::Windows::Forms::DialogResult::No) { // <-- Usar el namespace completo
+			return; // No cerrar el formulario
+		}
+	}
+	else {
+		// Si no hay cambios, preguntar confirmación normal
+		System::Windows::Forms::DialogResult resultado = MessageBox::Show(
+			"¿Está seguro que desea salir de la gestión de reportes?",
+			"Confirmar salida",
+			MessageBoxButtons::YesNo,
+			MessageBoxIcon::Question
+		);
+
+		if (resultado == System::Windows::Forms::DialogResult::No) { // <-- Usar el namespace completo
+			return;
+		}
+	}
+
+	// Proceder con el cierre
+	this->Close();
+}
+
+	   // Método para marcar cuando hay cambios (lo usarás más adelante con Editar)
+private: void MarcarCambiosPendientes(bool hayCambios) {
+	hayCambiosPendientes = hayCambios;
+
+	// Opcional: Cambiar el texto del formulario para indicar cambios
+	if (hayCambios) {
+		this->Text = "Gestión de Reportes - Administrador *";
+	}
+	else {
+		this->Text = "Gestión de Reportes - Administrador";
+	}
+}
+
+private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+
+	if (dataGridView1->SelectedRows->Count > 0) {
+		try {
+			// Obtener el ID del reporte seleccionado
+			DataGridViewRow^ selectedRow = dataGridView1->SelectedRows[0];
+			String^ idReporteStr = selectedRow->Cells["Column1"]->Value->ToString();
+			int idReporte = Convert::ToInt32(idReporteStr->Replace("REP-", ""));
+
+			// Buscar el reporte en la lista
+			AgroRobotModel::Reporte^ reporteSeleccionado = reporteController->ConsultarReportePorId(idReporte);
+
+			if (reporteSeleccionado != nullptr) {
+				// Abrir formulario de edición
+				frmEditarReporte^ formEdicion = gcnew frmEditarReporte(reporteController, reporteSeleccionado);
+				formEdicion->ShowDialog();
+
+				// Recargar datos después de editar
+				button1_Click(sender, e); // Ejecutar búsqueda nuevamente
+			}
+			else {
+				MessageBox::Show("No se pudo encontrar el reporte seleccionado.",
+					"Error",
+					MessageBoxButtons::OK,
+					MessageBoxIcon::Error);
+			}
+		}
+		catch (Exception^ ex) {
+			MessageBox::Show("Error al abrir el editor: " + ex->Message,
+				"Error",
+				MessageBoxButtons::OK,
+				MessageBoxIcon::Error);
+		}
+	}
+	else {
+		MessageBox::Show("Por favor, seleccione un reporte para editar.",
+			"Selección requerida",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Warning);
+	}
+
+}
 };
 }

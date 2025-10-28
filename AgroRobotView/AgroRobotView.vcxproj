@@ -139,6 +139,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="frmEditarReporte.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="frmEditInsumo.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -192,6 +195,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmEditarReporte.resx">
+      <DependentUpon>frmEditarReporte.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmEditInsumo.resx">
       <DependentUpon>frmEditInsumo.h</DependentUpon>
     </EmbeddedResource>
