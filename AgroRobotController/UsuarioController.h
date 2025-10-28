@@ -10,7 +10,7 @@ namespace AgroRobotController {
 	public:
 		UsuarioController();
 		//List<Usuario^>^ readTxt();
-		void writeTxt(List<Usuario^>^ lista);
+		void writeTxt(List<Usuario^>^ listaUsuarios);
 		void agregarUsuario(Usuario^ usuario);
 		List<Usuario^>^ obtenerTodosUsuarios();
 		void actualizarUsuario(Usuario^ usuario);

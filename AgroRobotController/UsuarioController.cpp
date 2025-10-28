@@ -118,8 +118,7 @@ void UsuarioController::writeTxt(List<Usuario^>^ lista)
 	File::WriteAllLines(path, lineas);
 }
 
-void UsuarioController::agregarUsuario(Usuario^ usuario)
-{
+void UsuarioController::agregarUsuario(Usuario^ usuario){
 	this->listaUsuarios->Add(usuario);
 	writeTxt(this->listaUsuarios);
 }

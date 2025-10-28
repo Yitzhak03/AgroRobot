@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "frmNuevoUsuario.h"
+#include "frmEditarUsuario.h"
 namespace AgroRobotView {
 
 	using namespace System;
@@ -21,6 +22,7 @@ namespace AgroRobotView {
 			//
 			//TODO: agregar código de constructor aquí
 			//
+			this->usuarioController = gcnew UsuarioController();
 		}
 
 	protected:
@@ -33,10 +35,14 @@ namespace AgroRobotView {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Button^ button5;
+	private: System::Windows::Forms::Button^ btnMostrarTodos;
+	private: System::Windows::Forms::Button^ btnEliminar;
+	private: System::Windows::Forms::Button^ btnEditar;
 	protected:
-	private: System::Windows::Forms::Button^ button4;
-	private: System::Windows::Forms::Button^ button3;
+
+	protected:
+
+
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
 
@@ -46,7 +52,8 @@ namespace AgroRobotView {
 
 
 	private: System::Windows::Forms::GroupBox^ groupBox1;
-	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ btnBuscar;
+
 	private: System::Windows::Forms::TextBox^ textBox2;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::TextBox^ textBox1;
@@ -58,6 +65,7 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column7;
+	private: UsuarioController^ usuarioController;
 
 	protected:
 
@@ -75,9 +83,9 @@ namespace AgroRobotView {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->button5 = (gcnew System::Windows::Forms::Button());
-			this->button4 = (gcnew System::Windows::Forms::Button());
-			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->btnMostrarTodos = (gcnew System::Windows::Forms::Button());
+			this->btnEliminar = (gcnew System::Windows::Forms::Button());
+			this->btnEditar = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
 			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -88,7 +96,7 @@ namespace AgroRobotView {
 			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column7 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
-			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->btnBuscar = (gcnew System::Windows::Forms::Button());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
@@ -97,36 +105,38 @@ namespace AgroRobotView {
 			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
 			// 
-			// button5
+			// btnMostrarTodos
 			// 
-			this->button5->Location = System::Drawing::Point(117, 370);
-			this->button5->Margin = System::Windows::Forms::Padding(2);
-			this->button5->Name = L"button5";
-			this->button5->Size = System::Drawing::Size(64, 19);
-			this->button5->TabIndex = 16;
-			this->button5->Text = L"Show All";
-			this->button5->UseVisualStyleBackColor = true;
-			this->button5->Click += gcnew System::EventHandler(this, &frmMantUsuarios::button5_Click);
+			this->btnMostrarTodos->Location = System::Drawing::Point(97, 370);
+			this->btnMostrarTodos->Margin = System::Windows::Forms::Padding(2);
+			this->btnMostrarTodos->Name = L"btnMostrarTodos";
+			this->btnMostrarTodos->Size = System::Drawing::Size(87, 19);
+			this->btnMostrarTodos->TabIndex = 16;
+			this->btnMostrarTodos->Text = L"Mostrar Todos";
+			this->btnMostrarTodos->UseVisualStyleBackColor = true;
+			this->btnMostrarTodos->Click += gcnew System::EventHandler(this, &frmMantUsuarios::btnMostrarTodos_Click);
 			// 
-			// button4
+			// btnEliminar
 			// 
-			this->button4->Location = System::Drawing::Point(631, 370);
-			this->button4->Margin = System::Windows::Forms::Padding(2);
-			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(56, 19);
-			this->button4->TabIndex = 15;
-			this->button4->Text = L"Eliminar";
-			this->button4->UseVisualStyleBackColor = true;
+			this->btnEliminar->Location = System::Drawing::Point(631, 370);
+			this->btnEliminar->Margin = System::Windows::Forms::Padding(2);
+			this->btnEliminar->Name = L"btnEliminar";
+			this->btnEliminar->Size = System::Drawing::Size(56, 19);
+			this->btnEliminar->TabIndex = 15;
+			this->btnEliminar->Text = L"Eliminar";
+			this->btnEliminar->UseVisualStyleBackColor = true;
+			this->btnEliminar->Click += gcnew System::EventHandler(this, &frmMantUsuarios::btnEliminar_Click);
 			// 
-			// button3
+			// btnEditar
 			// 
-			this->button3->Location = System::Drawing::Point(454, 370);
-			this->button3->Margin = System::Windows::Forms::Padding(2);
-			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(56, 19);
-			this->button3->TabIndex = 14;
-			this->button3->Text = L"Editar";
-			this->button3->UseVisualStyleBackColor = true;
+			this->btnEditar->Location = System::Drawing::Point(454, 370);
+			this->btnEditar->Margin = System::Windows::Forms::Padding(2);
+			this->btnEditar->Name = L"btnEditar";
+			this->btnEditar->Size = System::Drawing::Size(56, 19);
+			this->btnEditar->TabIndex = 14;
+			this->btnEditar->Text = L"Editar";
+			this->btnEditar->UseVisualStyleBackColor = true;
+			this->btnEditar->Click += gcnew System::EventHandler(this, &frmMantUsuarios::btnEditar_Click);
 			// 
 			// button2
 			// 
@@ -203,7 +213,7 @@ namespace AgroRobotView {
 			// 
 			// groupBox1
 			// 
-			this->groupBox1->Controls->Add(this->button1);
+			this->groupBox1->Controls->Add(this->btnBuscar);
 			this->groupBox1->Controls->Add(this->textBox2);
 			this->groupBox1->Controls->Add(this->label2);
 			this->groupBox1->Controls->Add(this->textBox1);
@@ -217,16 +227,16 @@ namespace AgroRobotView {
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Criterios de Búsqueda";
 			// 
-			// button1
+			// btnBuscar
 			// 
-			this->button1->Location = System::Drawing::Point(478, 50);
-			this->button1->Margin = System::Windows::Forms::Padding(2);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(56, 19);
-			this->button1->TabIndex = 4;
-			this->button1->Text = L"Buscar";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &frmMantUsuarios::button1_Click);
+			this->btnBuscar->Location = System::Drawing::Point(478, 50);
+			this->btnBuscar->Margin = System::Windows::Forms::Padding(2);
+			this->btnBuscar->Name = L"btnBuscar";
+			this->btnBuscar->Size = System::Drawing::Size(56, 19);
+			this->btnBuscar->TabIndex = 4;
+			this->btnBuscar->Text = L"Buscar";
+			this->btnBuscar->UseVisualStyleBackColor = true;
+			this->btnBuscar->Click += gcnew System::EventHandler(this, &frmMantUsuarios::btnBuscar_Click);
 			// 
 			// textBox2
 			// 
@@ -269,9 +279,9 @@ namespace AgroRobotView {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(827, 439);
-			this->Controls->Add(this->button5);
-			this->Controls->Add(this->button4);
-			this->Controls->Add(this->button3);
+			this->Controls->Add(this->btnMostrarTodos);
+			this->Controls->Add(this->btnEliminar);
+			this->Controls->Add(this->btnEditar);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->groupBox1);
@@ -284,9 +294,6 @@ namespace AgroRobotView {
 
 		}
 #pragma endregion
-		//===============================================================================
-		//==============================Show All==========================================
-		//===============================================================================
 public:	void mostrarGrilla(List<Usuario^>^ listaUsuarios)
 {
 	this->dataGridView1->Rows->Clear();
@@ -307,35 +314,21 @@ public:	void mostrarGrilla(List<Usuario^>^ listaUsuarios)
 	this->dataGridView1->AllowUserToAddRows = false;	 // Evitar que el usuario pueda agregar filas manualmente
 }
 
-private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e)
+private: System::Void btnMostrarTodos_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		// Limpiar el DataGridView antes de mostrar todos los usuarios
 		this->dataGridView1->Rows->Clear();
-		// Crear el controlador de usuarios
-		UsuarioController^ ctrl = gcnew UsuarioController();
-		// Leer la lista de usuarios desde el archivo
-		//List<Usuario^>^ lista = ctrl->obtenerTodosUsuarios();
-		// Llenar el DataGridView con los datos de los usuarios
-		/*for each (Usuario ^ u in lista) {
-			this->dataGridView1->Rows->Add(
-				Convert::ToString(u->Id),
-				u->Nombre,
-				u->Contrasenha,
-				u->UltimoAcceso,
-				u->EstadoCuenta,
-				u->Roles,
-				u->Alerts
-			);
-		}*/
+		
+		List<Usuario^>^ listaUsuarios= this->usuarioController->obtenerTodosUsuarios();
+		mostrarGrilla(listaUsuarios);
 
 	}
-	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e)
-	{
-		frmNuevoUsuario^ nuevoUsuarioForm = gcnew frmNuevoUsuario();
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e){
+		frmNuevoUsuario^ nuevoUsuarioForm = gcnew frmNuevoUsuario(this->usuarioController);
 		nuevoUsuarioForm->ShowDialog();
 	}
 
-	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void btnBuscar_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ nombreUsuario = "";
 		String^ estadoUsuario = "";
 		if (!textBox1->Text->Equals(""))
@@ -349,10 +342,59 @@ private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e
 			estadoUsuario = textBox2->Text;
 		}
 		// Crear una instancia del controlador y buscar el operador por nombre
-		UsuarioController^ ctrl = gcnew UsuarioController();
-		List<Usuario^>^ listaUsuarios = ctrl->obtenerUsuarioPorNombreEstado(nombreUsuario, estadoUsuario);
+		List<Usuario^>^ listaUsuarios = this->usuarioController->obtenerUsuarioPorNombreEstado(nombreUsuario, estadoUsuario);
 		// Mostrar los resultados en el DataGridView
 		mostrarGrilla(listaUsuarios);
+	}
+	private: System::Void btnEliminar_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (this->dataGridView1->SelectedRows->Count > 0){
+			// Preguntar al usuario si est� seguro de eliminar el registro
+			System::Windows::Forms::DialogResult resultado = MessageBox::Show("¿Está seguro de que desea eliminar el registro seleccionado?",
+				"Confirmación de eliminación", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
+
+			// Si el usuario selecciona "No", cancelar la operaci�n
+			if (resultado == System::Windows::Forms::DialogResult::No){
+				return; // Salir del evento si el usuario cancela
+			}
+
+			int selectedRowIndex = this->dataGridView1->SelectedRows[0]->Index;
+			int idUsuario = Convert::ToInt32(this->dataGridView1->Rows[selectedRowIndex]->Cells[0]->Value);
+			// Crear una instancia del controlador y eliminar la máquina
+			this->usuarioController->eliminarUsuario(idUsuario);
+			// Actualizar la lista de máquinas en el DataGridView
+			List<Usuario^>^ listaUsuarios = this->usuarioController->obtenerTodosUsuarios();
+			mostrarGrilla(listaUsuarios);
+		}
+		else{
+			MessageBox::Show("Por favor, seleccione un usuario para eliminar.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+		}
+	
+	}
+	private: System::Void btnEditar_Click(System::Object^ sender, System::EventArgs^ e) {
+		// Verificar si se ha seleccionado una fila en el DataGridView
+		if (this->dataGridView1->SelectedRows->Count > 0)
+		{
+			int filaSeleccionada = this->dataGridView1->SelectedRows[0]->Index;
+			int idUsuario = Convert::ToInt32(this->dataGridView1->Rows[filaSeleccionada]->Cells[0]->Value);
+
+			Usuario^ usuarioSeleccionado = this->usuarioController->obtenerUsuarioPorId(idUsuario);
+			if (usuarioSeleccionado == nullptr)
+			{
+				MessageBox::Show("No se encontró el usuario seleccionado.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				return;
+			}
+			// Crear una nueva instancia del formulario de nuevo operador
+			// y mostrarlo como un formulario hijo dentro del contenedor MDI
+			frmEditarUsuario^ ventanaEditarUsuario = gcnew frmEditarUsuario(this->usuarioController, usuarioSeleccionado);
+			ventanaEditarUsuario->ShowDialog();
+			// Llamar al m�todo para cargar la lista de operadores nuevamente
+			List<Usuario^>^ listaUsuarios = this->usuarioController->obtenerTodosUsuarios();
+			mostrarGrilla(listaUsuarios);
+		}
+		else
+		{
+			MessageBox::Show("Por favor, seleccione un usuario para editar.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+		}
 	}
 };
 }

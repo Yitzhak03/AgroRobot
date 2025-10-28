@@ -17,9 +17,10 @@ namespace AgroRobotView {
 	/// </summary>
 	public ref class frmNuevoUsuario : public System::Windows::Forms::Form {
 	public:
-		frmNuevoUsuario(void)
-		{
+		frmNuevoUsuario(UsuarioController^ usuarioController) {
 			InitializeComponent();
+			this->usuarioController = usuarioController;
+
 			// Obtener los roles desde el controlador
 			RolController^ rolCtrl = gcnew RolController();
 			List<Rol^>^ listaRoles = rolCtrl->readTxt();
@@ -62,7 +63,7 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::Label^ label7;
 
 	private: System::Windows::Forms::CheckedListBox^ checkedListBox1;
-
+	private: UsuarioController^ usuarioController;
 
 	private:
 		/// <summary>
@@ -273,9 +274,8 @@ namespace AgroRobotView {
 		}
 		nuevoUsuario->SetIdsRoles(idsRoles);
 		// Llamar al controlador para agregar el nuevo usuario
-
-		UsuarioController^ userCtrl = gcnew UsuarioController();
-		userCtrl->agregarUsuario(nuevoUsuario);
+		this->usuarioController->agregarUsuario(nuevoUsuario);
+		
 		// Confirmación
 		MessageBox::Show("Usuario agregado correctamente.", "Nuevo Usuario", MessageBoxButtons::OK, MessageBoxIcon::Information);
 		this->Close();
@@ -283,8 +283,7 @@ namespace AgroRobotView {
 		   //===============================================================================
 		   //==============================Cancelar=========================================
 		   //===============================================================================
-	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e)
-	{
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e){
 		this->Close();
 	}
 	};
