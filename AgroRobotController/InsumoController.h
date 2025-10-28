@@ -2,6 +2,7 @@
 namespace AgroRobotController {
 	using namespace System::Collections::Generic;
 	using namespace AgroRobotModel;
+	using namespace System;
 	public ref class InsumoController {
 	public:
 		InsumoController();
@@ -10,7 +11,8 @@ namespace AgroRobotController {
 		void agregarInsumo(Insumo^ insumo);
 		void eliminarInsumo(int id);
 		void actualizarInsumo(Insumo^ insumo);
-		Insumo^ BuscarPorId(int id);
-
+		Insumo^ buscarPorId(int id);
+		List<Insumo^>^ buscarPorTipo(String^ tipo);
+		List<Insumo^>^ buscarPorUnidad(String^ unidad);
 	};
 }

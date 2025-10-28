@@ -69,7 +69,7 @@ void InsumoController::actualizarInsumo(Insumo^ insumo)
 	}
 	writeTxt(lista);
 }
-Insumo^ InsumoController::BuscarPorId(int id)
+Insumo^ InsumoController::buscarPorId(int id)
 {
 	List<Insumo^>^ lista = readTxt();
 	for each (Insumo ^ insumo in lista) {
@@ -78,4 +78,26 @@ Insumo^ InsumoController::BuscarPorId(int id)
 		}
 	}
 	return nullptr;
+}
+List<Insumo^>^ InsumoController::buscarPorTipo(String^ tipo)
+{
+	List<Insumo^>^ lista = readTxt();
+	List<Insumo^>^ resultados = gcnew List<Insumo^>();
+	for each (Insumo ^ insumo in lista) {
+		if (insumo->Tipo->Equals(tipo, StringComparison::OrdinalIgnoreCase)) {
+			resultados->Add(insumo);
+		}
+	}
+	return resultados;
+}
+List<Insumo^>^ InsumoController::buscarPorUnidad(String^ unidad)
+{
+	List<Insumo^>^ lista = readTxt();
+	List<Insumo^>^ resultados = gcnew List<Insumo^>();
+	for each (Insumo ^ insumo in lista) {
+		if (insumo->Unidad->Equals(unidad, StringComparison::OrdinalIgnoreCase)) {
+			resultados->Add(insumo);
+		}
+	}
+	return resultados;
 }
