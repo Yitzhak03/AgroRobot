@@ -122,6 +122,7 @@
     <ClCompile Include="frmMantDiagnostico.cpp" />
     <ClCompile Include="frmMantDietas.cpp" />
     <ClCompile Include="frmMantInsumo.cpp" />
+    <ClCompile Include="frmMantMuestras.cpp" />
     <ClCompile Include="frmMantUsuarios.cpp" />
     <ClCompile Include="frmMenu.cpp" />
     <ClCompile Include="frmNuevoAlmacen.cpp" />
@@ -170,6 +171,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmMantInsumo.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="frmMantMuestras.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmMantReportes.h">
