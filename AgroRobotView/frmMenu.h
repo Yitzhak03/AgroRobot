@@ -5,7 +5,8 @@
 #include "frmMantDietas.h"
 #include "frmMantAnimales.h"
 #include "frmMantDiagnostico.h"
-#include "frmMantMuestras.h"
+#include "frmMantHeces.h"
+#include "frmMantSangre.h"
 
 namespace AgroRobotView {
 
@@ -60,6 +61,8 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::ToolStripMenuItem^ registroDeAnimalesToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ géstionDeDiagnosticosToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ gestiónDeMuestrasToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ muestraDeHecesToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ muestraDeSangreToolStripMenuItem;
 
 	private:
 	private:
@@ -80,6 +83,8 @@ namespace AgroRobotView {
 			this->diagnosticoToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->géstionDeDiagnosticosToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->gestiónDeMuestrasToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->muestraDeHecesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->muestraDeSangreToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->planDeAlimentacionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->registroDeDietasToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->registroDeAnimalesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -133,10 +138,28 @@ namespace AgroRobotView {
 			// 
 			// gestiónDeMuestrasToolStripMenuItem
 			// 
+			this->gestiónDeMuestrasToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->muestraDeHecesToolStripMenuItem,
+					this->muestraDeSangreToolStripMenuItem
+			});
 			this->gestiónDeMuestrasToolStripMenuItem->Name = L"gestiónDeMuestrasToolStripMenuItem";
 			this->gestiónDeMuestrasToolStripMenuItem->Size = System::Drawing::Size(201, 22);
 			this->gestiónDeMuestrasToolStripMenuItem->Text = L"Gestión de Muestras";
 			this->gestiónDeMuestrasToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::gestiónDeMuestrasToolStripMenuItem_Click);
+			// 
+			// muestraDeHecesToolStripMenuItem
+			// 
+			this->muestraDeHecesToolStripMenuItem->Name = L"muestraDeHecesToolStripMenuItem";
+			this->muestraDeHecesToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->muestraDeHecesToolStripMenuItem->Text = L"Muestra de Heces";
+			this->muestraDeHecesToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::muestraDeHecesToolStripMenuItem_Click);
+			// 
+			// muestraDeSangreToolStripMenuItem
+			// 
+			this->muestraDeSangreToolStripMenuItem->Name = L"muestraDeSangreToolStripMenuItem";
+			this->muestraDeSangreToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->muestraDeSangreToolStripMenuItem->Text = L"Muestra de Sangre";
+			this->muestraDeSangreToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::muestraDeSangreToolStripMenuItem_Click);
 			// 
 			// planDeAlimentacionToolStripMenuItem
 			// 
@@ -262,9 +285,17 @@ namespace AgroRobotView {
 		formMantDiagnostico->Show();
 	}
 	private: System::Void gestiónDeMuestrasToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-		frmMantMuestras^ formMantMuestras = gcnew frmMantMuestras();
-		formMantMuestras->MdiParent = this;
-		formMantMuestras->Show();
+	
+	}
+	private: System::Void muestraDeHecesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		frmMantHeces^ formMantHeces = gcnew frmMantHeces();
+		formMantHeces->MdiParent = this;
+		formMantHeces->Show();
+	}
+	private: System::Void muestraDeSangreToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		frmMantSangre^ formMantSangre = gcnew frmMantSangre();
+		formMantSangre->MdiParent = this;
+		formMantSangre->Show();
 	}
 };
 }

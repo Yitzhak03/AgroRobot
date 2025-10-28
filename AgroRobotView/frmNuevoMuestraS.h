@@ -48,6 +48,8 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Label^ label6;
+	private: System::Windows::Forms::TextBox^ textBox4;
 
 	private:
 		/// <summary>
@@ -75,21 +77,24 @@ namespace AgroRobotView {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
 			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(148, 298);
+			this->button2->Location = System::Drawing::Point(141, 337);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(75, 23);
 			this->button2->TabIndex = 5;
 			this->button2->Text = L"Cancelar";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &frmNuevoMuestraS::button2_Click);
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(41, 298);
+			this->button1->Location = System::Drawing::Point(34, 337);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(75, 23);
 			this->button1->TabIndex = 4;
@@ -99,6 +104,8 @@ namespace AgroRobotView {
 			// 
 			// groupBox1
 			// 
+			this->groupBox1->Controls->Add(this->textBox4);
+			this->groupBox1->Controls->Add(this->label6);
 			this->groupBox1->Controls->Add(this->comboBox2);
 			this->groupBox1->Controls->Add(this->comboBox1);
 			this->groupBox1->Controls->Add(this->label5);
@@ -111,7 +118,7 @@ namespace AgroRobotView {
 			this->groupBox1->Controls->Add(this->label1);
 			this->groupBox1->Location = System::Drawing::Point(22, 24);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(207, 248);
+			this->groupBox1->Size = System::Drawing::Size(207, 293);
 			this->groupBox1->TabIndex = 3;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Datos Sangre";
@@ -192,9 +199,26 @@ namespace AgroRobotView {
 			// 
 			this->label1->Location = System::Drawing::Point(9, 34);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(70, 30);
+			this->label1->Size = System::Drawing::Size(55, 13);
 			this->label1->TabIndex = 0;
-			this->label1->Text = L"Numero de muestras:";
+			this->label1->Text = L"ID Animal:";
+			// 
+			// label6
+			// 
+			this->label6->AutoSize = true;
+			this->label6->Location = System::Drawing::Point(11, 254);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(40, 13);
+			this->label6->TabIndex = 11;
+			this->label6->Text = L"Fecha:";
+			this->label6->Click += gcnew System::EventHandler(this, &frmNuevoMuestraS::label6_Click);
+			// 
+			// textBox4
+			// 
+			this->textBox4->Location = System::Drawing::Point(94, 251);
+			this->textBox4->Name = L"textBox4";
+			this->textBox4->Size = System::Drawing::Size(100, 20);
+			this->textBox4->TabIndex = 12;
 			// 
 			// frmNuevoMuestraS
 			// 
@@ -212,5 +236,9 @@ namespace AgroRobotView {
 
 		}
 #pragma endregion
-	};
+	private: System::Void label6_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+};
 }

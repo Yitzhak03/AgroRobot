@@ -121,13 +121,14 @@
     <ClCompile Include="frmMantAnimales.cpp" />
     <ClCompile Include="frmMantDiagnostico.cpp" />
     <ClCompile Include="frmMantDietas.cpp" />
+    <ClCompile Include="frmMantHeces.cpp" />
     <ClCompile Include="frmMantInsumo.cpp" />
-    <ClCompile Include="frmMantMuestras.cpp" />
+    <ClCompile Include="frmMantSangre.cpp" />
     <ClCompile Include="frmMantUsuarios.cpp" />
     <ClCompile Include="frmMenu.cpp" />
     <ClCompile Include="frmNuevoAlmacen.cpp" />
-    <ClCompile Include="frmNuevoAnalisis.cpp" />
     <ClCompile Include="frmNuevoAnimal.cpp" />
+    <ClCompile Include="frmNuevoDiagnostico.cpp" />
     <ClCompile Include="frmNuevoDieta.cpp" />
     <ClCompile Include="frmNuevoInsumo.cpp" />
     <ClCompile Include="frmNuevoMuestraH.cpp" />
@@ -170,13 +171,16 @@
     <ClInclude Include="frmMantDietas.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="frmMantHeces.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="frmMantInsumo.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="frmMantMuestras.h">
+    <ClInclude Include="frmMantReportes.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="frmMantReportes.h">
+    <ClInclude Include="frmMantSangre.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmMantUsuarios.h">
@@ -188,10 +192,10 @@
     <ClInclude Include="frmNuevoAlmacen.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="frmNuevoAnalisis.h">
+    <ClInclude Include="frmNuevoAnimal.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="frmNuevoAnimal.h">
+    <ClInclude Include="frmNuevoDiagnostico.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmNuevoDieta.h">
@@ -238,11 +242,17 @@
     <EmbeddedResource Include="frmMantDietas.resx">
       <DependentUpon>frmMantDietas.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmMantHeces.resx">
+      <DependentUpon>frmMantHeces.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMantInsumo.resx">
       <DependentUpon>frmMantInsumo.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMantReportes.resx">
       <DependentUpon>frmMantReportes.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMantSangre.resx">
+      <DependentUpon>frmMantSangre.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMantUsuarios.resx">
       <DependentUpon>frmMantUsuarios.h</DependentUpon>
@@ -253,11 +263,11 @@
     <EmbeddedResource Include="frmNuevoAlmacen.resx">
       <DependentUpon>frmNuevoAlmacen.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmNuevoAnalisis.resx">
-      <DependentUpon>frmNuevoAnalisis.h</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmNuevoAnimal.resx">
       <DependentUpon>frmNuevoAnimal.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNuevoDiagnostico.resx">
+      <DependentUpon>frmNuevoDiagnostico.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNuevoDieta.resx">
       <DependentUpon>frmNuevoDieta.h</DependentUpon>
