@@ -131,6 +131,7 @@
     <ClCompile Include="RobotComida.cpp" />
     <ClCompile Include="RobotSuplementos.cpp" />
     <ClCompile Include="Rol.cpp" />
+    <ClCompile Include="StockInsumo.cpp" />
     <ClCompile Include="Usuario.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +155,7 @@
     <ClInclude Include="RobotComida.h" />
     <ClInclude Include="RobotSuplementos.h" />
     <ClInclude Include="Rol.h" />
+    <ClInclude Include="StockInsumo.h" />
     <ClInclude Include="Usuario.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

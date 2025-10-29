@@ -14,5 +14,6 @@ namespace AgroRobotController {
 		Insumo^ buscarPorId(int id);
 		List<Insumo^>^ buscarPorTipo(String^ tipo);
 		List<String^>^ obtenerTiposInsumos();
+		int generarNuevoId();
 	};
 }

@@ -33,7 +33,6 @@ namespace AgroRobotView {
 			this->textBox1->Text = Convert::ToString(insumo->Id);
 			this->textBox2->Text = insumo->Nombre;
 			this->textBox3->Text = insumo->Tipo;
-			this->textBox4->Text = Convert::ToString(insumo->Stock);
 			this->textBox5->Text = insumo->Unidad;
 		}
 	protected:
@@ -48,13 +47,13 @@ namespace AgroRobotView {
 		}
 	private: System::Windows::Forms::GroupBox^ groupBox1;
 	protected:
-	private: System::Windows::Forms::TextBox^ textBox4;
+
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::TextBox^ textBox5;
 	private: System::Windows::Forms::TextBox^ textBox3;
 	private: System::Windows::Forms::Label^ label5;
-	private: System::Windows::Forms::Label^ label4;
+
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::TextBox^ textBox2;
 	private: System::Windows::Forms::Label^ label2;
@@ -75,13 +74,11 @@ namespace AgroRobotView {
 		void InitializeComponent(void)
 		{
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
-			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			this->label5 = (gcnew System::Windows::Forms::Label());
-			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
@@ -92,13 +89,11 @@ namespace AgroRobotView {
 			// 
 			// groupBox1
 			// 
-			this->groupBox1->Controls->Add(this->textBox4);
 			this->groupBox1->Controls->Add(this->button2);
 			this->groupBox1->Controls->Add(this->button1);
 			this->groupBox1->Controls->Add(this->textBox5);
 			this->groupBox1->Controls->Add(this->textBox3);
 			this->groupBox1->Controls->Add(this->label5);
-			this->groupBox1->Controls->Add(this->label4);
 			this->groupBox1->Controls->Add(this->label3);
 			this->groupBox1->Controls->Add(this->textBox2);
 			this->groupBox1->Controls->Add(this->label2);
@@ -111,16 +106,9 @@ namespace AgroRobotView {
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Datos del insumo";
 			// 
-			// textBox4
-			// 
-			this->textBox4->Location = System::Drawing::Point(115, 160);
-			this->textBox4->Name = L"textBox4";
-			this->textBox4->Size = System::Drawing::Size(100, 20);
-			this->textBox4->TabIndex = 12;
-			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(140, 255);
+			this->button2->Location = System::Drawing::Point(140, 209);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(75, 23);
 			this->button2->TabIndex = 5;
@@ -130,7 +118,7 @@ namespace AgroRobotView {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(29, 255);
+			this->button1->Location = System::Drawing::Point(29, 209);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(75, 23);
 			this->button1->TabIndex = 4;
@@ -141,7 +129,7 @@ namespace AgroRobotView {
 			// 
 			// textBox5
 			// 
-			this->textBox5->Location = System::Drawing::Point(115, 206);
+			this->textBox5->Location = System::Drawing::Point(115, 156);
 			this->textBox5->Name = L"textBox5";
 			this->textBox5->Size = System::Drawing::Size(100, 20);
 			this->textBox5->TabIndex = 5;
@@ -155,19 +143,11 @@ namespace AgroRobotView {
 			// 
 			// label5
 			// 
-			this->label5->Location = System::Drawing::Point(27, 206);
+			this->label5->Location = System::Drawing::Point(27, 156);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(55, 20);
 			this->label5->TabIndex = 4;
 			this->label5->Text = L"Unidad:";
-			// 
-			// label4
-			// 
-			this->label4->Location = System::Drawing::Point(27, 163);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(39, 20);
-			this->label4->TabIndex = 4;
-			this->label4->Text = L"Stock:";
 			// 
 			// label3
 			// 
@@ -239,7 +219,6 @@ namespace AgroRobotView {
 			Convert::ToInt32(this->textBox1->Text),
 			this->textBox2->Text,
 			this->textBox3->Text,
-			Convert::ToSingle(this->textBox4->Text),
 			this->textBox5->Text
 		);
 		insumoCtrl->actualizarInsumo(insumo);

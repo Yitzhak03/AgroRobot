@@ -17,8 +17,7 @@ List<Insumo^>^ InsumoController::readTxt()
 		insumo->Id = Convert::ToInt32(datos[0]);
 		insumo->Nombre = datos[1];
 		insumo->Tipo = datos[2];
-		insumo->Stock = Convert::ToSingle(datos[3]);
-		insumo->Unidad = datos[4];
+		insumo->Unidad = datos[3];
 		lista->Add(insumo);
 	}
 	return lista;
@@ -30,11 +29,10 @@ void InsumoController::writeTxt(List<Insumo^>^ lista)
 	array<String^>^ lineas = gcnew array<String^>(lista->Count);
 	for (int i = 0; i < lista->Count; ++i) {
 		Insumo^ insumo = lista[i];
-		lineas[i] = String::Format("{0};{1};{2};{3};{4}",
+		lineas[i] = String::Format("{0};{1};{2};{3}",
 			insumo->Id,
 			insumo->Nombre,
 			insumo->Tipo,
-			insumo->Stock,
 			insumo->Unidad
 		);
 	}
@@ -100,4 +98,15 @@ List<String^>^ InsumoController::obtenerTiposInsumos()
 		}
 	}
 	return tipos;
+}
+int InsumoController::generarNuevoId()
+{
+	List<Insumo^>^ lista = readTxt();
+	int maxId = 0;
+	for each (Insumo ^ insumo in lista) {
+		if (insumo->Id > maxId) {
+			maxId = insumo->Id;
+		}
+	}
+	return maxId + 1;
 }

@@ -1,11 +1,11 @@
-1;Maíz;Grano;20;kg
-2;Trigo;Grano;40;kg
-3;Melaza;Líquido;8;litros
-4;Aceite vegetal;Líquido;5;litros
-5;Salvado de trigo;Fibra;10;kg
-6;Premix vitamínico;Suplemento;4;kg
-7;Carbonato de calcio;Mineral;12;kg
-8;Suero lácteo;Líquido;6;litros
-9;Heno seco;Forraje;50;kg
-10;Antiparasitario oral;Medicamento;2;pastillas
-21;Harina de maíz;Harina;18;kg
+1;Maíz;Grano;kg
+2;Trigo;Grano;kg
+3;Melazaaaaa;Líquido;litros
+4;Aceite vegetal;Líquido;litros
+5;Salvado de trigo;Fibra;kg
+6;Premix vitamínico;Suplemento;kg
+7;Carbonato de calcio;Mineral;kg
+8;Suero lácteo;Líquido;litros
+9;Heno seco;Forraje;kg
+10;Antiparasitario;Medicamento;pastillas
+11;Harina de maíz;Harina;kg
