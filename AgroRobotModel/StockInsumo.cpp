@@ -10,11 +10,15 @@ StockInsumo::StockInsumo(
 	int id,
 	Insumo^ insumoo,
 	Almacen^ almacenn,
-	float stock
+	float stock,
+	float limiteBajo,
+	float limiteAlto
 ) 
 {
 	Id = id;
 	Insumoo = insumoo;
 	Almacenn = almacenn;
 	Stock = stock;
+	LimiteBajo = limiteBajo;
+	LimiteAlto = limiteAlto;
 }
