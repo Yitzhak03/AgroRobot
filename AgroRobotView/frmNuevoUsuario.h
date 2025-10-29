@@ -62,8 +62,10 @@ namespace AgroRobotView {
 
 	private: System::Windows::Forms::Label^ label7;
 
-	private: System::Windows::Forms::CheckedListBox^ checkedListBox1;
+
 	private: UsuarioController^ usuarioController;
+	private: System::Windows::Forms::CheckedListBox^ checkedListBox1;
+
 
 	private:
 		/// <summary>
@@ -81,7 +83,6 @@ namespace AgroRobotView {
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
-			this->checkedListBox1 = (gcnew System::Windows::Forms::CheckedListBox());
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
@@ -91,6 +92,7 @@ namespace AgroRobotView {
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->checkedListBox1 = (gcnew System::Windows::Forms::CheckedListBox());
 			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -136,15 +138,7 @@ namespace AgroRobotView {
 			this->groupBox1->TabIndex = 3;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Datos del Usuario";
-			// 
-			// checkedListBox1
-			// 
-			this->checkedListBox1->CheckOnClick = true;
-			this->checkedListBox1->FormattingEnabled = true;
-			this->checkedListBox1->Location = System::Drawing::Point(137, 225);
-			this->checkedListBox1->Name = L"checkedListBox1";
-			this->checkedListBox1->Size = System::Drawing::Size(101, 79);
-			this->checkedListBox1->TabIndex = 16;
+			this->groupBox1->Enter += gcnew System::EventHandler(this, &frmNuevoUsuario::groupBox1_Enter);
 			// 
 			// label7
 			// 
@@ -228,6 +222,15 @@ namespace AgroRobotView {
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Id: ";
 			// 
+			// checkedListBox1
+			// 
+			this->checkedListBox1->CheckOnClick = true;
+			this->checkedListBox1->FormattingEnabled = true;
+			this->checkedListBox1->Location = System::Drawing::Point(137, 225);
+			this->checkedListBox1->Name = L"checkedListBox1";
+			this->checkedListBox1->Size = System::Drawing::Size(101, 79);
+			this->checkedListBox1->TabIndex = 16;
+			// 
 			// frmNuevoUsuario
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -286,5 +289,7 @@ namespace AgroRobotView {
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e){
 		this->Close();
 	}
-	};
+	private: System::Void groupBox1_Enter(System::Object^ sender, System::EventArgs^ e) {
+	}
+};
 }

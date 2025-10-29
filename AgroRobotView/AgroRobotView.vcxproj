@@ -254,6 +254,9 @@
     <EmbeddedResource Include="frmEditarReporte.resx">
       <DependentUpon>frmEditarReporte.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmEditarUsuario.resx">
+      <DependentUpon>frmEditarUsuario.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmEditInsumo.resx">
       <DependentUpon>frmEditInsumo.h</DependentUpon>
     </EmbeddedResource>
@@ -280,6 +283,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMantReportes.resx">
       <DependentUpon>frmMantReportes.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMantRoles.resx">
+      <DependentUpon>frmMantRoles.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMantSangre.resx">
       <DependentUpon>frmMantSangre.h</DependentUpon>
