@@ -261,6 +261,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmEditarMuestraH";
 			this->Text = L"frmEditarMuestraH";
+			this->Load += gcnew System::EventHandler(this, &frmEditarMuestraH::frmEditarMuestraH_Load);
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
 			this->ResumeLayout(false);
@@ -282,6 +283,15 @@ namespace AgroRobotView {
 		muestraController->editarMuestraArchivo(idMuestra, muestraEditada);
 		MessageBox::Show("Muestra editada correctamente.");
 		this->Close();
+	}
+	private: System::Void frmEditarMuestraH_Load(System::Object^ sender, System::EventArgs^ e) {
+		this->textBox6->Text = Convert::ToString(this->muestra->getIdMuestra());
+		this->textBox1->Text = Convert::ToString(this->muestra->getIdAnimal());
+		this->textBox2->Text = this->muestra->getConsistencia();
+		this->textBox3->Text = this->muestra->getColorHeces();
+		this->textBox4->Text = this->muestra->getOlor();
+		this->comboBox2->Text = this->muestra->getParasitos();
+		this->textBox5->Text = this->muestra->getFechaToma();
 	}
 };
 }
