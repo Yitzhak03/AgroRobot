@@ -1,20 +1,21 @@
 #pragma once
-#include "Insumo.h"
+//#include "StockInsumo.h"
 namespace AgroRobotModel {
+	ref class StockInsumo; // Forward declaration
     using namespace System;
 	using namespace System::Collections::Generic;
     public ref class Almacen {
     public: 
         property int Id;
+        property String^ Nombre;
         property String^ Ubicacion;
-        property float Capacidad;
-		property List<Insumo^>^ Insumos;
+		property List<StockInsumo^>^ Stocks;
         Almacen();
         Almacen(
             int id,
+            String^ nombre,
             String^ ubicacion,
-            float capacidad,
-            List<Insumo^>^ insumos
+            List<StockInsumo^>^ stocks
         );
     };
 }
