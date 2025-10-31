@@ -161,16 +161,25 @@ namespace AgroRobotView {
 #pragma endregion
 	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e)
 	{
-		//Mostrar almacenes en el datagridview
-		this->dataGridView1->Rows->Clear();
-		AlmacenController^ almacenController = gcnew AlmacenController();
-		List<Almacen^>^ listaAlmacenes = almacenController->readTxt();
-		for each (Almacen ^ a in listaAlmacenes) {
-			int index = this->dataGridView1->Rows->Add();
-			this->dataGridView1->Rows[index]->Cells[0]->Value = a->Id;
-			this->dataGridView1->Rows[index]->Cells[1]->Value = a->Nombre;
-			this->dataGridView1->Rows[index]->Cells[2]->Value = a->Ubicacion;
-			this->dataGridView1->Rows[index]->Cells[3]->Value = almacenController->cantidadInsumosEnAlmacen(a->Id);
+		AlmacenController^ almacenCtrl = gcnew AlmacenController();
+		List<Almacen^>^ lista = almacenCtrl->readTxt();
+		mostrarGrilla(lista);
+	}
+		   //Método para mostrar todos los insumos en el DataGridView
+	private: System::Void mostrarGrilla(List<Almacen^>^ lista)
+	{
+		//Limpiar el DataGridView
+		dataGridView1->Rows->Clear();
+		//Crear el controlador de StockInsumo para contar insumos por almacén
+		StockInsumoController^ SICtrl = gcnew StockInsumoController();
+		//Cargar los insumos en el DataGridView
+		for each (Almacen ^ a in lista) {
+			dataGridView1->Rows->Add(
+				Convert::ToString(a->Id),
+				a->Nombre,
+				a->Ubicacion,
+				Convert::ToString(SICtrl->cantidadInsumosEnAlmacen(a->Id))
+			);
 		}
 	}
 	};

@@ -12,6 +12,7 @@ namespace AgroRobotController {
 		void eliminarInsumo(int id);
 		void actualizarInsumo(Insumo^ insumo);*/
 		StockInsumo^ buscarPorId(int id);
+		int cantidadInsumosEnAlmacen(int idAlmacen);
 		/*List<Insumo^>^ buscarPorTipo(String^ tipo);
 		List<String^>^ obtenerTiposInsumos();
 		int generarNuevoId();*/

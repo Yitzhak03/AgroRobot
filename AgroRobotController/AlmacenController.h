@@ -19,7 +19,6 @@ namespace AgroRobotController {
 		void cargarOrdenesDesdeArchivo();
 		void guardarOrdenesEnArchivo();
 		Almacen^ buscarPorId(int id);
-		int cantidadInsumosEnAlmacen(int idAlmacen);
 	};
 
 

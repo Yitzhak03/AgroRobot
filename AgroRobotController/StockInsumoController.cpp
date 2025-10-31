@@ -18,18 +18,10 @@ List<StockInsumo^>^ StockInsumoController::readTxt()
 		array<String^>^ datos = linea->Split(';');
 		StockInsumo^ stockInsumo = gcnew StockInsumo();
 		stockInsumo->Id = Convert::ToInt32(datos[0]);
-		/*InsumoController^ insumoController = gcnew InsumoController();
+		InsumoController^ insumoController = gcnew InsumoController();
 		stockInsumo->Insumoo = insumoController->buscarPorId(Convert::ToInt32(datos[1]));
 		AlmacenController^ almacenController = gcnew AlmacenController();
-		stockInsumo->Almacenn = almacenController->buscarPorId(Convert::ToInt32(datos[2]));*/
-		// 
-		int idInsumo = Convert::ToInt32(datos[1]);
-		int idAlmacen = Convert::ToInt32(datos[2]);
-		stockInsumo->Insumoo = gcnew Insumo();
-		stockInsumo->Insumoo->Id = idInsumo; // placeholder, sin leer todo Insumo
-		stockInsumo->Almacenn = gcnew Almacen();
-		stockInsumo->Almacenn->Id = idAlmacen; // placeholder
-		//
+		stockInsumo->Almacenn = almacenController->buscarPorId(Convert::ToInt32(datos[2]));
 		stockInsumo->Stock = Convert::ToSingle(datos[3]);
 		stockInsumo->LimiteBajo = Convert::ToSingle(datos[4]);
 		stockInsumo->LimiteAlto = Convert::ToSingle(datos[5]);
@@ -46,4 +38,15 @@ StockInsumo^ StockInsumoController::buscarPorId(int id)
 		}
 	}
 	return nullptr;
+}
+int StockInsumoController::cantidadInsumosEnAlmacen(int idAlmacen)
+{
+	List<StockInsumo^>^ lista = readTxt();
+	int contador = 0;
+	for each (StockInsumo ^ s in lista) {
+		if (s->Almacenn->Id == idAlmacen) {
+			contador++;
+		}
+	}
+	return contador;
 }
