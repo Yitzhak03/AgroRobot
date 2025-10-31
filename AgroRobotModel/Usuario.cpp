@@ -6,14 +6,14 @@ Usuario::Usuario(){
 }
 
 Usuario::Usuario(int id, String^ nombre, String^ email, String^ contrasenha, String^ ultimoAcceso,
-					String^ estadoCuenta, List<int>^ idsRoles, List<int>^ idsAlertas) {
+					String^ estadoCuenta, Rol^ rol, List<int>^ idsAlertas) {
 	this->Id = id;
 	this->Nombre = nombre;
 	this->Email = email;
 	this->Contrasenha = contrasenha;
 	this->UltimoAcceso = ultimoAcceso;
 	this->EstadoCuenta = estadoCuenta;
-	this->IdsRoles = idsRoles;
+	this->RolUsuario = rol;
 	this->IdsAlertas = idsAlertas;
 }
 
@@ -59,11 +59,11 @@ void Usuario::SetEstadoCuenta(String^ estadoCuenta) {
 	this->EstadoCuenta = estadoCuenta;
 }
 
-List<int>^ Usuario::GetIdsRoles() {
-	return this->IdsRoles;
+Rol^ Usuario::GetRol() {
+	return this->RolUsuario;
 }
-void Usuario::SetIdsRoles(List<int>^ idsRoles) {
-	this->IdsRoles = idsRoles;
+void Usuario::SetRol(Rol^rol) {
+	this->RolUsuario = rol;
 }
 
 List<int>^ Usuario::GetIdsAlertas() {

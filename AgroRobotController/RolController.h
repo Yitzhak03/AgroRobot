@@ -4,10 +4,17 @@ namespace AgroRobotController {
 	using namespace System::Collections::Generic;
 	using namespace AgroRobotModel;
 	public ref class RolController {
+	private:
+		List<Rol^>^ listaRoles;
+	
 	public:
 		RolController();
+
 		List<Rol^>^ readTxt();
 		void writeTxt(List<Rol^>^ lista);
-		int obtenerIdPorNombre(String^ nombre);
+		
+		Rol^ obtenerRolPorId(int id);
+		Rol^ obtenerRolPorNombre(String^ nombre);
+		List<Rol^>^ obtenerTodosRoles();
 	};
 }

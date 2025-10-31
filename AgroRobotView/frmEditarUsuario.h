@@ -30,6 +30,7 @@ namespace AgroRobotView {
 			InitializeComponent();
 			this->usuarioController = usuarioController;
 			this->usuario = usuario;
+			this->rolController = rolController;
 		}
 
 	protected:
@@ -46,21 +47,27 @@ namespace AgroRobotView {
 
 	private: UsuarioController^ usuarioController;
 	private: Usuario^ usuario;
+	private: RolController^ rolController;
 	private: System::Windows::Forms::GroupBox^ groupBox1;
 	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::Windows::Forms::TextBox^ txtId;
+
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::Label^ label4;
-	private: System::Windows::Forms::TextBox^ textBox2;
-	private: System::Windows::Forms::TextBox^ textBox4;
-	private: System::Windows::Forms::TextBox^ textBox3;
+	private: System::Windows::Forms::TextBox^ txtNombre;
+	private: System::Windows::Forms::TextBox^ txtCtrsn;
+
+
+	private: System::Windows::Forms::TextBox^ txtCorreo;
+
 
 	private: System::Windows::Forms::Button^ btnGrabar;
 
 	private: System::Windows::Forms::Button^ btnCancelar;
-	private: System::Windows::Forms::ComboBox^ comboBox1;
+	private: System::Windows::Forms::ComboBox^ txtRoles;
+
 
 
 
@@ -89,61 +96,69 @@ namespace AgroRobotView {
 		void InitializeComponent(void)
 		{
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
-			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->txtRoles = (gcnew System::Windows::Forms::ComboBox());
+			this->txtCtrsn = (gcnew System::Windows::Forms::TextBox());
+			this->txtCorreo = (gcnew System::Windows::Forms::TextBox());
+			this->txtNombre = (gcnew System::Windows::Forms::TextBox());
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->txtId = (gcnew System::Windows::Forms::TextBox());
 			this->btnGrabar = (gcnew System::Windows::Forms::Button());
 			this->btnCancelar = (gcnew System::Windows::Forms::Button());
-			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// groupBox1
 			// 
-			this->groupBox1->Controls->Add(this->comboBox1);
-			this->groupBox1->Controls->Add(this->textBox4);
-			this->groupBox1->Controls->Add(this->textBox3);
-			this->groupBox1->Controls->Add(this->textBox2);
+			this->groupBox1->Controls->Add(this->txtRoles);
+			this->groupBox1->Controls->Add(this->txtCtrsn);
+			this->groupBox1->Controls->Add(this->txtCorreo);
+			this->groupBox1->Controls->Add(this->txtNombre);
 			this->groupBox1->Controls->Add(this->label5);
 			this->groupBox1->Controls->Add(this->label4);
 			this->groupBox1->Controls->Add(this->label3);
 			this->groupBox1->Controls->Add(this->label1);
 			this->groupBox1->Controls->Add(this->label2);
-			this->groupBox1->Controls->Add(this->textBox1);
+			this->groupBox1->Controls->Add(this->txtId);
 			this->groupBox1->Location = System::Drawing::Point(11, 11);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(280, 320);
+			this->groupBox1->Size = System::Drawing::Size(304, 320);
 			this->groupBox1->TabIndex = 0;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Datos de Usuario";
 			this->groupBox1->Enter += gcnew System::EventHandler(this, &frmEditarUsuario::groupBox1_Enter);
 			// 
-			// textBox4
+			// txtRoles
 			// 
-			this->textBox4->Location = System::Drawing::Point(137, 178);
-			this->textBox4->Name = L"textBox4";
-			this->textBox4->Size = System::Drawing::Size(101, 20);
-			this->textBox4->TabIndex = 10;
+			this->txtRoles->FormattingEnabled = true;
+			this->txtRoles->Location = System::Drawing::Point(137, 222);
+			this->txtRoles->Name = L"txtRoles";
+			this->txtRoles->Size = System::Drawing::Size(127, 21);
+			this->txtRoles->TabIndex = 11;
 			// 
-			// textBox3
+			// txtCtrsn
 			// 
-			this->textBox3->Location = System::Drawing::Point(137, 129);
-			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(101, 20);
-			this->textBox3->TabIndex = 9;
+			this->txtCtrsn->Location = System::Drawing::Point(137, 178);
+			this->txtCtrsn->Name = L"txtCtrsn";
+			this->txtCtrsn->Size = System::Drawing::Size(127, 20);
+			this->txtCtrsn->TabIndex = 10;
 			// 
-			// textBox2
+			// txtCorreo
 			// 
-			this->textBox2->Location = System::Drawing::Point(137, 85);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(101, 20);
-			this->textBox2->TabIndex = 8;
+			this->txtCorreo->Location = System::Drawing::Point(137, 129);
+			this->txtCorreo->Name = L"txtCorreo";
+			this->txtCorreo->Size = System::Drawing::Size(127, 20);
+			this->txtCorreo->TabIndex = 9;
+			// 
+			// txtNombre
+			// 
+			this->txtNombre->Location = System::Drawing::Point(137, 85);
+			this->txtNombre->Name = L"txtNombre";
+			this->txtNombre->Size = System::Drawing::Size(127, 20);
+			this->txtNombre->TabIndex = 8;
 			// 
 			// label5
 			// 
@@ -191,12 +206,13 @@ namespace AgroRobotView {
 			this->label2->Text = L"Id:";
 			this->label2->Click += gcnew System::EventHandler(this, &frmEditarUsuario::label2_Click);
 			// 
-			// textBox1
+			// txtId
 			// 
-			this->textBox1->Location = System::Drawing::Point(137, 41);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(101, 20);
-			this->textBox1->TabIndex = 2;
+			this->txtId->Enabled = false;
+			this->txtId->Location = System::Drawing::Point(137, 41);
+			this->txtId->Name = L"txtId";
+			this->txtId->Size = System::Drawing::Size(127, 20);
+			this->txtId->TabIndex = 2;
 			// 
 			// btnGrabar
 			// 
@@ -218,40 +234,57 @@ namespace AgroRobotView {
 			this->btnCancelar->UseVisualStyleBackColor = true;
 			this->btnCancelar->Click += gcnew System::EventHandler(this, &frmEditarUsuario::btnCancelar_Click);
 			// 
-			// comboBox1
-			// 
-			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Location = System::Drawing::Point(137, 222);
-			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(101, 21);
-			this->comboBox1->TabIndex = 11;
-			// 
 			// frmEditarUsuario
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(303, 388);
+			this->ClientSize = System::Drawing::Size(327, 388);
 			this->Controls->Add(this->btnCancelar);
 			this->Controls->Add(this->btnGrabar);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmEditarUsuario";
 			this->Text = L"frmEditarUsuario";
+			this->Load += gcnew System::EventHandler(this, &frmEditarUsuario::frmEditarUsuario_Load);
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
+	private: System::Void frmEditarUsuario_Load(System::Object^ sender, System::EventArgs^ e) {
+		// Cargar los datos del objeto Operador en los controles del formulario
+		this->txtId->Text = this->usuario->GetId().ToString();
+		this->txtNombre->Text = this->usuario->GetNombre();
+		this->txtCorreo->Text = this->usuario->GetEmail();
+		this->txtCtrsn->Text = this->usuario->GetContrasenha();
+		this->txtRoles->Text = this->usuario->GetRol()->GetNombre();
+	}
+
 	private: System::Void groupBox1_Enter(System::Object^ sender, System::EventArgs^ e) {
 	}
+
 	private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
+
 	private: System::Void btnCancelar_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
 	}
 	
 	private: System::Void btnGrabar_Click(System::Object^ sender, System::EventArgs^ e) {
+		Usuario^ nuevoUsuario = gcnew Usuario();
+		nuevoUsuario->SetId(Convert::ToInt32(txtId->Text));
+		nuevoUsuario->SetNombre(txtNombre->Text);
+		nuevoUsuario->SetEmail(txtCorreo->Text);
+		nuevoUsuario->SetContrasenha(txtCtrsn->Text);
+		nuevoUsuario->SetRol(rolController->obtenerRolPorNombre(txtRoles->Text));
+		nuevoUsuario->SetUltimoAcceso(""); // Inicialmente vacío
+		nuevoUsuario->SetEstadoCuenta("Activo"); // Estado por defecto
+		nuevoUsuario->SetIdsAlertas(nullptr); // Inicialmente sin alertas
+		// Llamando al controlador para actualizar el operador en la base de datos
 		
+		this->usuarioController->actualizarUsuario(nuevoUsuario);
+		MessageBox::Show("El usuario se actualizó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+		this->Close(); // Cierra el formulario actual
 	}
 };
 }

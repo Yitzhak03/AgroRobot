@@ -1,4 +1,5 @@
 #include "UsuarioController.h"
+#include "RolController.h"
 
 using namespace AgroRobotController;
 using namespace System::IO;
@@ -18,13 +19,11 @@ UsuarioController::UsuarioController(){
 		String^ contrasenha = datos[3];
 		String^ ultimoAcceso = datos[4];
 		String^ estadoCuenta = datos[5];
+		
+		int idRol = Convert::ToInt32(datos[6]);
+		RolController^ rolController = gcnew RolController();
+		Rol^ rol = rolController->obtenerRolPorId(idRol);
 
-		// Parsear Roles usando '|' como separador
-		List<int>^ idsRoles = gcnew List<int>();
-		String^ rolesField = datos[6];
-		array<String^>^ rolesIds = rolesField->Split('|');
-		for each (String ^ rolId in rolesIds)
-			idsRoles->Add(Convert::ToInt32(rolId));
 
 		// Parsear Alertas usando '|' como separador
 		List<int>^ idsAlertas = gcnew List<int>();
@@ -36,7 +35,7 @@ UsuarioController::UsuarioController(){
 		}
 		else idsAlertas = nullptr;
 		
-		Usuario^ user = gcnew Usuario(id, nombre, email, contrasenha, ultimoAcceso, estadoCuenta, idsRoles, idsAlertas);
+		Usuario^ user = gcnew Usuario(id, nombre, email, contrasenha, ultimoAcceso, estadoCuenta, rol, idsAlertas);
 		listaUsuarios->Add(user);
 	}
 
@@ -83,17 +82,10 @@ void UsuarioController::writeTxt(List<Usuario^>^ lista)
 	String^ path = "usuarios.txt";
 	// Preparamos el array de líneas con la misma cantidad que la lista
 	array<String^>^ lineas = gcnew array<String^>(lista->Count);
+
 	for (int i = 0; i < lista->Count; ++i) {
 		Usuario^ u = lista[i];
-		// Construir campo roles (separador '|')
-		String^ rolesField = "";
-		if (u->GetIdsRoles() != nullptr && u->GetIdsRoles()->Count > 0) {
-			for (int j = 0; j < u->GetIdsRoles()->Count; ++j) {
-				rolesField += u->GetIdsRoles()[j].ToString();
-				if (j < u->GetIdsRoles()->Count - 1) // Agregar separador solo si no es el último
-					rolesField += "|";
-			}
-		}
+
 		// Construir campo alerts (separador '|')
 		String^ alertsField = "";
 		if (u->GetIdsAlertas() != nullptr && u->GetIdsAlertas()->Count > 0) {
@@ -110,7 +102,7 @@ void UsuarioController::writeTxt(List<Usuario^>^ lista)
 			u->GetContrasenha(),
 			u->GetUltimoAcceso(),
 			u->GetEstadoCuenta(),
-			rolesField,
+			u->GetRol()->GetId(),
 			alertsField
 		);
 	}

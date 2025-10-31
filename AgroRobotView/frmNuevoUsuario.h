@@ -20,15 +20,13 @@ namespace AgroRobotView {
 		frmNuevoUsuario(UsuarioController^ usuarioController) {
 			InitializeComponent();
 			this->usuarioController = usuarioController;
+			this->rolController = gcnew RolController();
 
 			// Obtener los roles desde el controlador
-			RolController^ rolCtrl = gcnew RolController();
-			List<Rol^>^ listaRoles = rolCtrl->readTxt();
-			// Limpiar los items existentes
-			checkedListBox1->Items->Clear();
-			// Agregar los nombres de los roles al CheckedListBox
+			this->comboBox1->Items->Clear();
+			List<Rol^>^ listaRoles = this->rolController->readTxt();
 			for each (Rol ^ rol in listaRoles) {
-				checkedListBox1->Items->Add(rol->Nombre);
+				this->comboBox1->Items->Add(rol->GetNombre());
 			}
 		}
 
@@ -62,9 +60,10 @@ namespace AgroRobotView {
 
 	private: System::Windows::Forms::Label^ label7;
 
-
+	private: RolController^ rolController;
 	private: UsuarioController^ usuarioController;
-	private: System::Windows::Forms::CheckedListBox^ checkedListBox1;
+	private: System::Windows::Forms::ComboBox^ comboBox1;
+
 
 
 	private:
@@ -83,6 +82,7 @@ namespace AgroRobotView {
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
@@ -92,13 +92,12 @@ namespace AgroRobotView {
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->checkedListBox1 = (gcnew System::Windows::Forms::CheckedListBox());
 			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(148, 348);
+			this->button2->Location = System::Drawing::Point(174, 348);
 			this->button2->Margin = System::Windows::Forms::Padding(2);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(66, 19);
@@ -109,7 +108,7 @@ namespace AgroRobotView {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(77, 348);
+			this->button1->Location = System::Drawing::Point(100, 348);
 			this->button1->Margin = System::Windows::Forms::Padding(2);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(56, 19);
@@ -120,7 +119,7 @@ namespace AgroRobotView {
 			// 
 			// groupBox1
 			// 
-			this->groupBox1->Controls->Add(this->checkedListBox1);
+			this->groupBox1->Controls->Add(this->comboBox1);
 			this->groupBox1->Controls->Add(this->label7);
 			this->groupBox1->Controls->Add(this->textBox4);
 			this->groupBox1->Controls->Add(this->textBox3);
@@ -134,11 +133,19 @@ namespace AgroRobotView {
 			this->groupBox1->Margin = System::Windows::Forms::Padding(2);
 			this->groupBox1->Name = L"groupBox1";
 			this->groupBox1->Padding = System::Windows::Forms::Padding(2);
-			this->groupBox1->Size = System::Drawing::Size(280, 320);
+			this->groupBox1->Size = System::Drawing::Size(305, 320);
 			this->groupBox1->TabIndex = 3;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Datos del Usuario";
 			this->groupBox1->Enter += gcnew System::EventHandler(this, &frmNuevoUsuario::groupBox1_Enter);
+			// 
+			// comboBox1
+			// 
+			this->comboBox1->FormattingEnabled = true;
+			this->comboBox1->Location = System::Drawing::Point(137, 223);
+			this->comboBox1->Name = L"comboBox1";
+			this->comboBox1->Size = System::Drawing::Size(127, 21);
+			this->comboBox1->TabIndex = 13;
 			// 
 			// label7
 			// 
@@ -155,7 +162,7 @@ namespace AgroRobotView {
 			this->textBox4->Location = System::Drawing::Point(137, 179);
 			this->textBox4->Margin = System::Windows::Forms::Padding(2);
 			this->textBox4->Name = L"textBox4";
-			this->textBox4->Size = System::Drawing::Size(101, 20);
+			this->textBox4->Size = System::Drawing::Size(127, 20);
 			this->textBox4->TabIndex = 9;
 			// 
 			// textBox3
@@ -163,7 +170,7 @@ namespace AgroRobotView {
 			this->textBox3->Location = System::Drawing::Point(137, 129);
 			this->textBox3->Margin = System::Windows::Forms::Padding(2);
 			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(101, 20);
+			this->textBox3->Size = System::Drawing::Size(127, 20);
 			this->textBox3->TabIndex = 8;
 			// 
 			// textBox2
@@ -171,7 +178,7 @@ namespace AgroRobotView {
 			this->textBox2->Location = System::Drawing::Point(137, 85);
 			this->textBox2->Margin = System::Windows::Forms::Padding(2);
 			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(101, 20);
+			this->textBox2->Size = System::Drawing::Size(127, 20);
 			this->textBox2->TabIndex = 7;
 			// 
 			// textBox1
@@ -179,7 +186,7 @@ namespace AgroRobotView {
 			this->textBox1->Location = System::Drawing::Point(137, 41);
 			this->textBox1->Margin = System::Windows::Forms::Padding(2);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(101, 20);
+			this->textBox1->Size = System::Drawing::Size(127, 20);
 			this->textBox1->TabIndex = 6;
 			// 
 			// label4
@@ -222,20 +229,11 @@ namespace AgroRobotView {
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Id: ";
 			// 
-			// checkedListBox1
-			// 
-			this->checkedListBox1->CheckOnClick = true;
-			this->checkedListBox1->FormattingEnabled = true;
-			this->checkedListBox1->Location = System::Drawing::Point(137, 225);
-			this->checkedListBox1->Name = L"checkedListBox1";
-			this->checkedListBox1->Size = System::Drawing::Size(101, 79);
-			this->checkedListBox1->TabIndex = 16;
-			// 
 			// frmNuevoUsuario
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(303, 388);
+			this->ClientSize = System::Drawing::Size(327, 388);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->groupBox1);
@@ -250,6 +248,7 @@ namespace AgroRobotView {
 		//===============================================================================
 		//==============================Grabar===========================================
 		//===============================================================================
+
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		// Crear el objeto Usuario
@@ -258,24 +257,11 @@ namespace AgroRobotView {
 		nuevoUsuario->SetNombre(textBox2->Text);
 		nuevoUsuario->SetEmail(textBox3->Text);
 		nuevoUsuario->SetContrasenha(textBox4->Text);
+		nuevoUsuario->SetRol(rolController->obtenerRolPorNombre(comboBox1->Text));
 		nuevoUsuario->SetUltimoAcceso(""); // Inicialmente vacío
 		nuevoUsuario->SetEstadoCuenta("Activo"); // Estado por defecto
 		nuevoUsuario->SetIdsAlertas(nullptr); // Inicialmente sin alertas
-		// Creación de la lista de IdsRoles
-		List<int>^ idsRoles = gcnew List<int>();
-		//Crear el controlador de roles
-		RolController^ rolCtrl = gcnew RolController();
-		// Agregar los roles seleccionados
-		for (int i = 0; i < checkedListBox1->Items->Count; i++) {
-			if (checkedListBox1->GetItemChecked(i)) {
-				String^ rolNombre = checkedListBox1->Items[i]->ToString();
-				// Obtener el Id del rol
-				int rolId = rolCtrl->obtenerIdPorNombre(rolNombre);
-				// Agregar el Id del rol a la lista de IdsRoles del usuario
-				idsRoles->Add(rolId);
-			}
-		}
-		nuevoUsuario->SetIdsRoles(idsRoles);
+		
 		// Llamar al controlador para agregar el nuevo usuario
 		this->usuarioController->agregarUsuario(nuevoUsuario);
 		

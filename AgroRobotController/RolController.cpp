@@ -1,8 +1,36 @@
 #include "RolController.h"
 using namespace AgroRobotController;
 using namespace System::IO;
+
 RolController::RolController(){
+	this->listaRoles = gcnew List<Rol^>();
+
+	String^ path = "roles.txt";
+	array<String^>^ lineas = File::ReadAllLines(path);
+
+	for each (String ^ linea in lineas) {
+		if (String::IsNullOrWhiteSpace(linea)) continue;
+		array<String^>^ datos = linea->Split(';');
+		int id = Convert::ToInt32(datos[0]);
+		String^ nombre = datos[1];
+
+
+		// Parsear Permisos usando '|' como separador
+		List<bool>^ listaPermisos = gcnew List<bool>();
+
+		String^ permisosTxt = datos[2];
+		array<String^>^ permisosBoolean = permisosTxt->Split('|');
+		if (!String::IsNullOrEmpty(permisosTxt)) {
+			for each (String ^ permisoBool in permisosBoolean)
+				listaPermisos->Add(Convert::ToBoolean(Convert::ToInt32(permisoBool)));
+		}
+		else listaPermisos = nullptr;
+
+		Rol^ rol = gcnew Rol(id, nombre);
+		listaRoles->Add(rol);
+	}
 }
+
 
 List<Rol^>^ RolController::readTxt(){
 	List<Rol^>^ lista = gcnew List<Rol^>();
@@ -51,12 +79,26 @@ void RolController::writeTxt(List<Rol^>^ lista)
 	// Escribimos todas las líneas al archivo (sobrescribe)
 	File::WriteAllLines(path, lineas);
 }
-int RolController::obtenerIdPorNombre(String^ nombre)
+Rol^ RolController::obtenerRolPorId(int id)
 {
 	List<Rol^>^ lista = readTxt();
 	for each (Rol ^ rol in lista) {
-		if (rol->Nombre->Equals(nombre)) {
-			return rol->Id;
+		if (rol->Id == id) {
+			return rol;
 		}
 	}
+}
+
+Rol^ RolController::obtenerRolPorNombre(String^ nombre) {
+	List<Rol^>^ listaRoles = readTxt();
+	for each (Rol ^ rol in listaRoles) {
+		if (rol->Nombre == nombre) {
+			return rol;
+		}
+	}
+}
+
+
+List<Rol^>^ RolController::obtenerTodosRoles() {
+	return this->listaRoles;
 }
