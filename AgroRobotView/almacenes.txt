@@ -1,2 +1,4 @@
-1;Principal;Norte;1|3
-2;SubPrincipal;Sur;2|4
+1;Principal;Norte
+2;Secundario1;Sur
+3;Secundario2;Este
+4;Secundario3;Oeste
