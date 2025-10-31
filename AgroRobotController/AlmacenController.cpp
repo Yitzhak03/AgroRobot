@@ -29,13 +29,21 @@ List<Almacen^>^ AlmacenController::readTxt()
 		array<String^>^ idsStockInsumosStr = datos[3]->Split('|');
 		almacen->Stocks = gcnew List<StockInsumo^>();
 		StockInsumoController^ stockInsumoController = gcnew StockInsumoController();
-		for each (String ^ idStr in idsStockInsumosStr) {
+		/*for each (String ^ idStr in idsStockInsumosStr) {
 			int idStockInsumo = Convert::ToInt32(idStr);
 			StockInsumo^ stockInsumo = stockInsumoController->buscarPorId(idStockInsumo);
 			if (stockInsumo != nullptr) {
 				almacen->Stocks->Add(stockInsumo);
 			}
+		}*/
+		for each (String ^ idStr in idsStockInsumosStr) {
+			if (String::IsNullOrWhiteSpace(idStr)) continue;
+			int idStockInsumo = Convert::ToInt32(idStr);
+			StockInsumo^ s = gcnew StockInsumo();
+			s->Id = idStockInsumo; // placeholder sin buscar en archivo
+			almacen->Stocks->Add(s);
 		}
+		lista->Add(almacen);
 	}
 	return lista;
 }
