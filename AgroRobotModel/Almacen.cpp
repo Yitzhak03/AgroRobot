@@ -1,5 +1,5 @@
 #include "Almacen.h"
-
+#include "StockInsumo.h" // include real porque aquí necesitamos la definición completa
 using namespace AgroRobotModel;
 
 Almacen::Almacen()
@@ -8,13 +8,13 @@ Almacen::Almacen()
 
 Almacen::Almacen(
 	int id,
+	String^ nombre,
 	String^ ubicacion,
-	float capacidad,
-	List<Insumo^>^ insumos
+	List<StockInsumo^>^ stocks
 )
 {
 	Id = id;
+	Nombre = nombre;
 	Ubicacion = ubicacion;
-	Capacidad = capacidad;
-	Insumos = insumos;
+	Stocks = stocks;
 }

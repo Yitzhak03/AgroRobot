@@ -1,4 +1,5 @@
 #include "StockInsumo.h"
+#include "Almacen.h" // include real porque aquí necesitamos la definición completa
 using namespace AgroRobotModel;
 StockInsumo::StockInsumo() {
 	//Id = 0;

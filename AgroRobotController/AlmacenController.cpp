@@ -1,4 +1,5 @@
 #include "AlmacenController.h"
+#include "StockInsumoController.h"
 using namespace AgroRobotController;
 using namespace System::IO;
 using namespace System;
@@ -13,39 +14,55 @@ AlmacenController::AlmacenController()
 }
 List<Almacen^>^ AlmacenController::readTxt()
 {
+	// Leer txt de la forma:
+	// Id(int);Nombre(String^);Direccion(String^);IdsStockInsumos(int separados por |)
 	List<Almacen^>^ lista = gcnew List<Almacen^>();
-	//String^ path = "almacenes.txt";
-	//array<String^>^ lineas = File::ReadAllLines(path);
-	//for each (String ^ linea in lineas) {
-	//	if (String::IsNullOrWhiteSpace(linea)) continue;
-	//	array<String^>^ datos = linea->Split(';');
-	//	Almacen^ almacen = gcnew Almacen();
-	//	almacen->Id = Convert::ToInt32(datos[0]);
-	//	almacen->Ubicacion = datos[1];
-	//	almacen->Capacidad = Convert::ToSingle(datos[2]);
-	//	//Parsear Id de insumos (separados por |)
-	//	List<Insumo^>^ insumos = gcnew List<Insumo^>();
-	//	array<String^>^ idsInsumos = datos[3]->Split('|');
-	//	for each (String ^ idInsumo in idsInsumos) {
-	//		if (String::IsNullOrWhiteSpace(idInsumo)) continue;
-
-
-
-	//		Insumo^ insumo = gcnew Insumo();
-	//		insumo->Codigo = codigo;
-	//		insumos->Add(insumo);
-	//	}
-
-
-
-	//	lista->Add(almacen);
-	//}
+	String^ path = "almacenes.txt";
+	array<String^>^ lineas = File::ReadAllLines(path);
+	for each (String ^ linea in lineas) {
+		array<String^>^ datos = linea->Split(';');
+		Almacen^ almacen = gcnew Almacen();
+		almacen->Id = Convert::ToInt32(datos[0]);
+		almacen->Nombre = datos[1];
+		almacen->Ubicacion = datos[2];
+		//Parsear Id de stockInsumo
+		array<String^>^ idsStockInsumosStr = datos[3]->Split('|');
+		almacen->Stocks = gcnew List<StockInsumo^>();
+		StockInsumoController^ stockInsumoController = gcnew StockInsumoController();
+		for each (String ^ idStr in idsStockInsumosStr) {
+			int idStockInsumo = Convert::ToInt32(idStr);
+			StockInsumo^ stockInsumo = stockInsumoController->buscarPorId(idStockInsumo);
+			if (stockInsumo != nullptr) {
+				almacen->Stocks->Add(stockInsumo);
+			}
+		}
+	}
 	return lista;
+}
+int AlmacenController::cantidadInsumosEnAlmacen(int idAlmacen)
+{
+	Almacen^ a = buscarPorId(idAlmacen);
+	if (a != nullptr) {
+		return a->Stocks->Count;
+	}
+	return 0;
 }
 void AlmacenController::writeTxt(List<Almacen^>^ lista)
 {
 
 }
+Almacen^ AlmacenController::buscarPorId(int id)
+{
+	List<Almacen^>^ lista = readTxt();
+	for each (Almacen^ a in lista) {
+		if (a->Id == id) {
+			return a;
+		}
+	}
+	return nullptr;
+}
+
+
 void AlmacenController::agregarAlmacen(Almacen^ almacen)
 {
 

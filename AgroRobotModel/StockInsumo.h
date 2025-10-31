@@ -1,6 +1,7 @@
 #include "Insumo.h"
-#include "Almacen.h"
+//#include "Almacen.h"
 namespace AgroRobotModel {
+	ref class Almacen; // Forward declaration
 	using namespace System;
 	public ref class StockInsumo {
 	public:
