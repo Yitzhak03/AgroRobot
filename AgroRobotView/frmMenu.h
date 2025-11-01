@@ -225,7 +225,7 @@ namespace AgroRobotView {
 			this->almacenToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3)
 			{
 				this->registroInsumosGeneralToolStripMenuItem,
-					this->ordenesDeToolStripMenuItem, this->registroGeneralDeAlmacenesToolStripMenuItem
+					this->registroGeneralDeAlmacenesToolStripMenuItem, this->ordenesDeToolStripMenuItem
 			});
 			this->almacenToolStripMenuItem->Name = L"almacenToolStripMenuItem";
 			this->almacenToolStripMenuItem->Size = System::Drawing::Size(66, 20);

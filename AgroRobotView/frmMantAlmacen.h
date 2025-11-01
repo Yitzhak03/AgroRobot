@@ -1,5 +1,6 @@
 #pragma once
-
+#include "frmNuevoAlmacen.h"
+#include "frmPaintStockPorAlmacen.h"
 namespace AgroRobotView {
 
 	using namespace System;
@@ -40,6 +41,12 @@ namespace AgroRobotView {
 	protected:
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
+
+
+
+
+	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ button3;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
@@ -66,6 +73,8 @@ namespace AgroRobotView {
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -75,7 +84,7 @@ namespace AgroRobotView {
 			// 
 			// button4
 			// 
-			this->button4->Location = System::Drawing::Point(16, 177);
+			this->button4->Location = System::Drawing::Point(11, 49);
 			this->button4->Margin = System::Windows::Forms::Padding(2);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(100, 32);
@@ -86,13 +95,14 @@ namespace AgroRobotView {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(16, 139);
+			this->button2->Location = System::Drawing::Point(11, 11);
 			this->button2->Margin = System::Windows::Forms::Padding(2);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(100, 34);
 			this->button2->TabIndex = 25;
-			this->button2->Text = L"Agregar";
+			this->button2->Text = L"Nuevo";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &frmMantAlmacen::button2_Click);
 			// 
 			// dataGridView1
 			// 
@@ -113,8 +123,30 @@ namespace AgroRobotView {
 			this->dataGridView1->RowHeadersWidth = 51;
 			this->dataGridView1->RowTemplate->Height = 24;
 			this->dataGridView1->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
-			this->dataGridView1->Size = System::Drawing::Size(435, 198);
+			this->dataGridView1->Size = System::Drawing::Size(383, 259);
 			this->dataGridView1->TabIndex = 24;
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(11, 121);
+			this->button1->Margin = System::Windows::Forms::Padding(2);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(100, 32);
+			this->button1->TabIndex = 27;
+			this->button1->Text = L"Agregar Insumos";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &frmMantAlmacen::button1_Click);
+			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(11, 85);
+			this->button3->Margin = System::Windows::Forms::Padding(2);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(100, 32);
+			this->button3->TabIndex = 27;
+			this->button3->Text = L"Ver Insumos";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &frmMantAlmacen::button3_Click);
 			// 
 			// Column1
 			// 
@@ -139,21 +171,23 @@ namespace AgroRobotView {
 			// 
 			// Column4
 			// 
-			this->Column4->HeaderText = L"#Insumos";
+			this->Column4->HeaderText = L"Insumos";
 			this->Column4->MinimumWidth = 6;
 			this->Column4->Name = L"Column4";
-			this->Column4->Width = 125;
+			this->Column4->Width = 80;
 			// 
 			// frmMantAlmacen
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(620, 233);
+			this->ClientSize = System::Drawing::Size(535, 281);
+			this->Controls->Add(this->button3);
+			this->Controls->Add(this->button1);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->dataGridView1);
 			this->Name = L"frmMantAlmacen";
-			this->Text = L"frmMantAlmacen";
+			this->Text = L"Registro General de Almacenes";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
 
@@ -182,5 +216,41 @@ namespace AgroRobotView {
 			);
 		}
 	}
-	};
+		   //========================================================================
+		   //=============================Nuevo======================================
+		   //========================================================================
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		frmNuevoAlmacen^ frmNA = gcnew frmNuevoAlmacen();
+		frmNA->ShowDialog();
+	}
+		   //========================================================================
+		   //========================Agregar Insumos=================================
+		   //========================================================================
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+	}
+		   //========================================================================
+		   //===========================Ver Insumos==================================
+		   //========================================================================
+	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		if (dataGridView1->SelectedRows->Count == 0) {
+			MessageBox::Show(
+				"Debe seleccionar una fila para ver el stock.",
+				"Error",
+				MessageBoxButtons::OK,
+				MessageBoxIcon::Error
+			);
+			return;
+		}
+		int idAlmacen = Convert::ToInt32(dataGridView1->SelectedRows[0]->Cells[0]->Value);
+		AlmacenController^ almCtrl = gcnew AlmacenController();
+		Almacen^ almacen = almCtrl->buscarPorId(idAlmacen);
+		StockInsumoController^ stockCtrl = gcnew StockInsumoController();
+		List<StockInsumo^>^ stocks = stockCtrl->buscarPorIdAlmacen(idAlmacen);
+		frmPaintStockPorAlmacen^ frm = gcnew frmPaintStockPorAlmacen(almacen, stocks);
+		frm->ShowDialog();
+	}
+};
 }

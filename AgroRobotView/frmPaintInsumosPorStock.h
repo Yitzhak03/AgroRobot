@@ -14,18 +14,18 @@ namespace AgroRobotView {
 	using namespace System::Collections::Generic;
 
 	/// <summary>
-	/// Resumen de frmVerListadoInsumos
+	/// Resumen de frmPaintInsumosPorStock
 	/// </summary>
-	public ref class frmVerListadoInsumos : public System::Windows::Forms::Form {
+	public ref class frmPaintInsumosPorStock : public System::Windows::Forms::Form {
 	public:
-		frmVerListadoInsumos(void)
+		frmPaintInsumosPorStock(void)
 		{
 			InitializeComponent();
 		}
 		/// <summary>
 		/// Nuevo constructor que recibe un insumo y su lista de stocks
 		/// </summary>
-		frmVerListadoInsumos(Insumo^ insumo, List<StockInsumo^>^ stocks)
+		frmPaintInsumosPorStock(Insumo^ insumo, List<StockInsumo^>^ stocks)
 		{
 			InitializeComponent();
 			// Guardar referencias en los campos de la clase
@@ -41,7 +41,7 @@ namespace AgroRobotView {
 		/// <summary>
 		/// Limpiar los recursos que se estén usando.
 		/// </summary>
-		~frmVerListadoInsumos()
+		~frmPaintInsumosPorStock()
 		{
 			if (components) {
 				delete components;
@@ -98,7 +98,7 @@ namespace AgroRobotView {
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(363, 247);
 			this->panel1->TabIndex = 3;
-			this->panel1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &frmVerListadoInsumos::panel1_Paint);
+			this->panel1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &frmPaintInsumosPorStock::panel1_Paint);
 			// 
 			// label1
 			// 
@@ -182,7 +182,7 @@ namespace AgroRobotView {
 			this->panel2->Name = L"panel2";
 			this->panel2->Size = System::Drawing::Size(154, 143);
 			this->panel2->TabIndex = 4;
-			this->panel2->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &frmVerListadoInsumos::panel2_Paint);
+			this->panel2->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &frmPaintInsumosPorStock::panel2_Paint);
 			// 
 			// label4
 			// 
@@ -203,7 +203,7 @@ namespace AgroRobotView {
 			this->textBox4->Size = System::Drawing::Size(95, 20);
 			this->textBox4->TabIndex = 6;
 			// 
-			// frmVerListadoInsumos
+			// frmPaintInsumosPorStock
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
@@ -211,8 +211,8 @@ namespace AgroRobotView {
 			this->Controls->Add(this->panel2);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->groupBox1);
-			this->Name = L"frmVerListadoInsumos";
-			this->Text = L"frmVerListadoInsumos";
+			this->Name = L"frmPaintInsumosPorStock";
+			this->Text = L"frmPaintInsumosPorStock";
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
 			this->ResumeLayout(false);
@@ -220,36 +220,27 @@ namespace AgroRobotView {
 		}
 #pragma endregion
 		/// <summary>
-		///	Pinta cuadrados en el panel que contienen el stock y el almacen correspondiente. Verde si el stock está dentro de los límites, rojo si está por debajo del límite bajo, amarillo si está por encima del límite alto.
+		///	Pinta cuadrados en el panel que contienen el stock y el almacen correspondiente. 
+		/// Verde opaco si el stock está lleno; 
+		/// Verde claro si el stock está dentro de los límites;
+		/// Amarillo si el stock está debajo del límite.
+		/// Rojo si no hay stock;
 		/// </summary>
 	private: System::Void panel1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e)
 	{
 		Graphics^ graphics = e->Graphics;
 		int x = 30, y = 30;
-		//for each (StockInsumo ^ stock in listaStocks) {
-		//	// Dibujar un rectángulo para cada stock
-		//	Rectangle rect = Rectangle(x, y, 50, 50);
-		//	graphics->DrawRectangle(Pens::Black, rect);
-		//	graphics->FillRectangle(Brushes::LightGreen, rect);
-		//	// Dibujar el texto del stock dentro del rectángulo
-		//	String^ stockText = String::Format("Stock: {0}", stock->Stock);
-		//	graphics->DrawString(stockText, gcnew System::Drawing::Font("Arial", 8), Brushes::Black, x + 5, y + 15);
-		//	// Actualizar las coordenadas para el siguiente rectángulo
-		//	x += 70;
-		//	if (x + 50 > panel1->Width) {
-		//		x = 30;
-		//		y += 70;
-		//	}
-		//}
 		for each (StockInsumo ^ stock in listaStocks) {
-			// Determinar el color según los límites
 			Brush^ brush;
-			if (stock->Stock < stock->LimiteBajo) {
-				brush = Brushes::Red; // Por debajo del límite bajo
-			} else if (stock->Stock > stock->LimiteAlto) {
-				brush = Brushes::Yellow; // Por encima del límite alto
+			// Determinar el color del rectángulo según el nivel de stock
+			if (stock->Stock == 0) {
+				brush = Brushes::Red; // Sin stock
+			} else if (stock->Stock < stock->LimiteBajo) {
+				brush = Brushes::Yellow; // Stock bajo
+			} else if (stock->Stock < stock->LimiteAlto) {
+				brush = Brushes::LightGreen; // Stock en rango
 			} else {
-				brush = Brushes::LightGreen; // Dentro de los límites
+				brush = Brushes::Green; // Stock lleno
 			}
 			// Dibujar un rectángulo para cada stock
 			int width = 130;
@@ -270,27 +261,38 @@ namespace AgroRobotView {
 			}
 		}
 	}
-	/// <summary>
-	/// Informacion de colores verde, amarillo, rojo del panel1
-	/// </summary>
+		   /// <summary>
+		   /// Informacion de colores del panel1
+		   /// </summary>
 	private: System::Void panel2_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e)
 	{
 		Graphics^ graphics = e->Graphics;
-		// Verde
-		Rectangle rectVerde = Rectangle(10, 10, 15, 15);
-		graphics->DrawRectangle(Pens::Black, rectVerde);
-		graphics->FillRectangle(Brushes::LightGreen, rectVerde);
-		graphics->DrawString("Stock en rango", gcnew System::Drawing::Font("Arial", 8), Brushes::Black, 30, 15);
+		int y = 10;
+		int separacionY = 30;
+		// Verde oscuro
+		Rectangle rectVerdeOscuro = Rectangle(10, y, 15, 15);
+		graphics->DrawRectangle(Pens::Black, rectVerdeOscuro);
+		graphics->FillRectangle(Brushes::Green, rectVerdeOscuro);
+		graphics->DrawString("Stock lleno", gcnew System::Drawing::Font("Arial", 8), Brushes::Black, 30, y);
+		// Verde claro
+		y += separacionY;
+		Rectangle rectVerdeClaro = Rectangle(10, y, 15, 15);
+		graphics->DrawRectangle(Pens::Black, rectVerdeClaro);
+		graphics->FillRectangle(Brushes::LightGreen, rectVerdeClaro);
+		graphics->DrawString("Stock en rango", gcnew System::Drawing::Font("Arial", 8), Brushes::Black, 30, y);
 		// Amarillo
-		Rectangle rectAmarillo = Rectangle(10, 40, 15, 15);
+		y += separacionY;
+		Rectangle rectAmarillo = Rectangle(10, y, 15, 15);
 		graphics->DrawRectangle(Pens::Black, rectAmarillo);
 		graphics->FillRectangle(Brushes::Yellow, rectAmarillo);
-		graphics->DrawString("Alto stock", gcnew System::Drawing::Font("Arial", 8), Brushes::Black, 30, 45);
+		graphics->DrawString("Stock bajo", gcnew System::Drawing::Font("Arial", 8), Brushes::Black, 30, y);
 		// Rojo
-		Rectangle rectRojo = Rectangle(10, 70, 15, 15);
+		y += separacionY;
+		Rectangle rectRojo = Rectangle(10, y, 15, 15);
 		graphics->DrawRectangle(Pens::Black, rectRojo);
 		graphics->FillRectangle(Brushes::Red, rectRojo);
-		graphics->DrawString("Bajo stock", gcnew System::Drawing::Font("Arial", 8), Brushes::Black, 30, 75);
+		graphics->DrawString("Sin stock", gcnew System::Drawing::Font("Arial", 8), Brushes::Black, 30, y);
+		
 	}
 	};
 }

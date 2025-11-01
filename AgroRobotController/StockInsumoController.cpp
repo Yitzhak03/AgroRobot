@@ -50,6 +50,17 @@ List<StockInsumo^>^ StockInsumoController::buscarPorIdInsumo(int idInsumo)
 	}
 	return resultados;
 }
+List<StockInsumo^>^ StockInsumoController::buscarPorIdAlmacen(int idAlmacen)
+{
+	List<StockInsumo^>^ lista = readTxt();
+	List<StockInsumo^>^ resultados = gcnew List<StockInsumo^>();
+	for each (StockInsumo ^ s in lista) {
+		if (s->Almacenn->Id == idAlmacen) {
+			resultados->Add(s);
+		}
+	}
+	return resultados;
+}
 int StockInsumoController::cantidadInsumosEnAlmacen(int idAlmacen)
 {
 	List<StockInsumo^>^ lista = readTxt();

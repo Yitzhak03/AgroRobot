@@ -1,5 +1,4 @@
 #include "AlmacenController.h"
-#include "StockInsumoController.h"
 using namespace AgroRobotController;
 using namespace System::IO;
 using namespace System;
@@ -12,6 +11,7 @@ AlmacenController::AlmacenController()
 	}
 	this->cargarOrdenesDesdeArchivo();
 }
+
 List<Almacen^>^ AlmacenController::readTxt()
 {
 	// Leer txt de la forma:
@@ -29,10 +29,18 @@ List<Almacen^>^ AlmacenController::readTxt()
 	}
 	return lista;
 }
+
 void AlmacenController::writeTxt(List<Almacen^>^ lista)
 {
-
+	String^ path = "almacenes.txt";
+	List<String^>^ lineas = gcnew List<String^>();
+	for each (Almacen ^ a in lista) {
+		String^ linea = Convert::ToString(a->Id) + ";" + a->Nombre + ";" + a->Ubicacion;
+		lineas->Add(linea);
+	}
+	File::WriteAllLines(path, lineas->ToArray());
 }
+
 Almacen^ AlmacenController::buscarPorId(int id)
 {
 	List<Almacen^>^ lista = readTxt();
@@ -44,24 +52,41 @@ Almacen^ AlmacenController::buscarPorId(int id)
 	return nullptr;
 }
 
-
 void AlmacenController::agregarAlmacen(Almacen^ almacen)
 {
-
+	List<Almacen^>^ lista = readTxt();
+	lista->Add(almacen);
+	// Escribir de nuevo el archivo
+	writeTxt(lista);
 }
 
-//======================================================================//
-void AlmacenController::registrarOrden(OrdenDistribucion^ orden)
+int AlmacenController::generarNuevoId()
 {
-	this->listaOrdenes->Add(orden);
-	this->guardarOrdenesEnArchivo();
+	List<Almacen^>^ lista = readTxt();
+	int maxId = -1;
+	for each (Almacen^ a in lista) {
+		if (a->Id > maxId) {
+			maxId = a->Id;
+		}
+	}
+	return maxId + 1;
 }
 
-List <OrdenDistribucion^>^ AlmacenController::listarOrdenes()
+//=====================================OTROS=================================================
+void AlmacenController::guardarOrdenesEnArchivo()
 {
-	return this->listaOrdenes;
+	List<String^>^ lineas = gcnew List<String^>();
+	for each (OrdenDistribucion ^ orden in this->listaOrdenes) {
+		String^ linea = orden->Id + ";" +
+			orden->IdDieta + ";" +
+			orden->RobotAsignado + ";" +
+			orden->FechaHoraEntrega + ";" +
+			orden->Ruta + ";" +
+			orden->Prioridad;
+		lineas->Add(linea);
+	}
+	File::WriteAllLines("ordenes.txt", lineas->ToArray());
 }
-
 void AlmacenController::cargarOrdenesDesdeArchivo()
 {
 	array<String^>^ lineas = File::ReadAllLines("ordenes.txt");
@@ -83,18 +108,12 @@ void AlmacenController::cargarOrdenesDesdeArchivo()
 		this->listaOrdenes->Add(orden);
 	}
 }
-
-void AlmacenController::guardarOrdenesEnArchivo()
+void AlmacenController::registrarOrden(OrdenDistribucion^ orden)
 {
-	List<String^>^ lineas = gcnew List<String^>();
-	for each (OrdenDistribucion ^ orden in this->listaOrdenes) {
-		String^ linea = orden->Id + ";" +
-			orden->IdDieta + ";" +
-			orden->RobotAsignado + ";" +
-			orden->FechaHoraEntrega + ";" +
-			orden->Ruta + ";" +
-			orden->Prioridad;
-		lineas->Add(linea);
-	}
-	File::WriteAllLines("ordenes.txt", lineas->ToArray());
+	this->listaOrdenes->Add(orden);
+	this->guardarOrdenesEnArchivo();
+}
+List <OrdenDistribucion^>^ AlmacenController::listarOrdenes()
+{
+	return this->listaOrdenes;
 }

@@ -1,7 +1,7 @@
 #pragma once
 #include "frmNuevoInsumo.h"
 #include "frmEditInsumo.h"
-#include "frmVerListadoInsumos.h"
+#include "frmPaintInsumosPorStock.h"
 namespace AgroRobotView {
 
 	using namespace System;
@@ -151,7 +151,7 @@ namespace AgroRobotView {
 			   this->dataGridView1->RowHeadersWidth = 51;
 			   this->dataGridView1->RowTemplate->Height = 24;
 			   this->dataGridView1->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
-			   this->dataGridView1->Size = System::Drawing::Size(430, 311);
+			   this->dataGridView1->Size = System::Drawing::Size(429, 311);
 			   this->dataGridView1->TabIndex = 18;
 			   this->dataGridView1->UserDeletingRow += gcnew System::Windows::Forms::DataGridViewRowCancelEventHandler(this, &frmMantInsumo::dataGridView1_UserDeletingRow);
 			   // 
@@ -261,7 +261,7 @@ namespace AgroRobotView {
 			   this->Controls->Add(this->groupBox1);
 			   this->Controls->Add(this->button2);
 			   this->Name = L"frmMantInsumo";
-			   this->Text = L"Registro de insumos";
+			   this->Text = L"Registro General de Insumos";
 			   this->Load += gcnew System::EventHandler(this, &frmMantInsumo::frmMantInsumo_Load);
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			   this->groupBox1->ResumeLayout(false);
@@ -450,7 +450,7 @@ namespace AgroRobotView {
 		Insumo^ insumo = insumoCtrl->buscarPorId(idInsumo);
 		StockInsumoController^ stockCtrl = gcnew StockInsumoController();
 		List<StockInsumo^>^ stocks = stockCtrl->buscarPorIdInsumo(idInsumo);
-		frmVerListadoInsumos^ frm = gcnew frmVerListadoInsumos(insumo,stocks);
+		frmPaintInsumosPorStock^ frm = gcnew frmPaintInsumosPorStock(insumo,stocks);
 		frm->ShowDialog();
 	}
 	};

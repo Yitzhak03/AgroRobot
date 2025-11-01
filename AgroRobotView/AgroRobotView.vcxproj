@@ -139,9 +139,10 @@
     <ClCompile Include="frmNuevoMuestraS.cpp" />
     <ClCompile Include="frmNuevoUsuario.cpp" />
     <ClCompile Include="frmOrdenesAlimentacion.cpp" />
+    <ClCompile Include="frmPaintStockPorAlmacen.cpp" />
     <ClCompile Include="frmStockPorAlmacen.cpp" />
     <ClCompile Include="frmVerificarPeso.cpp" />
-    <ClCompile Include="frmVerListadoInsumos.cpp" />
+    <ClCompile Include="frmPaintInsumosPorStock.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -236,13 +237,16 @@
     <ClInclude Include="frmOrdenesAlimentacion.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="frmPaintStockPorAlmacen.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="frmStockPorAlmacen.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmVerificarPeso.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="frmVerListadoInsumos.h">
+    <ClInclude Include="frmPaintInsumosPorStock.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
@@ -328,14 +332,17 @@
     <EmbeddedResource Include="frmNuevoUsuario.resx">
       <DependentUpon>frmNuevoUsuario.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmPaintStockPorAlmacen.resx">
+      <DependentUpon>frmPaintStockPorAlmacen.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmStockPorAlmacen.resx">
       <DependentUpon>frmStockPorAlmacen.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmVerificarPeso.resx">
       <DependentUpon>frmVerificarPeso.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmVerListadoInsumos.resx">
-      <DependentUpon>frmVerListadoInsumos.h</DependentUpon>
+    <EmbeddedResource Include="frmPaintInsumosPorStock.resx">
+      <DependentUpon>frmPaintInsumosPorStock.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -9,6 +9,7 @@ namespace AgroRobotController {
 		List<StockInsumo^>^ readTxt();
 		StockInsumo^ buscarPorId(int id);
 		List<StockInsumo^>^ buscarPorIdInsumo(int idInsumo);
+		List<StockInsumo^>^ buscarPorIdAlmacen(int idAlmacen);
 		int cantidadInsumosEnAlmacen(int idAlmacen);
 		
 	};

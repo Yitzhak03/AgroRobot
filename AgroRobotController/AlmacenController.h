@@ -1,14 +1,10 @@
 #pragma once
-
 namespace AgroRobotController {
-
 	using namespace System::Collections::Generic;
 	using namespace AgroRobotModel;
-
 	public ref class AlmacenController {
 	private:
 		List<OrdenDistribucion^>^ listaOrdenes;
-
 	public:
 		AlmacenController();
 		List<Almacen^>^ readTxt();
@@ -19,8 +15,6 @@ namespace AgroRobotController {
 		void cargarOrdenesDesdeArchivo();
 		void guardarOrdenesEnArchivo();
 		Almacen^ buscarPorId(int id);
+		int generarNuevoId();
 	};
-
-
-
 }
