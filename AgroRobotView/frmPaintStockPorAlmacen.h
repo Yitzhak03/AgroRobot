@@ -12,18 +12,18 @@ namespace AgroRobotView {
 	using namespace AgroRobotModel;
 	using namespace AgroRobotController;
 	using namespace System::Collections::Generic;
+
 	/// <summary>
-	/// Resumen de frmPaintStockPorAlmacen
+	/// frmPaintStockPorAlmacen - versión con formulario dinámico completo
+	/// - Genera controles (GroupBox con Label, Button y barra de color proporcional) en panel1
+	/// - Evita dibujar barras globales en panel1_Paint para que no haya solapamiento
+	/// - Recalcula layout en Resize y Show
 	/// </summary>
-	public ref class frmPaintStockPorAlmacen : public System::Windows::Forms::Form
-	{
+	public ref class frmPaintStockPorAlmacen : public System::Windows::Forms::Form {
 	public:
 		frmPaintStockPorAlmacen(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: agregar código de constructor aquí
-			//
 		}
 		frmPaintStockPorAlmacen(Almacen^ almacen, List<StockInsumo^>^ stocks)
 		{
@@ -33,13 +33,9 @@ namespace AgroRobotView {
 		}
 
 	protected:
-		/// <summary>
-		/// Limpiar los recursos que se estén usando.
-		/// </summary>
 		~frmPaintStockPorAlmacen()
 		{
-			if (components)
-			{
+			if (components) {
 				delete components;
 			}
 		}
@@ -57,16 +53,9 @@ namespace AgroRobotView {
 		Almacen^ almacenActual;
 		List<StockInsumo^>^ listaStocks;
 	private:
-		/// <summary>
-		/// Variable del diseñador necesaria.
-		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Método necesario para admitir el Diseñador. No se puede modificar
-		/// el contenido de este método con el editor de código.
-		/// </summary>
 		void InitializeComponent(void)
 		{
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
@@ -81,20 +70,24 @@ namespace AgroRobotView {
 			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
 			// 
-			// panel2
+			// panel2 (leyenda)
 			// 
 			this->panel2->Location = System::Drawing::Point(220, 12);
 			this->panel2->Name = L"panel2";
 			this->panel2->Size = System::Drawing::Size(154, 166);
 			this->panel2->TabIndex = 7;
+			this->panel2->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &frmPaintStockPorAlmacen::panel2_Paint);
 			// 
-			// panel1
+			// panel1 (contenedor dinámico)
 			// 
 			this->panel1->Location = System::Drawing::Point(11, 197);
 			this->panel1->Margin = System::Windows::Forms::Padding(2);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(363, 247);
+			this->panel1->Size = System::Drawing::Size(363, 507);
 			this->panel1->TabIndex = 6;
+			this->panel1->AutoScroll = true; // permitir scroll cuando hay muchos controles
+			this->panel1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &frmPaintStockPorAlmacen::panel1_Paint);
+			this->panel1->Resize += gcnew System::EventHandler(this, &frmPaintStockPorAlmacen::panel1_Resize);
 			// 
 			// groupBox1
 			// 
@@ -174,25 +167,260 @@ namespace AgroRobotView {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(385, 531);
+			this->ClientSize = System::Drawing::Size(385, 729);
 			this->Controls->Add(this->panel2);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmPaintStockPorAlmacen";
-			this->Text = L"frmPaintStockPorAlmacen";
+			this->Text = L"Insumos por Almacén";
 			this->Load += gcnew System::EventHandler(this, &frmPaintStockPorAlmacen::frmPaintStockPorAlmacen_Load);
+			this->Shown += gcnew System::EventHandler(this, &frmPaintStockPorAlmacen::frmPaintStockPorAlmacen_Shown);
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
+
 	private: System::Void frmPaintStockPorAlmacen_Load(System::Object^ sender, System::EventArgs^ e)
 	{
 		// Cargar los datos del almacén en los TextBox
-		this->textBox1->Text = this->almacenActual->Id.ToString();
-		this->textBox2->Text = this->almacenActual->Nombre;
-		this->textBox3->Text = this->almacenActual->Ubicacion;
+		if (this->almacenActual != nullptr) {
+			this->textBox1->Text = this->almacenActual->Id.ToString();
+			this->textBox2->Text = this->almacenActual->Nombre;
+			this->textBox3->Text = this->almacenActual->Ubicacion;
+		}
+		// Si listaStocks se setea antes de Load, generamos la vista aquí (también la regeneramos en Shown para tamaño final)
+		GenerateDynamicForm();
 	}
-};
+
+	private: System::Void frmPaintStockPorAlmacen_Shown(System::Object^ sender, System::EventArgs^ e)
+	{
+		// Asegurar layout final cuando la ventana ya está mostrada y tamaños son definitivos
+		GenerateDynamicForm();
+	}
+
+		   // Recalcular layout al cambiar tamaño del panel
+	private: System::Void panel1_Resize(System::Object^ sender, System::EventArgs^ e)
+	{
+		GenerateDynamicForm();
+	}
+
+		   // Genera controles dinámicos en panel1 en función de listaStocks
+	private: void GenerateDynamicForm()
+	{
+		// Limpiar controles previos
+		this->panel1->Controls->Clear();
+
+		if (this->listaStocks == nullptr || this->listaStocks->Count == 0) {
+			return;
+		}
+
+		// Parámetros del layout de cada item
+		int itemWidth = 170;   // ancho del GroupBox
+		int itemHeight = 90;   // alto del GroupBox
+		int spacingX = 12;
+		int spacingY = 12;
+		int marginLeft = 10;
+		int marginTop = 10;
+
+		// calcular cantidad de columnas según width real del panel (usar ClientSize para excluir scrollbars)
+		int availableWidth = this->panel1->ClientSize.Width;
+		if (availableWidth <= itemWidth) availableWidth = itemWidth + spacingX;
+		int cols = Math::Max(1, (availableWidth + spacingX) / (itemWidth + spacingX));
+
+		int x = marginLeft;
+		int y = marginTop;
+		int i = 0;
+
+		for each (StockInsumo ^ stock in this->listaStocks) {
+			// Crear un groupbox o panel para cada ítem
+			GroupBox^ gb = gcnew GroupBox();
+			gb->Size = System::Drawing::Size(itemWidth, itemHeight);
+			gb->Location = System::Drawing::Point(x, y);
+			gb->Text = ""; // dejamos sin título para más espacio
+			gb->Tag = stock; // guardar referencia para handlers
+
+			// Label con nombre (arriba)
+			Label^ lbl = gcnew Label();
+			lbl->AutoSize = false;
+			lbl->Size = System::Drawing::Size(itemWidth - 90, 30);
+			lbl->Location = System::Drawing::Point(8, 10);
+			lbl->Text = stock->Insumoo->Nombre;
+			lbl->Font = gcnew System::Drawing::Font("Arial", 9, FontStyle::Regular);
+			gb->Controls->Add(lbl);
+
+			// Botón de detalles (derecha)
+			Button^ btn = gcnew Button();
+			btn->Size = System::Drawing::Size(64, 24);
+			btn->Location = System::Drawing::Point(itemWidth - 74, 10);
+			btn->Text = "Detalles";
+			// Asociar evento click
+			btn->Click += gcnew EventHandler(this, &frmPaintStockPorAlmacen::OnDetalleClick);
+			btn->Tag = stock;
+			gb->Controls->Add(btn);
+
+			// Barra de color proporcional (debajo)
+			Panel^ colorBar = gcnew Panel();
+			int barMaxWidth = itemWidth - 16; // margen izquierdo/derecho
+			int barHeight = 14;
+			int barX = 8;
+			int barY = 45;
+
+			// calcular porcentaje de llenado. Preferimos usar LimiteAlto si existe; si no, usar LimiteAlto como referencia.
+			double cap = 0.0;
+			try {
+				// Si StockInsumo tiene LimiteAlto, úsala; si no, caerá al catch.
+				cap = (double)stock->LimiteAlto;
+			}
+			catch (...) {
+				cap = 0.0;
+			}
+			if (cap <= 0.0) {
+				// fallback: usar LimiteAlto si existe
+				cap = (double)stock->LimiteAlto;
+			}
+			double porcentaje = 0.0;
+			if (cap > 0.0) {
+				porcentaje = Math::Min(1.0, (double)stock->Stock / cap);
+			} else {
+				// si no hay referencia, mostrar barra según límites relativos
+				if (stock->Stock == 0) porcentaje = 0.0;
+				else if (stock->Stock < stock->LimiteBajo) porcentaje = 0.25;
+				else if (stock->Stock < stock->LimiteAlto) porcentaje = 0.6;
+				else porcentaje = 1.0;
+			}
+			int barWidth = (int)(barMaxWidth * porcentaje);
+			if (barWidth < 2) barWidth = 2;
+
+			colorBar->Location = System::Drawing::Point(barX, barY);
+			colorBar->Size = System::Drawing::Size(barWidth, barHeight);
+			colorBar->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			colorBar->Tag = stock;
+
+			// color según niveles
+			if (stock->Stock == 0) {
+				colorBar->BackColor = Color::Red;
+			} else if (stock->Stock < stock->LimiteBajo) {
+				colorBar->BackColor = Color::Yellow;
+			} else if (stock->Stock < stock->LimiteAlto) {
+				colorBar->BackColor = Color::LightGreen;
+			} else {
+				colorBar->BackColor = Color::Green;
+			}
+
+			// Hacer clic en la barra también muestra detalles
+			colorBar->Click += gcnew System::EventHandler(this, &frmPaintStockPorAlmacen::OnColorBarClick);
+
+			gb->Controls->Add(colorBar);
+
+			// Añadir una barra de fondo (marco) para representar el full width (opcional, para ver el máximo)
+			Panel^ barBg = gcnew Panel();
+			barBg->Location = System::Drawing::Point(barX, barY);
+			barBg->Size = System::Drawing::Size(barMaxWidth, barHeight);
+			barBg->BackColor = Color::Gainsboro;
+			barBg->SendToBack(); // que quede detrás del colorBar
+			gb->Controls->Add(barBg);
+			barBg->SendToBack();
+
+			// Información textual pequeña (porcentaje)
+			Label^ lblPct = gcnew Label();
+			lblPct->AutoSize = false;
+			lblPct->Size = System::Drawing::Size(50, 16);
+			lblPct->Location = System::Drawing::Point(8, barY + barHeight + 4);
+			int pctInt = (int)(porcentaje * 100.0);
+			lblPct->Text = String::Format("{0}%", pctInt);
+			lblPct->Font = gcnew System::Drawing::Font("Arial", 8);
+			gb->Controls->Add(lblPct);
+
+			// Añadir el groupbox al panel
+			this->panel1->Controls->Add(gb);
+
+			// siguiente posición
+			i++;
+			if (i % cols == 0) {
+				x = marginLeft;
+				y += itemHeight + spacingY;
+			} else {
+				x += itemWidth + spacingX;
+			}
+		}
+		// Forzar redibujado si es necesario
+		this->panel1->Invalidate();
+	}
+
+		   // Mostrar detalles cuando se pulsa el botón Detalles
+	private: System::Void OnDetalleClick(System::Object^ sender, System::EventArgs^ e)
+	{
+		Button^ btn = safe_cast<Button^>(sender);
+		StockInsumo^ stock = safe_cast<StockInsumo^>(btn->Tag);
+		ShowStockDetails(stock);
+	}
+
+		   // Mostrar detalles al pulsar la barra de color
+	private: System::Void OnColorBarClick(System::Object^ sender, System::EventArgs^ e)
+	{
+		Control^ ctl = safe_cast<Control^>(sender);
+		StockInsumo^ stock = safe_cast<StockInsumo^>(ctl->Tag);
+		ShowStockDetails(stock);
+	}
+
+		   // Ventana de detalles (ejemplo simple con MessageBox)
+	private: void ShowStockDetails(StockInsumo^ stock)
+	{
+		if (stock == nullptr) return;
+		String^ capStr = "N/A";
+		try { capStr = stock->LimiteAlto.ToString(); }
+		catch (...) { capStr = "N/A"; }
+
+		String^ msg = String::Format("Insumo: {0}\nStock: {1}\nLimiteAlto: {2}\nLímite bajo: {3}\nLímite alto: {4}",
+			(stock->Insumoo != nullptr ? stock->Insumoo->Nombre : "Sin nombre"),
+			stock->Stock,
+			capStr,
+			stock->LimiteBajo,
+			stock->LimiteAlto);
+		MessageBox::Show(msg, "Detalles del stock", MessageBoxButtons::OK, MessageBoxIcon::Information);
+	}
+
+		   /// <summary>
+		   /// Informacion de colores del panel2 (leyenda)
+		   /// </summary>
+	private: System::Void panel2_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e)
+	{
+		Graphics^ graphics = e->Graphics;
+		int y = 10;
+		int separacionY = 30;
+		// Verde oscuro
+		Rectangle rectVerdeOscuro = Rectangle(10, y, 15, 15);
+		graphics->DrawRectangle(Pens::Black, rectVerdeOscuro);
+		graphics->FillRectangle(Brushes::Green, rectVerdeOscuro);
+		graphics->DrawString("Stock lleno", gcnew System::Drawing::Font("Arial", 8), Brushes::Black, 30, y);
+		// Verde claro
+		y += separacionY;
+		Rectangle rectVerdeClaro = Rectangle(10, y, 15, 15);
+		graphics->DrawRectangle(Pens::Black, rectVerdeClaro);
+		graphics->FillRectangle(Brushes::LightGreen, rectVerdeClaro);
+		graphics->DrawString("Stock en rango", gcnew System::Drawing::Font("Arial", 8), Brushes::Black, 30, y);
+		// Amarillo
+		y += separacionY;
+		Rectangle rectAmarillo = Rectangle(10, y, 15, 15);
+		graphics->DrawRectangle(Pens::Black, rectAmarillo);
+		graphics->FillRectangle(Brushes::Yellow, rectAmarillo);
+		graphics->DrawString("Stock bajo", gcnew System::Drawing::Font("Arial", 8), Brushes::Black, 30, y);
+		// Rojo
+		y += separacionY;
+		Rectangle rectRojo = Rectangle(10, y, 15, 15);
+		graphics->DrawRectangle(Pens::Black, rectRojo);
+		graphics->FillRectangle(Brushes::Red, rectRojo);
+		graphics->DrawString("Stock agotado", gcnew System::Drawing::Font("Arial", 8), Brushes::Black, 30, y);
+	}
+
+		   // panel1_Paint: NO dibujar aquí barras largas que representen cada stock.
+		   // Solo dejarlo vacío o usar para debug. Mantenerlo para compatibilidad si necesitas
+		   // dibujar algún overlay; por ahora no entrenará solapamientos con controles.
+	private: System::Void panel1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e)
+	{
+		// Intencionalmente vacío para evitar solapamiento con los controles dinámicos.
+	}
+	};
 }
