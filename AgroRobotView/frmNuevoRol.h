@@ -191,8 +191,15 @@ namespace AgroRobotView {
 #pragma endregion
 	private: System::Void frmNuevoRol_Load(System::Object^ sender, System::EventArgs^ e) {
 		/*crea un ID automático*/
-		int cantRoles = this->rolController->obtenerTodosRoles()->Count;
-		this->txtId->Text = Convert::ToString(cantRoles + 1);
+		List<Rol^>^ listaRoles = this->rolController->obtenerTodosRoles();
+		
+		int maxId = 0;
+		for each (Rol ^ rol in listaRoles) {
+			if (rol->GetId() > maxId) {
+				maxId = rol->GetId();
+			}
+		}
+		this->txtId->Text = Convert::ToString(maxId + 1);
 		
 		this->checkedListBox1->Items->Add("Crear");
 		this->checkedListBox1->Items->Add("Editar");
