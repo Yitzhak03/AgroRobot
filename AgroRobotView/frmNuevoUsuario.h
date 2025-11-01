@@ -24,7 +24,7 @@ namespace AgroRobotView {
 
 			// Obtener los roles desde el controlador
 			this->comboBox1->Items->Clear();
-			List<Rol^>^ listaRoles = this->rolController->readTxt();
+			List<Rol^>^ listaRoles = this->rolController->obtenerTodosRoles();
 			for each (Rol ^ rol in listaRoles) {
 				this->comboBox1->Items->Add(rol->GetNombre());
 			}

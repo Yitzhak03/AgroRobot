@@ -110,6 +110,7 @@ namespace AgroRobotView {
 			// 
 			// txtId
 			// 
+			this->txtId->Enabled = false;
 			this->txtId->Location = System::Drawing::Point(137, 41);
 			this->txtId->Margin = System::Windows::Forms::Padding(2);
 			this->txtId->Name = L"txtId";
@@ -189,6 +190,10 @@ namespace AgroRobotView {
 		}
 #pragma endregion
 	private: System::Void frmNuevoRol_Load(System::Object^ sender, System::EventArgs^ e) {
+		/*crea un ID automático*/
+		int cantRoles = this->rolController->obtenerTodosRoles()->Count;
+		this->txtId->Text = Convert::ToString(cantRoles + 1);
+		
 		this->checkedListBox1->Items->Add("Crear");
 		this->checkedListBox1->Items->Add("Editar");
 		this->checkedListBox1->Items->Add("Eliminar");
@@ -197,7 +202,6 @@ namespace AgroRobotView {
 	private: System::Void btnCancelar_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
 	}
-
 
 	private: System::Void btnGrabar_Click(System::Object^ sender, System::EventArgs^ e) {
 		Rol^ nuevoRol = gcnew Rol();

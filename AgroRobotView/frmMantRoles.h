@@ -44,7 +44,8 @@ namespace AgroRobotView {
 	private: RolController^ rolController;
 	private: System::Windows::Forms::GroupBox^ groupBox1;
 	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::Windows::Forms::TextBox^ txtBuscar;
+
 	private: System::Windows::Forms::Button^ btnBuscar;
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
 
@@ -78,21 +79,21 @@ namespace AgroRobotView {
 		void InitializeComponent(void)
 		{
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->btnMostrarTodos = (gcnew System::Windows::Forms::Button());
 			this->btnBuscar = (gcnew System::Windows::Forms::Button());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->txtBuscar = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->btnMostrarTodos = (gcnew System::Windows::Forms::Button());
-			this->button3 = (gcnew System::Windows::Forms::Button());
-			this->btnEliminar = (gcnew System::Windows::Forms::Button());
 			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->btnEliminar = (gcnew System::Windows::Forms::Button());
 			this->groupBox1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
@@ -101,7 +102,7 @@ namespace AgroRobotView {
 			// 
 			this->groupBox1->Controls->Add(this->btnMostrarTodos);
 			this->groupBox1->Controls->Add(this->btnBuscar);
-			this->groupBox1->Controls->Add(this->textBox1);
+			this->groupBox1->Controls->Add(this->txtBuscar);
 			this->groupBox1->Controls->Add(this->label1);
 			this->groupBox1->Location = System::Drawing::Point(12, 12);
 			this->groupBox1->Name = L"groupBox1";
@@ -109,6 +110,17 @@ namespace AgroRobotView {
 			this->groupBox1->TabIndex = 0;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Criterio de Búsqueda";
+			// 
+			// btnMostrarTodos
+			// 
+			this->btnMostrarTodos->Location = System::Drawing::Point(456, 49);
+			this->btnMostrarTodos->Margin = System::Windows::Forms::Padding(2);
+			this->btnMostrarTodos->Name = L"btnMostrarTodos";
+			this->btnMostrarTodos->Size = System::Drawing::Size(87, 19);
+			this->btnMostrarTodos->TabIndex = 17;
+			this->btnMostrarTodos->Text = L"Mostrar Todos";
+			this->btnMostrarTodos->UseVisualStyleBackColor = true;
+			this->btnMostrarTodos->Click += gcnew System::EventHandler(this, &frmMantRoles::btnMostrarTodos_Click);
 			// 
 			// btnBuscar
 			// 
@@ -119,14 +131,15 @@ namespace AgroRobotView {
 			this->btnBuscar->TabIndex = 5;
 			this->btnBuscar->Text = L"Buscar";
 			this->btnBuscar->UseVisualStyleBackColor = true;
+			this->btnBuscar->Click += gcnew System::EventHandler(this, &frmMantRoles::btnBuscar_Click);
 			// 
-			// textBox1
+			// txtBuscar
 			// 
-			this->textBox1->Location = System::Drawing::Point(49, 49);
-			this->textBox1->Margin = System::Windows::Forms::Padding(2);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(128, 20);
-			this->textBox1->TabIndex = 2;
+			this->txtBuscar->Location = System::Drawing::Point(49, 49);
+			this->txtBuscar->Margin = System::Windows::Forms::Padding(2);
+			this->txtBuscar->Name = L"txtBuscar";
+			this->txtBuscar->Size = System::Drawing::Size(128, 20);
+			this->txtBuscar->TabIndex = 2;
 			// 
 			// label1
 			// 
@@ -147,8 +160,46 @@ namespace AgroRobotView {
 			});
 			this->dataGridView1->Location = System::Drawing::Point(12, 129);
 			this->dataGridView1->Name = L"dataGridView1";
+			this->dataGridView1->ReadOnly = true;
 			this->dataGridView1->Size = System::Drawing::Size(575, 229);
 			this->dataGridView1->TabIndex = 1;
+			// 
+			// Column1
+			// 
+			this->Column1->HeaderText = L"Id";
+			this->Column1->Name = L"Column1";
+			this->Column1->ReadOnly = true;
+			this->Column1->Width = 30;
+			// 
+			// Column2
+			// 
+			this->Column2->HeaderText = L"Rol";
+			this->Column2->Name = L"Column2";
+			this->Column2->ReadOnly = true;
+			// 
+			// Column3
+			// 
+			this->Column3->HeaderText = L"Permiso 1";
+			this->Column3->Name = L"Column3";
+			this->Column3->ReadOnly = true;
+			// 
+			// Column4
+			// 
+			this->Column4->HeaderText = L"Permiso 2";
+			this->Column4->Name = L"Column4";
+			this->Column4->ReadOnly = true;
+			// 
+			// Column5
+			// 
+			this->Column5->HeaderText = L"Permiso 3";
+			this->Column5->Name = L"Column5";
+			this->Column5->ReadOnly = true;
+			// 
+			// Column6
+			// 
+			this->Column6->HeaderText = L"Permiso 4";
+			this->Column6->Name = L"Column6";
+			this->Column6->ReadOnly = true;
 			// 
 			// button1
 			// 
@@ -168,17 +219,7 @@ namespace AgroRobotView {
 			this->button2->TabIndex = 3;
 			this->button2->Text = L"Cancelar";
 			this->button2->UseVisualStyleBackColor = true;
-			// 
-			// btnMostrarTodos
-			// 
-			this->btnMostrarTodos->Location = System::Drawing::Point(456, 49);
-			this->btnMostrarTodos->Margin = System::Windows::Forms::Padding(2);
-			this->btnMostrarTodos->Name = L"btnMostrarTodos";
-			this->btnMostrarTodos->Size = System::Drawing::Size(87, 19);
-			this->btnMostrarTodos->TabIndex = 17;
-			this->btnMostrarTodos->Text = L"Mostrar Todos";
-			this->btnMostrarTodos->UseVisualStyleBackColor = true;
-			this->btnMostrarTodos->Click += gcnew System::EventHandler(this, &frmMantRoles::btnMostrarTodos_Click);
+			this->button2->Click += gcnew System::EventHandler(this, &frmMantRoles::button2_Click);
 			// 
 			// button3
 			// 
@@ -198,37 +239,7 @@ namespace AgroRobotView {
 			this->btnEliminar->TabIndex = 5;
 			this->btnEliminar->Text = L"Eliminar";
 			this->btnEliminar->UseVisualStyleBackColor = true;
-			// 
-			// Column1
-			// 
-			this->Column1->HeaderText = L"Id";
-			this->Column1->Name = L"Column1";
-			this->Column1->Width = 30;
-			// 
-			// Column2
-			// 
-			this->Column2->HeaderText = L"Rol";
-			this->Column2->Name = L"Column2";
-			// 
-			// Column3
-			// 
-			this->Column3->HeaderText = L"Permiso 1";
-			this->Column3->Name = L"Column3";
-			// 
-			// Column4
-			// 
-			this->Column4->HeaderText = L"Permiso 2";
-			this->Column4->Name = L"Column4";
-			// 
-			// Column5
-			// 
-			this->Column5->HeaderText = L"Permiso 3";
-			this->Column5->Name = L"Column5";
-			// 
-			// Column6
-			// 
-			this->Column6->HeaderText = L"Permiso 4";
-			this->Column6->Name = L"Column6";
+			this->btnEliminar->Click += gcnew System::EventHandler(this, &frmMantRoles::btnEliminar_Click);
 			// 
 			// frmMantRoles
 			// 
@@ -261,12 +272,14 @@ namespace AgroRobotView {
 				filaGrilla[1] = rol->GetNombre();
 
 				List<bool>^ listaPermisos = rol->GetPermisos();
-				String^ permisosStr = "";
-
-				for (int i = 0; i < listaPermisos->Count; i++) {
-					permisosStr += listaPermisos[i] ? "1" : "0";
-					if (i < listaPermisos->Count - 1)
-						permisosStr += "|";
+				
+				for (int j = 0; j < listaPermisos->Count; j++) {
+					if (listaPermisos[j]) {
+						filaGrilla[j + 2] = "Permitido";
+					}
+					else {
+						filaGrilla[j + 2] = "Denegado";
+					}
 				}
 
 				this->dataGridView1->Rows->Add(filaGrilla);
@@ -312,9 +325,54 @@ namespace AgroRobotView {
 			{
 				MessageBox::Show("Por favor, seleccione un rol para editar.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
 			}
-			
-			
-			
 		}
+
+		private: System::Void btnEliminar_Click(System::Object^ sender, System::EventArgs^ e) {
+			if (this->dataGridView1->SelectedRows->Count > 0) {
+				// Preguntar al usuario si est� seguro de eliminar el registro
+				System::Windows::Forms::DialogResult resultado = MessageBox::Show("¿Está seguro de que desea eliminar el registro seleccionado?",
+					"Confirmación de eliminación", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
+
+				// Si el usuario selecciona "No", cancelar la operaci�n
+				if (resultado == System::Windows::Forms::DialogResult::No) {
+					return; // Salir del evento si el usuario cancela
+				}
+
+				int selectedRowIndex = this->dataGridView1->SelectedRows[0]->Index;
+				int id = Convert::ToInt32(this->dataGridView1->Rows[selectedRowIndex]->Cells[0]->Value);
+				// Crear una instancia del controlador y eliminar el rol
+				this->rolController->eliminarRol(id);
+				// Actualizar la lista de roles en el DataGridView
+				List<Rol^>^ listaRoles = this->rolController->obtenerTodosRoles();
+				mostrarGrilla(listaRoles);
+			}
+			else {
+				MessageBox::Show("Por favor, seleccione un usuario para eliminar.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+			}
+		}
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Close();
+	}
+	
+	private: System::Void btnBuscar_Click(System::Object^ sender, System::EventArgs^ e) {
+		List<Rol^>^ listaRoles = gcnew List<Rol^>();
+		/*si no se ingresa nada para buscar no busca nada*/
+		if (this->txtBuscar->Text != ""){
+			int id = 0;
+			/*verifica que haya un entero en la casilla de búsqueda*/
+			if (Int32::TryParse(this->txtBuscar->Text, id)) {
+				Rol^ rol = this -> rolController->obtenerRolPorId(id);
+				
+				if (rol != nullptr) {
+					listaRoles->Add(rol);
+				}
+			}
+			else {
+				MessageBox::Show("Por favor, ingrese un ID válido para buscar.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+			}
+		}
+
+		mostrarGrilla(listaRoles);
+	}
 };
 }

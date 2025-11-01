@@ -6,6 +6,11 @@ RolController::RolController(){
 	this->listaRoles = gcnew List<Rol^>();
 
 	String^ path = "roles.txt";
+	
+	if (!File::Exists(path)) {
+		File::WriteAllText(path, "");
+	}
+	
 	array<String^>^ lineas = File::ReadAllLines(path);
 
 	for each (String ^ linea in lineas) {
@@ -27,40 +32,9 @@ RolController::RolController(){
 		else listaPermisos = nullptr;
 
 		Rol^ rol = gcnew Rol(id, nombre);
+		rol->SetPermisos(listaPermisos);
 		listaRoles->Add(rol);
 	}
-}
-
-
-List<Rol^>^ RolController::readTxt(){
-	List<Rol^>^ lista = gcnew List<Rol^>();
-	String^ path = "roles.txt";
-
-	if (!File::Exists(path)) {
-		File::WriteAllText(path, ""); 
-		return lista;
-	}
-
-	array<String^>^ lineas = File::ReadAllLines(path);
-	for each (String ^ linea in lineas) {
-		if (String::IsNullOrWhiteSpace(linea)) continue;
-
-		array<String^>^ datos = linea->Split(';');
-		
-		int id = Convert::ToInt32(datos[0]);
-		String^ nombre = datos[1];
-
-		Rol^ rol = gcnew Rol(id, nombre);
-
-		array<String^>^ permisosTxt = datos[2]->Split('|');
-		for each (String ^ permiso in permisosTxt) {
-			if (permiso == "1") rol->GetPermisos()->Add(true);
-			else rol->GetPermisos()->Add(false);
-		}
-
-		lista->Add(rol);
-	}
-	return lista;
 }
 
 void RolController::escribirArchivo(){
@@ -71,19 +45,25 @@ void RolController::escribirArchivo(){
 		Rol^ rol = this->listaRoles[i];
 		lineasArchivo[i] = rol->GetId() + ";" + rol->GetNombre() + ";";
 
-		// Convertir la lista de permisos a formato "1|0|1"
+		// Convertir la lista de permisos a formato "1|0|1|0"
 		List<bool>^ permisos = rol->GetPermisos();
 		String^ permisosTxt = "";
 		
 		for (int j = 0; j < permisos->Count; ++j) {
-			permisosTxt += permisos[j] ? "1" : "0";
+			if (permisos[j]) {
+				permisosTxt += "1";
+			}
+			else {
+				permisosTxt += "0";
+			}
+			
 			if (j < permisos->Count - 1) permisosTxt += "|";
 		}
 
 		// Linea completa
 		lineasArchivo[i] = rol->GetId() + ";" + rol->GetNombre() + ";" + permisosTxt;
 	}
-	// Escribimos todas las líneas al archivo (sobrescribe)
+	// Escribimos todas las líneas al archivo 
 	File::WriteAllLines(path, lineasArchivo);
 }
 
@@ -92,10 +72,30 @@ void RolController::agregarRol(Rol^ rol) {
 	escribirArchivo();
 }
 
-Rol^ RolController::obtenerRolPorId(int id)
-{
-	List<Rol^>^ lista = readTxt();
-	for each (Rol ^ rol in lista) {
+bool RolController::eliminarRol(int id) {
+	Rol^ rol = obtenerRolPorId(id);
+	if (rol != nullptr) {
+		this->listaRoles->Remove(rol);
+		escribirArchivo();
+		return true;
+	}
+	return false;
+}
+
+bool RolController::modificarRol(int id, String^ nombre, List<bool>^ listaPermisos) {
+	Rol^ rol = obtenerRolPorId(id);
+
+	if (rol != nullptr) {
+		rol->SetNombre(nombre);
+		rol->SetPermisos(listaPermisos);
+		escribirArchivo();
+		return true;
+	}
+	return false;
+}
+
+Rol^ RolController::obtenerRolPorId(int id){
+	for each (Rol ^ rol in this->listaRoles) {
 		if (rol->Id == id) {
 			return rol;
 		}
@@ -103,8 +103,7 @@ Rol^ RolController::obtenerRolPorId(int id)
 }
 
 Rol^ RolController::obtenerRolPorNombre(String^ nombre) {
-	List<Rol^>^ listaRoles = readTxt();
-	for each (Rol ^ rol in listaRoles) {
+	for each (Rol ^ rol in this->listaRoles) {
 		if (rol->Nombre == nombre) {
 			return rol;
 		}

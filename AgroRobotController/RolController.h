@@ -10,10 +10,11 @@ namespace AgroRobotController {
 	public:
 		RolController();
 
-		List<Rol^>^ readTxt();
 		void escribirArchivo();
 		
 		void agregarRol(Rol^ rol);
+		bool eliminarRol(int id);
+		bool modificarRol(int id, String^ nombre, List<bool>^ listPermisos);
 		Rol^ obtenerRolPorId(int id);
 		Rol^ obtenerRolPorNombre(String^ nombre);
 		List<Rol^>^ obtenerTodosRoles();

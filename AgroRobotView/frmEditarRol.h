@@ -112,6 +112,7 @@ namespace AgroRobotView {
 			// 
 			// txtId
 			// 
+			this->txtId->Enabled = false;
 			this->txtId->Location = System::Drawing::Point(137, 41);
 			this->txtId->Margin = System::Windows::Forms::Padding(2);
 			this->txtId->Name = L"txtId";
@@ -157,6 +158,7 @@ namespace AgroRobotView {
 			this->btnGrabar->TabIndex = 6;
 			this->btnGrabar->Text = L"Grabar";
 			this->btnGrabar->UseVisualStyleBackColor = true;
+			this->btnGrabar->Click += gcnew System::EventHandler(this, &frmEditarRol::btnGrabar_Click);
 			// 
 			// btnCancelar
 			// 
@@ -167,6 +169,7 @@ namespace AgroRobotView {
 			this->btnCancelar->TabIndex = 7;
 			this->btnCancelar->Text = L"Cancelar";
 			this->btnCancelar->UseVisualStyleBackColor = true;
+			this->btnCancelar->Click += gcnew System::EventHandler(this, &frmEditarRol::btnCancelar_Click);
 			// 
 			// frmEditarRol
 			// 
@@ -178,11 +181,51 @@ namespace AgroRobotView {
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmEditarRol";
 			this->Text = L"frmEditarRol";
+			this->Load += gcnew System::EventHandler(this, &frmEditarRol::frmEditarRol_Load);
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
-	};
+	private: System::Void frmEditarRol_Load(System::Object^ sender, System::EventArgs^ e) {
+		this->txtId->Text = this->rol->GetId().ToString();
+		this->txtNombre->Text = this->rol->GetNombre();
+
+		this->checkedListBox1->Items->Add("Crear");
+		this->checkedListBox1->Items->Add("Editar");
+		this->checkedListBox1->Items->Add("Eliminar");
+		this->checkedListBox1->Items->Add("Ver");
+		List<bool>^ listaPermisos = this->rol->GetPermisos();
+		/*se encarga de marcar las cajas si detecta que dicho permiso es true*/
+		for (int i = 0; i < this->checkedListBox1->Items->Count; i++) {
+			if (listaPermisos[i]) {
+				this->checkedListBox1->SetItemChecked(i, true);
+			}
+		}
+
+		/*El rol de Administrador no puede quitarse permisos*/
+		if (rol->GetId() == 1) {
+			this->txtId->Enabled = false;
+			this->checkedListBox1->Enabled = false;
+		}
+	}
+	
+	private: System::Void btnGrabar_Click(System::Object^ sender, System::EventArgs^ e) {
+		int id = Convert::ToInt32(this->txtId->Text);
+		String^ nombre = this->txtNombre->Text;
+		List<bool>^ listaPermisos = gcnew List<bool>();
+		for (int i = 0; i < this->checkedListBox1->Items->Count; i++) {
+			listaPermisos->Add(this->checkedListBox1->GetItemChecked(i));
+		}
+
+		this->rolController->modificarRol(id, nombre, listaPermisos);
+		MessageBox::Show("El rol se editó correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+		this->Close(); // Cierra el formulario actual
+	}
+	
+	private: System::Void btnCancelar_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Close();
+	}
+};
 }
