@@ -137,6 +137,7 @@
     <ClCompile Include="frmNuevoInsumo.cpp" />
     <ClCompile Include="frmNuevoMuestraH.cpp" />
     <ClCompile Include="frmNuevoMuestraS.cpp" />
+    <ClCompile Include="frmNuevoRol.cpp" />
     <ClCompile Include="frmNuevoUsuario.cpp" />
     <ClCompile Include="frmOrdenesAlimentacion.cpp" />
     <ClCompile Include="frmPaintStockPorAlmacen.cpp" />
@@ -229,6 +230,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmNuevoMuestraS.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="frmNuevoRol.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmNuevoUsuario.h">

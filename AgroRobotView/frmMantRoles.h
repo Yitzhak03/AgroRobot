@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "frmNuevoRol.h"
 
 namespace AgroRobotView {
 
@@ -154,8 +155,9 @@ namespace AgroRobotView {
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(75, 23);
 			this->button1->TabIndex = 2;
-			this->button1->Text = L"Grabar";
+			this->button1->Text = L"Nuevo";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &frmMantRoles::button1_Click);
 			// 
 			// button2
 			// 
@@ -227,6 +229,11 @@ namespace AgroRobotView {
 
 			List<Rol^>^ listaRoles = this->rolController->obtenerTodosRoles();
 			mostrarGrilla(listaRoles);
+		}
+	
+		private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+			frmNuevoRol^ nuevoRolForm = gcnew frmNuevoRol(rolController);
+			nuevoRolForm->ShowDialog();
 		}
 	};
 }
