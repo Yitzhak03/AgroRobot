@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "frmNuevoRol.h"
+#include "frmEditarRol.h"
 
 namespace AgroRobotView {
 
@@ -46,12 +47,21 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::Windows::Forms::Button^ btnBuscar;
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
+
+
+
 	private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Button^ btnMostrarTodos;
+	private: System::Windows::Forms::Button^ button3;
+	private: System::Windows::Forms::Button^ btnEliminar;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
+
 	protected:
 
 	private:
@@ -72,31 +82,37 @@ namespace AgroRobotView {
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->btnMostrarTodos = (gcnew System::Windows::Forms::Button());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->btnEliminar = (gcnew System::Windows::Forms::Button());
+			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->groupBox1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// groupBox1
 			// 
+			this->groupBox1->Controls->Add(this->btnMostrarTodos);
 			this->groupBox1->Controls->Add(this->btnBuscar);
 			this->groupBox1->Controls->Add(this->textBox1);
 			this->groupBox1->Controls->Add(this->label1);
 			this->groupBox1->Location = System::Drawing::Point(12, 12);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(443, 100);
+			this->groupBox1->Size = System::Drawing::Size(575, 100);
 			this->groupBox1->TabIndex = 0;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Criterio de Búsqueda";
 			// 
 			// btnBuscar
 			// 
-			this->btnBuscar->Location = System::Drawing::Point(352, 49);
+			this->btnBuscar->Location = System::Drawing::Point(370, 49);
 			this->btnBuscar->Margin = System::Windows::Forms::Padding(2);
 			this->btnBuscar->Name = L"btnBuscar";
 			this->btnBuscar->Size = System::Drawing::Size(56, 19);
@@ -125,33 +141,18 @@ namespace AgroRobotView {
 			// dataGridView1
 			// 
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(3) {
+			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(6) {
 				this->Column1,
-					this->Column2, this->Column3
+					this->Column2, this->Column3, this->Column4, this->Column5, this->Column6
 			});
 			this->dataGridView1->Location = System::Drawing::Point(12, 129);
 			this->dataGridView1->Name = L"dataGridView1";
-			this->dataGridView1->Size = System::Drawing::Size(443, 229);
+			this->dataGridView1->Size = System::Drawing::Size(575, 229);
 			this->dataGridView1->TabIndex = 1;
-			// 
-			// Column1
-			// 
-			this->Column1->HeaderText = L"Id";
-			this->Column1->Name = L"Column1";
-			// 
-			// Column2
-			// 
-			this->Column2->HeaderText = L"Rol";
-			this->Column2->Name = L"Column2";
-			// 
-			// Column3
-			// 
-			this->Column3->HeaderText = L"Permisos";
-			this->Column3->Name = L"Column3";
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(199, 381);
+			this->button1->Location = System::Drawing::Point(41, 381);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(75, 23);
 			this->button1->TabIndex = 2;
@@ -161,7 +162,7 @@ namespace AgroRobotView {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(326, 381);
+			this->button2->Location = System::Drawing::Point(475, 381);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(75, 23);
 			this->button2->TabIndex = 3;
@@ -170,7 +171,7 @@ namespace AgroRobotView {
 			// 
 			// btnMostrarTodos
 			// 
-			this->btnMostrarTodos->Location = System::Drawing::Point(61, 383);
+			this->btnMostrarTodos->Location = System::Drawing::Point(456, 49);
 			this->btnMostrarTodos->Margin = System::Windows::Forms::Padding(2);
 			this->btnMostrarTodos->Name = L"btnMostrarTodos";
 			this->btnMostrarTodos->Size = System::Drawing::Size(87, 19);
@@ -179,12 +180,63 @@ namespace AgroRobotView {
 			this->btnMostrarTodos->UseVisualStyleBackColor = true;
 			this->btnMostrarTodos->Click += gcnew System::EventHandler(this, &frmMantRoles::btnMostrarTodos_Click);
 			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(182, 381);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(75, 23);
+			this->button3->TabIndex = 4;
+			this->button3->Text = L"Editar";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &frmMantRoles::button3_Click);
+			// 
+			// btnEliminar
+			// 
+			this->btnEliminar->Location = System::Drawing::Point(330, 381);
+			this->btnEliminar->Name = L"btnEliminar";
+			this->btnEliminar->Size = System::Drawing::Size(75, 23);
+			this->btnEliminar->TabIndex = 5;
+			this->btnEliminar->Text = L"Eliminar";
+			this->btnEliminar->UseVisualStyleBackColor = true;
+			// 
+			// Column1
+			// 
+			this->Column1->HeaderText = L"Id";
+			this->Column1->Name = L"Column1";
+			this->Column1->Width = 30;
+			// 
+			// Column2
+			// 
+			this->Column2->HeaderText = L"Rol";
+			this->Column2->Name = L"Column2";
+			// 
+			// Column3
+			// 
+			this->Column3->HeaderText = L"Permiso 1";
+			this->Column3->Name = L"Column3";
+			// 
+			// Column4
+			// 
+			this->Column4->HeaderText = L"Permiso 2";
+			this->Column4->Name = L"Column4";
+			// 
+			// Column5
+			// 
+			this->Column5->HeaderText = L"Permiso 3";
+			this->Column5->Name = L"Column5";
+			// 
+			// Column6
+			// 
+			this->Column6->HeaderText = L"Permiso 4";
+			this->Column6->Name = L"Column6";
+			// 
 			// frmMantRoles
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(467, 430);
-			this->Controls->Add(this->btnMostrarTodos);
+			this->ClientSize = System::Drawing::Size(599, 430);
+			this->Controls->Add(this->btnEliminar);
+			this->Controls->Add(this->button3);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->dataGridView1);
@@ -232,8 +284,37 @@ namespace AgroRobotView {
 		}
 	
 		private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-			frmNuevoRol^ nuevoRolForm = gcnew frmNuevoRol(rolController);
+			frmNuevoRol^ nuevoRolForm = gcnew frmNuevoRol(this->rolController);
 			nuevoRolForm->ShowDialog();
 		}
-	};
+		
+		private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+			if (this->dataGridView1->SelectedRows->Count > 0)
+			{
+				int filaSeleccionada = this->dataGridView1->SelectedRows[0]->Index;
+				int id = Convert::ToInt32(this->dataGridView1->Rows[filaSeleccionada]->Cells[0]->Value);
+
+				Rol^ rolSeleccionado= this->rolController->obtenerRolPorId(id);
+				if (rolSeleccionado == nullptr)
+				{
+					MessageBox::Show("No se encontró el rol seleccionado.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					return;
+				}
+				// Crear una nueva instancia del formulario de nuevo operador
+				// y mostrarlo como un formulario hijo dentro del contenedor MDI
+				frmEditarRol^ editarRolForm = gcnew frmEditarRol(this->rolController, rolSeleccionado);
+				editarRolForm->ShowDialog();
+				// Llamar al m�todo para cargar la lista de roles nuevamente
+				List<Rol^>^ listaRoles= this->rolController->obtenerTodosRoles();
+				mostrarGrilla(listaRoles);
+			}
+			else
+			{
+				MessageBox::Show("Por favor, seleccione un rol para editar.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+			}
+			
+			
+			
+		}
+};
 }

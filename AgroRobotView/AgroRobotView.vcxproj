@@ -117,6 +117,7 @@
     <ClCompile Include="frmEditarDieta.cpp" />
     <ClCompile Include="frmEditarMuestraH.cpp" />
     <ClCompile Include="frmEditarMuestraS.cpp" />
+    <ClCompile Include="frmEditarRol.cpp" />
     <ClCompile Include="frmEditarUsuario.cpp" />
     <ClCompile Include="frmEditInsumo.cpp" />
     <ClCompile Include="frmMain.cpp" />
@@ -167,6 +168,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmEditarReporte.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="frmEditarRol.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmEditarUsuario.h">
@@ -270,6 +274,9 @@
     <EmbeddedResource Include="frmEditarReporte.resx">
       <DependentUpon>frmEditarReporte.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmEditarRol.resx">
+      <DependentUpon>frmEditarRol.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmEditarUsuario.resx">
       <DependentUpon>frmEditarUsuario.h</DependentUpon>
     </EmbeddedResource>
@@ -332,6 +339,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmNuevoMuestraS.resx">
       <DependentUpon>frmNuevoMuestraS.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNuevoRol.resx">
+      <DependentUpon>frmNuevoRol.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNuevoUsuario.resx">
       <DependentUpon>frmNuevoUsuario.h</DependentUpon>

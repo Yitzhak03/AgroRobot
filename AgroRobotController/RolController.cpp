@@ -63,22 +63,35 @@ List<Rol^>^ RolController::readTxt(){
 	return lista;
 }
 
-void RolController::writeTxt(List<Rol^>^ lista)
-{
+void RolController::escribirArchivo(){
 	String^ path = "roles.txt";
 	// Preparamos el array de líneas con la misma cantidad que la lista
-	array<String^>^ lineas = gcnew array<String^>(lista->Count);
-	for (int i = 0; i < lista->Count; ++i) {
-		Rol^ rol = lista[i];
-		lineas[i] = String::Format("{0};{1};{2}",
-			rol->Id,
-			rol->Nombre,
-			rol->Permisos
-		);
+	array<String^>^ lineasArchivo = gcnew array<String^>(this->listaRoles->Count);
+	for (int i = 0; i < this->listaRoles->Count; ++i) {
+		Rol^ rol = this->listaRoles[i];
+		lineasArchivo[i] = rol->GetId() + ";" + rol->GetNombre() + ";";
+
+		// Convertir la lista de permisos a formato "1|0|1"
+		List<bool>^ permisos = rol->GetPermisos();
+		String^ permisosTxt = "";
+		
+		for (int j = 0; j < permisos->Count; ++j) {
+			permisosTxt += permisos[j] ? "1" : "0";
+			if (j < permisos->Count - 1) permisosTxt += "|";
+		}
+
+		// Linea completa
+		lineasArchivo[i] = rol->GetId() + ";" + rol->GetNombre() + ";" + permisosTxt;
 	}
 	// Escribimos todas las líneas al archivo (sobrescribe)
-	File::WriteAllLines(path, lineas);
+	File::WriteAllLines(path, lineasArchivo);
 }
+
+void RolController::agregarRol(Rol^ rol) {
+	this->listaRoles->Add(rol);
+	escribirArchivo();
+}
+
 Rol^ RolController::obtenerRolPorId(int id)
 {
 	List<Rol^>^ lista = readTxt();

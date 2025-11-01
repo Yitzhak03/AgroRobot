@@ -11,8 +11,9 @@ namespace AgroRobotController {
 		RolController();
 
 		List<Rol^>^ readTxt();
-		void writeTxt(List<Rol^>^ lista);
+		void escribirArchivo();
 		
+		void agregarRol(Rol^ rol);
 		Rol^ obtenerRolPorId(int id);
 		Rol^ obtenerRolPorNombre(String^ nombre);
 		List<Rol^>^ obtenerTodosRoles();
