@@ -275,6 +275,7 @@ namespace AgroRobotView {
 			this->IsMdiContainer = true;
 			this->Name = L"frmMenu";
 			this->Text = L"frmMenu";
+			this->Load += gcnew System::EventHandler(this, &frmMenu::frmMenu_Load);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
@@ -285,9 +286,7 @@ namespace AgroRobotView {
 		//===============================================================================
 		//==============================Administracion===================================
 		//===============================================================================
-	private: System::Void admnistracionToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-	{
-	}
+	
 
 	private: System::Void diagnosticoToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 	{
@@ -350,31 +349,38 @@ namespace AgroRobotView {
 		frm->MdiParent = this;
 		frm->Show();
 	}
-	private: System::Void mantenimientoDeUsuariosToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-	{
-		frmMantUsuarios^ frm = gcnew frmMantUsuarios();
-		if (this->usuario->GetNombre() == "Becquer") {
-			frm->MdiParent = this;
-			frm->Show();
-		} else {
-			MessageBox::Show("Usted no tiene acceso al módulo de Administración.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-		}
-	}
-	private: System::Void mantenimientoDeRolesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-	{
-		frmMantRoles^ ventanaRoles = gcnew frmMantRoles();
-		if (this->usuario->GetNombre() == "Becquer") {
-			ventanaRoles->MdiParent = this;
-			ventanaRoles->Show();
-		} else {
-			MessageBox::Show("Usted no tiene acceso al módulo de Administración.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-		}
-	}
+	
 	private: System::Void registroGeneralDeAlmacenesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		frmMantAlmacen^ frm = gcnew frmMantAlmacen();
 		frm->MdiParent = this;
 		frm->Show();
 	}
-	};
+	
+
+	//===============================================================================
+	//=========================Módulo de Administracion==============================
+	//===============================================================================
+	
+	/*vuelve invisible al botón Administración si no lo abre un usuario Administrador*/
+	private: System::Void frmMenu_Load(System::Object^ sender, System::EventArgs^ e) {
+		Rol^ rolUsuario = this->usuario->GetRol();
+		this->admnistracionToolStripMenuItem->Visible = rolUsuario->GetPermisos()[0];
+	}
+
+	private: System::Void admnistracionToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e){
+	}
+
+	private: System::Void mantenimientoDeUsuariosToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e){
+		frmMantUsuarios^ frm = gcnew frmMantUsuarios();
+		frm->MdiParent = this;
+		frm->Show();
+	}
+
+	private: System::Void mantenimientoDeRolesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e){
+		frmMantRoles^ ventanaRoles = gcnew frmMantRoles();
+		ventanaRoles->MdiParent = this;
+		ventanaRoles->Show();
+	}
+};
 }
