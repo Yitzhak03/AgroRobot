@@ -126,6 +126,7 @@
     <ClCompile Include="ParametroNutricional.cpp" />
     <ClCompile Include="RegistroActividad.cpp" />
     <ClCompile Include="Reporte.cpp" />
+    <ClCompile Include="ReporteData.cpp" />
     <ClCompile Include="Robot.cpp" />
     <ClCompile Include="RobotAgua.cpp" />
     <ClCompile Include="RobotComida.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="ParametroNutricional.h" />
     <ClInclude Include="RegistroActividad.h" />
     <ClInclude Include="Reporte.h" />
+    <ClInclude Include="ReporteData.h" />
     <ClInclude Include="Robot.h" />
     <ClInclude Include="RobotAgua.h" />
     <ClInclude Include="RobotComida.h" />

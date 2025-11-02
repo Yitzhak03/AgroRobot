@@ -103,6 +103,7 @@ namespace AgroRobotView {
 			this->button3->TabIndex = 11;
 			this->button3->Text = L"Editar";
 			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &frmMantDiagnostico::button3_Click);
 			// 
 			// button2
 			// 
@@ -178,6 +179,7 @@ namespace AgroRobotView {
 			this->button1->TabIndex = 4;
 			this->button1->Text = L"Buscar";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &frmMantDiagnostico::button1_Click);
 			// 
 			// textBox2
 			// 
@@ -223,6 +225,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmMantDiagnostico";
 			this->Text = L"frmMantDiagnostico";
+			this->Load += gcnew System::EventHandler(this, &frmMantDiagnostico::frmMantDiagnostico_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
@@ -234,5 +237,11 @@ namespace AgroRobotView {
 		frmNuevoDiagnostico^ nuevoDiagnostico = gcnew frmNuevoDiagnostico();
 		nuevoDiagnostico->ShowDialog();
 	}
+private: System::Void frmMantDiagnostico_Load(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }

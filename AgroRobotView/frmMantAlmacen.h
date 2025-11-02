@@ -73,12 +73,12 @@ namespace AgroRobotView {
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button3 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -110,8 +110,7 @@ namespace AgroRobotView {
 			this->dataGridView1->AllowUserToResizeColumns = false;
 			this->dataGridView1->AllowUserToResizeRows = false;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4)
-			{
+			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {
 				this->Column1,
 					this->Column2, this->Column3, this->Column4
 			});
@@ -125,28 +124,6 @@ namespace AgroRobotView {
 			this->dataGridView1->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
 			this->dataGridView1->Size = System::Drawing::Size(383, 259);
 			this->dataGridView1->TabIndex = 24;
-			// 
-			// button1
-			// 
-			this->button1->Location = System::Drawing::Point(11, 121);
-			this->button1->Margin = System::Windows::Forms::Padding(2);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(100, 32);
-			this->button1->TabIndex = 27;
-			this->button1->Text = L"Agregar Insumos";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &frmMantAlmacen::button1_Click);
-			// 
-			// button3
-			// 
-			this->button3->Location = System::Drawing::Point(11, 85);
-			this->button3->Margin = System::Windows::Forms::Padding(2);
-			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(100, 32);
-			this->button3->TabIndex = 27;
-			this->button3->Text = L"Ver Insumos";
-			this->button3->UseVisualStyleBackColor = true;
-			this->button3->Click += gcnew System::EventHandler(this, &frmMantAlmacen::button3_Click);
 			// 
 			// Column1
 			// 
@@ -176,6 +153,28 @@ namespace AgroRobotView {
 			this->Column4->Name = L"Column4";
 			this->Column4->Width = 80;
 			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(11, 121);
+			this->button1->Margin = System::Windows::Forms::Padding(2);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(100, 32);
+			this->button1->TabIndex = 27;
+			this->button1->Text = L"Agregar Insumos";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &frmMantAlmacen::button1_Click);
+			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(11, 85);
+			this->button3->Margin = System::Windows::Forms::Padding(2);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(100, 32);
+			this->button3->TabIndex = 27;
+			this->button3->Text = L"Ver Insumos";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &frmMantAlmacen::button3_Click);
+			// 
 			// frmMantAlmacen
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -188,6 +187,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->dataGridView1);
 			this->Name = L"frmMantAlmacen";
 			this->Text = L"Registro General de Almacenes";
+			this->Load += gcnew System::EventHandler(this, &frmMantAlmacen::frmMantAlmacen_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
 
@@ -252,5 +252,7 @@ namespace AgroRobotView {
 		frmPaintStockPorAlmacen^ frm = gcnew frmPaintStockPorAlmacen(almacen, stocks);
 		frm->ShowDialog();
 	}
+private: System::Void frmMantAlmacen_Load(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }

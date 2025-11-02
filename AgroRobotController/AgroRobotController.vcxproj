@@ -115,7 +115,10 @@
     <ClInclude Include="GestorNutricionalController.h" />
     <ClInclude Include="InsumoController.h" />
     <ClInclude Include="MuestraController.h" />
+    <ClInclude Include="PdfExportServiceController.h" />
     <ClInclude Include="ReporteController.h" />
+    <ClInclude Include="ReporteDataController.h" />
+    <ClInclude Include="ReporteDiagnosticoController.h" />
     <ClInclude Include="RolController.h" />
     <ClInclude Include="StockInsumoController.h" />
     <ClInclude Include="UsuarioController.h" />
@@ -130,7 +133,10 @@
     <ClCompile Include="GestorNutricionalController.cpp" />
     <ClCompile Include="InsumoController.cpp" />
     <ClCompile Include="MuestraController.cpp" />
+    <ClCompile Include="PdfExportServiceController.cpp" />
     <ClCompile Include="ReporteController.cpp" />
+    <ClCompile Include="ReporteDataController.cpp" />
+    <ClCompile Include="ReporteDiagnosticoController.cpp" />
     <ClCompile Include="RolController.cpp" />
     <ClCompile Include="StockInsumoController.cpp" />
     <ClCompile Include="UsuarioController.cpp" />

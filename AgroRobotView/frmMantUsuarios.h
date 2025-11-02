@@ -296,6 +296,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmMantUsuarios";
 			this->Text = L"frmMantUsuarios";
+			this->Load += gcnew System::EventHandler(this, &frmMantUsuarios::frmMantUsuarios_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
@@ -405,5 +406,7 @@ private: System::Void btnMostrarTodos_Click(System::Object^ sender, System::Even
 			MessageBox::Show("Por favor, seleccione un usuario para editar.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
 		}
 	}
+private: System::Void frmMantUsuarios_Load(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }
