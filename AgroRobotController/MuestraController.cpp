@@ -116,7 +116,7 @@ void MuestraController::escribirArchivo(List<Muestra^>^ listaMuestras) {
             m->getCantidadExtraida() + ";" + m->getColorSangre() + ";" + m->getCoagulos() + ";" + m->getContaminacion();*/
         lineas[i] = m->getIdMuestra() + ";" + m->getIdAnimal() + ";" + m->getTipo() + ";" + m->getFechaToma() + ";" +
             m->getConsistencia() + ";" + m->getColorHeces() + ";" + m->getOlor() + ";" + m->getParasitos() + ";" +
-            m->getCantidadExtraida() + ";" + m->getCoagulos() + ";" + m->getContaminacion() + "; " + m->getColorSangre();
+            m->getCantidadExtraida() + ";" + m->getCoagulos() + ";" + m->getContaminacion() + ";" + m->getColorSangre();
     }
     File::WriteAllLines("muestras.txt", lineas);
 }
