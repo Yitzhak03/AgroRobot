@@ -257,6 +257,7 @@
     <ClInclude Include="frmPaintInsumosPorStock.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="frmEditarAnimal.resx">
@@ -366,6 +367,15 @@
     <ProjectReference Include="..\AgroRobotModel\AgroRobotModel.vcxproj">
       <Project>{867e236b-108b-6a22-58ca-fc27c6d1021e}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="AgroRobotView.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\bueno.png" />
+    <Image Include="Resources\critico.png" />
+    <Image Include="Resources\excelente.png" />
+    <Image Include="Resources\regular.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

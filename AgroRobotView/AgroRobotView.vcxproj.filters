@@ -218,5 +218,27 @@
     <ClInclude Include="frmEditarRol.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="AgroRobotView.rc">
+      <Filter>Archivos de recursos</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\bueno.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="Resources\critico.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="Resources\excelente.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="Resources\regular.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
   </ItemGroup>
 </Project>
