@@ -25,9 +25,20 @@ namespace AgroRobotView {
 			this->pdfExportController = gcnew PdfExportServiceController();
 			this->reporteActual = nullptr;
 
-			// Configuración inicial
+			// Configurar event handlers como en frmMantReporteAlimentacion
+			this->button1->Click += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::button1_Click);
+			this->button3->Click += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::button3_Click);
+			this->button2->Click += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::button2_Click);
+			this->button4->Click += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::button4_Click);
+			this->button5->Click += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::button5_Click);
+			this->radioMensual->CheckedChanged += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::radioMensual_CheckedChanged);
+			this->radioRango->CheckedChanged += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::radioRango_CheckedChanged);
+
 			ConfigurarControlesIniciales();
-			ConfigurarCharts(); // Llamar después de InitializeComponent
+			ConfigurarCharts();
+
+			// Agregar tooltips como en la referencia
+			ConfigurarToolTips();
 		}
 
 	protected:
@@ -36,6 +47,19 @@ namespace AgroRobotView {
 		/// </summary>
 		~frmMantReporteDiagnostico()
 		{
+			// Liberar recursos como en la referencia
+			if (reporteController != nullptr) {
+				delete reporteController;
+				reporteController = nullptr;
+			}
+			if (pdfExportController != nullptr) {
+				delete pdfExportController;
+				pdfExportController = nullptr;
+			}
+			if (reporteActual != nullptr) {
+				delete reporteActual;
+				reporteActual = nullptr;
+			}
 			if (components)
 			{
 				delete components;
@@ -577,15 +601,42 @@ namespace AgroRobotView {
 
 		void GenerarReporte() {
 			try {
+				// Validar criterio de búsqueda (como en la referencia)
+				if (!radioMensual->Checked && !radioRango->Checked) {
+					MessageBox::Show("Por favor seleccione un criterio de búsqueda (Mensual o Rango)",
+						"Validación", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+					return;
+				}
+
 				if (radioMensual->Checked) {
+					// Validar selección de año y mes
+					if (comboAnio->SelectedItem == nullptr || comboMes->SelectedItem == nullptr) {
+						MessageBox::Show("Por favor seleccione año y mes", "Validación",
+							MessageBoxButtons::OK, MessageBoxIcon::Warning);
+						return;
+					}
+
 					int año = Convert::ToInt32(comboAnio->SelectedItem);
 					int mes = comboMes->SelectedIndex + 1;
 					reporteActual = reporteController->GenerarReporteMensual(año, mes);
 				}
 				else {
+					// Validar rango de fechas
+					if (dateTimePicker1->Value > dateTimePicker2->Value) {
+						MessageBox::Show("La fecha de inicio no puede ser mayor que la fecha fin",
+							"Validación", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+						return;
+					}
+
 					String^ fechaInicio = dateTimePicker1->Value.ToString("yyyy-MM-dd");
 					String^ fechaFin = dateTimePicker2->Value.ToString("yyyy-MM-dd");
 					reporteActual = reporteController->GenerarReportePorRangoFechas(fechaInicio, fechaFin);
+				}
+
+				// Verificar si hay datos
+				if (reporteActual != nullptr && reporteActual->TotalMuestras == 0) {
+					MessageBox::Show("No se encontraron muestras para los criterios seleccionados",
+						"Información", MessageBoxButtons::OK, MessageBoxIcon::Information);
 				}
 
 				ActualizarResumen();
@@ -620,33 +671,46 @@ namespace AgroRobotView {
 		void ActualizarGraficos() {
 			if (reporteActual == nullptr) return;
 
-			// Limpiar gráficos anteriores
-			chartTipoAnalisis->Series->Clear();
-			chartEstadoSalud->Series->Clear();
+			try {
+				// Limpiar gráficos anteriores
+				chartTipoAnalisis->Series->Clear();
+				chartEstadoSalud->Series->Clear();
 
-			// Configurar series si no existen
-			if (chartTipoAnalisis->Series->Count == 0) {
-				Series^ series1 = gcnew Series("Tipos");
-				series1->ChartType = SeriesChartType::Column;
-				series1->IsValueShownAsLabel = true;
-				chartTipoAnalisis->Series->Add(series1);
+				// Configurar gráfico de tipos de análisis
+				if (reporteActual->PorTipoAnalisis->Count > 0) {
+					Series^ seriesTipos = gcnew Series("TiposAnalisis");
+					seriesTipos->ChartType = SeriesChartType::Column;
+					seriesTipos->IsValueShownAsLabel = true;
+					seriesTipos->LabelFormat = "{0}"; // Mostrar valores enteros
+					chartTipoAnalisis->Series->Add(seriesTipos);
+
+					for each (auto stat in reporteActual->PorTipoAnalisis) {
+						DataPoint^ point = gcnew DataPoint();
+						point->SetValueXY(stat->Categoria, stat->Cantidad);
+						point->Label = stat->Cantidad.ToString();
+						chartTipoAnalisis->Series["TiposAnalisis"]->Points->Add(point);
+					}
+				}
+
+				// Configurar gráfico de estados de salud
+				if (reporteActual->PorEstadoSalud->Count > 0) {
+					Series^ seriesEstados = gcnew Series("EstadosSalud");
+					seriesEstados->ChartType = SeriesChartType::Pie;
+					seriesEstados->IsValueShownAsLabel = true;
+					seriesEstados->LabelFormat = "#PERCENT{P1}"; // Mostrar porcentajes
+					chartEstadoSalud->Series->Add(seriesEstados);
+
+					for each (auto stat in reporteActual->PorEstadoSalud) {
+						DataPoint^ point = gcnew DataPoint();
+						point->SetValueXY(stat->Categoria, stat->Cantidad);
+						point->LegendText = stat->Categoria;
+						chartEstadoSalud->Series["EstadosSalud"]->Points->Add(point);
+					}
+				}
 			}
-
-			if (chartEstadoSalud->Series->Count == 0) {
-				Series^ series2 = gcnew Series("Estados");
-				series2->ChartType = SeriesChartType::Pie;
-				series2->IsValueShownAsLabel = true;
-				chartEstadoSalud->Series->Add(series2);
-			}
-
-			// Actualizar gráfico de tipos de análisis
-			for each (auto stat in reporteActual->PorTipoAnalisis) {
-				chartTipoAnalisis->Series["Tipos"]->Points->AddXY(stat->Categoria, stat->Cantidad);
-			}
-
-			// Actualizar gráfico de estados de salud
-			for each (auto stat in reporteActual->PorEstadoSalud) {
-				chartEstadoSalud->Series["Estados"]->Points->AddXY(stat->Categoria, stat->Cantidad);
+			catch (Exception^ ex) {
+				MessageBox::Show("Error al actualizar gráficos: " + ex->Message, "Error",
+					MessageBoxButtons::OK, MessageBoxIcon::Error);
 			}
 		}
 
@@ -721,27 +785,33 @@ namespace AgroRobotView {
 
 		void ExportarPDF() {
 			if (reporteActual == nullptr) {
-				MessageBox::Show("No hay datos para exportar. Genere un reporte primero.",
-					"Advertencia", MessageBoxButtons::OK, MessageBoxIcon::Warning);
-				return;
-			}
+        MessageBox::Show("No hay datos para exportar. Genere un reporte primero.",
+            "Advertencia", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+        return;
+    }
 
-			SaveFileDialog^ saveDialog = gcnew SaveFileDialog();
-			saveDialog->Filter = "Archivos PDF|*.pdf";
-			saveDialog->Title = "Guardar reporte como PDF";
-			saveDialog->FileName = "Reporte_Diagnostico_" + DateTime::Now.ToString("yyyyMMdd_HHmm") + ".pdf";
+    try {
+        SaveFileDialog^ saveDialog = gcnew SaveFileDialog();
+        saveDialog->Filter = "Archivos PDF|*.pdf";
+        saveDialog->Title = "Guardar reporte como PDF";
+        saveDialog->FileName = "Reporte_Diagnostico_" + DateTime::Now.ToString("yyyyMMdd_HHmm") + ".pdf";
 
-			if (saveDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
-				bool exito = pdfExportController->ExportarReporteDiagnosticoPDF(reporteActual, saveDialog->FileName);
-				if (exito) {
-					MessageBox::Show("Reporte exportado exitosamente a PDF.", "Éxito",
-						MessageBoxButtons::OK, MessageBoxIcon::Information);
-				}
-				else {
-					MessageBox::Show("Error al exportar el reporte a PDF.", "Error",
-						MessageBoxButtons::OK, MessageBoxIcon::Error);
-				}
-			}
+        if (saveDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+            bool exito = pdfExportController->ExportarReporteDiagnosticoPDF(reporteActual, saveDialog->FileName);
+            if (exito) {
+                MessageBox::Show("Reporte exportado exitosamente a PDF.", "Éxito",
+                    MessageBoxButtons::OK, MessageBoxIcon::Information);
+            }
+            else {
+                MessageBox::Show("Error al exportar el reporte a PDF.", "Error",
+                    MessageBoxButtons::OK, MessageBoxIcon::Error);
+            }
+        }
+    }
+    catch (Exception^ ex) {
+        MessageBox::Show("Error en exportación PDF: " + ex->Message, "Error",
+            MessageBoxButtons::OK, MessageBoxIcon::Error);
+    }
 		}
 
 		void ExportarExcel() {
@@ -770,7 +840,20 @@ namespace AgroRobotView {
     
 		} // Fin de ExportarExcel()
 
-		
+		private:
+			void ConfigurarToolTips() {
+				ToolTip^ toolTip = gcnew ToolTip();
+				toolTip->SetToolTip(button1, "Generar reporte con los criterios seleccionados");
+				toolTip->SetToolTip(button3, "Limpiar todos los filtros y resultados");
+				toolTip->SetToolTip(button2, "Exportar reporte a formato PDF");
+				toolTip->SetToolTip(button4, "Exportar reporte a formato Excel");
+				toolTip->SetToolTip(button5, "Cerrar la ventana de reportes");
+				toolTip->SetToolTip(comboAnio, "Seleccionar año para reporte mensual");
+				toolTip->SetToolTip(comboMes, "Seleccionar mes para reporte mensual");
+				toolTip->SetToolTip(radioMensual, "Generar reporte por mes específico");
+				toolTip->SetToolTip(radioRango, "Generar reporte por rango de fechas");
+			}
+
 		private:
 			void ConfigurarCharts() {
 				// Configurar chartTipoAnalisis
