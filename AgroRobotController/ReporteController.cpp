@@ -75,21 +75,27 @@ List<Reporte^>^ ReporteController::ConsultarReportesPorFiltros(
     List<Reporte^>^ resultados = gcnew List<Reporte^>();
 
     for each (Reporte ^ r in this->listaReportes) {
-        // Criterio 1: ID Animal
-        // String::IsNullOrEmpty(animalAlias) = no se aplicó el filtro O r->getAnimalAlias() es 'N/A'
-        bool coincideAnimal = (String::IsNullOrWhiteSpace(animalAlias) ||
-            r->getAnimalAlias()->Equals(animalAlias, StringComparison::OrdinalIgnoreCase));
+        // Criterio 1: ID Animal - BÚSQUEDA PARCIAL
+        bool coincideAnimal = true;
+        if (!String::IsNullOrWhiteSpace(animalAlias)) {
+            String^ aliasReporte = r->getAnimalAlias()->ToUpper();
+            String^ aliasBuscado = animalAlias->ToUpper();
+            coincideAnimal = aliasReporte->Contains(aliasBuscado);
+        }
 
-        // Criterio 2: Rango de Fechas
-        // La fechaFin debe incluir el final del día (ajustada en la vista)
-        bool coincideFecha = r->getFechaGeneracion() >= fechaInicio &&
-            r->getFechaGeneracion() <= fechaFin;
+        // Criterio 2: Rango de Fechas - Maneja fechas extremas
+        bool coincideFecha = true;
+        if (fechaInicio != DateTime::MinValue && fechaFin != DateTime::MaxValue) {
+            coincideFecha = r->getFechaGeneracion() >= fechaInicio &&
+                r->getFechaGeneracion() <= fechaFin;
+        }
+        // Si son fechas extremas, no filtrar por fecha
 
-        // Criterio 3: Tipo de Análisis/Reporte (ej. "Salud", "Inventario")
+        // Criterio 3: Tipo de Análisis
         bool coincideTipoAnalisis = (String::IsNullOrWhiteSpace(tipoAnalisis) ||
             r->getTipo()->Equals(tipoAnalisis, StringComparison::OrdinalIgnoreCase));
 
-        // Criterio 4: Estado de Salud (ej. "Crítico", "Óptimo")
+        // Criterio 4: Estado de Salud
         bool coincideEstadoSalud = (String::IsNullOrWhiteSpace(estadoSalud) ||
             r->getEstadoSaludImpacto()->Equals(estadoSalud, StringComparison::OrdinalIgnoreCase));
 

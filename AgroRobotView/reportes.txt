@@ -1,0 +1,6 @@
+1;Hemograma;VAC-001;15/01/2024;Análisis sanguíneo completo - Valores dentro de rangos normales. Hemoglobina: 14.2 g/dL, Hematocrito: 42%. Recomendación: Mantener dieta actual.;Excelente;Completado
+2;Análisis Heces;OVE-015;16/01/2024;Presencia de parásitos intestinales detectada. Eficiencia digestiva reducida en 25%. Recomendación: Administrar antiparasitario y ajustar dieta con mayor fibra.;Crítico;Pendiente
+3;Análisis Completo;VAC-002;17/01/2024;Hemograma: Ligera anemia (Hemoglobina: 10.8 g/dL). Heces: Digestión normal, sin parásitos. Observación: Monitorear niveles de hierro.;Regular;En Proceso
+4;Hemograma;POR-123;18/01/2024;Mejoría significativa en parámetros sanguíneos. Hemoglobina aumentó de 10.8 a 12.5 g/dL. Continuar con suplemento de hierro por 7 días más.;Bueno;Completado
+5;Análisis Heces;VAC-003;19/01/2024;Análisis preventivo - Todos los parámetros dentro de rangos normales. Eficiencia digestiva óptima. Sistema inmunológico fortalecido.;Excelente;Completado
+6;Análisis Completo;OVE-016;20/01/2024;HEMOGRAMA: Anemia severa (Hemoglobina: 7.2 g/dL). HECES: Infección parasitaria avanzada. URGENTE: Aislamiento y tratamiento veterinario inmediato.;Crítico;Urgente

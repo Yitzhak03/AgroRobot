@@ -49,12 +49,12 @@ namespace AgroRobotView {
 		}
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
 	protected:
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
+
+
+
+
+
+
 	private: System::Windows::Forms::GroupBox^ groupBox1;
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::Label^ label2;
@@ -77,6 +77,12 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::Button^ button1;
 	private: ReporteController^ reporteController;
 	private: Reporte^ objReporte;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
 
 	private:
 		/// <summary>
@@ -92,12 +98,6 @@ namespace AgroRobotView {
 		void InitializeComponent(void)
 		{
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label4 = (gcnew System::Windows::Forms::Label());
@@ -118,6 +118,12 @@ namespace AgroRobotView {
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
@@ -137,42 +143,6 @@ namespace AgroRobotView {
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->Size = System::Drawing::Size(661, 150);
 			this->dataGridView1->TabIndex = 0;
-			// 
-			// Column1
-			// 
-			this->Column1->HeaderText = L"ID Reporte";
-			this->Column1->Name = L"Column1";
-			this->Column1->ReadOnly = true;
-			// 
-			// Column2
-			// 
-			this->Column2->HeaderText = L"Animal";
-			this->Column2->Name = L"Column2";
-			this->Column2->ReadOnly = true;
-			// 
-			// Column3
-			// 
-			this->Column3->HeaderText = L"Tipo Análisis";
-			this->Column3->Name = L"Column3";
-			this->Column3->ReadOnly = true;
-			// 
-			// Column4
-			// 
-			this->Column4->HeaderText = L"Fecha Generación";
-			this->Column4->Name = L"Column4";
-			this->Column4->ReadOnly = true;
-			// 
-			// Column5
-			// 
-			this->Column5->HeaderText = L"Estado Salud";
-			this->Column5->Name = L"Column5";
-			this->Column5->ReadOnly = true;
-			// 
-			// Column6
-			// 
-			this->Column6->HeaderText = L"Impacto";
-			this->Column6->Name = L"Column6";
-			this->Column6->ReadOnly = true;
 			// 
 			// groupBox1
 			// 
@@ -376,6 +346,42 @@ namespace AgroRobotView {
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &frmEditarReporte::button1_Click);
 			// 
+			// Column1
+			// 
+			this->Column1->HeaderText = L"ID Evaluación";
+			this->Column1->Name = L"Column1";
+			this->Column1->ReadOnly = true;
+			// 
+			// Column2
+			// 
+			this->Column2->HeaderText = L"Animal";
+			this->Column2->Name = L"Column2";
+			this->Column2->ReadOnly = true;
+			// 
+			// Column3
+			// 
+			this->Column3->HeaderText = L"Tipo Análisis";
+			this->Column3->Name = L"Column3";
+			this->Column3->ReadOnly = true;
+			// 
+			// Column4
+			// 
+			this->Column4->HeaderText = L"Fecha Generación";
+			this->Column4->Name = L"Column4";
+			this->Column4->ReadOnly = true;
+			// 
+			// Column5
+			// 
+			this->Column5->HeaderText = L"Estado Salud";
+			this->Column5->Name = L"Column5";
+			this->Column5->ReadOnly = true;
+			// 
+			// Column6
+			// 
+			this->Column6->HeaderText = L"Impacto";
+			this->Column6->Name = L"Column6";
+			this->Column6->ReadOnly = true;
+			// 
 			// frmEditarReporte
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -387,7 +393,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->groupBox1);
 			this->Controls->Add(this->dataGridView1);
 			this->Name = L"frmEditarReporte";
-			this->Text = L"Edición de Reporte";
+			this->Text = L"Edición de Evaluación Continua - Administrador";
 			this->Load += gcnew System::EventHandler(this, &frmEditarReporte::frmEditarReporte_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->groupBox1->ResumeLayout(false);
@@ -462,7 +468,7 @@ private: System::Void frmEditarReporte_Load(System::Object^ sender, System::Even
 		CargarDatosReporte();
 	}
 	else {
-		MessageBox::Show("Error: No se ha proporcionado un reporte válido para editar.",
+		MessageBox::Show("Error: No se ha proporcionado una evaluación válida para editar.", // CAMBIAR AQUÍ
 			"Error",
 			MessageBoxButtons::OK,
 			MessageBoxIcon::Error);
@@ -477,7 +483,8 @@ private: void CargarDatosReporte() {
 		int rowIndex = dataGridView1->Rows->Add();
 		DataGridViewRow^ row = dataGridView1->Rows[rowIndex];
 
-		row->Cells["Column1"]->Value = "REP-" + objReporte->getIdReporte().ToString("D3");
+		// CAMBIAR "REP-" por "EVA-"
+		row->Cells["Column1"]->Value = "EVA-" + objReporte->getIdReporte().ToString("D3");
 		row->Cells["Column2"]->Value = objReporte->getAnimalAlias();
 		row->Cells["Column3"]->Value = objReporte->getTipo();
 		row->Cells["Column4"]->Value = objReporte->getFechaGeneracion().ToString("dd/MM/yyyy");
@@ -495,19 +502,18 @@ private: void CargarDatosReporte() {
 			textBox2->ForeColor = Color::Black;
 		}
 
-		// 4. Veterinario responsable (podría venir del contenido o ser nuevo)
-		// Por ahora lo dejamos vacío para que el usuario lo complete
+		// 4. Veterinario responsable
 		textBox1->Text = "";
 
 		// 5. Cargar checkboxes del plan de acción basado en el contenido existente
 		CargarCheckboxesDesdeContenido();
 
-		// 6. Actualizar título del formulario
-		this->Text = "Edición de Reporte - REP-" + objReporte->getIdReporte().ToString("D3");
+		// 6. Actualizar título del formulario - CAMBIAR AQUÍ
+		this->Text = "Edición de Evaluación - EVA-" + objReporte->getIdReporte().ToString("D3");
 
 	}
 	catch (Exception^ ex) {
-		MessageBox::Show("Error al cargar los datos del reporte: " + ex->Message,
+		MessageBox::Show("Error al cargar los datos de la evaluación: " + ex->Message, // CAMBIAR AQUÍ
 			"Error",
 			MessageBoxButtons::OK,
 			MessageBoxIcon::Error);
@@ -554,9 +560,9 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 			return;
 		}
 
-		// 2. CONFIRMAR GUARDADO
+		// 2. CONFIRMAR GUARDADO - CAMBIAR AQUÍ
 		System::Windows::Forms::DialogResult resultado = MessageBox::Show(
-			"¿Está seguro que desea guardar los cambios en el reporte?",
+			"¿Está seguro que desea guardar los cambios en la evaluación?",
 			"Confirmar guardado",
 			MessageBoxButtons::YesNo,
 			MessageBoxIcon::Question
@@ -585,10 +591,9 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 				MessageBoxButtons::OK,
 				MessageBoxIcon::Error);
 		}
-
 	}
 	catch (Exception^ ex) {
-		MessageBox::Show("Error al guardar el reporte: " + ex->Message,
+		MessageBox::Show("Error al guardar la evaluación: " + ex->Message, // CAMBIAR AQUÍ
 			"Error",
 			MessageBoxButtons::OK,
 			MessageBoxIcon::Error);

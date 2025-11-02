@@ -12,6 +12,8 @@ namespace AgroRobotView {
 	using namespace System::Drawing;
 	using namespace AgroRobotModel; // Referencia al proyecto AgroRobotModel
 	using namespace AgroRobotController; // Referencia al proyecto AgroRobotController
+	using namespace System::IO;
+	using namespace System::Drawing;
 
 	/// <summary>
 	/// Resumen de frmMantReportes
@@ -26,6 +28,12 @@ namespace AgroRobotView {
 			this->dataGridView1->SelectionChanged += gcnew System::EventHandler(this, &frmMantReportes::dataGridView1_SelectionChanged);
 			this->button4->Click += gcnew System::EventHandler(this, &frmMantReportes::button4_Click);
 			hayCambiosPendientes = false;
+
+			this->comboBox3->SelectedIndexChanged += gcnew System::EventHandler(this, &frmMantReportes::comboBox3_SelectedIndexChanged);
+
+			// CARGAR LAS IMÁGENES - Ajusta las rutas según donde tengas tus imágenes
+			CargarImagenesEstados();
+
 			//
 			//TODO: agregar código de constructor aquí
 			//
@@ -62,7 +70,21 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::TextBox^ textBox2;
 	private: System::Windows::Forms::ProgressBar^ progressBar1;
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
+
+
+
+
+
+
+
+
+	private: System::Windows::Forms::Button^ button4;
+
+	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::Button^ button1;
+	private: UsuarioController^ usuarioController;
+	private: ReporteController^ reporteController;
+	private: System::Windows::Forms::Button^ button3;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
@@ -70,12 +92,7 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column7;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Impacto;
-	private: System::Windows::Forms::Button^ button4;
-	private: System::Windows::Forms::Button^ button3;
-	private: System::Windows::Forms::Button^ button2;
-	private: System::Windows::Forms::Button^ button1;
-	private: UsuarioController^ usuarioController;
-	private: ReporteController^ reporteController;
+	private: System::Windows::Forms::Label^ label8;
 
 
 
@@ -91,6 +108,17 @@ namespace AgroRobotView {
 
 
 
+
+
+
+
+
+
+	private:
+		System::Drawing::Bitmap^ imgExcelente;
+		System::Drawing::Bitmap^ imgBueno;
+		System::Drawing::Bitmap^ imgRegular;
+		System::Drawing::Bitmap^ imgCritico;
 
 	private:
 		/// <summary>
@@ -118,6 +146,7 @@ namespace AgroRobotView {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
+			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->progressBar1 = (gcnew System::Windows::Forms::ProgressBar());
@@ -125,7 +154,6 @@ namespace AgroRobotView {
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -134,9 +162,9 @@ namespace AgroRobotView {
 			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Impacto = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->button4 = (gcnew System::Windows::Forms::Button());
-			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
@@ -232,7 +260,7 @@ namespace AgroRobotView {
 			this->dateTimePicker1->Name = L"dateTimePicker1";
 			this->dateTimePicker1->Size = System::Drawing::Size(121, 20);
 			this->dateTimePicker1->TabIndex = 2;
-			this->dateTimePicker1->Value = System::DateTime(2025, 9, 30, 0, 0, 0, 0);
+			this->dateTimePicker1->Value = System::DateTime(2022, 1, 1, 0, 0, 0, 0);
 			// 
 			// label1
 			// 
@@ -248,15 +276,16 @@ namespace AgroRobotView {
 			this->textBox1->ForeColor = System::Drawing::Color::Gray;
 			this->textBox1->Location = System::Drawing::Point(136, 30);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(121, 20);
+			this->textBox1->Size = System::Drawing::Size(131, 20);
 			this->textBox1->TabIndex = 0;
-			this->textBox1->Text = L"Ej: VAC-001";
+			this->textBox1->Text = L"Ej: VAC-001 o VAC o 001";
 			this->textBox1->TextChanged += gcnew System::EventHandler(this, &frmMantReportes::textBox1_TextChanged);
 			this->textBox1->Enter += gcnew System::EventHandler(this, &frmMantReportes::textBox1_Enter);
 			this->textBox1->Leave += gcnew System::EventHandler(this, &frmMantReportes::textBox1_Leave);
 			// 
 			// groupBox2
 			// 
+			this->groupBox2->Controls->Add(this->label8);
 			this->groupBox2->Controls->Add(this->label7);
 			this->groupBox2->Controls->Add(this->textBox2);
 			this->groupBox2->Controls->Add(this->progressBar1);
@@ -269,6 +298,20 @@ namespace AgroRobotView {
 			this->groupBox2->TabIndex = 3;
 			this->groupBox2->TabStop = false;
 			this->groupBox2->Text = L"Monitoreo de Salud";
+			// 
+			// label8
+			// 
+			this->label8->AutoSize = true;
+			this->label8->FlatStyle = System::Windows::Forms::FlatStyle::System;
+			this->label8->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label8->ForeColor = System::Drawing::SystemColors::ControlDarkDark;
+			this->label8->Location = System::Drawing::Point(30, 137);
+			this->label8->Name = L"label8";
+			this->label8->Size = System::Drawing::Size(99, 13);
+			this->label8->TabIndex = 6;
+			this->label8->Text = L"Imagen Referencial";
+			this->label8->Click += gcnew System::EventHandler(this, &frmMantReportes::label8_Click);
 			// 
 			// label7
 			// 
@@ -305,6 +348,7 @@ namespace AgroRobotView {
 			// 
 			// pictureBox1
 			// 
+			this->pictureBox1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
 			this->pictureBox1->Location = System::Drawing::Point(29, 84);
 			this->pictureBox1->Name = L"pictureBox1";
@@ -326,9 +370,9 @@ namespace AgroRobotView {
 			// 
 			this->dataGridView1->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(8) {
-				this->Column6,
-					this->Column1, this->Column2, this->Column3, this->Column4, this->Column7, this->Column5, this->Impacto
+			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(7) {
+				this->Column1,
+					this->Column2, this->Column3, this->Column4, this->Column7, this->Column5, this->Impacto
 			});
 			this->dataGridView1->Location = System::Drawing::Point(28, 283);
 			this->dataGridView1->Name = L"dataGridView1";
@@ -336,17 +380,10 @@ namespace AgroRobotView {
 			this->dataGridView1->TabIndex = 4;
 			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &frmMantReportes::dataGridView1_CellContentClick);
 			// 
-			// Column6
-			// 
-			this->Column6->FillWeight = 81.21828F;
-			this->Column6->HeaderText = L"";
-			this->Column6->Name = L"Column6";
-			this->Column6->ReadOnly = true;
-			// 
 			// Column1
 			// 
 			this->Column1->FillWeight = 102.6831F;
-			this->Column1->HeaderText = L"ID Reporte";
+			this->Column1->HeaderText = L"ID Evaluación";
 			this->Column1->Name = L"Column1";
 			// 
 			// Column2
@@ -388,7 +425,7 @@ namespace AgroRobotView {
 			// 
 			// button4
 			// 
-			this->button4->Location = System::Drawing::Point(583, 455);
+			this->button4->Location = System::Drawing::Point(577, 458);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(80, 23);
 			this->button4->TabIndex = 10;
@@ -396,18 +433,9 @@ namespace AgroRobotView {
 			this->button4->UseVisualStyleBackColor = true;
 			this->button4->Click += gcnew System::EventHandler(this, &frmMantReportes::button4_Click);
 			// 
-			// button3
-			// 
-			this->button3->Location = System::Drawing::Point(416, 455);
-			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(91, 23);
-			this->button3->TabIndex = 9;
-			this->button3->Text = L"Programar tarea";
-			this->button3->UseVisualStyleBackColor = true;
-			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(255, 455);
+			this->button2->Location = System::Drawing::Point(264, 458);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(80, 23);
 			this->button2->TabIndex = 8;
@@ -417,7 +445,7 @@ namespace AgroRobotView {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(99, 455);
+			this->button1->Location = System::Drawing::Point(108, 458);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(80, 23);
 			this->button1->TabIndex = 7;
@@ -425,20 +453,30 @@ namespace AgroRobotView {
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &frmMantReportes::button1_Click);
 			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(420, 458);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(80, 23);
+			this->button3->TabIndex = 11;
+			this->button3->Text = L"Limpiar";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &frmMantReportes::button3_Click);
+			// 
 			// frmMantReportes
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(764, 523);
-			this->Controls->Add(this->button4);
+			this->ClientSize = System::Drawing::Size(764, 511);
 			this->Controls->Add(this->button3);
+			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->groupBox2);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmMantReportes";
-			this->Text = L"Gestión de Reportes - Administrador";
+			this->Text = L"Evaluacion Continua - Administrador";
 			this->Load += gcnew System::EventHandler(this, &frmMantReportes::frmMantReportes_Load);
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
@@ -477,8 +515,8 @@ namespace AgroRobotView {
 			int rowIndex = dataGridView1->Rows->Add();
 			DataGridViewRow^ row = dataGridView1->Rows[rowIndex];
 
-			// Llenar las celdas
-			row->Cells["Column1"]->Value = "REP-" + reporte->getIdReporte().ToString("D3");
+			// Llenar las celdas - CAMBIAR "REP-" por "EVA-"
+			row->Cells["Column1"]->Value = "EVA-" + reporte->getIdReporte().ToString("D3");
 			row->Cells["Column2"]->Value = reporte->getTipo();
 			row->Cells["Column3"]->Value = reporte->getAnimalAlias();
 			row->Cells["Column4"]->Value = reporte->getFechaGeneracion().ToString("dd/MM/yyyy");
@@ -521,7 +559,7 @@ private: void ConfigurarColorFila(DataGridViewRow^ row, String^ estado) {
 	private: System::Void comboBox2_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
 private: System::Void textBox1_Enter(System::Object^ sender, System::EventArgs^ e) {
-	if (textBox1->Text == "Ej: VAC-001") {
+	if (textBox1->Text == "Ej: VAC-001 o VAC o 001") {
 		textBox1->Text = "";
 		textBox1->ForeColor = System::Drawing::Color::Black;
 	}
@@ -530,7 +568,7 @@ private: System::Void textBox1_TextChanged(System::Object^ sender, System::Event
 }
 private: System::Void textBox1_Leave(System::Object^ sender, System::EventArgs^ e) {
 	if (textBox1->Text == "") {
-		textBox1->Text = "Ej: VAC-001";
+		textBox1->Text = "Ej: VAC-001 o VAC o 001";
 		textBox1->ForeColor = System::Drawing::Color::Gray;
 	}
 }
@@ -542,26 +580,36 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 	try {
 		// 1. OBTENER VALORES DE LOS FILTROS
 
-		// ID Animal (texto, no número)
+		// ID Animal - Búsqueda flexible (prioridad máxima)
 		String^ animalAlias = "";
+		bool buscarPorAnimal = false;
 		if (textBox1->Text != "Ej: VAC-001" && !String::IsNullOrWhiteSpace(textBox1->Text)) {
-			animalAlias = textBox1->Text->Trim();
+			animalAlias = textBox1->Text->Trim()->ToUpper();
+			buscarPorAnimal = true; // Bandera para indicar que se busca por animal
 		}
 
-		// Fechas
+		// Fechas - Solo se usan si NO se está buscando por animal específico
 		DateTime fechaInicio = dateTimePicker1->Value;
 		DateTime fechaFin = dateTimePicker2->Value;
 
-		// Ajustar fechaFin para incluir todo el día
-		fechaFin = fechaFin.Date.AddDays(1).AddSeconds(-1);
+		// Si se busca por animal, ignorar el filtro de fechas
+		if (buscarPorAnimal) {
+			// Establecer un rango de fechas muy amplio
+			fechaInicio = DateTime::MinValue;
+			fechaFin = DateTime::MaxValue;
+		}
+		else {
+			// Ajustar fechaFin para incluir todo el día
+			fechaFin = fechaFin.Date.AddDays(1).AddSeconds(-1);
 
-		// Validar rango de fechas
-		if (fechaInicio > fechaFin) {
-			MessageBox::Show("La fecha de inicio no puede ser mayor que la fecha fin.",
-				"Error en fechas",
-				MessageBoxButtons::OK,
-				MessageBoxIcon::Warning);
-			return;
+			// Validar rango de fechas solo si no se busca por animal
+			if (fechaInicio > fechaFin) {
+				MessageBox::Show("La fecha de inicio no puede ser mayor que la fecha fin.",
+					"Error en fechas",
+					MessageBoxButtons::OK,
+					MessageBoxIcon::Warning);
+				return;
+			}
 		}
 
 		// Tipo de Análisis
@@ -590,18 +638,33 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 		LlenarDataGridView(resultados);
 
 		// 4. MOSTRAR FEEDBACK AL USUARIO
-		String^ mensaje = String::Format("Se encontraron {0} reportes con los criterios seleccionados.",
-			resultados->Count);
-
-		if (resultados->Count == 0) {
-			MessageBox::Show("No se encontraron reportes con los criterios especificados.",
-				"Búsqueda sin resultados",
-				MessageBoxButtons::OK,
-				MessageBoxIcon::Information);
+		String^ mensaje = "";
+		if (buscarPorAnimal) {
+			mensaje = String::Format("Se encontraron {0} evaluaciones para '{1}'",
+				resultados->Count, textBox1->Text);
 		}
 		else {
-			// Opcional: Mostrar mensaje en una etiqueta de status en lugar de MessageBox
-			// statusLabel->Text = mensaje;
+			mensaje = String::Format("Se encontraron {0} evaluaciones en el período seleccionado",
+				resultados->Count);
+		}
+
+		if (resultados->Count == 0) {
+			if (buscarPorAnimal) {
+				MessageBox::Show("No se encontraron evaluaciones para el animal: " + textBox1->Text,
+					"Búsqueda sin resultados",
+					MessageBoxButtons::OK,
+					MessageBoxIcon::Information);
+			}
+			else {
+				MessageBox::Show("No se encontraron evaluaciones con los criterios especificados.",
+					"Búsqueda sin resultados",
+					MessageBoxButtons::OK,
+					MessageBoxIcon::Information);
+			}
+		}
+		else {
+			// Actualizar título con información de la búsqueda
+			this->Text = "Gestión de Evaluaciones - " + mensaje;
 		}
 
 	}
@@ -633,25 +696,39 @@ private: void ActualizarPanelMonitoreo(String^ estado) {
 		progressBar1->Value = 90;
 		textBox2->Text = "Óptimo";
 		textBox2->ForeColor = Color::Green;
+		pictureBox1->Image = imgExcelente; // ASIGNAR IMAGEN
 	}
 	else if (estado == "Bueno") {
 		progressBar1->Value = 70;
 		textBox2->Text = "Adecuado";
 		textBox2->ForeColor = Color::Blue;
+		pictureBox1->Image = imgBueno; // ASIGNAR IMAGEN
 	}
 	else if (estado == "Regular") {
 		progressBar1->Value = 50;
 		textBox2->Text = "Requiere atención";
 		textBox2->ForeColor = Color::Orange;
+		pictureBox1->Image = imgRegular; // ASIGNAR IMAGEN
 	}
 	else if (estado == "Crítico") {
 		progressBar1->Value = 20;
 		textBox2->Text = "URGENTE";
 		textBox2->ForeColor = Color::Red;
+		pictureBox1->Image = imgCritico; // ASIGNAR IMAGEN
+	}
+	else {
+		// Estado desconocido
+		progressBar1->Value = 0;
+		textBox2->Text = "Desconocido";
+		textBox2->ForeColor = Color::Gray;
+		pictureBox1->Image = nullptr; // Sin imagen
 	}
 
 	// Actualizar el porcentaje en el label
 	label7->Text = progressBar1->Value.ToString() + "%";
+
+	// Forzar el redibujado del PictureBox
+	pictureBox1->Refresh();
 }
 
 
@@ -693,6 +770,18 @@ private: void CerrarFormulario() {
 	}
 
 	// Proceder con el cierre
+
+	if (components)
+	{
+		delete components;
+	}
+
+	// Liberar las imágenes
+	if (imgExcelente != nullptr) delete imgExcelente;
+	if (imgBueno != nullptr) delete imgBueno;
+	if (imgRegular != nullptr) delete imgRegular;
+	if (imgCritico != nullptr) delete imgCritico;
+
 	this->Close();
 }
 
@@ -713,24 +802,24 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 
 	if (dataGridView1->SelectedRows->Count > 0) {
 		try {
-			// Obtener el ID del reporte seleccionado
+			// Obtener el ID de la evaluación seleccionada
 			DataGridViewRow^ selectedRow = dataGridView1->SelectedRows[0];
-			String^ idReporteStr = selectedRow->Cells["Column1"]->Value->ToString();
-			int idReporte = Convert::ToInt32(idReporteStr->Replace("REP-", ""));
+			String^ idEvaluacionStr = selectedRow->Cells["Column1"]->Value->ToString();
+			int idEvaluacion = Convert::ToInt32(idEvaluacionStr->Replace("EVA-", "")); // CAMBIAR AQUÍ
 
-			// Buscar el reporte en la lista
-			AgroRobotModel::Reporte^ reporteSeleccionado = reporteController->ConsultarReportePorId(idReporte);
+			// Buscar la evaluación en la lista
+			AgroRobotModel::Reporte^ evaluacionSeleccionada = reporteController->ConsultarReportePorId(idEvaluacion);
 
-			if (reporteSeleccionado != nullptr) {
+			if (evaluacionSeleccionada != nullptr) {
 				// Abrir formulario de edición
-				frmEditarReporte^ formEdicion = gcnew frmEditarReporte(reporteController, reporteSeleccionado);
+				frmEditarReporte^ formEdicion = gcnew frmEditarReporte(reporteController, evaluacionSeleccionada);
 				formEdicion->ShowDialog();
 
 				// Recargar datos después de editar
 				button1_Click(sender, e); // Ejecutar búsqueda nuevamente
 			}
 			else {
-				MessageBox::Show("No se pudo encontrar el reporte seleccionado.",
+				MessageBox::Show("No se pudo encontrar la evaluación seleccionada.", // CAMBIAR AQUÍ
 					"Error",
 					MessageBoxButtons::OK,
 					MessageBoxIcon::Error);
@@ -744,12 +833,153 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 		}
 	}
 	else {
-		MessageBox::Show("Por favor, seleccione un reporte para editar.",
+		MessageBox::Show("Por favor, seleccione una evaluación para editar.", // CAMBIAR AQUÍ
 			"Selección requerida",
 			MessageBoxButtons::OK,
 			MessageBoxIcon::Warning);
 	}
 
+}
+private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+
+	try {
+		LimpiarFiltros();
+		CargarDatosIniciales();
+
+		MessageBox::Show("Filtros limpiados. Mostrando todos los reportes.",
+			"Limpieza completada",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Information);
+	}
+	catch (Exception^ ex) {
+		MessageBox::Show("Error al limpiar los filtros: " + ex->Message,
+			"Error",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Error);
+	}
+
+}
+
+private: void LimpiarFiltros() {
+	// Limpiar campo de ID Animal
+	textBox1->Text = "Ej: VAC-001 o VAC o 001";
+	textBox1->ForeColor = Color::Gray;
+
+	// Restablecer fechas a los últimos 30 días
+	dateTimePicker1->Value = DateTime::Today.AddDays(-30);
+	dateTimePicker2->Value = DateTime::Today;
+
+	// Restablecer comboboxes a "Todos"
+	comboBox2->SelectedIndex = -1;
+	comboBox2->Text = "Todos";
+	comboBox1->SelectedIndex = -1;
+	comboBox1->Text = "Todos";
+
+	// Limpiar panel de monitoreo
+	comboBox3->SelectedIndex = -1;
+	progressBar1->Value = 0;
+	textBox2->Text = "";
+	label7->Text = "0%";
+
+	// Restablecer título del formulario
+	this->Text = "Gestión de Reportes - Administrador";
+
+	// Limpiar selección del DataGridView
+	if (dataGridView1->SelectedRows->Count > 0) {
+		dataGridView1->ClearSelection();
+	}
+}
+
+private: void CargarImagenesEstados() {
+	try {
+		String^ appPath = Application::StartupPath;
+		String^ resourcesPath = Path::Combine(appPath, "Resources");
+
+		// Si la carpeta Resources no existe, crear imágenes programáticamente
+		if (!Directory::Exists(resourcesPath)) {
+			CrearImagenesProgramaticamente();
+			return;
+		}
+
+		// Intentar cargar desde archivos
+		imgExcelente = gcnew Bitmap(Path::Combine(resourcesPath, "excelente.png"));
+		imgBueno = gcnew Bitmap(Path::Combine(resourcesPath, "bueno.png"));
+		imgRegular = gcnew Bitmap(Path::Combine(resourcesPath, "regular.png"));
+		imgCritico = gcnew Bitmap(Path::Combine(resourcesPath, "critico.png"));
+	}
+	catch (Exception^ ex) {
+		// Si falla, crear imágenes programáticamente
+		CrearImagenesProgramaticamente();
+	}
+}
+
+private: void CrearImagenesPorDefecto() {
+	// Crear imágenes simples con colores
+	imgExcelente = gcnew System::Drawing::Bitmap(100, 50);
+	imgBueno = gcnew System::Drawing::Bitmap(100, 50);
+	imgRegular = gcnew System::Drawing::Bitmap(100, 50);
+	imgCritico = gcnew System::Drawing::Bitmap(100, 50);
+
+	// En C++/CLI no se puede usar 'using' como en C#. Se debe crear el objeto Graphics^ y luego liberarlo manualmente.
+	Graphics^ g = Graphics::FromImage(imgExcelente);
+	g->Clear(Color::Green);
+	g->DrawString("EXCELENTE", gcnew System::Drawing::Font("Arial", 8), Brushes::White, 5, 15);
+	delete g;
+
+	g = Graphics::FromImage(imgBueno);
+	g->Clear(Color::Blue);
+	g->DrawString("BUENO", gcnew System::Drawing::Font("Arial", 8), Brushes::White, 15, 15);
+	delete g;
+
+	g = Graphics::FromImage(imgRegular);
+	g->Clear(Color::Orange);
+	g->DrawString("REGULAR", gcnew System::Drawing::Font("Arial", 8), Brushes::Black, 10, 15);
+	delete g;
+
+	g = Graphics::FromImage(imgCritico);
+	g->Clear(Color::Red);
+	g->DrawString("CRÍTICO", gcnew System::Drawing::Font("Arial", 8), Brushes::White, 10, 15);
+	delete g;
+}
+
+private: System::Void comboBox3_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+	if (comboBox3->SelectedItem != nullptr) {
+		String^ estado = comboBox3->SelectedItem->ToString();
+		ActualizarPanelMonitoreo(estado);
+	}
+}
+
+private: void CrearImagenesProgramaticamente() {
+	// Crear imágenes con colores y texto
+	imgExcelente = CrearImagenEstado(Color::Green, "EXCELENTE", Color::White);
+	imgBueno = CrearImagenEstado(Color::Blue, "BUENO", Color::White);
+	imgRegular = CrearImagenEstado(Color::Orange, "REGULAR", Color::Black);
+	imgCritico = CrearImagenEstado(Color::Red, "CRÍTICO", Color::White);
+}
+
+private: Bitmap^ CrearImagenEstado(Color colorFondo, String^ texto, Color colorTexto) {
+	Bitmap^ bmp = gcnew Bitmap(100, 50);
+	Graphics^ g = Graphics::FromImage(bmp);
+	// Fondo
+	g->Clear(colorFondo);
+
+	// Borde
+	g->DrawRectangle(gcnew Pen(Color::Black, 2), 0, 0, bmp->Width - 1, bmp->Height - 1);
+
+	// Texto
+	System::Drawing::Font^ font = gcnew System::Drawing::Font("Arial", 9, FontStyle::Bold);
+	SizeF textSize = g->MeasureString(texto, font);
+	float x = (bmp->Width - textSize.Width) / 2;
+	float y = (bmp->Height - textSize.Height) / 2;
+
+	g->DrawString(texto, font, gcnew SolidBrush(colorTexto), x, y);
+
+	delete font;
+	
+	return bmp;
+}
+
+private: System::Void label8_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }
