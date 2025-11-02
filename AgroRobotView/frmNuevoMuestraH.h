@@ -81,6 +81,8 @@ namespace AgroRobotView {
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
+			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
 			this->label6 = (gcnew System::Windows::Forms::Label());
@@ -93,8 +95,6 @@ namespace AgroRobotView {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
-			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -141,6 +141,22 @@ namespace AgroRobotView {
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Datos Heces";
 			// 
+			// textBox6
+			// 
+			this->textBox6->Location = System::Drawing::Point(86, 35);
+			this->textBox6->Name = L"textBox6";
+			this->textBox6->Size = System::Drawing::Size(100, 20);
+			this->textBox6->TabIndex = 15;
+			// 
+			// label7
+			// 
+			this->label7->AutoSize = true;
+			this->label7->Location = System::Drawing::Point(10, 38);
+			this->label7->Name = L"label7";
+			this->label7->Size = System::Drawing::Size(62, 13);
+			this->label7->TabIndex = 14;
+			this->label7->Text = L"ID Muestra:";
+			// 
 			// textBox5
 			// 
 			this->textBox5->Location = System::Drawing::Point(85, 295);
@@ -166,7 +182,7 @@ namespace AgroRobotView {
 			// comboBox2
 			// 
 			this->comboBox2->FormattingEnabled = true;
-			this->comboBox2->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"SI", L"NO" });
+			this->comboBox2->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Sí", L"No" });
 			this->comboBox2->Location = System::Drawing::Point(85, 251);
 			this->comboBox2->Name = L"comboBox2";
 			this->comboBox2->Size = System::Drawing::Size(100, 21);
@@ -235,22 +251,6 @@ namespace AgroRobotView {
 			this->label1->Size = System::Drawing::Size(55, 13);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"ID Animal:";
-			// 
-			// textBox6
-			// 
-			this->textBox6->Location = System::Drawing::Point(86, 35);
-			this->textBox6->Name = L"textBox6";
-			this->textBox6->Size = System::Drawing::Size(100, 20);
-			this->textBox6->TabIndex = 15;
-			// 
-			// label7
-			// 
-			this->label7->AutoSize = true;
-			this->label7->Location = System::Drawing::Point(10, 38);
-			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(62, 13);
-			this->label7->TabIndex = 14;
-			this->label7->Text = L"ID Muestra:";
 			// 
 			// frmNuevoMuestraH
 			// 
