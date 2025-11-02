@@ -95,7 +95,7 @@ namespace AgroRobotView {
 			this->txtUsuario->Name = L"txtUsuario";
 			this->txtUsuario->Size = System::Drawing::Size(176, 20);
 			this->txtUsuario->TabIndex = 6;
-			this->txtUsuario->Text = "Becquer";
+			this->txtUsuario->Text = L"Becquer";
 			// 
 			// label1
 			// 
@@ -123,8 +123,8 @@ namespace AgroRobotView {
 			this->txtContrasenha->Name = L"txtContrasenha";
 			this->txtContrasenha->Size = System::Drawing::Size(176, 20);
 			this->txtContrasenha->TabIndex = 11;
+			this->txtContrasenha->Text = L"123456";
 			this->txtContrasenha->UseSystemPasswordChar = true;
-			this->txtContrasenha->Text = "123456";
 			// 
 			// button2
 			// 
@@ -153,6 +153,7 @@ namespace AgroRobotView {
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedToolWindow;
 			this->Name = L"frmMain";
 			this->Text = L"frmMain";
+			this->Load += gcnew System::EventHandler(this, &frmMain::frmMain_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -204,5 +205,7 @@ namespace AgroRobotView {
 			txtContrasenha->UseSystemPasswordChar = true; // Ocultar contraseña
 		}
 	}
+private: System::Void frmMain_Load(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }

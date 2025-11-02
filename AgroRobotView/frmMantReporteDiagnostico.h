@@ -100,8 +100,6 @@ namespace AgroRobotView {
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->radioMensual = (gcnew System::Windows::Forms::RadioButton());
 			this->radioRango = (gcnew System::Windows::Forms::RadioButton());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chartTipoAnalisis))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chartEstadoSalud))->BeginInit();
 			this->comboAnio = (gcnew System::Windows::Forms::ComboBox());
 			this->comboMes = (gcnew System::Windows::Forms::ComboBox());
 			this->button3 = (gcnew System::Windows::Forms::Button());
@@ -129,15 +127,34 @@ namespace AgroRobotView {
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chartTipoAnalisis))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chartEstadoSalud))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
 			this->tabControl1->SuspendLayout();
+			this->tabPage1->SuspendLayout();
 			this->tabPage2->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridEstadisticas))->BeginInit();
 			this->tabPage3->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridDetalle))->BeginInit();
 			this->groupBox3->SuspendLayout();
 			this->SuspendLayout();
+			// 
+			// chartTipoAnalisis
+			// 
+			this->chartTipoAnalisis->Location = System::Drawing::Point(10, 10);
+			this->chartTipoAnalisis->Name = L"chartTipoAnalisis";
+			this->chartTipoAnalisis->Size = System::Drawing::Size(380, 140);
+			this->chartTipoAnalisis->TabIndex = 0;
+			this->chartTipoAnalisis->Text = L"Tipos de Análisis";
+			// 
+			// chartEstadoSalud
+			// 
+			this->chartEstadoSalud->Location = System::Drawing::Point(10, 160);
+			this->chartEstadoSalud->Name = L"chartEstadoSalud";
+			this->chartEstadoSalud->Size = System::Drawing::Size(380, 130);
+			this->chartEstadoSalud->TabIndex = 1;
+			this->chartEstadoSalud->Text = L"Estados de Salud";
 			// 
 			// groupBox1
 			// 
@@ -157,6 +174,7 @@ namespace AgroRobotView {
 			this->groupBox1->TabIndex = 2;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Criterios de búsqueda";
+			this->groupBox1->Enter += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::groupBox1_Enter);
 			// 
 			// radioMensual
 			// 
@@ -198,24 +216,6 @@ namespace AgroRobotView {
 			this->comboMes->Name = L"comboMes";
 			this->comboMes->Size = System::Drawing::Size(100, 21);
 			this->comboMes->TabIndex = 17;
-			// 
-			// chartTipoAnalisis
-			// 
-			this->chartTipoAnalisis->Location = System::Drawing::Point(10, 10);
-			this->chartTipoAnalisis->Name = L"chartTipoAnalisis";
-			this->chartTipoAnalisis->Size = System::Drawing::Size(380, 140);
-			this->chartTipoAnalisis->TabIndex = 0;
-			this->chartTipoAnalisis->Text = L"Tipos de Análisis";
-			// 
-			// chartEstadoSalud
-			// 
-			this->chartEstadoSalud->Location = System::Drawing::Point(10, 160);
-			this->chartEstadoSalud->Name = L"chartEstadoSalud";
-			this->chartEstadoSalud->Size = System::Drawing::Size(380, 130);
-			this->chartEstadoSalud->TabIndex = 1;
-			this->chartEstadoSalud->Text = L"Estados de Salud";
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chartTipoAnalisis))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chartEstadoSalud))->EndInit();
 			// 
 			// button3
 			// 
@@ -288,6 +288,7 @@ namespace AgroRobotView {
 			this->groupBox2->TabIndex = 4;
 			this->groupBox2->TabStop = false;
 			this->groupBox2->Text = L"Resumen Ejecutivo";
+			this->groupBox2->Enter += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::groupBox2_Enter);
 			// 
 			// textBox4
 			// 
@@ -371,6 +372,7 @@ namespace AgroRobotView {
 			this->tabControl1->SelectedIndex = 0;
 			this->tabControl1->Size = System::Drawing::Size(408, 329);
 			this->tabControl1->TabIndex = 5;
+			this->tabControl1->SelectedIndexChanged += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::tabControl1_SelectedIndexChanged);
 			// 
 			// tabPage1
 			// 
@@ -390,7 +392,7 @@ namespace AgroRobotView {
 			this->tabPage2->Location = System::Drawing::Point(4, 22);
 			this->tabPage2->Name = L"tabPage2";
 			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage2->Size = System::Drawing::Size(400, 217);
+			this->tabPage2->Size = System::Drawing::Size(400, 303);
 			this->tabPage2->TabIndex = 1;
 			this->tabPage2->Text = L"Estadísticas";
 			this->tabPage2->UseVisualStyleBackColor = true;
@@ -401,9 +403,10 @@ namespace AgroRobotView {
 			this->dataGridEstadisticas->AllowUserToDeleteRows = false;
 			this->dataGridEstadisticas->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridEstadisticas->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->dataGridEstadisticas->Location = System::Drawing::Point(3, 3);
 			this->dataGridEstadisticas->Name = L"dataGridEstadisticas";
 			this->dataGridEstadisticas->ReadOnly = true;
-			this->dataGridEstadisticas->Size = System::Drawing::Size(380, 200);
+			this->dataGridEstadisticas->Size = System::Drawing::Size(394, 297);
 			this->dataGridEstadisticas->TabIndex = 0;
 			// 
 			// tabPage3
@@ -411,7 +414,7 @@ namespace AgroRobotView {
 			this->tabPage3->Controls->Add(this->dataGridDetalle);
 			this->tabPage3->Location = System::Drawing::Point(4, 22);
 			this->tabPage3->Name = L"tabPage3";
-			this->tabPage3->Size = System::Drawing::Size(400, 217);
+			this->tabPage3->Size = System::Drawing::Size(400, 303);
 			this->tabPage3->TabIndex = 2;
 			this->tabPage3->Text = L"Detalle";
 			this->tabPage3->UseVisualStyleBackColor = true;
@@ -422,9 +425,10 @@ namespace AgroRobotView {
 			this->dataGridDetalle->AllowUserToDeleteRows = false;
 			this->dataGridDetalle->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridDetalle->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->dataGridDetalle->Location = System::Drawing::Point(0, 0);
 			this->dataGridDetalle->Name = L"dataGridDetalle";
 			this->dataGridDetalle->ReadOnly = true;
-			this->dataGridDetalle->Size = System::Drawing::Size(380, 200);
+			this->dataGridDetalle->Size = System::Drawing::Size(400, 303);
 			this->dataGridDetalle->TabIndex = 0;
 			// 
 			// groupBox3
@@ -438,6 +442,7 @@ namespace AgroRobotView {
 			this->groupBox3->TabIndex = 6;
 			this->groupBox3->TabStop = false;
 			this->groupBox3->Text = L"Exportar a:";
+			this->groupBox3->Enter += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::groupBox3_Enter);
 			// 
 			// button5
 			// 
@@ -481,11 +486,14 @@ namespace AgroRobotView {
 			this->Name = L"frmMantReporteDiagnostico";
 			this->Text = L"Reporte de Diagnóstico Médico";
 			this->Load += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::frmMantReporteDiagnostico_Load);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chartTipoAnalisis))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chartEstadoSalud))->EndInit();
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
 			this->groupBox2->ResumeLayout(false);
 			this->groupBox2->PerformLayout();
 			this->tabControl1->ResumeLayout(false);
+			this->tabPage1->ResumeLayout(false);
 			this->tabPage2->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridEstadisticas))->EndInit();
 			this->tabPage3->ResumeLayout(false);
@@ -789,6 +797,14 @@ namespace AgroRobotView {
 			}
 			
 
-    }; // Fin de la clase frmMantReporteDiagnostico
+	private: System::Void groupBox1_Enter(System::Object^ sender, System::EventArgs^ e) {
+	}
+private: System::Void groupBox2_Enter(System::Object^ sender, System::EventArgs^ e) {
+	}
+private: System::Void tabControl1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+	}
+private: System::Void groupBox3_Enter(System::Object^ sender, System::EventArgs^ e) {
+	}
+}; // Fin de la clase frmMantReporteDiagnostico
 
     } // Fin del namespace AgroRobotView

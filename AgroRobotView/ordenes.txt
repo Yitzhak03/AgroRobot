@@ -1,1 +1,2 @@
 1;1;AgroRobot;2025-10-28;Ruta X;Media
+2;1;AgroRobot;2025-11-02;Ruta X;Media

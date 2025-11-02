@@ -127,6 +127,7 @@
     <ClCompile Include="frmMantDietas.cpp" />
     <ClCompile Include="frmMantHeces.cpp" />
     <ClCompile Include="frmMantInsumo.cpp" />
+    <ClCompile Include="frmMantReporteAlimentacion.cpp" />
     <ClCompile Include="frmMantReporteDiagnostico.cpp" />
     <ClCompile Include="frmMantRoles.cpp" />
     <ClCompile Include="frmMantSangre.cpp" />
@@ -200,6 +201,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmMantInsumo.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="frmMantReporteAlimentacion.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmMantReporteDiagnostico.h">
@@ -309,6 +313,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMantInsumo.resx">
       <DependentUpon>frmMantInsumo.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMantReporteAlimentacion.resx">
+      <DependentUpon>frmMantReporteAlimentacion.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMantReporteDiagnostico.resx">
       <DependentUpon>frmMantReporteDiagnostico.h</DependentUpon>

@@ -116,6 +116,7 @@
     <ClInclude Include="InsumoController.h" />
     <ClInclude Include="MuestraController.h" />
     <ClInclude Include="PdfExportServiceController.h" />
+    <ClInclude Include="ReporteAlimentacionController.h" />
     <ClInclude Include="ReporteController.h" />
     <ClInclude Include="ReporteDataController.h" />
     <ClInclude Include="ReporteDiagnosticoController.h" />
@@ -134,6 +135,7 @@
     <ClCompile Include="InsumoController.cpp" />
     <ClCompile Include="MuestraController.cpp" />
     <ClCompile Include="PdfExportServiceController.cpp" />
+    <ClCompile Include="ReporteAlimentacionController.cpp" />
     <ClCompile Include="ReporteController.cpp" />
     <ClCompile Include="ReporteDataController.cpp" />
     <ClCompile Include="ReporteDiagnosticoController.cpp" />
