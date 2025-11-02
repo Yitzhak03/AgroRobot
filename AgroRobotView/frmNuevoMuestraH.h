@@ -261,7 +261,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmNuevoMuestraH";
-			this->Text = L"frmNuevoMuestraH";
+			this->Text = L"Muestra Heces";
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
 			this->ResumeLayout(false);

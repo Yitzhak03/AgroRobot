@@ -263,7 +263,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmMantSangre";
-			this->Text = L"frmMantSangre";
+			this->Text = L"Gestion de Muestras de Sangre";
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();

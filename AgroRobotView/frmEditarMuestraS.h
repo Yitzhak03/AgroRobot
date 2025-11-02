@@ -263,7 +263,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmEditarMuestraS";
-			this->Text = L"frmEditarMuestraS";
+			this->Text = L"Muestra Sangre";
 			this->Load += gcnew System::EventHandler(this, &frmEditarMuestraS::frmEditarMuestraS_Load);
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
