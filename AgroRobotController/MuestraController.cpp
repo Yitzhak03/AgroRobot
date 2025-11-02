@@ -27,13 +27,14 @@ List<Muestra^>^ MuestraController::buscarTodasMuestrasArchivo() {
 
         // Campos de sangre
         String^ cantidadExtraida = campos[8];
-        String^ colorSangre = campos[9];
-        String^ coagulos = campos[10];
-        String^ contaminacion = campos[11];
+       // String^ colorSangre = campos[9];
+        String^ coagulos = campos[9];
+        String^ contaminacion = campos[10];
+        String^ colorSangre = campos[11];
 
         Muestra^ muestra = gcnew Muestra(idMuestra, idAnimal, tipo, fechaToma,
             consistencia, colorHeces, olor, parasitos,
-            cantidadExtraida, colorSangre, coagulos, contaminacion);
+            cantidadExtraida, coagulos, contaminacion, colorSangre);
 
         listaMuestras->Add(muestra);
     }
@@ -83,9 +84,10 @@ void MuestraController::editarMuestraArchivo(int idMuestra, Muestra^ muestraEdit
             lista[i]->setParasitos(muestraEditada->getParasitos());
 
             lista[i]->setCantidadExtraida(muestraEditada->getCantidadExtraida());
-            lista[i]->setColorSangre(muestraEditada->getColorSangre());
+            //lista[i]->setColorSangre(muestraEditada->getColorSangre());
             lista[i]->setCoagulos(muestraEditada->getCoagulos());
             lista[i]->setContaminacion(muestraEditada->getContaminacion());
+            lista[i]->setColorSangre(muestraEditada->getColorSangre());
             break;
         }
     }
@@ -109,9 +111,12 @@ void MuestraController::escribirArchivo(List<Muestra^>^ listaMuestras) {
     array<String^>^ lineas = gcnew array<String^>(listaMuestras->Count);
     for (int i = 0; i < listaMuestras->Count; i++) {
         Muestra^ m = listaMuestras[i];
+        /*lineas[i] = m->getIdMuestra() + ";" + m->getIdAnimal() + ";" + m->getTipo() + ";" + m->getFechaToma() + ";" +
+            m->getConsistencia() + ";" + m->getColorHeces() + ";" + m->getOlor() + ";" + m->getParasitos() + ";" +
+            m->getCantidadExtraida() + ";" + m->getColorSangre() + ";" + m->getCoagulos() + ";" + m->getContaminacion();*/
         lineas[i] = m->getIdMuestra() + ";" + m->getIdAnimal() + ";" + m->getTipo() + ";" + m->getFechaToma() + ";" +
             m->getConsistencia() + ";" + m->getColorHeces() + ";" + m->getOlor() + ";" + m->getParasitos() + ";" +
-            m->getCantidadExtraida() + ";" + m->getColorSangre() + ";" + m->getCoagulos() + ";" + m->getContaminacion();
+            m->getCantidadExtraida() + ";" + m->getCoagulos() + ";" + m->getContaminacion() + "; " + m->getColorSangre();
     }
     File::WriteAllLines("muestras.txt", lineas);
 }

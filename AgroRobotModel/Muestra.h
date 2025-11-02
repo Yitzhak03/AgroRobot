@@ -29,7 +29,7 @@ namespace AgroRobotModel {
         Muestra();
         Muestra(int idMuestra, int idAnimal, String^ tipo, String^ fechaToma,
             String^ consistencia, String^ colorHeces, String^ olor, String^ parasitos,
-            String^ cantidadExtraida, String^ colorSangre, String^ coagulos, String^ contaminacion);
+            String^ cantidadExtraida, String^ coagulos, String^ contaminacion, String^ colorSangre);
 
         // Getters y setters
         int getIdMuestra();
