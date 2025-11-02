@@ -176,7 +176,7 @@ namespace AgroRobotView {
 			// comboBox2
 			// 
 			this->comboBox2->FormattingEnabled = true;
-			this->comboBox2->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"SI", L"NO" });
+			this->comboBox2->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Sí", L"No" });
 			this->comboBox2->Location = System::Drawing::Point(96, 211);
 			this->comboBox2->Name = L"comboBox2";
 			this->comboBox2->Size = System::Drawing::Size(100, 21);
@@ -185,7 +185,7 @@ namespace AgroRobotView {
 			// comboBox1
 			// 
 			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"SI", L"NO" });
+			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Sí", L"No" });
 			this->comboBox1->Location = System::Drawing::Point(96, 169);
 			this->comboBox1->Name = L"comboBox1";
 			this->comboBox1->Size = System::Drawing::Size(100, 21);
@@ -285,7 +285,7 @@ namespace AgroRobotView {
 
 		// Crear objeto muestra
 		Muestra^ nuevaMuestra = gcnew Muestra(idMuestra, idAnimal, "Sangre", fecha,
-			"", "", "", "", cantidad, color, coagulos, contaminacion);
+			"", "", "", "", cantidad, coagulos, contaminacion, color);
 
 		// Guardar en archivo
 		this->muestraController->agregarMuestraArchivo(nuevaMuestra);

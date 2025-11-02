@@ -41,7 +41,7 @@ namespace AgroRobotView {
 	protected:
 	private: System::Windows::Forms::Button^ button3;
 	private: System::Windows::Forms::Button^ button2;
-	private: System::Windows::Forms::DataGridView^ dataGridView1;
+
 
 
 
@@ -53,14 +53,50 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::Windows::Forms::Label^ label1;
 	private: MuestraController^ muestraController;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
+	private: System::Windows::Forms::DataGridView^ dataGridView1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Fecha;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ID;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column7;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	private:
 		/// <summary>
@@ -78,21 +114,20 @@ namespace AgroRobotView {
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Fecha = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->ID = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
+			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column7 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->groupBox1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// button4
@@ -124,58 +159,6 @@ namespace AgroRobotView {
 			this->button2->Text = L"Agregar";
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &frmMantSangre::button2_Click);
-			// 
-			// dataGridView1
-			// 
-			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(8) {
-				this->Column6,
-					this->Column1, this->Column3, this->Column4, this->Column5, this->Column2, this->Fecha, this->ID
-			});
-			this->dataGridView1->Location = System::Drawing::Point(23, 146);
-			this->dataGridView1->Name = L"dataGridView1";
-			this->dataGridView1->Size = System::Drawing::Size(595, 183);
-			this->dataGridView1->TabIndex = 24;
-			// 
-			// Column6
-			// 
-			this->Column6->HeaderText = L"ID Muestra";
-			this->Column6->Name = L"Column6";
-			// 
-			// Column1
-			// 
-			this->Column1->HeaderText = L"ID Animal";
-			this->Column1->Name = L"Column1";
-			// 
-			// Column3
-			// 
-			this->Column3->HeaderText = L"Cantidad Extraida";
-			this->Column3->Name = L"Column3";
-			// 
-			// Column4
-			// 
-			this->Column4->HeaderText = L"Presencia de Coagulos";
-			this->Column4->Name = L"Column4";
-			// 
-			// Column5
-			// 
-			this->Column5->HeaderText = L"Contaminacion Visible";
-			this->Column5->Name = L"Column5";
-			// 
-			// Column2
-			// 
-			this->Column2->HeaderText = L"Color";
-			this->Column2->Name = L"Column2";
-			// 
-			// Fecha
-			// 
-			this->Fecha->HeaderText = L"Fecha";
-			this->Fecha->Name = L"Fecha";
-			// 
-			// ID
-			// 
-			this->ID->HeaderText = L"Column6";
-			this->ID->Name = L"ID";
 			// 
 			// groupBox1
 			// 
@@ -215,21 +198,68 @@ namespace AgroRobotView {
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"ID Animal:";
 			// 
+			// dataGridView1
+			// 
+			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(7) {
+				this->Column1,
+					this->Column2, this->Column3, this->Column6, this->Column4, this->Column5, this->Column7
+			});
+			this->dataGridView1->Location = System::Drawing::Point(34, 153);
+			this->dataGridView1->Name = L"dataGridView1";
+			this->dataGridView1->Size = System::Drawing::Size(566, 180);
+			this->dataGridView1->TabIndex = 28;
+			// 
+			// Column1
+			// 
+			this->Column1->HeaderText = L"ID Muestra";
+			this->Column1->Name = L"Column1";
+			// 
+			// Column2
+			// 
+			this->Column2->HeaderText = L"ID Animal";
+			this->Column2->Name = L"Column2";
+			// 
+			// Column3
+			// 
+			this->Column3->HeaderText = L"Cantidad Extraida";
+			this->Column3->Name = L"Column3";
+			// 
+			// Column6
+			// 
+			this->Column6->HeaderText = L"Color";
+			this->Column6->Name = L"Column6";
+			// 
+			// Column4
+			// 
+			this->Column4->HeaderText = L"Presencia de Coagulos";
+			this->Column4->Name = L"Column4";
+			// 
+			// Column5
+			// 
+			this->Column5->HeaderText = L"Contaminacion Visible";
+			this->Column5->Name = L"Column5";
+			// 
+			// Column7
+			// 
+			this->Column7->HeaderText = L"Fecha";
+			this->Column7->Name = L"Column7";
+			// 
 			// frmMantSangre
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(640, 405);
+			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->button2);
-			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmMantSangre";
 			this->Text = L"frmMantSangre";
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
 
 		}
@@ -284,9 +314,9 @@ namespace AgroRobotView {
 			filaGrilla[0] = Convert::ToString(m->getIdMuestra());
 			filaGrilla[1] = Convert::ToString(m->getIdAnimal());
 			filaGrilla[2] = m->getCantidadExtraida();
-			filaGrilla[3] = m->getCoagulos();
-			filaGrilla[4] = m->getContaminacion();
-			filaGrilla[5] = m->getColorSangre();
+			filaGrilla[3] = m->getContaminacion();
+			filaGrilla[4] = m->getColorSangre();
+			filaGrilla[5] = m->getCoagulos();
 			filaGrilla[6] = m->getFechaToma();
 			this->dataGridView1->Rows->Add(filaGrilla);
 		}

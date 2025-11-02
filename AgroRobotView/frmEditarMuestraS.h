@@ -280,7 +280,7 @@ namespace AgroRobotView {
 		String^ fecha = textBox4->Text;
 
 		Muestra^ muestraEditada = gcnew Muestra(idMuestra, idAnimal, "Sangre", fecha,
-			"", "", "", "", cantidad, color, coagulos, contaminacion);
+			"", "", "", "", cantidad, coagulos, contaminacion, color);
 
 		muestraController->editarMuestraArchivo(idMuestra, muestraEditada);
 		MessageBox::Show("Muestra editada correctamente.");

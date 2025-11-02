@@ -33,42 +33,42 @@ namespace AgroRobotModel {
 
         // Getters y setters
         int getIdMuestra();
-        void setIdMuestra(int id);
+        void setIdMuestra(int idMuestra);
 
         int getIdAnimal();
-        void setIdAnimal(int id);
+        void setIdAnimal(int idAnimal);
 
         String^ getTipo();
-        void setTipo(String^ t);
+        void setTipo(String^ tipo);
 
         String^ getFechaToma();
-        void setFechaToma(String^ f);
+        void setFechaToma(String^ fechaToma);
 
         // Heces
         String^ getConsistencia();
-        void setConsistencia(String^ v);
+        void setConsistencia(String^ consistencia);
 
         String^ getColorHeces();
-        void setColorHeces(String^ v);
+        void setColorHeces(String^ colorHeces);
 
         String^ getOlor();
-        void setOlor(String^ v);
+        void setOlor(String^ olor);
 
         String^ getParasitos();
-        void setParasitos(String^ v);
+        void setParasitos(String^ parasitos);
 
         // Sangre
         String^ getCantidadExtraida();
-        void setCantidadExtraida(String^ v);
+        void setCantidadExtraida(String^ cantidadExtraida);
 
         String^ getColorSangre();
-        void setColorSangre(String^ v);
+        void setColorSangre(String^ colorSangre);
 
         String^ getCoagulos();
-        void setCoagulos(String^ v);
+        void setCoagulos(String^ coagulos);
 
         String^ getContaminacion();
-        void setContaminacion(String^ v);
+        void setContaminacion(String^ contaminacion);
     };
 }
 
