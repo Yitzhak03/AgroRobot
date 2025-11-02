@@ -1,6 +1,5 @@
-1;101;Heces;2025-10-28;Líquida;Negro;Fétido;Sí;;;;
+1;101;Sangre;25/10/2025;;;;;Líquida;Negro;Fétido;Sí
 2;102;Sangre;2025-10-28;;;;;5ml;Rojo oscuro;No;Sí
-3;103;Heces;2025-10-29;Pastosa;Marrón;Normal;No;;;;
-4;104;Heces;2025-10-30;Sólida;Verde;Fétido;Sí;;;;
+3;103;Sangre;29/10/2025;;;;;Pastosa;Marrón;Normal;NO
 5;105;Sangre;2025-10-29;;;;;3ml;Rojo claro;Sí;NO
 7;107;Sangre;20/10/2025;;;;;10ml;Rojo;NO;SI
