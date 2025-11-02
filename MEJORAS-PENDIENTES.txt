@@ -15,8 +15,9 @@ MODULO ALMACÉN
   1 Insumo -> varios Almacenes
   1 Almacen -> solo un tipo de Insumo
 • Mostrar insumos dinámicos para agregar insumos al almacen de acuerdo a los nombres existentes (no checkbox).
-• Implementar paint de acuerdo al estado y alertas de cada Almacen.
+• Implementar paint de acuerdo al estado y alertas de cada Almacen. ✅
 • Generar grafico de barras de insumos, de acuerdo al stock e unidades
+• Añadir nuevo un atributo Descripción a "Insumos"
 =====================
 MODULO DIAGNÓSTICO
 ======================
