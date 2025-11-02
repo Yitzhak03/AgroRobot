@@ -105,6 +105,7 @@ namespace AgroRobotView {
 			this->button2->TabIndex = 8;
 			this->button2->Text = L"Cancelar";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &frmEditarMuestraS::button2_Click);
 			// 
 			// button1
 			// 
@@ -280,7 +281,7 @@ namespace AgroRobotView {
 		String^ fecha = textBox4->Text;
 
 		Muestra^ muestraEditada = gcnew Muestra(idMuestra, idAnimal, "Sangre", fecha,
-			"", "", "", "", cantidad, color, coagulos, contaminacion);
+			"", "", "", "", cantidad, coagulos, contaminacion, color);
 
 		muestraController->editarMuestraArchivo(idMuestra, muestraEditada);
 		MessageBox::Show("Muestra editada correctamente.");
@@ -294,6 +295,9 @@ namespace AgroRobotView {
 		this->comboBox2->Text = this->muestra->getContaminacion();
 		this->textBox3->Text = this->muestra->getColorSangre();
 		this->textBox4->Text = this->muestra->getFechaToma();
+	}
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Close();
 	}
 };
 }
