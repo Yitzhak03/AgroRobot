@@ -181,7 +181,7 @@ namespace AgroRobotView {
 			// comboBox2
 			// 
 			this->comboBox2->FormattingEnabled = true;
-			this->comboBox2->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"SI", L"NO" });
+			this->comboBox2->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Sí", L"No" });
 			this->comboBox2->Location = System::Drawing::Point(85, 232);
 			this->comboBox2->Name = L"comboBox2";
 			this->comboBox2->Size = System::Drawing::Size(100, 21);
@@ -278,8 +278,8 @@ namespace AgroRobotView {
 		String^ parasitos = comboBox2->Text;
 		String^ fecha = textBox5->Text;
 
-		Muestra^ muestraEditada = gcnew Muestra(idMuestra, idAnimal, "Sangre", fecha,
-			"", "", "", "", consistencia, color, olor, parasitos);
+		Muestra^ muestraEditada = gcnew Muestra(idMuestra, idAnimal, "Heces", fecha,
+			consistencia, color, olor, parasitos, "", "", "", "");
 
 		muestraController->editarMuestraArchivo(idMuestra, muestraEditada);
 		MessageBox::Show("Muestra editada correctamente.");
