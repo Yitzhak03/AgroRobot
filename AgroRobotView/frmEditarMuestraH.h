@@ -105,6 +105,7 @@ namespace AgroRobotView {
 			this->button2->TabIndex = 8;
 			this->button2->Text = L"Cancelar";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &frmEditarMuestraH::button2_Click);
 			// 
 			// button1
 			// 
@@ -149,7 +150,7 @@ namespace AgroRobotView {
 			// 
 			// label7
 			// 
-			this->label7->Location = System::Drawing::Point(0, 22);
+			this->label7->Location = System::Drawing::Point(6, 22);
 			this->label7->Name = L"label7";
 			this->label7->Size = System::Drawing::Size(63, 13);
 			this->label7->TabIndex = 15;
@@ -292,6 +293,9 @@ namespace AgroRobotView {
 		this->textBox4->Text = this->muestra->getOlor();
 		this->comboBox2->Text = this->muestra->getParasitos();
 		this->textBox5->Text = this->muestra->getFechaToma();
+	}
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Close();
 	}
 };
 }
