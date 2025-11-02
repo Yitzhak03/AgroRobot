@@ -11,6 +11,7 @@
 #include "frmMantRoles.h"
 #include "frmMantAlmacen.h"
 #include "frmMantReporteDiagnostico.h"
+#include "frmMantReporteAlimentacion.h"
 
 namespace AgroRobotView {
 
@@ -72,6 +73,7 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::ToolStripMenuItem^ mantenimientoDeRolesToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ registroGeneralDeAlmacenesToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ reToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ reporteDeDietasToolStripMenuItem;
 
 
 
@@ -106,9 +108,10 @@ namespace AgroRobotView {
 			this->registroGeneralDeAlmacenesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ordenesDeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->reportesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->reToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->reporteDeDietasToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->gestiónDeReportesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->volverToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->reToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -252,18 +255,32 @@ namespace AgroRobotView {
 			// 
 			// reportesToolStripMenuItem
 			// 
-			this->reportesToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			this->reportesToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
 				this->reToolStripMenuItem,
-					this->gestiónDeReportesToolStripMenuItem
+					this->reporteDeDietasToolStripMenuItem, this->gestiónDeReportesToolStripMenuItem
 			});
 			this->reportesToolStripMenuItem->Name = L"reportesToolStripMenuItem";
 			this->reportesToolStripMenuItem->Size = System::Drawing::Size(65, 20);
 			this->reportesToolStripMenuItem->Text = L"Reportes";
 			// 
+			// reToolStripMenuItem
+			// 
+			this->reToolStripMenuItem->Name = L"reToolStripMenuItem";
+			this->reToolStripMenuItem->Size = System::Drawing::Size(202, 22);
+			this->reToolStripMenuItem->Text = L"Reporte de Diagnósticos";
+			this->reToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::reToolStripMenuItem_Click);
+			// 
+			// reporteDeDietasToolStripMenuItem
+			// 
+			this->reporteDeDietasToolStripMenuItem->Name = L"reporteDeDietasToolStripMenuItem";
+			this->reporteDeDietasToolStripMenuItem->Size = System::Drawing::Size(202, 22);
+			this->reporteDeDietasToolStripMenuItem->Text = L"Reporte de Dietas";
+			this->reporteDeDietasToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::reporteDeDietasToolStripMenuItem_Click);
+			// 
 			// gestiónDeReportesToolStripMenuItem
 			// 
 			this->gestiónDeReportesToolStripMenuItem->Name = L"gestiónDeReportesToolStripMenuItem";
-			this->gestiónDeReportesToolStripMenuItem->Size = System::Drawing::Size(183, 22);
+			this->gestiónDeReportesToolStripMenuItem->Size = System::Drawing::Size(202, 22);
 			this->gestiónDeReportesToolStripMenuItem->Text = L"Evaluación Continua";
 			this->gestiónDeReportesToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::gestiónDeReportesToolStripMenuItem_Click);
 			// 
@@ -272,13 +289,6 @@ namespace AgroRobotView {
 			this->volverToolStripMenuItem->Name = L"volverToolStripMenuItem";
 			this->volverToolStripMenuItem->Size = System::Drawing::Size(51, 20);
 			this->volverToolStripMenuItem->Text = L"Volver";
-			// 
-			// reToolStripMenuItem
-			// 
-			this->reToolStripMenuItem->Name = L"reToolStripMenuItem";
-			this->reToolStripMenuItem->Size = System::Drawing::Size(202, 22);
-			this->reToolStripMenuItem->Text = L"Reporte de Diagnósticos";
-			this->reToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::reToolStripMenuItem_Click);
 			// 
 			// frmMenu
 			// 
@@ -400,6 +410,11 @@ private: System::Void reToolStripMenuItem_Click(System::Object^ sender, System::
 	frmMantReporteDiagnostico^ reportesDiagnosForm = gcnew frmMantReporteDiagnostico();
 	reportesDiagnosForm->MdiParent = this;
 	reportesDiagnosForm->Show();
+}
+private: System::Void reporteDeDietasToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	frmMantReporteAlimentacion^ reportesAlimentForm = gcnew frmMantReporteAlimentacion();
+	reportesAlimentForm->MdiParent = this;
+	reportesAlimentForm->Show();
 }
 };
 }
