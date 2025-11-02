@@ -1,4 +1,4 @@
 1;Administrador;1|1|1|1
 2;Ganadero Limpieza;0|1|1|0
 3;Ganadero Alimentación;0|0|1|1
-4;Imbécil;0|0|0|1
+4;Visitante;0|0|0|1

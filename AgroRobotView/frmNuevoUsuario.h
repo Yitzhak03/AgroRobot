@@ -43,12 +43,16 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::GroupBox^ groupBox1;
+	private: System::Windows::Forms::TextBox^ txtCtrsn;
 
 
-	private: System::Windows::Forms::TextBox^ textBox4;
-	private: System::Windows::Forms::TextBox^ textBox3;
-	private: System::Windows::Forms::TextBox^ textBox2;
-	private: System::Windows::Forms::TextBox^ textBox1;
+
+	private: System::Windows::Forms::TextBox^ txtCorreo;
+
+	private: System::Windows::Forms::TextBox^ txtNombre;
+
+	private: System::Windows::Forms::TextBox^ txtId;
+
 
 
 	private: System::Windows::Forms::Label^ label4;
@@ -84,10 +88,10 @@ namespace AgroRobotView {
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->label7 = (gcnew System::Windows::Forms::Label());
-			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->txtCtrsn = (gcnew System::Windows::Forms::TextBox());
+			this->txtCorreo = (gcnew System::Windows::Forms::TextBox());
+			this->txtNombre = (gcnew System::Windows::Forms::TextBox());
+			this->txtId = (gcnew System::Windows::Forms::TextBox());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
@@ -121,10 +125,10 @@ namespace AgroRobotView {
 			// 
 			this->groupBox1->Controls->Add(this->comboBox1);
 			this->groupBox1->Controls->Add(this->label7);
-			this->groupBox1->Controls->Add(this->textBox4);
-			this->groupBox1->Controls->Add(this->textBox3);
-			this->groupBox1->Controls->Add(this->textBox2);
-			this->groupBox1->Controls->Add(this->textBox1);
+			this->groupBox1->Controls->Add(this->txtCtrsn);
+			this->groupBox1->Controls->Add(this->txtCorreo);
+			this->groupBox1->Controls->Add(this->txtNombre);
+			this->groupBox1->Controls->Add(this->txtId);
 			this->groupBox1->Controls->Add(this->label4);
 			this->groupBox1->Controls->Add(this->label3);
 			this->groupBox1->Controls->Add(this->label2);
@@ -157,37 +161,37 @@ namespace AgroRobotView {
 			this->label7->TabIndex = 12;
 			this->label7->Text = L"Roles:";
 			// 
-			// textBox4
+			// txtCtrsn
 			// 
-			this->textBox4->Location = System::Drawing::Point(137, 179);
-			this->textBox4->Margin = System::Windows::Forms::Padding(2);
-			this->textBox4->Name = L"textBox4";
-			this->textBox4->Size = System::Drawing::Size(127, 20);
-			this->textBox4->TabIndex = 9;
+			this->txtCtrsn->Location = System::Drawing::Point(137, 179);
+			this->txtCtrsn->Margin = System::Windows::Forms::Padding(2);
+			this->txtCtrsn->Name = L"txtCtrsn";
+			this->txtCtrsn->Size = System::Drawing::Size(127, 20);
+			this->txtCtrsn->TabIndex = 9;
 			// 
-			// textBox3
+			// txtCorreo
 			// 
-			this->textBox3->Location = System::Drawing::Point(137, 129);
-			this->textBox3->Margin = System::Windows::Forms::Padding(2);
-			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(127, 20);
-			this->textBox3->TabIndex = 8;
+			this->txtCorreo->Location = System::Drawing::Point(137, 129);
+			this->txtCorreo->Margin = System::Windows::Forms::Padding(2);
+			this->txtCorreo->Name = L"txtCorreo";
+			this->txtCorreo->Size = System::Drawing::Size(127, 20);
+			this->txtCorreo->TabIndex = 8;
 			// 
-			// textBox2
+			// txtNombre
 			// 
-			this->textBox2->Location = System::Drawing::Point(137, 85);
-			this->textBox2->Margin = System::Windows::Forms::Padding(2);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(127, 20);
-			this->textBox2->TabIndex = 7;
+			this->txtNombre->Location = System::Drawing::Point(137, 85);
+			this->txtNombre->Margin = System::Windows::Forms::Padding(2);
+			this->txtNombre->Name = L"txtNombre";
+			this->txtNombre->Size = System::Drawing::Size(127, 20);
+			this->txtNombre->TabIndex = 7;
 			// 
-			// textBox1
+			// txtId
 			// 
-			this->textBox1->Location = System::Drawing::Point(137, 41);
-			this->textBox1->Margin = System::Windows::Forms::Padding(2);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(127, 20);
-			this->textBox1->TabIndex = 6;
+			this->txtId->Location = System::Drawing::Point(137, 41);
+			this->txtId->Margin = System::Windows::Forms::Padding(2);
+			this->txtId->Name = L"txtId";
+			this->txtId->Size = System::Drawing::Size(127, 20);
+			this->txtId->TabIndex = 6;
 			// 
 			// label4
 			// 
@@ -253,10 +257,10 @@ namespace AgroRobotView {
 	{
 		// Crear el objeto Usuario
 		Usuario^ nuevoUsuario = gcnew Usuario();
-		nuevoUsuario->SetId(Convert::ToInt32(textBox1->Text));
-		nuevoUsuario->SetNombre(textBox2->Text);
-		nuevoUsuario->SetEmail(textBox3->Text);
-		nuevoUsuario->SetContrasenha(textBox4->Text);
+		nuevoUsuario->SetId(Convert::ToInt32(txtId->Text));
+		nuevoUsuario->SetNombre(txtNombre->Text);
+		nuevoUsuario->SetEmail(txtCorreo->Text);
+		nuevoUsuario->SetContrasenha(txtCtrsn->Text);
 		nuevoUsuario->SetRol(rolController->obtenerRolPorNombre(comboBox1->Text));
 		nuevoUsuario->SetUltimoAcceso(""); // Inicialmente vacío
 		nuevoUsuario->SetEstadoCuenta("Activo"); // Estado por defecto
@@ -275,7 +279,19 @@ namespace AgroRobotView {
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e){
 		this->Close();
 	}
+
 	private: System::Void groupBox1_Enter(System::Object^ sender, System::EventArgs^ e) {
+		/*crea un ID automático*/
+		List<Usuario^>^ listaUsuarios = this->usuarioController->obtenerTodosUsuarios();
+
+		int maxId = 0;
+		for each(Usuario ^ usuario in listaUsuarios) {
+			if (usuario->GetId() > maxId) {
+				maxId = usuario->GetId();
+			}
+		}
+		this->txtId->Text = Convert::ToString(maxId + 1);
+
 	}
 };
 }

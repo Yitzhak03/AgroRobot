@@ -1,7 +1,2 @@
 1;Becquer;birr.becquer2003@gmail.com;123456;25102025;Baneado;1;1|3
-8;Hola;cvb;cvb;;Activo;2;
-12;asdas;asd;asd;;Nuevo;3;
-11;Daniel;asd@asd.com;qwe;;Nuevo;3;
-18;Leonardo;leonar1420@gmail.com;31416;271025;Inactivo;2;1|1
-1304;Farid;faridssj@gmail.com;faridssj;2551;Inactivo;3;1|2
-13;Mateo;asd@asd;mateo;;Nuevo;2;
+2;Leonardo;leonar1420@gmail.com;31416;;Activo;4;
