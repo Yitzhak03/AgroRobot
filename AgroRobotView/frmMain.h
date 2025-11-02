@@ -36,17 +36,20 @@ namespace AgroRobotView {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Button^ button1;
+
 	protected:
+	private: System::Windows::Forms::Panel^ panelCard;
+	private: System::Windows::Forms::Label^ lblTitle;
+	private: System::Windows::Forms::Label^ lblSubtitle;
+	private: System::Windows::Forms::Label^ lblUser;
+	private: System::Windows::Forms::TextBox^ txtUser;
 
-	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::TextBox^ txtUsuario;
+	private: System::Windows::Forms::Label^ lblPassword;
+	private: System::Windows::Forms::TextBox^ txtPassword;
 
-	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::Label^ label3;
-	private: System::Windows::Forms::TextBox^ txtContrasenha;
-
-	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::CheckBox^ chkVerContrasenha;
+	private: System::Windows::Forms::Button^ btnLogin;
+	private: System::Windows::Forms::Button^ btnHelp;
 
 	private:
 		/// <summary>
@@ -61,112 +64,184 @@ namespace AgroRobotView {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->txtUsuario = (gcnew System::Windows::Forms::TextBox());
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->txtContrasenha = (gcnew System::Windows::Forms::TextBox());
-			this->button2 = (gcnew System::Windows::Forms::Button());
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(frmMain::typeid));
+			this->panelCard = (gcnew System::Windows::Forms::Panel());
+			this->lblTitle = (gcnew System::Windows::Forms::Label());
+			this->lblSubtitle = (gcnew System::Windows::Forms::Label());
+			this->lblUser = (gcnew System::Windows::Forms::Label());
+			this->txtUser = (gcnew System::Windows::Forms::TextBox());
+			this->lblPassword = (gcnew System::Windows::Forms::Label());
+			this->txtPassword = (gcnew System::Windows::Forms::TextBox());
+			this->chkVerContrasenha = (gcnew System::Windows::Forms::CheckBox());
+			this->btnLogin = (gcnew System::Windows::Forms::Button());
+			this->btnHelp = (gcnew System::Windows::Forms::Button());
+			this->panelCard->SuspendLayout();
 			this->SuspendLayout();
 			// 
-			// button1
+			// panelCard
 			// 
-			this->button1->Location = System::Drawing::Point(148, 188);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(100, 23);
-			this->button1->TabIndex = 9;
-			this->button1->Text = L"Iniciar sesión";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &frmMain::button1_Click);
+			this->panelCard->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(12)), static_cast<System::Int32>(static_cast<System::Byte>(59)),
+				static_cast<System::Int32>(static_cast<System::Byte>(50)));
+			this->panelCard->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->panelCard->Controls->Add(this->lblTitle);
+			this->panelCard->Controls->Add(this->lblSubtitle);
+			this->panelCard->Controls->Add(this->lblUser);
+			this->panelCard->Controls->Add(this->txtUser);
+			this->panelCard->Controls->Add(this->lblPassword);
+			this->panelCard->Controls->Add(this->txtPassword);
+			this->panelCard->Controls->Add(this->chkVerContrasenha);
+			this->panelCard->Controls->Add(this->btnLogin);
+			this->panelCard->Controls->Add(this->btnHelp);
+			this->panelCard->Location = System::Drawing::Point(190, 64);
+			this->panelCard->Name = L"panelCard";
+			this->panelCard->Size = System::Drawing::Size(366, 308);
+			this->panelCard->TabIndex = 14;
 			// 
-			// label2
+			// lblTitle
 			// 
-			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(30, 135);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(64, 13);
-			this->label2->TabIndex = 7;
-			this->label2->Text = L"Contraseña:";
+			this->lblTitle->AutoSize = true;
+			this->lblTitle->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16, System::Drawing::FontStyle::Bold));
+			this->lblTitle->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(230)), static_cast<System::Int32>(static_cast<System::Byte>(249)),
+				static_cast<System::Int32>(static_cast<System::Byte>(230)));
+			this->lblTitle->Location = System::Drawing::Point(20, 16);
+			this->lblTitle->Name = L"lblTitle";
+			this->lblTitle->Size = System::Drawing::Size(126, 30);
+			this->lblTitle->TabIndex = 0;
+			this->lblTitle->Text = L"AgroRobot";
 			// 
-			// txtUsuario
+			// lblSubtitle
 			// 
-			this->txtUsuario->Location = System::Drawing::Point(117, 88);
-			this->txtUsuario->Name = L"txtUsuario";
-			this->txtUsuario->Size = System::Drawing::Size(176, 20);
-			this->txtUsuario->TabIndex = 6;
-			this->txtUsuario->Text = L"Becquer";
+			this->lblSubtitle->AutoSize = true;
+			this->lblSubtitle->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->lblSubtitle->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(191)), static_cast<System::Int32>(static_cast<System::Byte>(228)),
+				static_cast<System::Int32>(static_cast<System::Byte>(198)));
+			this->lblSubtitle->Location = System::Drawing::Point(22, 50);
+			this->lblSubtitle->Name = L"lblSubtitle";
+			this->lblSubtitle->Size = System::Drawing::Size(181, 15);
+			this->lblSubtitle->TabIndex = 1;
+			this->lblSubtitle->Text = L"Sistema de granja y alimentación";
 			// 
-			// label1
+			// lblUser
 			// 
-			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(48, 91);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(46, 13);
-			this->label1->TabIndex = 5;
-			this->label1->Text = L"Usuario:";
+			this->lblUser->AutoSize = true;
+			this->lblUser->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->lblUser->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(217)), static_cast<System::Int32>(static_cast<System::Byte>(242)),
+				static_cast<System::Int32>(static_cast<System::Byte>(217)));
+			this->lblUser->Location = System::Drawing::Point(22, 88);
+			this->lblUser->Name = L"lblUser";
+			this->lblUser->Size = System::Drawing::Size(49, 15);
+			this->lblUser->TabIndex = 2;
+			this->lblUser->Text = L"Usuario";
 			// 
-			// label3
+			// txtUser
 			// 
-			this->label3->AutoSize = true;
-			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label3->Location = System::Drawing::Point(112, 31);
-			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(136, 25);
-			this->label3->TabIndex = 10;
-			this->label3->Text = L"Bienvenido!";
+			this->txtUser->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(38)),
+				static_cast<System::Int32>(static_cast<System::Byte>(35)));
+			this->txtUser->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->txtUser->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10));
+			this->txtUser->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(232)), static_cast<System::Int32>(static_cast<System::Byte>(245)),
+				static_cast<System::Int32>(static_cast<System::Byte>(234)));
+			this->txtUser->Location = System::Drawing::Point(22, 108);
+			this->txtUser->Name = L"txtUser";
+			this->txtUser->Size = System::Drawing::Size(312, 25);
+			this->txtUser->TabIndex = 0;
+			this->txtUser->Text = L"Becquer";
 			// 
-			// txtContrasenha
+			// lblPassword
 			// 
-			this->txtContrasenha->Location = System::Drawing::Point(117, 132);
-			this->txtContrasenha->Name = L"txtContrasenha";
-			this->txtContrasenha->Size = System::Drawing::Size(176, 20);
-			this->txtContrasenha->TabIndex = 11;
-			this->txtContrasenha->Text = L"123456";
-			this->txtContrasenha->UseSystemPasswordChar = true;
+			this->lblPassword->AutoSize = true;
+			this->lblPassword->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->lblPassword->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(217)), static_cast<System::Int32>(static_cast<System::Byte>(242)),
+				static_cast<System::Int32>(static_cast<System::Byte>(217)));
+			this->lblPassword->Location = System::Drawing::Point(22, 148);
+			this->lblPassword->Name = L"lblPassword";
+			this->lblPassword->Size = System::Drawing::Size(69, 15);
+			this->lblPassword->TabIndex = 3;
+			this->lblPassword->Text = L"Contraseña";
 			// 
-			// button2
+			// txtPassword
 			// 
-			this->button2->BackColor = System::Drawing::SystemColors::ButtonShadow;
-			this->button2->Location = System::Drawing::Point(300, 130);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(34, 23);
-			this->button2->TabIndex = 12;
-			this->button2->Text = L"👁";
-			this->button2->UseVisualStyleBackColor = false;
-			this->button2->Click += gcnew System::EventHandler(this, &frmMain::button2_Click);
+			this->txtPassword->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(38)),
+				static_cast<System::Int32>(static_cast<System::Byte>(35)));
+			this->txtPassword->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->txtPassword->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10));
+			this->txtPassword->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(232)), static_cast<System::Int32>(static_cast<System::Byte>(245)),
+				static_cast<System::Int32>(static_cast<System::Byte>(234)));
+			this->txtPassword->Location = System::Drawing::Point(22, 168);
+			this->txtPassword->Name = L"txtPassword";
+			this->txtPassword->Size = System::Drawing::Size(312, 25);
+			this->txtPassword->TabIndex = 1;
+			this->txtPassword->Text = L"123456";
+			this->txtPassword->UseSystemPasswordChar = true;
+			// 
+			// chkVerContrasenha
+			// 
+			this->chkVerContrasenha->AutoSize = true;
+			this->chkVerContrasenha->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->chkVerContrasenha->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(159)),
+				static_cast<System::Int32>(static_cast<System::Byte>(217)), static_cast<System::Int32>(static_cast<System::Byte>(176)));
+			this->chkVerContrasenha->Location = System::Drawing::Point(22, 205);
+			this->chkVerContrasenha->Name = L"chkVerContrasenha";
+			this->chkVerContrasenha->Size = System::Drawing::Size(103, 19);
+			this->chkVerContrasenha->TabIndex = 3;
+			this->chkVerContrasenha->Text = L"Ver contraseña";
+			this->chkVerContrasenha->UseVisualStyleBackColor = true;
+			this->chkVerContrasenha->CheckedChanged += gcnew System::EventHandler(this, &frmMain::chkVerContrasenha_CheckedChanged);
+			// 
+			// btnLogin
+			// 
+			this->btnLogin->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(122)), static_cast<System::Int32>(static_cast<System::Byte>(210)),
+				static_cast<System::Int32>(static_cast<System::Byte>(140)));
+			this->btnLogin->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnLogin->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Bold));
+			this->btnLogin->Location = System::Drawing::Point(22, 243);
+			this->btnLogin->Name = L"btnLogin";
+			this->btnLogin->Size = System::Drawing::Size(147, 36);
+			this->btnLogin->TabIndex = 5;
+			this->btnLogin->Text = L"Ingresar";
+			this->btnLogin->UseVisualStyleBackColor = false;
+			this->btnLogin->Click += gcnew System::EventHandler(this, &frmMain::btnLogin_Click);
+			// 
+			// btnHelp
+			// 
+			this->btnHelp->BackColor = System::Drawing::Color::Transparent;
+			this->btnHelp->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnHelp->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->btnHelp->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(159)), static_cast<System::Int32>(static_cast<System::Byte>(217)),
+				static_cast<System::Int32>(static_cast<System::Byte>(176)));
+			this->btnHelp->Location = System::Drawing::Point(190, 243);
+			this->btnHelp->Name = L"btnHelp";
+			this->btnHelp->Size = System::Drawing::Size(144, 36);
+			this->btnHelp->TabIndex = 6;
+			this->btnHelp->Text = L"Necesito ayuda";
+			this->btnHelp->UseVisualStyleBackColor = true;
 			// 
 			// frmMain
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoSize = true;
-			this->ClientSize = System::Drawing::Size(358, 244);
-			this->Controls->Add(this->button2);
-			this->Controls->Add(this->txtContrasenha);
-			this->Controls->Add(this->label3);
-			this->Controls->Add(this->button1);
-			this->Controls->Add(this->label2);
-			this->Controls->Add(this->txtUsuario);
-			this->Controls->Add(this->label1);
+			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
+			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->ClientSize = System::Drawing::Size(753, 446);
+			this->Controls->Add(this->panelCard);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedToolWindow;
 			this->Name = L"frmMain";
 			this->Text = L"frmMain";
-			this->Load += gcnew System::EventHandler(this, &frmMain::frmMain_Load);
+			this->panelCard->ResumeLayout(false);
+			this->panelCard->PerformLayout();
 			this->ResumeLayout(false);
-			this->PerformLayout();
 
 		}
 #pragma endregion
-	//==============================================================================
-	//==========================INICIAR SESION======================================
-	//==============================================================================
-	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e)
+		//==============================================================================
+		//==============================INGRESAR========================================
+		//==============================================================================
+	private: System::Void btnLogin_Click(System::Object^ sender, System::EventArgs^ e)
 	{
-		String^ usuario = txtUsuario->Text;
-		String^ contrasenha = txtContrasenha->Text;
-		
+		String^ usuario = txtUser->Text;
+		String^ contrasenha = txtPassword->Text;
+
 		// Validar campos vacíos
 		if (String::IsNullOrEmpty(usuario) || String::IsNullOrEmpty(contrasenha)) {
 			MessageBox::Show("Ingrese usuario y contraseña.", "Login", MessageBoxButtons::OK, MessageBoxIcon::Warning);
@@ -175,7 +250,7 @@ namespace AgroRobotView {
 
 		UsuarioController^ ctrl = gcnew UsuarioController();
 		List<Usuario^>^ lista = ctrl->obtenerTodosUsuarios();
-		
+
 		for each (Usuario ^ u in lista) {
 			// comparar nombre de usuario sin distinguir mayúsculas/minúsculas,
 			// pero la contraseña sí (por convención)
@@ -193,19 +268,16 @@ namespace AgroRobotView {
 		// No encontrado / credenciales inválidas
 		MessageBox::Show("Usuario o contraseña incorrectos.", "Login", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
-	//==============================================================================
-	//====================================👁========================================
-	//==============================================================================
-	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e)
+		   //==============================================================================
+		   //==============================Ver contraseña==================================
+		   //==============================================================================
+	private: System::Void chkVerContrasenha_CheckedChanged(System::Object^ sender, System::EventArgs^ e)
 	{
-		if (txtContrasenha->UseSystemPasswordChar) {
-			txtContrasenha->UseSystemPasswordChar = false; // Mostrar contraseña
-		}
-		else {
-			txtContrasenha->UseSystemPasswordChar = true; // Ocultar contraseña
+		if (chkVerContrasenha->Checked) {
+			txtPassword->UseSystemPasswordChar = false; // Mostrar contraseña
+		} else {
+			txtPassword->UseSystemPasswordChar = true; // Ocultar contraseña
 		}
 	}
-private: System::Void frmMain_Load(System::Object^ sender, System::EventArgs^ e) {
-}
-};
+	};
 }

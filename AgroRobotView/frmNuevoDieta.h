@@ -139,6 +139,7 @@ namespace AgroRobotView {
 			// 
 			// textBox1
 			// 
+			this->textBox1->Enabled = false;
 			this->textBox1->Location = System::Drawing::Point(232, 35);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(100, 22);
@@ -228,6 +229,14 @@ namespace AgroRobotView {
 		}
 #pragma endregion
 	private: System::Void frmNuevoDieta_Load(System::Object^ sender, System::EventArgs^ e) {
+		List<Dieta^>^ listaDietas = this->dietaController->obtenerTodasDietas();
+		int maxId = 0;
+		for each (Dieta^ dieta in listaDietas) {
+			if (dieta->Id > maxId) {
+				maxId = dieta->Id;
+			}
+		}
+		this->textBox1->Text = Convert::ToString(maxId + 1);
 	}
 
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
