@@ -179,6 +179,7 @@ namespace AgroRobotView {
 			// 
 			// textBox1
 			// 
+			this->textBox1->Enabled = false;
 			this->textBox1->Location = System::Drawing::Point(219, 41);
 			this->textBox1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->textBox1->Name = L"textBox1";
@@ -258,6 +259,14 @@ namespace AgroRobotView {
 		}
 #pragma endregion
 	private: System::Void frmNuevoAnimal_Load(System::Object^ sender, System::EventArgs^ e) {
+		List<Animal^>^ listaAnimales = this->animalController->obtenerTodosAnimales();
+		int maxId = 0;
+		for each (Animal ^ animal in listaAnimales) {
+			if (animal->IdAnimal > maxId) {
+				maxId = animal->IdAnimal;
+			}
+		}
+		this->textBox1->Text = Convert::ToString(maxId + 1);
 	}
 
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
