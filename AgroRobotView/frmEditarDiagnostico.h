@@ -113,7 +113,7 @@ namespace AgroRobotView {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(53, 365);
+			this->button1->Location = System::Drawing::Point(56, 365);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(75, 23);
 			this->button1->TabIndex = 10;
@@ -182,7 +182,7 @@ namespace AgroRobotView {
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(7, 291);
+			this->label6->Location = System::Drawing::Point(7, 278);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(70, 13);
 			this->label6->TabIndex = 11;
@@ -190,7 +190,7 @@ namespace AgroRobotView {
 			// 
 			// label5
 			// 
-			this->label5->Location = System::Drawing::Point(7, 244);
+			this->label5->Location = System::Drawing::Point(7, 234);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(70, 30);
 			this->label5->TabIndex = 10;
@@ -198,28 +198,28 @@ namespace AgroRobotView {
 			// 
 			// textBox6
 			// 
-			this->textBox6->Location = System::Drawing::Point(88, 288);
+			this->textBox6->Location = System::Drawing::Point(88, 275);
 			this->textBox6->Name = L"textBox6";
 			this->textBox6->Size = System::Drawing::Size(100, 20);
 			this->textBox6->TabIndex = 9;
 			// 
 			// textBox5
 			// 
-			this->textBox5->Location = System::Drawing::Point(88, 244);
+			this->textBox5->Location = System::Drawing::Point(88, 234);
 			this->textBox5->Name = L"textBox5";
 			this->textBox5->Size = System::Drawing::Size(100, 20);
 			this->textBox5->TabIndex = 8;
 			// 
 			// textBox4
 			// 
-			this->textBox4->Location = System::Drawing::Point(88, 200);
+			this->textBox4->Location = System::Drawing::Point(88, 192);
 			this->textBox4->Name = L"textBox4";
 			this->textBox4->Size = System::Drawing::Size(100, 20);
 			this->textBox4->TabIndex = 7;
 			// 
 			// label4
 			// 
-			this->label4->Location = System::Drawing::Point(7, 200);
+			this->label4->Location = System::Drawing::Point(7, 192);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(70, 30);
 			this->label4->TabIndex = 6;
@@ -282,7 +282,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmEditarDiagnostico";
-			this->Text = L"frmEditarDiagnostico";
+			this->Text = L"Datos del Diagnostico";
 			this->Load += gcnew System::EventHandler(this, &frmEditarDiagnostico::frmEditarDiagnostico_Load);
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
