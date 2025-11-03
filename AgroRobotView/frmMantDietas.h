@@ -1,4 +1,4 @@
-#pragma once
+Ôªø#pragma once
 #include "frmNuevoDieta.h"
 #include "frmEditarDieta.h"
 
@@ -24,14 +24,15 @@ namespace AgroRobotView {
 		{
 			InitializeComponent();
 			//
-			//TODO: agregar cÛdigo de constructor aquÌ
+			//TODO: agregar c√≥digo de constructor aqu√≠
 			//
 			this->dietaController = gcnew GestorNutricionalController();
+			aplicarEstilo();
 		}
 
 	protected:
 		/// <summary>
-		/// Limpiar los recursos que se estÈn usando.
+		/// Limpiar los recursos que se est√©n usando.
 		/// </summary>
 		~frmMantDietas()
 		{
@@ -53,10 +54,6 @@ namespace AgroRobotView {
 
 	private: System::Windows::Forms::Label^ label1;
 
-
-
-
-
 	private: GestorNutricionalController^ dietaController;
 	private: System::Windows::Forms::Button^ button5;
 	private: System::Windows::Forms::GroupBox^ groupBox2;
@@ -71,16 +68,78 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
 
+		   void aplicarEstilo()
+		   {
+			   this->BackColor = System::Drawing::Color::FromArgb(30, 61, 54);
+
+			   this->Font = gcnew System::Drawing::Font(L"Bahnschrift", 10, FontStyle::Regular);
+			   this->ForeColor = System::Drawing::Color::FromArgb(242, 242, 242);
+
+			   this->groupBox1->BackColor = System::Drawing::Color::FromArgb(45, 93, 80);
+			   this->groupBox1->ForeColor = System::Drawing::Color::FromArgb(242, 242, 242);
+			   this->groupBox1->Font = gcnew System::Drawing::Font(L"Bahnschrift", 11, FontStyle::Bold);
+			   this->groupBox1->Text = L"Criterios de b√∫squeda";
+
+			   array<TextBox^>^ textos = { this->textBox1 };
+			   for each (TextBox ^ t in textos) {
+				   t->BackColor = System::Drawing::Color::FromArgb(60, 110, 95);
+				   t->ForeColor = System::Drawing::Color::White;
+				   t->BorderStyle = BorderStyle::FixedSingle;
+				   t->Font = gcnew System::Drawing::Font(L"Bahnschrift", 10);
+			   }
+
+			   this->button1->BackColor = System::Drawing::Color::FromArgb(123, 228, 149);
+			   this->button1->FlatStyle = FlatStyle::Flat;
+			   this->button1->FlatAppearance->BorderSize = 0;
+			   this->button1->ForeColor = System::Drawing::Color::Black;
+			   this->button1->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 10);
+
+
+			   this->dataGridView1->BackgroundColor = System::Drawing::Color::FromArgb(45, 93, 80);
+			   this->dataGridView1->BorderStyle = BorderStyle::None;
+			   this->dataGridView1->GridColor = System::Drawing::Color::FromArgb(30, 61, 54);
+			   this->dataGridView1->EnableHeadersVisualStyles = false;
+			   this->dataGridView1->ColumnHeadersDefaultCellStyle->BackColor = System::Drawing::Color::FromArgb(30, 61, 54);
+			   this->dataGridView1->ColumnHeadersDefaultCellStyle->ForeColor = System::Drawing::Color::White;
+			   this->dataGridView1->DefaultCellStyle->BackColor = System::Drawing::Color::FromArgb(60, 110, 95);
+			   this->dataGridView1->DefaultCellStyle->ForeColor = System::Drawing::Color::White;
+			   this->dataGridView1->DefaultCellStyle->SelectionBackColor = System::Drawing::Color::FromArgb(123, 228, 149);
+			   this->dataGridView1->DefaultCellStyle->SelectionForeColor = System::Drawing::Color::Black;
+
+			   this->groupBox2->BackColor = System::Drawing::Color::FromArgb(45, 93, 80);
+			   this->groupBox2->ForeColor = System::Drawing::Color::FromArgb(242, 242, 242);
+			   this->groupBox2->Font = gcnew System::Drawing::Font(L"Bahnschrift", 11, FontStyle::Bold);
+
+			   array<Button^>^ botones = { this->button2, this->button3, this->button4, this->button5 };
+			   for each (Button ^ b in botones) {
+				   b->BackColor = System::Drawing::Color::FromArgb(123, 228, 149);
+				   b->FlatStyle = FlatStyle::Flat;
+				   b->FlatAppearance->BorderSize = 0;
+				   b->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 10);
+				   b->ForeColor = System::Drawing::Color::Black;
+				   b->Cursor = Cursors::Hand;
+			   }
+
+			   array<Label^>^ labels = { this->label1, this->label2 };
+			   for each (Label ^ l in labels) {
+				   l->ForeColor = System::Drawing::Color::White;
+				   l->Font = gcnew System::Drawing::Font(L"Bahnschrift", 10);
+			   }
+
+			   this->Text = L"AgroRobot - Mantenimiento de Dietas";
+			   this->StartPosition = FormStartPosition::CenterScreen;
+		   }
+
 	private:
 		/// <summary>
-		/// Variable del diseÒador necesaria.
+		/// Variable del dise√±ador necesaria.
 		/// </summary>
 		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// MÈtodo necesario para admitir el DiseÒador. No se puede modificar
-		/// el contenido de este mÈtodo con el editor de cÛdigo.
+		/// M√©todo necesario para admitir el Dise√±ador. No se puede modificar
+		/// el contenido de este m√©todo con el editor de c√≥digo.
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -113,7 +172,7 @@ namespace AgroRobotView {
 			this->button4->Location = System::Drawing::Point(578, 422);
 			this->button4->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(75, 23);
+			this->button4->Size = System::Drawing::Size(100, 30);
 			this->button4->TabIndex = 10;
 			this->button4->Text = L"Eliminar";
 			this->button4->UseVisualStyleBackColor = true;
@@ -124,7 +183,7 @@ namespace AgroRobotView {
 			this->button3->Location = System::Drawing::Point(325, 422);
 			this->button3->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(75, 23);
+			this->button3->Size = System::Drawing::Size(100, 30);
 			this->button3->TabIndex = 9;
 			this->button3->Text = L"Editar";
 			this->button3->UseVisualStyleBackColor = true;
@@ -135,7 +194,7 @@ namespace AgroRobotView {
 			this->button2->Location = System::Drawing::Point(42, 422);
 			this->button2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(75, 23);
+			this->button2->Size = System::Drawing::Size(100, 30);
 			this->button2->TabIndex = 8;
 			this->button2->Text = L"Agregar";
 			this->button2->UseVisualStyleBackColor = true;
@@ -168,14 +227,14 @@ namespace AgroRobotView {
 			this->groupBox1->Size = System::Drawing::Size(680, 122);
 			this->groupBox1->TabIndex = 6;
 			this->groupBox1->TabStop = false;
-			this->groupBox1->Text = L"Criterios de B˙squeda";
+			this->groupBox1->Text = L"Criterios de B√∫squeda";
 			// 
 			// button1
 			// 
 			this->button1->Location = System::Drawing::Point(317, 57);
 			this->button1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->Size = System::Drawing::Size(100, 30);
 			this->button1->TabIndex = 4;
 			this->button1->Text = L"Buscar";
 			this->button1->UseVisualStyleBackColor = true;
@@ -203,7 +262,7 @@ namespace AgroRobotView {
 			// 
 			this->button5->Location = System::Drawing::Point(67, 141);
 			this->button5->Name = L"button5";
-			this->button5->Size = System::Drawing::Size(172, 23);
+			this->button5->Size = System::Drawing::Size(172, 35);
 			this->button5->TabIndex = 11;
 			this->button5->Text = L"Enviar orden";
 			this->button5->UseVisualStyleBackColor = true;
@@ -221,7 +280,7 @@ namespace AgroRobotView {
 			this->groupBox2->Size = System::Drawing::Size(317, 183);
 			this->groupBox2->TabIndex = 12;
 			this->groupBox2->TabStop = false;
-			this->groupBox2->Text = L"Envio de Ûrdenes";
+			this->groupBox2->Text = L"Envio de √≥rdenes";
 			// 
 			// comboBox1
 			// 
@@ -338,8 +397,8 @@ namespace AgroRobotView {
 		if (this->dataGridView1->SelectedRows->Count > 0)
 		{
 
-			System::Windows::Forms::DialogResult resultado = MessageBox::Show("øEst· seguro de que desea eliminar el registro seleccionado?",
-				"ConfirmaciÛn de eliminaciÛn", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
+			System::Windows::Forms::DialogResult resultado = MessageBox::Show("¬øEst√° seguro de que desea eliminar el registro seleccionado?",
+				"Confirmaci√≥n de eliminaci√≥n", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
 
 			if (resultado == System::Windows::Forms::DialogResult::No)
 			{
@@ -362,25 +421,25 @@ namespace AgroRobotView {
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ textoBusqueda = textBox1->Text->Trim();
 
-		// ?? Si no se ingresÛ nada, mostrar todas las dietas
+		// ?? Si no se ingres√≥ nada, mostrar todas las dietas
 		if (String::IsNullOrEmpty(textoBusqueda)) {
 			List<Dieta^>^ listaDietas = this->dietaController->obtenerTodasDietas();
 			if (listaDietas->Count > 0) {
 				mostrarGrilla(listaDietas);
 			}
 			else {
-				MessageBox::Show("No hay dietas registradas.", "InformaciÛn", MessageBoxButtons::OK, MessageBoxIcon::Information);
+				MessageBox::Show("No hay dietas registradas.", "Informaci√≥n", MessageBoxButtons::OK, MessageBoxIcon::Information);
 			}
 			return;
 		}
 
-		// ?? Si sÌ se ingresÛ algo, intentar convertir a entero y buscar por ID
+		// ?? Si s√≠ se ingres√≥ algo, intentar convertir a entero y buscar por ID
 		int id = 0;
 		try {
 			id = Convert::ToInt32(textoBusqueda);
 		}
 		catch (FormatException^) {
-			MessageBox::Show("Por favor, ingrese un ID v·lido (n˙mero entero).", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			MessageBox::Show("Por favor, ingrese un ID v√°lido (n√∫mero entero).", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			return;
 		}
 
@@ -392,7 +451,7 @@ namespace AgroRobotView {
 			mostrarGrilla(listaDietas);
 		}
 		else {
-			MessageBox::Show("No se encontrÛ la dieta con el ID especificado.", "B˙squeda", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			MessageBox::Show("No se encontr√≥ la dieta con el ID especificado.", "B√∫squeda", MessageBoxButtons::OK, MessageBoxIcon::Information);
 		}
 	}
 
@@ -407,7 +466,7 @@ namespace AgroRobotView {
 			Dieta^ dietaSeleccionada = this->dietaController->consultarDietaporId(id);
 			if (dietaSeleccionada == nullptr)
 			{
-				MessageBox::Show("No se encontrÛ la dieta seleccionado.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				MessageBox::Show("No se encontr√≥ la dieta seleccionado.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 				return;
 			}
 			frmEditarDieta^ editarDietaForm = gcnew frmEditarDieta(this->dietaController, dietaSeleccionada);
@@ -456,8 +515,8 @@ namespace AgroRobotView {
 			String^ prioridad = comboBox1->Text;
 
 			System::Windows::Forms::DialogResult confirmacion =
-				MessageBox::Show("øDesea enviar esta orden al mÛdulo de AlmacÈn?",
-					"Confirmar envÌo", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
+				MessageBox::Show("¬øDesea enviar esta orden al m√≥dulo de Almac√©n?",
+					"Confirmar env√≠o", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
 
 			if (confirmacion == System::Windows::Forms::DialogResult::No) {
 				return;
@@ -465,18 +524,18 @@ namespace AgroRobotView {
 
 			this->dietaController->enviarOrdenAlimentacion(idDieta, prioridad);
 
-			MessageBox::Show("La orden de alimentaciÛn fue enviada correctamente al mÛdulo de AlmacÈn.",
-				"…xito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			MessageBox::Show("La orden de alimentaci√≥n fue enviada correctamente al m√≥dulo de Almac√©n.",
+				"√âxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
 
 			txtID->Clear();
 			comboBox1->SelectedIndex = -1;
 		}
 		catch (FormatException^) {
-			MessageBox::Show("El ID ingresado no tiene un formato v·lido. Debe ser un n˙mero entero.",
+			MessageBox::Show("El ID ingresado no tiene un formato v√°lido. Debe ser un n√∫mero entero.",
 				"Error de formato", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 		catch (Exception^ ex) {
-			MessageBox::Show("OcurriÛ un error inesperado al enviar la orden:\n" + ex->Message,
+			MessageBox::Show("Ocurri√≥ un error inesperado al enviar la orden:\n" + ex->Message,
 				"Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 	}
