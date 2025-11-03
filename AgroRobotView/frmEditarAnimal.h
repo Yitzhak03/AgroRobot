@@ -30,6 +30,7 @@ namespace AgroRobotView {
 			InitializeComponent();
 			this->animalController = animalController;
 			this->objAnimal = objAnimal;
+			aplicarEstilo();
 		}
 
 	protected:
@@ -61,6 +62,52 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::Label^ label2;
 	private: GestorNutricionalController^ animalController;
 	private: Animal^ objAnimal;
+
+	private: void aplicarEstilo()
+	{
+		System::Drawing::Font^ fuenteGeneral = gcnew System::Drawing::Font("Segoe UI", 10, FontStyle::Regular);
+		System::Drawing::Font^ fuenteNegrita = gcnew System::Drawing::Font("Segoe UI Semibold", 10, FontStyle::Bold);
+
+		this->BackColor = System::Drawing::Color::FromArgb(232, 245, 233);
+		this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+		this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+		this->Text = L"Editar animal";
+
+		array<GroupBox^>^ grupos = { groupBox1 };
+		for each (GroupBox ^ g in grupos)
+		{
+			g->BackColor = System::Drawing::Color::FromArgb(240, 250, 240);
+			g->Font = fuenteNegrita;
+			g->ForeColor = System::Drawing::Color::FromArgb(45, 85, 45);
+		}
+
+		array<Label^>^ etiquetas = { label2, label3, label4, label5, label7, label8 };
+		for each (Label ^ lbl in etiquetas)
+		{
+			lbl->Font = fuenteGeneral;
+			lbl->ForeColor = System::Drawing::Color::FromArgb(35, 75, 45);
+		}
+
+		array<TextBox^>^ textos = { textBox1, textBox2, textBox3, textBox4, textBox5, textBox6 };
+		for each (TextBox ^ t in textos)
+		{
+			t->Font = fuenteGeneral;
+			t->BackColor = System::Drawing::Color::White;
+			t->ForeColor = System::Drawing::Color::FromArgb(30, 70, 40);
+			t->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+		}
+
+		array<Button^>^ botones = { button1, button2 };
+		for each (Button ^ b in botones)
+		{
+			b->FlatStyle = FlatStyle::Flat;
+			b->FlatAppearance->BorderSize = 0;
+			b->BackColor = System::Drawing::Color::FromArgb(183, 223, 185);
+			b->ForeColor = System::Drawing::Color::FromArgb(20, 60, 30);
+			b->Font = fuenteNegrita;
+			b->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(153, 203, 155);
+		}
+	}
 
 	private:
 		/// <summary>
@@ -98,7 +145,7 @@ namespace AgroRobotView {
 			this->button2->Location = System::Drawing::Point(243, 412);
 			this->button2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(81, 23);
+			this->button2->Size = System::Drawing::Size(100, 30);
 			this->button2->TabIndex = 8;
 			this->button2->Text = L"Cancelar";
 			this->button2->UseVisualStyleBackColor = true;
@@ -109,7 +156,7 @@ namespace AgroRobotView {
 			this->button1->Location = System::Drawing::Point(95, 412);
 			this->button1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->Size = System::Drawing::Size(120, 30);
 			this->button1->TabIndex = 7;
 			this->button1->Text = L"Modificar";
 			this->button1->UseVisualStyleBackColor = true;
@@ -245,7 +292,7 @@ namespace AgroRobotView {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(431, 483);
+			this->ClientSize = System::Drawing::Size(500, 500);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->groupBox1);
