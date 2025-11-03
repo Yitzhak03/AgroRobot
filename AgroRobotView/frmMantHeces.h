@@ -226,8 +226,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmMantHeces";
-			this->Text = L"frmMantHeces";
-			this->Load += gcnew System::EventHandler(this, &frmMantHeces::frmMantHeces_Load);
+			this->Text = L"Gestion de Muestras de Heces";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
@@ -316,7 +315,5 @@ namespace AgroRobotView {
 		this->muestraController->eliminarMuestraArchivo(idEliminar);
 		MessageBox::Show("La muestra ha sido eliminada con éxito.");
 	}
-private: System::Void frmMantHeces_Load(System::Object^ sender, System::EventArgs^ e) {
-}
 };
 }
