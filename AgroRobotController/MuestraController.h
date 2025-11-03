@@ -14,6 +14,7 @@ namespace AgroRobotController {
         void agregarMuestraArchivo(Muestra^ nuevaMuestra);
         void editarMuestraArchivo(int idMuestra, Muestra^ muestraEditada);
         void eliminarMuestraArchivo(int idMuestra);
+        int generarNuevoId();
 
         // Búsquedas
         List<Muestra^>^ buscarTodasMuestrasArchivo();

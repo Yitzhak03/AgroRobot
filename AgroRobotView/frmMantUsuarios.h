@@ -76,6 +76,8 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column7;
 
+
+
 	protected:
 
 
@@ -116,29 +118,29 @@ namespace AgroRobotView {
 			// 
 			// btnMostrarTodos
 			// 
-			this->btnMostrarTodos->Location = System::Drawing::Point(97, 370);
+			this->btnMostrarTodos->Location = System::Drawing::Point(555, 49);
 			this->btnMostrarTodos->Margin = System::Windows::Forms::Padding(2);
 			this->btnMostrarTodos->Name = L"btnMostrarTodos";
-			this->btnMostrarTodos->Size = System::Drawing::Size(87, 19);
+			this->btnMostrarTodos->Size = System::Drawing::Size(117, 19);
 			this->btnMostrarTodos->TabIndex = 16;
-			this->btnMostrarTodos->Text = L"Mostrar Todos";
+			this->btnMostrarTodos->Text = L"Mostrar Habilitados";
 			this->btnMostrarTodos->UseVisualStyleBackColor = true;
 			this->btnMostrarTodos->Click += gcnew System::EventHandler(this, &frmMantUsuarios::btnMostrarTodos_Click);
 			// 
 			// btnEliminar
 			// 
-			this->btnEliminar->Location = System::Drawing::Point(631, 370);
+			this->btnEliminar->Location = System::Drawing::Point(535, 370);
 			this->btnEliminar->Margin = System::Windows::Forms::Padding(2);
 			this->btnEliminar->Name = L"btnEliminar";
-			this->btnEliminar->Size = System::Drawing::Size(56, 19);
+			this->btnEliminar->Size = System::Drawing::Size(77, 19);
 			this->btnEliminar->TabIndex = 15;
-			this->btnEliminar->Text = L"Eliminar";
+			this->btnEliminar->Text = L"Deshabilitar";
 			this->btnEliminar->UseVisualStyleBackColor = true;
 			this->btnEliminar->Click += gcnew System::EventHandler(this, &frmMantUsuarios::btnEliminar_Click);
 			// 
 			// btnEditar
 			// 
-			this->btnEditar->Location = System::Drawing::Point(454, 370);
+			this->btnEditar->Location = System::Drawing::Point(362, 370);
 			this->btnEditar->Margin = System::Windows::Forms::Padding(2);
 			this->btnEditar->Name = L"btnEditar";
 			this->btnEditar->Size = System::Drawing::Size(56, 19);
@@ -149,7 +151,7 @@ namespace AgroRobotView {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(292, 370);
+			this->button2->Location = System::Drawing::Point(200, 370);
 			this->button2->Margin = System::Windows::Forms::Padding(2);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(56, 19);
@@ -222,6 +224,7 @@ namespace AgroRobotView {
 			// 
 			// groupBox1
 			// 
+			this->groupBox1->Controls->Add(this->btnMostrarTodos);
 			this->groupBox1->Controls->Add(this->btnBuscar);
 			this->groupBox1->Controls->Add(this->textBox2);
 			this->groupBox1->Controls->Add(this->label2);
@@ -288,7 +291,6 @@ namespace AgroRobotView {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(827, 439);
-			this->Controls->Add(this->btnMostrarTodos);
 			this->Controls->Add(this->btnEliminar);
 			this->Controls->Add(this->btnEditar);
 			this->Controls->Add(this->button2);

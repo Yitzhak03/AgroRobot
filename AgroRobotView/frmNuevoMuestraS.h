@@ -23,6 +23,7 @@ namespace AgroRobotView {
 			//
 			//TODO: agregar código de constructor aquí
 			//
+			this->Load += gcnew System::EventHandler(this, &frmNuevoMuestraS::frmNuevoMuestraS_Load);
 		}
 
 		frmNuevoMuestraS(Muestra^ muestra, MuestraController^ muestraController)
@@ -263,6 +264,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmNuevoMuestraS";
 			this->Text = L"Muestra Sangre";
+			this->Load += gcnew System::EventHandler(this, &frmNuevoMuestraS::frmNuevoMuestraS_Load);
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
 			this->ResumeLayout(false);
@@ -275,6 +277,7 @@ namespace AgroRobotView {
 		this->Close();
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		//int idMuestra = Convert::ToInt32(this->textBox5->Text);
 		int idMuestra = Convert::ToInt32(this->textBox5->Text);
 		int idAnimal = Convert::ToInt32(this->textBox1->Text);
 		String^ cantidad = this->textBox2->Text;
@@ -292,6 +295,11 @@ namespace AgroRobotView {
 
 		MessageBox::Show("La muestra de sangre ha sido registrada con éxito.");
 		this->Close();
+	}
+	private: System::Void frmNuevoMuestraS_Load(System::Object^ sender, System::EventArgs^ e) {
+		int nuevoId = this->muestraController->generarNuevoId();
+		this->textBox5->Text = Convert::ToString(nuevoId);
+		this->textBox5->ReadOnly = true;
 	}
 };
 }

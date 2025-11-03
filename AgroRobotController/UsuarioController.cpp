@@ -41,42 +41,6 @@ UsuarioController::UsuarioController(){
 
 }
 
-//List<Usuario^>^ UsuarioController::readTxt(){
-//	List<Usuario^>^ lista = gcnew List<Usuario^>();
-//	String^ path = "usuarios.txt";
-//	array<String^>^ lineas = File::ReadAllLines(path);
-
-//	for each (String ^ linea in lineas) {
-//		if (String::IsNullOrWhiteSpace(linea)) continue;
-//		array<String^>^ datos = linea->Split(';');
-//		Usuario^ user = gcnew Usuario();
-//		user->Id = Convert::ToInt32(datos[0]);
-//		user->Nombre = datos[1];
-//		user->Email = datos[2];
-//		user->Contrasenha = datos[3];
-//		user->UltimoAcceso = datos[4];
-//		user->EstadoCuenta = datos[5];
-
-		// Parsear Roles usando '|' como separador
-//		user->IdsRoles = gcnew List<int>();
-//		String^ rolesField = datos[6];
-//		array<String^>^ rolesIds = rolesField->Split('|');
-//		for each (String ^ rolId in rolesIds)
-//			user->IdsRoles->Add(Convert::ToInt32(rolId));
-
-		// Parsear Alertas usando '|' como separador
-//		user->IdsAlertas = gcnew List<int>();
-//		String^ alertsField = datos[7];
-//		array<String^>^ alertasIds = alertsField->Split('|');
-//		if (!String::IsNullOrEmpty(alertsField)) {
-//			for each (String ^ alertaId in alertasIds)
-//				user->IdsAlertas->Add(Convert::ToInt32(alertaId));
-//		} else user->IdsAlertas = nullptr;
-//		lista->Add(user);
-//	}
-//	return lista;
-//}
-
 void UsuarioController::writeTxt(List<Usuario^>^ lista)
 {
 	String^ path = "usuarios.txt";
