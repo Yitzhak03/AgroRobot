@@ -97,7 +97,15 @@ namespace AgroRobotView {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(frmEditarReporte::typeid));
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label4 = (gcnew System::Windows::Forms::Label());
@@ -118,12 +126,6 @@ namespace AgroRobotView {
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
@@ -131,220 +133,21 @@ namespace AgroRobotView {
 			// 
 			// dataGridView1
 			// 
+			dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"Times New Roman", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->dataGridView1->AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
 			this->dataGridView1->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
-			this->dataGridView1->BackgroundColor = System::Drawing::SystemColors::ControlDarkDark;
+			this->dataGridView1->BackgroundColor = System::Drawing::Color::DarkSeaGreen;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(6) {
 				this->Column1,
 					this->Column2, this->Column3, this->Column4, this->Column5, this->Column6
 			});
-			this->dataGridView1->GridColor = System::Drawing::SystemColors::ControlDarkDark;
+			this->dataGridView1->GridColor = System::Drawing::Color::Black;
 			this->dataGridView1->Location = System::Drawing::Point(31, 43);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->Size = System::Drawing::Size(661, 150);
 			this->dataGridView1->TabIndex = 0;
-			// 
-			// groupBox1
-			// 
-			this->groupBox1->Controls->Add(this->textBox1);
-			this->groupBox1->Controls->Add(this->label4);
-			this->groupBox1->Controls->Add(this->dateTimePicker1);
-			this->groupBox1->Controls->Add(this->comboBox2);
-			this->groupBox1->Controls->Add(this->comboBox1);
-			this->groupBox1->Controls->Add(this->label3);
-			this->groupBox1->Controls->Add(this->label2);
-			this->groupBox1->Controls->Add(this->label1);
-			this->groupBox1->Location = System::Drawing::Point(31, 219);
-			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(281, 149);
-			this->groupBox1->TabIndex = 1;
-			this->groupBox1->TabStop = false;
-			this->groupBox1->Text = L"Diagnóstico Actual";
-			// 
-			// textBox1
-			// 
-			this->textBox1->Location = System::Drawing::Point(129, 119);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(134, 20);
-			this->textBox1->TabIndex = 6;
-			// 
-			// label4
-			// 
-			this->label4->Location = System::Drawing::Point(24, 119);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(99, 27);
-			this->label4->TabIndex = 5;
-			this->label4->Text = L"Veterinario Responsable:";
-			// 
-			// dateTimePicker1
-			// 
-			this->dateTimePicker1->Format = System::Windows::Forms::DateTimePickerFormat::Short;
-			this->dateTimePicker1->Location = System::Drawing::Point(129, 87);
-			this->dateTimePicker1->Name = L"dateTimePicker1";
-			this->dateTimePicker1->Size = System::Drawing::Size(134, 20);
-			this->dateTimePicker1->TabIndex = 4;
-			// 
-			// comboBox2
-			// 
-			this->comboBox2->FormattingEnabled = true;
-			this->comboBox2->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"Bajo", L"Medio", L"Alto", L"Urgente" });
-			this->comboBox2->Location = System::Drawing::Point(129, 60);
-			this->comboBox2->Name = L"comboBox2";
-			this->comboBox2->Size = System::Drawing::Size(134, 21);
-			this->comboBox2->TabIndex = 3;
-			// 
-			// comboBox1
-			// 
-			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"Excelente", L"Bueno", L"Regular", L"Crítico" });
-			this->comboBox1->Location = System::Drawing::Point(129, 33);
-			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(134, 21);
-			this->comboBox1->TabIndex = 2;
-			// 
-			// label3
-			// 
-			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(24, 91);
-			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(99, 13);
-			this->label3->TabIndex = 2;
-			this->label3->Text = L"Fecha Diagnóstico:";
-			// 
-			// label2
-			// 
-			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(24, 63);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(48, 13);
-			this->label2->TabIndex = 1;
-			this->label2->Text = L"Impacto:";
-			// 
-			// label1
-			// 
-			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(24, 36);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(88, 13);
-			this->label1->TabIndex = 0;
-			this->label1->Text = L"Estado de Salud:";
-			// 
-			// groupBox2
-			// 
-			this->groupBox2->Controls->Add(this->checkBox6);
-			this->groupBox2->Controls->Add(this->checkBox5);
-			this->groupBox2->Controls->Add(this->checkBox4);
-			this->groupBox2->Controls->Add(this->checkBox3);
-			this->groupBox2->Controls->Add(this->checkBox2);
-			this->groupBox2->Controls->Add(this->checkBox1);
-			this->groupBox2->Controls->Add(this->label5);
-			this->groupBox2->Controls->Add(this->textBox2);
-			this->groupBox2->Location = System::Drawing::Point(340, 219);
-			this->groupBox2->Name = L"groupBox2";
-			this->groupBox2->Size = System::Drawing::Size(352, 227);
-			this->groupBox2->TabIndex = 2;
-			this->groupBox2->TabStop = false;
-			this->groupBox2->Text = L"Observaciones";
-			this->groupBox2->Enter += gcnew System::EventHandler(this, &frmEditarReporte::groupBox2_Enter);
-			// 
-			// checkBox6
-			// 
-			this->checkBox6->AutoSize = true;
-			this->checkBox6->Location = System::Drawing::Point(259, 194);
-			this->checkBox6->Name = L"checkBox6";
-			this->checkBox6->Size = System::Drawing::Size(57, 17);
-			this->checkBox6->TabIndex = 7;
-			this->checkBox6->Text = L"Otro(s)";
-			this->checkBox6->UseVisualStyleBackColor = true;
-			// 
-			// checkBox5
-			// 
-			this->checkBox5->AutoSize = true;
-			this->checkBox5->Location = System::Drawing::Point(151, 164);
-			this->checkBox5->Name = L"checkBox5";
-			this->checkBox5->Size = System::Drawing::Size(84, 17);
-			this->checkBox5->TabIndex = 6;
-			this->checkBox5->Text = L"Seguimiento";
-			this->checkBox5->UseVisualStyleBackColor = true;
-			// 
-			// checkBox4
-			// 
-			this->checkBox4->Location = System::Drawing::Point(259, 152);
-			this->checkBox4->Name = L"checkBox4";
-			this->checkBox4->Size = System::Drawing::Size(80, 40);
-			this->checkBox4->TabIndex = 5;
-			this->checkBox4->Text = L"Aislamiento preventivo";
-			this->checkBox4->UseVisualStyleBackColor = true;
-			// 
-			// checkBox3
-			// 
-			this->checkBox3->AutoSize = true;
-			this->checkBox3->Location = System::Drawing::Point(18, 194);
-			this->checkBox3->Name = L"checkBox3";
-			this->checkBox3->Size = System::Drawing::Size(106, 17);
-			this->checkBox3->TabIndex = 4;
-			this->checkBox3->Text = L"Consulta urgente";
-			this->checkBox3->UseVisualStyleBackColor = true;
-			// 
-			// checkBox2
-			// 
-			this->checkBox2->Location = System::Drawing::Point(151, 187);
-			this->checkBox2->Name = L"checkBox2";
-			this->checkBox2->Size = System::Drawing::Size(80, 31);
-			this->checkBox2->TabIndex = 3;
-			this->checkBox2->Text = L"Administrar suplementos";
-			this->checkBox2->UseVisualStyleBackColor = true;
-			// 
-			// checkBox1
-			// 
-			this->checkBox1->AutoSize = true;
-			this->checkBox1->Location = System::Drawing::Point(18, 164);
-			this->checkBox1->Name = L"checkBox1";
-			this->checkBox1->Size = System::Drawing::Size(84, 17);
-			this->checkBox1->TabIndex = 2;
-			this->checkBox1->Text = L"Ajustar dieta";
-			this->checkBox1->UseVisualStyleBackColor = true;
-			// 
-			// label5
-			// 
-			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(9, 140);
-			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(81, 13);
-			this->label5->TabIndex = 1;
-			this->label5->Text = L"Plan de acción:";
-			// 
-			// textBox2
-			// 
-			this->textBox2->ForeColor = System::Drawing::Color::Gray;
-			this->textBox2->Location = System::Drawing::Point(20, 25);
-			this->textBox2->Multiline = true;
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(313, 103);
-			this->textBox2->TabIndex = 0;
-			this->textBox2->Text = L"Inserte observaciones y ajustes manuales...";
-			this->textBox2->Enter += gcnew System::EventHandler(this, &frmEditarReporte::textBox2_Enter);
-			this->textBox2->Leave += gcnew System::EventHandler(this, &frmEditarReporte::textBox2_Leave);
-			// 
-			// button2
-			// 
-			this->button2->Location = System::Drawing::Point(198, 406);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(75, 23);
-			this->button2->TabIndex = 7;
-			this->button2->Text = L"Cancelar";
-			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &frmEditarReporte::button2_Click);
-			// 
-			// button1
-			// 
-			this->button1->Location = System::Drawing::Point(79, 406);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
-			this->button1->TabIndex = 6;
-			this->button1->Text = L"Guardar";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &frmEditarReporte::button1_Click);
 			// 
 			// Column1
 			// 
@@ -382,10 +185,278 @@ namespace AgroRobotView {
 			this->Column6->Name = L"Column6";
 			this->Column6->ReadOnly = true;
 			// 
+			// groupBox1
+			// 
+			this->groupBox1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(12)), static_cast<System::Int32>(static_cast<System::Byte>(59)),
+				static_cast<System::Int32>(static_cast<System::Byte>(50)));
+			this->groupBox1->Controls->Add(this->textBox1);
+			this->groupBox1->Controls->Add(this->label4);
+			this->groupBox1->Controls->Add(this->dateTimePicker1);
+			this->groupBox1->Controls->Add(this->comboBox2);
+			this->groupBox1->Controls->Add(this->comboBox1);
+			this->groupBox1->Controls->Add(this->label3);
+			this->groupBox1->Controls->Add(this->label2);
+			this->groupBox1->Controls->Add(this->label1);
+			this->groupBox1->Font = (gcnew System::Drawing::Font(L"Times New Roman", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->groupBox1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(217)), static_cast<System::Int32>(static_cast<System::Byte>(242)),
+				static_cast<System::Int32>(static_cast<System::Byte>(217)));
+			this->groupBox1->Location = System::Drawing::Point(31, 219);
+			this->groupBox1->Name = L"groupBox1";
+			this->groupBox1->Size = System::Drawing::Size(289, 153);
+			this->groupBox1->TabIndex = 1;
+			this->groupBox1->TabStop = false;
+			this->groupBox1->Text = L"Diagnóstico Actual";
+			// 
+			// textBox1
+			// 
+			this->textBox1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(38)),
+				static_cast<System::Int32>(static_cast<System::Byte>(35)));
+			this->textBox1->Font = (gcnew System::Drawing::Font(L"Times New Roman", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->textBox1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(232)), static_cast<System::Int32>(static_cast<System::Byte>(245)),
+				static_cast<System::Int32>(static_cast<System::Byte>(234)));
+			this->textBox1->Location = System::Drawing::Point(142, 118);
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(134, 22);
+			this->textBox1->TabIndex = 6;
+			// 
+			// label4
+			// 
+			this->label4->Font = (gcnew System::Drawing::Font(L"Times New Roman", 11.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label4->Location = System::Drawing::Point(11, 118);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(99, 27);
+			this->label4->TabIndex = 5;
+			this->label4->Text = L"Veterinario Responsable:";
+			// 
+			// dateTimePicker1
+			// 
+			this->dateTimePicker1->Font = (gcnew System::Drawing::Font(L"Times New Roman", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->dateTimePicker1->Format = System::Windows::Forms::DateTimePickerFormat::Short;
+			this->dateTimePicker1->Location = System::Drawing::Point(142, 86);
+			this->dateTimePicker1->Name = L"dateTimePicker1";
+			this->dateTimePicker1->Size = System::Drawing::Size(134, 22);
+			this->dateTimePicker1->TabIndex = 4;
+			// 
+			// comboBox2
+			// 
+			this->comboBox2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(38)),
+				static_cast<System::Int32>(static_cast<System::Byte>(35)));
+			this->comboBox2->Font = (gcnew System::Drawing::Font(L"Times New Roman", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->comboBox2->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(232)), static_cast<System::Int32>(static_cast<System::Byte>(245)),
+				static_cast<System::Int32>(static_cast<System::Byte>(234)));
+			this->comboBox2->FormattingEnabled = true;
+			this->comboBox2->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"Bajo", L"Medio", L"Alto", L"Urgente" });
+			this->comboBox2->Location = System::Drawing::Point(142, 59);
+			this->comboBox2->Name = L"comboBox2";
+			this->comboBox2->Size = System::Drawing::Size(134, 23);
+			this->comboBox2->TabIndex = 3;
+			// 
+			// comboBox1
+			// 
+			this->comboBox1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(38)),
+				static_cast<System::Int32>(static_cast<System::Byte>(35)));
+			this->comboBox1->Font = (gcnew System::Drawing::Font(L"Times New Roman", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->comboBox1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(232)), static_cast<System::Int32>(static_cast<System::Byte>(245)),
+				static_cast<System::Int32>(static_cast<System::Byte>(234)));
+			this->comboBox1->FormattingEnabled = true;
+			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"Excelente", L"Bueno", L"Regular", L"Crítico" });
+			this->comboBox1->Location = System::Drawing::Point(142, 32);
+			this->comboBox1->Name = L"comboBox1";
+			this->comboBox1->Size = System::Drawing::Size(134, 23);
+			this->comboBox1->TabIndex = 2;
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Font = (gcnew System::Drawing::Font(L"Times New Roman", 11.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label3->Location = System::Drawing::Point(11, 90);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(128, 17);
+			this->label3->TabIndex = 2;
+			this->label3->Text = L"Fecha Diagnóstico";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Times New Roman", 11.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label2->Location = System::Drawing::Point(11, 61);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(61, 17);
+			this->label2->TabIndex = 1;
+			this->label2->Text = L"Impacto";
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Times New Roman", 11.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label1->Location = System::Drawing::Point(11, 34);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(112, 17);
+			this->label1->TabIndex = 0;
+			this->label1->Text = L"Estado de Salud";
+			// 
+			// groupBox2
+			// 
+			this->groupBox2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(12)), static_cast<System::Int32>(static_cast<System::Byte>(59)),
+				static_cast<System::Int32>(static_cast<System::Byte>(50)));
+			this->groupBox2->Controls->Add(this->checkBox6);
+			this->groupBox2->Controls->Add(this->checkBox5);
+			this->groupBox2->Controls->Add(this->checkBox4);
+			this->groupBox2->Controls->Add(this->checkBox3);
+			this->groupBox2->Controls->Add(this->checkBox2);
+			this->groupBox2->Controls->Add(this->checkBox1);
+			this->groupBox2->Controls->Add(this->label5);
+			this->groupBox2->Controls->Add(this->textBox2);
+			this->groupBox2->Font = (gcnew System::Drawing::Font(L"Times New Roman", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->groupBox2->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(217)), static_cast<System::Int32>(static_cast<System::Byte>(242)),
+				static_cast<System::Int32>(static_cast<System::Byte>(217)));
+			this->groupBox2->Location = System::Drawing::Point(340, 219);
+			this->groupBox2->Name = L"groupBox2";
+			this->groupBox2->Size = System::Drawing::Size(352, 227);
+			this->groupBox2->TabIndex = 2;
+			this->groupBox2->TabStop = false;
+			this->groupBox2->Text = L"Observaciones";
+			this->groupBox2->Enter += gcnew System::EventHandler(this, &frmEditarReporte::groupBox2_Enter);
+			// 
+			// checkBox6
+			// 
+			this->checkBox6->AutoSize = true;
+			this->checkBox6->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->checkBox6->Location = System::Drawing::Point(252, 194);
+			this->checkBox6->Name = L"checkBox6";
+			this->checkBox6->Size = System::Drawing::Size(63, 19);
+			this->checkBox6->TabIndex = 7;
+			this->checkBox6->Text = L"Otro(s)";
+			this->checkBox6->UseVisualStyleBackColor = true;
+			// 
+			// checkBox5
+			// 
+			this->checkBox5->AutoSize = true;
+			this->checkBox5->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->checkBox5->Location = System::Drawing::Point(144, 164);
+			this->checkBox5->Name = L"checkBox5";
+			this->checkBox5->Size = System::Drawing::Size(92, 19);
+			this->checkBox5->TabIndex = 6;
+			this->checkBox5->Text = L"Seguimiento";
+			this->checkBox5->UseVisualStyleBackColor = true;
+			// 
+			// checkBox4
+			// 
+			this->checkBox4->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->checkBox4->Location = System::Drawing::Point(252, 152);
+			this->checkBox4->Name = L"checkBox4";
+			this->checkBox4->Size = System::Drawing::Size(93, 40);
+			this->checkBox4->TabIndex = 5;
+			this->checkBox4->Text = L"Aislamiento preventivo";
+			this->checkBox4->UseVisualStyleBackColor = true;
+			// 
+			// checkBox3
+			// 
+			this->checkBox3->AutoSize = true;
+			this->checkBox3->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->checkBox3->Location = System::Drawing::Point(11, 194);
+			this->checkBox3->Name = L"checkBox3";
+			this->checkBox3->Size = System::Drawing::Size(118, 19);
+			this->checkBox3->TabIndex = 4;
+			this->checkBox3->Text = L"Consulta urgente";
+			this->checkBox3->UseVisualStyleBackColor = true;
+			// 
+			// checkBox2
+			// 
+			this->checkBox2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->checkBox2->Location = System::Drawing::Point(144, 183);
+			this->checkBox2->Name = L"checkBox2";
+			this->checkBox2->Size = System::Drawing::Size(92, 40);
+			this->checkBox2->TabIndex = 3;
+			this->checkBox2->Text = L"Administrar suplementos";
+			this->checkBox2->UseVisualStyleBackColor = true;
+			// 
+			// checkBox1
+			// 
+			this->checkBox1->AutoSize = true;
+			this->checkBox1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->checkBox1->Location = System::Drawing::Point(11, 164);
+			this->checkBox1->Name = L"checkBox1";
+			this->checkBox1->Size = System::Drawing::Size(94, 19);
+			this->checkBox1->TabIndex = 2;
+			this->checkBox1->Text = L"Ajustar dieta";
+			this->checkBox1->UseVisualStyleBackColor = true;
+			// 
+			// label5
+			// 
+			this->label5->AutoSize = true;
+			this->label5->Font = (gcnew System::Drawing::Font(L"Times New Roman", 11.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label5->Location = System::Drawing::Point(8, 142);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(106, 17);
+			this->label5->TabIndex = 1;
+			this->label5->Text = L"Plan de acción:";
+			// 
+			// textBox2
+			// 
+			this->textBox2->BackColor = System::Drawing::Color::DarkSeaGreen;
+			this->textBox2->Font = (gcnew System::Drawing::Font(L"Times New Roman", 9.75F, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->textBox2->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(38)),
+				static_cast<System::Int32>(static_cast<System::Byte>(35)));
+			this->textBox2->Location = System::Drawing::Point(20, 25);
+			this->textBox2->Multiline = true;
+			this->textBox2->Name = L"textBox2";
+			this->textBox2->Size = System::Drawing::Size(313, 103);
+			this->textBox2->TabIndex = 0;
+			this->textBox2->Text = L"Inserte observaciones y ajustes manuales...";
+			this->textBox2->Enter += gcnew System::EventHandler(this, &frmEditarReporte::textBox2_Enter);
+			this->textBox2->Leave += gcnew System::EventHandler(this, &frmEditarReporte::textBox2_Leave);
+			// 
+			// button2
+			// 
+			this->button2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(38)),
+				static_cast<System::Int32>(static_cast<System::Byte>(35)));
+			this->button2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button2->Font = (gcnew System::Drawing::Font(L"Times New Roman", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button2->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(217)), static_cast<System::Int32>(static_cast<System::Byte>(242)),
+				static_cast<System::Int32>(static_cast<System::Byte>(217)));
+			this->button2->Location = System::Drawing::Point(198, 406);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(75, 23);
+			this->button2->TabIndex = 7;
+			this->button2->Text = L"Cancelar";
+			this->button2->UseVisualStyleBackColor = false;
+			this->button2->Click += gcnew System::EventHandler(this, &frmEditarReporte::button2_Click);
+			// 
+			// button1
+			// 
+			this->button1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(122)), static_cast<System::Int32>(static_cast<System::Byte>(210)),
+				static_cast<System::Int32>(static_cast<System::Byte>(140)));
+			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button1->Font = (gcnew System::Drawing::Font(L"Times New Roman", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button1->Location = System::Drawing::Point(79, 406);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->TabIndex = 6;
+			this->button1->Text = L"Guardar";
+			this->button1->UseVisualStyleBackColor = false;
+			this->button1->Click += gcnew System::EventHandler(this, &frmEditarReporte::button1_Click);
+			// 
 			// frmEditarReporte
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
+			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->ClientSize = System::Drawing::Size(714, 458);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);

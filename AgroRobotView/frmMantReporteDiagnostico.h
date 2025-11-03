@@ -119,6 +119,7 @@ namespace AgroRobotView {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(frmMantReporteDiagnostico::typeid));
 			this->chartTipoAnalisis = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
 			this->chartEstadoSalud = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
@@ -182,6 +183,8 @@ namespace AgroRobotView {
 			// 
 			// groupBox1
 			// 
+			this->groupBox1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(12)), static_cast<System::Int32>(static_cast<System::Byte>(59)),
+				static_cast<System::Int32>(static_cast<System::Byte>(50)));
 			this->groupBox1->Controls->Add(this->radioMensual);
 			this->groupBox1->Controls->Add(this->radioRango);
 			this->groupBox1->Controls->Add(this->comboAnio);
@@ -192,9 +195,13 @@ namespace AgroRobotView {
 			this->groupBox1->Controls->Add(this->label4);
 			this->groupBox1->Controls->Add(this->dateTimePicker2);
 			this->groupBox1->Controls->Add(this->dateTimePicker1);
+			this->groupBox1->Font = (gcnew System::Drawing::Font(L"Times New Roman", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->groupBox1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(217)), static_cast<System::Int32>(static_cast<System::Byte>(242)),
+				static_cast<System::Int32>(static_cast<System::Byte>(217)));
 			this->groupBox1->Location = System::Drawing::Point(35, 24);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(408, 121);
+			this->groupBox1->Size = System::Drawing::Size(408, 134);
 			this->groupBox1->TabIndex = 2;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Criterios de búsqueda";
@@ -203,9 +210,10 @@ namespace AgroRobotView {
 			// radioMensual
 			// 
 			this->radioMensual->AutoSize = true;
+			this->radioMensual->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->radioMensual->Location = System::Drawing::Point(24, 60);
 			this->radioMensual->Name = L"radioMensual";
-			this->radioMensual->Size = System::Drawing::Size(65, 17);
+			this->radioMensual->Size = System::Drawing::Size(71, 19);
 			this->radioMensual->TabIndex = 14;
 			this->radioMensual->TabStop = true;
 			this->radioMensual->Text = L"Mensual";
@@ -215,9 +223,10 @@ namespace AgroRobotView {
 			// radioRango
 			// 
 			this->radioRango->AutoSize = true;
+			this->radioRango->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->radioRango->Location = System::Drawing::Point(24, 35);
 			this->radioRango->Name = L"radioRango";
-			this->radioRango->Size = System::Drawing::Size(57, 17);
+			this->radioRango->Size = System::Drawing::Size(59, 19);
 			this->radioRango->TabIndex = 15;
 			this->radioRango->Text = L"Rango";
 			this->radioRango->UseVisualStyleBackColor = true;
@@ -225,48 +234,64 @@ namespace AgroRobotView {
 			// 
 			// comboAnio
 			// 
+			this->comboAnio->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(38)),
+				static_cast<System::Int32>(static_cast<System::Byte>(35)));
 			this->comboAnio->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->comboAnio->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(232)), static_cast<System::Int32>(static_cast<System::Byte>(245)),
+				static_cast<System::Int32>(static_cast<System::Byte>(234)));
 			this->comboAnio->FormattingEnabled = true;
-			this->comboAnio->Location = System::Drawing::Point(100, 58);
+			this->comboAnio->Location = System::Drawing::Point(104, 58);
 			this->comboAnio->Name = L"comboAnio";
-			this->comboAnio->Size = System::Drawing::Size(70, 21);
+			this->comboAnio->Size = System::Drawing::Size(70, 23);
 			this->comboAnio->TabIndex = 16;
 			// 
 			// comboMes
 			// 
+			this->comboMes->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(38)),
+				static_cast<System::Int32>(static_cast<System::Byte>(35)));
 			this->comboMes->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->comboMes->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(232)), static_cast<System::Int32>(static_cast<System::Byte>(245)),
+				static_cast<System::Int32>(static_cast<System::Byte>(234)));
 			this->comboMes->FormattingEnabled = true;
-			this->comboMes->Location = System::Drawing::Point(180, 58);
+			this->comboMes->Location = System::Drawing::Point(184, 58);
 			this->comboMes->Name = L"comboMes";
-			this->comboMes->Size = System::Drawing::Size(100, 21);
+			this->comboMes->Size = System::Drawing::Size(100, 23);
 			this->comboMes->TabIndex = 17;
 			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(206, 85);
+			this->button3->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(122)), static_cast<System::Int32>(static_cast<System::Byte>(210)),
+				static_cast<System::Int32>(static_cast<System::Byte>(140)));
+			this->button3->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button3->ForeColor = System::Drawing::Color::Black;
+			this->button3->Location = System::Drawing::Point(214, 96);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(80, 23);
 			this->button3->TabIndex = 13;
 			this->button3->Text = L"Limpiar";
-			this->button3->UseVisualStyleBackColor = true;
+			this->button3->UseVisualStyleBackColor = false;
 			this->button3->Click += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::button3_Click);
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(100, 85);
+			this->button1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(122)), static_cast<System::Int32>(static_cast<System::Byte>(210)),
+				static_cast<System::Int32>(static_cast<System::Byte>(140)));
+			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button1->ForeColor = System::Drawing::Color::Black;
+			this->button1->Location = System::Drawing::Point(108, 96);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(80, 23);
 			this->button1->TabIndex = 12;
 			this->button1->Text = L"Buscar";
-			this->button1->UseVisualStyleBackColor = true;
+			this->button1->UseVisualStyleBackColor = false;
 			this->button1->Click += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::button1_Click);
 			// 
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(227, 36);
+			this->label5->Location = System::Drawing::Point(231, 36);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(13, 13);
+			this->label5->Size = System::Drawing::Size(13, 15);
 			this->label5->TabIndex = 8;
 			this->label5->Text = L"a";
 			// 
@@ -275,29 +300,35 @@ namespace AgroRobotView {
 			this->label4->AutoSize = true;
 			this->label4->Location = System::Drawing::Point(24, 35);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(42, 13);
+			this->label4->Size = System::Drawing::Size(46, 15);
 			this->label4->TabIndex = 5;
 			this->label4->Text = L"Rango:";
 			// 
 			// dateTimePicker2
 			// 
+			this->dateTimePicker2->Font = (gcnew System::Drawing::Font(L"Times New Roman", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->dateTimePicker2->Format = System::Windows::Forms::DateTimePickerFormat::Short;
-			this->dateTimePicker2->Location = System::Drawing::Point(257, 33);
+			this->dateTimePicker2->Location = System::Drawing::Point(261, 33);
 			this->dateTimePicker2->Name = L"dateTimePicker2";
-			this->dateTimePicker2->Size = System::Drawing::Size(121, 20);
+			this->dateTimePicker2->Size = System::Drawing::Size(121, 22);
 			this->dateTimePicker2->TabIndex = 6;
 			// 
 			// dateTimePicker1
 			// 
+			this->dateTimePicker1->Font = (gcnew System::Drawing::Font(L"Times New Roman", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->dateTimePicker1->Format = System::Windows::Forms::DateTimePickerFormat::Short;
-			this->dateTimePicker1->Location = System::Drawing::Point(87, 33);
+			this->dateTimePicker1->Location = System::Drawing::Point(91, 33);
 			this->dateTimePicker1->Name = L"dateTimePicker1";
-			this->dateTimePicker1->Size = System::Drawing::Size(121, 20);
+			this->dateTimePicker1->Size = System::Drawing::Size(121, 22);
 			this->dateTimePicker1->TabIndex = 2;
 			this->dateTimePicker1->Value = System::DateTime(2022, 1, 1, 0, 0, 0, 0);
 			// 
 			// groupBox2
 			// 
+			this->groupBox2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(12)), static_cast<System::Int32>(static_cast<System::Byte>(59)),
+				static_cast<System::Int32>(static_cast<System::Byte>(50)));
 			this->groupBox2->Controls->Add(this->textBox4);
 			this->groupBox2->Controls->Add(this->textBox3);
 			this->groupBox2->Controls->Add(this->textBox1);
@@ -306,7 +337,11 @@ namespace AgroRobotView {
 			this->groupBox2->Controls->Add(this->label1);
 			this->groupBox2->Controls->Add(this->textBox2);
 			this->groupBox2->Controls->Add(this->label6);
-			this->groupBox2->Location = System::Drawing::Point(35, 172);
+			this->groupBox2->Font = (gcnew System::Drawing::Font(L"Times New Roman", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->groupBox2->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(217)), static_cast<System::Int32>(static_cast<System::Byte>(242)),
+				static_cast<System::Int32>(static_cast<System::Byte>(217)));
+			this->groupBox2->Location = System::Drawing::Point(35, 177);
 			this->groupBox2->Name = L"groupBox2";
 			this->groupBox2->Size = System::Drawing::Size(408, 116);
 			this->groupBox2->TabIndex = 4;
@@ -316,81 +351,120 @@ namespace AgroRobotView {
 			// 
 			// textBox4
 			// 
+			this->textBox4->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(38)),
+				static_cast<System::Int32>(static_cast<System::Byte>(35)));
+			this->textBox4->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->textBox4->Font = (gcnew System::Drawing::Font(L"Times New Roman", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->textBox4->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(232)), static_cast<System::Int32>(static_cast<System::Byte>(245)),
+				static_cast<System::Int32>(static_cast<System::Byte>(234)));
 			this->textBox4->Location = System::Drawing::Point(327, 75);
 			this->textBox4->Name = L"textBox4";
 			this->textBox4->ReadOnly = true;
-			this->textBox4->Size = System::Drawing::Size(56, 20);
+			this->textBox4->Size = System::Drawing::Size(56, 22);
 			this->textBox4->TabIndex = 10;
 			this->textBox4->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			// 
 			// textBox3
 			// 
+			this->textBox3->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(38)),
+				static_cast<System::Int32>(static_cast<System::Byte>(35)));
+			this->textBox3->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->textBox3->Font = (gcnew System::Drawing::Font(L"Times New Roman", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->textBox3->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(232)), static_cast<System::Int32>(static_cast<System::Byte>(245)),
+				static_cast<System::Int32>(static_cast<System::Byte>(234)));
 			this->textBox3->Location = System::Drawing::Point(230, 75);
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->ReadOnly = true;
-			this->textBox3->Size = System::Drawing::Size(56, 20);
+			this->textBox3->Size = System::Drawing::Size(56, 22);
 			this->textBox3->TabIndex = 9;
 			this->textBox3->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			// 
 			// textBox1
 			// 
+			this->textBox1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(38)),
+				static_cast<System::Int32>(static_cast<System::Byte>(35)));
+			this->textBox1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->textBox1->Font = (gcnew System::Drawing::Font(L"Times New Roman", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->textBox1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(232)), static_cast<System::Int32>(static_cast<System::Byte>(245)),
+				static_cast<System::Int32>(static_cast<System::Byte>(234)));
 			this->textBox1->Location = System::Drawing::Point(130, 75);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->ReadOnly = true;
-			this->textBox1->Size = System::Drawing::Size(58, 20);
+			this->textBox1->Size = System::Drawing::Size(58, 22);
 			this->textBox1->TabIndex = 8;
 			this->textBox1->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(324, 37);
+			this->label3->Font = (gcnew System::Drawing::Font(L"Times New Roman", 11.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label3->Location = System::Drawing::Point(324, 45);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(38, 13);
+			this->label3->Size = System::Drawing::Size(50, 17);
 			this->label3->TabIndex = 7;
 			this->label3->Text = L"Heces";
 			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(227, 37);
+			this->label2->Font = (gcnew System::Drawing::Font(L"Times New Roman", 11.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label2->Location = System::Drawing::Point(227, 45);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(41, 13);
+			this->label2->Size = System::Drawing::Size(53, 17);
 			this->label2->TabIndex = 6;
 			this->label2->Text = L"Sangre";
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(127, 37);
+			this->label1->Font = (gcnew System::Drawing::Font(L"Times New Roman", 11.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label1->Location = System::Drawing::Point(127, 28);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(49, 26);
+			this->label1->Size = System::Drawing::Size(69, 34);
 			this->label1->TabIndex = 5;
 			this->label1->Text = L"Animales\r\nÚnicos";
 			// 
 			// textBox2
 			// 
+			this->textBox2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(38)),
+				static_cast<System::Int32>(static_cast<System::Byte>(35)));
+			this->textBox2->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->textBox2->Font = (gcnew System::Drawing::Font(L"Times New Roman", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->textBox2->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(232)), static_cast<System::Int32>(static_cast<System::Byte>(245)),
+				static_cast<System::Int32>(static_cast<System::Byte>(234)));
 			this->textBox2->Location = System::Drawing::Point(27, 75);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->ReadOnly = true;
-			this->textBox2->Size = System::Drawing::Size(55, 20);
+			this->textBox2->Size = System::Drawing::Size(55, 22);
 			this->textBox2->TabIndex = 4;
 			this->textBox2->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			// 
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(24, 37);
+			this->label6->Font = (gcnew System::Drawing::Font(L"Times New Roman", 11.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label6->Location = System::Drawing::Point(24, 28);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(50, 26);
+			this->label6->Size = System::Drawing::Size(71, 34);
 			this->label6->TabIndex = 0;
 			this->label6->Text = L"Total\r\nMuestras";
+			this->label6->Click += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::label6_Click_1);
 			// 
 			// tabControl1
 			// 
 			this->tabControl1->Controls->Add(this->tabPage1);
 			this->tabControl1->Controls->Add(this->tabPage2);
 			this->tabControl1->Controls->Add(this->tabPage3);
+			this->tabControl1->Font = (gcnew System::Drawing::Font(L"Times New Roman", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->tabControl1->Location = System::Drawing::Point(35, 317);
 			this->tabControl1->Name = L"tabControl1";
 			this->tabControl1->SelectedIndex = 0;
@@ -402,10 +476,10 @@ namespace AgroRobotView {
 			// 
 			this->tabPage1->Controls->Add(this->chartTipoAnalisis);
 			this->tabPage1->Controls->Add(this->chartEstadoSalud);
-			this->tabPage1->Location = System::Drawing::Point(4, 22);
+			this->tabPage1->Location = System::Drawing::Point(4, 24);
 			this->tabPage1->Name = L"tabPage1";
 			this->tabPage1->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage1->Size = System::Drawing::Size(400, 303);
+			this->tabPage1->Size = System::Drawing::Size(400, 301);
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"Gráficos";
 			this->tabPage1->UseVisualStyleBackColor = true;
@@ -413,10 +487,10 @@ namespace AgroRobotView {
 			// tabPage2
 			// 
 			this->tabPage2->Controls->Add(this->dataGridEstadisticas);
-			this->tabPage2->Location = System::Drawing::Point(4, 22);
+			this->tabPage2->Location = System::Drawing::Point(4, 24);
 			this->tabPage2->Name = L"tabPage2";
 			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage2->Size = System::Drawing::Size(400, 303);
+			this->tabPage2->Size = System::Drawing::Size(400, 301);
 			this->tabPage2->TabIndex = 1;
 			this->tabPage2->Text = L"Estadísticas";
 			this->tabPage2->UseVisualStyleBackColor = true;
@@ -430,15 +504,15 @@ namespace AgroRobotView {
 			this->dataGridEstadisticas->Location = System::Drawing::Point(3, 3);
 			this->dataGridEstadisticas->Name = L"dataGridEstadisticas";
 			this->dataGridEstadisticas->ReadOnly = true;
-			this->dataGridEstadisticas->Size = System::Drawing::Size(394, 297);
+			this->dataGridEstadisticas->Size = System::Drawing::Size(394, 295);
 			this->dataGridEstadisticas->TabIndex = 0;
 			// 
 			// tabPage3
 			// 
 			this->tabPage3->Controls->Add(this->dataGridDetalle);
-			this->tabPage3->Location = System::Drawing::Point(4, 22);
+			this->tabPage3->Location = System::Drawing::Point(4, 24);
 			this->tabPage3->Name = L"tabPage3";
-			this->tabPage3->Size = System::Drawing::Size(400, 303);
+			this->tabPage3->Size = System::Drawing::Size(400, 301);
 			this->tabPage3->TabIndex = 2;
 			this->tabPage3->Text = L"Detalle";
 			this->tabPage3->UseVisualStyleBackColor = true;
@@ -452,14 +526,20 @@ namespace AgroRobotView {
 			this->dataGridDetalle->Location = System::Drawing::Point(0, 0);
 			this->dataGridDetalle->Name = L"dataGridDetalle";
 			this->dataGridDetalle->ReadOnly = true;
-			this->dataGridDetalle->Size = System::Drawing::Size(400, 303);
+			this->dataGridDetalle->Size = System::Drawing::Size(400, 301);
 			this->dataGridDetalle->TabIndex = 0;
 			// 
 			// groupBox3
 			// 
+			this->groupBox3->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(12)), static_cast<System::Int32>(static_cast<System::Byte>(59)),
+				static_cast<System::Int32>(static_cast<System::Byte>(50)));
 			this->groupBox3->Controls->Add(this->button5);
 			this->groupBox3->Controls->Add(this->button4);
 			this->groupBox3->Controls->Add(this->button2);
+			this->groupBox3->Font = (gcnew System::Drawing::Font(L"Times New Roman", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->groupBox3->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(217)), static_cast<System::Int32>(static_cast<System::Byte>(242)),
+				static_cast<System::Int32>(static_cast<System::Byte>(217)));
 			this->groupBox3->Location = System::Drawing::Point(35, 664);
 			this->groupBox3->Name = L"groupBox3";
 			this->groupBox3->Size = System::Drawing::Size(408, 73);
@@ -470,38 +550,53 @@ namespace AgroRobotView {
 			// 
 			// button5
 			// 
+			this->button5->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(38)),
+				static_cast<System::Int32>(static_cast<System::Byte>(35)));
+			this->button5->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button5->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(159)), static_cast<System::Int32>(static_cast<System::Byte>(217)),
+				static_cast<System::Int32>(static_cast<System::Byte>(176)));
 			this->button5->Location = System::Drawing::Point(298, 29);
 			this->button5->Name = L"button5";
 			this->button5->Size = System::Drawing::Size(80, 23);
 			this->button5->TabIndex = 15;
 			this->button5->Text = L"Cancelar";
-			this->button5->UseVisualStyleBackColor = true;
+			this->button5->UseVisualStyleBackColor = false;
 			this->button5->Click += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::button5_Click);
 			// 
 			// button4
 			// 
+			this->button4->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(122)), static_cast<System::Int32>(static_cast<System::Byte>(210)),
+				static_cast<System::Int32>(static_cast<System::Byte>(140)));
+			this->button4->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button4->ForeColor = System::Drawing::Color::Black;
 			this->button4->Location = System::Drawing::Point(172, 29);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(80, 23);
 			this->button4->TabIndex = 14;
 			this->button4->Text = L"Excel";
-			this->button4->UseVisualStyleBackColor = true;
+			this->button4->UseVisualStyleBackColor = false;
 			this->button4->Click += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::button4_Click);
 			// 
 			// button2
 			// 
+			this->button2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(122)), static_cast<System::Int32>(static_cast<System::Byte>(210)),
+				static_cast<System::Int32>(static_cast<System::Byte>(140)));
+			this->button2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button2->ForeColor = System::Drawing::Color::Black;
 			this->button2->Location = System::Drawing::Point(40, 29);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(80, 23);
 			this->button2->TabIndex = 13;
 			this->button2->Text = L"PDF";
-			this->button2->UseVisualStyleBackColor = true;
+			this->button2->UseVisualStyleBackColor = false;
 			this->button2->Click += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::button2_Click);
 			// 
 			// frmMantReporteDiagnostico
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
+			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->ClientSize = System::Drawing::Size(469, 749);
 			this->Controls->Add(this->groupBox3);
 			this->Controls->Add(this->tabControl1);
@@ -888,6 +983,8 @@ private: System::Void tabControl1_SelectedIndexChanged(System::Object^ sender, S
 	}
 private: System::Void groupBox3_Enter(System::Object^ sender, System::EventArgs^ e) {
 	}
+private: System::Void label6_Click_1(System::Object^ sender, System::EventArgs^ e) {
+}
 }; // Fin de la clase frmMantReporteDiagnostico
 
     } // Fin del namespace AgroRobotView
