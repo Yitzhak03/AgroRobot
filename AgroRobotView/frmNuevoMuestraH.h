@@ -23,6 +23,8 @@ namespace AgroRobotView {
 			//
 			//TODO: agregar código de constructor aquí
 			//
+			this->Load += gcnew System::EventHandler(this, &frmNuevoMuestraH::frmNuevoMuestraH_Load);
+
 		}
 
 		frmNuevoMuestraH(Muestra^ muestra, MuestraController^ muestraController)
@@ -262,6 +264,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmNuevoMuestraH";
 			this->Text = L"Muestra Heces";
+			this->Load += gcnew System::EventHandler(this, &frmNuevoMuestraH::frmNuevoMuestraH_Load);
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
 			this->ResumeLayout(false);
@@ -269,6 +272,7 @@ namespace AgroRobotView {
 		}
 #pragma endregion
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		//int idMuestra = Convert::ToInt32(this->textBox6->Text);
 		int idMuestra = Convert::ToInt32(this->textBox6->Text);
 		int idAnimal = Convert::ToInt32(this->textBox1->Text);
 		String^ consistencia = this->textBox2->Text;
@@ -289,6 +293,11 @@ namespace AgroRobotView {
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
+	}
+	private: System::Void frmNuevoMuestraH_Load(System::Object^ sender, System::EventArgs^ e) {
+		int nuevoId = this->muestraController->generarNuevoId();
+		this->textBox6->Text = Convert::ToString(nuevoId);
+		this->textBox6->ReadOnly = true;
 	}
 };
 }

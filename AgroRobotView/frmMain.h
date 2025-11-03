@@ -252,12 +252,12 @@ namespace AgroRobotView {
 		List<Usuario^>^ lista = ctrl->obtenerTodosUsuarios();
 
 		for each (Usuario ^ u in lista) {
-			// comparar nombre de usuario sin distinguir mayúsculas/minúsculas,
-			// pero la contraseña sí (por convención)
-			if (String::Compare(u->GetNombre(), usuario, false) == 0 && u->GetContrasenha()->Equals(contrasenha)) {
+			if (u->GetNombre() == usuario && u->GetContrasenha() == contrasenha) {
 				// Autenticado
 				MessageBox::Show("Acceso correcto. Bienvenido " + u->GetNombre(), "Login", MessageBoxButtons::OK, MessageBoxIcon::Information);
-				// Aquí puedes guardar el usuario actual en una variable global/static o abrir el formulario principal
+				
+				u->SetUltimoAcceso(DateTime::Now.ToString("dd/MM/yyyy HH:mm"));
+				ctrl->actualizarUsuario(u);
 				this->Hide(); // Ocultar el formulario de login
 				frmMenu^ menu = gcnew frmMenu(u); // Pasar el usuario autenticado
 				menu->ShowDialog(); // Mostrar el formulario del menú principal

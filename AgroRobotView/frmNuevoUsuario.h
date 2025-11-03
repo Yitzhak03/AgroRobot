@@ -262,7 +262,7 @@ namespace AgroRobotView {
 		nuevoUsuario->SetEmail(txtCorreo->Text);
 		nuevoUsuario->SetContrasenha(txtCtrsn->Text);
 		nuevoUsuario->SetRol(rolController->obtenerRolPorNombre(comboBox1->Text));
-		nuevoUsuario->SetUltimoAcceso(""); // Inicialmente vacío
+		nuevoUsuario->SetUltimoAcceso("-"); // Inicialmente vacío
 		nuevoUsuario->SetEstadoCuenta("Activo"); // Estado por defecto
 		nuevoUsuario->SetIdsAlertas(nullptr); // Inicialmente sin alertas
 		

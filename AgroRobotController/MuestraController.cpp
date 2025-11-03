@@ -106,6 +106,17 @@ void MuestraController::eliminarMuestraArchivo(int idMuestra) {
     escribirArchivo(lista);
 }
 
+int MuestraController::generarNuevoId() {
+    List<Muestra^>^ lista = buscarTodasMuestrasArchivo(); // O readTxt() si usas ese nombre
+    int maxId = 0;
+    for each (Muestra ^ muestra in lista) {
+        if (muestra->getIdMuestra() > maxId) {
+            maxId = muestra->getIdMuestra();
+        }
+    }
+    return maxId + 1;
+}
+
 // Guardar lista completa en archivo
 void MuestraController::escribirArchivo(List<Muestra^>^ listaMuestras) {
     array<String^>^ lineas = gcnew array<String^>(listaMuestras->Count);
