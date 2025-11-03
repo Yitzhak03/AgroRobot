@@ -2,6 +2,7 @@
 namespace AgroRobotController {
 	using namespace System::Collections::Generic;
 	using namespace AgroRobotModel;
+	using namespace System;
 	public ref class AlmacenController {
 	private:
 		List<OrdenDistribucion^>^ listaOrdenes;
@@ -15,6 +16,10 @@ namespace AgroRobotController {
 		void cargarOrdenesDesdeArchivo();
 		void guardarOrdenesEnArchivo();
 		Almacen^ buscarPorId(int id);
+		String^ buscarNombrePorId(int id);
+		int buscarIdPorNombre(String^ nombre);
 		int generarNuevoId();
+		List<String^>^ obtenerNombresAlmacenes();
+		Almacen^ obtenerAlmacenPorNombre(String^ nombre);
 	};
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "frmNuevoAlmacen.h"
 #include "frmPaintStockPorAlmacen.h"
+#include "frmAgregarInsumoToAlmacen.h"
 namespace AgroRobotView {
 
 	using namespace System;
@@ -229,6 +230,18 @@ namespace AgroRobotView {
 		   //========================================================================
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e)
 	{
+		if (dataGridView1->SelectedRows->Count == 0) {
+			MessageBox::Show(
+				"Debe seleccionar una fila para agregar insumos.",
+				"Error",
+				MessageBoxButtons::OK,
+				MessageBoxIcon::Error
+			);
+			return;
+		}
+		int idAlmacen = Convert::ToInt32(dataGridView1->SelectedRows[0]->Cells[0]->Value);
+		frmAgregarInsumoToAlmacen^ frm = gcnew frmAgregarInsumoToAlmacen(idAlmacen);
+		frm->ShowDialog();
 	}
 		   //========================================================================
 		   //===========================Ver Insumos==================================
@@ -252,5 +265,5 @@ namespace AgroRobotView {
 		frmPaintStockPorAlmacen^ frm = gcnew frmPaintStockPorAlmacen(almacen, stocks);
 		frm->ShowDialog();
 	}
-};
+	};
 }

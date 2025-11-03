@@ -29,6 +29,32 @@ List<StockInsumo^>^ StockInsumoController::readTxt()
 	}
 	return lista;
 }
+void StockInsumoController::writeTxt(List<StockInsumo^>^ lista)
+{
+	String^ path = "stocks.txt";
+	List<String^>^ lineas = gcnew List<String^>();
+	for each (StockInsumo ^ s in lista) {
+		String^ linea = Convert::ToString(s->Id) + ";" +
+			Convert::ToString(s->Insumoo->Id) + ";" +
+			Convert::ToString(s->Almacenn->Id) + ";" +
+			Convert::ToString(s->Stock) + ";" +
+			Convert::ToString(s->LimiteBajo) + ";" +
+			Convert::ToString(s->LimiteAlto);
+		lineas->Add(linea);
+	}
+	File::WriteAllLines(path, lineas->ToArray());
+}
+int StockInsumoController::generarNuevoId()
+{
+	List<StockInsumo^>^ lista = readTxt();
+	int maxId = 0;
+	for each (StockInsumo ^ s in lista) {
+		if (s->Id > maxId) {
+			maxId = s->Id;
+		}
+	}
+	return maxId + 1;
+}
 StockInsumo^ StockInsumoController::buscarPorId(int id)
 {
 	List<StockInsumo^>^ lista = readTxt();
@@ -38,6 +64,25 @@ StockInsumo^ StockInsumoController::buscarPorId(int id)
 		}
 	}
 	return nullptr;
+}
+void StockInsumoController::agregarStockInsumo(StockInsumo^ stockInsumo)
+{
+	List<StockInsumo^>^ lista = readTxt();
+	lista->Add(stockInsumo);
+	// Escribir de nuevo el archivo
+	writeTxt(lista);
+}
+void StockInsumoController::actualizarStockInsumo(StockInsumo^ stockInsumo)
+{
+	List<StockInsumo^>^ lista = readTxt();
+	for (int i = 0; i < lista->Count; i++) {
+		if (lista[i]->Id == stockInsumo->Id) {
+			lista[i] = stockInsumo;
+			break;
+		}
+	}
+	// Escribir de nuevo el archivo
+	writeTxt(lista);
 }
 List<StockInsumo^>^ StockInsumoController::buscarPorIdInsumo(int idInsumo)
 {
@@ -60,6 +105,16 @@ List<StockInsumo^>^ StockInsumoController::buscarPorIdAlmacen(int idAlmacen)
 		}
 	}
 	return resultados;
+}
+StockInsumo^ StockInsumoController::buscarPorIdInsumoYAlmacen(int idInsumo, int idAlmacen)
+{
+	List<StockInsumo^>^ lista = readTxt();
+	for each (StockInsumo ^ s in lista) {
+		if (s->Insumoo->Id == idInsumo && s->Almacenn->Id == idAlmacen) {
+			return s;
+		}
+	}
+	return nullptr;
 }
 int StockInsumoController::cantidadInsumosEnAlmacen(int idAlmacen)
 {

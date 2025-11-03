@@ -2,6 +2,7 @@
 #include "frmNuevoInsumo.h"
 #include "frmEditInsumo.h"
 #include "frmPaintInsumosPorStock.h"
+#include "frmNuevoStock.h"
 namespace AgroRobotView {
 
 	using namespace System;
@@ -70,6 +71,7 @@ namespace AgroRobotView {
 		/// </summary>
 		System::ComponentModel::Container^ components;
 	private: System::Windows::Forms::Button^ button6;
+	private: System::Windows::Forms::Button^ button7;
 
 		   // Nuevo campo para recordar filtro actual (si null o vacío => mostrar todos)
 		   String^ currentFilter;
@@ -95,6 +97,7 @@ namespace AgroRobotView {
 			   this->label1 = (gcnew System::Windows::Forms::Label());
 			   this->button4 = (gcnew System::Windows::Forms::Button());
 			   this->button6 = (gcnew System::Windows::Forms::Button());
+			   this->button7 = (gcnew System::Windows::Forms::Button());
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			   this->groupBox1->SuspendLayout();
 			   this->SuspendLayout();
@@ -248,11 +251,22 @@ namespace AgroRobotView {
 			   this->button6->UseVisualStyleBackColor = true;
 			   this->button6->Click += gcnew System::EventHandler(this, &frmMantInsumo::button6_Click);
 			   // 
+			   // button7
+			   // 
+			   this->button7->Location = System::Drawing::Point(121, 269);
+			   this->button7->Name = L"button7";
+			   this->button7->Size = System::Drawing::Size(116, 23);
+			   this->button7->TabIndex = 24;
+			   this->button7->Text = L"Añadir stock";
+			   this->button7->UseVisualStyleBackColor = true;
+			   this->button7->Click += gcnew System::EventHandler(this, &frmMantInsumo::button7_Click);
+			   // 
 			   // frmMantInsumo
 			   // 
 			   this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			   this->ClientSize = System::Drawing::Size(691, 335);
+			   this->Controls->Add(this->button7);
 			   this->Controls->Add(this->button6);
 			   this->Controls->Add(this->button3);
 			   this->Controls->Add(this->button4);
@@ -450,7 +464,27 @@ namespace AgroRobotView {
 		Insumo^ insumo = insumoCtrl->buscarPorId(idInsumo);
 		StockInsumoController^ stockCtrl = gcnew StockInsumoController();
 		List<StockInsumo^>^ stocks = stockCtrl->buscarPorIdInsumo(idInsumo);
-		frmPaintInsumosPorStock^ frm = gcnew frmPaintInsumosPorStock(insumo,stocks);
+		frmPaintInsumosPorStock^ frm = gcnew frmPaintInsumosPorStock(insumo, stocks);
+		frm->ShowDialog();
+	}
+		   //===============================================================================
+		   //==============================Añadir stock=====================================
+		   //===============================================================================
+	private: System::Void button7_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		if (dataGridView1->SelectedRows->Count == 0) {
+			MessageBox::Show(
+				"Debe seleccionar una fila para añadir stock.",
+				"Error",
+				MessageBoxButtons::OK,
+				MessageBoxIcon::Error
+			);
+			return;
+		}
+		int idInsumo = Convert::ToInt32(dataGridView1->SelectedRows[0]->Cells[0]->Value);
+		InsumoController^ insumoCtrl = gcnew InsumoController();
+		Insumo^ insumo = insumoCtrl->buscarPorId(idInsumo);
+		frmNuevoStock^ frm = gcnew frmNuevoStock(insumo);
 		frm->ShowDialog();
 	}
 	};

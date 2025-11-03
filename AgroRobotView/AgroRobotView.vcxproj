@@ -113,6 +113,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="frmAgregarInsumoToAlmacen.cpp" />
     <ClCompile Include="frmEditarAnimal.cpp" />
     <ClCompile Include="frmEditarDiagnostico.cpp" />
     <ClCompile Include="frmEditarDieta.cpp" />
@@ -140,6 +141,8 @@
     <ClCompile Include="frmNuevoMuestraH.cpp" />
     <ClCompile Include="frmNuevoMuestraS.cpp" />
     <ClCompile Include="frmNuevoRol.cpp" />
+    <ClCompile Include="frmNuevoStock.cpp" />
+    <ClCompile Include="frmNuevoStock2.cpp" />
     <ClCompile Include="frmNuevoUsuario.cpp" />
     <ClCompile Include="frmOrdenesAlimentacion.cpp" />
     <ClCompile Include="frmPaintStockPorAlmacen.cpp" />
@@ -156,6 +159,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="frmAgregarInsumoToAlmacen.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="frmEditarAnimal.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -241,6 +247,12 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmNuevoRol.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="frmNuevoStock.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="frmNuevoStock2.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmNuevoUsuario.h">
