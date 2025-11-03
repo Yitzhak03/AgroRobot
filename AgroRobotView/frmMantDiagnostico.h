@@ -1,14 +1,18 @@
 #pragma once
 #include "frmNuevoDiagnostico.h"
+#include "frmEditarDiagnostico.h"
 
 namespace AgroRobotView {
 
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
+	using namespace System::Collections::Generic;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace AgroRobotModel;
+	using namespace AgroRobotController;
 
 	/// <summary>
 	/// Resumen de frmMantDiagnostico
@@ -19,9 +23,7 @@ namespace AgroRobotView {
 		frmMantDiagnostico(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: agregar código de constructor aquí
-			//
+			this->diagnosticoController = gcnew DiagnosticoController();
 		}
 
 	protected:
@@ -52,6 +54,7 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::Windows::Forms::Label^ label1;
+	private: DiagnosticoController^ diagnosticoController;
 
 	private:
 		/// <summary>
@@ -94,6 +97,7 @@ namespace AgroRobotView {
 			this->button4->TabIndex = 12;
 			this->button4->Text = L"Eliminar";
 			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &frmMantDiagnostico::button4_Click);
 			// 
 			// button3
 			// 
@@ -103,6 +107,7 @@ namespace AgroRobotView {
 			this->button3->TabIndex = 11;
 			this->button3->Text = L"Editar";
 			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &frmMantDiagnostico::button3_Click);
 			// 
 			// button2
 			// 
@@ -178,6 +183,7 @@ namespace AgroRobotView {
 			this->button1->TabIndex = 4;
 			this->button1->Text = L"Buscar";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &frmMantDiagnostico::button1_Click);
 			// 
 			// textBox2
 			// 
@@ -233,6 +239,79 @@ namespace AgroRobotView {
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		frmNuevoDiagnostico^ nuevoDiagnostico = gcnew frmNuevoDiagnostico();
 		nuevoDiagnostico->ShowDialog();
+	}
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		List<Diagnostico^>^ listaFiltrada = gcnew List<Diagnostico^>();
+		String^ textoId = this->textBox1->Text->Trim();
+
+		if (String::IsNullOrEmpty(textoId)) {
+			// Mostrar todos los diagnósticos
+			List<Diagnostico^>^ todos = diagnosticoController->buscarTodosDiagnosticosArchivo();
+			listaFiltrada->AddRange(todos);
+		}
+		else {
+			// Buscar por ID de animal
+			int idAnimal;
+			if (!Int32::TryParse(textoId, idAnimal)) {
+				MessageBox::Show("Ingrese un ID de animal válido.");
+				return;
+			}
+			List<Diagnostico^>^ listaPorAnimal = diagnosticoController->buscarDiagnosticosPorAnimalArchivo(idAnimal);
+			listaFiltrada->AddRange(listaPorAnimal);
+		}
+
+		this->dataGridView1->Rows->Clear();
+		if (listaFiltrada->Count == 0) {
+			MessageBox::Show("No se encontraron diagnósticos.");
+		}
+		else {
+			mostrarGrillaDiagnostico(listaFiltrada);
+		}
+	}
+
+	private: void mostrarGrillaDiagnostico(List<Diagnostico^>^ listaDiagnosticos) {
+		for each (Diagnostico ^ d in listaDiagnosticos) {
+			array<String^>^ fila = gcnew array<String^>(8);
+			fila[0] = Convert::ToString(d->getIdDiagnostico());
+			fila[1] = Convert::ToString(d->getIdAnimal());
+			fila[2] = d->getEspecie();
+			fila[3] = d->getResultadoHeces();
+			fila[4] = d->getResultadoSangre();
+			fila[5] = d->getEstadoSalud();
+			fila[6] = d->getObservaciones();
+			fila[7] = d->getFecha();
+			this->dataGridView1->Rows->Add(fila);
+		}
+	}
+	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (this->dataGridView1->SelectedRows->Count == 0) {
+			MessageBox::Show("Seleccione un diagnóstico para eliminar.");
+			return;
+		}
+
+		int filaSeleccionada = this->dataGridView1->SelectedRows[0]->Index;
+		int idEliminar = Convert::ToInt32(this->dataGridView1->Rows[filaSeleccionada]->Cells[0]->Value->ToString());
+
+		this->diagnosticoController->eliminarDiagnosticoArchivo(idEliminar);
+		MessageBox::Show("El diagnóstico ha sido eliminado con éxito.");
+
+		// Opcional: recargar la grilla
+		List<Diagnostico^>^ listaActualizada = diagnosticoController->buscarTodosDiagnosticosArchivo();
+		this->dataGridView1->Rows->Clear();
+		mostrarGrillaDiagnostico(listaActualizada);
+	}
+	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (this->dataGridView1->SelectedRows->Count == 0) {
+			MessageBox::Show("Seleccione un diagnóstico para editar.");
+			return;
+		}
+
+		int filaSeleccionada = this->dataGridView1->SelectedRows[0]->Index;
+		int codigoEditar = Convert::ToInt32(this->dataGridView1->Rows[filaSeleccionada]->Cells[0]->Value->ToString());
+
+		Diagnostico^ diagnostico = this->diagnosticoController->buscarDiagnosticoPorIdArchivo(codigoEditar);
+		frmEditarDiagnostico^ ventanaEditar = gcnew frmEditarDiagnostico(diagnostico, this->diagnosticoController);
+		ventanaEditar->ShowDialog();
 	}
 };
 }

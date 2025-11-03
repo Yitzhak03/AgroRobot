@@ -277,7 +277,7 @@ namespace AgroRobotView {
 		this->Close();
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		//int idMuestra = Convert::ToInt32(this->textBox5->Text);
+		
 		int idMuestra = Convert::ToInt32(this->textBox5->Text);
 		int idAnimal = Convert::ToInt32(this->textBox1->Text);
 		String^ cantidad = this->textBox2->Text;

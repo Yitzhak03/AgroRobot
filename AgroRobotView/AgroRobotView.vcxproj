@@ -114,6 +114,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="frmEditarAnimal.cpp" />
+    <ClCompile Include="frmEditarDiagnostico.cpp" />
     <ClCompile Include="frmEditarDieta.cpp" />
     <ClCompile Include="frmEditarMuestraH.cpp" />
     <ClCompile Include="frmEditarMuestraS.cpp" />
@@ -156,6 +157,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="frmEditarAnimal.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="frmEditarDiagnostico.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmEditarDieta.h">
@@ -261,6 +265,9 @@
   <ItemGroup>
     <EmbeddedResource Include="frmEditarAnimal.resx">
       <DependentUpon>frmEditarAnimal.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEditarDiagnostico.resx">
+      <DependentUpon>frmEditarDiagnostico.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEditarDieta.resx">
       <DependentUpon>frmEditarDieta.h</DependentUpon>

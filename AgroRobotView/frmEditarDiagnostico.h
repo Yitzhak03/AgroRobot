@@ -12,21 +12,20 @@ namespace AgroRobotView {
 	using namespace AgroRobotController;
 
 	/// <summary>
-	/// Resumen de frmNuevoDiagnostico
+	/// Resumen de frmEditarDiagnostico
 	/// </summary>
-	public ref class frmNuevoDiagnostico : public System::Windows::Forms::Form
+	public ref class frmEditarDiagnostico : public System::Windows::Forms::Form
 	{
 	public:
-		frmNuevoDiagnostico(void)
+		frmEditarDiagnostico(void)
 		{
 			InitializeComponent();
 			//
 			//TODO: agregar código de constructor aquí
 			//
-			this->Load += gcnew System::EventHandler(this, &frmNuevoDiagnostico::frmNuevoDiagnostico_Load);
 		}
 
-		frmNuevoDiagnostico(Diagnostico^ Diagnostico, DiagnosticoController^ diagnosticoController)
+		frmEditarDiagnostico(Diagnostico^ diagnostico, DiagnosticoController^ diagnosticoController)
 		{
 			InitializeComponent();
 			this->diagnostico = diagnostico;
@@ -37,7 +36,7 @@ namespace AgroRobotView {
 		/// <summary>
 		/// Limpiar los recursos que se estén usando.
 		/// </summary>
-		~frmNuevoDiagnostico()
+		~frmEditarDiagnostico()
 		{
 			if (components)
 			{
@@ -48,10 +47,6 @@ namespace AgroRobotView {
 	protected:
 	private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::GroupBox^ groupBox1;
-	private: System::Windows::Forms::Label^ label8;
-	private: System::Windows::Forms::TextBox^ textBox8;
-	private: System::Windows::Forms::TextBox^ textBox7;
-	private: System::Windows::Forms::Label^ label7;
 	private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::TextBox^ textBox6;
@@ -66,22 +61,10 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::Label^ label1;
 	private: Diagnostico^ diagnostico;
 	private: DiagnosticoController^ diagnosticoController;
-
-	protected:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	private: System::Windows::Forms::TextBox^ textBox7;
+	private: System::Windows::Forms::Label^ label7;
+	private: System::Windows::Forms::Label^ label8;
+	private: System::Windows::Forms::TextBox^ textBox8;
 
 	private:
 		/// <summary>
@@ -120,23 +103,23 @@ namespace AgroRobotView {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(166, 361);
+			this->button2->Location = System::Drawing::Point(166, 365);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(75, 23);
-			this->button2->TabIndex = 14;
+			this->button2->TabIndex = 11;
 			this->button2->Text = L"Cancelar";
 			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &frmNuevoDiagnostico::button2_Click);
+			this->button2->Click += gcnew System::EventHandler(this, &frmEditarDiagnostico::button2_Click);
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(53, 361);
+			this->button1->Location = System::Drawing::Point(53, 365);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(75, 23);
-			this->button1->TabIndex = 13;
+			this->button1->TabIndex = 10;
 			this->button1->Text = L"Guardar";
 			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &frmNuevoDiagnostico::button1_Click);
+			this->button1->Click += gcnew System::EventHandler(this, &frmEditarDiagnostico::button1_Click);
 			// 
 			// groupBox1
 			// 
@@ -156,10 +139,10 @@ namespace AgroRobotView {
 			this->groupBox1->Controls->Add(this->textBox2);
 			this->groupBox1->Controls->Add(this->textBox1);
 			this->groupBox1->Controls->Add(this->label1);
-			this->groupBox1->Location = System::Drawing::Point(44, 8);
+			this->groupBox1->Location = System::Drawing::Point(44, 12);
 			this->groupBox1->Name = L"groupBox1";
 			this->groupBox1->Size = System::Drawing::Size(211, 347);
-			this->groupBox1->TabIndex = 12;
+			this->groupBox1->TabIndex = 9;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Diagnostico";
 			// 
@@ -290,17 +273,16 @@ namespace AgroRobotView {
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"ID Animal:";
 			// 
-			// frmNuevoDiagnostico
+			// frmEditarDiagnostico
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(298, 392);
+			this->ClientSize = System::Drawing::Size(299, 400);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->groupBox1);
-			this->Name = L"frmNuevoDiagnostico";
-			this->Text = L"frmNuevoDiagnostico";
-			this->Load += gcnew System::EventHandler(this, &frmNuevoDiagnostico::frmNuevoDiagnostico_Load);
+			this->Name = L"frmEditarDiagnostico";
+			this->Text = L"frmEditarDiagnostico";
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
 			this->ResumeLayout(false);
@@ -308,17 +290,16 @@ namespace AgroRobotView {
 		}
 #pragma endregion
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		int idDiagnostico = Convert::ToInt32(this->textBox7->Text);
-		int idAnimal = Convert::ToInt32(this->textBox1->Text);
-		String^ especie = this->textBox2->Text;
-		String^ resultadoHeces = this->textBox3->Text;
-		String^ resultadoSangre = this->textBox4->Text;
-		String^ estadoSalud = this->textBox5->Text;
-		String^ observaciones = this->textBox6->Text;
-		String^ fecha = this->textBox8->Text;
+		int idDiagnostico = Convert::ToInt32(textBox7->Text);
+		int idAnimal = Convert::ToInt32(textBox1->Text);
+		String^ especie = textBox2->Text;
+		String^ resultadoHeces = textBox3->Text;
+		String^ resultadoSangre = textBox4->Text;
+		String^ estadoSalud = textBox5->Text;
+		String^ observaciones = textBox6->Text;
+		String^ fecha = textBox8->Text;
 
-		// Crear objeto diagnóstico
-		Diagnostico^ nuevoDiagnostico = gcnew Diagnostico(
+		Diagnostico^ diagnosticoEditado = gcnew Diagnostico(
 			idDiagnostico,
 			idAnimal,
 			especie,
@@ -329,19 +310,12 @@ namespace AgroRobotView {
 			fecha
 		);
 
-		// Guardar en archivo
-		this->diagnosticoController->agregarDiagnosticoArchivo(nuevoDiagnostico);
-
-		MessageBox::Show("El diagnóstico ha sido registrado con éxito.");
+		diagnosticoController->editarDiagnosticoArchivo(idDiagnostico, diagnosticoEditado);
+		MessageBox::Show("Diagnóstico editado correctamente.");
 		this->Close();
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
-	}
-	private: System::Void frmNuevoDiagnostico_Load(System::Object^ sender, System::EventArgs^ e) {
-		int nuevoId = this->diagnosticoController->generarNuevoId();
-		this->textBox7->Text = Convert::ToString(nuevoId);
-		this->textBox7->ReadOnly = true;
 	}
 };
 }

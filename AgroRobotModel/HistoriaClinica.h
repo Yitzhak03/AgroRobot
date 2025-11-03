@@ -1,6 +1,6 @@
 #pragma once
 #include "Reporte.h"
-#include "Analisis.h"
+#include "Diagnostico.h"
 namespace AgroRobotModel {
     using namespace System;
 	using namespace System::Collections::Generic;
@@ -12,7 +12,7 @@ namespace AgroRobotModel {
         property String^ EvolucionSalud;
         property String^ PlanesNutricionales;
 		property Reporte^ ReporteAsociado;
-		property List<Analisis^>^ AnalisisRealizados;
+		property List<Diagnostico^>^ AnalisisRealizados;
         HistoriaClinica();
         HistoriaClinica(
             int idAnimal,
@@ -21,7 +21,7 @@ namespace AgroRobotModel {
             String^ evolucionSalud,
             String^ planesNutricionales,
             Reporte^ reporteAsociado,
-            List<Analisis^>^ analisisRealizados
+            List<Diagnostico^>^ AnalisisRealizados
         );
     };
 }

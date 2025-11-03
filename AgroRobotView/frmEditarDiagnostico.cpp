@@ -1,0 +1,2 @@
+#include "frmEditarDiagnostico.h"
+
