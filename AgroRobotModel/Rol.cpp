@@ -4,7 +4,9 @@ using namespace AgroRobotModel;
 
 
 Rol::Rol() {
-
+    this->Id = 0;
+    this->Nombre = "";
+    this->Permisos = nullptr;
 }
 
 Rol::Rol(int id, String^ nombre) {
