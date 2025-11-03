@@ -69,6 +69,12 @@ namespace AgroRobotView {
 
 
 
+
+
+
+
+
+
 	protected:
 
 	private:
@@ -231,13 +237,14 @@ namespace AgroRobotView {
 			// 
 			// Column4
 			// 
-			this->Column4->HeaderText = L"Permiso 2";
+			this->Column4->HeaderText = L"Acceso a Gestión de Reportes";
 			this->Column4->Name = L"Column4";
 			this->Column4->ReadOnly = true;
+			this->Column4->Width = 130;
 			// 
 			// Column5
 			// 
-			this->Column5->HeaderText = L"Permiso 3";
+			this->Column5->HeaderText = L"Acceso a Alimentación";
 			this->Column5->Name = L"Column5";
 			this->Column5->ReadOnly = true;
 			// 
@@ -246,6 +253,7 @@ namespace AgroRobotView {
 			this->Column6->HeaderText = L"Permiso 4";
 			this->Column6->Name = L"Column6";
 			this->Column6->ReadOnly = true;
+			this->Column6->Width = 50;
 			// 
 			// frmMantRoles
 			// 

@@ -202,7 +202,7 @@ namespace AgroRobotView {
 		this->txtId->Text = Convert::ToString(maxId + 1);
 		
 		this->checkedListBox1->Items->Add("Acceso a Administración");
-		this->checkedListBox1->Items->Add("Editar");
+		this->checkedListBox1->Items->Add("Gestión de Reportes");
 		this->checkedListBox1->Items->Add("Eliminar");
 		this->checkedListBox1->Items->Add("Ver");
 	}
