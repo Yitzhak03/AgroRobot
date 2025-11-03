@@ -105,6 +105,20 @@ namespace AgroRobotView {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	private:
 		/// <summary>
 		/// Variable del diseñador necesaria.
