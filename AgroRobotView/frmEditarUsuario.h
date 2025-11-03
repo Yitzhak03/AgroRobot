@@ -280,7 +280,6 @@ namespace AgroRobotView {
 		nuevoUsuario->SetRol(rolController->obtenerRolPorNombre(txtRoles->Text));
 		nuevoUsuario->SetUltimoAcceso(""); // Inicialmente vacío
 		nuevoUsuario->SetEstadoCuenta("Activo"); // Estado por defecto
-		nuevoUsuario->SetIdsAlertas(nullptr); // Inicialmente sin alertas
 		// Llamando al controlador para actualizar el operador en la base de datos
 		
 		this->usuarioController->actualizarUsuario(nuevoUsuario);

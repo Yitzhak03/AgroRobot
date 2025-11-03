@@ -353,6 +353,9 @@
     <EmbeddedResource Include="frmNuevoUsuario.resx">
       <DependentUpon>frmNuevoUsuario.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmOrdenesAlimentacion.resx">
+      <DependentUpon>frmOrdenesAlimentacion.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPaintStockPorAlmacen.resx">
       <DependentUpon>frmPaintStockPorAlmacen.h</DependentUpon>
     </EmbeddedResource>

@@ -14,13 +14,12 @@ namespace AgroRobotModel {
 		property String^ UltimoAcceso;
 		property String^ EstadoCuenta;
 		property Rol^ RolUsuario;
-		property List<int>^ IdsAlertas;
 	
 	public:
 		
 		Usuario();
 		Usuario(int id, String^ nombre, String^ email, String^ contrasenha, String^ ultimoAcceso, 
-			String^ estadoCuenta,Rol^ rol,  List<int>^ idsAlertas);
+			String^ estadoCuenta,Rol^ rol);
 
 		int GetId();
 		void SetId(int id);
@@ -42,8 +41,5 @@ namespace AgroRobotModel {
 
 		Rol^ GetRol();
 		void SetRol(Rol^ rol);
-
-		List<int>^ GetIdsAlertas();
-		void SetIdsAlertas(List<int>^ idsAlertas);
 	};
 }

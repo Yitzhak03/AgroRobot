@@ -3,7 +3,7 @@
 namespace AgroRobotModel {
     using namespace System;
 
-    // Forward declarations to avoid circular includes
+    /*Declaración para evitar referencias circulares*/
     ref class Robot;
 
     public ref class Ganadero: public Usuario {

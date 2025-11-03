@@ -197,7 +197,7 @@ bool GestorNutricionalController::modificarDieta(int id, int idAnimal, String^ f
 }
 
 bool GestorNutricionalController::eliminarDieta(int id) {
-	Dieta^ dieta = consultarDietaporId(dieta->Id);
+	Dieta^ dieta = consultarDietaporId(id);
 	if (dieta != nullptr) {
 		this->listaDietas->Remove(dieta);
 		return true;
