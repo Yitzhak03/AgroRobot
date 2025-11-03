@@ -12,7 +12,7 @@ HistoriaClinica::HistoriaClinica(
     String^ evolucionSalud,
     String^ planesNutricionales,
     Reporte^ reporteAsociado,
-    List<Analisis^>^ analisisRealizados
+	List<Diagnostico^>^ analisisRealizados
 ) 
 {
 	IdAnimal = idAnimal;

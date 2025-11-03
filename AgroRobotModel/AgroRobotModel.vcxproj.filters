@@ -24,7 +24,7 @@
     <ClCompile Include="Almacen.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Analisis.cpp">
+    <ClCompile Include="Diagnostico.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Animal.cpp">
@@ -92,7 +92,7 @@
     <ClInclude Include="Almacen.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Analisis.h">
+    <ClInclude Include="Diagnostico.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Animal.h">
