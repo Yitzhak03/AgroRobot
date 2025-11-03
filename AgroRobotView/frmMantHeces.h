@@ -54,6 +54,14 @@ namespace AgroRobotView {
 
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::Windows::Forms::Label^ label1;
+
+
+
+
+
+
+
+	private: MuestraController^ muestraController;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
@@ -61,7 +69,12 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Fecha;
-	private: MuestraController^ muestraController;
+
+
+
+
+
+
 
 
 
@@ -85,6 +98,10 @@ namespace AgroRobotView {
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -92,10 +109,6 @@ namespace AgroRobotView {
 			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Fecha = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			this->label1 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
@@ -142,41 +155,6 @@ namespace AgroRobotView {
 			this->dataGridView1->Size = System::Drawing::Size(595, 183);
 			this->dataGridView1->TabIndex = 19;
 			// 
-			// Column6
-			// 
-			this->Column6->HeaderText = L"ID Muestra";
-			this->Column6->Name = L"Column6";
-			// 
-			// Column1
-			// 
-			this->Column1->HeaderText = L"ID Animal";
-			this->Column1->Name = L"Column1";
-			// 
-			// Column2
-			// 
-			this->Column2->HeaderText = L"Consistencia";
-			this->Column2->Name = L"Column2";
-			// 
-			// Column3
-			// 
-			this->Column3->HeaderText = L"Color";
-			this->Column3->Name = L"Column3";
-			// 
-			// Column4
-			// 
-			this->Column4->HeaderText = L"Olor";
-			this->Column4->Name = L"Column4";
-			// 
-			// Column5
-			// 
-			this->Column5->HeaderText = L"Parasitos presentes";
-			this->Column5->Name = L"Column5";
-			// 
-			// Fecha
-			// 
-			this->Fecha->HeaderText = L"Fecha";
-			this->Fecha->Name = L"Fecha";
-			// 
 			// groupBox1
 			// 
 			this->groupBox1->Controls->Add(this->button1);
@@ -214,6 +192,41 @@ namespace AgroRobotView {
 			this->label1->Size = System::Drawing::Size(55, 13);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"ID Animal:";
+			// 
+			// Column6
+			// 
+			this->Column6->HeaderText = L"ID Muestra";
+			this->Column6->Name = L"Column6";
+			// 
+			// Column1
+			// 
+			this->Column1->HeaderText = L"ID Animal";
+			this->Column1->Name = L"Column1";
+			// 
+			// Column2
+			// 
+			this->Column2->HeaderText = L"Consistencia";
+			this->Column2->Name = L"Column2";
+			// 
+			// Column3
+			// 
+			this->Column3->HeaderText = L"Color";
+			this->Column3->Name = L"Column3";
+			// 
+			// Column4
+			// 
+			this->Column4->HeaderText = L"Olor";
+			this->Column4->Name = L"Column4";
+			// 
+			// Column5
+			// 
+			this->Column5->HeaderText = L"Parasitos presentes";
+			this->Column5->Name = L"Column5";
+			// 
+			// Fecha
+			// 
+			this->Fecha->HeaderText = L"Fecha";
+			this->Fecha->Name = L"Fecha";
 			// 
 			// frmMantHeces
 			// 
