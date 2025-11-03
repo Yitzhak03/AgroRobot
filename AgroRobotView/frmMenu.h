@@ -37,6 +37,7 @@ namespace AgroRobotView {
 		{
 			this->usuario = usuario;
 			InitializeComponent();
+			aplicarEstilo();
 
 		}
 	protected:
@@ -72,6 +73,35 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::ToolStripMenuItem^ registroGeneralDeAlmacenesToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ gestiónDeOrdenesDeAlimentaciónToolStripMenuItem;
 
+	void aplicarEstilo() {
+
+		// === Fondo general del formulario ===
+		this->BackColor = System::Drawing::Color::FromArgb(245, 250, 245); 
+		this->Font = gcnew System::Drawing::Font("Segoe UI", 10, FontStyle::Regular);
+
+		// === Estilo del menú ===
+		this->menuStrip1->BackColor = System::Drawing::Color::FromArgb(67, 160, 71); 
+		this->menuStrip1->ForeColor = System::Drawing::Color::Gray;
+		this->menuStrip1->Font = gcnew System::Drawing::Font("Segoe UI Semibold", 10, FontStyle::Bold);
+
+		// Recorremos todos los ToolStripMenuItems del menú para darles formato coherente
+		for each (ToolStripMenuItem ^ menuItem in this->menuStrip1->Items) {
+			menuItem->ForeColor = System::Drawing::Color::Black;
+			menuItem->Font = gcnew System::Drawing::Font("Segoe UI Semibold", 10, FontStyle::Bold);
+
+			// Submenús
+			for each (ToolStripItem ^ subItem in menuItem->DropDownItems) {
+				subItem->BackColor = System::Drawing::Color::FromArgb(232, 245, 233); 
+				subItem->ForeColor = System::Drawing::Color::FromArgb(30, 60, 30);
+				subItem->Font = gcnew System::Drawing::Font("Segoe UI", 9, FontStyle::Regular);
+			}
+		}
+
+		// === Bordes y ajustes generales ===
+		this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+		this->MaximizeBox = false;
+		this->Text = L"Menú Principal - AgroRobot";
+	}
 
 	private:
 	private:
