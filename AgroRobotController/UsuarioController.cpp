@@ -40,6 +40,27 @@ UsuarioController::UsuarioController(){
 		listaUsuarios->Add(user);
 	}
 
+	/*lectura para usuarios deshabilitados*/
+	array<String^>^ lineas_2 = File::ReadAllLines(path_2);
+
+	for each (String ^ line in lineas_2) {
+		if (String::IsNullOrWhiteSpace(line)) continue;
+		array<String^>^ datos = line->Split(';');
+		int id = Convert::ToInt32(datos[0]);
+		String^ nombre = datos[1];
+		String^ email = datos[2];
+		String^ contrasenha = datos[3];
+		String^ ultimoAcceso = datos[4];
+		String^ estadoCuenta = datos[5];
+
+		int idRol = Convert::ToInt32(datos[6]);
+		RolController^ rolController = gcnew RolController();
+		Rol^ rol = rolController->obtenerRolPorId(idRol);
+
+		Usuario^ user = gcnew Usuario(id, nombre, email, contrasenha, ultimoAcceso, estadoCuenta, rol);
+		listaDeshabilitados->Add(user);
+	}
+
 }
 
 void UsuarioController::escribirArchivo(bool habilitado){
@@ -58,7 +79,7 @@ void UsuarioController::escribirArchivo(bool habilitado){
 	/*se decide si los cambios se harán en la lista de usuarios habilitados o la de deshabilitados*/
 	lista = (habilitado) ? this->listaUsuarios : this->listaDeshabilitados;
 
-	array<String^>^ lineasArchivo = gcnew array<String^>(this->listaUsuarios->Count);
+	array<String^>^ lineasArchivo = gcnew array<String^>(lista->Count);
 
 	for (int i = 0; i < lista->Count; ++i) {
 		Usuario^ usuario = lista[i];
@@ -75,12 +96,17 @@ void UsuarioController::agregarUsuario(Usuario^ usuario){
 	escribirArchivo(true);
 }
 
-List<Usuario^>^ UsuarioController::obtenerTodosUsuarios() {
-	return this->listaUsuarios;
+List<Usuario^>^ UsuarioController::obtenerTodosUsuarios(bool habilitado) {
+	if (habilitado) {
+		return this->listaUsuarios;
+	}
+	else {
+		return this->listaDeshabilitados;
+	}
 }
 
 
-void UsuarioController::deshabilitarUsuario(int id)
+void UsuarioController::cambiarEstadoUsuario(int id)
 {
 	for each (Usuario ^ usuario in this->listaUsuarios) {
 		if (usuario->GetId() == id) {
@@ -106,6 +132,8 @@ void UsuarioController::actualizarUsuario(Usuario^ usuario)
 }
 
 Usuario^ UsuarioController::obtenerUsuarioPorId(int id){
+	List<Usuario^>^ lista = this->listaUsuarios;
+	lista->AddRange(this->listaDeshabilitados);
 	for each (Usuario ^ usuario in this->listaUsuarios) {
 		if (usuario->GetId() == id) {
 			return usuario;

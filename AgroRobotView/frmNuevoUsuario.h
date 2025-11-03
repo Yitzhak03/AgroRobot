@@ -264,7 +264,7 @@ namespace AgroRobotView {
 		nuevoUsuario->SetContrasenha(txtCtrsn->Text);
 		nuevoUsuario->SetRol(rolController->obtenerRolPorNombre(comboBox1->Text));
 		nuevoUsuario->SetUltimoAcceso("-"); // Inicialmente vacío
-		nuevoUsuario->SetEstadoCuenta("Activo"); // Estado por defecto
+		nuevoUsuario->SetEstadoCuenta("Habilitado"); // Estado por defecto
 		
 		// Llamar al controlador para agregar el nuevo usuario
 		this->usuarioController->agregarUsuario(nuevoUsuario);
@@ -282,7 +282,8 @@ namespace AgroRobotView {
 
 	private: System::Void groupBox1_Enter(System::Object^ sender, System::EventArgs^ e) {
 		/*crea un ID automático*/
-		List<Usuario^>^ listaUsuarios = this->usuarioController->obtenerTodosUsuarios();
+		List<Usuario^>^ listaUsuarios = this->usuarioController->obtenerTodosUsuarios(true);
+		listaUsuarios->AddRange(this->usuarioController->obtenerTodosUsuarios(false));
 
 		int maxId = 0;
 		for each(Usuario ^ usuario in listaUsuarios) {

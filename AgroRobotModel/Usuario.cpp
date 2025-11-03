@@ -3,6 +3,13 @@
 using namespace AgroRobotModel;
 
 Usuario::Usuario(){
+	this->Id = 0;
+	this->Nombre = "";
+	this->Email = "";
+	this->Contrasenha = "";
+	this->UltimoAcceso = "";
+	this->EstadoCuenta = "";
+	this->RolUsuario = nullptr;
 }
 
 Usuario::Usuario(int id, String^ nombre, String^ email, String^ contrasenha, String^ ultimoAcceso,

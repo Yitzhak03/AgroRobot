@@ -151,12 +151,12 @@ namespace AgroRobotView {
 			// 
 			// btnEliminar
 			// 
-			this->btnEliminar->Location = System::Drawing::Point(535, 370);
+			this->btnEliminar->Location = System::Drawing::Point(526, 370);
 			this->btnEliminar->Margin = System::Windows::Forms::Padding(2);
 			this->btnEliminar->Name = L"btnEliminar";
-			this->btnEliminar->Size = System::Drawing::Size(77, 19);
+			this->btnEliminar->Size = System::Drawing::Size(99, 19);
 			this->btnEliminar->TabIndex = 15;
-			this->btnEliminar->Text = L"Deshabilitar";
+			this->btnEliminar->Text = L"Cambiar Estado";
 			this->btnEliminar->UseVisualStyleBackColor = true;
 			this->btnEliminar->Click += gcnew System::EventHandler(this, &frmMantUsuarios::btnEliminar_Click);
 			// 
@@ -350,15 +350,23 @@ public:	void mostrarGrilla(List<Usuario^>^ listaUsuarios)
 	this->dataGridView1->AllowUserToAddRows = false;	 // Evitar que el usuario pueda agregar filas manualmente
 }
 
-private: System::Void btnMostrarTodos_Click(System::Object^ sender, System::EventArgs^ e)
-	{
+	private: System::Void btnMostrarTodos_Click(System::Object^ sender, System::EventArgs^ e){
 		// Limpiar el DataGridView antes de mostrar todos los usuarios
 		this->dataGridView1->Rows->Clear();
-		
-		List<Usuario^>^ listaUsuarios= this->usuarioController->obtenerTodosUsuarios();
+		List<Usuario^>^ listaUsuarios = gcnew List<Usuario^>();
+		if (comboBox1->Text == "Habilitado") {
+			listaUsuarios = this->usuarioController->obtenerTodosUsuarios(true);
+		}
+		else if(comboBox1->Text == "Deshabilitado") {
+			listaUsuarios = this->usuarioController->obtenerTodosUsuarios(false);
+		}
+		else {
+			MessageBox::Show("Por favor, seleccione un estado para mostrar todos.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+		}
 		mostrarGrilla(listaUsuarios);
 
 	}
+
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e){
 		frmNuevoUsuario^ nuevoUsuarioForm = gcnew frmNuevoUsuario(this->usuarioController);
 		nuevoUsuarioForm->ShowDialog();
@@ -378,24 +386,28 @@ private: System::Void btnMostrarTodos_Click(System::Object^ sender, System::Even
 	private: System::Void btnEliminar_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (this->dataGridView1->SelectedRows->Count > 0){
 			// Preguntar al usuario si est� seguro de eliminar el registro
-			System::Windows::Forms::DialogResult resultado = MessageBox::Show("¿Está seguro de que desea eliminar el registro seleccionado?",
-				"Confirmación de eliminación", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
-
-			// Si el usuario selecciona "No", cancelar la operaci�n
-			if (resultado == System::Windows::Forms::DialogResult::No){
-				return; // Salir del evento si el usuario cancela
-			}
-
 			int selectedRowIndex = this->dataGridView1->SelectedRows[0]->Index;
 			int idUsuario = Convert::ToInt32(this->dataGridView1->Rows[selectedRowIndex]->Cells[0]->Value);
-			// Crear una instancia del controlador y eliminar la máquina
-			this->usuarioController->deshabilitarUsuario(idUsuario);
-			// Actualizar la lista de máquinas en el DataGridView
-			List<Usuario^>^ listaUsuarios = this->usuarioController->obtenerTodosUsuarios();
-			mostrarGrilla(listaUsuarios);
+			
+			if (this->usuarioController->obtenerUsuarioPorId(idUsuario)->GetEstadoCuenta() == "Habilitado") {
+				System::Windows::Forms::DialogResult resultado = MessageBox::Show("¿Está seguro de que desea deshabilitar el registro seleccionado?", "Confirmación de deshabilitación", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
+				// Si el usuario selecciona "No", cancelar la operaci n 
+				if (resultado == System::Windows::Forms::DialogResult::No) {
+					return;
+					// Salir del evento si el usuario cancela 
+				}
+				this->usuarioController->cambiarEstadoUsuario(idUsuario);
+				// Actualizar la lista de máquinas en el DataGridView
+				List<Usuario^>^ listaUsuarios = this->usuarioController->obtenerTodosUsuarios(true);
+				mostrarGrilla(listaUsuarios);
+			}
+			else {
+				MessageBox::Show("El usuario que ha seleccionado ya se encuentra deshabilitado.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+			}
+			
 		}
 		else{
-			MessageBox::Show("Por favor, seleccione un usuario para eliminar.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+			MessageBox::Show("Por favor, seleccione un usuario para deshabilitar.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
 		}
 	
 	}
@@ -412,13 +424,18 @@ private: System::Void btnMostrarTodos_Click(System::Object^ sender, System::Even
 				MessageBox::Show("No se encontró el usuario seleccionado.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 				return;
 			}
-			// Crear una nueva instancia del formulario de nuevo operador
+			// Crear una nueva instancia del formulario de nuevo usuario
 			// y mostrarlo como un formulario hijo dentro del contenedor MDI
 			frmEditarUsuario^ ventanaEditarUsuario = gcnew frmEditarUsuario(this->usuarioController, usuarioSeleccionado);
 			ventanaEditarUsuario->ShowDialog();
 			// Llamar al m�todo para cargar la lista de operadores nuevamente
-			List<Usuario^>^ listaUsuarios = this->usuarioController->obtenerTodosUsuarios();
-			mostrarGrilla(listaUsuarios);
+			List<Usuario^>^ listaUsuarios = gcnew List<Usuario^>();
+			if (usuarioSeleccionado->GetEstadoCuenta() == "Habilitado") {
+				listaUsuarios = this->usuarioController->obtenerTodosUsuarios(true);
+			}
+			else {
+				listaUsuarios = this->usuarioController->obtenerTodosUsuarios(false);
+			}
 		}
 		else
 		{

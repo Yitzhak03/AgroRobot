@@ -13,9 +13,9 @@ namespace AgroRobotController {
 		void escribirArchivo(bool habilitado);
 
 		void agregarUsuario(Usuario^ usuario);
-		List<Usuario^>^ obtenerTodosUsuarios();
+		List<Usuario^>^ obtenerTodosUsuarios(bool habilitado);
 		void actualizarUsuario(Usuario^ usuario);
-		void deshabilitarUsuario(int id);
+		void cambiarEstadoUsuario(int id);
 		Usuario^ obtenerUsuarioPorId(int id);
 		List<Usuario^>^ obtenerUsuarioPorNombreEstado(String^ nombre, String^ estado);
 	};

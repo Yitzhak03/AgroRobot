@@ -1,3 +1,2 @@
-4;rg;gre;gre;-;Deshabilitado;4
-
-
+2;Mauricio;mau.ricio@gmail,com;schrodinger;-;Deshabilitado;3
+4;Bryan;bry_an@gmail.com;721577;-;Deshabilitado;3

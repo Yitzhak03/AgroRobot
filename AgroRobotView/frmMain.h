@@ -249,7 +249,7 @@ namespace AgroRobotView {
 		}
 
 		UsuarioController^ ctrl = gcnew UsuarioController();
-		List<Usuario^>^ lista = ctrl->obtenerTodosUsuarios();
+		List<Usuario^>^ lista = ctrl->obtenerTodosUsuarios(true);
 
 		for each (Usuario ^ u in lista) {
 			if (u->GetNombre() == usuario && u->GetContrasenha() == contrasenha) {
