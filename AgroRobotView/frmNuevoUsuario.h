@@ -187,6 +187,7 @@ namespace AgroRobotView {
 			// 
 			// txtId
 			// 
+			this->txtId->Enabled = false;
 			this->txtId->Location = System::Drawing::Point(137, 41);
 			this->txtId->Margin = System::Windows::Forms::Padding(2);
 			this->txtId->Name = L"txtId";
@@ -264,7 +265,6 @@ namespace AgroRobotView {
 		nuevoUsuario->SetRol(rolController->obtenerRolPorNombre(comboBox1->Text));
 		nuevoUsuario->SetUltimoAcceso("-"); // Inicialmente vacío
 		nuevoUsuario->SetEstadoCuenta("Activo"); // Estado por defecto
-		nuevoUsuario->SetIdsAlertas(nullptr); // Inicialmente sin alertas
 		
 		// Llamar al controlador para agregar el nuevo usuario
 		this->usuarioController->agregarUsuario(nuevoUsuario);

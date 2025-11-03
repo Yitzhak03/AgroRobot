@@ -6,8 +6,20 @@ using namespace System::IO;
 
 UsuarioController::UsuarioController(){
 	this->listaUsuarios = gcnew List<Usuario^>();
+	this->listaDeshabilitados = gcnew List<Usuario^>();
 	
 	String^ path = "usuarios.txt";
+	String^ path_2 = "deshabilitados.txt";
+
+	/*crea el txt de habilitados y deshabilitados*/
+	if (!File::Exists(path)) {
+		File::WriteAllText(path, "");
+	}
+
+	if (!File::Exists(path_2)) {
+		File::WriteAllText(path_2, "");
+	}
+
 	array<String^>^ lineas = File::ReadAllLines(path);
 
 	for each (String ^ linea in lineas) {
@@ -23,60 +35,44 @@ UsuarioController::UsuarioController(){
 		int idRol = Convert::ToInt32(datos[6]);
 		RolController^ rolController = gcnew RolController();
 		Rol^ rol = rolController->obtenerRolPorId(idRol);
-
-
-		// Parsear Alertas usando '|' como separador
-		List<int>^ idsAlertas = gcnew List<int>();
-		String^ alertsField = datos[7];
-		array<String^>^ alertasIds = alertsField->Split('|');
-		if (!String::IsNullOrEmpty(alertsField)) {
-			for each (String ^ alertaId in alertasIds)
-				idsAlertas->Add(Convert::ToInt32(alertaId));
-		}
-		else idsAlertas = nullptr;
 		
-		Usuario^ user = gcnew Usuario(id, nombre, email, contrasenha, ultimoAcceso, estadoCuenta, rol, idsAlertas);
+		Usuario^ user = gcnew Usuario(id, nombre, email, contrasenha, ultimoAcceso, estadoCuenta, rol);
 		listaUsuarios->Add(user);
 	}
 
 }
 
-void UsuarioController::writeTxt(List<Usuario^>^ lista)
-{
-	String^ path = "usuarios.txt";
+void UsuarioController::escribirArchivo(bool habilitado){
+	String^ path;
+
+	if (habilitado) {
+		path = "usuarios.txt";
+	}
+	else {
+		path = "deshabilitados.txt";
+	}
+
 	// Preparamos el array de líneas con la misma cantidad que la lista
-	array<String^>^ lineas = gcnew array<String^>(lista->Count);
+	List<Usuario^>^ lista = gcnew List<Usuario^>();
+
+	/*se decide si los cambios se harán en la lista de usuarios habilitados o la de deshabilitados*/
+	lista = (habilitado) ? this->listaUsuarios : this->listaDeshabilitados;
+
+	array<String^>^ lineasArchivo = gcnew array<String^>(this->listaUsuarios->Count);
 
 	for (int i = 0; i < lista->Count; ++i) {
-		Usuario^ u = lista[i];
-
-		// Construir campo alerts (separador '|')
-		String^ alertsField = "";
-		if (u->GetIdsAlertas() != nullptr && u->GetIdsAlertas()->Count > 0) {
-			for (int j = 0; j < u->GetIdsAlertas()->Count; ++j) {
-				alertsField += u->GetIdsAlertas()[j].ToString();
-				if (j < u->GetIdsAlertas()->Count - 1) // Agregar separador solo si no es el último
-					alertsField += "|";
-			}
-		}
-		lineas[i] = String::Format("{0};{1};{2};{3};{4};{5};{6};{7}",
-			u->GetId(),
-			u->GetNombre(),
-			u->GetEmail(),
-			u->GetContrasenha(),
-			u->GetUltimoAcceso(),
-			u->GetEstadoCuenta(),
-			u->GetRol()->GetId(),
-			alertsField
-		);
+		Usuario^ usuario = lista[i];
+		lineasArchivo[i] = usuario->GetId() + ";" + usuario->GetNombre() + ";" + usuario->GetEmail() + ";" +
+			usuario->GetContrasenha() + ";" + usuario->GetUltimoAcceso() + ";" + usuario->GetEstadoCuenta() + ";" +
+			 usuario->GetRol()->GetId();
 	}
 	// Escribimos todas las líneas al archivo (sobrescribe)
-	File::WriteAllLines(path, lineas);
+	File::WriteAllLines(path, lineasArchivo);
 }
 
 void UsuarioController::agregarUsuario(Usuario^ usuario){
 	this->listaUsuarios->Add(usuario);
-	writeTxt(this->listaUsuarios);
+	escribirArchivo(true);
 }
 
 List<Usuario^>^ UsuarioController::obtenerTodosUsuarios() {
@@ -84,15 +80,18 @@ List<Usuario^>^ UsuarioController::obtenerTodosUsuarios() {
 }
 
 
-void UsuarioController::eliminarUsuario(int id)
+void UsuarioController::deshabilitarUsuario(int id)
 {
 	for each (Usuario ^ usuario in this->listaUsuarios) {
 		if (usuario->GetId() == id) {
+			this->listaDeshabilitados->Add(usuario);
 			this->listaUsuarios->Remove(usuario);
+			usuario->SetEstadoCuenta("Deshabilitado");
 			break;
 		}
 	}
-	writeTxt(this->listaUsuarios);
+	escribirArchivo(true);
+	escribirArchivo(false);
 }
 
 void UsuarioController::actualizarUsuario(Usuario^ usuario)
@@ -103,7 +102,7 @@ void UsuarioController::actualizarUsuario(Usuario^ usuario)
 			break;
 		}
 	}
-	writeTxt(this->listaUsuarios);
+	escribirArchivo(true);
 }
 
 Usuario^ UsuarioController::obtenerUsuarioPorId(int id){
@@ -116,8 +115,18 @@ Usuario^ UsuarioController::obtenerUsuarioPorId(int id){
 
 List<Usuario^>^ UsuarioController::obtenerUsuarioPorNombreEstado(String^ nombre, String^ estado){
 	List<Usuario^>^ resultados = gcnew List<Usuario^>();
+	List<Usuario^>^ listaBusqueda = gcnew List<Usuario^>();
 
-	for each (Usuario ^ usuario in this->listaUsuarios) {
+	/*si no se escoge estado se busca en ambos, si se escoge se busca solo en una de ellas*/
+	if (estado == "") {
+		listaBusqueda->AddRange(this->listaUsuarios);
+		listaBusqueda->AddRange(this->listaDeshabilitados);
+	}
+	else {
+		listaBusqueda = (estado == "Habilitado") ? this->listaUsuarios : this->listaDeshabilitados;
+	}
+	
+	for each (Usuario ^ usuario in listaBusqueda) {
 		bool coincideNombre = (String::IsNullOrEmpty(nombre) || usuario->GetNombre() == nombre);
 		bool coincideEstado = (String::IsNullOrEmpty(estado) || usuario->GetEstadoCuenta() == estado);
 
@@ -127,5 +136,4 @@ List<Usuario^>^ UsuarioController::obtenerUsuarioPorNombreEstado(String^ nombre,
 	}
 
 	return resultados;
-
 }

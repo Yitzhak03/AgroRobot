@@ -56,7 +56,7 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::GroupBox^ groupBox1;
 	private: System::Windows::Forms::Button^ btnBuscar;
 
-	private: System::Windows::Forms::TextBox^ textBox2;
+
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::Windows::Forms::Label^ label1;
@@ -68,6 +68,14 @@ namespace AgroRobotView {
 
 
 	private: UsuarioController^ usuarioController;
+
+
+
+
+
+
+
+	private: System::Windows::Forms::ComboBox^ comboBox1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
@@ -75,6 +83,20 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column7;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -107,8 +129,8 @@ namespace AgroRobotView {
 			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column7 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->btnBuscar = (gcnew System::Windows::Forms::Button());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
@@ -118,12 +140,12 @@ namespace AgroRobotView {
 			// 
 			// btnMostrarTodos
 			// 
-			this->btnMostrarTodos->Location = System::Drawing::Point(555, 49);
+			this->btnMostrarTodos->Location = System::Drawing::Point(582, 49);
 			this->btnMostrarTodos->Margin = System::Windows::Forms::Padding(2);
 			this->btnMostrarTodos->Name = L"btnMostrarTodos";
-			this->btnMostrarTodos->Size = System::Drawing::Size(117, 19);
+			this->btnMostrarTodos->Size = System::Drawing::Size(92, 19);
 			this->btnMostrarTodos->TabIndex = 16;
-			this->btnMostrarTodos->Text = L"Mostrar Habilitados";
+			this->btnMostrarTodos->Text = L"Mostrar Todos";
 			this->btnMostrarTodos->UseVisualStyleBackColor = true;
 			this->btnMostrarTodos->Click += gcnew System::EventHandler(this, &frmMantUsuarios::btnMostrarTodos_Click);
 			// 
@@ -189,44 +211,46 @@ namespace AgroRobotView {
 			this->Column2->HeaderText = L"Nombre";
 			this->Column2->MinimumWidth = 6;
 			this->Column2->Name = L"Column2";
-			this->Column2->Width = 125;
+			this->Column2->Width = 90;
 			// 
 			// Column3
 			// 
-			this->Column3->HeaderText = L"Contraseña";
+			this->Column3->HeaderText = L"Email";
 			this->Column3->MinimumWidth = 6;
 			this->Column3->Name = L"Column3";
-			this->Column3->Width = 125;
+			this->Column3->Width = 145;
 			// 
 			// Column4
 			// 
-			this->Column4->HeaderText = L"Ultimo Acceso";
+			this->Column4->HeaderText = L"Contraseña";
 			this->Column4->MinimumWidth = 6;
 			this->Column4->Name = L"Column4";
 			this->Column4->Width = 125;
 			// 
 			// Column5
 			// 
-			this->Column5->HeaderText = L"Estado";
+			this->Column5->HeaderText = L"Último Acceso";
 			this->Column5->Name = L"Column5";
+			this->Column5->Width = 125;
 			// 
 			// Column6
 			// 
-			this->Column6->HeaderText = L"Rol";
+			this->Column6->HeaderText = L"Estado";
 			this->Column6->MinimumWidth = 6;
 			this->Column6->Name = L"Column6";
-			this->Column6->Width = 125;
+			this->Column6->Width = 90;
 			// 
 			// Column7
 			// 
-			this->Column7->HeaderText = L"Alertas";
+			this->Column7->HeaderText = L"Rol";
 			this->Column7->Name = L"Column7";
+			this->Column7->Width = 125;
 			// 
 			// groupBox1
 			// 
+			this->groupBox1->Controls->Add(this->comboBox1);
 			this->groupBox1->Controls->Add(this->btnMostrarTodos);
 			this->groupBox1->Controls->Add(this->btnBuscar);
-			this->groupBox1->Controls->Add(this->textBox2);
 			this->groupBox1->Controls->Add(this->label2);
 			this->groupBox1->Controls->Add(this->textBox1);
 			this->groupBox1->Controls->Add(this->label1);
@@ -239,9 +263,18 @@ namespace AgroRobotView {
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Criterios de Búsqueda";
 			// 
+			// comboBox1
+			// 
+			this->comboBox1->FormattingEnabled = true;
+			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Habilitado", L"Deshabilitado" });
+			this->comboBox1->Location = System::Drawing::Point(326, 50);
+			this->comboBox1->Name = L"comboBox1";
+			this->comboBox1->Size = System::Drawing::Size(128, 21);
+			this->comboBox1->TabIndex = 17;
+			// 
 			// btnBuscar
 			// 
-			this->btnBuscar->Location = System::Drawing::Point(478, 50);
+			this->btnBuscar->Location = System::Drawing::Point(493, 50);
 			this->btnBuscar->Margin = System::Windows::Forms::Padding(2);
 			this->btnBuscar->Name = L"btnBuscar";
 			this->btnBuscar->Size = System::Drawing::Size(56, 19);
@@ -249,14 +282,6 @@ namespace AgroRobotView {
 			this->btnBuscar->Text = L"Buscar";
 			this->btnBuscar->UseVisualStyleBackColor = true;
 			this->btnBuscar->Click += gcnew System::EventHandler(this, &frmMantUsuarios::btnBuscar_Click);
-			// 
-			// textBox2
-			// 
-			this->textBox2->Location = System::Drawing::Point(325, 50);
-			this->textBox2->Margin = System::Windows::Forms::Padding(2);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(128, 20);
-			this->textBox2->TabIndex = 3;
 			// 
 			// label2
 			// 
@@ -314,11 +339,11 @@ public:	void mostrarGrilla(List<Usuario^>^ listaUsuarios)
 		array<String^>^ filaGrilla = gcnew array<String^>(7);
 		filaGrilla[0] = Convert::ToString(usuario->GetId());
 		filaGrilla[1] = usuario->GetNombre();
-		filaGrilla[2] = usuario->GetContrasenha();
-		filaGrilla[3] = Convert::ToString(usuario->GetUltimoAcceso());
-		filaGrilla[4] = usuario->GetEstadoCuenta();
-		filaGrilla[5] = usuario->GetRol()->GetNombre();
-		filaGrilla[6] = Convert::ToString(usuario->GetIdsAlertas());
+		filaGrilla[2] = usuario->GetEmail();
+		filaGrilla[3] = usuario->GetContrasenha();
+		filaGrilla[4] = Convert::ToString(usuario->GetUltimoAcceso());
+		filaGrilla[5] = usuario->GetEstadoCuenta();
+		filaGrilla[6] = usuario->GetRol()->GetNombre();
 		this->dataGridView1->Rows->Add(filaGrilla);
 	}
 	this->dataGridView1->AutoGenerateColumns = false; // Desactivar la generaci�n autom�tica de columnas
@@ -340,23 +365,16 @@ private: System::Void btnMostrarTodos_Click(System::Object^ sender, System::Even
 	}
 
 	private: System::Void btnBuscar_Click(System::Object^ sender, System::EventArgs^ e) {
-		String^ nombreUsuario = "";
-		String^ estadoUsuario = "";
-		if (!textBox1->Text->Equals(""))
-		{
-			//Obterne el nombre del usuario a buscar
-			nombreUsuario = textBox1->Text;
+		String^ nombreUsuario = textBox1->Text;
+		String^ estadoUsuario = comboBox1->Text;
+		
+		List<Usuario^>^ listaUsuarios = gcnew List<Usuario^>();
+		if (nombreUsuario != "") {
+			listaUsuarios = this->usuarioController->obtenerUsuarioPorNombreEstado(nombreUsuario, estadoUsuario);
 		}
-		if (!textBox2->Text->Equals(""))
-		{
-			// Obtener el nombre del operador a buscar
-			estadoUsuario = textBox2->Text;
-		}
-		// Crear una instancia del controlador y buscar el operador por nombre
-		List<Usuario^>^ listaUsuarios = this->usuarioController->obtenerUsuarioPorNombreEstado(nombreUsuario, estadoUsuario);
-		// Mostrar los resultados en el DataGridView
 		mostrarGrilla(listaUsuarios);
 	}
+
 	private: System::Void btnEliminar_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (this->dataGridView1->SelectedRows->Count > 0){
 			// Preguntar al usuario si est� seguro de eliminar el registro
@@ -371,7 +389,7 @@ private: System::Void btnMostrarTodos_Click(System::Object^ sender, System::Even
 			int selectedRowIndex = this->dataGridView1->SelectedRows[0]->Index;
 			int idUsuario = Convert::ToInt32(this->dataGridView1->Rows[selectedRowIndex]->Cells[0]->Value);
 			// Crear una instancia del controlador y eliminar la máquina
-			this->usuarioController->eliminarUsuario(idUsuario);
+			this->usuarioController->deshabilitarUsuario(idUsuario);
 			// Actualizar la lista de máquinas en el DataGridView
 			List<Usuario^>^ listaUsuarios = this->usuarioController->obtenerTodosUsuarios();
 			mostrarGrilla(listaUsuarios);
