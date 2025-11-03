@@ -283,6 +283,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmEditarDiagnostico";
 			this->Text = L"frmEditarDiagnostico";
+			this->Load += gcnew System::EventHandler(this, &frmEditarDiagnostico::frmEditarDiagnostico_Load);
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
 			this->ResumeLayout(false);
@@ -316,6 +317,16 @@ namespace AgroRobotView {
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
+	}
+	private: System::Void frmEditarDiagnostico_Load(System::Object^ sender, System::EventArgs^ e) {
+		this->textBox7->Text = Convert::ToString(this->diagnostico->getIdDiagnostico());
+		this->textBox1->Text = Convert::ToString(this->diagnostico->getIdAnimal());
+		this->textBox2->Text = this->diagnostico->getEspecie();
+		this->textBox3->Text = this->diagnostico->getResultadoHeces();
+		this->textBox4->Text = this->diagnostico->getResultadoSangre();
+		this->textBox5->Text = this->diagnostico->getEstadoSalud();
+		this->textBox6->Text = this->diagnostico->getObservaciones();
+		this->textBox8->Text = this->diagnostico->getFecha();
 	}
 };
 }

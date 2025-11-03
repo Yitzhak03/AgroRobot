@@ -275,7 +275,6 @@ namespace AgroRobotView {
 			// 
 			// textBox1
 			// 
-			this->textBox1->Enabled = false;
 			this->textBox1->Location = System::Drawing::Point(88, 70);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(100, 20);

@@ -42,12 +42,12 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::Button^ button3;
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
+
+
+
+
+
+
 	private: System::Windows::Forms::GroupBox^ groupBox1;
 	private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::TextBox^ textBox2;
@@ -55,6 +55,24 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::Windows::Forms::Label^ label1;
 	private: DiagnosticoController^ diagnosticoController;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column7;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column8;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
+
+
+
+
+
+
+
+
+
+
 
 	private:
 		/// <summary>
@@ -73,18 +91,20 @@ namespace AgroRobotView {
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->Column7 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column8 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
@@ -122,44 +142,14 @@ namespace AgroRobotView {
 			// dataGridView1
 			// 
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(6) {
-				this->Column1,
-					this->Column2, this->Column3, this->Column4, this->Column5, this->Column6
+			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(8) {
+				this->Column7,
+					this->Column1, this->Column2, this->Column3, this->Column4, this->Column5, this->Column8, this->Column6
 			});
 			this->dataGridView1->Location = System::Drawing::Point(24, 151);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->Size = System::Drawing::Size(595, 183);
 			this->dataGridView1->TabIndex = 9;
-			// 
-			// Column1
-			// 
-			this->Column1->HeaderText = L"ID Animal";
-			this->Column1->Name = L"Column1";
-			// 
-			// Column2
-			// 
-			this->Column2->HeaderText = L"Especie";
-			this->Column2->Name = L"Column2";
-			// 
-			// Column3
-			// 
-			this->Column3->HeaderText = L"Resultado de heces";
-			this->Column3->Name = L"Column3";
-			// 
-			// Column4
-			// 
-			this->Column4->HeaderText = L"Resultado de hemograma";
-			this->Column4->Name = L"Column4";
-			// 
-			// Column5
-			// 
-			this->Column5->HeaderText = L"Estado de salud";
-			this->Column5->Name = L"Column5";
-			// 
-			// Column6
-			// 
-			this->Column6->HeaderText = L"Fecha";
-			this->Column6->Name = L"Column6";
 			// 
 			// groupBox1
 			// 
@@ -216,6 +206,46 @@ namespace AgroRobotView {
 			this->label1->Size = System::Drawing::Size(55, 13);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"ID Animal:";
+			// 
+			// Column7
+			// 
+			this->Column7->HeaderText = L"ID Diagnostico";
+			this->Column7->Name = L"Column7";
+			// 
+			// Column1
+			// 
+			this->Column1->HeaderText = L"ID Animal";
+			this->Column1->Name = L"Column1";
+			// 
+			// Column2
+			// 
+			this->Column2->HeaderText = L"Especie";
+			this->Column2->Name = L"Column2";
+			// 
+			// Column3
+			// 
+			this->Column3->HeaderText = L"Resultado de heces";
+			this->Column3->Name = L"Column3";
+			// 
+			// Column4
+			// 
+			this->Column4->HeaderText = L"Resultado de hemograma";
+			this->Column4->Name = L"Column4";
+			// 
+			// Column5
+			// 
+			this->Column5->HeaderText = L"Estado de salud";
+			this->Column5->Name = L"Column5";
+			// 
+			// Column8
+			// 
+			this->Column8->HeaderText = L"Observaciones";
+			this->Column8->Name = L"Column8";
+			// 
+			// Column6
+			// 
+			this->Column6->HeaderText = L"Fecha";
+			this->Column6->Name = L"Column6";
 			// 
 			// frmMantDiagnostico
 			// 
