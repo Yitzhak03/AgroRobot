@@ -66,10 +66,11 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::ToolStripMenuItem^ gestiónDeMuestrasToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ muestraDeHecesToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ muestraDeSangreToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^ ordenesDeToolStripMenuItem;
+
 	private: System::Windows::Forms::ToolStripMenuItem^ mantenimientoDeUsuariosToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ mantenimientoDeRolesToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ registroGeneralDeAlmacenesToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ gestiónDeOrdenesDeAlimentaciónToolStripMenuItem;
 
 
 	private:
@@ -101,9 +102,9 @@ namespace AgroRobotView {
 			this->almacenToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->registroInsumosGeneralToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->registroGeneralDeAlmacenesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ordenesDeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->reportesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->gestiónDeReportesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->gestiónDeOrdenesDeAlimentaciónToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->volverToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
@@ -118,8 +119,8 @@ namespace AgroRobotView {
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Padding = System::Windows::Forms::Padding(4, 2, 0, 2);
-			this->menuStrip1->Size = System::Drawing::Size(854, 24);
+			this->menuStrip1->Padding = System::Windows::Forms::Padding(5, 2, 0, 2);
+			this->menuStrip1->Size = System::Drawing::Size(1139, 28);
 			this->menuStrip1->TabIndex = 1;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -130,21 +131,21 @@ namespace AgroRobotView {
 					this->mantenimientoDeRolesToolStripMenuItem
 			});
 			this->admnistracionToolStripMenuItem->Name = L"admnistracionToolStripMenuItem";
-			this->admnistracionToolStripMenuItem->Size = System::Drawing::Size(100, 20);
+			this->admnistracionToolStripMenuItem->Size = System::Drawing::Size(123, 24);
 			this->admnistracionToolStripMenuItem->Text = L"Administracion";
 			this->admnistracionToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::admnistracionToolStripMenuItem_Click);
 			// 
 			// mantenimientoDeUsuariosToolStripMenuItem
 			// 
 			this->mantenimientoDeUsuariosToolStripMenuItem->Name = L"mantenimientoDeUsuariosToolStripMenuItem";
-			this->mantenimientoDeUsuariosToolStripMenuItem->Size = System::Drawing::Size(220, 22);
+			this->mantenimientoDeUsuariosToolStripMenuItem->Size = System::Drawing::Size(274, 26);
 			this->mantenimientoDeUsuariosToolStripMenuItem->Text = L"Mantenimiento de Usuarios";
 			this->mantenimientoDeUsuariosToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::mantenimientoDeUsuariosToolStripMenuItem_Click);
 			// 
 			// mantenimientoDeRolesToolStripMenuItem
 			// 
 			this->mantenimientoDeRolesToolStripMenuItem->Name = L"mantenimientoDeRolesToolStripMenuItem";
-			this->mantenimientoDeRolesToolStripMenuItem->Size = System::Drawing::Size(220, 22);
+			this->mantenimientoDeRolesToolStripMenuItem->Size = System::Drawing::Size(274, 26);
 			this->mantenimientoDeRolesToolStripMenuItem->Text = L"Mantenimiento de Roles";
 			this->mantenimientoDeRolesToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::mantenimientoDeRolesToolStripMenuItem_Click);
 			// 
@@ -155,14 +156,14 @@ namespace AgroRobotView {
 					this->gestiónDeMuestrasToolStripMenuItem
 			});
 			this->diagnosticoToolStripMenuItem->Name = L"diagnosticoToolStripMenuItem";
-			this->diagnosticoToolStripMenuItem->Size = System::Drawing::Size(82, 20);
+			this->diagnosticoToolStripMenuItem->Size = System::Drawing::Size(103, 24);
 			this->diagnosticoToolStripMenuItem->Text = L"Diagnostico";
 			this->diagnosticoToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::diagnosticoToolStripMenuItem_Click);
 			// 
 			// géstionDeDiagnosticosToolStripMenuItem
 			// 
 			this->géstionDeDiagnosticosToolStripMenuItem->Name = L"géstionDeDiagnosticosToolStripMenuItem";
-			this->géstionDeDiagnosticosToolStripMenuItem->Size = System::Drawing::Size(201, 22);
+			this->géstionDeDiagnosticosToolStripMenuItem->Size = System::Drawing::Size(253, 26);
 			this->géstionDeDiagnosticosToolStripMenuItem->Text = L"Gestión de Diagnosticos";
 			this->géstionDeDiagnosticosToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::géstionDeDiagnosticosToolStripMenuItem_Click);
 			// 
@@ -173,21 +174,21 @@ namespace AgroRobotView {
 					this->muestraDeSangreToolStripMenuItem
 			});
 			this->gestiónDeMuestrasToolStripMenuItem->Name = L"gestiónDeMuestrasToolStripMenuItem";
-			this->gestiónDeMuestrasToolStripMenuItem->Size = System::Drawing::Size(201, 22);
+			this->gestiónDeMuestrasToolStripMenuItem->Size = System::Drawing::Size(253, 26);
 			this->gestiónDeMuestrasToolStripMenuItem->Text = L"Gestión de Muestras";
 			this->gestiónDeMuestrasToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::gestiónDeMuestrasToolStripMenuItem_Click);
 			// 
 			// muestraDeHecesToolStripMenuItem
 			// 
 			this->muestraDeHecesToolStripMenuItem->Name = L"muestraDeHecesToolStripMenuItem";
-			this->muestraDeHecesToolStripMenuItem->Size = System::Drawing::Size(172, 22);
+			this->muestraDeHecesToolStripMenuItem->Size = System::Drawing::Size(216, 26);
 			this->muestraDeHecesToolStripMenuItem->Text = L"Muestra de Heces";
 			this->muestraDeHecesToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::muestraDeHecesToolStripMenuItem_Click);
 			// 
 			// muestraDeSangreToolStripMenuItem
 			// 
 			this->muestraDeSangreToolStripMenuItem->Name = L"muestraDeSangreToolStripMenuItem";
-			this->muestraDeSangreToolStripMenuItem->Size = System::Drawing::Size(172, 22);
+			this->muestraDeSangreToolStripMenuItem->Size = System::Drawing::Size(216, 26);
 			this->muestraDeSangreToolStripMenuItem->Text = L"Muestra de Sangre";
 			this->muestraDeSangreToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::muestraDeSangreToolStripMenuItem_Click);
 			// 
@@ -198,81 +199,85 @@ namespace AgroRobotView {
 					this->registroDeAnimalesToolStripMenuItem
 			});
 			this->planDeAlimentacionToolStripMenuItem->Name = L"planDeAlimentacionToolStripMenuItem";
-			this->planDeAlimentacionToolStripMenuItem->Size = System::Drawing::Size(130, 20);
+			this->planDeAlimentacionToolStripMenuItem->Size = System::Drawing::Size(162, 24);
 			this->planDeAlimentacionToolStripMenuItem->Text = L"Plan de alimentacion";
 			// 
 			// registroDeDietasToolStripMenuItem
 			// 
 			this->registroDeDietasToolStripMenuItem->Name = L"registroDeDietasToolStripMenuItem";
-			this->registroDeDietasToolStripMenuItem->Size = System::Drawing::Size(183, 22);
+			this->registroDeDietasToolStripMenuItem->Size = System::Drawing::Size(231, 26);
 			this->registroDeDietasToolStripMenuItem->Text = L"Registro de dietas";
 			this->registroDeDietasToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::registroDeDietasToolStripMenuItem_Click);
 			// 
 			// registroDeAnimalesToolStripMenuItem
 			// 
 			this->registroDeAnimalesToolStripMenuItem->Name = L"registroDeAnimalesToolStripMenuItem";
-			this->registroDeAnimalesToolStripMenuItem->Size = System::Drawing::Size(183, 22);
+			this->registroDeAnimalesToolStripMenuItem->Size = System::Drawing::Size(231, 26);
 			this->registroDeAnimalesToolStripMenuItem->Text = L"Registro de animales";
 			this->registroDeAnimalesToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::registroDeAnimalesToolStripMenuItem_Click);
 			// 
 			// almacenToolStripMenuItem
 			// 
-			this->almacenToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+			this->almacenToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
 				this->registroInsumosGeneralToolStripMenuItem,
-					this->registroGeneralDeAlmacenesToolStripMenuItem, this->ordenesDeToolStripMenuItem
+					this->registroGeneralDeAlmacenesToolStripMenuItem
 			});
 			this->almacenToolStripMenuItem->Name = L"almacenToolStripMenuItem";
-			this->almacenToolStripMenuItem->Size = System::Drawing::Size(66, 20);
+			this->almacenToolStripMenuItem->Size = System::Drawing::Size(81, 24);
 			this->almacenToolStripMenuItem->Text = L"Almacen";
 			// 
 			// registroInsumosGeneralToolStripMenuItem
 			// 
 			this->registroInsumosGeneralToolStripMenuItem->Name = L"registroInsumosGeneralToolStripMenuItem";
-			this->registroInsumosGeneralToolStripMenuItem->Size = System::Drawing::Size(237, 22);
+			this->registroInsumosGeneralToolStripMenuItem->Size = System::Drawing::Size(299, 26);
 			this->registroInsumosGeneralToolStripMenuItem->Text = L"Registro General de Insumos";
 			this->registroInsumosGeneralToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::registroInsumosGeneralToolStripMenuItem_Click);
 			// 
 			// registroGeneralDeAlmacenesToolStripMenuItem
 			// 
 			this->registroGeneralDeAlmacenesToolStripMenuItem->Name = L"registroGeneralDeAlmacenesToolStripMenuItem";
-			this->registroGeneralDeAlmacenesToolStripMenuItem->Size = System::Drawing::Size(237, 22);
+			this->registroGeneralDeAlmacenesToolStripMenuItem->Size = System::Drawing::Size(299, 26);
 			this->registroGeneralDeAlmacenesToolStripMenuItem->Text = L"Registro General de Almacenes";
 			this->registroGeneralDeAlmacenesToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::registroGeneralDeAlmacenesToolStripMenuItem_Click);
 			// 
-			// ordenesDeToolStripMenuItem
-			// 
-			this->ordenesDeToolStripMenuItem->Name = L"ordenesDeToolStripMenuItem";
-			this->ordenesDeToolStripMenuItem->Size = System::Drawing::Size(237, 22);
-			this->ordenesDeToolStripMenuItem->Text = L"Ordenes de Alimentacion";
-			this->ordenesDeToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::ordenesDeAlimentaciónToolStripMenuItem_Click);
-			// 
 			// reportesToolStripMenuItem
 			// 
-			this->reportesToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->gestiónDeReportesToolStripMenuItem });
+			this->reportesToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->gestiónDeReportesToolStripMenuItem,
+					this->gestiónDeOrdenesDeAlimentaciónToolStripMenuItem
+			});
 			this->reportesToolStripMenuItem->Name = L"reportesToolStripMenuItem";
-			this->reportesToolStripMenuItem->Size = System::Drawing::Size(65, 20);
+			this->reportesToolStripMenuItem->Size = System::Drawing::Size(82, 24);
 			this->reportesToolStripMenuItem->Text = L"Reportes";
 			// 
 			// gestiónDeReportesToolStripMenuItem
 			// 
 			this->gestiónDeReportesToolStripMenuItem->Name = L"gestiónDeReportesToolStripMenuItem";
-			this->gestiónDeReportesToolStripMenuItem->Size = System::Drawing::Size(179, 22);
+			this->gestiónDeReportesToolStripMenuItem->Size = System::Drawing::Size(260, 26);
 			this->gestiónDeReportesToolStripMenuItem->Text = L"Gestión de Reportes";
 			this->gestiónDeReportesToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::gestiónDeReportesToolStripMenuItem_Click);
+			// 
+			// gestiónDeOrdenesDeAlimentaciónToolStripMenuItem
+			// 
+			this->gestiónDeOrdenesDeAlimentaciónToolStripMenuItem->Name = L"gestiónDeOrdenesDeAlimentaciónToolStripMenuItem";
+			this->gestiónDeOrdenesDeAlimentaciónToolStripMenuItem->Size = System::Drawing::Size(260, 26);
+			this->gestiónDeOrdenesDeAlimentaciónToolStripMenuItem->Text = L"Ordenes de Alimentación";
+			this->gestiónDeOrdenesDeAlimentaciónToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::ordenesDeAlimentaciónToolStripMenuItem_Click);
 			// 
 			// volverToolStripMenuItem
 			// 
 			this->volverToolStripMenuItem->Name = L"volverToolStripMenuItem";
-			this->volverToolStripMenuItem->Size = System::Drawing::Size(51, 20);
+			this->volverToolStripMenuItem->Size = System::Drawing::Size(64, 24);
 			this->volverToolStripMenuItem->Text = L"Volver";
 			// 
 			// frmMenu
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(854, 527);
+			this->ClientSize = System::Drawing::Size(1139, 649);
 			this->Controls->Add(this->menuStrip1);
 			this->IsMdiContainer = true;
+			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"frmMenu";
 			this->Text = L"frmMenu";
 			this->Load += gcnew System::EventHandler(this, &frmMenu::frmMenu_Load);
