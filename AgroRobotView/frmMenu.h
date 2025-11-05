@@ -96,11 +96,6 @@ namespace AgroRobotView {
 				subItem->Font = gcnew System::Drawing::Font("Segoe UI", 9, FontStyle::Regular);
 			}
 		}
-
-		// === Bordes y ajustes generales ===
-		this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-		this->MaximizeBox = false;
-		this->Text = L"Menú Principal - AgroRobot";
 	}
 
 	private:
@@ -117,6 +112,7 @@ namespace AgroRobotView {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(frmMenu::typeid));
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->admnistracionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->mantenimientoDeUsuariosToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -141,175 +137,187 @@ namespace AgroRobotView {
 			// 
 			// menuStrip1
 			// 
+			this->menuStrip1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(41)), static_cast<System::Int32>(static_cast<System::Byte>(118)),
+				static_cast<System::Int32>(static_cast<System::Byte>(58)));
 			this->menuStrip1->ImageScalingSize = System::Drawing::Size(20, 20);
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6) {
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6)
+			{
 				this->admnistracionToolStripMenuItem,
 					this->diagnosticoToolStripMenuItem, this->planDeAlimentacionToolStripMenuItem, this->almacenToolStripMenuItem, this->reportesToolStripMenuItem,
 					this->volverToolStripMenuItem
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Padding = System::Windows::Forms::Padding(5, 2, 0, 2);
-			this->menuStrip1->Size = System::Drawing::Size(1139, 28);
+			this->menuStrip1->Padding = System::Windows::Forms::Padding(4, 2, 0, 2);
+			this->menuStrip1->Size = System::Drawing::Size(854, 24);
 			this->menuStrip1->TabIndex = 1;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
 			// admnistracionToolStripMenuItem
 			// 
-			this->admnistracionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			this->admnistracionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2)
+			{
 				this->mantenimientoDeUsuariosToolStripMenuItem,
 					this->mantenimientoDeRolesToolStripMenuItem
 			});
 			this->admnistracionToolStripMenuItem->Name = L"admnistracionToolStripMenuItem";
-			this->admnistracionToolStripMenuItem->Size = System::Drawing::Size(123, 24);
+			this->admnistracionToolStripMenuItem->Size = System::Drawing::Size(100, 20);
 			this->admnistracionToolStripMenuItem->Text = L"Administracion";
 			this->admnistracionToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::admnistracionToolStripMenuItem_Click);
 			// 
 			// mantenimientoDeUsuariosToolStripMenuItem
 			// 
 			this->mantenimientoDeUsuariosToolStripMenuItem->Name = L"mantenimientoDeUsuariosToolStripMenuItem";
-			this->mantenimientoDeUsuariosToolStripMenuItem->Size = System::Drawing::Size(274, 26);
+			this->mantenimientoDeUsuariosToolStripMenuItem->Size = System::Drawing::Size(220, 22);
 			this->mantenimientoDeUsuariosToolStripMenuItem->Text = L"Mantenimiento de Usuarios";
 			this->mantenimientoDeUsuariosToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::mantenimientoDeUsuariosToolStripMenuItem_Click);
 			// 
 			// mantenimientoDeRolesToolStripMenuItem
 			// 
 			this->mantenimientoDeRolesToolStripMenuItem->Name = L"mantenimientoDeRolesToolStripMenuItem";
-			this->mantenimientoDeRolesToolStripMenuItem->Size = System::Drawing::Size(274, 26);
+			this->mantenimientoDeRolesToolStripMenuItem->Size = System::Drawing::Size(220, 22);
 			this->mantenimientoDeRolesToolStripMenuItem->Text = L"Mantenimiento de Roles";
 			this->mantenimientoDeRolesToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::mantenimientoDeRolesToolStripMenuItem_Click);
 			// 
 			// diagnosticoToolStripMenuItem
 			// 
-			this->diagnosticoToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			this->diagnosticoToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2)
+			{
 				this->géstionDeDiagnosticosToolStripMenuItem,
 					this->gestiónDeMuestrasToolStripMenuItem
 			});
 			this->diagnosticoToolStripMenuItem->Name = L"diagnosticoToolStripMenuItem";
-			this->diagnosticoToolStripMenuItem->Size = System::Drawing::Size(103, 24);
+			this->diagnosticoToolStripMenuItem->Size = System::Drawing::Size(82, 20);
 			this->diagnosticoToolStripMenuItem->Text = L"Diagnostico";
 			this->diagnosticoToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::diagnosticoToolStripMenuItem_Click);
 			// 
 			// géstionDeDiagnosticosToolStripMenuItem
 			// 
 			this->géstionDeDiagnosticosToolStripMenuItem->Name = L"géstionDeDiagnosticosToolStripMenuItem";
-			this->géstionDeDiagnosticosToolStripMenuItem->Size = System::Drawing::Size(253, 26);
+			this->géstionDeDiagnosticosToolStripMenuItem->Size = System::Drawing::Size(201, 22);
 			this->géstionDeDiagnosticosToolStripMenuItem->Text = L"Gestión de Diagnosticos";
 			this->géstionDeDiagnosticosToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::géstionDeDiagnosticosToolStripMenuItem_Click);
 			// 
 			// gestiónDeMuestrasToolStripMenuItem
 			// 
-			this->gestiónDeMuestrasToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			this->gestiónDeMuestrasToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2)
+			{
 				this->muestraDeHecesToolStripMenuItem,
 					this->muestraDeSangreToolStripMenuItem
 			});
 			this->gestiónDeMuestrasToolStripMenuItem->Name = L"gestiónDeMuestrasToolStripMenuItem";
-			this->gestiónDeMuestrasToolStripMenuItem->Size = System::Drawing::Size(253, 26);
+			this->gestiónDeMuestrasToolStripMenuItem->Size = System::Drawing::Size(201, 22);
 			this->gestiónDeMuestrasToolStripMenuItem->Text = L"Gestión de Muestras";
 			this->gestiónDeMuestrasToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::gestiónDeMuestrasToolStripMenuItem_Click);
 			// 
 			// muestraDeHecesToolStripMenuItem
 			// 
 			this->muestraDeHecesToolStripMenuItem->Name = L"muestraDeHecesToolStripMenuItem";
-			this->muestraDeHecesToolStripMenuItem->Size = System::Drawing::Size(216, 26);
+			this->muestraDeHecesToolStripMenuItem->Size = System::Drawing::Size(172, 22);
 			this->muestraDeHecesToolStripMenuItem->Text = L"Muestra de Heces";
 			this->muestraDeHecesToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::muestraDeHecesToolStripMenuItem_Click);
 			// 
 			// muestraDeSangreToolStripMenuItem
 			// 
 			this->muestraDeSangreToolStripMenuItem->Name = L"muestraDeSangreToolStripMenuItem";
-			this->muestraDeSangreToolStripMenuItem->Size = System::Drawing::Size(216, 26);
+			this->muestraDeSangreToolStripMenuItem->Size = System::Drawing::Size(172, 22);
 			this->muestraDeSangreToolStripMenuItem->Text = L"Muestra de Sangre";
 			this->muestraDeSangreToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::muestraDeSangreToolStripMenuItem_Click);
 			// 
 			// planDeAlimentacionToolStripMenuItem
 			// 
-			this->planDeAlimentacionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			this->planDeAlimentacionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2)
+			{
 				this->registroDeDietasToolStripMenuItem,
 					this->registroDeAnimalesToolStripMenuItem
 			});
 			this->planDeAlimentacionToolStripMenuItem->Name = L"planDeAlimentacionToolStripMenuItem";
-			this->planDeAlimentacionToolStripMenuItem->Size = System::Drawing::Size(162, 24);
+			this->planDeAlimentacionToolStripMenuItem->Size = System::Drawing::Size(130, 20);
 			this->planDeAlimentacionToolStripMenuItem->Text = L"Plan de alimentacion";
 			// 
 			// registroDeDietasToolStripMenuItem
 			// 
 			this->registroDeDietasToolStripMenuItem->Name = L"registroDeDietasToolStripMenuItem";
-			this->registroDeDietasToolStripMenuItem->Size = System::Drawing::Size(231, 26);
+			this->registroDeDietasToolStripMenuItem->Size = System::Drawing::Size(183, 22);
 			this->registroDeDietasToolStripMenuItem->Text = L"Registro de dietas";
 			this->registroDeDietasToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::registroDeDietasToolStripMenuItem_Click);
 			// 
 			// registroDeAnimalesToolStripMenuItem
 			// 
 			this->registroDeAnimalesToolStripMenuItem->Name = L"registroDeAnimalesToolStripMenuItem";
-			this->registroDeAnimalesToolStripMenuItem->Size = System::Drawing::Size(231, 26);
+			this->registroDeAnimalesToolStripMenuItem->Size = System::Drawing::Size(183, 22);
 			this->registroDeAnimalesToolStripMenuItem->Text = L"Registro de animales";
 			this->registroDeAnimalesToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::registroDeAnimalesToolStripMenuItem_Click);
 			// 
 			// almacenToolStripMenuItem
 			// 
-			this->almacenToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			this->almacenToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2)
+			{
 				this->registroInsumosGeneralToolStripMenuItem,
 					this->registroGeneralDeAlmacenesToolStripMenuItem
 			});
 			this->almacenToolStripMenuItem->Name = L"almacenToolStripMenuItem";
-			this->almacenToolStripMenuItem->Size = System::Drawing::Size(81, 24);
+			this->almacenToolStripMenuItem->Size = System::Drawing::Size(66, 20);
 			this->almacenToolStripMenuItem->Text = L"Almacen";
 			// 
 			// registroInsumosGeneralToolStripMenuItem
 			// 
 			this->registroInsumosGeneralToolStripMenuItem->Name = L"registroInsumosGeneralToolStripMenuItem";
-			this->registroInsumosGeneralToolStripMenuItem->Size = System::Drawing::Size(299, 26);
+			this->registroInsumosGeneralToolStripMenuItem->Size = System::Drawing::Size(237, 22);
 			this->registroInsumosGeneralToolStripMenuItem->Text = L"Registro General de Insumos";
 			this->registroInsumosGeneralToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::registroInsumosGeneralToolStripMenuItem_Click);
 			// 
 			// registroGeneralDeAlmacenesToolStripMenuItem
 			// 
 			this->registroGeneralDeAlmacenesToolStripMenuItem->Name = L"registroGeneralDeAlmacenesToolStripMenuItem";
-			this->registroGeneralDeAlmacenesToolStripMenuItem->Size = System::Drawing::Size(299, 26);
+			this->registroGeneralDeAlmacenesToolStripMenuItem->Size = System::Drawing::Size(237, 22);
 			this->registroGeneralDeAlmacenesToolStripMenuItem->Text = L"Registro General de Almacenes";
 			this->registroGeneralDeAlmacenesToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::registroGeneralDeAlmacenesToolStripMenuItem_Click);
 			// 
 			// reportesToolStripMenuItem
 			// 
-			this->reportesToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			this->reportesToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2)
+			{
 				this->gestiónDeReportesToolStripMenuItem,
 					this->gestiónDeOrdenesDeAlimentaciónToolStripMenuItem
 			});
 			this->reportesToolStripMenuItem->Name = L"reportesToolStripMenuItem";
-			this->reportesToolStripMenuItem->Size = System::Drawing::Size(82, 24);
+			this->reportesToolStripMenuItem->Size = System::Drawing::Size(65, 20);
 			this->reportesToolStripMenuItem->Text = L"Reportes";
 			// 
 			// gestiónDeReportesToolStripMenuItem
 			// 
 			this->gestiónDeReportesToolStripMenuItem->Name = L"gestiónDeReportesToolStripMenuItem";
-			this->gestiónDeReportesToolStripMenuItem->Size = System::Drawing::Size(260, 26);
+			this->gestiónDeReportesToolStripMenuItem->Size = System::Drawing::Size(208, 22);
 			this->gestiónDeReportesToolStripMenuItem->Text = L"Gestión de Reportes";
 			this->gestiónDeReportesToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::gestiónDeReportesToolStripMenuItem_Click);
 			// 
 			// gestiónDeOrdenesDeAlimentaciónToolStripMenuItem
 			// 
 			this->gestiónDeOrdenesDeAlimentaciónToolStripMenuItem->Name = L"gestiónDeOrdenesDeAlimentaciónToolStripMenuItem";
-			this->gestiónDeOrdenesDeAlimentaciónToolStripMenuItem->Size = System::Drawing::Size(260, 26);
+			this->gestiónDeOrdenesDeAlimentaciónToolStripMenuItem->Size = System::Drawing::Size(208, 22);
 			this->gestiónDeOrdenesDeAlimentaciónToolStripMenuItem->Text = L"Ordenes de Alimentación";
 			this->gestiónDeOrdenesDeAlimentaciónToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::ordenesDeAlimentaciónToolStripMenuItem_Click);
 			// 
 			// volverToolStripMenuItem
 			// 
 			this->volverToolStripMenuItem->Name = L"volverToolStripMenuItem";
-			this->volverToolStripMenuItem->Size = System::Drawing::Size(64, 24);
+			this->volverToolStripMenuItem->Size = System::Drawing::Size(51, 20);
 			this->volverToolStripMenuItem->Text = L"Volver";
 			// 
 			// frmMenu
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1139, 649);
+			this->BackColor = System::Drawing::SystemColors::MenuText;
+			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
+			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->ClientSize = System::Drawing::Size(854, 527);
 			this->Controls->Add(this->menuStrip1);
 			this->IsMdiContainer = true;
-			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"frmMenu";
 			this->Text = L"frmMenu";
+			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
 			this->Load += gcnew System::EventHandler(this, &frmMenu::frmMenu_Load);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();

@@ -227,6 +227,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->panelCard);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedToolWindow;
 			this->Name = L"frmMain";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"frmMain";
 			this->panelCard->ResumeLayout(false);
 			this->panelCard->PerformLayout();
