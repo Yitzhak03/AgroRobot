@@ -104,10 +104,10 @@ namespace AgroRobotView {
 			   // 
 			   // button5
 			   // 
-			   this->button5->Location = System::Drawing::Point(11, 130);
+			   this->button5->Location = System::Drawing::Point(283, 43);
 			   this->button5->Margin = System::Windows::Forms::Padding(2);
 			   this->button5->Name = L"button5";
-			   this->button5->Size = System::Drawing::Size(226, 36);
+			   this->button5->Size = System::Drawing::Size(91, 36);
 			   this->button5->TabIndex = 22;
 			   this->button5->Text = L"Mostrar todos";
 			   this->button5->UseVisualStyleBackColor = true;
@@ -115,10 +115,10 @@ namespace AgroRobotView {
 			   // 
 			   // button3
 			   // 
-			   this->button3->Location = System::Drawing::Point(121, 183);
+			   this->button3->Location = System::Drawing::Point(117, 391);
 			   this->button3->Margin = System::Windows::Forms::Padding(2);
 			   this->button3->Name = L"button3";
-			   this->button3->Size = System::Drawing::Size(116, 25);
+			   this->button3->Size = System::Drawing::Size(93, 25);
 			   this->button3->TabIndex = 20;
 			   this->button3->Text = L"Editar";
 			   this->button3->UseVisualStyleBackColor = true;
@@ -126,7 +126,7 @@ namespace AgroRobotView {
 			   // 
 			   // button2
 			   // 
-			   this->button2->Location = System::Drawing::Point(11, 183);
+			   this->button2->Location = System::Drawing::Point(11, 391);
 			   this->button2->Margin = System::Windows::Forms::Padding(2);
 			   this->button2->Name = L"button2";
 			   this->button2->Size = System::Drawing::Size(102, 25);
@@ -146,7 +146,7 @@ namespace AgroRobotView {
 				   this->Column1,
 					   this->Column2, this->Column3, this->Column5
 			   });
-			   this->dataGridView1->Location = System::Drawing::Point(251, 11);
+			   this->dataGridView1->Location = System::Drawing::Point(11, 125);
 			   this->dataGridView1->Margin = System::Windows::Forms::Padding(2);
 			   this->dataGridView1->MultiSelect = false;
 			   this->dataGridView1->Name = L"dataGridView1";
@@ -154,7 +154,7 @@ namespace AgroRobotView {
 			   this->dataGridView1->RowHeadersWidth = 51;
 			   this->dataGridView1->RowTemplate->Height = 24;
 			   this->dataGridView1->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
-			   this->dataGridView1->Size = System::Drawing::Size(429, 311);
+			   this->dataGridView1->Size = System::Drawing::Size(539, 249);
 			   this->dataGridView1->TabIndex = 18;
 			   this->dataGridView1->UserDeletingRow += gcnew System::Windows::Forms::DataGridViewRowCancelEventHandler(this, &frmMantInsumo::dataGridView1_UserDeletingRow);
 			   // 
@@ -186,14 +186,17 @@ namespace AgroRobotView {
 			   // 
 			   // groupBox1
 			   // 
+			   this->groupBox1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(236)), static_cast<System::Int32>(static_cast<System::Byte>(246)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(240)));
 			   this->groupBox1->Controls->Add(this->comboBox1);
 			   this->groupBox1->Controls->Add(this->button1);
 			   this->groupBox1->Controls->Add(this->label1);
+			   this->groupBox1->Controls->Add(this->button5);
 			   this->groupBox1->Location = System::Drawing::Point(11, 11);
 			   this->groupBox1->Margin = System::Windows::Forms::Padding(2);
 			   this->groupBox1->Name = L"groupBox1";
 			   this->groupBox1->Padding = System::Windows::Forms::Padding(2);
-			   this->groupBox1->Size = System::Drawing::Size(226, 97);
+			   this->groupBox1->Size = System::Drawing::Size(539, 97);
 			   this->groupBox1->TabIndex = 17;
 			   this->groupBox1->TabStop = false;
 			   this->groupBox1->Text = L"Criterios de Búsqueda";
@@ -202,7 +205,7 @@ namespace AgroRobotView {
 			   // 
 			   this->comboBox1->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			   this->comboBox1->FormattingEnabled = true;
-			   this->comboBox1->Location = System::Drawing::Point(55, 26);
+			   this->comboBox1->Location = System::Drawing::Point(9, 52);
 			   this->comboBox1->MaxDropDownItems = 15;
 			   this->comboBox1->Name = L"comboBox1";
 			   this->comboBox1->Size = System::Drawing::Size(154, 21);
@@ -211,13 +214,17 @@ namespace AgroRobotView {
 			   // 
 			   // button1
 			   // 
-			   this->button1->Location = System::Drawing::Point(9, 62);
-			   this->button1->Margin = System::Windows::Forms::Padding(2);
+			   this->button1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(46)), static_cast<System::Int32>(static_cast<System::Byte>(143)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(77)));
+			   this->button1->FlatAppearance->BorderSize = 0;
+			   this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->button1->Location = System::Drawing::Point(429, 56);
+			   this->button1->Margin = System::Windows::Forms::Padding(0);
 			   this->button1->Name = L"button1";
 			   this->button1->Size = System::Drawing::Size(70, 23);
 			   this->button1->TabIndex = 21;
 			   this->button1->Text = L"Buscar";
-			   this->button1->UseVisualStyleBackColor = true;
+			   this->button1->UseVisualStyleBackColor = false;
 			   this->button1->Click += gcnew System::EventHandler(this, &frmMantInsumo::button1_Click);
 			   // 
 			   // label1
@@ -232,10 +239,10 @@ namespace AgroRobotView {
 			   // 
 			   // button4
 			   // 
-			   this->button4->Location = System::Drawing::Point(11, 225);
+			   this->button4->Location = System::Drawing::Point(214, 391);
 			   this->button4->Margin = System::Windows::Forms::Padding(2);
 			   this->button4->Name = L"button4";
-			   this->button4->Size = System::Drawing::Size(226, 25);
+			   this->button4->Size = System::Drawing::Size(102, 25);
 			   this->button4->TabIndex = 21;
 			   this->button4->Text = L"Eliminar";
 			   this->button4->UseVisualStyleBackColor = true;
@@ -243,7 +250,7 @@ namespace AgroRobotView {
 			   // 
 			   // button6
 			   // 
-			   this->button6->Location = System::Drawing::Point(11, 269);
+			   this->button6->Location = System::Drawing::Point(321, 393);
 			   this->button6->Name = L"button6";
 			   this->button6->Size = System::Drawing::Size(102, 23);
 			   this->button6->TabIndex = 23;
@@ -253,7 +260,7 @@ namespace AgroRobotView {
 			   // 
 			   // button7
 			   // 
-			   this->button7->Location = System::Drawing::Point(121, 269);
+			   this->button7->Location = System::Drawing::Point(434, 393);
 			   this->button7->Name = L"button7";
 			   this->button7->Size = System::Drawing::Size(116, 23);
 			   this->button7->TabIndex = 24;
@@ -265,13 +272,14 @@ namespace AgroRobotView {
 			   // 
 			   this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			   this->ClientSize = System::Drawing::Size(691, 335);
+			   this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(246)), static_cast<System::Int32>(static_cast<System::Byte>(251)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(248)));
+			   this->ClientSize = System::Drawing::Size(562, 566);
 			   this->Controls->Add(this->button7);
 			   this->Controls->Add(this->button6);
 			   this->Controls->Add(this->button3);
 			   this->Controls->Add(this->button4);
 			   this->Controls->Add(this->dataGridView1);
-			   this->Controls->Add(this->button5);
 			   this->Controls->Add(this->groupBox1);
 			   this->Controls->Add(this->button2);
 			   this->Name = L"frmMantInsumo";
