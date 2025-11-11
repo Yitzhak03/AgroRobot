@@ -6,17 +6,18 @@ namespace AgroRobotController {
 	public ref class UsuarioController {
 	private:
 		List<Usuario^>^ listaUsuarios;
-		List<Usuario^>^ listaDeshabilitados;
 	
 	public:
 		UsuarioController();
-		void escribirArchivo(bool habilitado);
+		void escribirArchivo();
 
 		void agregarUsuario(Usuario^ usuario);
-		List<Usuario^>^ obtenerTodosUsuarios(bool habilitado);
+		List<Usuario^>^ obtenerUsuariosPorEstado(Nullable<bool> estado);
+		List<Usuario^>^ obtenerUsuariosHabilitados();
+		List<Usuario^>^ obtenerUsuariosDeshabilitados();
 		void actualizarUsuario(Usuario^ usuario);
 		void cambiarEstadoUsuario(int id);
 		Usuario^ obtenerUsuarioPorId(int id);
-		List<Usuario^>^ obtenerUsuarioPorNombreEstado(String^ nombre, String^ estado);
+		List<Usuario^>^ obtenerUsuarioPorNombreEstado(String^ nombre, Nullable<bool> estado);
 	};
 }

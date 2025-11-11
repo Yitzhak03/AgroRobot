@@ -117,14 +117,14 @@
     <ClCompile Include="frmEditarDiagnostico.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="frmAgregarInsumoToAlmacen.cpp">
-      <Filter>Archivos de encabezado</Filter>
-    </ClCompile>
     <ClCompile Include="frmNuevoStock.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="frmNuevoStock2.cpp">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="frmAgregarInsumoToAlmacen.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

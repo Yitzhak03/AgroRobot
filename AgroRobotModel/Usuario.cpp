@@ -8,12 +8,12 @@ Usuario::Usuario(){
 	this->Email = "";
 	this->Contrasenha = "";
 	this->UltimoAcceso = "";
-	this->EstadoCuenta = "";
+	this->EstadoCuenta = false;
 	this->RolUsuario = nullptr;
 }
 
 Usuario::Usuario(int id, String^ nombre, String^ email, String^ contrasenha, String^ ultimoAcceso,
-					String^ estadoCuenta, Rol^ rol) {
+					bool estadoCuenta, Rol^ rol) {
 	this->Id = id;
 	this->Nombre = nombre;
 	this->Email = email;
@@ -58,10 +58,10 @@ void Usuario::SetUltimoAcceso(String^ ultimoAcceso) {
 	this->UltimoAcceso = ultimoAcceso;
 }
 
-String^ Usuario::GetEstadoCuenta() {
+bool Usuario::GetEstadoCuenta() {
 	return this->EstadoCuenta;
 }
-void Usuario::SetEstadoCuenta(String^ estadoCuenta) {
+void Usuario::SetEstadoCuenta(bool estadoCuenta) {
 	this->EstadoCuenta = estadoCuenta;
 }
 

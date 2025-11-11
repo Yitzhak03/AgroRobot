@@ -243,7 +243,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmNuevoUsuario";
-			this->Text = L"frmNuevoUsuario";
+			this->Text = L"Nuevo Usuario";
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
 			this->ResumeLayout(false);
@@ -282,9 +282,7 @@ namespace AgroRobotView {
 
 	private: System::Void groupBox1_Enter(System::Object^ sender, System::EventArgs^ e) {
 		/*crea un ID automático*/
-		List<Usuario^>^ listaUsuarios = this->usuarioController->obtenerTodosUsuarios(true);
-		listaUsuarios->AddRange(this->usuarioController->obtenerTodosUsuarios(false));
-
+		List<Usuario^>^ listaUsuarios = this->usuarioController->obtenerUsuariosPorEstado(Nullable<bool>());
 		int maxId = 0;
 		for each(Usuario ^ usuario in listaUsuarios) {
 			if (usuario->GetId() > maxId) {
@@ -292,7 +290,6 @@ namespace AgroRobotView {
 			}
 		}
 		this->txtId->Text = Convert::ToString(maxId + 1);
-
 	}
 };
 }

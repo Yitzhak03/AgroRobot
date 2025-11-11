@@ -25,6 +25,7 @@ namespace AgroRobotView {
 			//TODO: agregar código de constructor aquí
 			//
 			this->usuarioController = gcnew UsuarioController();
+			this->rolController = gcnew RolController();
 		}
 
 	protected:
@@ -38,7 +39,8 @@ namespace AgroRobotView {
 			}
 		}
 	private: System::Windows::Forms::Button^ btnMostrarTodos;
-	private: System::Windows::Forms::Button^ btnEliminar;
+	private: System::Windows::Forms::Button^ btnCambiarEstado;
+
 	private: System::Windows::Forms::Button^ btnEditar;
 	protected:
 
@@ -68,7 +70,7 @@ namespace AgroRobotView {
 
 
 	private: UsuarioController^ usuarioController;
-
+	private: RolController^ rolController;
 
 
 
@@ -83,6 +85,13 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column7;
+
+
+
+
+
+
+
 
 
 
@@ -117,7 +126,7 @@ namespace AgroRobotView {
 		void InitializeComponent(void)
 		{
 			this->btnMostrarTodos = (gcnew System::Windows::Forms::Button());
-			this->btnEliminar = (gcnew System::Windows::Forms::Button());
+			this->btnCambiarEstado = (gcnew System::Windows::Forms::Button());
 			this->btnEditar = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
@@ -149,16 +158,16 @@ namespace AgroRobotView {
 			this->btnMostrarTodos->UseVisualStyleBackColor = true;
 			this->btnMostrarTodos->Click += gcnew System::EventHandler(this, &frmMantUsuarios::btnMostrarTodos_Click);
 			// 
-			// btnEliminar
+			// btnCambiarEstado
 			// 
-			this->btnEliminar->Location = System::Drawing::Point(526, 370);
-			this->btnEliminar->Margin = System::Windows::Forms::Padding(2);
-			this->btnEliminar->Name = L"btnEliminar";
-			this->btnEliminar->Size = System::Drawing::Size(99, 19);
-			this->btnEliminar->TabIndex = 15;
-			this->btnEliminar->Text = L"Cambiar Estado";
-			this->btnEliminar->UseVisualStyleBackColor = true;
-			this->btnEliminar->Click += gcnew System::EventHandler(this, &frmMantUsuarios::btnEliminar_Click);
+			this->btnCambiarEstado->Location = System::Drawing::Point(526, 370);
+			this->btnCambiarEstado->Margin = System::Windows::Forms::Padding(2);
+			this->btnCambiarEstado->Name = L"btnCambiarEstado";
+			this->btnCambiarEstado->Size = System::Drawing::Size(99, 19);
+			this->btnCambiarEstado->TabIndex = 15;
+			this->btnCambiarEstado->Text = L"Cambiar Estado";
+			this->btnCambiarEstado->UseVisualStyleBackColor = true;
+			this->btnCambiarEstado->Click += gcnew System::EventHandler(this, &frmMantUsuarios::btnCambiarEstado_Click);
 			// 
 			// btnEditar
 			// 
@@ -204,6 +213,7 @@ namespace AgroRobotView {
 			this->Column1->HeaderText = L"Id";
 			this->Column1->MinimumWidth = 6;
 			this->Column1->Name = L"Column1";
+			this->Column1->Visible = false;
 			this->Column1->Width = 50;
 			// 
 			// Column2
@@ -316,13 +326,13 @@ namespace AgroRobotView {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(827, 439);
-			this->Controls->Add(this->btnEliminar);
+			this->Controls->Add(this->btnCambiarEstado);
 			this->Controls->Add(this->btnEditar);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmMantUsuarios";
-			this->Text = L"frmMantUsuarios";
+			this->Text = L"Gestión de Usuarios";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
@@ -342,7 +352,9 @@ public:	void mostrarGrilla(List<Usuario^>^ listaUsuarios)
 		filaGrilla[2] = usuario->GetEmail();
 		filaGrilla[3] = usuario->GetContrasenha();
 		filaGrilla[4] = Convert::ToString(usuario->GetUltimoAcceso());
-		filaGrilla[5] = usuario->GetEstadoCuenta();
+
+		(usuario->GetEstadoCuenta()) ? filaGrilla[5] = "Habilitado" : filaGrilla[5] = "Desabilitado";
+		
 		filaGrilla[6] = usuario->GetRol()->GetNombre();
 		this->dataGridView1->Rows->Add(filaGrilla);
 	}
@@ -355,10 +367,10 @@ public:	void mostrarGrilla(List<Usuario^>^ listaUsuarios)
 		this->dataGridView1->Rows->Clear();
 		List<Usuario^>^ listaUsuarios = gcnew List<Usuario^>();
 		if (comboBox1->Text == "Habilitado") {
-			listaUsuarios = this->usuarioController->obtenerTodosUsuarios(true);
+			listaUsuarios = this->usuarioController->obtenerUsuariosHabilitados();
 		}
 		else if(comboBox1->Text == "Deshabilitado") {
-			listaUsuarios = this->usuarioController->obtenerTodosUsuarios(false);
+			listaUsuarios = this->usuarioController->obtenerUsuariosDeshabilitados();
 		}
 		else {
 			MessageBox::Show("Por favor, seleccione un estado para mostrar todos.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
@@ -374,7 +386,16 @@ public:	void mostrarGrilla(List<Usuario^>^ listaUsuarios)
 
 	private: System::Void btnBuscar_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ nombreUsuario = textBox1->Text;
-		String^ estadoUsuario = comboBox1->Text;
+		String^ estadoTexto = comboBox1->Text;
+
+		Nullable<bool> estadoUsuario;
+
+		if (estadoTexto == "Habilitado") {
+			estadoUsuario = true;
+		}
+		else if (estadoTexto == "Deshabilitado") {
+			estadoUsuario = false;
+		}
 		
 		List<Usuario^>^ listaUsuarios = gcnew List<Usuario^>();
 		if (nombreUsuario != "") {
@@ -383,34 +404,39 @@ public:	void mostrarGrilla(List<Usuario^>^ listaUsuarios)
 		mostrarGrilla(listaUsuarios);
 	}
 
-	private: System::Void btnEliminar_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (this->dataGridView1->SelectedRows->Count > 0){
+	private: System::Void btnCambiarEstado_Click(System::Object^ sender, System::EventArgs^ e) {
+		// Verificar si se ha seleccionado una fila en el DataGridView
+		if (this->dataGridView1->SelectedRows->Count > 0)
+		{
+			int filaSeleccionada = this->dataGridView1->SelectedRows[0]->Index;
+			int idUsuario = Convert::ToInt32(this->dataGridView1->Rows[filaSeleccionada]->Cells[0]->Value);
+
+			Usuario^ usuarioSeleccionado = this->usuarioController->obtenerUsuarioPorId(idUsuario);
+			List<Usuario^>^ listaUsuarios = gcnew List<Usuario^>();
+
 			// Preguntar al usuario si est� seguro de eliminar el registro
-			int selectedRowIndex = this->dataGridView1->SelectedRows[0]->Index;
-			int idUsuario = Convert::ToInt32(this->dataGridView1->Rows[selectedRowIndex]->Cells[0]->Value);
+			System::Windows::Forms::DialogResult resultado = MessageBox::Show("¿Está seguro de que desea cambiar el estado del registro seleccionado?",
+				"Confirmación de cambio de estado", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
 			
-			if (this->usuarioController->obtenerUsuarioPorId(idUsuario)->GetEstadoCuenta() == "Habilitado") {
-				System::Windows::Forms::DialogResult resultado = MessageBox::Show("¿Está seguro de que desea deshabilitar el registro seleccionado?", "Confirmación de deshabilitación", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
-				// Si el usuario selecciona "No", cancelar la operaci n 
-				if (resultado == System::Windows::Forms::DialogResult::No) {
-					return;
-					// Salir del evento si el usuario cancela 
-				}
-				this->usuarioController->cambiarEstadoUsuario(idUsuario);
-				// Actualizar la lista de máquinas en el DataGridView
-				List<Usuario^>^ listaUsuarios = this->usuarioController->obtenerTodosUsuarios(true);
-				mostrarGrilla(listaUsuarios);
-			}
-			else {
-				MessageBox::Show("El usuario que ha seleccionado ya se encuentra deshabilitado.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+			if (resultado == System::Windows::Forms::DialogResult::No)
+			{
+				return; // Salir del evento si el usuario cancela
 			}
 			
+			this->usuarioController->cambiarEstadoUsuario(idUsuario);
+			
+			(usuarioSeleccionado->GetEstadoCuenta()) ? listaUsuarios = this->usuarioController->obtenerUsuariosDeshabilitados() :
+				listaUsuarios = this->usuarioController->obtenerUsuariosHabilitados();
+
+			mostrarGrilla(listaUsuarios);
 		}
-		else{
-			MessageBox::Show("Por favor, seleccione un usuario para deshabilitar.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+		else
+		{
+			MessageBox::Show("Por favor, seleccione un usuario para habilitar/deshabilitar.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
 		}
-	
 	}
+
+
 	private: System::Void btnEditar_Click(System::Object^ sender, System::EventArgs^ e) {
 		// Verificar si se ha seleccionado una fila en el DataGridView
 		if (this->dataGridView1->SelectedRows->Count > 0)
@@ -424,18 +450,24 @@ public:	void mostrarGrilla(List<Usuario^>^ listaUsuarios)
 				MessageBox::Show("No se encontró el usuario seleccionado.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 				return;
 			}
+
+			if (usuarioSeleccionado->GetEstadoCuenta() == false) {
+				MessageBox::Show("No se puede editar a un usuario deshabilitado.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				return;
+			}
 			// Crear una nueva instancia del formulario de nuevo usuario
 			// y mostrarlo como un formulario hijo dentro del contenedor MDI
-			frmEditarUsuario^ ventanaEditarUsuario = gcnew frmEditarUsuario(this->usuarioController, usuarioSeleccionado);
+			frmEditarUsuario^ ventanaEditarUsuario = gcnew frmEditarUsuario(this->usuarioController, usuarioSeleccionado, this->rolController);
 			ventanaEditarUsuario->ShowDialog();
 			// Llamar al m�todo para cargar la lista de operadores nuevamente
 			List<Usuario^>^ listaUsuarios = gcnew List<Usuario^>();
-			if (usuarioSeleccionado->GetEstadoCuenta() == "Habilitado") {
-				listaUsuarios = this->usuarioController->obtenerTodosUsuarios(true);
+			if (usuarioSeleccionado->GetEstadoCuenta()) {
+				listaUsuarios = this->usuarioController->obtenerUsuariosHabilitados();
 			}
 			else {
-				listaUsuarios = this->usuarioController->obtenerTodosUsuarios(false);
+				listaUsuarios = this->usuarioController->obtenerUsuariosDeshabilitados();
 			}
+			mostrarGrilla(listaUsuarios);
 		}
 		else
 		{

@@ -181,7 +181,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->btnGrabar);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmNuevoRol";
-			this->Text = L"frmNuevoRol";
+			this->Text = L"Nuevo Rol";
 			this->Load += gcnew System::EventHandler(this, &frmNuevoRol::frmNuevoRol_Load);
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
