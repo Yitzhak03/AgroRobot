@@ -123,6 +123,7 @@
     <ClCompile Include="frmEditarUsuario.cpp" />
     <ClCompile Include="frmEditInsumo.cpp" />
     <ClCompile Include="frmMain.cpp" />
+    <ClCompile Include="frmMantAlimentación.cpp" />
     <ClCompile Include="frmMantAlmacen.cpp" />
     <ClCompile Include="frmMantAnimales.cpp" />
     <ClCompile Include="frmMantDiagnostico.cpp" />
@@ -190,6 +191,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmMain.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="frmMantAlimentación.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmMantAlmacen.h">
@@ -305,6 +309,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMantAlimentación.resx">
+      <DependentUpon>frmMantAlimentación.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMantAlmacen.resx">
       <DependentUpon>frmMantAlmacen.h</DependentUpon>

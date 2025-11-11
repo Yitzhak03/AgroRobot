@@ -203,7 +203,7 @@ namespace AgroRobotView {
 		
 		this->checkedListBox1->Items->Add("Acceso a Administración");
 		this->checkedListBox1->Items->Add("Gestión de Reportes");
-		this->checkedListBox1->Items->Add("Eliminar");
+		this->checkedListBox1->Items->Add("Programar Alimentación");
 		this->checkedListBox1->Items->Add("Ver");
 	}
 	private: System::Void btnCancelar_Click(System::Object^ sender, System::EventArgs^ e) {

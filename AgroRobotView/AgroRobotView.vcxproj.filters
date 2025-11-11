@@ -126,6 +126,9 @@
     <ClCompile Include="frmAgregarInsumoToAlmacen.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="frmMantAlimentación.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="frmMain.h">
@@ -243,6 +246,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="frmMantAlimentación.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
