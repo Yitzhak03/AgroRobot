@@ -114,7 +114,7 @@
     <ClCompile Include="Administrador.cpp" />
     <ClCompile Include="Alerta.cpp" />
     <ClCompile Include="Almacen.cpp" />
-    <ClCompile Include="Analisis.cpp" />
+    <ClCompile Include="Diagnostico.cpp" />
     <ClCompile Include="Animal.cpp" />
     <ClCompile Include="ConfiguracionSistema.cpp" />
     <ClCompile Include="Dieta.cpp" />
@@ -140,7 +140,7 @@
     <ClInclude Include="Administrador.h" />
     <ClInclude Include="Alerta.h" />
     <ClInclude Include="Almacen.h" />
-    <ClInclude Include="Analisis.h" />
+    <ClInclude Include="Diagnostico.h" />
     <ClInclude Include="Animal.h" />
     <ClInclude Include="ConfiguracionSistema.h" />
     <ClInclude Include="Dieta.h" />

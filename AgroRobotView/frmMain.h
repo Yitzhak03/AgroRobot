@@ -227,6 +227,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->panelCard);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedToolWindow;
 			this->Name = L"frmMain";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"frmMain";
 			this->panelCard->ResumeLayout(false);
 			this->panelCard->PerformLayout();
@@ -249,7 +250,7 @@ namespace AgroRobotView {
 		}
 
 		UsuarioController^ ctrl = gcnew UsuarioController();
-		List<Usuario^>^ lista = ctrl->obtenerTodosUsuarios();
+		List<Usuario^>^ lista = ctrl->obtenerUsuariosHabilitados();
 
 		for each (Usuario ^ u in lista) {
 			if (u->GetNombre() == usuario && u->GetContrasenha() == contrasenha) {

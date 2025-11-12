@@ -24,6 +24,15 @@ namespace AgroRobotView {
 		{
 			InitializeComponent();
 			this->muestraController = gcnew MuestraController();
+			this->BackColor = System::Drawing::Color::SeaGreen;
+			this->button1->BackColor = System::Drawing::Color::LightGreen;
+			this->button1->ForeColor = System::Drawing::Color::DarkGreen;
+			this->button2->BackColor = System::Drawing::Color::LightGreen;
+			this->button2->ForeColor = System::Drawing::Color::DarkGreen;
+			this->button3->BackColor = System::Drawing::Color::LightGreen;
+			this->button3->ForeColor = System::Drawing::Color::DarkGreen;
+			this->button4->BackColor = System::Drawing::Color::LightGreen;
+			this->button4->ForeColor = System::Drawing::Color::DarkGreen;
 		}
 
 	protected:

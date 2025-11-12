@@ -3,7 +3,7 @@
 3;3;Heces;30/10/2025;Sólida;Verde;Fétido;Sí;;;;  
 4;4;Heces;28/10/2025;Líquida;Negro;Fétido;Sí;;;;  
 5;5;Heces;29/10/2025;Pastosa;Marrón;Normal;No;;;;  
-6;6;Heces;24/10/2025;Viscosa;Marrón;Desagradable;Sí;;;;  
+6;6;Heces;24/10/2025;Sólida;Marrón;Normal;No;;;;  
 7;1;Sangre;25/10/2025;;;;;4ml;No;Sí;Oscuro
 8;2;Sangre;26/10/2025;;;;;5ml;No;Sí;Rojo Oscuro
 9;3;Sangre;27/10/2025;;;;;6ml;No;No;Claro

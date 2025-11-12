@@ -9,12 +9,15 @@ namespace AgroRobotController {
 	
 	public:
 		UsuarioController();
-		void writeTxt(List<Usuario^>^ listaUsuarios);
+		void escribirArchivo();
+
 		void agregarUsuario(Usuario^ usuario);
-		List<Usuario^>^ obtenerTodosUsuarios();
+		List<Usuario^>^ obtenerUsuariosPorEstado(Nullable<bool> estado);
+		List<Usuario^>^ obtenerUsuariosHabilitados();
+		List<Usuario^>^ obtenerUsuariosDeshabilitados();
 		void actualizarUsuario(Usuario^ usuario);
-		void eliminarUsuario(int id);
+		void cambiarEstadoUsuario(int id);
 		Usuario^ obtenerUsuarioPorId(int id);
-		List<Usuario^>^ obtenerUsuarioPorNombreEstado(String^ nombre, String^ estado);
+		List<Usuario^>^ obtenerUsuarioPorNombreEstado(String^ nombre, Nullable<bool> estado);
 	};
 }

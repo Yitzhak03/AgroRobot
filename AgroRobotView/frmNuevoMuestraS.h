@@ -20,9 +20,12 @@ namespace AgroRobotView {
 		frmNuevoMuestraS(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: agregar código de constructor aquí
-			//
+			this->BackColor = System::Drawing::Color::SeaGreen;
+			this->button1->BackColor = System::Drawing::Color::LightGreen;
+			this->button1->ForeColor = System::Drawing::Color::DarkGreen;
+			this->button2->BackColor = System::Drawing::Color::LightGreen;
+			this->button2->ForeColor = System::Drawing::Color::DarkGreen;
+			
 			this->Load += gcnew System::EventHandler(this, &frmNuevoMuestraS::frmNuevoMuestraS_Load);
 		}
 
@@ -31,6 +34,7 @@ namespace AgroRobotView {
 			InitializeComponent();
 			this->muestra = muestra;
 			this->muestraController = muestraController;
+			
 		}
 
 	protected:
@@ -277,7 +281,7 @@ namespace AgroRobotView {
 		this->Close();
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		//int idMuestra = Convert::ToInt32(this->textBox5->Text);
+		
 		int idMuestra = Convert::ToInt32(this->textBox5->Text);
 		int idAnimal = Convert::ToInt32(this->textBox1->Text);
 		String^ cantidad = this->textBox2->Text;

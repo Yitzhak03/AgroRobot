@@ -437,7 +437,7 @@ namespace AgroRobotView {
 		}
 		else
 		{
-			MessageBox::Show("Por favor, seleccione un operador para editar.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+			MessageBox::Show("Por favor, seleccione un animal para editar.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
 		}
 	}
 

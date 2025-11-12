@@ -112,6 +112,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AlmacenController.h" />
+    <ClInclude Include="DiagnosticoController.h" />
     <ClInclude Include="GestorNutricionalController.h" />
     <ClInclude Include="InsumoController.h" />
     <ClInclude Include="MuestraController.h" />
@@ -131,6 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AlmacenController.cpp" />
+    <ClCompile Include="DiagnosticoController.cpp" />
     <ClCompile Include="GestorNutricionalController.cpp" />
     <ClCompile Include="InsumoController.cpp" />
     <ClCompile Include="MuestraController.cpp" />

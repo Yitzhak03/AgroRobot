@@ -181,7 +181,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->btnGrabar);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmNuevoRol";
-			this->Text = L"frmNuevoRol";
+			this->Text = L"Nuevo Rol";
 			this->Load += gcnew System::EventHandler(this, &frmNuevoRol::frmNuevoRol_Load);
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
@@ -202,8 +202,8 @@ namespace AgroRobotView {
 		this->txtId->Text = Convert::ToString(maxId + 1);
 		
 		this->checkedListBox1->Items->Add("Acceso a Administración");
-		this->checkedListBox1->Items->Add("Editar");
-		this->checkedListBox1->Items->Add("Eliminar");
+		this->checkedListBox1->Items->Add("Gestión de Reportes");
+		this->checkedListBox1->Items->Add("Programar Alimentación");
 		this->checkedListBox1->Items->Add("Ver");
 	}
 	private: System::Void btnCancelar_Click(System::Object^ sender, System::EventArgs^ e) {

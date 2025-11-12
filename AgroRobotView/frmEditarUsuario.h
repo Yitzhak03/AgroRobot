@@ -26,12 +26,18 @@ namespace AgroRobotView {
 			//
 		}
 
-		frmEditarUsuario(UsuarioController^ usuarioController, Usuario^ usuario)
+		frmEditarUsuario(UsuarioController^ usuarioController, Usuario^ usuario, RolController^ rolController)
 		{
 			InitializeComponent();
 			this->usuarioController = usuarioController;
 			this->usuario = usuario;
 			this->rolController = rolController;
+
+			this->txtRoles->Items->Clear();
+			List<Rol^>^ listaRoles = this->rolController->obtenerTodosRoles();
+			for each (Rol ^ rol in listaRoles) {
+				this->txtRoles->Items->Add(rol->GetNombre());
+			}
 		}
 
 	protected:
@@ -244,7 +250,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->btnGrabar);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmEditarUsuario";
-			this->Text = L"frmEditarUsuario";
+			this->Text = L"Editar Usuario";
 			this->Load += gcnew System::EventHandler(this, &frmEditarUsuario::frmEditarUsuario_Load);
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
@@ -280,7 +286,6 @@ namespace AgroRobotView {
 		nuevoUsuario->SetRol(rolController->obtenerRolPorNombre(txtRoles->Text));
 		nuevoUsuario->SetUltimoAcceso(""); // Inicialmente vacío
 		nuevoUsuario->SetEstadoCuenta("Activo"); // Estado por defecto
-		nuevoUsuario->SetIdsAlertas(nullptr); // Inicialmente sin alertas
 		// Llamando al controlador para actualizar el operador en la base de datos
 		
 		this->usuarioController->actualizarUsuario(nuevoUsuario);

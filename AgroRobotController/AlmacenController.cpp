@@ -64,14 +64,52 @@ int AlmacenController::generarNuevoId()
 {
 	List<Almacen^>^ lista = readTxt();
 	int maxId = -1;
-	for each (Almacen^ a in lista) {
+	for each (Almacen ^ a in lista) {
 		if (a->Id > maxId) {
 			maxId = a->Id;
 		}
 	}
 	return maxId + 1;
 }
-
+List<String^>^ AlmacenController::obtenerNombresAlmacenes()
+{
+	List<Almacen^>^ lista = readTxt();
+	List<String^>^ nombres = gcnew List<String^>();
+	for each (Almacen ^ a in lista) {
+		nombres->Add(a->Nombre);
+	}
+	return nombres;
+}
+Almacen^ AlmacenController::obtenerAlmacenPorNombre(String^ nombre)
+{
+	List<Almacen^>^ lista = readTxt();
+	for each (Almacen ^ a in lista) {
+		if (a->Nombre == nombre) {
+			return a;
+		}
+	}
+	return nullptr;
+}
+String^ AlmacenController::buscarNombrePorId(int id)
+{
+	List<Almacen^>^ lista = readTxt();
+	for each (Almacen ^ a in lista) {
+		if (a->Id == id) {
+			return a->Nombre;
+		}
+	}
+	return "";
+}
+int AlmacenController::buscarIdPorNombre(String^ nombre)
+{
+	List<Almacen^>^ lista = readTxt();
+	for each (Almacen ^ a in lista) {
+		if (a->Nombre == nombre) {
+			return a->Id;
+		}
+	}
+	return -1;
+}
 //=====================================OTROS=================================================
 void AlmacenController::guardarOrdenesEnArchivo()
 {

@@ -69,6 +69,12 @@ namespace AgroRobotView {
 
 
 
+
+
+
+
+
+
 	protected:
 
 	private:
@@ -191,13 +197,14 @@ namespace AgroRobotView {
 			// 
 			// Column4
 			// 
-			this->Column4->HeaderText = L"Permiso 2";
+			this->Column4->HeaderText = L"Acceso a Gestión de Reportes";
 			this->Column4->Name = L"Column4";
 			this->Column4->ReadOnly = true;
+			this->Column4->Width = 130;
 			// 
 			// Column5
 			// 
-			this->Column5->HeaderText = L"Permiso 3";
+			this->Column5->HeaderText = L"Acceso a Alimentación";
 			this->Column5->Name = L"Column5";
 			this->Column5->ReadOnly = true;
 			// 
@@ -206,6 +213,7 @@ namespace AgroRobotView {
 			this->Column6->HeaderText = L"Permiso 4";
 			this->Column6->Name = L"Column6";
 			this->Column6->ReadOnly = true;
+			this->Column6->Width = 50;
 			// 
 			// button1
 			// 
@@ -259,8 +267,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmMantRoles";
-			this->Text = L"frmMantRoles";
-			this->Load += gcnew System::EventHandler(this, &frmMantRoles::frmMantRoles_Load);
+			this->Text = L"Gestión de Roles";
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
@@ -381,7 +388,5 @@ namespace AgroRobotView {
 
 		mostrarGrilla(listaRoles);
 	}
-private: System::Void frmMantRoles_Load(System::Object^ sender, System::EventArgs^ e) {
-}
 };
 }

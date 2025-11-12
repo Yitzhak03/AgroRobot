@@ -187,6 +187,7 @@ namespace AgroRobotView {
 			// 
 			// txtId
 			// 
+			this->txtId->Enabled = false;
 			this->txtId->Location = System::Drawing::Point(137, 41);
 			this->txtId->Margin = System::Windows::Forms::Padding(2);
 			this->txtId->Name = L"txtId";
@@ -242,7 +243,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmNuevoUsuario";
-			this->Text = L"frmNuevoUsuario";
+			this->Text = L"Nuevo Usuario";
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
 			this->ResumeLayout(false);
@@ -263,8 +264,7 @@ namespace AgroRobotView {
 		nuevoUsuario->SetContrasenha(txtCtrsn->Text);
 		nuevoUsuario->SetRol(rolController->obtenerRolPorNombre(comboBox1->Text));
 		nuevoUsuario->SetUltimoAcceso("-"); // Inicialmente vacío
-		nuevoUsuario->SetEstadoCuenta("Activo"); // Estado por defecto
-		nuevoUsuario->SetIdsAlertas(nullptr); // Inicialmente sin alertas
+		nuevoUsuario->SetEstadoCuenta("Habilitado"); // Estado por defecto
 		
 		// Llamar al controlador para agregar el nuevo usuario
 		this->usuarioController->agregarUsuario(nuevoUsuario);
@@ -282,8 +282,7 @@ namespace AgroRobotView {
 
 	private: System::Void groupBox1_Enter(System::Object^ sender, System::EventArgs^ e) {
 		/*crea un ID automático*/
-		List<Usuario^>^ listaUsuarios = this->usuarioController->obtenerTodosUsuarios();
-
+		List<Usuario^>^ listaUsuarios = this->usuarioController->obtenerUsuariosPorEstado(Nullable<bool>());
 		int maxId = 0;
 		for each(Usuario ^ usuario in listaUsuarios) {
 			if (usuario->GetId() > maxId) {
@@ -291,7 +290,6 @@ namespace AgroRobotView {
 			}
 		}
 		this->txtId->Text = Convert::ToString(maxId + 1);
-
 	}
 };
 }

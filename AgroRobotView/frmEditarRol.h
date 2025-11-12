@@ -180,7 +180,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->btnGrabar);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmEditarRol";
-			this->Text = L"frmEditarRol";
+			this->Text = L"Editar Rol";
 			this->Load += gcnew System::EventHandler(this, &frmEditarRol::frmEditarRol_Load);
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
@@ -193,8 +193,8 @@ namespace AgroRobotView {
 		this->txtNombre->Text = this->rol->GetNombre();
 
 		this->checkedListBox1->Items->Add("Acceso a Administración");
-		this->checkedListBox1->Items->Add("Editar");
-		this->checkedListBox1->Items->Add("Eliminar");
+		this->checkedListBox1->Items->Add("Gestión de reportes");
+		this->checkedListBox1->Items->Add("Programar Alimentación");
 		this->checkedListBox1->Items->Add("Ver");
 		List<bool>^ listaPermisos = this->rol->GetPermisos();
 		/*se encarga de marcar las cajas si detecta que dicho permiso es true*/
