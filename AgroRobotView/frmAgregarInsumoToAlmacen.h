@@ -1,4 +1,4 @@
-#pragma once
+Ôªø#pragma once
 #include "frmNuevoStock2.h"
 namespace AgroRobotView {
 
@@ -22,8 +22,9 @@ namespace AgroRobotView {
 		{
 			InitializeComponent();
 			//
-			//TODO: agregar cÛdigo de constructor aquÌ
+			//TODO: agregar c√≥digo de constructor aqu√≠
 			//
+			aplicarEstilo();
 		}
 		frmAgregarInsumoToAlmacen(int idAlmacen)
 		{
@@ -33,7 +34,7 @@ namespace AgroRobotView {
 
 	protected:
 		/// <summary>
-		/// Limpiar los recursos que se estÈn usando.
+		/// Limpiar los recursos que se est√©n usando.
 		/// </summary>
 		~frmAgregarInsumoToAlmacen()
 		{
@@ -51,30 +52,10 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::TextBox^ textBox2;
-
-
-
-
-
-
 	private: System::Windows::Forms::Button^ button3;
 	private: int idAlmacenDestino;
 	private: System::Windows::Forms::Button^ button4;
-
-
-
-
-
-
-
-
 	private: System::Windows::Forms::Label^ label3;
-
-
-
-
-
-
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column8;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
@@ -88,16 +69,71 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column10;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
 
+		   void aplicarEstilo()
+		   {
+			   this->BackColor = System::Drawing::Color::FromArgb(30, 61, 54);
+
+			   this->Font = gcnew System::Drawing::Font(L"Bahnschrift", 10, FontStyle::Regular);
+			   this->ForeColor = System::Drawing::Color::FromArgb(242, 242, 242);
+
+			   array<TextBox^>^ textos = { this->textBox1, this->textBox2 };
+			   for each (TextBox ^ t in textos) {
+				   t->BackColor = System::Drawing::Color::FromArgb(60, 110, 95);
+				   t->ForeColor = System::Drawing::Color::White;
+				   t->BorderStyle = BorderStyle::FixedSingle;
+				   t->Font = gcnew System::Drawing::Font(L"Bahnschrift", 10);
+			   }
+
+			   this->button1->BackColor = System::Drawing::Color::FromArgb(123, 228, 149);
+			   this->button1->FlatStyle = FlatStyle::Flat;
+			   this->button1->FlatAppearance->BorderSize = 0;
+			   this->button1->ForeColor = System::Drawing::Color::Black;
+			   this->button1->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 10);
+
+
+			   this->dataGridView1->BackgroundColor = System::Drawing::Color::FromArgb(45, 93, 80);
+			   this->dataGridView1->BorderStyle = BorderStyle::None;
+			   this->dataGridView1->GridColor = System::Drawing::Color::FromArgb(30, 61, 54);
+			   this->dataGridView1->EnableHeadersVisualStyles = false;
+			   this->dataGridView1->ColumnHeadersDefaultCellStyle->BackColor = System::Drawing::Color::FromArgb(30, 61, 54);
+			   this->dataGridView1->ColumnHeadersDefaultCellStyle->ForeColor = System::Drawing::Color::White;
+			   this->dataGridView1->DefaultCellStyle->BackColor = System::Drawing::Color::FromArgb(60, 110, 95);
+			   this->dataGridView1->DefaultCellStyle->ForeColor = System::Drawing::Color::White;
+			   this->dataGridView1->DefaultCellStyle->SelectionBackColor = System::Drawing::Color::FromArgb(123, 228, 149);
+			   this->dataGridView1->DefaultCellStyle->SelectionForeColor = System::Drawing::Color::Black;
+
+			   array<Button^>^ botones = { this->button2, this->button3, this->button1, this->button4};
+			   for each (Button ^ b in botones) {
+				   b->BackColor = System::Drawing::Color::FromArgb(123, 228, 149);
+				   b->FlatStyle = FlatStyle::Flat;
+				   b->FlatAppearance->BorderSize = 0;
+				   b->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 10);
+				   b->ForeColor = System::Drawing::Color::Black;
+				   b->Cursor = Cursors::Hand;
+			   }
+
+			   // üè∑Ô∏è Etiquetas
+			   array<Label^>^ labels = { this->label1 };
+			   for each (Label ^ l in labels) {
+				   l->ForeColor = System::Drawing::Color::White;
+				   l->Font = gcnew System::Drawing::Font(L"Bahnschrift", 10);
+			   }
+
+			   // üìè Config general
+			   this->Text = L"AgroRobot - Mantenimiento de Roles";
+			   this->StartPosition = FormStartPosition::CenterScreen;
+		   }
+
 	private:
 		/// <summary>
-		/// Variable del diseÒador necesaria.
+		/// Variable del dise√±ador necesaria.
 		/// </summary>
 		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// MÈtodo necesario para admitir el DiseÒador. No se puede modificar
-		/// el contenido de este mÈtodo con el editor de cÛdigo.
+		/// M√©todo necesario para admitir el Dise√±ador. No se puede modificar
+		/// el contenido de este m√©todo con el editor de c√≥digo.
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -171,7 +207,7 @@ namespace AgroRobotView {
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(90, 30);
 			this->button1->TabIndex = 2;
-			this->button1->Text = L"AÒadir  > >";
+			this->button1->Text = L"A√±adir  > >";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &frmAgregarInsumoToAlmacen::button1_Click);
 			// 
@@ -378,7 +414,7 @@ namespace AgroRobotView {
 			comboBox1->Items->Add(nombre);
 		}
 	}
-		   //Mostrar los insumos del almacÈn seleccionado al cerrar el comboBox
+		   //Mostrar los insumos del almac√©n seleccionado al cerrar el comboBox
 	/*private: System::Void comboBox1_DropDownClosed(System::Object^ sender, System::EventArgs^ e)
 	{
 		String^ nombreAlmacen = comboBox1->Text;
@@ -390,7 +426,7 @@ namespace AgroRobotView {
 			mostrarGrilla(listaStockInsumos);
 		}
 	}*/
-	//Mostrar la grilla de insumos del almacÈn seleccionado
+	//Mostrar la grilla de insumos del almac√©n seleccionado
 	private: System::Void mostrarGrilla1(List<StockInsumo^>^ lista)
 	{
 		dataGridView1->Rows->Clear();
@@ -419,7 +455,7 @@ namespace AgroRobotView {
 			);
 		}
 	}
-		   //AcciÛn al presionar el boton de buscar
+		   //Acci√≥n al presionar el boton de buscar
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		String^ nombreAlmacen = comboBox1->Text;
@@ -431,26 +467,26 @@ namespace AgroRobotView {
 			mostrarGrilla1(listaStockInsumos);
 		}
 	}
-		   //Mostrar nombre y grilla del almacÈn destino al cargar el formulario
+		   //Mostrar nombre y grilla del almac√©n destino al cargar el formulario
 	private: System::Void frmAgregarInsumoToAlmacen_Load(System::Object^ sender, System::EventArgs^ e)
 	{
 		AlmacenController^ aCtrl = gcnew AlmacenController();
 		String^ nombreAlmacen = aCtrl->buscarNombrePorId(this->idAlmacenDestino);
 		textBox2->Text = nombreAlmacen;
-		//Mostrar la grilla del almacÈn destino
+		//Mostrar la grilla del almac√©n destino
 		StockInsumoController^ sCtrl = gcnew StockInsumoController();
 		List<StockInsumo^>^ listaStockInsumos = sCtrl->buscarPorIdAlmacen(this->idAlmacenDestino);
 		mostrarGrilla2(listaStockInsumos);
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e)
 	{
-		//Validar si existe el insumo en el almacÈn destino por nombre
+		//Validar si existe el insumo en el almac√©n destino por nombre
 		if (dataGridView1->SelectedRows->Count > 0) {
 			StockInsumoController^ sCtrl = gcnew StockInsumoController();
 			//Obtener el insumo seleccionado del dataGridView1
 			int idStock = Convert::ToInt32(dataGridView1->SelectedRows[0]->Cells[0]->Value);
 			StockInsumo^ stockOrigen = sCtrl->buscarPorId(idStock);
-			//Verificar si el insumo ya existe en el almacÈn destino
+			//Verificar si el insumo ya existe en el almac√©n destino
 			//buscarPorIdInsumoYAlmacen
 			StockInsumo^ stockDestino = sCtrl->buscarPorIdInsumoYAlmacen(stockOrigen->Insumoo->Id, this->idAlmacenDestino);
 			if (stockDestino != nullptr) {
@@ -462,18 +498,18 @@ namespace AgroRobotView {
 				sCtrl->actualizarStockInsumo(stockDestino);
 			} else {
 				//Si no existe, mostrar mensaje para agregar limites de stock minimo y maximo
-				MessageBox::Show("El insumo no existe en el almacÈn destino. Por favor, agregue los lÌmites de stock mÌnimo y m·ximo en la siguiente ventana.", "AtenciÛn", MessageBoxButtons::OK, MessageBoxIcon::Information);
+				MessageBox::Show("El insumo no existe en el almac√©n destino. Por favor, agregue los l√≠mites de stock m√≠nimo y m√°ximo en la siguiente ventana.", "Atenci√≥n", MessageBoxButtons::OK, MessageBoxIcon::Information);
 				frmNuevoStock2^ frm = gcnew frmNuevoStock2(stockOrigen, this->idAlmacenDestino, Convert::ToSingle(textBox1->Text));
 				frm->ShowDialog();
 
 			}
 
 		} else {
-			MessageBox::Show("Seleccione un insumo para agregar.", "AtenciÛn", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+			MessageBox::Show("Seleccione un insumo para agregar.", "Atenci√≥n", MessageBoxButtons::OK, MessageBoxIcon::Warning);
 		}
 
 	}
-		   //Actualizar grilla del almacÈn destino
+		   //Actualizar grilla del almac√©n destino
 	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		StockInsumoController^ sCtrl = gcnew StockInsumoController();
