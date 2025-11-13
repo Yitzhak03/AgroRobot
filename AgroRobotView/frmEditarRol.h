@@ -201,7 +201,7 @@ namespace AgroRobotView {
 			this->btnGrabar->Location = System::Drawing::Point(113, 303);
 			this->btnGrabar->Margin = System::Windows::Forms::Padding(2);
 			this->btnGrabar->Name = L"btnGrabar";
-			this->btnGrabar->Size = System::Drawing::Size(56, 19);
+			this->btnGrabar->Size = System::Drawing::Size(60, 30);
 			this->btnGrabar->TabIndex = 6;
 			this->btnGrabar->Text = L"Grabar";
 			this->btnGrabar->UseVisualStyleBackColor = true;
@@ -212,7 +212,7 @@ namespace AgroRobotView {
 			this->btnCancelar->Location = System::Drawing::Point(204, 303);
 			this->btnCancelar->Margin = System::Windows::Forms::Padding(2);
 			this->btnCancelar->Name = L"btnCancelar";
-			this->btnCancelar->Size = System::Drawing::Size(66, 19);
+			this->btnCancelar->Size = System::Drawing::Size(80, 30);
 			this->btnCancelar->TabIndex = 7;
 			this->btnCancelar->Text = L"Cancelar";
 			this->btnCancelar->UseVisualStyleBackColor = true;

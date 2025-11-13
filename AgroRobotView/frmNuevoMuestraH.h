@@ -106,9 +106,10 @@ namespace AgroRobotView {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(152, 376);
+			this->button2->Location = System::Drawing::Point(203, 463);
+			this->button2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(75, 23);
+			this->button2->Size = System::Drawing::Size(100, 28);
 			this->button2->TabIndex = 5;
 			this->button2->Text = L"Cancelar";
 			this->button2->UseVisualStyleBackColor = true;
@@ -116,9 +117,10 @@ namespace AgroRobotView {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(40, 376);
+			this->button1->Location = System::Drawing::Point(53, 463);
+			this->button1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->Size = System::Drawing::Size(100, 28);
 			this->button1->TabIndex = 4;
 			this->button1->Text = L"Guardar";
 			this->button1->UseVisualStyleBackColor = true;
@@ -140,48 +142,55 @@ namespace AgroRobotView {
 			this->groupBox1->Controls->Add(this->label2);
 			this->groupBox1->Controls->Add(this->textBox1);
 			this->groupBox1->Controls->Add(this->label1);
-			this->groupBox1->Location = System::Drawing::Point(27, 26);
+			this->groupBox1->Location = System::Drawing::Point(36, 32);
+			this->groupBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(200, 332);
+			this->groupBox1->Padding = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->groupBox1->Size = System::Drawing::Size(267, 409);
 			this->groupBox1->TabIndex = 3;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Datos Heces";
 			// 
 			// textBox6
 			// 
-			this->textBox6->Location = System::Drawing::Point(86, 35);
+			this->textBox6->Location = System::Drawing::Point(115, 43);
+			this->textBox6->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox6->Name = L"textBox6";
-			this->textBox6->Size = System::Drawing::Size(100, 20);
+			this->textBox6->Size = System::Drawing::Size(132, 22);
 			this->textBox6->TabIndex = 15;
 			// 
 			// label7
 			// 
 			this->label7->AutoSize = true;
-			this->label7->Location = System::Drawing::Point(10, 38);
+			this->label7->Location = System::Drawing::Point(13, 47);
+			this->label7->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(62, 13);
+			this->label7->Size = System::Drawing::Size(74, 16);
 			this->label7->TabIndex = 14;
 			this->label7->Text = L"ID Muestra:";
 			// 
 			// textBox5
 			// 
-			this->textBox5->Location = System::Drawing::Point(85, 295);
+			this->textBox5->Location = System::Drawing::Point(113, 363);
+			this->textBox5->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox5->Name = L"textBox5";
-			this->textBox5->Size = System::Drawing::Size(100, 20);
+			this->textBox5->Size = System::Drawing::Size(132, 22);
 			this->textBox5->TabIndex = 13;
 			// 
 			// textBox4
 			// 
-			this->textBox4->Location = System::Drawing::Point(85, 207);
+			this->textBox4->Location = System::Drawing::Point(113, 255);
+			this->textBox4->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox4->Name = L"textBox4";
-			this->textBox4->Size = System::Drawing::Size(100, 20);
+			this->textBox4->Size = System::Drawing::Size(132, 22);
 			this->textBox4->TabIndex = 12;
 			// 
 			// label6
 			// 
-			this->label6->Location = System::Drawing::Point(9, 298);
+			this->label6->Location = System::Drawing::Point(12, 367);
+			this->label6->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(55, 13);
+			this->label6->Size = System::Drawing::Size(73, 16);
 			this->label6->TabIndex = 11;
 			this->label6->Text = L"Fecha:";
 			// 
@@ -189,85 +198,95 @@ namespace AgroRobotView {
 			// 
 			this->comboBox2->FormattingEnabled = true;
 			this->comboBox2->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Sí", L"No" });
-			this->comboBox2->Location = System::Drawing::Point(85, 251);
+			this->comboBox2->Location = System::Drawing::Point(113, 309);
+			this->comboBox2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->comboBox2->Name = L"comboBox2";
-			this->comboBox2->Size = System::Drawing::Size(100, 21);
+			this->comboBox2->Size = System::Drawing::Size(132, 24);
 			this->comboBox2->TabIndex = 10;
 			// 
 			// label5
 			// 
-			this->label5->Location = System::Drawing::Point(9, 251);
+			this->label5->Location = System::Drawing::Point(12, 309);
+			this->label5->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(70, 30);
+			this->label5->Size = System::Drawing::Size(93, 37);
 			this->label5->TabIndex = 8;
 			this->label5->Text = L"Parasitos presentes:";
 			// 
 			// label4
 			// 
-			this->label4->Location = System::Drawing::Point(9, 214);
+			this->label4->Location = System::Drawing::Point(12, 263);
+			this->label4->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(34, 13);
+			this->label4->Size = System::Drawing::Size(45, 16);
 			this->label4->TabIndex = 6;
 			this->label4->Text = L"Olor:";
 			// 
 			// textBox3
 			// 
-			this->textBox3->Location = System::Drawing::Point(85, 161);
+			this->textBox3->Location = System::Drawing::Point(113, 198);
+			this->textBox3->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(100, 20);
+			this->textBox3->Size = System::Drawing::Size(132, 22);
 			this->textBox3->TabIndex = 5;
 			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(9, 168);
+			this->label3->Location = System::Drawing::Point(12, 207);
+			this->label3->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(34, 13);
+			this->label3->Size = System::Drawing::Size(42, 16);
 			this->label3->TabIndex = 4;
 			this->label3->Text = L"Color:";
 			// 
 			// textBox2
 			// 
-			this->textBox2->Location = System::Drawing::Point(85, 123);
+			this->textBox2->Location = System::Drawing::Point(113, 151);
+			this->textBox2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(100, 20);
+			this->textBox2->Size = System::Drawing::Size(132, 22);
 			this->textBox2->TabIndex = 3;
 			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(9, 126);
+			this->label2->Location = System::Drawing::Point(12, 155);
+			this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(70, 13);
+			this->label2->Size = System::Drawing::Size(87, 16);
 			this->label2->TabIndex = 2;
 			this->label2->Text = L"Consistencia:";
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(85, 79);
+			this->textBox1->Location = System::Drawing::Point(113, 97);
+			this->textBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(100, 20);
+			this->textBox1->Size = System::Drawing::Size(132, 22);
 			this->textBox1->TabIndex = 1;
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(9, 82);
+			this->label1->Location = System::Drawing::Point(12, 101);
+			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(55, 13);
+			this->label1->Size = System::Drawing::Size(67, 16);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"ID Animal:";
 			// 
 			// frmNuevoMuestraH
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(279, 461);
+			this->ClientSize = System::Drawing::Size(372, 567);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->groupBox1);
+			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->Name = L"frmNuevoMuestraH";
-			this->Text = L"Muestra Heces";
+			this->Text = L"AgroRobot - Nueva muestra ";
 			this->Load += gcnew System::EventHandler(this, &frmNuevoMuestraH::frmNuevoMuestraH_Load);
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();

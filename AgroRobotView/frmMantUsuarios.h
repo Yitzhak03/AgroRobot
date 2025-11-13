@@ -78,7 +78,7 @@ namespace AgroRobotView {
 			this->dataGridView1->DefaultCellStyle->SelectionBackColor = System::Drawing::Color::FromArgb(123, 228, 149);
 			this->dataGridView1->DefaultCellStyle->SelectionForeColor = System::Drawing::Color::Black;
 
-			array<Button^>^ botones = { this->button2, this->btnBuscar, this->btnCambiarEstado, this->btnEditar };
+			array<Button^>^ botones = { this->button2, this->btnBuscar, this->btnCambiarEstado, this->btnEditar, this->btnMostrarTodos };
 			for each (Button ^ b in botones) {
 				b->BackColor = System::Drawing::Color::FromArgb(123, 228, 149);
 				b->FlatStyle = FlatStyle::Flat;
@@ -214,7 +214,7 @@ namespace AgroRobotView {
 			this->btnMostrarTodos->Location = System::Drawing::Point(582, 49);
 			this->btnMostrarTodos->Margin = System::Windows::Forms::Padding(2);
 			this->btnMostrarTodos->Name = L"btnMostrarTodos";
-			this->btnMostrarTodos->Size = System::Drawing::Size(92, 19);
+			this->btnMostrarTodos->Size = System::Drawing::Size(92, 30);
 			this->btnMostrarTodos->TabIndex = 16;
 			this->btnMostrarTodos->Text = L"Mostrar Todos";
 			this->btnMostrarTodos->UseVisualStyleBackColor = true;

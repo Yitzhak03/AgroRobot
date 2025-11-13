@@ -162,9 +162,10 @@ namespace AgroRobotView {
 			// 
 			// button4
 			// 
-			this->button4->Location = System::Drawing::Point(439, 357);
+			this->button4->Location = System::Drawing::Point(585, 439);
+			this->button4->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(75, 23);
+			this->button4->Size = System::Drawing::Size(100, 28);
 			this->button4->TabIndex = 27;
 			this->button4->Text = L"Eliminar";
 			this->button4->UseVisualStyleBackColor = true;
@@ -172,9 +173,10 @@ namespace AgroRobotView {
 			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(292, 357);
+			this->button3->Location = System::Drawing::Point(389, 439);
+			this->button3->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(75, 23);
+			this->button3->Size = System::Drawing::Size(100, 28);
 			this->button3->TabIndex = 26;
 			this->button3->Text = L"Editar";
 			this->button3->UseVisualStyleBackColor = true;
@@ -182,9 +184,10 @@ namespace AgroRobotView {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(135, 357);
+			this->button2->Location = System::Drawing::Point(180, 439);
+			this->button2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(75, 23);
+			this->button2->Size = System::Drawing::Size(100, 28);
 			this->button2->TabIndex = 25;
 			this->button2->Text = L"Agregar";
 			this->button2->UseVisualStyleBackColor = true;
@@ -195,18 +198,21 @@ namespace AgroRobotView {
 			this->groupBox1->Controls->Add(this->button1);
 			this->groupBox1->Controls->Add(this->textBox1);
 			this->groupBox1->Controls->Add(this->label1);
-			this->groupBox1->Location = System::Drawing::Point(179, 25);
+			this->groupBox1->Location = System::Drawing::Point(239, 31);
+			this->groupBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(318, 100);
+			this->groupBox1->Padding = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->groupBox1->Size = System::Drawing::Size(424, 123);
 			this->groupBox1->TabIndex = 23;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Criterio de Busqueda";
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(210, 35);
+			this->button1->Location = System::Drawing::Point(280, 43);
+			this->button1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->Size = System::Drawing::Size(100, 28);
 			this->button1->TabIndex = 4;
 			this->button1->Text = L"Buscar";
 			this->button1->UseVisualStyleBackColor = true;
@@ -214,17 +220,19 @@ namespace AgroRobotView {
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(67, 35);
+			this->textBox1->Location = System::Drawing::Point(89, 43);
+			this->textBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(100, 20);
+			this->textBox1->Size = System::Drawing::Size(132, 22);
 			this->textBox1->TabIndex = 1;
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(6, 38);
+			this->label1->Location = System::Drawing::Point(8, 47);
+			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(55, 13);
+			this->label1->Size = System::Drawing::Size(67, 16);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"ID Animal:";
 			// 
@@ -235,58 +243,75 @@ namespace AgroRobotView {
 				this->Column1,
 					this->Column2, this->Column3, this->Column4, this->Column5, this->Column6, this->Column7
 			});
-			this->dataGridView1->Location = System::Drawing::Point(34, 153);
+			this->dataGridView1->Location = System::Drawing::Point(45, 188);
+			this->dataGridView1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->dataGridView1->Name = L"dataGridView1";
-			this->dataGridView1->Size = System::Drawing::Size(566, 180);
+			this->dataGridView1->RowHeadersWidth = 51;
+			this->dataGridView1->Size = System::Drawing::Size(755, 222);
 			this->dataGridView1->TabIndex = 28;
 			// 
 			// Column1
 			// 
 			this->Column1->HeaderText = L"ID Muestra";
+			this->Column1->MinimumWidth = 6;
 			this->Column1->Name = L"Column1";
+			this->Column1->Width = 125;
 			// 
 			// Column2
 			// 
 			this->Column2->HeaderText = L"ID Animal";
+			this->Column2->MinimumWidth = 6;
 			this->Column2->Name = L"Column2";
+			this->Column2->Width = 125;
 			// 
 			// Column3
 			// 
 			this->Column3->HeaderText = L"Cantidad Extraida";
+			this->Column3->MinimumWidth = 6;
 			this->Column3->Name = L"Column3";
+			this->Column3->Width = 125;
 			// 
 			// Column4
 			// 
 			this->Column4->HeaderText = L"Presencia de Coagulos";
+			this->Column4->MinimumWidth = 6;
 			this->Column4->Name = L"Column4";
+			this->Column4->Width = 125;
 			// 
 			// Column5
 			// 
 			this->Column5->HeaderText = L"Contaminacion Visible";
+			this->Column5->MinimumWidth = 6;
 			this->Column5->Name = L"Column5";
+			this->Column5->Width = 125;
 			// 
 			// Column6
 			// 
 			this->Column6->HeaderText = L"Color";
+			this->Column6->MinimumWidth = 6;
 			this->Column6->Name = L"Column6";
+			this->Column6->Width = 125;
 			// 
 			// Column7
 			// 
 			this->Column7->HeaderText = L"Fecha";
+			this->Column7->MinimumWidth = 6;
 			this->Column7->Name = L"Column7";
+			this->Column7->Width = 125;
 			// 
 			// frmMantSangre
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(640, 405);
+			this->ClientSize = System::Drawing::Size(853, 498);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->groupBox1);
+			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->Name = L"frmMantSangre";
-			this->Text = L"Gestion de Muestras de Sangre";
+			this->Text = L"AgroRobot - Gestion de Muestras de Sangre";
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
