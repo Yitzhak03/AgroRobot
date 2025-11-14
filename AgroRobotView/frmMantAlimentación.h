@@ -53,7 +53,7 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::GroupBox^ groupBox2;
-	private: System::Windows::Forms::Button^ button4;
+
 	private: System::Windows::Forms::Button^ button3;
 	private: GestorNutricionalController^ animalController;
 	private: frmProgreso^ ventanaProgreso;
@@ -114,14 +114,6 @@ namespace AgroRobotView {
 		void InitializeComponent(void)
 		{
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
-			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
-			this->button4 = (gcnew System::Windows::Forms::Button());
-			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -129,6 +121,13 @@ namespace AgroRobotView {
 			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column7 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
+			this->button3 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
@@ -149,93 +148,6 @@ namespace AgroRobotView {
 			this->dataGridView1->Size = System::Drawing::Size(679, 229);
 			this->dataGridView1->TabIndex = 13;
 			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &frmMantAlimentación::dataGridView1_CellContentClick);
-			// 
-			// groupBox1
-			// 
-			this->groupBox1->Controls->Add(this->button1);
-			this->groupBox1->Controls->Add(this->textBox2);
-			this->groupBox1->Controls->Add(this->label2);
-			this->groupBox1->Location = System::Drawing::Point(17, 19);
-			this->groupBox1->Margin = System::Windows::Forms::Padding(2);
-			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Padding = System::Windows::Forms::Padding(2);
-			this->groupBox1->Size = System::Drawing::Size(679, 99);
-			this->groupBox1->TabIndex = 14;
-			this->groupBox1->TabStop = false;
-			this->groupBox1->Text = L"Criterios de Búsqueda";
-			// 
-			// button1
-			// 
-			this->button1->Location = System::Drawing::Point(532, 44);
-			this->button1->Margin = System::Windows::Forms::Padding(2);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 24);
-			this->button1->TabIndex = 4;
-			this->button1->Text = L"Buscar";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &frmMantAlimentación::button1_Click);
-			// 
-			// textBox2
-			// 
-			this->textBox2->Location = System::Drawing::Point(366, 47);
-			this->textBox2->Margin = System::Windows::Forms::Padding(2);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(93, 20);
-			this->textBox2->TabIndex = 3;
-			// 
-			// label2
-			// 
-			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(282, 50);
-			this->label2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(51, 13);
-			this->label2->TabIndex = 1;
-			this->label2->Text = L"Especie: ";
-			// 
-			// button2
-			// 
-			this->button2->Location = System::Drawing::Point(33, 51);
-			this->button2->Margin = System::Windows::Forms::Padding(2);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(90, 24);
-			this->button2->TabIndex = 5;
-			this->button2->Text = L"Por especie";
-			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &frmMantAlimentación::button2_Click);
-			// 
-			// groupBox2
-			// 
-			this->groupBox2->Controls->Add(this->button4);
-			this->groupBox2->Controls->Add(this->button3);
-			this->groupBox2->Controls->Add(this->button2);
-			this->groupBox2->Location = System::Drawing::Point(713, 132);
-			this->groupBox2->Name = L"groupBox2";
-			this->groupBox2->Size = System::Drawing::Size(156, 229);
-			this->groupBox2->TabIndex = 5;
-			this->groupBox2->TabStop = false;
-			this->groupBox2->Text = L"Alimentar";
-			// 
-			// button4
-			// 
-			this->button4->Location = System::Drawing::Point(33, 171);
-			this->button4->Margin = System::Windows::Forms::Padding(2);
-			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(90, 24);
-			this->button4->TabIndex = 7;
-			this->button4->Text = L"Ver Reportes";
-			this->button4->UseVisualStyleBackColor = true;
-			// 
-			// button3
-			// 
-			this->button3->Location = System::Drawing::Point(33, 112);
-			this->button3->Margin = System::Windows::Forms::Padding(2);
-			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(90, 24);
-			this->button3->TabIndex = 6;
-			this->button3->Text = L"Por animal";
-			this->button3->UseVisualStyleBackColor = true;
-			this->button3->Click += gcnew System::EventHandler(this, &frmMantAlimentación::button3_Click);
 			// 
 			// Column1
 			// 
@@ -284,6 +196,82 @@ namespace AgroRobotView {
 			// 
 			this->Column7->HeaderText = L"Ultima Vez Alimentado";
 			this->Column7->Name = L"Column7";
+			// 
+			// groupBox1
+			// 
+			this->groupBox1->Controls->Add(this->button1);
+			this->groupBox1->Controls->Add(this->textBox2);
+			this->groupBox1->Controls->Add(this->label2);
+			this->groupBox1->Location = System::Drawing::Point(17, 19);
+			this->groupBox1->Margin = System::Windows::Forms::Padding(2);
+			this->groupBox1->Name = L"groupBox1";
+			this->groupBox1->Padding = System::Windows::Forms::Padding(2);
+			this->groupBox1->Size = System::Drawing::Size(679, 99);
+			this->groupBox1->TabIndex = 14;
+			this->groupBox1->TabStop = false;
+			this->groupBox1->Text = L"Criterios de Búsqueda";
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(532, 44);
+			this->button1->Margin = System::Windows::Forms::Padding(2);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(75, 24);
+			this->button1->TabIndex = 4;
+			this->button1->Text = L"Buscar";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &frmMantAlimentación::button1_Click);
+			// 
+			// textBox2
+			// 
+			this->textBox2->Location = System::Drawing::Point(366, 47);
+			this->textBox2->Margin = System::Windows::Forms::Padding(2);
+			this->textBox2->Name = L"textBox2";
+			this->textBox2->Size = System::Drawing::Size(93, 20);
+			this->textBox2->TabIndex = 3;
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(282, 50);
+			this->label2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(51, 13);
+			this->label2->TabIndex = 1;
+			this->label2->Text = L"Especie: ";
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(33, 53);
+			this->button2->Margin = System::Windows::Forms::Padding(2);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(90, 24);
+			this->button2->TabIndex = 5;
+			this->button2->Text = L"Por especie";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &frmMantAlimentación::button2_Click);
+			// 
+			// groupBox2
+			// 
+			this->groupBox2->Controls->Add(this->button3);
+			this->groupBox2->Controls->Add(this->button2);
+			this->groupBox2->Location = System::Drawing::Point(713, 132);
+			this->groupBox2->Name = L"groupBox2";
+			this->groupBox2->Size = System::Drawing::Size(156, 229);
+			this->groupBox2->TabIndex = 5;
+			this->groupBox2->TabStop = false;
+			this->groupBox2->Text = L"Alimentar";
+			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(33, 152);
+			this->button3->Margin = System::Windows::Forms::Padding(2);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(90, 24);
+			this->button3->TabIndex = 6;
+			this->button3->Text = L"Por animal";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &frmMantAlimentación::button3_Click);
 			// 
 			// frmMantAlimentación
 			// 

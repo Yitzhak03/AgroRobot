@@ -228,7 +228,7 @@ namespace AgroRobotView {
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedToolWindow;
 			this->Name = L"frmMain";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"frmMain";
+			this->Text = L"Login";
 			this->panelCard->ResumeLayout(false);
 			this->panelCard->PerformLayout();
 			this->ResumeLayout(false);

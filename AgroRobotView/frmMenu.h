@@ -14,6 +14,7 @@
 #include "frmMantReporteDiagnostico.h"
 #include "frmMantReporteAlimentacion.h"
 #include "frmReporteInsumosXalmacen.h"
+#include "frmReporteAlimentacion.h"
 
 namespace AgroRobotView {
 
@@ -27,13 +28,13 @@ namespace AgroRobotView {
 
 	// !!!!Comentar esta clase y sus llamadas en el construcctor para poder usar el diseñador visual !!!!
 	// Renderer: mantiene hover por defecto, pinta un fondo semitransparente sólo al hacer click
+	
 	public ref class ClickTransparentToolStripRenderer : public System::Windows::Forms::ToolStripProfessionalRenderer {
 	private:
 		System::Drawing::Color pressedColor;
 	public:
-		ClickTransparentToolStripRenderer(System::Drawing::Color color)
-			: System::Windows::Forms::ToolStripProfessionalRenderer()
-		{
+		ClickTransparentToolStripRenderer(System::Drawing::Color color):
+		System::Windows::Forms::ToolStripProfessionalRenderer(){
 			this->pressedColor = color;
 		}
 	protected:
@@ -104,6 +105,7 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::ToolStripMenuItem^ diagnósticosMédicosToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ planAlimenticioToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ insumosPorAlmacénToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ alimentaciónPorEspecieToolStripMenuItem;
 	private:
 		/// <summary>
 		/// Variable del diseñador necesaria.
@@ -140,6 +142,7 @@ namespace AgroRobotView {
 			this->planAlimenticioToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->gestiónDeReportesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->insumosPorAlmacénToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->alimentaciónPorEspecieToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->volverToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
@@ -150,8 +153,7 @@ namespace AgroRobotView {
 				static_cast<System::Int32>(static_cast<System::Byte>(58)));
 			this->menuStrip1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Pixel));
 			this->menuStrip1->ImageScalingSize = System::Drawing::Size(35, 35);
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6)
-			{
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6) {
 				this->admnistracionToolStripMenuItem,
 					this->diagnosticoToolStripMenuItem, this->planDeAlimentacionToolStripMenuItem, this->almacenToolStripMenuItem, this->reportesToolStripMenuItem,
 					this->volverToolStripMenuItem
@@ -166,8 +168,7 @@ namespace AgroRobotView {
 			// 
 			// admnistracionToolStripMenuItem
 			// 
-			this->admnistracionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3)
-			{
+			this->admnistracionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
 				this->mantenimientoDeUsuariosToolStripMenuItem,
 					this->mantenimientoDeRolesToolStripMenuItem, this->programaciónDeAlimentaciónToolStripMenuItem
 			});
@@ -207,8 +208,7 @@ namespace AgroRobotView {
 			// 
 			// diagnosticoToolStripMenuItem
 			// 
-			this->diagnosticoToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2)
-			{
+			this->diagnosticoToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
 				this->géstionDeDiagnosticosToolStripMenuItem,
 					this->gestiónDeMuestrasToolStripMenuItem
 			});
@@ -231,8 +231,7 @@ namespace AgroRobotView {
 			// 
 			// gestiónDeMuestrasToolStripMenuItem
 			// 
-			this->gestiónDeMuestrasToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2)
-			{
+			this->gestiónDeMuestrasToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
 				this->muestraDeHecesToolStripMenuItem,
 					this->muestraDeSangreToolStripMenuItem
 			});
@@ -259,8 +258,7 @@ namespace AgroRobotView {
 			// 
 			// planDeAlimentacionToolStripMenuItem
 			// 
-			this->planDeAlimentacionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2)
-			{
+			this->planDeAlimentacionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
 				this->registroDeDietasToolStripMenuItem,
 					this->registroDeAnimalesToolStripMenuItem
 			});
@@ -291,8 +289,7 @@ namespace AgroRobotView {
 			// 
 			// almacenToolStripMenuItem
 			// 
-			this->almacenToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2)
-			{
+			this->almacenToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
 				this->registroInsumosGeneralToolStripMenuItem,
 					this->registroGeneralDeAlmacenesToolStripMenuItem
 			});
@@ -323,11 +320,10 @@ namespace AgroRobotView {
 			// 
 			// reportesToolStripMenuItem
 			// 
-			this->reportesToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5)
-			{
+			this->reportesToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6) {
 				this->gestiónDeOrdenesDeAlimentaciónToolStripMenuItem,
 					this->diagnósticosMédicosToolStripMenuItem, this->planAlimenticioToolStripMenuItem, this->gestiónDeReportesToolStripMenuItem,
-					this->insumosPorAlmacénToolStripMenuItem
+					this->insumosPorAlmacénToolStripMenuItem, this->alimentaciónPorEspecieToolStripMenuItem
 			});
 			this->reportesToolStripMenuItem->ForeColor = System::Drawing::Color::Ivory;
 			this->reportesToolStripMenuItem->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"reportesToolStripMenuItem.Image")));
@@ -380,6 +376,15 @@ namespace AgroRobotView {
 			this->insumosPorAlmacénToolStripMenuItem->Size = System::Drawing::Size(284, 30);
 			this->insumosPorAlmacénToolStripMenuItem->Text = L"Insumos por Almacén";
 			this->insumosPorAlmacénToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::insumosPorAlmacénToolStripMenuItem_Click);
+			// 
+			// alimentaciónPorEspecieToolStripMenuItem
+			// 
+			this->alimentaciónPorEspecieToolStripMenuItem->Font = (gcnew System::Drawing::Font(L"Segoe UI", 18, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Pixel));
+			this->alimentaciónPorEspecieToolStripMenuItem->Name = L"alimentaciónPorEspecieToolStripMenuItem";
+			this->alimentaciónPorEspecieToolStripMenuItem->Size = System::Drawing::Size(284, 30);
+			this->alimentaciónPorEspecieToolStripMenuItem->Text = L"Alimentación por Especie";
+			this->alimentaciónPorEspecieToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::alimentaciónPorEspecieToolStripMenuItem_Click);
 			// 
 			// volverToolStripMenuItem
 			// 
@@ -540,5 +545,10 @@ namespace AgroRobotView {
 		ventanaInsumosXAlmacen->MdiParent = this;
 		ventanaInsumosXAlmacen->Show();
 	}
-	};
+	private: System::Void alimentaciónPorEspecieToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		frmReporteAlimentacion^ ventanaReporteAlimentacion = gcnew frmReporteAlimentacion();
+		ventanaReporteAlimentacion->MdiParent = this;
+		ventanaReporteAlimentacion->Show();
+	}
+};
 }
