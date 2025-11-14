@@ -76,6 +76,7 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::ToolStripMenuItem^ programaciónDeAlimentaciónToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ diagnósticosMédicosToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ planAlimenticioToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ insumosPorAlmacénToolStripMenuItem;
 
 	private:
 	private:
@@ -111,9 +112,10 @@ namespace AgroRobotView {
 			this->reportesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->gestiónDeOrdenesDeAlimentaciónToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->diagnósticosMédicosToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->planAlimenticioToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->gestiónDeReportesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->volverToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->planAlimenticioToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->insumosPorAlmacénToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -123,14 +125,15 @@ namespace AgroRobotView {
 				static_cast<System::Int32>(static_cast<System::Byte>(58)));
 			this->menuStrip1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Pixel));
 			this->menuStrip1->ImageScalingSize = System::Drawing::Size(35, 35);
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6) {
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6)
+			{
 				this->admnistracionToolStripMenuItem,
 					this->diagnosticoToolStripMenuItem, this->planDeAlimentacionToolStripMenuItem, this->almacenToolStripMenuItem, this->reportesToolStripMenuItem,
 					this->volverToolStripMenuItem
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Padding = System::Windows::Forms::Padding(4, 10, 0, 10);
+			this->menuStrip1->Padding = System::Windows::Forms::Padding(15, 10, 15, 10);
 			this->menuStrip1->RightToLeft = System::Windows::Forms::RightToLeft::No;
 			this->menuStrip1->Size = System::Drawing::Size(1180, 75);
 			this->menuStrip1->TabIndex = 1;
@@ -138,7 +141,8 @@ namespace AgroRobotView {
 			// 
 			// admnistracionToolStripMenuItem
 			// 
-			this->admnistracionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+			this->admnistracionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3)
+			{
 				this->mantenimientoDeUsuariosToolStripMenuItem,
 					this->mantenimientoDeRolesToolStripMenuItem, this->programaciónDeAlimentaciónToolStripMenuItem
 			});
@@ -172,7 +176,8 @@ namespace AgroRobotView {
 			// 
 			// diagnosticoToolStripMenuItem
 			// 
-			this->diagnosticoToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			this->diagnosticoToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2)
+			{
 				this->géstionDeDiagnosticosToolStripMenuItem,
 					this->gestiónDeMuestrasToolStripMenuItem
 			});
@@ -193,7 +198,8 @@ namespace AgroRobotView {
 			// 
 			// gestiónDeMuestrasToolStripMenuItem
 			// 
-			this->gestiónDeMuestrasToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			this->gestiónDeMuestrasToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2)
+			{
 				this->muestraDeHecesToolStripMenuItem,
 					this->muestraDeSangreToolStripMenuItem
 			});
@@ -218,7 +224,8 @@ namespace AgroRobotView {
 			// 
 			// planDeAlimentacionToolStripMenuItem
 			// 
-			this->planDeAlimentacionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			this->planDeAlimentacionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2)
+			{
 				this->registroDeDietasToolStripMenuItem,
 					this->registroDeAnimalesToolStripMenuItem
 			});
@@ -245,7 +252,8 @@ namespace AgroRobotView {
 			// 
 			// almacenToolStripMenuItem
 			// 
-			this->almacenToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			this->almacenToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2)
+			{
 				this->registroInsumosGeneralToolStripMenuItem,
 					this->registroGeneralDeAlmacenesToolStripMenuItem
 			});
@@ -272,9 +280,11 @@ namespace AgroRobotView {
 			// 
 			// reportesToolStripMenuItem
 			// 
-			this->reportesToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
+			this->reportesToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5)
+			{
 				this->gestiónDeOrdenesDeAlimentaciónToolStripMenuItem,
-					this->diagnósticosMédicosToolStripMenuItem, this->planAlimenticioToolStripMenuItem, this->gestiónDeReportesToolStripMenuItem
+					this->diagnósticosMédicosToolStripMenuItem, this->planAlimenticioToolStripMenuItem, this->gestiónDeReportesToolStripMenuItem,
+					this->insumosPorAlmacénToolStripMenuItem
 			});
 			this->reportesToolStripMenuItem->ForeColor = System::Drawing::Color::Ivory;
 			this->reportesToolStripMenuItem->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"reportesToolStripMenuItem.Image")));
@@ -297,6 +307,13 @@ namespace AgroRobotView {
 			this->diagnósticosMédicosToolStripMenuItem->Text = L"Diagnósticos Médicos";
 			this->diagnósticosMédicosToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::diagnósticosMédicosToolStripMenuItem_Click);
 			// 
+			// planAlimenticioToolStripMenuItem
+			// 
+			this->planAlimenticioToolStripMenuItem->Name = L"planAlimenticioToolStripMenuItem";
+			this->planAlimenticioToolStripMenuItem->Size = System::Drawing::Size(299, 30);
+			this->planAlimenticioToolStripMenuItem->Text = L"Plan Alimenticio";
+			this->planAlimenticioToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::planAlimenticioToolStripMenuItem_Click);
+			// 
 			// gestiónDeReportesToolStripMenuItem
 			// 
 			this->gestiónDeReportesToolStripMenuItem->Name = L"gestiónDeReportesToolStripMenuItem";
@@ -306,6 +323,7 @@ namespace AgroRobotView {
 			// 
 			// volverToolStripMenuItem
 			// 
+			this->volverToolStripMenuItem->Alignment = System::Windows::Forms::ToolStripItemAlignment::Right;
 			this->volverToolStripMenuItem->ForeColor = System::Drawing::Color::Ivory;
 			this->volverToolStripMenuItem->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"volverToolStripMenuItem.Image")));
 			this->volverToolStripMenuItem->Name = L"volverToolStripMenuItem";
@@ -313,12 +331,11 @@ namespace AgroRobotView {
 			this->volverToolStripMenuItem->Size = System::Drawing::Size(135, 55);
 			this->volverToolStripMenuItem->Text = L"Volver";
 			// 
-			// planAlimenticioToolStripMenuItem
+			// insumosPorAlmacénToolStripMenuItem
 			// 
-			this->planAlimenticioToolStripMenuItem->Name = L"planAlimenticioToolStripMenuItem";
-			this->planAlimenticioToolStripMenuItem->Size = System::Drawing::Size(299, 30);
-			this->planAlimenticioToolStripMenuItem->Text = L"Plan Alimenticio";
-			this->planAlimenticioToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::planAlimenticioToolStripMenuItem_Click);
+			this->insumosPorAlmacénToolStripMenuItem->Name = L"insumosPorAlmacénToolStripMenuItem";
+			this->insumosPorAlmacénToolStripMenuItem->Size = System::Drawing::Size(299, 30);
+			this->insumosPorAlmacénToolStripMenuItem->Text = L"Insumos por Almacén";
 			// 
 			// frmMenu
 			// 
