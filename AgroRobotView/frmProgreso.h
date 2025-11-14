@@ -66,8 +66,8 @@ namespace AgroRobotView {
 		{
 			this->progressBar1 = (gcnew System::Windows::Forms::ProgressBar());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
-			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
@@ -89,24 +89,24 @@ namespace AgroRobotView {
 			this->groupBox1->TabIndex = 1;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Información";
-			// 
-			// label1
-			// 
-			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(25, 31);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(123, 13);
-			this->label1->TabIndex = 2;
-			this->label1->Text = L"Animales alimentados: 0 ";
+			this->groupBox1->Enter += gcnew System::EventHandler(this, &frmProgreso::groupBox1_Enter);
 			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
 			this->label2->Location = System::Drawing::Point(25, 56);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(44, 13);
+			this->label2->Size = System::Drawing::Size(0, 13);
 			this->label2->TabIndex = 3;
-			this->label2->Text = L"Total: X";
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Location = System::Drawing::Point(25, 31);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(10, 13);
+			this->label1->TabIndex = 2;
+			this->label1->Text = L" ";
 			// 
 			// button1
 			// 
@@ -133,7 +133,10 @@ namespace AgroRobotView {
 
 		}
 #pragma endregion
-	
+	private: System::Void groupBox1_Enter(System::Object^ sender, System::EventArgs^ e) {
+	}
+
+
 	/*FUNCIONES PÚBLICAS (REFERENCIADAS)*/
 		public: void actualizarProgreso(int actual){
 			progressBar1->Value = actual;
@@ -145,5 +148,6 @@ namespace AgroRobotView {
 		}
 
 
-	};
+	
+};
 }
