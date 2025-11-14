@@ -128,6 +128,7 @@
     <ClCompile Include="Reporte.cpp" />
     <ClCompile Include="ReporteAlimentacion.cpp" />
     <ClCompile Include="ReporteData.cpp" />
+    <ClCompile Include="ReporteInsumosXalmacen.cpp" />
     <ClCompile Include="Robot.cpp" />
     <ClCompile Include="RobotAgua.cpp" />
     <ClCompile Include="RobotComida.cpp" />
@@ -154,6 +155,7 @@
     <ClInclude Include="Reporte.h" />
     <ClInclude Include="ReporteAlimentacion.h" />
     <ClInclude Include="ReporteData.h" />
+    <ClInclude Include="ReporteInsumosXalmacen.h" />
     <ClInclude Include="Robot.h" />
     <ClInclude Include="RobotAgua.h" />
     <ClInclude Include="RobotComida.h" />

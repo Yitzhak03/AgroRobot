@@ -121,6 +121,7 @@
     <ClInclude Include="ReporteController.h" />
     <ClInclude Include="ReporteDataController.h" />
     <ClInclude Include="ReporteDiagnosticoController.h" />
+    <ClInclude Include="ReporteInsumosXalmacenController.h" />
     <ClInclude Include="RolController.h" />
     <ClInclude Include="StockInsumoController.h" />
     <ClInclude Include="UsuarioController.h" />
@@ -141,6 +142,7 @@
     <ClCompile Include="ReporteController.cpp" />
     <ClCompile Include="ReporteDataController.cpp" />
     <ClCompile Include="ReporteDiagnosticoController.cpp" />
+    <ClCompile Include="ReporteInsumosXalmacenController.cpp" />
     <ClCompile Include="RolController.cpp" />
     <ClCompile Include="StockInsumoController.cpp" />
     <ClCompile Include="UsuarioController.cpp" />
