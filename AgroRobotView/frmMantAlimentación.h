@@ -41,12 +41,12 @@ namespace AgroRobotView {
 			}
 		}
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
+
+
+
+
+
+
 	private: System::Windows::Forms::GroupBox^ groupBox1;
 	private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::TextBox^ textBox2;
@@ -58,6 +58,34 @@ namespace AgroRobotView {
 	private: GestorNutricionalController^ animalController;
 	private: frmProgreso^ ventanaProgreso;
 	private: System::IO::Ports::SerialPort^ serialPort1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column7;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -86,12 +114,6 @@ namespace AgroRobotView {
 		void InitializeComponent(void)
 		{
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
@@ -100,6 +122,13 @@ namespace AgroRobotView {
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column7 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
@@ -108,9 +137,9 @@ namespace AgroRobotView {
 			// dataGridView1
 			// 
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(6) {
+			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(7) {
 				this->Column1,
-					this->Column2, this->Column3, this->Column4, this->Column5, this->Column6
+					this->Column2, this->Column3, this->Column4, this->Column5, this->Column6, this->Column7
 			});
 			this->dataGridView1->Location = System::Drawing::Point(17, 132);
 			this->dataGridView1->Margin = System::Windows::Forms::Padding(2);
@@ -119,49 +148,7 @@ namespace AgroRobotView {
 			this->dataGridView1->RowTemplate->Height = 24;
 			this->dataGridView1->Size = System::Drawing::Size(679, 229);
 			this->dataGridView1->TabIndex = 13;
-			// 
-			// Column1
-			// 
-			this->Column1->HeaderText = L"ID Animal";
-			this->Column1->MinimumWidth = 6;
-			this->Column1->Name = L"Column1";
-			this->Column1->Visible = false;
-			this->Column1->Width = 125;
-			// 
-			// Column2
-			// 
-			this->Column2->HeaderText = L"Especie";
-			this->Column2->MinimumWidth = 6;
-			this->Column2->Name = L"Column2";
-			this->Column2->Width = 125;
-			// 
-			// Column3
-			// 
-			this->Column3->HeaderText = L"Peso";
-			this->Column3->MinimumWidth = 6;
-			this->Column3->Name = L"Column3";
-			this->Column3->Width = 125;
-			// 
-			// Column4
-			// 
-			this->Column4->HeaderText = L"Edad";
-			this->Column4->MinimumWidth = 6;
-			this->Column4->Name = L"Column4";
-			this->Column4->Width = 125;
-			// 
-			// Column5
-			// 
-			this->Column5->HeaderText = L"Estado de salud:";
-			this->Column5->MinimumWidth = 6;
-			this->Column5->Name = L"Column5";
-			this->Column5->Width = 125;
-			// 
-			// Column6
-			// 
-			this->Column6->HeaderText = L"Ultima dieta:";
-			this->Column6->MinimumWidth = 6;
-			this->Column6->Name = L"Column6";
-			this->Column6->Width = 125;
+			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &frmMantAlimentación::dataGridView1_CellContentClick);
 			// 
 			// groupBox1
 			// 
@@ -250,6 +237,54 @@ namespace AgroRobotView {
 			this->button3->UseVisualStyleBackColor = true;
 			this->button3->Click += gcnew System::EventHandler(this, &frmMantAlimentación::button3_Click);
 			// 
+			// Column1
+			// 
+			this->Column1->HeaderText = L"ID Animal";
+			this->Column1->MinimumWidth = 6;
+			this->Column1->Name = L"Column1";
+			this->Column1->Visible = false;
+			this->Column1->Width = 125;
+			// 
+			// Column2
+			// 
+			this->Column2->HeaderText = L"Especie";
+			this->Column2->MinimumWidth = 6;
+			this->Column2->Name = L"Column2";
+			this->Column2->Width = 125;
+			// 
+			// Column3
+			// 
+			this->Column3->HeaderText = L"Peso";
+			this->Column3->MinimumWidth = 6;
+			this->Column3->Name = L"Column3";
+			this->Column3->Width = 75;
+			// 
+			// Column4
+			// 
+			this->Column4->HeaderText = L"Edad";
+			this->Column4->MinimumWidth = 6;
+			this->Column4->Name = L"Column4";
+			this->Column4->Width = 75;
+			// 
+			// Column5
+			// 
+			this->Column5->HeaderText = L"Estado de salud:";
+			this->Column5->MinimumWidth = 6;
+			this->Column5->Name = L"Column5";
+			this->Column5->Width = 125;
+			// 
+			// Column6
+			// 
+			this->Column6->HeaderText = L"Ultima dieta:";
+			this->Column6->MinimumWidth = 6;
+			this->Column6->Name = L"Column6";
+			this->Column6->Width = 125;
+			// 
+			// Column7
+			// 
+			this->Column7->HeaderText = L"Ultima Vez Alimentado";
+			this->Column7->Name = L"Column7";
+			// 
 			// frmMantAlimentación
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -328,6 +363,7 @@ namespace AgroRobotView {
 			filaGrilla[3] = Convert::ToString(animal->Edad);
 			filaGrilla[4] = animal->EstadoSalud;
 			filaGrilla[5] = animal->UltimaDieta;
+			filaGrilla[6] = animal->UltimaVezAlimentado;
 			this->dataGridView1->Rows->Add(filaGrilla);
 		}
 	}
@@ -389,7 +425,8 @@ namespace AgroRobotView {
 			}
 			int idEspecie = 0;
 			String^ especie = animalSeleccionado->Especie;
-			int cantidad = this->animalController->consultarAnimalporIdEspecie(idEspecie, especie)->Count;
+			List<Animal^>^ listaAnimales = this->animalController->consultarAnimalporIdEspecie(idEspecie, especie);
+			int cantidad = listaAnimales->Count;
 			
 
 
@@ -408,7 +445,11 @@ namespace AgroRobotView {
 				String^ comando = "ESPECIE," + cantidad.ToString();
 				serialPort1->WriteLine(comando);
 
-				String^ respuesta = serialPort1->ReadLine();
+				for each (Animal ^ animal in listaAnimales){
+					int idModificar = animal->IdAnimal;
+					String^ fechaAlimentacion = DateTime::Now.ToString("dd/MM/yyyy HH:mm");
+					this->animalController->modificarUltimaAlimentacion(idModificar, fechaAlimentacion);
+				}
 				/*FIN DE LA SECUENCIA*/
 			}
 
@@ -454,6 +495,11 @@ namespace AgroRobotView {
 
 			// Enviar comando al Arduino
 			serialPort1->WriteLine("ANIMAL");
+
+			//actualiza la fecha de ultima alimentación
+			String^ fechaAlimentacion = DateTime::Now.ToString("dd/MM/yyyy HH:mm");
+			this->animalController->modificarUltimaAlimentacion(id, fechaAlimentacion);
+
 			/*FIN DE LA SECUENCIA*/
 
 		}
@@ -474,5 +520,7 @@ namespace AgroRobotView {
 			MessageBox::Show("Error al cerrar el puerto serial: " + ex->Message);
 		}
 	}
+private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+}
 };
 }

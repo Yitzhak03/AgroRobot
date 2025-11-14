@@ -26,6 +26,7 @@ namespace AgroRobotController {
 		void escribirArchivoAnimal();
 		List<Animal^>^ consultarAnimalporIdEspecie(int idAnimal, String^ especie);
 		bool modificarAnimal(int idAnimal, String^ especie, double peso, double edad, String^ estadoSalud, String^ ultimaDieta);
+		void modificarUltimaAlimentacion(int id, String^ ultimaAlimentacion);
 		bool eliminarAnimal(int idAnimal);
 		void closeAnimal();
 

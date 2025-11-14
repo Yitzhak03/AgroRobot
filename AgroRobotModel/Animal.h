@@ -19,6 +19,7 @@ namespace AgroRobotModel {
 		property List<Muestra^>^ Muestras;
 		property Dieta^ Dietaa;
 		property List<HistoriaClinica^>^ HistoriasClinicas;
+        property String^ UltimaVezAlimentado;
         Animal();
         Animal(
             int idAnimal,
@@ -29,7 +30,8 @@ namespace AgroRobotModel {
             String^ ultimaDieta,
 			List<Muestra^>^ muestras,
 			Dieta^ dietaa,
-            List<HistoriaClinica^>^ historiasClinicas
+            List<HistoriaClinica^>^ historiasClinicas,
+            String^ ultimaVezAlimentado
         );
     };
 }
