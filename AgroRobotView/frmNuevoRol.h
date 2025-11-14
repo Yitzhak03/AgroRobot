@@ -25,6 +25,7 @@ namespace AgroRobotView {
 			//TODO: agregar código de constructor aquí
 			//
 			this->rolController = rolController;
+			aplicarEstilo();
 		}
 
 	protected:
@@ -51,6 +52,52 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::CheckedListBox^ checkedListBox1;
 	private: System::Windows::Forms::Button^ btnGrabar;
 	private: System::Windows::Forms::Button^ btnCancelar;
+
+	private: void aplicarEstilo()
+	{
+		System::Drawing::Font^ fuenteGeneral = gcnew System::Drawing::Font("Segoe UI", 10, FontStyle::Regular);
+		System::Drawing::Font^ fuenteNegrita = gcnew System::Drawing::Font("Segoe UI Semibold", 10, FontStyle::Bold);
+
+		this->BackColor = System::Drawing::Color::FromArgb(232, 245, 233);
+		this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+		this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+		this->Text = L"Registrar nuevo animal";
+
+		array<GroupBox^>^ grupos = { groupBox1 };
+		for each (GroupBox ^ g in grupos)
+		{
+			g->BackColor = System::Drawing::Color::FromArgb(240, 250, 240);
+			g->Font = fuenteNegrita;
+			g->ForeColor = System::Drawing::Color::FromArgb(45, 85, 45);
+		}
+
+		array<Label^>^ etiquetas = { label2, label3};
+		for each (Label ^ lbl in etiquetas)
+		{
+			lbl->Font = fuenteGeneral;
+			lbl->ForeColor = System::Drawing::Color::FromArgb(35, 75, 45);
+		}
+
+		array<TextBox^>^ textos = { txtNombre, txtId};
+		for each (TextBox ^ t in textos)
+		{
+			t->Font = fuenteGeneral;
+			t->BackColor = System::Drawing::Color::White;
+			t->ForeColor = System::Drawing::Color::FromArgb(30, 70, 40);
+			t->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+		}
+
+		array<Button^>^ botones = { btnCancelar, btnGrabar };
+		for each (Button ^ b in botones)
+		{
+			b->FlatStyle = FlatStyle::Flat;
+			b->FlatAppearance->BorderSize = 0;
+			b->BackColor = System::Drawing::Color::FromArgb(183, 223, 185);
+			b->ForeColor = System::Drawing::Color::FromArgb(20, 60, 30);
+			b->Font = fuenteNegrita;
+			b->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(153, 203, 155);
+		}
+	}
 
 
 	private:
@@ -155,7 +202,7 @@ namespace AgroRobotView {
 			this->btnGrabar->Location = System::Drawing::Point(113, 303);
 			this->btnGrabar->Margin = System::Windows::Forms::Padding(2);
 			this->btnGrabar->Name = L"btnGrabar";
-			this->btnGrabar->Size = System::Drawing::Size(56, 19);
+			this->btnGrabar->Size = System::Drawing::Size(60, 30);
 			this->btnGrabar->TabIndex = 5;
 			this->btnGrabar->Text = L"Grabar";
 			this->btnGrabar->UseVisualStyleBackColor = true;
@@ -166,7 +213,7 @@ namespace AgroRobotView {
 			this->btnCancelar->Location = System::Drawing::Point(204, 303);
 			this->btnCancelar->Margin = System::Windows::Forms::Padding(2);
 			this->btnCancelar->Name = L"btnCancelar";
-			this->btnCancelar->Size = System::Drawing::Size(66, 19);
+			this->btnCancelar->Size = System::Drawing::Size(80, 30);
 			this->btnCancelar->TabIndex = 6;
 			this->btnCancelar->Text = L"Cancelar";
 			this->btnCancelar->UseVisualStyleBackColor = true;

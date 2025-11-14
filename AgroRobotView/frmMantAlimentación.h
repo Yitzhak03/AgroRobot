@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "frmProgreso.h"
 
 namespace AgroRobotView {
 
@@ -55,6 +56,7 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::Button^ button4;
 	private: System::Windows::Forms::Button^ button3;
 	private: GestorNutricionalController^ animalController;
+	private: frmProgreso^ ventanaProgreso;
 	private: System::IO::Ports::SerialPort^ serialPort1;
 
 
@@ -268,6 +270,49 @@ namespace AgroRobotView {
 
 		}
 #pragma endregion
+	/*FUNCIONES AUXILIARES PARA LA COMUNICACIÓN CON EL ROBOT*/
+		private: void OnSerialDataReceived(System::Object^ sender, System::IO::Ports::SerialDataReceivedEventArgs^ e)
+		{
+			try {
+				String^ linea = serialPort1->ReadLine()->Trim();
+
+				if (linea == "ANIMAL_1_COMPLETADO") {
+					this->ActualizarProgresoSeguro();
+				}
+				else if (linea == "FIN_ANIMAL") {
+					this->FinalizarProgresoSeguro();
+				}
+			}
+			catch (...) {}
+		}
+
+		private: void ActualizarProgresoSeguro() {
+		   if (this->InvokeRequired) {
+			   this->Invoke(gcnew System::Action(this, &frmMantAlimentación::ActualizarProgresoSeguro));
+			   return;
+		   }
+
+		  if (ventanaProgreso != nullptr) {
+			ventanaProgreso->actualizarProgreso(1);
+		  }
+		}
+
+		private: void FinalizarProgresoSeguro() {
+			if (this->InvokeRequired) {
+				this->Invoke(gcnew System::Action(this, &frmMantAlimentación::FinalizarProgresoSeguro));
+				return;
+			}
+
+			if (ventanaProgreso != nullptr) {
+				ventanaProgreso->finalizar();
+			}
+
+			MessageBox::Show("El robot terminó la alimentación del animal.");
+		}
+
+
+
+
 	public:	void mostrarGrilla(List<Animal^>^ listaAnimales){
 		this->dataGridView1->Rows->Clear();
 		for (int i = 0; i < listaAnimales->Count; i++)
@@ -305,15 +350,19 @@ namespace AgroRobotView {
 		/*código para funcionalidad del periférico*/
 		try {
 			serialPort1 = gcnew System::IO::Ports::SerialPort();
-			serialPort1->PortName = "COM3";/*CAMBIAR POR EL CORRECTO*/
+
+			serialPort1->PortName = "COM5";/*CAMBIAR POR EL CORRECTO*/
 			serialPort1->BaudRate = 9600;
 			serialPort1->Parity = System::IO::Ports::Parity::None;
 			serialPort1->DataBits = 8;
 			serialPort1->StopBits = System::IO::Ports::StopBits::One;
 
+			serialPort1->DataReceived +=
+				gcnew System::IO::Ports::SerialDataReceivedEventHandler(this, &frmMantAlimentación::OnSerialDataReceived);
+
 			if (!serialPort1->IsOpen) {
 				serialPort1->Open();
-				MessageBox::Show("Conectado al Arduino correctamente.",
+				MessageBox::Show("Conectado a AgroRobot correctamente.",
 					"Conexión exitosa", MessageBoxButtons::OK, MessageBoxIcon::Information);
 			}
 		}
@@ -336,7 +385,7 @@ namespace AgroRobotView {
 				MessageBox::Show("No se encontró el animal seleccionado.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 				return;
 			}
-			
+			id = 0;
 			String^ especie = animalSeleccionado->Especie;
 			int cantidad = this->animalController->consultarAnimalporIdEspecie(id, especie)->Count;
 			
@@ -347,28 +396,18 @@ namespace AgroRobotView {
 			}
 			/*secuencia correcta*/
 			try {
-				String^ comando = "ESPECIE " + cantidad.ToString();
+				String^ comando = "ESPECIE," + cantidad.ToString();
 				serialPort1->WriteLine(comando);
 
 				String^ respuesta = serialPort1->ReadLine();
 
-				if (respuesta->Trim() == "FIN_ESPECIE")
-				{
-					MessageBox::Show("La secuencia de alimentación por especie finalizó exitosamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
-				}
-				else
-				{
-					MessageBox::Show("No se recibió confirmación del periférico.", "Advertencia", MessageBoxButtons::OK, MessageBoxIcon::Warning);
-				}
+				
 			}
 			/*reemplazar errores por mensajes*/
 			catch (Exception^ ex) {
 				MessageBox::Show("Error al comunicar con el periférico: " + ex->Message, "Error",
 					MessageBoxButtons::OK, MessageBoxIcon::Error);
 			}
-
-			String^ comando = "ESPECIE " + cantidad.ToString();
-			serialPort1->WriteLine(comando);
 			
 		}
 		else
@@ -393,14 +432,20 @@ namespace AgroRobotView {
 			}
 			
 
-			if (serialPort1->IsOpen)
-			{
-				serialPort1->WriteLine("ALIMENTAR");
-			}
-			else
+			/*SECUENCIA DEL ROBOT*/
+			if (!serialPort1->IsOpen)
 			{
 				MessageBox::Show("El puerto serial no está abierto.");
+				return;
 			}
+			
+			// Abrir ventana de progreso
+			this->ventanaProgreso = gcnew frmProgreso(1);
+			ventanaProgreso->Show();
+
+			// Enviar comando al Arduino
+			serialPort1->WriteLine("ANIMAL");
+			/*FIN DE LA SECUENCIA*/
 
 		}
 		else
@@ -413,6 +458,7 @@ namespace AgroRobotView {
 		try {
 			if (serialPort1 != nullptr && serialPort1->IsOpen) {
 				serialPort1->Close();
+				MessageBox::Show("Conexión con AgroRobot terminada.");
 			}
 		}
 		catch (Exception^ ex) {

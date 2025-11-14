@@ -4,7 +4,8 @@
 //#include "frmNuevoUsuario.h"
 //#include "frmNuevoInsumo.h"
 //#include "frmMantInsumo.h"
-#include "frmMantAlmacen.h"
+//#include "frmMantAlmacen.h"
+//#include "frmReporteInsumosXalmacen.h"
 
 using namespace System;
 using namespace System::Windows::Forms;

@@ -26,6 +26,7 @@ namespace AgroRobotView {
 			//
 			this->usuarioController = gcnew UsuarioController();
 			this->rolController = gcnew RolController();
+			aplicarEstilo();
 		}
 
 	protected:
@@ -38,6 +39,67 @@ namespace AgroRobotView {
 				delete components;
 			}
 		}
+
+		void aplicarEstilo()
+		{
+			this->BackColor = System::Drawing::Color::FromArgb(30, 61, 54);
+
+			this->Font = gcnew System::Drawing::Font(L"Bahnschrift", 10, FontStyle::Regular);
+			this->ForeColor = System::Drawing::Color::FromArgb(242, 242, 242);
+
+			this->groupBox1->BackColor = System::Drawing::Color::FromArgb(45, 93, 80);
+			this->groupBox1->ForeColor = System::Drawing::Color::FromArgb(242, 242, 242);
+			this->groupBox1->Font = gcnew System::Drawing::Font(L"Bahnschrift", 11, FontStyle::Bold);
+			this->groupBox1->Text = L"Criterios de búsqueda";
+
+			array<TextBox^>^ textos = { this->textBox1};
+			for each (TextBox ^ t in textos) {
+				t->BackColor = System::Drawing::Color::FromArgb(60, 110, 95);
+				t->ForeColor = System::Drawing::Color::White;
+				t->BorderStyle = BorderStyle::FixedSingle;
+				t->Font = gcnew System::Drawing::Font(L"Bahnschrift", 10);
+			}
+
+			this->btnBuscar->BackColor = System::Drawing::Color::FromArgb(123, 228, 149);
+			this->btnBuscar->FlatStyle = FlatStyle::Flat;
+			this->btnBuscar->FlatAppearance->BorderSize = 0;
+			this->btnBuscar->ForeColor = System::Drawing::Color::Black;
+			this->btnBuscar->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 10);
+
+
+			this->dataGridView1->BackgroundColor = System::Drawing::Color::FromArgb(45, 93, 80);
+			this->dataGridView1->BorderStyle = BorderStyle::None;
+			this->dataGridView1->GridColor = System::Drawing::Color::FromArgb(30, 61, 54);
+			this->dataGridView1->EnableHeadersVisualStyles = false;
+			this->dataGridView1->ColumnHeadersDefaultCellStyle->BackColor = System::Drawing::Color::FromArgb(30, 61, 54);
+			this->dataGridView1->ColumnHeadersDefaultCellStyle->ForeColor = System::Drawing::Color::White;
+			this->dataGridView1->DefaultCellStyle->BackColor = System::Drawing::Color::FromArgb(60, 110, 95);
+			this->dataGridView1->DefaultCellStyle->ForeColor = System::Drawing::Color::White;
+			this->dataGridView1->DefaultCellStyle->SelectionBackColor = System::Drawing::Color::FromArgb(123, 228, 149);
+			this->dataGridView1->DefaultCellStyle->SelectionForeColor = System::Drawing::Color::Black;
+
+			array<Button^>^ botones = { this->button2, this->btnBuscar, this->btnCambiarEstado, this->btnEditar, this->btnMostrarTodos };
+			for each (Button ^ b in botones) {
+				b->BackColor = System::Drawing::Color::FromArgb(123, 228, 149);
+				b->FlatStyle = FlatStyle::Flat;
+				b->FlatAppearance->BorderSize = 0;
+				b->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 10);
+				b->ForeColor = System::Drawing::Color::Black;
+				b->Cursor = Cursors::Hand;
+			}
+
+			// 🏷️ Etiquetas
+			array<Label^>^ labels = { this->label1 };
+			for each (Label ^ l in labels) {
+				l->ForeColor = System::Drawing::Color::White;
+				l->Font = gcnew System::Drawing::Font(L"Bahnschrift", 10);
+			}
+
+			// 📏 Config general
+			this->Text = L"AgroRobot - Mantenimiento de Usuarios";
+			this->StartPosition = FormStartPosition::CenterScreen;
+		}
+
 	private: System::Windows::Forms::Button^ btnMostrarTodos;
 	private: System::Windows::Forms::Button^ btnCambiarEstado;
 
@@ -152,7 +214,7 @@ namespace AgroRobotView {
 			this->btnMostrarTodos->Location = System::Drawing::Point(582, 49);
 			this->btnMostrarTodos->Margin = System::Windows::Forms::Padding(2);
 			this->btnMostrarTodos->Name = L"btnMostrarTodos";
-			this->btnMostrarTodos->Size = System::Drawing::Size(92, 19);
+			this->btnMostrarTodos->Size = System::Drawing::Size(92, 30);
 			this->btnMostrarTodos->TabIndex = 16;
 			this->btnMostrarTodos->Text = L"Mostrar Todos";
 			this->btnMostrarTodos->UseVisualStyleBackColor = true;
