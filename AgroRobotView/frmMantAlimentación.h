@@ -276,24 +276,28 @@ namespace AgroRobotView {
 			try {
 				String^ linea = serialPort1->ReadLine()->Trim();
 
-				if (linea == "ANIMAL_1_COMPLETADO") {
-					this->ActualizarProgresoSeguro();
+				if (linea->EndsWith("_COMPLETADO")) {
+					/*separa la cadena de texto en 3 bloques para extraer el número de animal*/
+					array<String^>^ partes = linea->Split('_');
+					int numero = Convert::ToInt32(partes[1]);
+
+					this->ActualizarProgresoSeguro(numero);
 				}
-				else if (linea == "FIN_ANIMAL") {
+				else if (linea == "FIN_ANIMAL" || linea == "FIN_ESPECIE") {
 					this->FinalizarProgresoSeguro();
 				}
 			}
 			catch (...) {}
 		}
 
-		private: void ActualizarProgresoSeguro() {
+		private: void ActualizarProgresoSeguro(int num) {
 		   if (this->InvokeRequired) {
-			   this->Invoke(gcnew System::Action(this, &frmMantAlimentación::ActualizarProgresoSeguro));
+			   this->Invoke(gcnew System::Action<int>(this, &frmMantAlimentación::ActualizarProgresoSeguro), num);
 			   return;
 		   }
 
 		  if (ventanaProgreso != nullptr) {
-			ventanaProgreso->actualizarProgreso(1);
+			ventanaProgreso->actualizarProgreso(num);
 		  }
 		}
 
@@ -307,12 +311,11 @@ namespace AgroRobotView {
 				ventanaProgreso->finalizar();
 			}
 
-			MessageBox::Show("El robot terminó la alimentación del animal.");
+			MessageBox::Show("El robot terminó la secuencia de alimentación.");
 		}
 
 
-
-
+	/*-----------------------------------------------------------------------------------------------------------*/
 	public:	void mostrarGrilla(List<Animal^>^ listaAnimales){
 		this->dataGridView1->Rows->Clear();
 		for (int i = 0; i < listaAnimales->Count; i++)
@@ -334,10 +337,9 @@ namespace AgroRobotView {
 		String^ especie = "";
 		if (!textBox2->Text->Equals(""))
 		{
-			// Obtener el nombre del operador a buscar
 			especie = textBox2->Text;
 		}
-		// Crear una instancia del controlador y buscar el operador por nombre
+
 		List<Animal^>^ listaAnimales = this->animalController->consultarAnimalporIdEspecie(id, especie);
 		// Mostrar los resultados en el DataGridView
 		mostrarGrilla(listaAnimales);
@@ -385,24 +387,31 @@ namespace AgroRobotView {
 				MessageBox::Show("No se encontró el animal seleccionado.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 				return;
 			}
-			id = 0;
+			int idEspecie = 0;
 			String^ especie = animalSeleccionado->Especie;
-			int cantidad = this->animalController->consultarAnimalporIdEspecie(id, especie)->Count;
+			int cantidad = this->animalController->consultarAnimalporIdEspecie(idEspecie, especie)->Count;
 			
-			if (serialPort1 == nullptr || !serialPort1->IsOpen) {
-				MessageBox::Show("El puerto serial no está abierto.", "Error",
-					MessageBoxButtons::OK, MessageBoxIcon::Error);
+
+
+			if (!serialPort1->IsOpen)
+			{
+				MessageBox::Show("El puerto serial no está abierto.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 				return;
 			}
-			/*secuencia correcta*/
+
+			/*SECUENCIA DEL ROBOT*/
 			try {
+				// Abrir ventana de progreso
+				this->ventanaProgreso = gcnew frmProgreso(cantidad);
+				ventanaProgreso->Show();
+
 				String^ comando = "ESPECIE," + cantidad.ToString();
 				serialPort1->WriteLine(comando);
 
 				String^ respuesta = serialPort1->ReadLine();
-
-				
+				/*FIN DE LA SECUENCIA*/
 			}
+
 			/*reemplazar errores por mensajes*/
 			catch (Exception^ ex) {
 				MessageBox::Show("Error al comunicar con el periférico: " + ex->Message, "Error",
@@ -435,7 +444,7 @@ namespace AgroRobotView {
 			/*SECUENCIA DEL ROBOT*/
 			if (!serialPort1->IsOpen)
 			{
-				MessageBox::Show("El puerto serial no está abierto.");
+				MessageBox::Show("El puerto serial no está abierto.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 				return;
 			}
 			
