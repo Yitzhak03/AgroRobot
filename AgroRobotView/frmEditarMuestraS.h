@@ -257,7 +257,7 @@ namespace AgroRobotView {
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(55, 13);
 			this->label1->TabIndex = 0;
-			this->label1->Text = L"ID Animal:";
+			this->label1->Text = L"Especie:";
 			// 
 			// frmEditarMuestraS
 			// 
@@ -278,15 +278,16 @@ namespace AgroRobotView {
 #pragma endregion
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		int idMuestra = Convert::ToInt32(textBox5->Text);
-		int idAnimal = Convert::ToInt32(textBox1->Text);
+
 		String^ cantidad = textBox2->Text;
 		String^ coagulos = comboBox1->Text;
 		String^ contaminacion = comboBox2->Text;
 		String^ color = textBox3->Text;
 		String^ fecha = textBox4->Text;
+		Animal^ animal = this->muestra->getAnimal();
 
-		Muestra^ muestraEditada = gcnew Muestra(idMuestra, idAnimal, "Sangre", fecha,
-			"", "", "", "", cantidad, coagulos, contaminacion, color);
+		Muestra^ muestraEditada = gcnew Muestra(idMuestra, "Sangre", fecha,
+			"", "", "", "", cantidad, coagulos, contaminacion, color, animal);
 
 		muestraController->editarMuestraArchivo(idMuestra, muestraEditada);
 		MessageBox::Show("Muestra editada correctamente.");
@@ -294,7 +295,7 @@ namespace AgroRobotView {
 	}
 	private: System::Void frmEditarMuestraS_Load(System::Object^ sender, System::EventArgs^ e) {
 		this->textBox5->Text = Convert::ToString(this->muestra->getIdMuestra());
-		this->textBox1->Text = Convert::ToString(this->muestra->getIdAnimal());
+		this->textBox1->Text = this->muestra->getEspecie();
 		this->textBox2->Text = this->muestra->getCantidadExtraida();
 		this->comboBox1->Text = this->muestra->getCoagulos();
 		this->comboBox2->Text = this->muestra->getContaminacion();
