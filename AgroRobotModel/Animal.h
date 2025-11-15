@@ -35,5 +35,7 @@ namespace AgroRobotModel {
             String^ ultimaVezAlimentado,
             int vecesAlimentado
         );
+        // Constructor básico
+        Animal(int idAnimal, String^ especie);
     };
 }

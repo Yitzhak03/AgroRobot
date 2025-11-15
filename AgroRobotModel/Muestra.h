@@ -1,4 +1,5 @@
 #pragma once
+#include "Animal.h"
 
 namespace AgroRobotModel {
 
@@ -8,7 +9,6 @@ namespace AgroRobotModel {
     private:
         // Comunes
         int idMuestra;
-        int idAnimal;
         String^ tipo; // "Heces" o "Sangre"
         String^ fechaToma;
 
@@ -24,19 +24,20 @@ namespace AgroRobotModel {
         String^ coagulos;
         String^ contaminacion;
 
+        // Referencia al animal
+        Animal^ animal;
+
     public:
         // Constructores
         Muestra();
-        Muestra(int idMuestra, int idAnimal, String^ tipo, String^ fechaToma,
+        Muestra(int idMuestra, String^ tipo, String^ fechaToma,
             String^ consistencia, String^ colorHeces, String^ olor, String^ parasitos,
-            String^ cantidadExtraida, String^ coagulos, String^ contaminacion, String^ colorSangre);
+            String^ cantidadExtraida, String^ coagulos, String^ contaminacion,
+            String^ colorSangre, Animal^ animal);
 
         // Getters y setters
         int getIdMuestra();
         void setIdMuestra(int idMuestra);
-
-        int getIdAnimal();
-        void setIdAnimal(int idAnimal);
 
         String^ getTipo();
         void setTipo(String^ tipo);
@@ -69,6 +70,14 @@ namespace AgroRobotModel {
 
         String^ getContaminacion();
         void setContaminacion(String^ contaminacion);
+
+        // Animal
+        Animal^ getAnimal();
+        void setAnimal(Animal^ animal);
+
+        // Propiedades derivadas del animal
+        int getIdAnimal();
+        String^ getEspecie();
     };
 }
 

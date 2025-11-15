@@ -32,3 +32,15 @@ Animal::Animal(
 	UltimaVezAlimentado = ultimaVezAlimentado;
 	VecesAlimentado = vecesAlimentado;
 }
+
+Animal::Animal(int idAnimal, String^ especie) {
+	IdAnimal = idAnimal;
+	Especie = especie;
+	Peso = 0.0;
+	Edad = 0.0;
+	EstadoSalud = "";
+	UltimaDieta = "";
+	Muestras = gcnew List<Muestra^>();
+	Dietaa = nullptr;
+	HistoriasClinicas = gcnew List<HistoriaClinica^>();
+}
