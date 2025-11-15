@@ -248,10 +248,9 @@ namespace AgroRobotView {
 		}
 		this->txtId->Text = Convert::ToString(maxId + 1);
 		
-		this->checkedListBox1->Items->Add("Acceso a Administración");
+		this->checkedListBox1->Items->Add("Administrar Usuarios");
 		this->checkedListBox1->Items->Add("Gestión de Reportes");
 		this->checkedListBox1->Items->Add("Programar Alimentación");
-		this->checkedListBox1->Items->Add("Ver");
 	}
 	private: System::Void btnCancelar_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();

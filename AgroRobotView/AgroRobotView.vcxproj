@@ -409,6 +409,9 @@
     <EmbeddedResource Include="frmProgreso.resx">
       <DependentUpon>frmProgreso.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmReporteAlimentacion.resx">
+      <DependentUpon>frmReporteAlimentacion.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmReporteInsumosXalmacen.resx">
       <DependentUpon>frmReporteInsumosXalmacen.h</DependentUpon>
     </EmbeddedResource>

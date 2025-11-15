@@ -36,13 +36,14 @@ GestorNutricionalController::GestorNutricionalController() {
 		String^ estadoSalud = camposAnimales[4];
 		String^ ultimaDieta = (camposAnimales->Length > 5) ? camposAnimales[5] : "";
 		String^ ultimaVezAlimentado = camposAnimales[6];
+		int vecesAlimentado = Convert::ToInt32(camposAnimales[7]);
 
 		/*para que no haya error*/
 		List<Muestra^>^ muestras = gcnew List<Muestra^>();
 		Dieta^ dietaa = gcnew Dieta();
 		List<HistoriaClinica^>^ historiasClinicas = gcnew List<HistoriaClinica^>();
 
-		Animal^ animal = gcnew Animal(idAnimal, especie, peso, edad, estadoSalud, ultimaDieta, muestras, dietaa, historiasClinicas, ultimaVezAlimentado);
+		Animal^ animal = gcnew Animal(idAnimal, especie, peso, edad, estadoSalud, ultimaDieta, muestras, dietaa, historiasClinicas, ultimaVezAlimentado, vecesAlimentado);
 		this->listaAnimales->Add(animal);
 	}
 
@@ -100,7 +101,8 @@ void GestorNutricionalController::escribirArchivoAnimal() {
 								   animal->Edad + ";" + 
 								   animal->EstadoSalud + ";" + 
 								   animal->UltimaDieta + ";" +
-								   animal->UltimaVezAlimentado;
+								   animal->UltimaVezAlimentado + ";" + 
+								   animal->VecesAlimentado;
 	}
 	File::WriteAllLines("animales.txt", lineasArchivoAnimales);
 }
@@ -136,6 +138,7 @@ void GestorNutricionalController::modificarUltimaAlimentacion(int id, String^ fe
 	Animal^ animal = consultarAnimalporId(id);
 	if (animal != nullptr) {
 		animal->UltimaVezAlimentado = fecha;
+		animal->VecesAlimentado +=1;
 	}
 	escribirArchivoAnimal();
 }
