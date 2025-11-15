@@ -16,7 +16,8 @@ ReporteDiagnosticoResult^ ReporteDiagnosticoController::GenerarReporteMensual(in
 
     // Usar MuestraController para obtener datos
     MuestraController^ muestraController = gcnew MuestraController();
-    auto todasMuestras = muestraController->buscarTodasMuestrasArchivo();
+    GestorNutricionalController^ gestor = gcnew GestorNutricionalController();
+    auto todasMuestras = muestraController->buscarTodasMuestrasArchivo(gestor);
 
     // Procesar datos
     Dictionary<String^, int>^ conteoTipos = gcnew Dictionary<String^, int>();
@@ -127,7 +128,8 @@ ReporteDiagnosticoResult^ ReporteDiagnosticoController::GenerarReportePorRangoFe
     reporte->Periodo = String::Format("{0} a {1}", fechaInicio, fechaFin);
 
     MuestraController^ muestraController = gcnew MuestraController();
-    auto todasMuestras = muestraController->buscarTodasMuestrasArchivo();
+    GestorNutricionalController^ gestor = gcnew GestorNutricionalController();
+    auto todasMuestras = muestraController->buscarTodasMuestrasArchivo(gestor);
 
     Dictionary<String^, int>^ conteoTipos = gcnew Dictionary<String^, int>();
     Dictionary<String^, int>^ conteoEstados = gcnew Dictionary<String^, int>();
