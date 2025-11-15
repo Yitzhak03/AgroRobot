@@ -41,23 +41,51 @@ namespace AgroRobotView {
 			}
 		}
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
+
+
+
+
+
+
 	private: System::Windows::Forms::GroupBox^ groupBox1;
 	private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::TextBox^ textBox2;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::GroupBox^ groupBox2;
-	private: System::Windows::Forms::Button^ button4;
+
 	private: System::Windows::Forms::Button^ button3;
 	private: GestorNutricionalController^ animalController;
 	private: frmProgreso^ ventanaProgreso;
 	private: System::IO::Ports::SerialPort^ serialPort1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column7;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -92,13 +120,13 @@ namespace AgroRobotView {
 			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column7 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
-			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBox1->SuspendLayout();
@@ -108,9 +136,9 @@ namespace AgroRobotView {
 			// dataGridView1
 			// 
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(6) {
+			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(7) {
 				this->Column1,
-					this->Column2, this->Column3, this->Column4, this->Column5, this->Column6
+					this->Column2, this->Column3, this->Column4, this->Column5, this->Column6, this->Column7
 			});
 			this->dataGridView1->Location = System::Drawing::Point(17, 132);
 			this->dataGridView1->Margin = System::Windows::Forms::Padding(2);
@@ -119,6 +147,7 @@ namespace AgroRobotView {
 			this->dataGridView1->RowTemplate->Height = 24;
 			this->dataGridView1->Size = System::Drawing::Size(679, 229);
 			this->dataGridView1->TabIndex = 13;
+			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &frmMantAlimentación::dataGridView1_CellContentClick);
 			// 
 			// Column1
 			// 
@@ -140,14 +169,14 @@ namespace AgroRobotView {
 			this->Column3->HeaderText = L"Peso";
 			this->Column3->MinimumWidth = 6;
 			this->Column3->Name = L"Column3";
-			this->Column3->Width = 125;
+			this->Column3->Width = 75;
 			// 
 			// Column4
 			// 
 			this->Column4->HeaderText = L"Edad";
 			this->Column4->MinimumWidth = 6;
 			this->Column4->Name = L"Column4";
-			this->Column4->Width = 125;
+			this->Column4->Width = 75;
 			// 
 			// Column5
 			// 
@@ -162,6 +191,11 @@ namespace AgroRobotView {
 			this->Column6->MinimumWidth = 6;
 			this->Column6->Name = L"Column6";
 			this->Column6->Width = 125;
+			// 
+			// Column7
+			// 
+			this->Column7->HeaderText = L"Ultima Vez Alimentado";
+			this->Column7->Name = L"Column7";
 			// 
 			// groupBox1
 			// 
@@ -208,7 +242,7 @@ namespace AgroRobotView {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(33, 51);
+			this->button2->Location = System::Drawing::Point(33, 53);
 			this->button2->Margin = System::Windows::Forms::Padding(2);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(90, 24);
@@ -219,7 +253,6 @@ namespace AgroRobotView {
 			// 
 			// groupBox2
 			// 
-			this->groupBox2->Controls->Add(this->button4);
 			this->groupBox2->Controls->Add(this->button3);
 			this->groupBox2->Controls->Add(this->button2);
 			this->groupBox2->Location = System::Drawing::Point(713, 132);
@@ -229,19 +262,9 @@ namespace AgroRobotView {
 			this->groupBox2->TabStop = false;
 			this->groupBox2->Text = L"Alimentar";
 			// 
-			// button4
-			// 
-			this->button4->Location = System::Drawing::Point(33, 171);
-			this->button4->Margin = System::Windows::Forms::Padding(2);
-			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(90, 24);
-			this->button4->TabIndex = 7;
-			this->button4->Text = L"Ver Reportes";
-			this->button4->UseVisualStyleBackColor = true;
-			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(33, 112);
+			this->button3->Location = System::Drawing::Point(33, 152);
 			this->button3->Margin = System::Windows::Forms::Padding(2);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(90, 24);
@@ -276,24 +299,28 @@ namespace AgroRobotView {
 			try {
 				String^ linea = serialPort1->ReadLine()->Trim();
 
-				if (linea == "ANIMAL_1_COMPLETADO") {
-					this->ActualizarProgresoSeguro();
+				if (linea->EndsWith("_COMPLETADO")) {
+					/*separa la cadena de texto en 3 bloques para extraer el número de animal*/
+					array<String^>^ partes = linea->Split('_');
+					int numero = Convert::ToInt32(partes[1]);
+
+					this->ActualizarProgresoSeguro(numero);
 				}
-				else if (linea == "FIN_ANIMAL") {
+				else if (linea == "FIN_ANIMAL" || linea == "FIN_ESPECIE") {
 					this->FinalizarProgresoSeguro();
 				}
 			}
 			catch (...) {}
 		}
 
-		private: void ActualizarProgresoSeguro() {
+		private: void ActualizarProgresoSeguro(int num) {
 		   if (this->InvokeRequired) {
-			   this->Invoke(gcnew System::Action(this, &frmMantAlimentación::ActualizarProgresoSeguro));
+			   this->Invoke(gcnew System::Action<int>(this, &frmMantAlimentación::ActualizarProgresoSeguro), num);
 			   return;
 		   }
 
 		  if (ventanaProgreso != nullptr) {
-			ventanaProgreso->actualizarProgreso(1);
+			ventanaProgreso->actualizarProgreso(num);
 		  }
 		}
 
@@ -307,12 +334,11 @@ namespace AgroRobotView {
 				ventanaProgreso->finalizar();
 			}
 
-			MessageBox::Show("El robot terminó la alimentación del animal.");
+			MessageBox::Show("El robot terminó la secuencia de alimentación.");
 		}
 
 
-
-
+	/*-----------------------------------------------------------------------------------------------------------*/
 	public:	void mostrarGrilla(List<Animal^>^ listaAnimales){
 		this->dataGridView1->Rows->Clear();
 		for (int i = 0; i < listaAnimales->Count; i++)
@@ -325,6 +351,7 @@ namespace AgroRobotView {
 			filaGrilla[3] = Convert::ToString(animal->Edad);
 			filaGrilla[4] = animal->EstadoSalud;
 			filaGrilla[5] = animal->UltimaDieta;
+			filaGrilla[6] = animal->UltimaVezAlimentado;
 			this->dataGridView1->Rows->Add(filaGrilla);
 		}
 	}
@@ -334,10 +361,9 @@ namespace AgroRobotView {
 		String^ especie = "";
 		if (!textBox2->Text->Equals(""))
 		{
-			// Obtener el nombre del operador a buscar
 			especie = textBox2->Text;
 		}
-		// Crear una instancia del controlador y buscar el operador por nombre
+
 		List<Animal^>^ listaAnimales = this->animalController->consultarAnimalporIdEspecie(id, especie);
 		// Mostrar los resultados en el DataGridView
 		mostrarGrilla(listaAnimales);
@@ -385,24 +411,36 @@ namespace AgroRobotView {
 				MessageBox::Show("No se encontró el animal seleccionado.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 				return;
 			}
-			id = 0;
+			int idEspecie = 0;
 			String^ especie = animalSeleccionado->Especie;
-			int cantidad = this->animalController->consultarAnimalporIdEspecie(id, especie)->Count;
+			List<Animal^>^ listaAnimales = this->animalController->consultarAnimalporIdEspecie(idEspecie, especie);
+			int cantidad = listaAnimales->Count;
 			
-			if (serialPort1 == nullptr || !serialPort1->IsOpen) {
-				MessageBox::Show("El puerto serial no está abierto.", "Error",
-					MessageBoxButtons::OK, MessageBoxIcon::Error);
+
+
+			if (!serialPort1->IsOpen)
+			{
+				MessageBox::Show("El puerto serial no está abierto.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 				return;
 			}
-			/*secuencia correcta*/
+
+			/*SECUENCIA DEL ROBOT*/
 			try {
+				// Abrir ventana de progreso
+				this->ventanaProgreso = gcnew frmProgreso(cantidad);
+				ventanaProgreso->Show();
+
 				String^ comando = "ESPECIE," + cantidad.ToString();
 				serialPort1->WriteLine(comando);
 
-				String^ respuesta = serialPort1->ReadLine();
-
-				
+				for each (Animal ^ animal in listaAnimales){
+					int idModificar = animal->IdAnimal;
+					String^ fechaAlimentacion = DateTime::Now.ToString("dd/MM/yyyy HH:mm");
+					this->animalController->modificarUltimaAlimentacion(idModificar, fechaAlimentacion);
+				}
+				/*FIN DE LA SECUENCIA*/
 			}
+
 			/*reemplazar errores por mensajes*/
 			catch (Exception^ ex) {
 				MessageBox::Show("Error al comunicar con el periférico: " + ex->Message, "Error",
@@ -435,7 +473,7 @@ namespace AgroRobotView {
 			/*SECUENCIA DEL ROBOT*/
 			if (!serialPort1->IsOpen)
 			{
-				MessageBox::Show("El puerto serial no está abierto.");
+				MessageBox::Show("El puerto serial no está abierto.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 				return;
 			}
 			
@@ -445,6 +483,11 @@ namespace AgroRobotView {
 
 			// Enviar comando al Arduino
 			serialPort1->WriteLine("ANIMAL");
+
+			//actualiza la fecha de ultima alimentación
+			String^ fechaAlimentacion = DateTime::Now.ToString("dd/MM/yyyy HH:mm");
+			this->animalController->modificarUltimaAlimentacion(id, fechaAlimentacion);
+
 			/*FIN DE LA SECUENCIA*/
 
 		}
@@ -465,5 +508,7 @@ namespace AgroRobotView {
 			MessageBox::Show("Error al cerrar el puerto serial: " + ex->Message);
 		}
 	}
+private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+}
 };
 }

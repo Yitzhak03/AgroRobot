@@ -122,7 +122,12 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
+
+
+
+
+
+
 
 
 
@@ -157,16 +162,15 @@ namespace AgroRobotView {
 			this->txtBuscar = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->btnEliminar = (gcnew System::Windows::Forms::Button());
 			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->button3 = (gcnew System::Windows::Forms::Button());
-			this->btnEliminar = (gcnew System::Windows::Forms::Button());
 			this->groupBox1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
@@ -177,21 +181,19 @@ namespace AgroRobotView {
 			this->groupBox1->Controls->Add(this->btnBuscar);
 			this->groupBox1->Controls->Add(this->txtBuscar);
 			this->groupBox1->Controls->Add(this->label1);
-			this->groupBox1->Location = System::Drawing::Point(16, 15);
-			this->groupBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->groupBox1->Location = System::Drawing::Point(12, 12);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Padding = System::Windows::Forms::Padding(4, 4, 4, 4);
-			this->groupBox1->Size = System::Drawing::Size(767, 123);
+			this->groupBox1->Size = System::Drawing::Size(575, 100);
 			this->groupBox1->TabIndex = 0;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Criterio de Búsqueda";
 			// 
 			// btnMostrarTodos
 			// 
-			this->btnMostrarTodos->Location = System::Drawing::Point(596, 50);
-			this->btnMostrarTodos->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->btnMostrarTodos->Location = System::Drawing::Point(447, 41);
+			this->btnMostrarTodos->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnMostrarTodos->Name = L"btnMostrarTodos";
-			this->btnMostrarTodos->Size = System::Drawing::Size(107, 43);
+			this->btnMostrarTodos->Size = System::Drawing::Size(80, 35);
 			this->btnMostrarTodos->TabIndex = 17;
 			this->btnMostrarTodos->Text = L"Mostrar Todos";
 			this->btnMostrarTodos->UseVisualStyleBackColor = true;
@@ -199,10 +201,10 @@ namespace AgroRobotView {
 			// 
 			// btnBuscar
 			// 
-			this->btnBuscar->Location = System::Drawing::Point(493, 60);
-			this->btnBuscar->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->btnBuscar->Location = System::Drawing::Point(370, 49);
+			this->btnBuscar->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnBuscar->Name = L"btnBuscar";
-			this->btnBuscar->Size = System::Drawing::Size(75, 23);
+			this->btnBuscar->Size = System::Drawing::Size(56, 19);
 			this->btnBuscar->TabIndex = 5;
 			this->btnBuscar->Text = L"Buscar";
 			this->btnBuscar->UseVisualStyleBackColor = true;
@@ -210,35 +212,75 @@ namespace AgroRobotView {
 			// 
 			// txtBuscar
 			// 
-			this->txtBuscar->Location = System::Drawing::Point(65, 60);
-			this->txtBuscar->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->txtBuscar->Location = System::Drawing::Point(49, 49);
+			this->txtBuscar->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->txtBuscar->Name = L"txtBuscar";
-			this->txtBuscar->Size = System::Drawing::Size(169, 22);
+			this->txtBuscar->Size = System::Drawing::Size(128, 20);
 			this->txtBuscar->TabIndex = 2;
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(35, 64);
+			this->label1->Location = System::Drawing::Point(26, 52);
+			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(21, 16);
+			this->label1->Size = System::Drawing::Size(19, 13);
 			this->label1->TabIndex = 1;
 			this->label1->Text = L"Id:";
 			// 
 			// dataGridView1
 			// 
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(6) {
+			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(5) {
 				this->Column1,
-					this->Column2, this->Column3, this->Column4, this->Column5, this->Column6
+					this->Column2, this->Column3, this->Column4, this->Column5
 			});
-			this->dataGridView1->Location = System::Drawing::Point(16, 159);
-			this->dataGridView1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->dataGridView1->Location = System::Drawing::Point(12, 129);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->ReadOnly = true;
 			this->dataGridView1->RowHeadersWidth = 51;
-			this->dataGridView1->Size = System::Drawing::Size(767, 282);
+			this->dataGridView1->Size = System::Drawing::Size(575, 229);
 			this->dataGridView1->TabIndex = 1;
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(41, 381);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->TabIndex = 2;
+			this->button1->Text = L"Nuevo";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &frmMantRoles::button1_Click);
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(475, 381);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(75, 23);
+			this->button2->TabIndex = 3;
+			this->button2->Text = L"Cancelar";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &frmMantRoles::button2_Click);
+			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(182, 381);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(75, 23);
+			this->button3->TabIndex = 4;
+			this->button3->Text = L"Editar";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &frmMantRoles::button3_Click);
+			// 
+			// btnEliminar
+			// 
+			this->btnEliminar->Location = System::Drawing::Point(330, 381);
+			this->btnEliminar->Name = L"btnEliminar";
+			this->btnEliminar->Size = System::Drawing::Size(75, 23);
+			this->btnEliminar->TabIndex = 5;
+			this->btnEliminar->Text = L"Eliminar";
+			this->btnEliminar->UseVisualStyleBackColor = true;
+			this->btnEliminar->Click += gcnew System::EventHandler(this, &frmMantRoles::btnEliminar_Click);
 			// 
 			// Column1
 			// 
@@ -258,7 +300,7 @@ namespace AgroRobotView {
 			// 
 			// Column3
 			// 
-			this->Column3->HeaderText = L"Acceso a Administración";
+			this->Column3->HeaderText = L"Administrar Usuarios";
 			this->Column3->MinimumWidth = 6;
 			this->Column3->Name = L"Column3";
 			this->Column3->ReadOnly = true;
@@ -266,7 +308,7 @@ namespace AgroRobotView {
 			// 
 			// Column4
 			// 
-			this->Column4->HeaderText = L"Acceso a Gestión de Reportes";
+			this->Column4->HeaderText = L"Acceso a Reportes";
 			this->Column4->MinimumWidth = 6;
 			this->Column4->Name = L"Column4";
 			this->Column4->ReadOnly = true;
@@ -280,70 +322,17 @@ namespace AgroRobotView {
 			this->Column5->ReadOnly = true;
 			this->Column5->Width = 125;
 			// 
-			// Column6
-			// 
-			this->Column6->HeaderText = L"Permiso 4";
-			this->Column6->MinimumWidth = 6;
-			this->Column6->Name = L"Column6";
-			this->Column6->ReadOnly = true;
-			this->Column6->Width = 90;
-			// 
-			// button1
-			// 
-			this->button1->Location = System::Drawing::Point(55, 469);
-			this->button1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(100, 28);
-			this->button1->TabIndex = 2;
-			this->button1->Text = L"Nuevo";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &frmMantRoles::button1_Click);
-			// 
-			// button2
-			// 
-			this->button2->Location = System::Drawing::Point(633, 469);
-			this->button2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(100, 28);
-			this->button2->TabIndex = 3;
-			this->button2->Text = L"Cancelar";
-			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &frmMantRoles::button2_Click);
-			// 
-			// button3
-			// 
-			this->button3->Location = System::Drawing::Point(243, 469);
-			this->button3->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
-			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(100, 28);
-			this->button3->TabIndex = 4;
-			this->button3->Text = L"Editar";
-			this->button3->UseVisualStyleBackColor = true;
-			this->button3->Click += gcnew System::EventHandler(this, &frmMantRoles::button3_Click);
-			// 
-			// btnEliminar
-			// 
-			this->btnEliminar->Location = System::Drawing::Point(440, 469);
-			this->btnEliminar->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
-			this->btnEliminar->Name = L"btnEliminar";
-			this->btnEliminar->Size = System::Drawing::Size(100, 28);
-			this->btnEliminar->TabIndex = 5;
-			this->btnEliminar->Text = L"Eliminar";
-			this->btnEliminar->UseVisualStyleBackColor = true;
-			this->btnEliminar->Click += gcnew System::EventHandler(this, &frmMantRoles::btnEliminar_Click);
-			// 
 			// frmMantRoles
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(799, 529);
+			this->ClientSize = System::Drawing::Size(599, 430);
 			this->Controls->Add(this->btnEliminar);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->groupBox1);
-			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->Name = L"frmMantRoles";
 			this->Text = L"Gestión de Roles";
 			this->groupBox1->ResumeLayout(false);

@@ -16,7 +16,9 @@ Animal::Animal(
 	String^ ultimaDieta,
 	List<Muestra^>^ muestras,
 	Dieta^ dietaa,
-	List<HistoriaClinica^>^ historiasClinicas)
+	List<HistoriaClinica^>^ historiasClinicas,
+	String^ ultimaVezAlimentado,
+	int vecesAlimentado)
 {
 	IdAnimal = idAnimal;
 	Especie = especie;
@@ -27,4 +29,6 @@ Animal::Animal(
 	Muestras = muestras;
 	Dietaa = dietaa;
 	HistoriasClinicas = historiasClinicas;
+	UltimaVezAlimentado = ultimaVezAlimentado;
+	VecesAlimentado = vecesAlimentado;
 }

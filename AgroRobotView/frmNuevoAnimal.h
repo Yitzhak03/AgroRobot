@@ -324,12 +324,14 @@ namespace AgroRobotView {
 		double edad = Convert::ToDouble(this->textBox4->Text);
 		String^ estadoSalud = this->textBox5->Text;
 		String^ ultimaDieta = this->textBox6->Text;
+		String^ ultimaVezAlimentado = "-";
+		int vecesAlimentado = 0;
 		if (id == 0 || especie->Equals("") || peso == 0.0 || edad == 0.0 || estadoSalud->Equals("") || ultimaDieta->Equals("")) {
 			MessageBox::Show("Por favor, complete todos los campos.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
 			return;
 		}
 
-		Animal^ nuevoAnimal = gcnew Animal(id, especie, peso, edad, estadoSalud, ultimaDieta, gcnew List<Muestra^>(), gcnew Dieta(), gcnew List<HistoriaClinica^>());
+		Animal^ nuevoAnimal = gcnew Animal(id, especie, peso, edad, estadoSalud, ultimaDieta, gcnew List<Muestra^>(), gcnew Dieta(), gcnew List<HistoriaClinica^>(), ultimaVezAlimentado, vecesAlimentado);
 		this->animalController->registrarAnimal(nuevoAnimal);
 		MessageBox::Show("Animal agregado correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
 		this->Close();

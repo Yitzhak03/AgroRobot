@@ -242,7 +242,6 @@ namespace AgroRobotView {
 		this->checkedListBox1->Items->Add("Acceso a Administración");
 		this->checkedListBox1->Items->Add("Gestión de reportes");
 		this->checkedListBox1->Items->Add("Programar Alimentación");
-		this->checkedListBox1->Items->Add("Ver");
 		List<bool>^ listaPermisos = this->rol->GetPermisos();
 		/*se encarga de marcar las cajas si detecta que dicho permiso es true*/
 		for (int i = 0; i < this->checkedListBox1->Items->Count; i++) {

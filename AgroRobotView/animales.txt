@@ -1,15 +1,15 @@
-1;Vaca;523.4;5.2;Saludable;DietaPastura
-2;Pollo;2.1;1;Saludable;DietaMaiz
-3;Cerdo;97.8;2.5;Saludable;DietaCereal
-4;Oveja;68.3;3.8;Saludable;DietaForraje
-5;Cabra;56.9;3.1;Saludable;DietaHeno
-6;Pato;3.5;1.8;Bajo peso;DietaGrano
-7;Conejo;4.4;1.2;Saludable;DietaVerdura
-8;Pavo;8.9;2.3;Saludable;DietaGrano
-9;Cerdo;113.6;3.4;Sobrepeso;DietaCereal
-10;Vaca;478.7;6;BajoPeso;DietaPastura
-11;Oveja;72.1;4.2;Saludable;DietaForraje
-12;Cabra;52.5;2.9;BajoPeso;DietaHeno
-13;Pollo;1.8;0.9;BajoPeso;DietaMaiz
-14;Pavo;9.6;2.7;Saludable;DietaGrano
-15;Conejo;3.9;1;Saludable;DietaVerdura
+1;Vaca;523.4;5.2;Saludable;DietaPastura;14/11/2025 17:18;6
+2;Pollo;2.1;1;Saludable;DietaMaiz;14/11/2025 17:19;5
+3;Cerdo;97.8;2.5;Saludable;DietaCereal;14/11/2025 17:20;4
+4;Oveja;68.3;3.8;Saludable;DietaForraje;14/11/2025 17:10;6
+5;Cabra;56.9;3.1;Saludable;DietaHeno;14/11/2025 17:20;1
+6;Pato;3.5;1.8;Bajo peso;DietaGrano;14/11/2025 17:14;3
+7;Conejo;4.4;1.2;Saludable;DietaVerdura;14/11/2025 17:19;5
+8;Pavo;8.9;2.3;Saludable;DietaGrano;14/11/2025 17:20;6
+9;Cerdo;113.6;3.4;Sobrepeso;DietaCereal;14/11/2025 17:20;8
+10;Vaca;478.7;6;BajoPeso;DietaPastura;14/11/2025 17:18;6
+11;Oveja;72.1;4.2;Saludable;DietaForraje;14/11/2025 17:21;5
+12;Cabra;52.5;2.9;BajoPeso;DietaHeno;14/11/2025 17:20;4
+13;Pollo;1.8;0.9;BajoPeso;DietaMaiz;14/11/2025 17:19;3
+14;Pavo;9.6;2.7;Saludable;DietaGrano;14/11/2025 17:20;2
+15;Conejo;3.9;1;Saludable;DietaVerdura;14/11/2025 17:19;1

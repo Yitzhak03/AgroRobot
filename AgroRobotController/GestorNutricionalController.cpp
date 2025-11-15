@@ -23,6 +23,7 @@ GestorNutricionalController::GestorNutricionalController() {
 	/*PARA ANIMALES*/
 	array<String^>^ lineasAnimales = File::ReadAllLines("animales.txt");
 	String^ separadores = ";";
+
 	for each (String ^ linea in lineasAnimales) {
 		if (String::IsNullOrEmpty(linea)) continue;
 
@@ -34,13 +35,15 @@ GestorNutricionalController::GestorNutricionalController() {
 		double edad = Convert::ToDouble(camposAnimales[3]);
 		String^ estadoSalud = camposAnimales[4];
 		String^ ultimaDieta = (camposAnimales->Length > 5) ? camposAnimales[5] : "";
+		String^ ultimaVezAlimentado = camposAnimales[6];
+		int vecesAlimentado = Convert::ToInt32(camposAnimales[7]);
 
 		/*para que no haya error*/
 		List<Muestra^>^ muestras = gcnew List<Muestra^>();
 		Dieta^ dietaa = gcnew Dieta();
 		List<HistoriaClinica^>^ historiasClinicas = gcnew List<HistoriaClinica^>();
 
-		Animal^ animal = gcnew Animal(idAnimal, especie, peso, edad, estadoSalud, ultimaDieta, muestras, dietaa, historiasClinicas);
+		Animal^ animal = gcnew Animal(idAnimal, especie, peso, edad, estadoSalud, ultimaDieta, muestras, dietaa, historiasClinicas, ultimaVezAlimentado, vecesAlimentado);
 		this->listaAnimales->Add(animal);
 	}
 
@@ -97,7 +100,9 @@ void GestorNutricionalController::escribirArchivoAnimal() {
 								   animal->Peso + ";" + 
 								   animal->Edad + ";" + 
 								   animal->EstadoSalud + ";" + 
-								   animal->UltimaDieta;
+								   animal->UltimaDieta + ";" +
+								   animal->UltimaVezAlimentado + ";" + 
+								   animal->VecesAlimentado;
 	}
 	File::WriteAllLines("animales.txt", lineasArchivoAnimales);
 }
@@ -127,6 +132,15 @@ bool GestorNutricionalController::modificarAnimal(int idAnimal, String^ especie,
 		return true;
 	}
 	return false;
+}
+
+void GestorNutricionalController::modificarUltimaAlimentacion(int id, String^ fecha) {
+	Animal^ animal = consultarAnimalporId(id);
+	if (animal != nullptr) {
+		animal->UltimaVezAlimentado = fecha;
+		animal->VecesAlimentado +=1;
+	}
+	escribirArchivoAnimal();
 }
 
 bool GestorNutricionalController::eliminarAnimal(int idAnimal) {

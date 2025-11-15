@@ -47,7 +47,7 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::GroupBox^ groupBox1;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::Button^ button1;
+
 	private: int total;
 	protected:
 
@@ -68,7 +68,6 @@ namespace AgroRobotView {
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -108,21 +107,11 @@ namespace AgroRobotView {
 			this->label1->TabIndex = 2;
 			this->label1->Text = L" ";
 			// 
-			// button1
-			// 
-			this->button1->Location = System::Drawing::Point(105, 153);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
-			this->button1->TabIndex = 2;
-			this->button1->Text = L"Cancelar";
-			this->button1->UseVisualStyleBackColor = true;
-			// 
 			// frmProgreso
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(280, 188);
-			this->Controls->Add(this->button1);
 			this->Controls->Add(this->groupBox1);
 			this->Controls->Add(this->progressBar1);
 			this->Name = L"frmProgreso";

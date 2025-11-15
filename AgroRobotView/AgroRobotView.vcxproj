@@ -150,6 +150,7 @@
     <ClCompile Include="frmOrdenesAlimentacion.cpp" />
     <ClCompile Include="frmPaintStockPorAlmacen.cpp" />
     <ClCompile Include="frmProgreso.cpp" />
+    <ClCompile Include="frmReporteAlimentacion.cpp" />
     <ClCompile Include="frmReporteInsumosXalmacen.cpp" />
     <ClCompile Include="frmStockPorAlmacen.cpp" />
     <ClCompile Include="frmVerificarPeso.cpp" />
@@ -282,6 +283,9 @@
     <ClInclude Include="frmProgreso.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="frmReporteAlimentacion.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="frmReporteInsumosXalmacen.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -404,6 +408,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmProgreso.resx">
       <DependentUpon>frmProgreso.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReporteAlimentacion.resx">
+      <DependentUpon>frmReporteAlimentacion.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmReporteInsumosXalmacen.resx">
       <DependentUpon>frmReporteInsumosXalmacen.h</DependentUpon>
