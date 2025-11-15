@@ -74,6 +74,7 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column7;
 	private: System::Windows::Forms::ComboBox^ comboBox1;
+	private: System::Windows::Forms::Label^ label2;
 
 
 
@@ -160,7 +161,6 @@ namespace AgroRobotView {
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -168,6 +168,8 @@ namespace AgroRobotView {
 			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column7 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
+			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->groupBox1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
@@ -194,9 +196,9 @@ namespace AgroRobotView {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(535, 57);
+			this->button2->Location = System::Drawing::Point(407, 92);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(75, 23);
+			this->button2->Size = System::Drawing::Size(142, 23);
 			this->button2->TabIndex = 25;
 			this->button2->Text = L"Agregar";
 			this->button2->UseVisualStyleBackColor = true;
@@ -253,14 +255,6 @@ namespace AgroRobotView {
 			this->dataGridView1->Size = System::Drawing::Size(566, 180);
 			this->dataGridView1->TabIndex = 28;
 			// 
-			// comboBox1
-			// 
-			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Location = System::Drawing::Point(393, 58);
-			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(121, 21);
-			this->comboBox1->TabIndex = 30;
-			// 
 			// Column1
 			// 
 			this->Column1->HeaderText = L"ID Muestra";
@@ -310,11 +304,29 @@ namespace AgroRobotView {
 			this->Column7->Name = L"Column7";
 			this->Column7->Width = 125;
 			// 
+			// comboBox1
+			// 
+			this->comboBox1->FormattingEnabled = true;
+			this->comboBox1->Location = System::Drawing::Point(468, 56);
+			this->comboBox1->Name = L"comboBox1";
+			this->comboBox1->Size = System::Drawing::Size(81, 21);
+			this->comboBox1->TabIndex = 30;
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(404, 59);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(55, 13);
+			this->label2->TabIndex = 31;
+			this->label2->Text = L"ID Animal:";
+			// 
 			// frmMantSangre
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(640, 405);
+			this->Controls->Add(this->label2);
 			this->Controls->Add(this->comboBox1);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->button4);
@@ -327,6 +339,7 @@ namespace AgroRobotView {
 			this->groupBox1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
