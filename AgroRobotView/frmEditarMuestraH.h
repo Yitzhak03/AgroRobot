@@ -254,9 +254,9 @@ namespace AgroRobotView {
 			this->label1->AutoSize = true;
 			this->label1->Location = System::Drawing::Point(9, 63);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(55, 13);
+			this->label1->Size = System::Drawing::Size(48, 13);
 			this->label1->TabIndex = 0;
-			this->label1->Text = L"ID Animal:";
+			this->label1->Text = L"Especie:";
 			// 
 			// frmEditarMuestraH
 			// 
@@ -277,15 +277,16 @@ namespace AgroRobotView {
 #pragma endregion
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		int idMuestra = Convert::ToInt32(textBox6->Text);
-		int idAnimal = Convert::ToInt32(textBox1->Text);
+
 		String^ consistencia = textBox2->Text;
 		String^ color = textBox3->Text;
 		String^ olor = textBox4->Text;
 		String^ parasitos = comboBox2->Text;
 		String^ fecha = textBox5->Text;
+		Animal^ animal = this->muestra->getAnimal();
 
-		Muestra^ muestraEditada = gcnew Muestra(idMuestra, idAnimal, "Heces", fecha,
-			consistencia, color, olor, parasitos, "", "", "", "");
+		Muestra^ muestraEditada = gcnew Muestra(idMuestra, "Heces", fecha,
+			consistencia, color, olor, parasitos, "", "", "", "", animal);
 
 		muestraController->editarMuestraArchivo(idMuestra, muestraEditada);
 		MessageBox::Show("Muestra editada correctamente.");
@@ -293,7 +294,7 @@ namespace AgroRobotView {
 	}
 	private: System::Void frmEditarMuestraH_Load(System::Object^ sender, System::EventArgs^ e) {
 		this->textBox6->Text = Convert::ToString(this->muestra->getIdMuestra());
-		this->textBox1->Text = Convert::ToString(this->muestra->getIdAnimal());
+		this->textBox1->Text = this->muestra->getEspecie();
 		this->textBox2->Text = this->muestra->getConsistencia();
 		this->textBox3->Text = this->muestra->getColorHeces();
 		this->textBox4->Text = this->muestra->getOlor();
