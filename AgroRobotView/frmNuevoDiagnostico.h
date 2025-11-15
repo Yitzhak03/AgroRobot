@@ -332,40 +332,13 @@ namespace AgroRobotView {
 		}
 #pragma endregion
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		int idDiagnostico = Convert::ToInt32(this->textBox7->Text);
-		int idAnimal = Convert::ToInt32(this->textBox1->Text);
-		String^ especie = this->textBox2->Text;
-		String^ resultadoHeces = this->textBox3->Text;
-		String^ resultadoSangre = this->textBox4->Text;
-		String^ estadoSalud = this->textBox5->Text;
-		String^ observaciones = this->textBox6->Text;
-		String^ fecha = this->textBox8->Text;
-
-		// Crear objeto diagnóstico
-		Diagnostico^ nuevoDiagnostico = gcnew Diagnostico(
-			idDiagnostico,
-			idAnimal,
-			especie,
-			resultadoHeces,
-			resultadoSangre,
-			estadoSalud,
-			observaciones,
-			fecha
-		);
-
-		// Guardar en archivo
-		this->diagnosticoController->agregarDiagnosticoArchivo(nuevoDiagnostico);
-
-		MessageBox::Show("El diagnóstico ha sido registrado con éxito.");
-		this->Close();
+		
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
 	}
 	private: System::Void frmNuevoDiagnostico_Load(System::Object^ sender, System::EventArgs^ e) {
-		int nuevoId = this->diagnosticoController->generarNuevoId();
-		this->textBox7->Text = Convert::ToString(nuevoId);
-		this->textBox7->ReadOnly = true;
+		
 	}
 };
 }

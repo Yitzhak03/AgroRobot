@@ -318,42 +318,13 @@ namespace AgroRobotView {
 		}
 #pragma endregion
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		int idDiagnostico = Convert::ToInt32(textBox7->Text);
-		int idAnimal = Convert::ToInt32(textBox1->Text);
-		String^ especie = textBox2->Text;
-		String^ resultadoHeces = textBox3->Text;
-		String^ resultadoSangre = textBox4->Text;
-		String^ estadoSalud = textBox5->Text;
-		String^ observaciones = textBox6->Text;
-		String^ fecha = textBox8->Text;
-
-		Diagnostico^ diagnosticoEditado = gcnew Diagnostico(
-			idDiagnostico,
-			idAnimal,
-			especie,
-			resultadoHeces,
-			resultadoSangre,
-			estadoSalud,
-			observaciones,
-			fecha
-		);
-
-		diagnosticoController->editarDiagnosticoArchivo(idDiagnostico, diagnosticoEditado);
-		MessageBox::Show("Diagnóstico editado correctamente.");
-		this->Close();
+		
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
 	}
 	private: System::Void frmEditarDiagnostico_Load(System::Object^ sender, System::EventArgs^ e) {
-		this->textBox7->Text = Convert::ToString(this->diagnostico->getIdDiagnostico());
-		this->textBox1->Text = Convert::ToString(this->diagnostico->getIdAnimal());
-		this->textBox2->Text = this->diagnostico->getEspecie();
-		this->textBox3->Text = this->diagnostico->getResultadoHeces();
-		this->textBox4->Text = this->diagnostico->getResultadoSangre();
-		this->textBox5->Text = this->diagnostico->getEstadoSalud();
-		this->textBox6->Text = this->diagnostico->getObservaciones();
-		this->textBox8->Text = this->diagnostico->getFecha();
+		
 	}
 };
 }
