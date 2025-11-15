@@ -1,0 +1,5 @@
+1;101;Vaca;Sí;Sí;Enfermo;Atención urgente
+2;102;Pollo;No;Sí;En observación;Parásitos detectados
+3;103;Cerdo;Sí;No;En observación;Sangre contaminada
+4;104;Oveja;Sí;No;Saludable;Sin problemas
+5;105;Cabra;No;Sí;Enfermo;Atención urgente

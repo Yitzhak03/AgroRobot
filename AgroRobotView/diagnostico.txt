@@ -1,7 +1,0 @@
-1;101;Gallina;Parásitos leves;Normal;En observación;Seguimiento recomendado;15/10/2025
-2;102;Cerdo;Sin parásitos;Bacterias altas;Crítico;Tratamiento urgente;16/10/2025
-3;103;Vaca;Sin parásitos;Contaminación leve;En observación;Repetir análisis;17/10/2025
-4;104;Cabra;Parásitos graves;Normal;Crítico;Aislamiento inmediato;18/10/2025
-5;105;Gallina;Sin parásitos;Normal;Saludable;Sin observaciones;19/10/2025
-6;106;Pato;Parásitos dudosos;Contaminación media;En observación;Control próximo;20/10/2025
-7;107;Vaca;Sin parásitos;Normal;Saludable;Buen estado;21/10/2025
