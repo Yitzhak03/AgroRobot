@@ -37,5 +37,9 @@ namespace AgroRobotModel {
         );
         // Constructor básico
         Animal(int idAnimal, String^ especie);
+
+        // En Animal
+        Animal(int idAnimal, String^ especie, double peso, double edad, String^ estadoSalud, String^ ultimaDieta);
+
     };
 }

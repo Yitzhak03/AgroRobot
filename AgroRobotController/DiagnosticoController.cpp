@@ -92,6 +92,10 @@ Diagnostico^ DiagnosticoController::generarDiagnosticoParaAnimal(
 ) {
     List<Muestra^>^ muestras = muestraController->buscarMuestrasPorAnimalArchivo(idAnimal, gestor);
 
+    if (muestras == nullptr || muestras->Count == 0) {
+        return nullptr; // No hay muestras, no se genera diagnóstico
+    }
+
     String^ resultadoHeces = "No";
     String^ resultadoSangre = "No";
     String^ especie = "";

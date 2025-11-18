@@ -24,10 +24,14 @@ namespace AgroRobotView {
 		{
 			InitializeComponent();
 			this->diagnosticoController = gcnew DiagnosticoController();
+			this->gestorController = gcnew GestorNutricionalController();
+			this->muestraController = gcnew MuestraController();
 			this->BackColor = System::Drawing::Color::SeaGreen;
 			this->button1->BackColor = System::Drawing::Color::LightGreen;
 			this->button1->ForeColor = System::Drawing::Color::DarkGreen;
-			
+			this->button2->BackColor = System::Drawing::Color::LightGreen;
+			this->button2->ForeColor = System::Drawing::Color::DarkGreen;
+			cargarAnimalesSinDiagnostico();
 		}
 
 	protected:
@@ -46,19 +50,15 @@ namespace AgroRobotView {
 
 
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
-
-
-
-
-
+	private: DiagnosticoController^ diagnosticoController;
+	private: GestorNutricionalController^ gestorController;
+	private: MuestraController^ muestraController;
 
 	private: System::Windows::Forms::GroupBox^ groupBox1;
 	private: System::Windows::Forms::Button^ button1;
-
-
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::Windows::Forms::Label^ label1;
-	private: DiagnosticoController^ diagnosticoController;
+	
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column7;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
@@ -66,6 +66,10 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column8;
+	private: System::Windows::Forms::GroupBox^ groupBox2;
+	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::ComboBox^ comboBox1;
+	private: System::Windows::Forms::Button^ button2;
 
 
 
@@ -110,8 +114,13 @@ namespace AgroRobotView {
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
+			this->button2 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBox1->SuspendLayout();
+			this->groupBox2->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// dataGridView1
@@ -181,7 +190,7 @@ namespace AgroRobotView {
 			this->groupBox1->Controls->Add(this->button1);
 			this->groupBox1->Controls->Add(this->textBox1);
 			this->groupBox1->Controls->Add(this->label1);
-			this->groupBox1->Location = System::Drawing::Point(110, 29);
+			this->groupBox1->Location = System::Drawing::Point(43, 29);
 			this->groupBox1->Name = L"groupBox1";
 			this->groupBox1->Size = System::Drawing::Size(303, 100);
 			this->groupBox1->TabIndex = 8;
@@ -214,11 +223,51 @@ namespace AgroRobotView {
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"ID Animal:";
 			// 
+			// groupBox2
+			// 
+			this->groupBox2->Controls->Add(this->label2);
+			this->groupBox2->Controls->Add(this->comboBox1);
+			this->groupBox2->Controls->Add(this->button2);
+			this->groupBox2->Location = System::Drawing::Point(389, 29);
+			this->groupBox2->Name = L"groupBox2";
+			this->groupBox2->Size = System::Drawing::Size(230, 100);
+			this->groupBox2->TabIndex = 10;
+			this->groupBox2->TabStop = false;
+			this->groupBox2->Text = L"Nuevo Diagnostico";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(45, 25);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(55, 13);
+			this->label2->TabIndex = 31;
+			this->label2->Text = L"ID Animal:";
+			// 
+			// comboBox1
+			// 
+			this->comboBox1->FormattingEnabled = true;
+			this->comboBox1->Location = System::Drawing::Point(106, 20);
+			this->comboBox1->Name = L"comboBox1";
+			this->comboBox1->Size = System::Drawing::Size(77, 21);
+			this->comboBox1->TabIndex = 30;
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(48, 58);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(137, 23);
+			this->button2->TabIndex = 29;
+			this->button2->Text = L"Generar";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &frmMantDiagnostico::button2_Click);
+			// 
 			// frmMantDiagnostico
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(661, 485);
+			this->Controls->Add(this->groupBox2);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmMantDiagnostico";
@@ -226,29 +275,48 @@ namespace AgroRobotView {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
+			this->groupBox2->ResumeLayout(false);
+			this->groupBox2->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
+
+	private: void cargarAnimalesSinDiagnostico() {
+		List<Animal^>^ animales = gestorController->leerArchivoAnimal();
+		List<Diagnostico^>^ diagnosticos = diagnosticoController->buscarTodosDiagnosticosArchivo();
+
+		this->comboBox1->Items->Clear();
+
+		for each (Animal ^ a in animales) {
+			bool tieneDiagnostico = false;
+			for each (Diagnostico ^ d in diagnosticos) {
+				if (d->IdAnimal == a->IdAnimal) {
+					tieneDiagnostico = true;
+					break;
+				}
+			}
+			if (!tieneDiagnostico) {
+				this->comboBox1->Items->Add(a->IdAnimal);
+			}
+		}
+	}
 	
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		List<Diagnostico^>^ listaFiltrada = gcnew List<Diagnostico^>();
+		// Buscar por ID Animal (textBox1)
 		String^ textoId = this->textBox1->Text->Trim();
+		List<Diagnostico^>^ listaFiltrada = gcnew List<Diagnostico^>();
 
 		if (String::IsNullOrEmpty(textoId)) {
-			// Mostrar todos los diagnósticos
-			List<Diagnostico^>^ todos = diagnosticoController->buscarTodosDiagnosticosArchivo();
-			listaFiltrada->AddRange(todos);
+			listaFiltrada = diagnosticoController->buscarTodosDiagnosticosArchivo();
 		}
 		else {
-			// Buscar por ID de animal
 			int idAnimal;
 			if (!Int32::TryParse(textoId, idAnimal)) {
 				MessageBox::Show("Ingrese un ID de animal válido.");
 				return;
 			}
-			List<Diagnostico^>^ listaPorAnimal = diagnosticoController->buscarDiagnosticosPorAnimalArchivo(idAnimal);
-			listaFiltrada->AddRange(listaPorAnimal);
+			listaFiltrada = diagnosticoController->buscarDiagnosticosPorAnimalArchivo(idAnimal);
 		}
 
 		this->dataGridView1->Rows->Clear();
@@ -261,17 +329,6 @@ namespace AgroRobotView {
 	}
 
 	private: void mostrarGrillaDiagnostico(List<Diagnostico^>^ listaDiagnosticos) {
-		// Configurar columnas si aún no existen
-		if (this->dataGridView1->Columns->Count == 0) {
-			this->dataGridView1->Columns->Add("IdDiagnostico", "ID Diagnóstico");
-			this->dataGridView1->Columns->Add("IdAnimal", "ID Animal");
-			this->dataGridView1->Columns->Add("Especie", "Especie");
-			this->dataGridView1->Columns->Add("ResultadoHeces", "Heces");
-			this->dataGridView1->Columns->Add("ResultadoSangre", "Sangre");
-			this->dataGridView1->Columns->Add("EstadoSalud", "Estado");
-			this->dataGridView1->Columns->Add("Observaciones", "Observaciones");
-		}
-
 		for each (Diagnostico ^ d in listaDiagnosticos) {
 			array<String^>^ fila = gcnew array<String^>(7);
 			fila[0] = Convert::ToString(d->IdDiagnostico);
@@ -285,5 +342,35 @@ namespace AgroRobotView {
 		}
 	}
 	
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (this->comboBox1->SelectedItem == nullptr) {
+			MessageBox::Show("Seleccione un animal.");
+			return;
+		}
+
+		int idAnimal = Convert::ToInt32(this->comboBox1->SelectedItem);
+
+		Diagnostico^ nuevoDiag = diagnosticoController->generarDiagnosticoParaAnimal(
+			idAnimal,
+			muestraController,
+			gestorController
+		);
+
+		if (nuevoDiag == nullptr) {
+			MessageBox::Show("No se pudo generar el diagnóstico. Verifique que existan muestras para este animal.");
+			return;
+		}
+
+		// Guardar en archivo
+		diagnosticoController->guardarDiagnosticoArchivo(nuevoDiag);
+
+		// Refrescar grilla
+		List<Diagnostico^>^ lista = diagnosticoController->buscarTodosDiagnosticosArchivo();
+		this->dataGridView1->Rows->Clear();
+		mostrarGrillaDiagnostico(lista);
+
+		// Actualizar comboBox
+		cargarAnimalesSinDiagnostico();
+	}
 };
 }

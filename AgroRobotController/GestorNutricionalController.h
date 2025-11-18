@@ -20,6 +20,7 @@ namespace AgroRobotController {
 
 		/*Animal*/
 		List<Animal^>^ obtenerTodosAnimales();
+		List<Animal^>^ leerArchivoAnimal();
 		void registrarAnimal(Animal^ animal);
 		bool existeAnimal(int idAnimal);
 		Animal^ consultarAnimalporId(int idAnimal);
