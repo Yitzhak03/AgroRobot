@@ -115,7 +115,6 @@
   <ItemGroup>
     <ClCompile Include="frmAgregarInsumoToAlmacen.cpp" />
     <ClCompile Include="frmEditarAnimal.cpp" />
-    <ClCompile Include="frmEditarDiagnostico.cpp" />
     <ClCompile Include="frmEditarDieta.cpp" />
     <ClCompile Include="frmEditarMuestraH.cpp" />
     <ClCompile Include="frmEditarMuestraS.cpp" />
@@ -138,7 +137,6 @@
     <ClCompile Include="frmMenu.cpp" />
     <ClCompile Include="frmNuevoAlmacen.cpp" />
     <ClCompile Include="frmNuevoAnimal.cpp" />
-    <ClCompile Include="frmNuevoDiagnostico.cpp" />
     <ClCompile Include="frmNuevoDieta.cpp" />
     <ClCompile Include="frmNuevoInsumo.cpp" />
     <ClCompile Include="frmNuevoMuestraH.cpp" />
@@ -170,9 +168,6 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmEditarAnimal.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="frmEditarDiagnostico.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmEditarDieta.h">
@@ -247,9 +242,6 @@
     <ClInclude Include="frmNuevoAnimal.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="frmNuevoDiagnostico.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
     <ClInclude Include="frmNuevoDieta.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -303,9 +295,6 @@
   <ItemGroup>
     <EmbeddedResource Include="frmEditarAnimal.resx">
       <DependentUpon>frmEditarAnimal.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmEditarDiagnostico.resx">
-      <DependentUpon>frmEditarDiagnostico.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEditarDieta.resx">
       <DependentUpon>frmEditarDieta.h</DependentUpon>
@@ -378,9 +367,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmNuevoAnimal.resx">
       <DependentUpon>frmNuevoAnimal.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmNuevoDiagnostico.resx">
-      <DependentUpon>frmNuevoDiagnostico.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNuevoDieta.resx">
       <DependentUpon>frmNuevoDieta.h</DependentUpon>

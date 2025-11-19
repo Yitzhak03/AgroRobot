@@ -149,3 +149,14 @@ Diagnostico^ DiagnosticoController::generarDiagnosticoParaAnimal(
 
     return diag;
 }
+
+void DiagnosticoController::eliminarDiagnosticoArchivo(int idDiagnostico) {
+    List<Diagnostico^>^ lista = buscarTodosDiagnosticosArchivo();
+    for (int i = 0; i < lista->Count; i++) {
+        if (lista[i]->IdDiagnostico == idDiagnostico) {
+            lista->RemoveAt(i);
+            break;
+        }
+    }
+    escribirArchivo(lista); 
+}

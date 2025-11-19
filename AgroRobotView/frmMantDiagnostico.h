@@ -31,6 +31,8 @@ namespace AgroRobotView {
 			this->button1->ForeColor = System::Drawing::Color::DarkGreen;
 			this->button2->BackColor = System::Drawing::Color::LightGreen;
 			this->button2->ForeColor = System::Drawing::Color::DarkGreen;
+			this->button3->BackColor = System::Drawing::Color::LightGreen;
+			this->button3->ForeColor = System::Drawing::Color::DarkGreen;
 			cargarAnimalesSinDiagnostico();
 		}
 
@@ -70,6 +72,7 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::ComboBox^ comboBox1;
 	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::Button^ button3;
 
 
 
@@ -118,6 +121,7 @@ namespace AgroRobotView {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button3 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
@@ -262,11 +266,22 @@ namespace AgroRobotView {
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &frmMantDiagnostico::button2_Click);
 			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(235, 393);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(151, 23);
+			this->button3->TabIndex = 11;
+			this->button3->Text = L"Eliminar";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &frmMantDiagnostico::button3_Click);
+			// 
 			// frmMantDiagnostico
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(661, 485);
+			this->Controls->Add(this->button3);
 			this->Controls->Add(this->groupBox2);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->groupBox1);
@@ -371,6 +386,32 @@ namespace AgroRobotView {
 
 		// Actualizar comboBox
 		cargarAnimalesSinDiagnostico();
+	}
+	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (this->dataGridView1->SelectedRows->Count == 0) {
+			MessageBox::Show("Seleccione un diagnóstico para eliminar.");
+			return;
+		}
+
+		int filaSeleccionada = this->dataGridView1->SelectedRows[0]->Index;
+		int idEliminar = Convert::ToInt32(this->dataGridView1->Rows[filaSeleccionada]->Cells[0]->Value->ToString());
+
+		// Confirmación antes de eliminar
+		System::Windows::Forms::DialogResult resultado =
+			MessageBox::Show("¿Está seguro de que desea eliminar el diagnóstico seleccionado?",
+				"Confirmar eliminación",
+				MessageBoxButtons::YesNo,
+				MessageBoxIcon::Warning);
+
+		if (resultado == System::Windows::Forms::DialogResult::Yes) {
+			this->diagnosticoController->eliminarDiagnosticoArchivo(idEliminar);
+			MessageBox::Show("El diagnóstico ha sido eliminado con éxito.");
+
+			// Refrescar la grilla mostrando todos los diagnósticos restantes
+			List<Diagnostico^>^ lista = this->diagnosticoController->buscarTodosDiagnosticosArchivo();
+			this->dataGridView1->Rows->Clear();
+			mostrarGrillaDiagnostico(lista);
+		}
 	}
 };
 }

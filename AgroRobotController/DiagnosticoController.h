@@ -25,9 +25,11 @@ namespace AgroRobotController {
         Diagnostico^ buscarDiagnosticoPorIdArchivo(int idDiagnostico);
         List<Diagnostico^>^ buscarDiagnosticosPorAnimalArchivo(int idAnimal);
 
+        // Eliminación
+        void eliminarDiagnosticoArchivo(int idDiagnostico);
+
         // Persistencia
         void escribirArchivo(List<Diagnostico^>^ listaDiagnosticos);
         void guardarDiagnosticoArchivo(Diagnostico^ diagnostico);
     };
 }
-
