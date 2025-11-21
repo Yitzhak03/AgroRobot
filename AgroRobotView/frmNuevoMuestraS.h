@@ -20,12 +20,7 @@ namespace AgroRobotView {
 		frmNuevoMuestraS(void)
 		{
 			InitializeComponent();
-			this->BackColor = System::Drawing::Color::SeaGreen;
-			this->button1->BackColor = System::Drawing::Color::LightGreen;
-			this->button1->ForeColor = System::Drawing::Color::DarkGreen;
-			this->button2->BackColor = System::Drawing::Color::LightGreen;
-			this->button2->ForeColor = System::Drawing::Color::DarkGreen;
-			
+
 			this->Load += gcnew System::EventHandler(this, &frmNuevoMuestraS::frmNuevoMuestraS_Load);
 		}
 
@@ -35,7 +30,11 @@ namespace AgroRobotView {
 			this->idAnimal = idAnimal;
 			this->muestraController = muestraController;
 			this->gestorNutricionalController = gc;
-
+			this->BackColor = System::Drawing::Color::SeaGreen;
+			this->button1->BackColor = System::Drawing::Color::LightGreen;
+			this->button1->ForeColor = System::Drawing::Color::DarkGreen;
+			this->button2->BackColor = System::Drawing::Color::LightGreen;
+			this->button2->ForeColor = System::Drawing::Color::DarkGreen;
 		}
 
 	protected:
@@ -215,7 +214,7 @@ namespace AgroRobotView {
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(80, 30);
 			this->label4->TabIndex = 6;
-			this->label4->Text = L"Contaminacion visible:";
+			this->label4->Text = L"Contaminación visible:";
 			// 
 			// textBox3
 			// 
@@ -230,7 +229,7 @@ namespace AgroRobotView {
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(70, 30);
 			this->label3->TabIndex = 4;
-			this->label3->Text = L"Presencia de coagulos:";
+			this->label3->Text = L"Presencia de coágulos:";
 			// 
 			// textBox2
 			// 
@@ -245,7 +244,7 @@ namespace AgroRobotView {
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(50, 30);
 			this->label2->TabIndex = 2;
-			this->label2->Text = L"Cantidad extraida:";
+			this->label2->Text = L"Cantidad extraída:";
 			// 
 			// textBox1
 			// 

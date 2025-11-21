@@ -26,7 +26,7 @@ namespace AgroRobotView {
 			this->muestraController = gcnew MuestraController();
 			this->gestorNutricionalController = gcnew GestorNutricionalController();
 			cargarAnimalesDisponibles();
-
+			cargarAnimalesSinMuestraSangre();
 			this->BackColor = System::Drawing::Color::SeaGreen;
 			this->button1->BackColor = System::Drawing::Color::LightGreen;
 			this->button1->ForeColor = System::Drawing::Color::DarkGreen;
@@ -36,6 +36,8 @@ namespace AgroRobotView {
 			this->button3->ForeColor = System::Drawing::Color::DarkGreen;
 			this->button4->BackColor = System::Drawing::Color::LightGreen;
 			this->button4->ForeColor = System::Drawing::Color::DarkGreen;
+			this->button5->BackColor = System::Drawing::Color::LightGreen;
+			this->button5->ForeColor = System::Drawing::Color::DarkGreen;
 		}
 
 	protected:
@@ -66,6 +68,18 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::Label^ label1;
 	private: MuestraController^ muestraController;
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
+
+
+
+
+
+
+
+	private: System::Windows::Forms::GroupBox^ groupBox2;
+	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::ComboBox^ comboBox1;
+	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::Button^ button5;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
@@ -73,10 +87,6 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column7;
-	private: System::Windows::Forms::GroupBox^ groupBox2;
-	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::ComboBox^ comboBox1;
-	private: System::Windows::Forms::Button^ button2;
 
 
 
@@ -160,10 +170,15 @@ namespace AgroRobotView {
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
+			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -171,10 +186,6 @@ namespace AgroRobotView {
 			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column7 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
-			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
-			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->groupBox1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBox2->SuspendLayout();
@@ -202,6 +213,7 @@ namespace AgroRobotView {
 			// 
 			// groupBox1
 			// 
+			this->groupBox1->Controls->Add(this->button5);
 			this->groupBox1->Controls->Add(this->button1);
 			this->groupBox1->Controls->Add(this->textBox1);
 			this->groupBox1->Controls->Add(this->label1);
@@ -210,7 +222,17 @@ namespace AgroRobotView {
 			this->groupBox1->Size = System::Drawing::Size(318, 100);
 			this->groupBox1->TabIndex = 23;
 			this->groupBox1->TabStop = false;
-			this->groupBox1->Text = L"Criterio de Busqueda";
+			this->groupBox1->Text = L"Criterio de Búsqueda";
+			// 
+			// button5
+			// 
+			this->button5->Location = System::Drawing::Point(87, 71);
+			this->button5->Name = L"button5";
+			this->button5->Size = System::Drawing::Size(137, 23);
+			this->button5->TabIndex = 32;
+			this->button5->Text = L"Limpiar";
+			this->button5->UseVisualStyleBackColor = true;
+			this->button5->Click += gcnew System::EventHandler(this, &frmMantSangre::button5_Click);
 			// 
 			// button1
 			// 
@@ -251,55 +273,6 @@ namespace AgroRobotView {
 			this->dataGridView1->Size = System::Drawing::Size(566, 180);
 			this->dataGridView1->TabIndex = 28;
 			// 
-			// Column1
-			// 
-			this->Column1->HeaderText = L"ID Muestra";
-			this->Column1->MinimumWidth = 6;
-			this->Column1->Name = L"Column1";
-			this->Column1->Width = 125;
-			// 
-			// Column2
-			// 
-			this->Column2->HeaderText = L"Especie";
-			this->Column2->MinimumWidth = 6;
-			this->Column2->Name = L"Column2";
-			this->Column2->Width = 125;
-			// 
-			// Column3
-			// 
-			this->Column3->HeaderText = L"Cantidad Extraida";
-			this->Column3->MinimumWidth = 6;
-			this->Column3->Name = L"Column3";
-			this->Column3->Width = 125;
-			// 
-			// Column4
-			// 
-			this->Column4->HeaderText = L"Presencia de Coagulos";
-			this->Column4->MinimumWidth = 6;
-			this->Column4->Name = L"Column4";
-			this->Column4->Width = 125;
-			// 
-			// Column5
-			// 
-			this->Column5->HeaderText = L"Contaminacion Visible";
-			this->Column5->MinimumWidth = 6;
-			this->Column5->Name = L"Column5";
-			this->Column5->Width = 125;
-			// 
-			// Column6
-			// 
-			this->Column6->HeaderText = L"Color";
-			this->Column6->MinimumWidth = 6;
-			this->Column6->Name = L"Column6";
-			this->Column6->Width = 125;
-			// 
-			// Column7
-			// 
-			this->Column7->HeaderText = L"Fecha";
-			this->Column7->MinimumWidth = 6;
-			this->Column7->Name = L"Column7";
-			this->Column7->Width = 125;
-			// 
 			// groupBox2
 			// 
 			this->groupBox2->Controls->Add(this->label2);
@@ -337,6 +310,56 @@ namespace AgroRobotView {
 			this->button2->TabIndex = 26;
 			this->button2->Text = L"Agregar";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &frmMantSangre::button2_Click_1);
+			// 
+			// Column1
+			// 
+			this->Column1->HeaderText = L"ID Muestra";
+			this->Column1->MinimumWidth = 6;
+			this->Column1->Name = L"Column1";
+			this->Column1->Width = 125;
+			// 
+			// Column2
+			// 
+			this->Column2->HeaderText = L"Especie";
+			this->Column2->MinimumWidth = 6;
+			this->Column2->Name = L"Column2";
+			this->Column2->Width = 125;
+			// 
+			// Column3
+			// 
+			this->Column3->HeaderText = L"Cantidad Extraída";
+			this->Column3->MinimumWidth = 6;
+			this->Column3->Name = L"Column3";
+			this->Column3->Width = 125;
+			// 
+			// Column4
+			// 
+			this->Column4->HeaderText = L"Presencia de Coágulos";
+			this->Column4->MinimumWidth = 6;
+			this->Column4->Name = L"Column4";
+			this->Column4->Width = 125;
+			// 
+			// Column5
+			// 
+			this->Column5->HeaderText = L"Contaminación Visible";
+			this->Column5->MinimumWidth = 6;
+			this->Column5->Name = L"Column5";
+			this->Column5->Width = 125;
+			// 
+			// Column6
+			// 
+			this->Column6->HeaderText = L"Color";
+			this->Column6->MinimumWidth = 6;
+			this->Column6->Name = L"Column6";
+			this->Column6->Width = 125;
+			// 
+			// Column7
+			// 
+			this->Column7->HeaderText = L"Fecha";
+			this->Column7->MinimumWidth = 6;
+			this->Column7->Name = L"Column7";
+			this->Column7->Width = 125;
 			// 
 			// frmMantSangre
 			// 
@@ -349,7 +372,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmMantSangre";
-			this->Text = L"AgroRobot - Gestion de Muestras de Sangre";
+			this->Text = L"AgroRobot - Gestión de Muestras de Sangre";
 			this->Load += gcnew System::EventHandler(this, &frmMantSangre::frmMantSangre_Load);
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
@@ -385,24 +408,7 @@ namespace AgroRobotView {
 	}
 
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (this->comboBox1->SelectedItem == nullptr) {
-			MessageBox::Show("Seleccione un animal válido antes de agregar una muestra de sangre.");
-			return;
-		}
-
-		int idAnimalSeleccionado = Convert::ToInt32(this->comboBox1->SelectedItem->ToString());
-
-		// Abrir el formulario de nueva muestra de sangre
-		frmNuevoMuestraS^ nuevaMuestraSangre = gcnew frmNuevoMuestraS(
-			idAnimalSeleccionado,
-			this->muestraController,
-			this->gestorNutricionalController
-		);
-
-		nuevaMuestraSangre->ShowDialog();
-
-		// Refrescar comboBox después de agregar
-		cargarAnimalesDisponibles();
+		
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ textoId = this->textBox1->Text->Trim();
@@ -509,6 +515,7 @@ namespace AgroRobotView {
 			}
 			this->dataGridView1->Rows->Clear();
 			mostrarGrilla(listaFiltrada);
+			cargarAnimalesSinMuestraSangre();
 		}
 	}
 
@@ -523,6 +530,52 @@ namespace AgroRobotView {
 		}
 		this->dataGridView1->Rows->Clear();
 		mostrarGrilla(listaSangre);
+	}
+
+	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->textBox1->Clear();
+	}
+
+	private: void cargarAnimalesSinMuestraSangre() {
+		
+		List<Animal^>^ animales = gestorNutricionalController->leerArchivoAnimal();
+		List<Muestra^>^ muestras = muestraController->buscarTodasMuestrasArchivo(gestorNutricionalController);
+
+		this->comboBox1->Items->Clear();
+
+		for each (Animal ^ a in animales) {
+			bool tieneMuestraSangre = false;
+			for each (Muestra ^ m in muestras) {
+				if (m->getIdAnimal() == a->IdAnimal && m->getTipo()->Equals("Sangre")) {
+					tieneMuestraSangre = true;
+					break;
+				}
+			}
+			if (!tieneMuestraSangre) {
+				this->comboBox1->Items->Add(a->IdAnimal);
+			}
+		}
+	}
+
+	private: System::Void button2_Click_1(System::Object^ sender, System::EventArgs^ e) {
+		if (this->comboBox1->SelectedItem == nullptr) {
+			MessageBox::Show("Seleccione un animal válido antes de agregar una muestra de sangre.");
+			return;
+		}
+
+		int idAnimalSeleccionado = Convert::ToInt32(this->comboBox1->SelectedItem->ToString());
+
+		// Abrir el formulario de nueva muestra de sangre
+		frmNuevoMuestraS^ nuevaMuestraSangre = gcnew frmNuevoMuestraS(
+			idAnimalSeleccionado,
+			this->muestraController,
+			this->gestorNutricionalController
+		);
+
+		nuevaMuestraSangre->ShowDialog();
+
+		// Refrescar comboBox después de agregar
+		cargarAnimalesDisponibles();
 	}
 };
 }

@@ -36,6 +36,8 @@ namespace AgroRobotView {
 			this->button3->ForeColor = System::Drawing::Color::DarkGreen;
 			this->button4->BackColor = System::Drawing::Color::LightGreen;
 			this->button4->ForeColor = System::Drawing::Color::DarkGreen;
+			this->button5->BackColor = System::Drawing::Color::LightGreen;
+			this->button5->ForeColor = System::Drawing::Color::DarkGreen;
 		}
 
 	protected:
@@ -72,6 +74,18 @@ namespace AgroRobotView {
 	private: MuestraController^ muestraController;
 
 
+
+
+
+
+
+
+
+	private: System::Windows::Forms::GroupBox^ groupBox2;
+	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::ComboBox^ comboBox1;
+	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::Button^ button5;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
@@ -79,11 +93,6 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Fecha;
-	private: System::Windows::Forms::GroupBox^ groupBox2;
-	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::ComboBox^ comboBox1;
-	private: System::Windows::Forms::Button^ button2;
-	private: System::Windows::Forms::Button^ button5;
 
 
 
@@ -113,13 +122,6 @@ namespace AgroRobotView {
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Fecha = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
@@ -129,6 +131,13 @@ namespace AgroRobotView {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Fecha = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
@@ -167,55 +176,6 @@ namespace AgroRobotView {
 			this->dataGridView1->Size = System::Drawing::Size(595, 183);
 			this->dataGridView1->TabIndex = 19;
 			// 
-			// Column6
-			// 
-			this->Column6->HeaderText = L"ID Muestra";
-			this->Column6->MinimumWidth = 6;
-			this->Column6->Name = L"Column6";
-			this->Column6->Width = 125;
-			// 
-			// Column1
-			// 
-			this->Column1->HeaderText = L"Especie";
-			this->Column1->MinimumWidth = 6;
-			this->Column1->Name = L"Column1";
-			this->Column1->Width = 125;
-			// 
-			// Column2
-			// 
-			this->Column2->HeaderText = L"Consistencia";
-			this->Column2->MinimumWidth = 6;
-			this->Column2->Name = L"Column2";
-			this->Column2->Width = 125;
-			// 
-			// Column3
-			// 
-			this->Column3->HeaderText = L"Color";
-			this->Column3->MinimumWidth = 6;
-			this->Column3->Name = L"Column3";
-			this->Column3->Width = 125;
-			// 
-			// Column4
-			// 
-			this->Column4->HeaderText = L"Olor";
-			this->Column4->MinimumWidth = 6;
-			this->Column4->Name = L"Column4";
-			this->Column4->Width = 125;
-			// 
-			// Column5
-			// 
-			this->Column5->HeaderText = L"Parasitos presentes";
-			this->Column5->MinimumWidth = 6;
-			this->Column5->Name = L"Column5";
-			this->Column5->Width = 125;
-			// 
-			// Fecha
-			// 
-			this->Fecha->HeaderText = L"Fecha";
-			this->Fecha->MinimumWidth = 6;
-			this->Fecha->Name = L"Fecha";
-			this->Fecha->Width = 125;
-			// 
 			// groupBox1
 			// 
 			this->groupBox1->Controls->Add(this->button5);
@@ -227,7 +187,7 @@ namespace AgroRobotView {
 			this->groupBox1->Size = System::Drawing::Size(318, 100);
 			this->groupBox1->TabIndex = 18;
 			this->groupBox1->TabStop = false;
-			this->groupBox1->Text = L"Criterio de Busqueda";
+			this->groupBox1->Text = L"Criterio de Búsqueda";
 			// 
 			// button5
 			// 
@@ -305,6 +265,55 @@ namespace AgroRobotView {
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &frmMantHeces::button2_Click_1);
 			// 
+			// Column6
+			// 
+			this->Column6->HeaderText = L"ID Muestra";
+			this->Column6->MinimumWidth = 6;
+			this->Column6->Name = L"Column6";
+			this->Column6->Width = 125;
+			// 
+			// Column1
+			// 
+			this->Column1->HeaderText = L"Especie";
+			this->Column1->MinimumWidth = 6;
+			this->Column1->Name = L"Column1";
+			this->Column1->Width = 125;
+			// 
+			// Column2
+			// 
+			this->Column2->HeaderText = L"Consistencia";
+			this->Column2->MinimumWidth = 6;
+			this->Column2->Name = L"Column2";
+			this->Column2->Width = 125;
+			// 
+			// Column3
+			// 
+			this->Column3->HeaderText = L"Color";
+			this->Column3->MinimumWidth = 6;
+			this->Column3->Name = L"Column3";
+			this->Column3->Width = 125;
+			// 
+			// Column4
+			// 
+			this->Column4->HeaderText = L"Olor";
+			this->Column4->MinimumWidth = 6;
+			this->Column4->Name = L"Column4";
+			this->Column4->Width = 125;
+			// 
+			// Column5
+			// 
+			this->Column5->HeaderText = L"Parásitos presentes";
+			this->Column5->MinimumWidth = 6;
+			this->Column5->Name = L"Column5";
+			this->Column5->Width = 125;
+			// 
+			// Fecha
+			// 
+			this->Fecha->HeaderText = L"Fecha";
+			this->Fecha->MinimumWidth = 6;
+			this->Fecha->Name = L"Fecha";
+			this->Fecha->Width = 125;
+			// 
 			// frmMantHeces
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -316,7 +325,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmMantHeces";
-			this->Text = L"AgroRobot - Gestion de Muestras de Heces";
+			this->Text = L"AgroRobot - Gestión de Muestras de Heces";
 			this->Load += gcnew System::EventHandler(this, &frmMantHeces::frmMantHeces_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->groupBox1->ResumeLayout(false);

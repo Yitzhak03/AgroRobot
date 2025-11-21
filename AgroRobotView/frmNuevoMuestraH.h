@@ -20,14 +20,8 @@ namespace AgroRobotView {
 		frmNuevoMuestraH(void)
 		{
 			InitializeComponent();
-			this->BackColor = System::Drawing::Color::SeaGreen;
-			this->button1->BackColor = System::Drawing::Color::LightGreen;
-			this->button1->ForeColor = System::Drawing::Color::DarkGreen;
-			this->button2->BackColor = System::Drawing::Color::LightGreen;
-			this->button2->ForeColor = System::Drawing::Color::DarkGreen;
 			
 			this->Load += gcnew System::EventHandler(this, &frmNuevoMuestraH::frmNuevoMuestraH_Load);
-
 		}
 
 		frmNuevoMuestraH(int idAnimal, MuestraController^ muestraController, GestorNutricionalController^ gc)
@@ -36,7 +30,11 @@ namespace AgroRobotView {
 			this->idAnimal = idAnimal;
 			this->muestraController = muestraController;
 			this->gestorNutricionalController = gc;
-
+			this->BackColor = System::Drawing::Color::SeaGreen;
+			this->button1->BackColor = System::Drawing::Color::LightGreen;
+			this->button1->ForeColor = System::Drawing::Color::DarkGreen;
+			this->button2->BackColor = System::Drawing::Color::LightGreen;
+			this->button2->ForeColor = System::Drawing::Color::DarkGreen;
 		}
 
 	protected:
@@ -204,7 +202,7 @@ namespace AgroRobotView {
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(70, 30);
 			this->label5->TabIndex = 8;
-			this->label5->Text = L"Parasitos presentes:";
+			this->label5->Text = L"Parásitos presentes:";
 			// 
 			// label4
 			// 

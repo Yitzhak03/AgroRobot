@@ -139,9 +139,9 @@ namespace AgroRobotView {
 			this->groupBox1->Controls->Add(this->label2);
 			this->groupBox1->Controls->Add(this->textBox1);
 			this->groupBox1->Controls->Add(this->label1);
-			this->groupBox1->Location = System::Drawing::Point(39, 31);
+			this->groupBox1->Location = System::Drawing::Point(39, 24);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(207, 315);
+			this->groupBox1->Size = System::Drawing::Size(207, 322);
 			this->groupBox1->TabIndex = 6;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Datos Sangre";
@@ -149,14 +149,14 @@ namespace AgroRobotView {
 			// textBox5
 			// 
 			this->textBox5->Enabled = false;
-			this->textBox5->Location = System::Drawing::Point(101, 24);
+			this->textBox5->Location = System::Drawing::Point(101, 29);
 			this->textBox5->Name = L"textBox5";
 			this->textBox5->Size = System::Drawing::Size(100, 20);
 			this->textBox5->TabIndex = 14;
 			// 
 			// label7
 			// 
-			this->label7->Location = System::Drawing::Point(16, 27);
+			this->label7->Location = System::Drawing::Point(16, 32);
 			this->label7->Name = L"label7";
 			this->label7->Size = System::Drawing::Size(63, 13);
 			this->label7->TabIndex = 13;
@@ -164,7 +164,7 @@ namespace AgroRobotView {
 			// 
 			// textBox4
 			// 
-			this->textBox4->Location = System::Drawing::Point(101, 277);
+			this->textBox4->Location = System::Drawing::Point(101, 282);
 			this->textBox4->Name = L"textBox4";
 			this->textBox4->Size = System::Drawing::Size(100, 20);
 			this->textBox4->TabIndex = 12;
@@ -172,7 +172,7 @@ namespace AgroRobotView {
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(18, 280);
+			this->label6->Location = System::Drawing::Point(18, 285);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(40, 13);
 			this->label6->TabIndex = 11;
@@ -182,7 +182,7 @@ namespace AgroRobotView {
 			// 
 			this->comboBox2->FormattingEnabled = true;
 			this->comboBox2->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Sí", L"No" });
-			this->comboBox2->Location = System::Drawing::Point(101, 188);
+			this->comboBox2->Location = System::Drawing::Point(101, 193);
 			this->comboBox2->Name = L"comboBox2";
 			this->comboBox2->Size = System::Drawing::Size(100, 21);
 			this->comboBox2->TabIndex = 10;
@@ -191,7 +191,7 @@ namespace AgroRobotView {
 			// 
 			this->comboBox1->FormattingEnabled = true;
 			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Sí", L"No" });
-			this->comboBox1->Location = System::Drawing::Point(101, 146);
+			this->comboBox1->Location = System::Drawing::Point(101, 151);
 			this->comboBox1->Name = L"comboBox1";
 			this->comboBox1->Size = System::Drawing::Size(100, 21);
 			this->comboBox1->TabIndex = 9;
@@ -199,7 +199,7 @@ namespace AgroRobotView {
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(16, 237);
+			this->label5->Location = System::Drawing::Point(16, 242);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(34, 13);
 			this->label5->TabIndex = 8;
@@ -207,53 +207,53 @@ namespace AgroRobotView {
 			// 
 			// label4
 			// 
-			this->label4->Location = System::Drawing::Point(16, 191);
+			this->label4->Location = System::Drawing::Point(16, 196);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(80, 30);
 			this->label4->TabIndex = 6;
-			this->label4->Text = L"Contaminacion visible:";
+			this->label4->Text = L"Contaminación visible:";
 			// 
 			// textBox3
 			// 
-			this->textBox3->Location = System::Drawing::Point(101, 234);
+			this->textBox3->Location = System::Drawing::Point(101, 239);
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->Size = System::Drawing::Size(100, 20);
 			this->textBox3->TabIndex = 5;
 			// 
 			// label3
 			// 
-			this->label3->Location = System::Drawing::Point(16, 146);
+			this->label3->Location = System::Drawing::Point(16, 151);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(70, 30);
 			this->label3->TabIndex = 4;
-			this->label3->Text = L"Presencia de coagulos:";
+			this->label3->Text = L"Presencia de coágulos:";
 			// 
 			// textBox2
 			// 
-			this->textBox2->Location = System::Drawing::Point(101, 97);
+			this->textBox2->Location = System::Drawing::Point(101, 102);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(100, 20);
 			this->textBox2->TabIndex = 3;
 			// 
 			// label2
 			// 
-			this->label2->Location = System::Drawing::Point(16, 100);
+			this->label2->Location = System::Drawing::Point(16, 105);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(50, 30);
 			this->label2->TabIndex = 2;
-			this->label2->Text = L"Cantidad extraida:";
+			this->label2->Text = L"Cantidad extraída:";
 			// 
 			// textBox1
 			// 
 			this->textBox1->Enabled = false;
-			this->textBox1->Location = System::Drawing::Point(101, 57);
+			this->textBox1->Location = System::Drawing::Point(101, 62);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(100, 20);
 			this->textBox1->TabIndex = 1;
 			// 
 			// label1
 			// 
-			this->label1->Location = System::Drawing::Point(16, 60);
+			this->label1->Location = System::Drawing::Point(16, 65);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(55, 13);
 			this->label1->TabIndex = 0;

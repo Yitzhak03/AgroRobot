@@ -63,6 +63,19 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::Windows::Forms::Label^ label1;
 	
+
+
+
+
+
+
+
+	private: System::Windows::Forms::GroupBox^ groupBox2;
+	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::ComboBox^ comboBox1;
+	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::Button^ button3;
+	private: System::Windows::Forms::Button^ button4;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column7;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
@@ -70,12 +83,6 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column8;
-	private: System::Windows::Forms::GroupBox^ groupBox2;
-	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::ComboBox^ comboBox1;
-	private: System::Windows::Forms::Button^ button2;
-	private: System::Windows::Forms::Button^ button3;
-	private: System::Windows::Forms::Button^ button4;
 
 
 
@@ -109,14 +116,8 @@ namespace AgroRobotView {
 		void InitializeComponent(void)
 		{
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->Column7 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column8 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
@@ -125,7 +126,13 @@ namespace AgroRobotView {
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
-			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->Column7 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column8 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
@@ -144,55 +151,6 @@ namespace AgroRobotView {
 			this->dataGridView1->Size = System::Drawing::Size(595, 183);
 			this->dataGridView1->TabIndex = 9;
 			// 
-			// Column7
-			// 
-			this->Column7->HeaderText = L"ID Diagnostico";
-			this->Column7->MinimumWidth = 6;
-			this->Column7->Name = L"Column7";
-			this->Column7->Width = 125;
-			// 
-			// Column1
-			// 
-			this->Column1->HeaderText = L"ID Animal";
-			this->Column1->MinimumWidth = 6;
-			this->Column1->Name = L"Column1";
-			this->Column1->Width = 125;
-			// 
-			// Column2
-			// 
-			this->Column2->HeaderText = L"Especie";
-			this->Column2->MinimumWidth = 6;
-			this->Column2->Name = L"Column2";
-			this->Column2->Width = 125;
-			// 
-			// Column3
-			// 
-			this->Column3->HeaderText = L"Parasitos presentes";
-			this->Column3->MinimumWidth = 6;
-			this->Column3->Name = L"Column3";
-			this->Column3->Width = 125;
-			// 
-			// Column4
-			// 
-			this->Column4->HeaderText = L"Contaminacion visible";
-			this->Column4->MinimumWidth = 6;
-			this->Column4->Name = L"Column4";
-			this->Column4->Width = 125;
-			// 
-			// Column5
-			// 
-			this->Column5->HeaderText = L"Estado de salud";
-			this->Column5->MinimumWidth = 6;
-			this->Column5->Name = L"Column5";
-			this->Column5->Width = 125;
-			// 
-			// Column8
-			// 
-			this->Column8->HeaderText = L"Observaciones";
-			this->Column8->MinimumWidth = 6;
-			this->Column8->Name = L"Column8";
-			this->Column8->Width = 125;
-			// 
 			// groupBox1
 			// 
 			this->groupBox1->Controls->Add(this->button4);
@@ -204,7 +162,17 @@ namespace AgroRobotView {
 			this->groupBox1->Size = System::Drawing::Size(303, 100);
 			this->groupBox1->TabIndex = 8;
 			this->groupBox1->TabStop = false;
-			this->groupBox1->Text = L"Criterio de Busqueda";
+			this->groupBox1->Text = L"Criterio de Búsqueda";
+			// 
+			// button4
+			// 
+			this->button4->Location = System::Drawing::Point(83, 71);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(137, 23);
+			this->button4->TabIndex = 30;
+			this->button4->Text = L"Limpiar";
+			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &frmMantDiagnostico::button4_Click);
 			// 
 			// button1
 			// 
@@ -242,7 +210,7 @@ namespace AgroRobotView {
 			this->groupBox2->Size = System::Drawing::Size(230, 100);
 			this->groupBox2->TabIndex = 10;
 			this->groupBox2->TabStop = false;
-			this->groupBox2->Text = L"Nuevo Diagnostico";
+			this->groupBox2->Text = L"Nuevo Diagnóstico";
 			// 
 			// label2
 			// 
@@ -281,15 +249,54 @@ namespace AgroRobotView {
 			this->button3->UseVisualStyleBackColor = true;
 			this->button3->Click += gcnew System::EventHandler(this, &frmMantDiagnostico::button3_Click);
 			// 
-			// button4
+			// Column7
 			// 
-			this->button4->Location = System::Drawing::Point(83, 71);
-			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(137, 23);
-			this->button4->TabIndex = 30;
-			this->button4->Text = L"Limpiar";
-			this->button4->UseVisualStyleBackColor = true;
-			this->button4->Click += gcnew System::EventHandler(this, &frmMantDiagnostico::button4_Click);
+			this->Column7->HeaderText = L"ID Diagnóstico";
+			this->Column7->MinimumWidth = 6;
+			this->Column7->Name = L"Column7";
+			this->Column7->Width = 125;
+			// 
+			// Column1
+			// 
+			this->Column1->HeaderText = L"ID Animal";
+			this->Column1->MinimumWidth = 6;
+			this->Column1->Name = L"Column1";
+			this->Column1->Width = 125;
+			// 
+			// Column2
+			// 
+			this->Column2->HeaderText = L"Especie";
+			this->Column2->MinimumWidth = 6;
+			this->Column2->Name = L"Column2";
+			this->Column2->Width = 125;
+			// 
+			// Column3
+			// 
+			this->Column3->HeaderText = L"Parásitos presentes";
+			this->Column3->MinimumWidth = 6;
+			this->Column3->Name = L"Column3";
+			this->Column3->Width = 125;
+			// 
+			// Column4
+			// 
+			this->Column4->HeaderText = L"Contaminación visible";
+			this->Column4->MinimumWidth = 6;
+			this->Column4->Name = L"Column4";
+			this->Column4->Width = 125;
+			// 
+			// Column5
+			// 
+			this->Column5->HeaderText = L"Estado de salud";
+			this->Column5->MinimumWidth = 6;
+			this->Column5->Name = L"Column5";
+			this->Column5->Width = 125;
+			// 
+			// Column8
+			// 
+			this->Column8->HeaderText = L"Observaciones";
+			this->Column8->MinimumWidth = 6;
+			this->Column8->Name = L"Column8";
+			this->Column8->Width = 125;
 			// 
 			// frmMantDiagnostico
 			// 
@@ -301,7 +308,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmMantDiagnostico";
-			this->Text = L"AgroRobot - Gestion de Diagnosticos";
+			this->Text = L"AgroRobot - Gestión de Diagnósticos";
 			this->Load += gcnew System::EventHandler(this, &frmMantDiagnostico::frmMantDiagnostico_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->groupBox1->ResumeLayout(false);
