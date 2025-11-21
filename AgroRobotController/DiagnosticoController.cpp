@@ -100,18 +100,32 @@ Diagnostico^ DiagnosticoController::generarDiagnosticoParaAnimal(
     String^ resultadoSangre = "No";
     String^ especie = "";
 
+    bool tieneHeces = false;
+    bool tieneSangre = false;
+
     for each (Muestra ^ m in muestras) {
         if (m->getAnimal() != nullptr) {
             especie = m->getAnimal()->Especie;
         }
 
-        if (m->getTipo()->Equals("Heces") && m->getParasitos()->Equals("Sí")) {
-            resultadoHeces = "Sí";
+        if (m->getTipo()->Equals("Heces")) {
+            tieneHeces = true;
+            if (m->getParasitos()->Equals("Sí")) {
+                resultadoHeces = "Sí";
+            }
         }
 
-        if (m->getTipo()->Equals("Sangre") && m->getContaminacion()->Equals("Sí")) {
-            resultadoSangre = "Sí";
+        if (m->getTipo()->Equals("Sangre")) {
+            tieneSangre = true;
+            if (m->getContaminacion()->Equals("Sí")) {
+                resultadoSangre = "Sí";
+            }
         }
+    }
+
+    // Validación: si falta alguna muestra, no generar diagnóstico
+    if (!tieneHeces || !tieneSangre) {
+        return nullptr;
     }
 
     String^ estadoSalud;

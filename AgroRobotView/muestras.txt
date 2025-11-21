@@ -10,3 +10,4 @@
 10;Sangre;28/10/2025;;;;;5ml;Sí;No;Rojo Claro;4;Oveja
 11;Sangre;29/10/2025;;;;;4ml;Sí;Sí;Rojo Oscuro;5;Cabra
 12;Sangre;30/10/2025;;;;;6ml;No;No;Rojo;6;Pato
+
