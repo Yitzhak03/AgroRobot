@@ -1,3 +1,5 @@
+#pragma once
+
 namespace AgroRobotView {
 
 	using namespace System;
@@ -6,10 +8,13 @@ namespace AgroRobotView {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-	// Agregar referencias a los espacios de nombres necesarios
+	using namespace System::IO; // Necesario para exportar archivos
+	using namespace System::Collections::Generic;
+
+	// Referencias a tus proyectos
 	using namespace AgroRobotController;
 	using namespace AgroRobotModel;
-	using namespace System::Collections::Generic;
+
 	/// <summary>
 	/// Resumen de frmReporteInsumosXalmacen
 	/// </summary>
@@ -18,9 +23,6 @@ namespace AgroRobotView {
 		frmReporteInsumosXalmacen(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: agregar código de constructor aquí
-			//
 		}
 
 	protected:
@@ -33,10 +35,11 @@ namespace AgroRobotView {
 				delete components;
 			}
 		}
+
 	private: System::Windows::Forms::DataVisualization::Charting::Chart^ chart1;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
-	protected:
+	private: System::Windows::Forms::Button^ btnExportar; // <--- BOTÓN NUEVO
 
 	private:
 		/// <summary>
@@ -57,11 +60,14 @@ namespace AgroRobotView {
 			this->chart1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->btnExportar = (gcnew System::Windows::Forms::Button()); // Inicializar botón
+
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
 			this->SuspendLayout();
-			// 
+
+			// 
 			// chart1
-			// 
+			// 
 			this->chart1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(210)), static_cast<System::Int32>(static_cast<System::Byte>(246)),
 				static_cast<System::Int32>(static_cast<System::Byte>(224)));
 			chartArea2->AxisX->Title = L"Nombre del almacén";
@@ -89,9 +95,10 @@ namespace AgroRobotView {
 			this->chart1->Size = System::Drawing::Size(679, 393);
 			this->chart1->TabIndex = 0;
 			this->chart1->Text = L"chart1";
-			// 
+
+			// 
 			// label1
-			// 
+			// 
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -102,9 +109,10 @@ namespace AgroRobotView {
 			this->label1->Size = System::Drawing::Size(223, 30);
 			this->label1->TabIndex = 1;
 			this->label1->Text = L"Insumos por almacén";
-			// 
+
+			// 
 			// label2
-			// 
+			// 
 			this->label2->AutoSize = true;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -115,14 +123,33 @@ namespace AgroRobotView {
 			this->label2->Size = System::Drawing::Size(258, 13);
 			this->label2->TabIndex = 2;
 			this->label2->Text = L"Conteo de insumos registrados en cada almacén";
+
 			// 
+			// btnExportar (CONFIGURACIÓN VISUAL)
+			// 
+			this->btnExportar->Location = System::Drawing::Point(532, 37); // Arriba a la derecha
+			this->btnExportar->Name = L"btnExportar";
+			this->btnExportar->Size = System::Drawing::Size(180, 35);
+			this->btnExportar->TabIndex = 3;
+			this->btnExportar->Text = L"Exportar Reporte";
+			this->btnExportar->UseVisualStyleBackColor = true;
+			this->btnExportar->BackColor = System::Drawing::Color::FromArgb(118, 222, 146); // Verde suave
+			this->btnExportar->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnExportar->FlatAppearance->BorderSize = 0;
+			this->btnExportar->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
+			this->btnExportar->ForeColor = System::Drawing::Color::FromArgb(22, 53, 45);
+			this->btnExportar->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btnExportar->Click += gcnew System::EventHandler(this, &frmReporteInsumosXalmacen::btnExportar_Click);
+
+			// 
 			// frmReporteInsumosXalmacen
-			// 
+			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(246)), static_cast<System::Int32>(static_cast<System::Byte>(251)),
 				static_cast<System::Int32>(static_cast<System::Byte>(248)));
 			this->ClientSize = System::Drawing::Size(755, 529);
+			this->Controls->Add(this->btnExportar); // Agregar botón
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->chart1);
@@ -137,14 +164,74 @@ namespace AgroRobotView {
 
 		}
 #pragma endregion
+
 	private: System::Void frmReporteInsumosXalmacen_Load(System::Object^ sender, System::EventArgs^ e)
 	{
-		// Lógica para cargar los datos en el gráfico
+		// Cargar datos en el gráfico
 		ReporteInsumosXalmacenController^ reporteCtrl = gcnew ReporteInsumosXalmacenController();
 		List<ReporteInsumosXalmacen^>^ reporte = reporteCtrl->generarReporte();
+
 		this->chart1->Series["Series1"]->Points->Clear();
 		for each (ReporteInsumosXalmacen ^ item in reporte) {
 			this->chart1->Series["Series1"]->Points->AddXY(item->Nombre, item->CantInsumos);
+		}
+	}
+
+		   // --- LÓGICA DE EXPORTACIÓN ---
+	private: System::Void btnExportar_Click(System::Object^ sender, System::EventArgs^ e) {
+		try {
+			// 1. Obtener datos (usando el mismo controller)
+			ReporteInsumosXalmacenController^ reporteCtrl = gcnew ReporteInsumosXalmacenController();
+			List<ReporteInsumosXalmacen^>^ datos = reporteCtrl->generarReporte();
+
+			if (datos->Count == 0) {
+				MessageBox::Show("No hay datos para exportar.", "Aviso", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+				return;
+			}
+
+			// 2. Diálogo de guardado
+			SaveFileDialog^ saveDialog = gcnew SaveFileDialog();
+			saveDialog->Filter = "Reporte de Texto|*.txt";
+			saveDialog->Title = "Guardar Reporte de Insumos";
+			saveDialog->FileName = "Reporte_Insumos_Almacen_" + DateTime::Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+
+			if (saveDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+
+				// 3. Escribir archivo
+				StreamWriter^ writer = gcnew StreamWriter(saveDialog->FileName, false, System::Text::Encoding::UTF8);
+				try {
+					writer->WriteLine("============================================================");
+					writer->WriteLine("              REPORTE DE INSUMOS POR ALMACÉN                ");
+					writer->WriteLine("============================================================");
+					writer->WriteLine("Fecha de Generación: " + DateTime::Now.ToString("dd/MM/yyyy HH:mm:ss"));
+					writer->WriteLine("Total Almacenes:     " + datos->Count);
+					writer->WriteLine("------------------------------------------------------------");
+					writer->WriteLine("");
+
+					// Cabecera alineada
+					writer->WriteLine(String::Format("{0,-30} | {1,15}", "ALMACÉN", "CANTIDAD INSUMOS"));
+					writer->WriteLine("------------------------------------------------------------");
+
+					// Filas
+					int totalInsumos = 0;
+					for each (ReporteInsumosXalmacen ^ item in datos) {
+						writer->WriteLine(String::Format("{0,-30} | {1,15}", item->Nombre, item->CantInsumos));
+						totalInsumos += item->CantInsumos;
+					}
+
+					writer->WriteLine("------------------------------------------------------------");
+					writer->WriteLine(String::Format("{0,-30} | {1,15}", "TOTAL GENERAL", totalInsumos));
+					writer->WriteLine("============================================================");
+				}
+				finally {
+					writer->Close();
+				}
+
+				MessageBox::Show("Reporte exportado correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			}
+		}
+		catch (Exception^ ex) {
+			MessageBox::Show("Error al exportar: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 	}
 	};
