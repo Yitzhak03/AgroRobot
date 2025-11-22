@@ -53,7 +53,7 @@ namespace AgroRobotView {
 			System::Windows::Forms::ToolStripProfessionalRenderer::OnRenderMenuItemBackground(e);
 		}
 	};
-
+	
 	/// <summary>
 	/// Resumen de frmMenu
 	/// </summary>
@@ -325,8 +325,8 @@ namespace AgroRobotView {
 			// reportesToolStripMenuItem
 			// 
 			this->reportesToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6) {
-				this->gestiónDeOrdenesDeAlimentaciónToolStripMenuItem,
-					this->diagnósticosMédicosToolStripMenuItem, this->planAlimenticioToolStripMenuItem, this->gestiónDeReportesToolStripMenuItem,
+				this->diagnósticosMédicosToolStripMenuItem,
+					this->planAlimenticioToolStripMenuItem, this->gestiónDeReportesToolStripMenuItem, this->gestiónDeOrdenesDeAlimentaciónToolStripMenuItem,
 					this->insumosPorAlmacénToolStripMenuItem, this->alimentaciónPorEspecieToolStripMenuItem
 			});
 			this->reportesToolStripMenuItem->ForeColor = System::Drawing::Color::Ivory;
@@ -397,9 +397,9 @@ namespace AgroRobotView {
 			this->volverToolStripMenuItem->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"volverToolStripMenuItem.Image")));
 			this->volverToolStripMenuItem->Name = L"volverToolStripMenuItem";
 			this->volverToolStripMenuItem->Padding = System::Windows::Forms::Padding(15, 0, 15, 0);
-			this->volverToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::volverToolStripMenuItem_Click);
 			this->volverToolStripMenuItem->Size = System::Drawing::Size(135, 55);
 			this->volverToolStripMenuItem->Text = L"Volver";
+			this->volverToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::volverToolStripMenuItem_Click);
 			// 
 			// frmMenu
 			// 
