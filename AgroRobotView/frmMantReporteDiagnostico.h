@@ -660,23 +660,32 @@ namespace AgroRobotView {
 
 	private:
 		void ConfigurarControlesIniciales() {
-			// Configurar años (últimos 5 años)
-			int añoActual = DateTime::Now.Year;
-			for (int i = añoActual; i >= añoActual - 5; i--) {
+			// 1. Configurar Años: Aseguramos que 2025 esté en la lista
+			comboAnio->Items->Clear();
+			int anioBase = 2025;
+			// Agregamos desde 2022 hasta 2026 para tener margen
+			for (int i = 2022; i <= 2026; i++) {
 				comboAnio->Items->Add(i.ToString());
 			}
-			comboAnio->SelectedIndex = 0;
 
-			// Configurar meses
+			// SELECCIONAR 2025 POR DEFECTO
+			comboAnio->SelectedItem = "2025";
+
+			// 2. Configurar Meses
+			comboMes->Items->Clear();
 			array<String^>^ meses = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
 									"Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
 			comboMes->Items->AddRange(meses);
-			comboMes->SelectedIndex = DateTime::Now.Month - 1;
 
-			// Configurar fechas por defecto
-			dateTimePicker1->Value = DateTime::Today.AddMonths(-1);
-			dateTimePicker2->Value = DateTime::Today;
+			// SELECCIONAR OCTUBRE (Índice 9 porque empieza en 0)
+			comboMes->SelectedIndex = 9;
 
+			// 3. Configurar Rango de Fechas (1 al 31 de Octubre de 2025)
+			dateTimePicker1->Value = DateTime(2025, 10, 1);
+			dateTimePicker2->Value = DateTime(2025, 10, 31);
+
+			// 4. Activar Mensual por defecto
+			radioMensual->Checked = true;
 			HabilitarControlesMensual();
 		}
 
@@ -767,45 +776,58 @@ namespace AgroRobotView {
 			if (reporteActual == nullptr) return;
 
 			try {
-				// Limpiar gráficos anteriores
+				// --- 1. ACTUALIZAR BARRAS (Tipos) ---
 				chartTipoAnalisis->Series->Clear();
-				chartEstadoSalud->Series->Clear();
-
-				// Configurar gráfico de tipos de análisis
 				if (reporteActual->PorTipoAnalisis->Count > 0) {
 					Series^ seriesTipos = gcnew Series("TiposAnalisis");
 					seriesTipos->ChartType = SeriesChartType::Column;
 					seriesTipos->IsValueShownAsLabel = true;
-					seriesTipos->LabelFormat = "{0}"; // Mostrar valores enteros
+
+					// Negrita para las barras también
+					seriesTipos->Font = gcnew System::Drawing::Font("Arial", 10, FontStyle::Bold);
+					seriesTipos->LabelForeColor = System::Drawing::Color::Black;
+
 					chartTipoAnalisis->Series->Add(seriesTipos);
 
 					for each (auto stat in reporteActual->PorTipoAnalisis) {
 						DataPoint^ point = gcnew DataPoint();
 						point->SetValueXY(stat->Categoria, stat->Cantidad);
-						point->Label = stat->Cantidad.ToString();
+						point->ToolTip = stat->Categoria + ": " + stat->Cantidad + " muestras";
 						chartTipoAnalisis->Series["TiposAnalisis"]->Points->Add(point);
 					}
 				}
 
-				// Configurar gráfico de estados de salud
+				// --- 2. ACTUALIZAR PASTEL (Opción Etiquetas Fuera) ---
+				chartEstadoSalud->Series->Clear();
 				if (reporteActual->PorEstadoSalud->Count > 0) {
 					Series^ seriesEstados = gcnew Series("EstadosSalud");
 					seriesEstados->ChartType = SeriesChartType::Pie;
-					seriesEstados->IsValueShownAsLabel = true;
-					seriesEstados->LabelFormat = "#PERCENT{P1}"; // Mostrar porcentajes
+
+					// Configuramos etiqueta externa
+					seriesEstados->Label = "#AXISLABEL\n#PERCENT";
+					seriesEstados->Font = gcnew System::Drawing::Font("Arial", 8, FontStyle::Bold);
+					seriesEstados->Legend = "LeyendaSalud";
+
+					// PROPIEDAD MÁGICA: Sacar etiquetas fuera
+					seriesEstados["PieLabelStyle"] = "Outside";
+					seriesEstados["PieLineColor"] = "Black"; // Línea conectora
+
 					chartEstadoSalud->Series->Add(seriesEstados);
 
 					for each (auto stat in reporteActual->PorEstadoSalud) {
 						DataPoint^ point = gcnew DataPoint();
 						point->SetValueXY(stat->Categoria, stat->Cantidad);
-						point->LegendText = stat->Categoria;
+						point->AxisLabel = stat->Categoria;
+
+						if (stat->Categoria->ToLower() == "crítico" || stat->Categoria->ToLower() == "critico") {
+							point->SetCustomProperty("Exploded", "true");
+						}
 						chartEstadoSalud->Series["EstadosSalud"]->Points->Add(point);
 					}
 				}
 			}
 			catch (Exception^ ex) {
-				MessageBox::Show("Error al actualizar gráficos: " + ex->Message, "Error",
-					MessageBoxButtons::OK, MessageBoxIcon::Error);
+				MessageBox::Show("Error visual: " + ex->Message);
 			}
 		}
 
@@ -951,37 +973,61 @@ namespace AgroRobotView {
 
 		private:
 			void ConfigurarCharts() {
-				// --- GRÁFICO 1: TIPOS DE ANÁLISIS ---
+				// --- GRÁFICO 1: TIPOS DE ANÁLISIS (Barras) ---
 				if (chartTipoAnalisis != nullptr) {
-					// IMPORTANTE: Limpiar lo que haya hecho el diseñador para evitar duplicados
 					chartTipoAnalisis->ChartAreas->Clear();
 					chartTipoAnalisis->Series->Clear();
+					chartTipoAnalisis->Legends->Clear();
 					chartTipoAnalisis->Titles->Clear();
 
-					// Crear el área limpia
+					// Área de gráfico con fondo limpio
 					ChartArea^ areaTipos = gcnew ChartArea("AreaTipos");
+					areaTipos->BackColor = System::Drawing::Color::WhiteSmoke; // Fondo gris suave
+
+					// Ejes más legibles
 					areaTipos->AxisX->Title = "Tipo de Análisis";
-					areaTipos->AxisY->Title = "Cantidad";
-					areaTipos->AxisX->Interval = 1; // Forzar que se vean todas las etiquetas
+					areaTipos->AxisX->TitleFont = gcnew System::Drawing::Font("Arial", 10, FontStyle::Bold);
+					areaTipos->AxisX->LabelStyle->Font = gcnew System::Drawing::Font("Arial", 8);
+					areaTipos->AxisX->Interval = 1; // Mostrar todas las etiquetas
+
+					// Rejilla suave para ver mejor las alturas
+					areaTipos->AxisY->MajorGrid->LineColor = System::Drawing::Color::LightGray;
+					areaTipos->AxisX->MajorGrid->Enabled = false; // Sin rejilla vertical
+
 					chartTipoAnalisis->ChartAreas->Add(areaTipos);
 
-					// Título
-					chartTipoAnalisis->Titles->Add("Distribución por Tipo de Análisis");
+					// Título elegante
+					Title^ titulo = gcnew Title("Distribución por Tipo de Análisis");
+					titulo->Font = gcnew System::Drawing::Font("Arial", 12, FontStyle::Bold);
+					chartTipoAnalisis->Titles->Add(titulo);
+
+					// Paleta de colores bonita (Verde mar)
+					chartTipoAnalisis->Palette = ChartColorPalette::SeaGreen;
 				}
 
-				// --- GRÁFICO 2: ESTADO DE SALUD ---
+				// --- GRÁFICO 2: ESTADO DE SALUD (Pastel/Pie) ---
 				if (chartEstadoSalud != nullptr) {
-					// IMPORTANTE: Limpiar todo primero
 					chartEstadoSalud->ChartAreas->Clear();
 					chartEstadoSalud->Series->Clear();
+					chartEstadoSalud->Legends->Clear();
 					chartEstadoSalud->Titles->Clear();
 
-					// Crear área limpia
 					ChartArea^ areaSalud = gcnew ChartArea("AreaSalud");
+					areaSalud->BackColor = System::Drawing::Color::Transparent;
 					chartEstadoSalud->ChartAreas->Add(areaSalud);
 
-					// Título
-					chartEstadoSalud->Titles->Add("Estado de Salud General");
+					// Agregar Leyenda (Cuadrito con colores a la derecha)
+					Legend^ leyenda = gcnew Legend("LeyendaSalud");
+					leyenda->Docking = Docking::Right; // Poner a la derecha
+					leyenda->Alignment = System::Drawing::StringAlignment::Center;
+					chartEstadoSalud->Legends->Add(leyenda);
+
+					Title^ titulo = gcnew Title("Estado de Salud General");
+					titulo->Font = gcnew System::Drawing::Font("Arial", 12, FontStyle::Bold);
+					chartEstadoSalud->Titles->Add(titulo);
+
+					// Paleta de colores vivos (Pastel)
+					chartEstadoSalud->Palette = ChartColorPalette::BrightPastel;
 				}
 			}
 			

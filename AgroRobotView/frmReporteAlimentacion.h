@@ -131,23 +131,39 @@ namespace AgroRobotView {
 				contador->Add(especie, veces);
 		}
 
-		// Configurar el gráfico
+		// --- CONFIGURACIÓN DEL GRÁFICO ---
+
 		chart1->Series["Series1"]->Points->Clear();
 		chart1->Series["Series1"]->ChartType = SeriesChartType::Pie;
-		chart1->Series["Series1"]->IsValueShownAsLabel = true;
-		chart1->ChartAreas[0]->Area3DStyle->Enable3D = true;
+		chart1->ChartAreas[0]->Area3DStyle->Enable3D = false; // Sin 3D
+
+		// 1. AUMENTAR TAMAÑO DE LETRA (Cambia 10 por 11 o 12 si quieres más grande)
+		chart1->Series["Series1"]->Font = gcnew System::Drawing::Font("Arial", 10, FontStyle::Bold);
+
+		// Etiqueta: Solo el nombre del animal
+		chart1->Series["Series1"]->Label = "#VALX";
+
+		// 2. SEPARACIÓN Y ESTILO (CALLOUT)
+		chart1->Series["Series1"]->SetCustomProperty("PieLabelStyle", "Outside");
+		chart1->Series["Series1"]->SetCustomProperty("PieLineColor", "Black");
+
+		// TRUCO PARA SEPARAR: Permitir que las etiquetas usen el espacio blanco del borde
+		// Esto hace que las líneas se estiren más hacia afuera para no amontonarse
+		chart1->Series["Series1"]->SmartLabelStyle->Enabled = true;
+		chart1->Series["Series1"]->SmartLabelStyle->AllowOutsidePlotArea = System::Windows::Forms::DataVisualization::Charting::LabelOutsidePlotAreaStyle::Yes;
+
+		// Leyenda: Solo porcentaje
+		chart1->Series["Series1"]->LegendText = "#PERCENT";
+		chart1->Series["Series1"]->Legend = "Legend1";
 
 		// Añadir datos al gráfico
 		for each (KeyValuePair<String^, int> kvp in contador) {
-			/*ÁDEMÁS SE LE DA COLOR VERDE AL PAVO*/
 			int idx = chart1->Series["Series1"]->Points->AddXY(kvp.Key, kvp.Value);
+
 			if (kvp.Key == "Pavo") {
 				chart1->Series["Series1"]->Points[idx]->Color = Color::LightGreen;
 			}
 		}
-
-		// Mostrar porcentajes
-		chart1->Series["Series1"]->Label = "#VALX: #PERCENT";
 	}
 	};
 }
