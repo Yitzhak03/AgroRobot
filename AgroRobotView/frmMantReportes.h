@@ -1006,33 +1006,35 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 				reporteProxy->setContenido(animalReal->UltimaDieta);
 
 				// 4. ABRIR LA PANTALLA DE EDICIÓN
-				// Pasamos un controlador dummy o null porque guardaremos manualmente al volver
-				frmEditarReporte^ formEdicion = gcnew frmEditarReporte(this->reporteController, reporteProxy);
-				formEdicion->ShowDialog();
+					// CAMBIO CLAVE: Pasamos 'nullptr' en vez de 'this->reporteController'
+					// Esto activa el "Modo Memoria" que acabamos de programar en el Paso 1.
+				frmEditarReporte^ formEdicion = gcnew frmEditarReporte(nullptr, reporteProxy);
 
-				// 5. GUARDAR CAMBIOS (AL VOLVER DE LA EDICIÓN)
-				// Recuperamos los datos modificados del objeto reporteProxy
-				String^ nuevoEstadoVisual = reporteProxy->getEstadoSaludImpacto();
-				String^ nuevasObservaciones = reporteProxy->getContenido(); // Esto tiene el plan de acción nuevo
+				// Mostramos como diálogo y esperamos respuesta
+				if (formEdicion->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 
-				// Traducimos de vuelta al idioma de Animales ("Crítico" -> "Bajo peso")
-				String^ nuevoEstadoAnimal = TraducirVisualAEstadoAnimal(nuevoEstadoVisual);
+					// 5. GUARDAR CAMBIOS (AL VOLVER)
+					// ... (Tu lógica de traducción y guardado en gestorNutricional sigue aquí) ...
+					String^ nuevoEstadoVisual = reporteProxy->getEstadoSaludImpacto();
+					String^ nuevasObservaciones = reporteProxy->getContenido();
 
-				// GUARDAR EN EL ARCHIVO DE TU COMPAÑERO
-				// Preservamos los datos que no cambian (Peso, Edad)
-				this->gestorNutricional->modificarAnimal(
-					animalReal->IdAnimal,
-					animalReal->Especie,
-					animalReal->Peso,
-					animalReal->Edad,
-					nuevoEstadoAnimal,   // <--- DATO ACTUALIZADO
-					nuevasObservaciones  // <--- DATO ACTUALIZADO (Guardamos el plan en UltimaDieta)
-				);
+					String^ nuevoEstadoAnimal = TraducirVisualAEstadoAnimal(nuevoEstadoVisual);
 
-				MessageBox::Show("Evaluación actualizada y guardada en el expediente del animal.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+					this->gestorNutricional->modificarAnimal(
+						animalReal->IdAnimal,
+						animalReal->Especie,
+						animalReal->Peso,
+						animalReal->Edad,
+						nuevoEstadoAnimal,
+						nuevasObservaciones
+					);
 
-				// 6. REFRESCAR LA LISTA
-				button1_Click(sender, e);
+					// IMPORTANTE: Actualizar también la última fecha para que se vea el cambio hoy
+					// Opcional: this->gestorNutricional->modificarUltimaAlimentacion(animalReal->IdAnimal, DateTime::Now.ToString("yyyy-MM-dd"));
+
+					MessageBox::Show("Ficha del animal actualizada correctamente.", "Éxito");
+					button1_Click(sender, e); // Refrescar la tabla
+				}
 			}
 			else {
 				MessageBox::Show("No se encontró el animal en la base de datos.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);

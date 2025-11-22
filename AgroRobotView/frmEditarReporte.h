@@ -684,47 +684,40 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 
 	try {
 		// 1. VALIDAR DATOS
-		if (!ValidarDatos()) {
-			return;
-		}
+		if (!ValidarDatos()) return;
 
-		// 2. CONFIRMAR GUARDADO - CAMBIAR AQUÍ
+		// 2. CONFIRMAR
 		System::Windows::Forms::DialogResult resultado = MessageBox::Show(
-			"¿Está seguro que desea guardar los cambios en la evaluación?",
-			"Confirmar guardado",
-			MessageBoxButtons::YesNo,
-			MessageBoxIcon::Question
-		);
+			"¿Desea guardar los cambios?", "Confirmar",
+			MessageBoxButtons::YesNo, MessageBoxIcon::Question);
 
-		if (resultado == System::Windows::Forms::DialogResult::No) {
-			return;
-		}
+		if (resultado == System::Windows::Forms::DialogResult::No) return;
 
-		// 3. ACTUALIZAR EL OBJETO REPORTE
+		// 3. ACTUALIZAR EL OBJETO EN MEMORIA
 		ActualizarObjetoReporte();
 
-		// 4. GUARDAR EN LA BASE DE DATOS
-		bool exito = reporteController->ModificarReporte(objReporte);
+		// 4. DECISIÓN CRÍTICA: ¿GUARDAR EN DB O SOLO EN MEMORIA?
+		// Si el controlador es NULL, significa que la pantalla padre (Animales) 
+		// se encargará del guardado. Nosotros solo devolvemos OK.
+		if (this->reporteController == nullptr) {
+			this->DialogResult = System::Windows::Forms::DialogResult::OK;
+			this->Close();
+			return;
+		}
 
+		// --- Lógica original para Reportes normales ---
+		bool exito = reporteController->ModificarReporte(objReporte);
 		if (exito) {
-			MessageBox::Show("Los cambios se guardaron correctamente.",
-				"Éxito",
-				MessageBoxButtons::OK,
-				MessageBoxIcon::Information);
+			MessageBox::Show("Cambios guardados.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			this->DialogResult = System::Windows::Forms::DialogResult::OK; // Importante para avisar al padre
 			this->Close();
 		}
 		else {
-			MessageBox::Show("Error al guardar los cambios en la base de datos.",
-				"Error",
-				MessageBoxButtons::OK,
-				MessageBoxIcon::Error);
+			MessageBox::Show("Error al guardar en BD Reportes.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 	}
 	catch (Exception^ ex) {
-		MessageBox::Show("Error al guardar la evaluación: " + ex->Message, // CAMBIAR AQUÍ
-			"Error",
-			MessageBoxButtons::OK,
-			MessageBoxIcon::Error);
+		MessageBox::Show("Error: " + ex->Message);
 	}
 	
 }
