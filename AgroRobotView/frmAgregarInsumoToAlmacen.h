@@ -138,7 +138,19 @@ namespace AgroRobotView {
 		void InitializeComponent(void)
 		{
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->Column7 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column9 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column10 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->dataGridView2 = (gcnew System::Windows::Forms::DataGridView());
+			this->Column8 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column11 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column12 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
@@ -149,18 +161,6 @@ namespace AgroRobotView {
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->Column8 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column11 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column12 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column7 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column9 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column10 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
 			this->SuspendLayout();
@@ -169,6 +169,7 @@ namespace AgroRobotView {
 			// 
 			this->dataGridView1->AllowUserToAddRows = false;
 			this->dataGridView1->AllowUserToDeleteRows = false;
+			this->dataGridView1->BackgroundColor = System::Drawing::Color::Honeydew;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(6)
 			{
@@ -183,10 +184,52 @@ namespace AgroRobotView {
 			this->dataGridView1->Size = System::Drawing::Size(335, 328);
 			this->dataGridView1->TabIndex = 0;
 			// 
+			// Column7
+			// 
+			this->Column7->HeaderText = L"Id";
+			this->Column7->Name = L"Column7";
+			this->Column7->ReadOnly = true;
+			this->Column7->Width = 30;
+			// 
+			// Column1
+			// 
+			this->Column1->HeaderText = L"Nombre";
+			this->Column1->Name = L"Column1";
+			this->Column1->ReadOnly = true;
+			// 
+			// Column2
+			// 
+			this->Column2->HeaderText = L"Stock";
+			this->Column2->Name = L"Column2";
+			this->Column2->ReadOnly = true;
+			this->Column2->Width = 50;
+			// 
+			// Column9
+			// 
+			this->Column9->HeaderText = L"Min";
+			this->Column9->Name = L"Column9";
+			this->Column9->ReadOnly = true;
+			this->Column9->Width = 50;
+			// 
+			// Column10
+			// 
+			this->Column10->HeaderText = L"Max";
+			this->Column10->Name = L"Column10";
+			this->Column10->ReadOnly = true;
+			this->Column10->Width = 50;
+			// 
+			// Column3
+			// 
+			this->Column3->HeaderText = L"Unidad";
+			this->Column3->Name = L"Column3";
+			this->Column3->ReadOnly = true;
+			this->Column3->Width = 50;
+			// 
 			// dataGridView2
 			// 
 			this->dataGridView2->AllowUserToAddRows = false;
 			this->dataGridView2->AllowUserToDeleteRows = false;
+			this->dataGridView2->BackgroundColor = System::Drawing::Color::Honeydew;
 			this->dataGridView2->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView2->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(6)
 			{
@@ -200,6 +243,47 @@ namespace AgroRobotView {
 			this->dataGridView2->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
 			this->dataGridView2->Size = System::Drawing::Size(334, 328);
 			this->dataGridView2->TabIndex = 1;
+			// 
+			// Column8
+			// 
+			this->Column8->HeaderText = L"Id";
+			this->Column8->Name = L"Column8";
+			this->Column8->ReadOnly = true;
+			this->Column8->Width = 30;
+			// 
+			// Column4
+			// 
+			this->Column4->HeaderText = L"Nombre";
+			this->Column4->Name = L"Column4";
+			this->Column4->ReadOnly = true;
+			// 
+			// Column5
+			// 
+			this->Column5->HeaderText = L"Stock";
+			this->Column5->Name = L"Column5";
+			this->Column5->ReadOnly = true;
+			this->Column5->Width = 50;
+			// 
+			// Column11
+			// 
+			this->Column11->HeaderText = L"Min";
+			this->Column11->Name = L"Column11";
+			this->Column11->ReadOnly = true;
+			this->Column11->Width = 50;
+			// 
+			// Column12
+			// 
+			this->Column12->HeaderText = L"Max";
+			this->Column12->Name = L"Column12";
+			this->Column12->ReadOnly = true;
+			this->Column12->Width = 50;
+			// 
+			// Column6
+			// 
+			this->Column6->HeaderText = L"Unidad";
+			this->Column6->Name = L"Column6";
+			this->Column6->ReadOnly = true;
+			this->Column6->Width = 50;
 			// 
 			// button1
 			// 
@@ -293,92 +377,11 @@ namespace AgroRobotView {
 			this->label3->TabIndex = 8;
 			this->label3->Text = L"Cantidad a transferir:";
 			// 
-			// Column8
-			// 
-			this->Column8->HeaderText = L"Id";
-			this->Column8->Name = L"Column8";
-			this->Column8->ReadOnly = true;
-			this->Column8->Width = 30;
-			// 
-			// Column4
-			// 
-			this->Column4->HeaderText = L"Nombre";
-			this->Column4->Name = L"Column4";
-			this->Column4->ReadOnly = true;
-			// 
-			// Column5
-			// 
-			this->Column5->HeaderText = L"Stock";
-			this->Column5->Name = L"Column5";
-			this->Column5->ReadOnly = true;
-			this->Column5->Width = 50;
-			// 
-			// Column11
-			// 
-			this->Column11->HeaderText = L"Min";
-			this->Column11->Name = L"Column11";
-			this->Column11->ReadOnly = true;
-			this->Column11->Width = 50;
-			// 
-			// Column12
-			// 
-			this->Column12->HeaderText = L"Max";
-			this->Column12->Name = L"Column12";
-			this->Column12->ReadOnly = true;
-			this->Column12->Width = 50;
-			// 
-			// Column6
-			// 
-			this->Column6->HeaderText = L"Unidad";
-			this->Column6->Name = L"Column6";
-			this->Column6->ReadOnly = true;
-			this->Column6->Width = 50;
-			// 
-			// Column7
-			// 
-			this->Column7->HeaderText = L"Id";
-			this->Column7->Name = L"Column7";
-			this->Column7->ReadOnly = true;
-			this->Column7->Width = 30;
-			// 
-			// Column1
-			// 
-			this->Column1->HeaderText = L"Nombre";
-			this->Column1->Name = L"Column1";
-			this->Column1->ReadOnly = true;
-			// 
-			// Column2
-			// 
-			this->Column2->HeaderText = L"Stock";
-			this->Column2->Name = L"Column2";
-			this->Column2->ReadOnly = true;
-			this->Column2->Width = 50;
-			// 
-			// Column9
-			// 
-			this->Column9->HeaderText = L"Min";
-			this->Column9->Name = L"Column9";
-			this->Column9->ReadOnly = true;
-			this->Column9->Width = 50;
-			// 
-			// Column10
-			// 
-			this->Column10->HeaderText = L"Max";
-			this->Column10->Name = L"Column10";
-			this->Column10->ReadOnly = true;
-			this->Column10->Width = 50;
-			// 
-			// Column3
-			// 
-			this->Column3->HeaderText = L"Unidad";
-			this->Column3->Name = L"Column3";
-			this->Column3->ReadOnly = true;
-			this->Column3->Width = 50;
-			// 
 			// frmAgregarInsumoToAlmacen
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::Color::DarkSeaGreen;
 			this->ClientSize = System::Drawing::Size(916, 485);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->button4);
@@ -393,7 +396,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->dataGridView2);
 			this->Controls->Add(this->dataGridView1);
 			this->Name = L"frmAgregarInsumoToAlmacen";
-			this->Text = L"frmAgregarInsumoToAlmacen";
+			this->Text = L"Transferir Insumos";
 			this->Load += gcnew System::EventHandler(this, &frmAgregarInsumoToAlmacen::frmAgregarInsumoToAlmacen_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->EndInit();
