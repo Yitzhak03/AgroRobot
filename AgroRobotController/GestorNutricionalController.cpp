@@ -28,15 +28,31 @@ GestorNutricionalController::GestorNutricionalController() {
 		if (String::IsNullOrEmpty(linea)) continue;
 
 		array<String^>^ camposAnimales = linea->Split(separadores->ToCharArray());
+
+		// --- VALIDACIÓN DE SEGURIDAD: Si la línea está incompleta, la saltamos ---
+		if (camposAnimales->Length < 5) continue;
+
 		/*campos obligatorios*/
 		int idAnimal = Convert::ToInt32(camposAnimales[0]);
 		String^ especie = camposAnimales[1];
 		double peso = Convert::ToDouble(camposAnimales[2]);
 		double edad = Convert::ToDouble(camposAnimales[3]);
 		String^ estadoSalud = camposAnimales[4];
-		String^ ultimaDieta = (camposAnimales->Length > 5) ? camposAnimales[5] : "";
-		String^ ultimaVezAlimentado = camposAnimales[6];
-		int vecesAlimentado = Convert::ToInt32(camposAnimales[7]);
+
+		// --- CORRECCIÓN: LECTURA SEGURA DE CAMPOS OPCIONALES ---
+		// Usamos (condición) ? valor_si_verdadero : valor_si_falso
+
+		String^ ultimaDieta = (camposAnimales->Length > 5) ? camposAnimales[5] : "Ninguna";
+
+		String^ ultimaVezAlimentado = (camposAnimales->Length > 6) ? camposAnimales[6] : "No registrado";
+
+		int vecesAlimentado = 0;
+		if (camposAnimales->Length > 7) {
+			try {
+				vecesAlimentado = Convert::ToInt32(camposAnimales[7]);
+			}
+			catch (Exception^) { vecesAlimentado = 0; }
+		}
 
 		/*para que no haya error*/
 		List<Muestra^>^ muestras = gcnew List<Muestra^>();
