@@ -1,40 +1,34 @@
 #pragma once
 
 namespace AgroRobotController {
-    using namespace System;
-    using namespace System::Collections::Generic;
-    using namespace System::IO;
+	using namespace System;
+	using namespace System::Collections::Generic;
+	using namespace System::IO;
 
-    // Forward declaration de las estructuras de ReporteDataController
-    ref class ReporteDiagnosticoResult;
-    ref class EstadisticaReporte;
+	// Declaraciones adelantadas para que no se queje el compilador
+	ref class ReporteDiagnosticoResult;
+	ref class EstadisticaReporte;
+	ref class ReporteAlimentacionResult;
 
-    ref class ReporteAlimentacionResult;
-    ref class EstadisticaAlimentacionResult;
-    ref class DietaResumenResult;
+	public ref class PdfExportServiceController {
+	public:
+		PdfExportServiceController(); // Constructor
 
-    public ref class PdfExportServiceController {
-    public:
-        PdfExportServiceController();
+		// Métodos Públicos (Sin static para usarlos con tu instancia actual)
+		bool ExportarReporteDiagnosticoPDF(ReporteDiagnosticoResult^ reporte, String^ filePath);
+		bool ExportarReporteDiagnosticoExcel(ReporteDiagnosticoResult^ reporte, String^ filePath);
 
-        static bool ExportarReporteDiagnosticoPDF(ReporteDiagnosticoResult^ reporte, String^ filePath);
-        static bool ExportarReporteDiagnosticoExcel(ReporteDiagnosticoResult^ reporte, String^ filePath);
-        static bool ExportarReporteAlimentacionPDF(ReporteAlimentacionResult^ reporte, String^ filePath);
-        static bool ExportarReporteAlimentacionExcel(ReporteAlimentacionResult^ reporte, String^ filePath);
+		// Métodos vacíos para que no de error si los llamas desde otro lado
+		bool ExportarReporteAlimentacionPDF(ReporteAlimentacionResult^ reporte, String^ filePath);
+		bool ExportarReporteAlimentacionExcel(ReporteAlimentacionResult^ reporte, String^ filePath);
 
+	private:
+		// Métodos auxiliares
+		void EscribirCabeceraPDF(StreamWriter^ writer, ReporteDiagnosticoResult^ reporte);
+		void EscribirEstadisticasPDF(StreamWriter^ writer, ReporteDiagnosticoResult^ reporte);
+		void EscribirDetalleMuestrasPDF(StreamWriter^ writer, ReporteDiagnosticoResult^ reporte);
 
-    private:
-        static void EscribirCabeceraPDF(StreamWriter^ writer, ReporteDiagnosticoResult^ reporte);
-        static void EscribirEstadisticasPDF(StreamWriter^ writer, ReporteDiagnosticoResult^ reporte);
-        static void EscribirDetalleMuestrasPDF(StreamWriter^ writer, ReporteDiagnosticoResult^ reporte);
-
-        static void EscribirCabeceraExcel(StreamWriter^ writer, ReporteDiagnosticoResult^ reporte);
-        static void EscribirEstadisticasExcel(StreamWriter^ writer, ReporteDiagnosticoResult^ reporte);
-        static void EscribirCabeceraAlimentacionPDF(StreamWriter^ writer, ReporteAlimentacionResult^ reporte);
-        static void EscribirEstadisticasAlimentacionPDF(StreamWriter^ writer, ReporteAlimentacionResult^ reporte);
-        static void EscribirDetalleDietasPDF(StreamWriter^ writer, ReporteAlimentacionResult^ reporte);
-
-        static void EscribirCabeceraAlimentacionExcel(StreamWriter^ writer, ReporteAlimentacionResult^ reporte);
-        static void EscribirEstadisticasAlimentacionExcel(StreamWriter^ writer, ReporteAlimentacionResult^ reporte);
-    };
+		void EscribirCabeceraExcel(StreamWriter^ writer, ReporteDiagnosticoResult^ reporte);
+		void EscribirEstadisticasExcel(StreamWriter^ writer, ReporteDiagnosticoResult^ reporte);
+	};
 }

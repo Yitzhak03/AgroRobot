@@ -16,6 +16,9 @@ namespace AgroRobotView {
 	/// <summary>
 	/// Resumen de frmMain
 	/// </summary>
+	
+	
+	
 	public ref class frmMain : public System::Windows::Forms::Form {
 	public:
 		frmMain(void)
@@ -229,6 +232,7 @@ namespace AgroRobotView {
 			this->Name = L"frmMain";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Login";
+			this->Load += gcnew System::EventHandler(this, &frmMain::frmMain_Load);
 			this->panelCard->ResumeLayout(false);
 			this->panelCard->PerformLayout();
 			this->ResumeLayout(false);
@@ -280,5 +284,7 @@ namespace AgroRobotView {
 			txtPassword->UseSystemPasswordChar = true; // Ocultar contraseña
 		}
 	}
-	};
+	private: System::Void frmMain_Load(System::Object^ sender, System::EventArgs^ e) {
+	}
+};
 }

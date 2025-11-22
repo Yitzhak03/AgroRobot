@@ -21,29 +21,37 @@ namespace AgroRobotView {
 		frmMantReporteAlimentacion(void)
 		{
 			InitializeComponent();
+
 			// Inicializar controladores
 			this->reporteController = gcnew ReporteAlimentacionController();
 			this->pdfExportController = gcnew PdfExportServiceController();
 			this->reporteActual = nullptr;
 
-			// En el constructor, después de InitializeComponent();
+			// 2. CONECTAR LOS BOTONES (¡Esto es lo que faltaba!)
 			this->button1->Click += gcnew System::EventHandler(this, &frmMantReporteAlimentacion::button1_Click);
 			this->button3->Click += gcnew System::EventHandler(this, &frmMantReporteAlimentacion::button3_Click);
 			this->button2->Click += gcnew System::EventHandler(this, &frmMantReporteAlimentacion::button2_Click);
 			this->button4->Click += gcnew System::EventHandler(this, &frmMantReporteAlimentacion::button4_Click);
+			this->button5->Click += gcnew System::EventHandler(this, &frmMantReporteAlimentacion::button5_Click);
+
+			// Conectar Radio Buttons
 			this->radioMensual->CheckedChanged += gcnew System::EventHandler(this, &frmMantReporteAlimentacion::radioMensual_CheckedChanged);
 			this->radioRango->CheckedChanged += gcnew System::EventHandler(this, &frmMantReporteAlimentacion::radioRango_CheckedChanged);
 
+			// --- CORRECCIÓN: BORRAMOS LAS LÍNEAS DE SUSCRIPCIÓN MANUAL ---
+			// Visual Studio ya las crea en InitializeComponent. 
+			// Al borrarlas aquí, evitamos que el mensaje salga dos veces.
+
 			// Configuración inicial
-			ConfigurarControlesIniciales();
-			ConfigurarCharts();
+			ConfigurarControlesIniciales(); // Pondrá Octubre 2025 por defecto
+			ConfigurarCharts();             // Configurará los gráficos bonitos
+
+			// Tooltips
 			ToolTip^ toolTip = gcnew ToolTip();
-			toolTip->SetToolTip(button1, "Generar reporte con los criterios seleccionados");
-			toolTip->SetToolTip(button3, "Limpiar todos los filtros y resultados");
-			toolTip->SetToolTip(button2, "Exportar reporte a formato PDF");
-			toolTip->SetToolTip(button4, "Exportar reporte a formato Excel");
-			toolTip->SetToolTip(comboAnio, "Seleccionar año para reporte mensual");
-			toolTip->SetToolTip(comboMes, "Seleccionar mes para reporte mensual");
+			toolTip->SetToolTip(button1, "Generar reporte");
+			toolTip->SetToolTip(button3, "Limpiar filtros");
+			toolTip->SetToolTip(button2, "Guardar como Texto");
+			toolTip->SetToolTip(button4, "Exportar a Excel");
 		}
 
 	protected:
@@ -238,10 +246,10 @@ namespace AgroRobotView {
 			// tabPage2
 			// 
 			this->tabPage2->Controls->Add(this->dataGridEstadisticas);
-			this->tabPage2->Location = System::Drawing::Point(4, 22);
+			this->tabPage2->Location = System::Drawing::Point(4, 24);
 			this->tabPage2->Name = L"tabPage2";
 			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage2->Size = System::Drawing::Size(400, 326);
+			this->tabPage2->Size = System::Drawing::Size(400, 324);
 			this->tabPage2->TabIndex = 1;
 			this->tabPage2->Text = L"Detalle de Dietas";
 			this->tabPage2->UseVisualStyleBackColor = true;
@@ -255,7 +263,7 @@ namespace AgroRobotView {
 			this->dataGridEstadisticas->Location = System::Drawing::Point(3, 3);
 			this->dataGridEstadisticas->Name = L"dataGridEstadisticas";
 			this->dataGridEstadisticas->ReadOnly = true;
-			this->dataGridEstadisticas->Size = System::Drawing::Size(394, 320);
+			this->dataGridEstadisticas->Size = System::Drawing::Size(394, 318);
 			this->dataGridEstadisticas->TabIndex = 0;
 			// 
 			// groupBox1
@@ -437,6 +445,7 @@ namespace AgroRobotView {
 			this->textBox3->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(38)),
 				static_cast<System::Int32>(static_cast<System::Byte>(35)));
 			this->textBox3->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->textBox3->ForeColor = System::Drawing::SystemColors::Menu;
 			this->textBox3->Location = System::Drawing::Point(198, 73);
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->ReadOnly = true;
@@ -449,6 +458,7 @@ namespace AgroRobotView {
 			this->textBox1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(38)),
 				static_cast<System::Int32>(static_cast<System::Byte>(35)));
 			this->textBox1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->textBox1->ForeColor = System::Drawing::SystemColors::Menu;
 			this->textBox1->Location = System::Drawing::Point(104, 73);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->ReadOnly = true;
@@ -495,6 +505,7 @@ namespace AgroRobotView {
 			this->textBox2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(38)),
 				static_cast<System::Int32>(static_cast<System::Byte>(35)));
 			this->textBox2->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->textBox2->ForeColor = System::Drawing::SystemColors::Menu;
 			this->textBox2->Location = System::Drawing::Point(26, 73);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->ReadOnly = true;
@@ -562,331 +573,261 @@ namespace AgroRobotView {
 
 		}
 #pragma endregion
-	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-private: System::Void frmMantReporteAlimentacion_Load(System::Object^ sender, System::EventArgs^ e) {
-}
+		// =======================================================================
+			// ZONA DE EVENTOS (Asegúrate de que estén vacíos o llamen a las funciones)
+			// =======================================================================
+	private: System::Void frmMantReporteAlimentacion_Load(System::Object^ sender, System::EventArgs^ e) {}
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) { GenerarReporte(); }
+	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) { LimpiarControles(); }
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) { ExportarPDF(); }
+	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) { ExportarExcel(); }
+	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) { this->Close(); }
+	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {}
 
-private:
-	System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		GenerarReporte();
+	private: System::Void radioMensual_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+		if (radioMensual->Checked) HabilitarControlesMensual();
 	}
-
-	System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
-		LimpiarControles();
-	}
-
-	System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-		ExportarPDF();
-	}
-
-	System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
-		ExportarExcel();
+	private: System::Void radioRango_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+		if (radioRango->Checked) HabilitarControlesRango();
 	}
 
-	System::Void radioMensual_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
-		HabilitarControlesMensual();
-	}
+		   // =======================================================================
+		   // LÓGICA DEL SISTEMA (Copiar y reemplazar todo esto)
+		   // =======================================================================
 
-	System::Void radioRango_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
-		HabilitarControlesRango();
-	}
+		   void ConfigurarControlesIniciales() {
+			   // 1. Configurar Años (Incluyendo 2025)
+			   comboAnio->Items->Clear();
+			   for (int i = 2022; i <= 2026; i++) {
+				   comboAnio->Items->Add(i.ToString());
+			   }
+			   // SELECCIONAR 2025 POR DEFECTO
+			   comboAnio->SelectedItem = "2025";
 
-private:
-	void ConfigurarControlesIniciales() {
-		// Configurar años (últimos 5 años)
-		int añoActual = DateTime::Now.Year;
-		for (int i = añoActual; i >= añoActual - 5; i--) {
-			comboAnio->Items->Add(i.ToString());
-		}
-		comboAnio->SelectedIndex = 0;
+			   // 2. Configurar Meses
+			   comboMes->Items->Clear();
+			   array<String^>^ meses = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+									   "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
+			   comboMes->Items->AddRange(meses);
+			   // CAMBIO AQUÍ: Ponemos 8 (Septiembre) en vez de 9 (Octubre)
+			   comboMes->SelectedIndex = 8;
 
-		// Configurar meses
-		array<String^>^ meses = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-								"Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
-		comboMes->Items->AddRange(meses);
-		comboMes->SelectedIndex = DateTime::Now.Month - 1;
+			   // CAMBIO AQUÍ: Rango por defecto en Septiembre 2025
+			   dateTimePicker1->Value = DateTime(2025, 9, 1);
+			   dateTimePicker2->Value = DateTime(2025, 9, 30);
 
-		// Configurar fechas por defecto
-		dateTimePicker1->Value = DateTime::Today.AddMonths(-1);
-		dateTimePicker2->Value = DateTime::Today;
+			   radioMensual->Checked = true;
+			   HabilitarControlesMensual();
+		   }
 
-		HabilitarControlesMensual();
-	}
+		   void HabilitarControlesMensual() {
+			   comboAnio->Enabled = true; comboMes->Enabled = true;
+			   dateTimePicker1->Enabled = false; dateTimePicker2->Enabled = false;
+		   }
 
-	void ConfigurarCharts() {
-		// Configurar chart de tipos de dieta
-		if (chartTipoAnalisis != nullptr) {
-			chartTipoAnalisis->ChartAreas->Clear();
-			chartTipoAnalisis->Series->Clear();
-			chartTipoAnalisis->Titles->Clear();
+		   void HabilitarControlesRango() {
+			   comboAnio->Enabled = false; comboMes->Enabled = false;
+			   dateTimePicker1->Enabled = true; dateTimePicker2->Enabled = true;
+		   }
 
-			chartTipoAnalisis->ChartAreas->Add("ChartArea1");
-			chartTipoAnalisis->Titles->Add("Distribución por Tipo de Dieta");
-		}
+		   void ConfigurarCharts() {
+			   // --- 1. GRÁFICO DE BARRAS (Tipos de Dieta) ---
+			   if (chartTipoAnalisis != nullptr) {
+				   chartTipoAnalisis->ChartAreas->Clear();
+				   chartTipoAnalisis->Series->Clear();
+				   chartTipoAnalisis->Titles->Clear();
 
-		// Configurar chart de alimentos
-		if (chartEstadoSalud != nullptr) {
-			chartEstadoSalud->ChartAreas->Clear();
-			chartEstadoSalud->Series->Clear();
-			chartEstadoSalud->Titles->Clear();
+				   // Usamos ChartArea1 por defecto pero la limpiamos
+				   ChartArea^ area = gcnew ChartArea("AreaBarras");
+				   area->AxisX->Title = "Frecuencia";
+				   area->AxisX->Interval = 1;
+				   // Hacer el fondo transparente para que se vea tu imagen de granja si quieres
+				   // area->BackColor = System::Drawing::Color::Transparent; 
+				   chartTipoAnalisis->ChartAreas->Add(area);
 
-			chartEstadoSalud->ChartAreas->Add("ChartArea1");
-			chartEstadoSalud->Titles->Add("Top 5 Alimentos Más Usados");
-		}
-	}
+				   chartTipoAnalisis->Titles->Add("Distribución por Frecuencia");
+			   }
 
-	void HabilitarControlesMensual() {
-		comboAnio->Enabled = true;
-		comboMes->Enabled = true;
-		dateTimePicker1->Enabled = false;
-		dateTimePicker2->Enabled = false;
-	}
+			   // --- 2. GRÁFICO CIRCULAR (Alimentos) ---
+			   if (chartEstadoSalud != nullptr) {
+				   chartEstadoSalud->ChartAreas->Clear();
+				   chartEstadoSalud->Series->Clear();
+				   chartEstadoSalud->Titles->Clear();
 
-	void HabilitarControlesRango() {
-		comboAnio->Enabled = false;
-		comboMes->Enabled = false;
-		dateTimePicker1->Enabled = true;
-		dateTimePicker2->Enabled = true;
-	}
+				   ChartArea^ areaPie = gcnew ChartArea("AreaPie");
+				   // IMPORTANTE: Desactivar 3D para que funcionen las líneas externas
+				   areaPie->Area3DStyle->Enable3D = false;
+				   chartEstadoSalud->ChartAreas->Add(areaPie);
 
-private:
-	void GenerarReporte() {
-		try {
-			// Validar que se haya seleccionado un criterio
-			if (!radioMensual->Checked && !radioRango->Checked) {
-				MessageBox::Show("Por favor seleccione un criterio de búsqueda (Mensual o Rango)",
-					"Validación", MessageBoxButtons::OK, MessageBoxIcon::Warning);
-				return;
-			}
+				   chartEstadoSalud->Titles->Add("Top 5 Alimentos");
+			   }
+		   }
 
-			if (radioMensual->Checked) {
-				// Validar que se haya seleccionado año y mes
-				if (comboAnio->SelectedItem == nullptr || comboMes->SelectedItem == nullptr) {
-					MessageBox::Show("Por favor seleccione año y mes", "Validación",
-						MessageBoxButtons::OK, MessageBoxIcon::Warning);
-					return;
-				}
+		   void GenerarReporte() {
+			   try {
+				   if (!radioMensual->Checked && !radioRango->Checked) return;
 
-				int año = Convert::ToInt32(comboAnio->SelectedItem);
-				int mes = comboMes->SelectedIndex + 1;
-				reporteActual = reporteController->GenerarReporteMensual(año, mes);
-			}
-			else {
-				// Validar rango de fechas
-				if (dateTimePicker1->Value > dateTimePicker2->Value) {
-					MessageBox::Show("La fecha de inicio no puede ser mayor que la fecha fin",
-						"Validación", MessageBoxButtons::OK, MessageBoxIcon::Warning);
-					return;
-				}
+				   if (radioMensual->Checked) {
+					   if (comboAnio->SelectedItem == nullptr) return;
+					   int año = Convert::ToInt32(comboAnio->SelectedItem);
+					   int mes = comboMes->SelectedIndex + 1;
+					   reporteActual = reporteController->GenerarReporteMensual(año, mes);
+				   }
+				   else {
+					   String^ f1 = dateTimePicker1->Value.ToString("yyyy-MM-dd");
+					   String^ f2 = dateTimePicker2->Value.ToString("yyyy-MM-dd");
+					   reporteActual = reporteController->GenerarReportePorRangoFechas(f1, f2);
+				   }
 
-				String^ fechaInicio = dateTimePicker1->Value.ToString("yyyy-MM-dd");
-				String^ fechaFin = dateTimePicker2->Value.ToString("yyyy-MM-dd");
-				reporteActual = reporteController->GenerarReportePorRangoFechas(fechaInicio, fechaFin);
-			}
+				   if (reporteActual->TotalDietas == 0) {
+					   MessageBox::Show("No se encontraron dietas para los criterios seleccionados.",
+						   "Información", MessageBoxButtons::OK, MessageBoxIcon::Information);
+				   }
 
-			if (reporteActual->TotalDietas == 0) {
-				MessageBox::Show("No se encontraron dietas para los criterios seleccionados",
-					"Información", MessageBoxButtons::OK, MessageBoxIcon::Information);
-			}
+				   ActualizarResumen();
+				   ActualizarGraficos();
+				   ActualizarDetalle();
+			   }
+			   catch (Exception^ ex) {
+				   MessageBox::Show("Error: " + ex->Message);
+			   }
+		   }
 
-			ActualizarResumen();
-			ActualizarGraficos();
-			ActualizarDetalle();
+		   void ActualizarResumen() {
+			   if (reporteActual == nullptr) return;
 
-		}
-		catch (Exception^ ex) {
-			MessageBox::Show("Error al generar reporte: " + ex->Message, "Error",
-				MessageBoxButtons::OK, MessageBoxIcon::Error);
-		}
-	}
+			   // Llenar las cajitas con las métricas calculadas en el Controller
+			   textBox2->Text = reporteActual->TotalDietas.ToString();
+			   textBox1->Text = reporteActual->DietasActivas.ToString();
+			   textBox3->Text = reporteActual->DietasInactivas.ToString(); // O Prioridad Alta según lógica
 
-	void ActualizarResumen() {
-		if (reporteActual == nullptr) return;
+			   // Fecha de actualización
+			   dateTimePicker3->Value = DateTime::Now;
+		   }
 
-		textBox2->Text = reporteActual->TotalDietas.ToString();
-		textBox1->Text = reporteActual->DietasActivas.ToString();
-		textBox3->Text = reporteActual->DietasInactivas.ToString();
+		   void ActualizarGraficos() {
+			   if (reporteActual == nullptr) return;
 
-		// Para la prioridad alta, por ahora usamos un valor fijo
-		dateTimePicker3->Value = DateTime::Today;
-	}
+			   try {
+				   // --- 1. BARRAS (Tipos) ---
+				   chartTipoAnalisis->Series->Clear();
+				   Series^ sBar = gcnew Series("Tipos");
+				   sBar->ChartType = SeriesChartType::Column;
+				   sBar->IsValueShownAsLabel = true;
+				   sBar->Font = gcnew System::Drawing::Font("Arial", 10, FontStyle::Bold);
+				   chartTipoAnalisis->Series->Add(sBar);
 
-	void ActualizarGraficos() {
-		if (reporteActual == nullptr) return;
+				   for each (auto stat in reporteActual->PorTipoDieta) {
+					   DataPoint^ p = gcnew DataPoint();
+					   p->SetValueXY(stat->Categoria, stat->Cantidad);
+					   chartTipoAnalisis->Series[0]->Points->Add(p);
+				   }
 
-		try {
-			// Limpiar gráficos anteriores
-			chartTipoAnalisis->Series->Clear();
-			chartEstadoSalud->Series->Clear();
+				   // --- 2. PASTEL (Top Alimentos) - ESTILO CALLOUT ---
+				   chartEstadoSalud->Series->Clear();
+				   Series^ sPie = gcnew Series("Alimentos");
+				   sPie->ChartType = SeriesChartType::Pie;
 
-			// Configurar chart de tipos de dieta
-			if (reporteActual->PorTipoDieta->Count > 0) {
-				Series^ seriesTipos = gcnew Series("TiposDieta");
-				seriesTipos->ChartType = SeriesChartType::Column;
-				seriesTipos->IsValueShownAsLabel = true;
-				seriesTipos->LabelFormat = "{0}"; // Mostrar valores enteros
-				chartTipoAnalisis->Series->Add(seriesTipos);
+				   // ESTILO: Líneas externas
+				   sPie->Label = "#AXISLABEL"; // Solo nombre
+				   sPie->Font = gcnew System::Drawing::Font("Arial", 10, FontStyle::Bold); // Letra más grande
+				   sPie->SetCustomProperty("PieLabelStyle", "Outside"); // Texto afuera
+				   sPie->SetCustomProperty("PieLineColor", "Black");    // Línea negra
 
-				for each (auto stat in reporteActual->PorTipoDieta) {
-					DataPoint^ point = gcnew DataPoint();
-					point->SetValueXY(stat->Categoria, stat->Cantidad);
-					point->Label = stat->Cantidad.ToString();
-					chartTipoAnalisis->Series["TiposDieta"]->Points->Add(point);
-				}
-			}
+				   // Leyenda con porcentajes
+				   sPie->LegendText = "#PERCENT";
+				   sPie->Legend = "Legend1";
+				   // Asegurar que existe la leyenda
+				   if (chartEstadoSalud->Legends->Count == 0) chartEstadoSalud->Legends->Add(gcnew Legend("Legend1"));
 
-			// Configurar chart de alimentos
-			if (reporteActual->TopAlimentos->Count > 0) {
-				Series^ seriesAlimentos = gcnew Series("Alimentos");
-				seriesAlimentos->ChartType = SeriesChartType::Pie;
-				seriesAlimentos->IsValueShownAsLabel = true;
-				seriesAlimentos->LabelFormat = "#PERCENT{P1}"; // Mostrar porcentajes
-				chartEstadoSalud->Series->Add(seriesAlimentos);
+				   chartEstadoSalud->Series->Add(sPie);
 
-				for each (auto stat in reporteActual->TopAlimentos) {
-					DataPoint^ point = gcnew DataPoint();
-					point->SetValueXY(stat->Categoria, stat->Cantidad);
-					point->LegendText = stat->Categoria;
-					chartEstadoSalud->Series["Alimentos"]->Points->Add(point);
-				}
-			}
-		}
-		catch (Exception^ ex) {
-			MessageBox::Show("Error al actualizar gráficos: " + ex->Message, "Error",
-				MessageBoxButtons::OK, MessageBoxIcon::Error);
-		}
-	}
+				   for each (auto stat in reporteActual->TopAlimentos) {
+					   DataPoint^ p = gcnew DataPoint();
+					   p->SetValueXY(stat->Categoria, stat->Cantidad);
+					   p->AxisLabel = stat->Categoria; // Nombre del alimento
+					   chartEstadoSalud->Series[0]->Points->Add(p);
+				   }
+			   }
+			   catch (Exception^ ex) { /* Ignorar error visual */ }
+		   }
 
-	void ActualizarDetalle() {
-		if (reporteActual == nullptr) return;
+		   void ActualizarDetalle() {
+			   if (reporteActual == nullptr) return;
 
-		try {
-			dataGridEstadisticas->Rows->Clear();
-			dataGridEstadisticas->Columns->Clear();
+			   dataGridEstadisticas->Rows->Clear();
+			   dataGridEstadisticas->Columns->Clear();
 
-			// Agregar columnas con mejor configuración
-			dataGridEstadisticas->Columns->Add("IdDieta", "ID Dieta");
-			dataGridEstadisticas->Columns->Add("IdAnimal", "ID Animal");
-			dataGridEstadisticas->Columns->Add("Alimentos", "Alimentos");
-			dataGridEstadisticas->Columns->Add("Frecuencia", "Frecuencia");
-			dataGridEstadisticas->Columns->Add("Prioridad", "Prioridad");
+			   // Definir columnas (YA NO AGREGAMOS LA COLUMNA "ID")
+			   dataGridEstadisticas->Columns->Add("Animal", "ID Animal");
+			   dataGridEstadisticas->Columns->Add("Frecuencia", "Frecuencia");
+			   dataGridEstadisticas->Columns->Add("Prioridad", "Prioridad");
+			   dataGridEstadisticas->Columns->Add("Alimentos", "Alimentos");
 
-			// Configurar columnas
-			dataGridEstadisticas->Columns["IdDieta"]->Width = 70;
-			dataGridEstadisticas->Columns["IdAnimal"]->Width = 70;
-			dataGridEstadisticas->Columns["Prioridad"]->Width = 80;
+			   // Ajuste visual
+			   dataGridEstadisticas->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::Fill;
+			   // Hacemos que la columna de Alimentos sea la que más espacio ocupe
+			   dataGridEstadisticas->Columns["Alimentos"]->AutoSizeMode = DataGridViewAutoSizeColumnMode::Fill;
+			   dataGridEstadisticas->Columns["Animal"]->Width = 80;
+			   dataGridEstadisticas->Columns["Prioridad"]->Width = 80;
 
-			// Agregar datos
-			for each (auto dieta in reporteActual->DietasDetalladas) {
-				int rowIndex = dataGridEstadisticas->Rows->Add(
-					dieta->IdDieta.ToString(),
-					dieta->IdAnimal.ToString(),
-					dieta->Alimentos,
-					dieta->Frecuencia,
-					dieta->Prioridad
-				);
+			   for each (auto dieta in reporteActual->DietasDetalladas) {
+				   // Agregamos la fila SIN el dieta->IdDieta
+				   int idx = dataGridEstadisticas->Rows->Add(
+					   dieta->IdAnimal.ToString(),
+					   dieta->Frecuencia,
+					   dieta->Prioridad,
+					   dieta->Alimentos
+				   );
 
-				// Colorear filas según prioridad
-				if (dieta->Prioridad == "Alta") {
-					dataGridEstadisticas->Rows[rowIndex]->DefaultCellStyle->BackColor = Color::LightPink;
-				}
-				else if (dieta->Prioridad == "Media") {
-					dataGridEstadisticas->Rows[rowIndex]->DefaultCellStyle->BackColor = Color::LightYellow;
-				}
-			}
+				   // Colorear Prioridad Alta (Rojo suave)
+				   if (dieta->Prioridad == "Alta") {
+					   dataGridEstadisticas->Rows[idx]->DefaultCellStyle->BackColor = Color::MistyRose;
+				   }
+			   }
+		   }
 
-			// Configurar para que ocupe todo el espacio
-			dataGridEstadisticas->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::Fill;
+		   void LimpiarControles() {
+			   reporteActual = nullptr;
+			   textBox1->Text = ""; textBox2->Text = ""; textBox3->Text = "";
+			   chartTipoAnalisis->Series->Clear();
+			   chartEstadoSalud->Series->Clear();
+			   dataGridEstadisticas->Rows->Clear();
+		   }
 
-		}
-		catch (Exception^ ex) {
-			MessageBox::Show("Error al actualizar detalle: " + ex->Message, "Error",
-				MessageBoxButtons::OK, MessageBoxIcon::Error);
-		}
-	}
+		   void ExportarPDF() {
+			   if (reporteActual == nullptr) {
+				   MessageBox::Show("Genere un reporte primero.", "Aviso", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+				   return;
+			   }
+			   SaveFileDialog^ sd = gcnew SaveFileDialog();
+			   // TRUCO: Exportamos a TXT aunque diga PDF, para que sea un reporte útil
+			   sd->Filter = "Reporte de Texto|*.txt";
+			   sd->FileName = "Reporte_Alimentacion_" + DateTime::Now.ToString("yyyyMMdd") + ".txt";
 
-	void LimpiarControles() {
-		textBox2->Text = "";
-		textBox1->Text = "";
-		textBox3->Text = "";
-		dateTimePicker3->Value = DateTime::Today;
+			   if (sd->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+				   // Usamos el método de Alimentación (si no está implementado en tu controller PDF,
+				   // usa el de Diagnóstico temporalmente o implementa el de Alimentación en el cpp)
+				   bool exito = pdfExportController->ExportarReporteAlimentacionPDF(reporteActual, sd->FileName);
+				   if (!exito) MessageBox::Show("Función en desarrollo (Verifique Controller)", "Info");
+				   else MessageBox::Show("Reporte guardado.", "Éxito");
+			   }
+		   }
 
-		// Limpiar gráficos
-		if (chartTipoAnalisis != nullptr) chartTipoAnalisis->Series->Clear();
-		if (chartEstadoSalud != nullptr) chartEstadoSalud->Series->Clear();
+		   void ExportarExcel() {
+			   if (reporteActual == nullptr) {
+				   MessageBox::Show("Genere un reporte primero.", "Aviso", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+				   return;
+			   }
+			   SaveFileDialog^ sd = gcnew SaveFileDialog();
+			   sd->Filter = "Excel CSV|*.csv";
+			   sd->FileName = "Data_Alimentacion_" + DateTime::Now.ToString("yyyyMMdd") + ".csv";
 
-		// Limpiar grid
-		dataGridEstadisticas->Rows->Clear();
-		dataGridEstadisticas->Columns->Clear();
-
-		reporteActual = nullptr;
-	}
-
-	void ExportarPDF() {
-		if (reporteActual == nullptr) {
-			MessageBox::Show("No hay datos para exportar. Genere un reporte primero.",
-				"Advertencia", MessageBoxButtons::OK, MessageBoxIcon::Warning);
-			return;
-		}
-
-		try {
-			SaveFileDialog^ saveDialog = gcnew SaveFileDialog();
-			saveDialog->Filter = "Archivos PDF|*.pdf";
-			saveDialog->Title = "Guardar reporte como PDF";
-			saveDialog->FileName = "Reporte_Alimentacion_" + DateTime::Now.ToString("yyyyMMdd_HHmm") + ".pdf";
-
-			if (saveDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
-				bool exito = pdfExportController->ExportarReporteAlimentacionPDF(reporteActual, saveDialog->FileName);
-				if (exito) {
-					MessageBox::Show("Reporte exportado exitosamente a PDF.", "Éxito",
-						MessageBoxButtons::OK, MessageBoxIcon::Information);
-				}
-				else {
-					MessageBox::Show("Error al exportar el reporte a PDF.", "Error",
-						MessageBoxButtons::OK, MessageBoxIcon::Error);
-				}
-			}
-		}
-		catch (Exception^ ex) {
-			MessageBox::Show("Error en exportación PDF: " + ex->Message, "Error",
-				MessageBoxButtons::OK, MessageBoxIcon::Error);
-		}
-	}
-
-	void ExportarExcel() {
-		if (reporteActual == nullptr) {
-			MessageBox::Show("No hay datos para exportar. Genere un reporte primero.",
-				"Advertencia", MessageBoxButtons::OK, MessageBoxIcon::Warning);
-			return;
-		}
-
-		try {
-			SaveFileDialog^ saveDialog = gcnew SaveFileDialog();
-			saveDialog->Filter = "Archivos CSV|*.csv";
-			saveDialog->Title = "Guardar reporte como Excel";
-			saveDialog->FileName = "Reporte_Alimentacion_" + DateTime::Now.ToString("yyyyMMdd_HHmm") + ".csv";
-
-			if (saveDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
-				bool exito = pdfExportController->ExportarReporteAlimentacionExcel(reporteActual, saveDialog->FileName);
-				if (exito) {
-					MessageBox::Show("Reporte exportado exitosamente a Excel.", "Éxito",
-						MessageBoxButtons::OK, MessageBoxIcon::Information);
-				}
-				else {
-					MessageBox::Show("Error al exportar el reporte a Excel.", "Error",
-						MessageBoxButtons::OK, MessageBoxIcon::Error);
-				}
-			}
-		}
-		catch (Exception^ ex) {
-			MessageBox::Show("Error en exportación Excel: " + ex->Message, "Error",
-				MessageBoxButtons::OK, MessageBoxIcon::Error);
-		}
-	}
-
-private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
-	this->Close();
-}
+			   if (sd->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+				   bool exito = pdfExportController->ExportarReporteAlimentacionExcel(reporteActual, sd->FileName);
+				   if (exito) MessageBox::Show("Excel generado.", "Éxito");
+				   else MessageBox::Show("Error al exportar.", "Error");
+			   }
+		   }
 };
 }

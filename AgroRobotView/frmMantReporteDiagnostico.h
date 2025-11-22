@@ -24,7 +24,7 @@ namespace AgroRobotView {
 			this->reporteController = gcnew ReporteDiagnosticoController();
 			this->pdfExportController = gcnew PdfExportServiceController();
 			this->reporteActual = nullptr;
-
+			/*
 			// Configurar event handlers como en frmMantReporteAlimentacion
 			//this->button1->Click += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::button1_Click);
 			this->button3->Click += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::button3_Click);
@@ -33,6 +33,7 @@ namespace AgroRobotView {
 			this->button5->Click += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::button5_Click);
 			this->radioMensual->CheckedChanged += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::radioMensual_CheckedChanged);
 			this->radioRango->CheckedChanged += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::radioRango_CheckedChanged);
+			*/
 
 			ConfigurarControlesIniciales();
 			ConfigurarCharts();
@@ -776,14 +777,12 @@ namespace AgroRobotView {
 			if (reporteActual == nullptr) return;
 
 			try {
-				// --- 1. ACTUALIZAR BARRAS (Tipos) ---
+				// --- 1. ACTUALIZAR BARRAS (Tipos) - IGUAL ---
 				chartTipoAnalisis->Series->Clear();
 				if (reporteActual->PorTipoAnalisis->Count > 0) {
 					Series^ seriesTipos = gcnew Series("TiposAnalisis");
 					seriesTipos->ChartType = SeriesChartType::Column;
 					seriesTipos->IsValueShownAsLabel = true;
-
-					// Negrita para las barras también
 					seriesTipos->Font = gcnew System::Drawing::Font("Arial", 10, FontStyle::Bold);
 					seriesTipos->LabelForeColor = System::Drawing::Color::Black;
 
@@ -797,31 +796,44 @@ namespace AgroRobotView {
 					}
 				}
 
-				// --- 2. ACTUALIZAR PASTEL (Opción Etiquetas Fuera) ---
+				// --- 2. ACTUALIZAR PASTEL (Estado de Salud) - CORREGIDO ---
 				chartEstadoSalud->Series->Clear();
+
+				// IMPORTANTE: Asegurar que NO sea 3D para que salgan las líneas
+				if (chartEstadoSalud->ChartAreas->Count > 0)
+					chartEstadoSalud->ChartAreas[0]->Area3DStyle->Enable3D = false;
+
 				if (reporteActual->PorEstadoSalud->Count > 0) {
 					Series^ seriesEstados = gcnew Series("EstadosSalud");
 					seriesEstados->ChartType = SeriesChartType::Pie;
 
-					// Configuramos etiqueta externa
-					seriesEstados->Label = "#AXISLABEL\n#PERCENT";
-					seriesEstados->Font = gcnew System::Drawing::Font("Arial", 8, FontStyle::Bold);
-					seriesEstados->Legend = "LeyendaSalud";
+					// 1. CONTENIDO: Solo el nombre
+					seriesEstados->Label = "#AXISLABEL";
 
-					// PROPIEDAD MÁGICA: Sacar etiquetas fuera
-					seriesEstados["PieLabelStyle"] = "Outside";
-					seriesEstados["PieLineColor"] = "Black"; // Línea conectora
+					// 2. TAMAÑO: Letra un poco más grande (11)
+					seriesEstados->Font = gcnew System::Drawing::Font("Arial", 11, FontStyle::Bold);
+
+					// 3. ESTILO: Sacar etiquetas afuera con línea negra
+					seriesEstados->SetCustomProperty("PieLabelStyle", "Outside");
+					seriesEstados->SetCustomProperty("PieLineColor", "Black");
+
+					// 4. LEYENDA: Mantenemos el detalle
+					seriesEstados->LegendText = "#AXISLABEL (#PERCENT)";
+					seriesEstados->Legend = "LeyendaSalud";
 
 					chartEstadoSalud->Series->Add(seriesEstados);
 
 					for each (auto stat in reporteActual->PorEstadoSalud) {
 						DataPoint^ point = gcnew DataPoint();
+
 						point->SetValueXY(stat->Categoria, stat->Cantidad);
 						point->AxisLabel = stat->Categoria;
+						point->ToolTip = stat->Categoria + ": " + stat->Cantidad + " (" + stat->Porcentaje.ToString("F1") + "%)";
 
 						if (stat->Categoria->ToLower() == "crítico" || stat->Categoria->ToLower() == "critico") {
 							point->SetCustomProperty("Exploded", "true");
 						}
+
 						chartEstadoSalud->Series["EstadosSalud"]->Points->Add(point);
 					}
 				}
@@ -902,60 +914,52 @@ namespace AgroRobotView {
 
 		void ExportarPDF() {
 			if (reporteActual == nullptr) {
-        MessageBox::Show("No hay datos para exportar. Genere un reporte primero.",
-            "Advertencia", MessageBoxButtons::OK, MessageBoxIcon::Warning);
-        return;
-    }
-
-    try {
-        SaveFileDialog^ saveDialog = gcnew SaveFileDialog();
-        saveDialog->Filter = "Archivos PDF|*.pdf";
-        saveDialog->Title = "Guardar reporte como PDF";
-        saveDialog->FileName = "Reporte_Diagnostico_" + DateTime::Now.ToString("yyyyMMdd_HHmm") + ".pdf";
-
-        if (saveDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
-            bool exito = pdfExportController->ExportarReporteDiagnosticoPDF(reporteActual, saveDialog->FileName);
-            if (exito) {
-                MessageBox::Show("Reporte exportado exitosamente a PDF.", "Éxito",
-                    MessageBoxButtons::OK, MessageBoxIcon::Information);
-            }
-            else {
-                MessageBox::Show("Error al exportar el reporte a PDF.", "Error",
-                    MessageBoxButtons::OK, MessageBoxIcon::Error);
-            }
-        }
-    }
-    catch (Exception^ ex) {
-        MessageBox::Show("Error en exportación PDF: " + ex->Message, "Error",
-            MessageBoxButtons::OK, MessageBoxIcon::Error);
-    }
-		}
-
-		void ExportarExcel() {
-			if (reporteActual == nullptr) {
-				MessageBox::Show("No hay datos para exportar. Genere un reporte primero.",
-					"Advertencia", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+				MessageBox::Show("Primero genere un reporte (Botón Buscar).", "Atención", MessageBoxButtons::OK, MessageBoxIcon::Warning);
 				return;
 			}
 
 			SaveFileDialog^ saveDialog = gcnew SaveFileDialog();
-			saveDialog->Filter = "Archivos CSV|*.csv";
-			saveDialog->Title = "Guardar reporte como Excel";
-			saveDialog->FileName = "Reporte_Diagnostico_" + DateTime::Now.ToString("yyyyMMdd_HHmm") + ".csv";
+			// TRUCO: Guardamos como .txt para que sea legible, aunque el botón diga PDF
+			saveDialog->Filter = "Reporte Texto|*.txt";
+			saveDialog->Title = "Guardar Reporte";
+			saveDialog->FileName = "Reporte_" + DateTime::Now.ToString("yyyyMMdd_HHmm") + ".txt";
+
+			if (saveDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+				bool exito = pdfExportController->ExportarReporteDiagnosticoPDF(reporteActual, saveDialog->FileName);
+
+				if (exito) {
+					MessageBox::Show("Reporte guardado correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+					// Opcional: Abrir el archivo automáticamente
+					// System::Diagnostics::Process::Start(saveDialog->FileName);
+				}
+				else {
+					MessageBox::Show("No se pudo guardar el archivo. Verifique permisos.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				}
+			}
+		}
+
+		void ExportarExcel() {
+			if (reporteActual == nullptr) {
+				MessageBox::Show("Primero genere un reporte (Botón Buscar).", "Atención", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+				return;
+			}
+
+			SaveFileDialog^ saveDialog = gcnew SaveFileDialog();
+			saveDialog->Filter = "Archivo Excel CSV|*.csv";
+			saveDialog->Title = "Guardar Excel";
+			saveDialog->FileName = "Data_" + DateTime::Now.ToString("yyyyMMdd_HHmm") + ".csv";
 
 			if (saveDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 				bool exito = pdfExportController->ExportarReporteDiagnosticoExcel(reporteActual, saveDialog->FileName);
+
 				if (exito) {
-					MessageBox::Show("Reporte exportado exitosamente a Excel.", "Éxito",
-						MessageBoxButtons::OK, MessageBoxIcon::Information);
+					MessageBox::Show("Excel generado correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
 				}
 				else {
-					MessageBox::Show("Error al exportar el reporte a Excel.", "Error",
-						MessageBoxButtons::OK, MessageBoxIcon::Error);
+					MessageBox::Show("Error al generar Excel. ¿Tiene el archivo abierto?", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 				}
 			}
-    
-		} // Fin de ExportarExcel()
+		}
 
 		private:
 			void ConfigurarToolTips() {
