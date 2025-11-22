@@ -883,16 +883,16 @@ namespace AgroRobotView {
 				   return;
 			   }
 			   SaveFileDialog^ sd = gcnew SaveFileDialog();
-			   // TRUCO: Exportamos a TXT aunque diga PDF, para que sea un reporte útil
 			   sd->Filter = "Reporte de Texto|*.txt";
-			   sd->FileName = "Reporte_Alimentacion_" + DateTime::Now.ToString("yyyyMMdd") + ".txt";
+
+			   // CAMBIO AQUÍ: Agregamos _HHmmss para que el nombre sea único cada segundo
+			   // Ejemplo: Reporte_Alimentacion_20251028_143005.txt
+			   sd->FileName = "Reporte_Alimentacion_" + DateTime::Now.ToString("yyyyMMdd_HHmmss") + ".txt";
 
 			   if (sd->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
-				   // Usamos el método de Alimentación (si no está implementado en tu controller PDF,
-				   // usa el de Diagnóstico temporalmente o implementa el de Alimentación en el cpp)
 				   bool exito = pdfExportController->ExportarReporteAlimentacionPDF(reporteActual, sd->FileName);
-				   if (!exito) MessageBox::Show("Función en desarrollo (Verifique Controller)", "Info");
-				   else MessageBox::Show("Reporte guardado.", "Éxito");
+				   if (!exito) MessageBox::Show("Error al guardar el reporte.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				   else MessageBox::Show("Reporte guardado correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
 			   }
 		   }
 
@@ -903,12 +903,14 @@ namespace AgroRobotView {
 			   }
 			   SaveFileDialog^ sd = gcnew SaveFileDialog();
 			   sd->Filter = "Excel CSV|*.csv";
-			   sd->FileName = "Data_Alimentacion_" + DateTime::Now.ToString("yyyyMMdd") + ".csv";
+
+			   // CAMBIO AQUÍ: Agregamos _HHmmss
+			   sd->FileName = "Data_Alimentacion_" + DateTime::Now.ToString("yyyyMMdd_HHmmss") + ".csv";
 
 			   if (sd->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 				   bool exito = pdfExportController->ExportarReporteAlimentacionExcel(reporteActual, sd->FileName);
-				   if (exito) MessageBox::Show("Excel generado.", "Éxito");
-				   else MessageBox::Show("Error al exportar.", "Error");
+				   if (exito) MessageBox::Show("Excel generado correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+				   else MessageBox::Show("Error al exportar.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			   }
 		   }
 };

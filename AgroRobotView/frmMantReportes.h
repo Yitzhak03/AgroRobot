@@ -24,6 +24,7 @@ namespace AgroRobotView {
 		frmMantReportes(void)
 		{
 			InitializeComponent();
+			this->gestorNutricional = gcnew GestorNutricionalController();
 			this->reporteController = gcnew ReporteController();
 			this->dataGridView1->SelectionChanged += gcnew System::EventHandler(this, &frmMantReportes::dataGridView1_SelectionChanged);
 			this->button4->Click += gcnew System::EventHandler(this, &frmMantReportes::button4_Click);
@@ -72,7 +73,7 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::ProgressBar^ progressBar1;
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
 
-
+	private: GestorNutricionalController^ gestorNutricional;
 
 
 
@@ -336,7 +337,7 @@ namespace AgroRobotView {
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(147, 22);
 			this->textBox1->TabIndex = 0;
-			this->textBox1->Text = L"Ej: VAC-001 o VAC o 001";
+			this->textBox1->Text = L"Ej: 1, 2, 101...";
 			this->textBox1->TextChanged += gcnew System::EventHandler(this, &frmMantReportes::textBox1_TextChanged);
 			this->textBox1->Enter += gcnew System::EventHandler(this, &frmMantReportes::textBox1_Enter);
 			this->textBox1->Leave += gcnew System::EventHandler(this, &frmMantReportes::textBox1_Leave);
@@ -593,21 +594,44 @@ namespace AgroRobotView {
 		}
 #pragma endregion
 	private: System::Void frmMantReportes_Load(System::Object^ sender, System::EventArgs^ e) {
-		// Inicializar el controlador
-		reporteController = gcnew AgroRobotController::ReporteController();
+		// 1. Inicializar el controlador (si no está hecho)
+		if (this->gestorNutricional == nullptr) {
+			this->gestorNutricional = gcnew GestorNutricionalController();
+		}
 
-		// Configurar fechas por defecto (últimos 30 días)
-		dateTimePicker1->Value = DateTime::Today.AddDays(-30);
-		dateTimePicker2->Value = DateTime::Today;
+		// 2. CONFIGURACIÓN DE FECHAS "ABIERTA"
+		// Ponemos una fecha muy antigua y la de hoy para abarcar todo el historial por defecto
+		dateTimePicker1->Value = DateTime(2020, 1, 1);
+		dateTimePicker2->Value = DateTime::Now;
 
-		// Cargar datos iniciales
-		CargarDatosIniciales();
+		// 3. CONFIGURACIÓN DE COMBOS (JERARQUÍA BAJA)
+		// Aseguramos que tengan la opción "Todos" y la seleccionamos
+		ConfigurarCombosBusqueda();
+
+		// 4. RESETEAR ID
+		textBox1->Text = "Ej: 1, 2, 101...";
+		textBox1->ForeColor = System::Drawing::Color::Gray;
+
+		// 5. CARGAR DATOS INICIALES (Esto mostrará todo porque los filtros están abiertos)
+		button1_Click(sender, e);
 	}
 
-	private: void CargarDatosIniciales() {
-		// Obtener todos los reportes para mostrar al iniciar
-		List<AgroRobotModel::Reporte^>^ reportes = reporteController->ObtenerTodosReportes();
-		LlenarDataGridView(reportes);
+	private: void ConfigurarCombosBusqueda() {
+		// Estado de Salud
+		comboBox1->Items->Clear();
+		comboBox1->Items->Add("Todos"); // Índice 0
+		comboBox1->Items->Add("Excelente");
+		comboBox1->Items->Add("Bueno");
+		comboBox1->Items->Add("Regular");
+		comboBox1->Items->Add("Crítico");
+		comboBox1->SelectedIndex = 0; // Seleccionar "Todos"
+
+		// Tipo de Análisis (Adaptado a lo que mostramos: "Rutina")
+		comboBox2->Items->Clear();
+		comboBox2->Items->Add("Todos");
+		comboBox2->Items->Add("Rutina"); // Coincide con lo que generamos en la grilla
+		comboBox2->Items->Add("Específico");
+		comboBox2->SelectedIndex = 0; // Seleccionar "Todos"
 	}
 
 	private: void LlenarDataGridView(List<AgroRobotModel::Reporte^>^ reportes) {
@@ -662,17 +686,19 @@ private: void ConfigurarColorFila(DataGridViewRow^ row, String^ estado) {
 
 	private: System::Void comboBox2_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
+		   // Texto por defecto
+		   String^ textoPlaceholder = "Ej: 1, 2, 101...";
 private: System::Void textBox1_Enter(System::Object^ sender, System::EventArgs^ e) {
-	if (textBox1->Text == "Ej: VAC-001 o VAC o 001") {
+	if (textBox1->Text == textoPlaceholder) {
 		textBox1->Text = "";
-		textBox1->ForeColor = System::Drawing::Color::Black;
+		textBox1->ForeColor = System::Drawing::Color::FromArgb(30, 60, 30); // Color oscuro
 	}
 }
 private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void textBox1_Leave(System::Object^ sender, System::EventArgs^ e) {
-	if (textBox1->Text == "") {
-		textBox1->Text = "Ej: VAC-001 o VAC o 001";
+	if (String::IsNullOrWhiteSpace(textBox1->Text)) {
+		textBox1->Text = textoPlaceholder;
 		textBox1->ForeColor = System::Drawing::Color::Gray;
 	}
 }
@@ -682,101 +708,89 @@ private: System::Void dataGridView1_CellContentClick(System::Object^ sender, Sys
 }
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 	try {
-		// 1. OBTENER VALORES DE LOS FILTROS
+		// =========================================================
+		// NIVEL 1: JERARQUÍA MÁXIMA (BÚSQUEDA POR ID)
+		// =========================================================
+		String^ textoID = textBox1->Text;
+		int idBusqueda = -1;
 
-		// ID Animal - Búsqueda flexible (prioridad máxima)
-		String^ animalAlias = "";
-		bool buscarPorAnimal = false;
-		if (textBox1->Text != "Ej: VAC-001" && !String::IsNullOrWhiteSpace(textBox1->Text)) {
-			animalAlias = textBox1->Text->Trim()->ToUpper();
-			buscarPorAnimal = true; // Bandera para indicar que se busca por animal
-		}
+		// Validamos si el usuario escribió un número real (ignoramos el placeholder)
+		if (!String::IsNullOrWhiteSpace(textoID) && textoID != "Ej: 1, 2, 101...") {
+			// Intentamos convertir a número
+			bool esNumero = Int32::TryParse(textoID, idBusqueda);
 
-		// Fechas - Solo se usan si NO se está buscando por animal específico
-		DateTime fechaInicio = dateTimePicker1->Value;
-		DateTime fechaFin = dateTimePicker2->Value;
+			if (esNumero && idBusqueda > 0) {
+				// SI HAY ID: IGNORAMOS EL RESTO Y BUSCAMOS DIRECTO
+				Animal^ animalEncontrado = this->gestorNutricional->consultarAnimalporId(idBusqueda);
 
-		// Si se busca por animal, ignorar el filtro de fechas
-		if (buscarPorAnimal) {
-			// Establecer un rango de fechas muy amplio
-			fechaInicio = DateTime::MinValue;
-			fechaFin = DateTime::MaxValue;
-		}
-		else {
-			// Ajustar fechaFin para incluir todo el día
-			fechaFin = fechaFin.Date.AddDays(1).AddSeconds(-1);
+				List<Animal^>^ listaResultado = gcnew List<Animal^>();
+				if (animalEncontrado != nullptr) {
+					listaResultado->Add(animalEncontrado);
+				}
 
-			// Validar rango de fechas solo si no se busca por animal
-			if (fechaInicio > fechaFin) {
-				MessageBox::Show("La fecha de inicio no puede ser mayor que la fecha fin.",
-					"Error en fechas",
-					MessageBoxButtons::OK,
-					MessageBoxIcon::Warning);
-				return;
+				LlenarDataGridViewDesdeAnimales(listaResultado);
+
+				if (listaResultado->Count == 0)
+					MessageBox::Show("No se encontró ningún animal con el ID: " + idBusqueda, "Sin resultados");
+
+				return; // TERMINAMOS AQUÍ (No miramos fechas ni combos)
 			}
 		}
 
-		// Tipo de Análisis
-		String^ tipoAnalisis = "";
-		if (comboBox2->SelectedItem != nullptr && comboBox2->Text != "Todos") {
-			tipoAnalisis = comboBox2->Text;
-		}
+		// =========================================================
+		// NIVEL 2: FILTROS COMBINADOS (SI NO HAY ID)
+		// =========================================================
 
-		// Estado de Salud
-		String^ estadoSalud = "";
-		if (comboBox1->SelectedItem != nullptr && comboBox1->Text != "Todos") {
-			estadoSalud = comboBox1->Text;
-		}
+		// 1. Traemos TODOS los animales primero
+		List<Animal^>^ todosLosAnimales = this->gestorNutricional->obtenerTodosAnimales();
+		List<Animal^>^ resultadosFiltrados = gcnew List<Animal^>();
 
-		// 2. EJECUTAR LA BÚSQUEDA
-		List<AgroRobotModel::Reporte^>^ resultados =
-			reporteController->ConsultarReportesPorFiltros(
-				animalAlias,
-				fechaInicio,
-				fechaFin,
-				tipoAnalisis,
-				estadoSalud
-			);
+		// 2. Preparamos los criterios
+		DateTime inicio = dateTimePicker1->Value.Date; // Solo fecha, sin hora
+		DateTime fin = dateTimePicker2->Value.Date.AddDays(1).AddSeconds(-1); // Final del día
 
-		// 3. MOSTRAR RESULTADOS
-		LlenarDataGridView(resultados);
+		String^ filtroEstado = "";
+		if (comboBox1->SelectedIndex > 0) filtroEstado = comboBox1->SelectedItem->ToString(); // >0 ignora "Todos"
 
-		// 4. MOSTRAR FEEDBACK AL USUARIO
-		String^ mensaje = "";
-		if (buscarPorAnimal) {
-			mensaje = String::Format("Se encontraron {0} evaluaciones para '{1}'",
-				resultados->Count, textBox1->Text);
-		}
-		else {
-			mensaje = String::Format("Se encontraron {0} evaluaciones en el período seleccionado",
-				resultados->Count);
-		}
+		String^ filtroTipo = "";
+		if (comboBox2->SelectedIndex > 0) filtroTipo = comboBox2->SelectedItem->ToString();   // >0 ignora "Todos"
 
-		if (resultados->Count == 0) {
-			if (buscarPorAnimal) {
-				MessageBox::Show("No se encontraron evaluaciones para el animal: " + textBox1->Text,
-					"Búsqueda sin resultados",
-					MessageBoxButtons::OK,
-					MessageBoxIcon::Information);
+		// 3. Aplicamos el "Embudo" de filtros
+		for each (Animal ^ animal in todosLosAnimales) {
+
+			// A) FILTRO FECHA (Opcional: Si quieres que la fecha filtre por "Última vez alimentado" o similar)
+			// Como Animal no tiene "Fecha Generación Reporte", usaremos DateTime::Now o simulamos que pasan todos
+			// Si tu animal tuviera fecha, descomenta esto:
+			// DateTime fechaAnimal = DateTime::Parse(animal->UltimaVezAlimentado);
+			// if (fechaAnimal < inicio || fechaAnimal > fin) continue; 
+
+			// B) FILTRO ESTADO (Usamos el traductor para que coincida con el combo)
+			String^ estadoVisual = TraducirEstadoAnimalAVisual(animal->EstadoSalud);
+			if (!String::IsNullOrEmpty(filtroEstado)) {
+				if (estadoVisual != filtroEstado) continue; // Si no coincide, saltamos al siguiente
 			}
-			else {
-				MessageBox::Show("No se encontraron evaluaciones con los criterios especificados.",
-					"Búsqueda sin resultados",
-					MessageBoxButtons::OK,
-					MessageBoxIcon::Information);
+
+			// C) FILTRO TIPO (Buscamos texto parcial en la especie o tipo generado)
+			// Generamos el texto que se ve en la grilla: "Rutina (Vaca)"
+			String^ tipoVisual = "Rutina (" + animal->Especie + ")";
+			if (!String::IsNullOrEmpty(filtroTipo)) {
+				// Si seleccionaste "Rutina", pasa. Si seleccionaste "Hemograma", no pasará nada (correcto, no hay datos)
+				if (!tipoVisual->Contains(filtroTipo)) continue;
 			}
-		}
-		else {
-			// Actualizar título con información de la búsqueda
-			this->Text = "Gestión de Evaluaciones - " + mensaje;
+
+			// Si pasó todos los filtros, lo agregamos
+			resultadosFiltrados->Add(animal);
 		}
 
+		// 4. MOSTRAR RESULTADOS
+		LlenarDataGridViewDesdeAnimales(resultadosFiltrados);
+
+		if (resultadosFiltrados->Count == 0) {
+			MessageBox::Show("No se encontraron registros con los criterios seleccionados.", "Búsqueda");
+		}
 	}
 	catch (Exception^ ex) {
-		MessageBox::Show("Error al realizar la búsqueda: " + ex->Message,
-			"Error",
-			MessageBoxButtons::OK,
-			MessageBoxIcon::Error);
+		MessageBox::Show("Error en la búsqueda: " + ex->Message);
 	}
 }
 
@@ -797,6 +811,67 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 		}
 	}
 
+	private: String^ TraducirEstadoAnimalAVisual(String^ estadoOriginal) {
+		// Limpieza básica
+		if (estadoOriginal == nullptr) return "Regular";
+		String^ estado = estadoOriginal->Trim();
+
+		// Lógica de traducción
+		if (estado == "Normal" || estado == "Saludable") return "Bueno"; // Azul/Verde
+		if (estado == "Sobrepeso") return "Regular";                     // Naranja
+		if (estado == "Bajo peso" || estado == "Enfermo") return "Crítico"; // Rojo
+		if (estado == "Excelente") return "Excelente";                   // Verde Fuerte
+
+		return "Regular"; // Por defecto si no sabemos qué es
+	}
+private: void LlenarDataGridViewDesdeAnimales(List<Animal^>^ listaAnimales) {
+	dataGridView1->Rows->Clear();
+
+	for each (Animal ^ animal in listaAnimales) {
+		int rowIndex = dataGridView1->Rows->Add();
+		DataGridViewRow^ row = dataGridView1->Rows[rowIndex];
+
+		// 1. TRADUCCIÓN DE DATOS
+		// Convertimos el estado del compañero al tuyo visual
+		String^ estadoVisual = TraducirEstadoAnimalAVisual(animal->EstadoSalud);
+		String^ impactoCalculado = ObtenerImpactoDesdeEstado(estadoVisual);
+
+		// 2. LLENADO DE CELDAS
+		// Usamos el ID del Animal para simular un ID de Evaluación
+		row->Cells["Column1"]->Value = "EVA-" + animal->IdAnimal.ToString("D3");
+
+		// Tipo de análisis basado en la especie
+		row->Cells["Column2"]->Value = "Rutina (" + animal->Especie + ")";
+
+		// ID Real del animal
+		row->Cells["Column3"]->Value = animal->IdAnimal.ToString();
+
+		// Fecha (Usamos hoy o la fecha de última alimentación si existe)
+		row->Cells["Column4"]->Value = DateTime::Now.ToString("dd/MM/yyyy");
+
+		// ESTADO (Usamos el traducido para que se vea bonito)
+		row->Cells["Column7"]->Value = estadoVisual;
+
+		// IMPACTO (Calculado)
+		row->Cells["Column5"]->Value = impactoCalculado;
+
+		// ATENCIÓN (Lógica de negocio extra)
+		String^ atencion = (estadoVisual == "Crítico") ? "Prioritaria" : "Normal";
+		row->Cells["Impacto"]->Value = atencion;
+
+		// 3. APLICAR COLORES (Usando tu función existente)
+		ConfigurarColorFila(row, estadoVisual);
+	}
+}
+private: String^ TraducirVisualAEstadoAnimal(String^ estadoVisual) {
+	// Traduce lo que seleccionas en el Combo (Editar) al formato del txt de Animales
+	if (estadoVisual == "Excelente") return "Normal";
+	if (estadoVisual == "Bueno") return "Saludable";
+	if (estadoVisual == "Regular") return "Sobrepeso";
+	if (estadoVisual == "Crítico" || estadoVisual == "Urgente") return "Bajo peso";
+
+	return "Normal"; // Default
+}
 private: void ActualizarPanelMonitoreo(String^ estado) {
 	// Normalizamos el texto para evitar errores por mayúsculas/minúsculas
 	estado = estado->Trim();
@@ -906,94 +981,117 @@ private: void MarcarCambiosPendientes(bool hayCambios) {
 }
 
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-
 	if (dataGridView1->SelectedRows->Count > 0) {
 		try {
-			// Obtener el ID de la evaluación seleccionada
+			// 1. OBTENER ID DEL ANIMAL SELECCIONADO
 			DataGridViewRow^ selectedRow = dataGridView1->SelectedRows[0];
-			String^ idEvaluacionStr = selectedRow->Cells["Column1"]->Value->ToString();
-			int idEvaluacion = Convert::ToInt32(idEvaluacionStr->Replace("EVA-", "")); // CAMBIAR AQUÍ
+			// La columna 3 tiene el ID puro del animal (lo pusimos en LlenarDataGridView)
+			int idAnimal = Convert::ToInt32(selectedRow->Cells["Column3"]->Value);
 
-			// Buscar la evaluación en la lista
-			AgroRobotModel::Reporte^ evaluacionSeleccionada = reporteController->ConsultarReportePorId(idEvaluacion);
+			// 2. BUSCAR EL ANIMAL REAL (Usando el Gestor, no Reportes)
+			Animal^ animalReal = this->gestorNutricional->consultarAnimalporId(idAnimal);
 
-			if (evaluacionSeleccionada != nullptr) {
-				// Abrir formulario de edición
-				frmEditarReporte^ formEdicion = gcnew frmEditarReporte(reporteController, evaluacionSeleccionada);
+			if (animalReal != nullptr) {
+				// 3. CREAR UN REPORTE "ADAPTADOR" (Puente entre Animal y Pantalla de Edición)
+				Reporte^ reporteProxy = gcnew Reporte();
+				reporteProxy->setIdReporte(animalReal->IdAnimal);
+				reporteProxy->setAnimalAlias(animalReal->Especie); // Usamos Especie como nombre
+				reporteProxy->setTipo("Rutina");
+				reporteProxy->setFechaGeneracion(DateTime::Now);
+
+				// Traducir estado del animal (Bajo peso) a visual (Crítico)
+				reporteProxy->setEstadoSaludImpacto(TraducirEstadoAnimalAVisual(animalReal->EstadoSalud));
+
+				// Usamos el campo 'UltimaDieta' como contenido/observaciones
+				reporteProxy->setContenido(animalReal->UltimaDieta);
+
+				// 4. ABRIR LA PANTALLA DE EDICIÓN
+				// Pasamos un controlador dummy o null porque guardaremos manualmente al volver
+				frmEditarReporte^ formEdicion = gcnew frmEditarReporte(this->reporteController, reporteProxy);
 				formEdicion->ShowDialog();
 
-				// Recargar datos después de editar
-				button1_Click(sender, e); // Ejecutar búsqueda nuevamente
+				// 5. GUARDAR CAMBIOS (AL VOLVER DE LA EDICIÓN)
+				// Recuperamos los datos modificados del objeto reporteProxy
+				String^ nuevoEstadoVisual = reporteProxy->getEstadoSaludImpacto();
+				String^ nuevasObservaciones = reporteProxy->getContenido(); // Esto tiene el plan de acción nuevo
+
+				// Traducimos de vuelta al idioma de Animales ("Crítico" -> "Bajo peso")
+				String^ nuevoEstadoAnimal = TraducirVisualAEstadoAnimal(nuevoEstadoVisual);
+
+				// GUARDAR EN EL ARCHIVO DE TU COMPAÑERO
+				// Preservamos los datos que no cambian (Peso, Edad)
+				this->gestorNutricional->modificarAnimal(
+					animalReal->IdAnimal,
+					animalReal->Especie,
+					animalReal->Peso,
+					animalReal->Edad,
+					nuevoEstadoAnimal,   // <--- DATO ACTUALIZADO
+					nuevasObservaciones  // <--- DATO ACTUALIZADO (Guardamos el plan en UltimaDieta)
+				);
+
+				MessageBox::Show("Evaluación actualizada y guardada en el expediente del animal.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+
+				// 6. REFRESCAR LA LISTA
+				button1_Click(sender, e);
 			}
 			else {
-				MessageBox::Show("No se pudo encontrar la evaluación seleccionada.", // CAMBIAR AQUÍ
-					"Error",
-					MessageBoxButtons::OK,
-					MessageBoxIcon::Error);
+				MessageBox::Show("No se encontró el animal en la base de datos.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			}
 		}
 		catch (Exception^ ex) {
-			MessageBox::Show("Error al abrir el editor: " + ex->Message,
-				"Error",
-				MessageBoxButtons::OK,
-				MessageBoxIcon::Error);
+			MessageBox::Show("Error en el proceso de edición: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 	}
 	else {
-		MessageBox::Show("Por favor, seleccione una evaluación para editar.", // CAMBIAR AQUÍ
-			"Selección requerida",
-			MessageBoxButtons::OK,
-			MessageBoxIcon::Warning);
+		MessageBox::Show("Por favor, seleccione una fila para editar.", "Aviso", MessageBoxButtons::OK, MessageBoxIcon::Warning);
 	}
-
 }
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 
 	try {
+		// 1. Restablecer visualmente los controles
 		LimpiarFiltros();
-		CargarDatosIniciales();
 
-		MessageBox::Show("Filtros limpiados. Mostrando todos los reportes.",
-			"Limpieza completada",
-			MessageBoxButtons::OK,
-			MessageBoxIcon::Information);
+		// 2. Ejecutar la búsqueda automática (al estar los filtros vacíos, traerá TODOS los animales)
+		button1_Click(sender, e);
+
+		// 3. Feedback opcional
+		// MessageBox::Show("Filtros restablecidos.", "Limpieza", MessageBoxButtons::OK, MessageBoxIcon::Information);
 	}
 	catch (Exception^ ex) {
-		MessageBox::Show("Error al limpiar los filtros: " + ex->Message,
-			"Error",
-			MessageBoxButtons::OK,
-			MessageBoxIcon::Error);
+		MessageBox::Show("Error al limpiar: " + ex->Message);
 	}
 
 }
 
 private: void LimpiarFiltros() {
-	// Limpiar campo de ID Animal
-	textBox1->Text = "Ej: VAC-001 o VAC o 001";
-	textBox1->ForeColor = Color::Gray;
+	// 1. Restablecer ID (Placeholder)
+	textBox1->Text = "Ej: 1, 2, 101...";
+	textBox1->ForeColor = System::Drawing::Color::Gray;
 
-	// Restablecer fechas a los últimos 30 días
-	dateTimePicker1->Value = DateTime::Today.AddDays(-30);
-	dateTimePicker2->Value = DateTime::Today;
+	// 2. Restablecer Fechas (Rango amplio para que salgan todos)
+	dateTimePicker1->Value = DateTime(2020, 1, 1);
+	dateTimePicker2->Value = DateTime::Now;
 
-	// Restablecer comboboxes a "Todos"
-	comboBox2->SelectedIndex = -1;
-	comboBox2->Text = "Todos";
-	comboBox1->SelectedIndex = -1;
-	comboBox1->Text = "Todos";
+	// 3. Restablecer Combos a "Todos"
+	if (comboBox1->Items->Count > 0) comboBox1->SelectedIndex = 0; // Estado
+	if (comboBox2->Items->Count > 0) comboBox2->SelectedIndex = 0; // Tipo
 
-	// Limpiar panel de monitoreo
+	// 4. Limpiar Panel de Monitoreo
 	comboBox3->SelectedIndex = -1;
+	if (comboBox3->Items->Count > 0) comboBox3->Text = "";
 	progressBar1->Value = 0;
 	textBox2->Text = "";
 	label7->Text = "0%";
+	pictureBox1->Image = nullptr;
 
-	// Restablecer título del formulario
+	// 5. Restablecer título
 	this->Text = "Gestión de Reportes - Administrador";
 
-	// Limpiar selección del DataGridView
-	if (dataGridView1->SelectedRows->Count > 0) {
+	// 6. Limpiar selección de la tabla
+	if (dataGridView1->Rows->Count > 0) {
 		dataGridView1->ClearSelection();
+		dataGridView1->CurrentCell = nullptr;
 	}
 }
 
