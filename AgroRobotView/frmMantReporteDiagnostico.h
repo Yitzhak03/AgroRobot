@@ -26,7 +26,7 @@ namespace AgroRobotView {
 			this->reporteActual = nullptr;
 
 			// Configurar event handlers como en frmMantReporteAlimentacion
-			this->button1->Click += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::button1_Click);
+			//this->button1->Click += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::button1_Click);
 			this->button3->Click += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::button3_Click);
 			this->button2->Click += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::button2_Click);
 			this->button4->Click += gcnew System::EventHandler(this, &frmMantReporteDiagnostico::button4_Click);
@@ -951,26 +951,37 @@ namespace AgroRobotView {
 
 		private:
 			void ConfigurarCharts() {
-				// Configurar chartTipoAnalisis
+				// --- GRÁFICO 1: TIPOS DE ANÁLISIS ---
 				if (chartTipoAnalisis != nullptr) {
-					chartTipoAnalisis->ChartAreas->Add(gcnew ChartArea());
-					chartTipoAnalisis->ChartAreas[0]->AxisX->Title = "Tipo de Análisis";
-					chartTipoAnalisis->ChartAreas[0]->AxisY->Title = "Cantidad";
-					chartTipoAnalisis->Series->Add(gcnew Series());
-					chartTipoAnalisis->Series[0]->ChartType = SeriesChartType::Column;
-					chartTipoAnalisis->Series[0]->Name = "Tipos";
-					chartTipoAnalisis->Series[0]->IsValueShownAsLabel = true;
-					chartTipoAnalisis->Titles->Add("Tipos de Análisis");
+					// IMPORTANTE: Limpiar lo que haya hecho el diseñador para evitar duplicados
+					chartTipoAnalisis->ChartAreas->Clear();
+					chartTipoAnalisis->Series->Clear();
+					chartTipoAnalisis->Titles->Clear();
+
+					// Crear el área limpia
+					ChartArea^ areaTipos = gcnew ChartArea("AreaTipos");
+					areaTipos->AxisX->Title = "Tipo de Análisis";
+					areaTipos->AxisY->Title = "Cantidad";
+					areaTipos->AxisX->Interval = 1; // Forzar que se vean todas las etiquetas
+					chartTipoAnalisis->ChartAreas->Add(areaTipos);
+
+					// Título
+					chartTipoAnalisis->Titles->Add("Distribución por Tipo de Análisis");
 				}
 
-				// Configurar chartEstadoSalud
+				// --- GRÁFICO 2: ESTADO DE SALUD ---
 				if (chartEstadoSalud != nullptr) {
-					chartEstadoSalud->ChartAreas->Add(gcnew ChartArea());
-					chartEstadoSalud->Series->Add(gcnew Series());
-					chartEstadoSalud->Series[0]->ChartType = SeriesChartType::Pie;
-					chartEstadoSalud->Series[0]->Name = "Estados";
-					chartEstadoSalud->Series[0]->IsValueShownAsLabel = true;
-					chartEstadoSalud->Titles->Add("Estados de Salud");
+					// IMPORTANTE: Limpiar todo primero
+					chartEstadoSalud->ChartAreas->Clear();
+					chartEstadoSalud->Series->Clear();
+					chartEstadoSalud->Titles->Clear();
+
+					// Crear área limpia
+					ChartArea^ areaSalud = gcnew ChartArea("AreaSalud");
+					chartEstadoSalud->ChartAreas->Add(areaSalud);
+
+					// Título
+					chartEstadoSalud->Titles->Add("Estado de Salud General");
 				}
 			}
 			
