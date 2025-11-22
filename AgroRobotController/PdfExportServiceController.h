@@ -5,30 +5,43 @@ namespace AgroRobotController {
 	using namespace System::Collections::Generic;
 	using namespace System::IO;
 
-	// Declaraciones adelantadas para que no se queje el compilador
+	// Declaraciones adelantadas (Forward declarations)
 	ref class ReporteDiagnosticoResult;
 	ref class EstadisticaReporte;
 	ref class ReporteAlimentacionResult;
+	ref class EstadisticaAlimentacionResult;
+	ref class DietaResumenResult;
 
 	public ref class PdfExportServiceController {
 	public:
-		PdfExportServiceController(); // Constructor
+		// Constructor
+		PdfExportServiceController();
 
-		// Métodos Públicos (Sin static para usarlos con tu instancia actual)
-		bool ExportarReporteDiagnosticoPDF(ReporteDiagnosticoResult^ reporte, String^ filePath);
-		bool ExportarReporteDiagnosticoExcel(ReporteDiagnosticoResult^ reporte, String^ filePath);
+		// --- MÉTODOS PÚBLICOS (DIAGNÓSTICO) ---
+		// Corrección: Usamos System::String^ explícitamente
+		bool ExportarReporteDiagnosticoPDF(ReporteDiagnosticoResult^ reporte, System::String^ filePath);
+		bool ExportarReporteDiagnosticoExcel(ReporteDiagnosticoResult^ reporte, System::String^ filePath);
 
-		// Métodos vacíos para que no de error si los llamas desde otro lado
-		bool ExportarReporteAlimentacionPDF(ReporteAlimentacionResult^ reporte, String^ filePath);
-		bool ExportarReporteAlimentacionExcel(ReporteAlimentacionResult^ reporte, String^ filePath);
+		// --- MÉTODOS PÚBLICOS (ALIMENTACIÓN) ---
+		// Corrección: Usamos System::String^ explícitamente
+		bool ExportarReporteAlimentacionPDF(ReporteAlimentacionResult^ reporte, System::String^ filePath);
+		bool ExportarReporteAlimentacionExcel(ReporteAlimentacionResult^ reporte, System::String^ filePath);
 
 	private:
-		// Métodos auxiliares
+		// --- MÉTODOS PRIVADOS AUXILIARES (DIAGNÓSTICO) ---
 		void EscribirCabeceraPDF(StreamWriter^ writer, ReporteDiagnosticoResult^ reporte);
 		void EscribirEstadisticasPDF(StreamWriter^ writer, ReporteDiagnosticoResult^ reporte);
 		void EscribirDetalleMuestrasPDF(StreamWriter^ writer, ReporteDiagnosticoResult^ reporte);
 
 		void EscribirCabeceraExcel(StreamWriter^ writer, ReporteDiagnosticoResult^ reporte);
 		void EscribirEstadisticasExcel(StreamWriter^ writer, ReporteDiagnosticoResult^ reporte);
+
+		// --- MÉTODOS PRIVADOS AUXILIARES (ALIMENTACIÓN) ---
+		void EscribirCabeceraAlimentacionPDF(StreamWriter^ writer, ReporteAlimentacionResult^ reporte);
+		void EscribirEstadisticasAlimentacionPDF(StreamWriter^ writer, ReporteAlimentacionResult^ reporte);
+		void EscribirDetalleDietasPDF(StreamWriter^ writer, ReporteAlimentacionResult^ reporte);
+
+		void EscribirCabeceraAlimentacionExcel(StreamWriter^ writer, ReporteAlimentacionResult^ reporte);
+		void EscribirEstadisticasAlimentacionExcel(StreamWriter^ writer, ReporteAlimentacionResult^ reporte);
 	};
 }

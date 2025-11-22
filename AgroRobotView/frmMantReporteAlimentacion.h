@@ -52,6 +52,9 @@ namespace AgroRobotView {
 			toolTip->SetToolTip(button3, "Limpiar filtros");
 			toolTip->SetToolTip(button2, "Guardar como Texto");
 			toolTip->SetToolTip(button4, "Exportar a Excel");
+
+			AplicarEstiloProfesional();
+
 		}
 
 	protected:
@@ -135,7 +138,6 @@ namespace AgroRobotView {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(frmMantReporteAlimentacion::typeid));
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
@@ -182,7 +184,7 @@ namespace AgroRobotView {
 			this->button4->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->button4->Font = (gcnew System::Drawing::Font(L"Times New Roman", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button4->Location = System::Drawing::Point(350, 153);
+			this->button4->Location = System::Drawing::Point(348, 296);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(80, 23);
 			this->button4->TabIndex = 14;
@@ -196,11 +198,11 @@ namespace AgroRobotView {
 			this->button2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->button2->Font = (gcnew System::Drawing::Font(L"Times New Roman", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button2->Location = System::Drawing::Point(252, 153);
+			this->button2->Location = System::Drawing::Point(250, 296);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(80, 23);
 			this->button2->TabIndex = 13;
-			this->button2->Text = L"PDF";
+			this->button2->Text = L"TXT";
 			this->button2->UseVisualStyleBackColor = false;
 			// 
 			// tabControl1
@@ -209,7 +211,7 @@ namespace AgroRobotView {
 			this->tabControl1->Controls->Add(this->tabPage2);
 			this->tabControl1->Font = (gcnew System::Drawing::Font(L"Times New Roman", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->tabControl1->Location = System::Drawing::Point(36, 232);
+			this->tabControl1->Location = System::Drawing::Point(474, 24);
 			this->tabControl1->Name = L"tabControl1";
 			this->tabControl1->SelectedIndex = 0;
 			this->tabControl1->Size = System::Drawing::Size(408, 352);
@@ -388,7 +390,7 @@ namespace AgroRobotView {
 			this->button3->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->button3->Font = (gcnew System::Drawing::Font(L"Times New Roman", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button3->Location = System::Drawing::Point(152, 153);
+			this->button3->Location = System::Drawing::Point(150, 296);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(80, 23);
 			this->button3->TabIndex = 13;
@@ -402,7 +404,7 @@ namespace AgroRobotView {
 			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->button1->Font = (gcnew System::Drawing::Font(L"Times New Roman", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button1->Location = System::Drawing::Point(53, 153);
+			this->button1->Location = System::Drawing::Point(51, 296);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(80, 23);
 			this->button1->TabIndex = 12;
@@ -425,7 +427,7 @@ namespace AgroRobotView {
 				static_cast<System::Byte>(0)));
 			this->groupBox2->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(217)), static_cast<System::Int32>(static_cast<System::Byte>(242)),
 				static_cast<System::Int32>(static_cast<System::Byte>(217)));
-			this->groupBox2->Location = System::Drawing::Point(32, 609);
+			this->groupBox2->Location = System::Drawing::Point(36, 159);
 			this->groupBox2->Name = L"groupBox2";
 			this->groupBox2->Size = System::Drawing::Size(408, 113);
 			this->groupBox2->TabIndex = 15;
@@ -533,7 +535,7 @@ namespace AgroRobotView {
 				static_cast<System::Byte>(0)));
 			this->button5->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(217)), static_cast<System::Int32>(static_cast<System::Byte>(242)),
 				static_cast<System::Int32>(static_cast<System::Byte>(217)));
-			this->button5->Location = System::Drawing::Point(350, 186);
+			this->button5->Location = System::Drawing::Point(348, 329);
 			this->button5->Name = L"button5";
 			this->button5->Size = System::Drawing::Size(80, 23);
 			this->button5->TabIndex = 16;
@@ -545,9 +547,8 @@ namespace AgroRobotView {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->ClientSize = System::Drawing::Size(473, 741);
+			this->ClientSize = System::Drawing::Size(957, 401);
 			this->Controls->Add(this->button5);
 			this->Controls->Add(this->groupBox2);
 			this->Controls->Add(this->button4);
@@ -629,7 +630,83 @@ namespace AgroRobotView {
 			   comboAnio->Enabled = false; comboMes->Enabled = false;
 			   dateTimePicker1->Enabled = true; dateTimePicker2->Enabled = true;
 		   }
+		   void AplicarEstiloProfesional() {
+			   // COLORES Y FUENTE
+			   System::Drawing::Color colorFondo = System::Drawing::Color::FromArgb(238, 245, 233);
+			   System::Drawing::Color colorVerde = System::Drawing::Color::FromArgb(67, 160, 71);
+			   System::Drawing::Color colorTexto = System::Drawing::Color::FromArgb(30, 60, 30);
+			   // Usamos Segoe UI 9pt para respetar el espacio
+			   System::Drawing::Font^ fuente = gcnew System::Drawing::Font("Segoe UI", 9, FontStyle::Regular);
+			   System::Drawing::Font^ fuenteBold = gcnew System::Drawing::Font("Segoe UI Semibold", 9, FontStyle::Bold);
 
+			   // FORMULARIO
+			   this->BackgroundImage = nullptr;
+			   this->BackColor = colorFondo;
+			   this->Font = fuente;
+			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			   // No tocamos el tamaño (ClientSize) para que use el que pusiste en el diseñador (957, 401)
+
+			   // GROUPBOXES
+			   array<GroupBox^>^ grupos = { groupBox1, groupBox2 };
+			   for each (GroupBox ^ gb in grupos) {
+				   gb->BackColor = System::Drawing::Color::White;
+				   gb->ForeColor = colorTexto;
+				   gb->Font = fuenteBold;
+				   gb->FlatStyle = FlatStyle::System;
+			   }
+
+			   // BOTONES
+			   array<Button^>^ botones = { button1, button2, button3, button4 };
+			   for each (Button ^ btn in botones) {
+				   btn->BackColor = colorVerde;
+				   btn->ForeColor = System::Drawing::Color::White;
+				   btn->FlatStyle = FlatStyle::Flat;
+				   btn->FlatAppearance->BorderSize = 0;
+				   btn->Font = fuenteBold;
+				   btn->Cursor = Cursors::Hand;
+			   }
+			   // Cancelar Gris
+			   button5->BackColor = System::Drawing::Color::FromArgb(220, 220, 220);
+			   button5->ForeColor = System::Drawing::Color::Black;
+			   button5->FlatStyle = FlatStyle::Flat;
+			   button5->FlatAppearance->BorderSize = 0;
+
+			   // TABLA
+			   dataGridEstadisticas->BackgroundColor = System::Drawing::Color::White;
+			   dataGridEstadisticas->BorderStyle = BorderStyle::None;
+			   dataGridEstadisticas->EnableHeadersVisualStyles = false;
+			   dataGridEstadisticas->ColumnHeadersDefaultCellStyle->BackColor = colorVerde;
+			   dataGridEstadisticas->ColumnHeadersDefaultCellStyle->ForeColor = System::Drawing::Color::White;
+			   dataGridEstadisticas->ColumnHeadersDefaultCellStyle->Font = fuenteBold;
+			   dataGridEstadisticas->DefaultCellStyle->SelectionBackColor = System::Drawing::Color::FromArgb(180, 220, 180);
+			   dataGridEstadisticas->DefaultCellStyle->SelectionForeColor = System::Drawing::Color::Black;
+			   dataGridEstadisticas->RowHeadersVisible = false;
+
+			   // TABS
+			   tabControl1->Font = fuente;
+			   tabPage1->BackColor = colorFondo;
+			   tabPage2->BackColor = System::Drawing::Color::White;
+
+			   // GRÁFICOS
+			   array<Chart^>^ charts = { chartTipoAnalisis, chartEstadoSalud };
+			   for each (Chart ^ ch in charts) {
+				   ch->BackColor = System::Drawing::Color::Transparent;
+				   if (ch->ChartAreas->Count > 0)
+					   ch->ChartAreas[0]->BackColor = System::Drawing::Color::White;
+
+				   for each (Title ^ t in ch->Titles) {
+					   t->ForeColor = colorTexto;
+					   t->Font = gcnew System::Drawing::Font("Segoe UI", 11, FontStyle::Bold);
+				   }
+			   }
+
+			   // LABELS Y RADIOS
+			   array<Label^>^ labels = { label1, label2, label3, label4, label5, label6 };
+			   for each (Label ^ lbl in labels) lbl->ForeColor = colorTexto;
+
+			   radioMensual->ForeColor = colorTexto;
+			   radioRango->ForeColor = colorTexto;
+		   }
 		   void ConfigurarCharts() {
 			   // --- 1. GRÁFICO DE BARRAS (Tipos de Dieta) ---
 			   if (chartTipoAnalisis != nullptr) {
@@ -709,35 +786,40 @@ namespace AgroRobotView {
 			   if (reporteActual == nullptr) return;
 
 			   try {
-				   // --- 1. BARRAS (Tipos) ---
+				   // --- 1. BARRAS (Tipos) - VISUAL MEJORADO ---
 				   chartTipoAnalisis->Series->Clear();
 				   Series^ sBar = gcnew Series("Tipos");
 				   sBar->ChartType = SeriesChartType::Column;
+
+				   // CONFIGURACIÓN VISUAL PEDIDA:
+				   sBar->Color = System::Drawing::Color::FromArgb(67, 160, 71); // Verde Corporativo
 				   sBar->IsValueShownAsLabel = true;
-				   sBar->Font = gcnew System::Drawing::Font("Arial", 10, FontStyle::Bold);
+				   sBar->LabelForeColor = System::Drawing::Color::Black; // Números oscuros
+				   sBar->Font = gcnew System::Drawing::Font("Segoe UI", 10, FontStyle::Bold); // Negrita
+
 				   chartTipoAnalisis->Series->Add(sBar);
 
 				   for each (auto stat in reporteActual->PorTipoDieta) {
 					   DataPoint^ p = gcnew DataPoint();
 					   p->SetValueXY(stat->Categoria, stat->Cantidad);
+					   // Tooltip para ver detalle al pasar el mouse
+					   p->ToolTip = "Frecuencia: " + stat->Categoria + "\nCantidad: " + stat->Cantidad;
 					   chartTipoAnalisis->Series[0]->Points->Add(p);
 				   }
 
-				   // --- 2. PASTEL (Top Alimentos) - ESTILO CALLOUT ---
+				   // --- 2. PASTEL (Top Alimentos) - IGUAL QUE ANTES ---
 				   chartEstadoSalud->Series->Clear();
 				   Series^ sPie = gcnew Series("Alimentos");
 				   sPie->ChartType = SeriesChartType::Pie;
 
 				   // ESTILO: Líneas externas
-				   sPie->Label = "#AXISLABEL"; // Solo nombre
-				   sPie->Font = gcnew System::Drawing::Font("Arial", 10, FontStyle::Bold); // Letra más grande
-				   sPie->SetCustomProperty("PieLabelStyle", "Outside"); // Texto afuera
-				   sPie->SetCustomProperty("PieLineColor", "Black");    // Línea negra
+				   sPie->Label = "#AXISLABEL";
+				   sPie->Font = gcnew System::Drawing::Font("Segoe UI", 10, FontStyle::Bold);
+				   sPie->SetCustomProperty("PieLabelStyle", "Outside");
+				   sPie->SetCustomProperty("PieLineColor", "Black");
 
-				   // Leyenda con porcentajes
 				   sPie->LegendText = "#PERCENT";
 				   sPie->Legend = "Legend1";
-				   // Asegurar que existe la leyenda
 				   if (chartEstadoSalud->Legends->Count == 0) chartEstadoSalud->Legends->Add(gcnew Legend("Legend1"));
 
 				   chartEstadoSalud->Series->Add(sPie);
@@ -745,7 +827,7 @@ namespace AgroRobotView {
 				   for each (auto stat in reporteActual->TopAlimentos) {
 					   DataPoint^ p = gcnew DataPoint();
 					   p->SetValueXY(stat->Categoria, stat->Cantidad);
-					   p->AxisLabel = stat->Categoria; // Nombre del alimento
+					   p->AxisLabel = stat->Categoria;
 					   chartEstadoSalud->Series[0]->Points->Add(p);
 				   }
 			   }
