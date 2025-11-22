@@ -78,9 +78,6 @@
     <ClCompile Include="frmMantSangre.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="frmNuevoDiagnostico.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="frmOrdenesAlimentacion.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
@@ -112,9 +109,6 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="frmEditarRol.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="frmEditarDiagnostico.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="frmNuevoStock.cpp">
@@ -212,9 +206,6 @@
     <ClInclude Include="frmMantSangre.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="frmNuevoDiagnostico.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="frmOrdenesAlimentacion.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -246,9 +237,6 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="frmEditarRol.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="frmEditarDiagnostico.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="frmAgregarInsumoToAlmacen.h">

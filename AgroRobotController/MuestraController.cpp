@@ -1,49 +1,80 @@
 #include "MuestraController.h"
+#include "GestorNutricionalController.h"
 
 using namespace AgroRobotController;
 using namespace System::IO;
 
 MuestraController::MuestraController() {
+
 }
 
 // Leer todas las muestras desde archivo
-List<Muestra^>^ MuestraController::buscarTodasMuestrasArchivo() {
+List<Muestra^>^ MuestraController::buscarTodasMuestrasArchivo(GestorNutricionalController^ gestor) {
     List<Muestra^>^ listaMuestras = gcnew List<Muestra^>();
     if (!File::Exists("muestras.txt")) return listaMuestras;
 
     array<String^>^ lineas = File::ReadAllLines("muestras.txt");
     for each (String ^ linea in lineas) {
+        if (String::IsNullOrWhiteSpace(linea)) continue;
+
         array<String^>^ campos = linea->Split(';');
-        int idMuestra = Convert::ToInt32(campos[0]);
-        int idAnimal = Convert::ToInt32(campos[1]);
-        String^ tipo = campos[2];
-        String^ fechaToma = campos[3];
+        if (campos->Length < 13) continue; // siempre deben ser 13 columnas
+
+        // Trim de cada campo
+        for (int i = 0; i < campos->Length; i++) {
+            campos[i] = campos[i]->Trim();
+        }
+
+        int idMuestra;
+        if (!Int32::TryParse(campos[0], idMuestra)) continue;
+
+        String^ tipo = campos[1];
+        String^ fechaToma = campos[2];
 
         // Campos de heces
-        String^ consistencia = campos[4];
-        String^ colorHeces = campos[5];
-        String^ olor = campos[6];
-        String^ parasitos = campos[7];
+        String^ consistencia = campos[3];
+        String^ colorHeces = campos[4];
+        String^ olor = campos[5];
+        String^ parasitos = campos[6];
 
         // Campos de sangre
-        String^ cantidadExtraida = campos[8];
-       // String^ colorSangre = campos[9];
-        String^ coagulos = campos[9];
-        String^ contaminacion = campos[10];
-        String^ colorSangre = campos[11];
+        String^ cantidadExtraida = campos[7];
+        String^ coagulos = campos[8];
+        String^ contaminacion = campos[9];
+        String^ colorSangre = campos[10];
 
-        Muestra^ muestra = gcnew Muestra(idMuestra, idAnimal, tipo, fechaToma,
+        // Animal
+        int idAnimal;
+        if (!Int32::TryParse(campos[11], idAnimal)) continue;
+        String^ especie = campos[12];
+
+        Animal^ animal = nullptr;
+        if (gestor != nullptr) {
+            animal = gestor->consultarAnimalporId(idAnimal);
+        }
+        if (animal == nullptr) {
+            //ahora usamos el constructor básico
+            animal = gcnew Animal(idAnimal, especie);
+        }
+
+        // Crear la muestra
+        Muestra^ muestra = gcnew Muestra(
+            idMuestra, tipo, fechaToma,
             consistencia, colorHeces, olor, parasitos,
-            cantidadExtraida, coagulos, contaminacion, colorSangre);
+            cantidadExtraida, coagulos, contaminacion, colorSangre,
+            animal
+        );
 
         listaMuestras->Add(muestra);
     }
     return listaMuestras;
 }
 
+
+
 // Buscar muestra por ID
-Muestra^ MuestraController::buscarMuestraPorIdArchivo(int idMuestra) {
-    List<Muestra^>^ lista = buscarTodasMuestrasArchivo();
+Muestra^ MuestraController::buscarMuestraPorIdArchivo(int idMuestra, GestorNutricionalController^ gestor) {
+    List<Muestra^>^ lista = buscarTodasMuestrasArchivo(gestor);
     for each (Muestra ^ m in lista) {
         if (m->getIdMuestra() == idMuestra)
             return m;
@@ -52,29 +83,40 @@ Muestra^ MuestraController::buscarMuestraPorIdArchivo(int idMuestra) {
 }
 
 // Buscar muestras por ID de animal
-List<Muestra^>^ MuestraController::buscarMuestrasPorAnimalArchivo(int idAnimal) {
-    List<Muestra^>^ lista = buscarTodasMuestrasArchivo();
+List<Muestra^>^ MuestraController::buscarMuestrasPorAnimalArchivo(int idAnimal, GestorNutricionalController^ gestor) {
+    List<Muestra^>^ lista = buscarTodasMuestrasArchivo(gestor);
     List<Muestra^>^ resultado = gcnew List<Muestra^>();
     for each (Muestra ^ m in lista) {
-        if (m->getIdAnimal() == idAnimal)
+        if (m->getAnimal() != nullptr && m->getAnimal()->IdAnimal == idAnimal) {
             resultado->Add(m);
+        }
     }
     return resultado;
 }
 
 // Agregar nueva muestra
-void MuestraController::agregarMuestraArchivo(Muestra^ nuevaMuestra) {
-    List<Muestra^>^ lista = buscarTodasMuestrasArchivo();
+void MuestraController::agregarMuestraArchivo(Muestra^ nuevaMuestra, GestorNutricionalController^ gestor) {
+    // Validar que la muestra tenga un animal asociado
+    Animal^ animal = nuevaMuestra->getAnimal();
+    if (animal == nullptr) {
+        return;
+    }
+    // Validar existencia del animal en animales.txt usando GestorNutricionalController
+    if (!gestor->existeAnimal(animal->IdAnimal)) {
+        return;
+    }
+    // Si pasa la validación, agregar la muestra
+    List<Muestra^>^ lista = buscarTodasMuestrasArchivo(gestor);
     lista->Add(nuevaMuestra);
     escribirArchivo(lista);
 }
 
 // Editar muestra existente
 void MuestraController::editarMuestraArchivo(int idMuestra, Muestra^ muestraEditada) {
-    List<Muestra^>^ lista = buscarTodasMuestrasArchivo();
+    List<Muestra^>^ lista = buscarTodasMuestrasArchivo(nullptr);
     for (int i = 0; i < lista->Count; i++) {
         if (lista[i]->getIdMuestra() == idMuestra) {
-            lista[i]->setIdAnimal(muestraEditada->getIdAnimal());
+
             lista[i]->setTipo(muestraEditada->getTipo());
             lista[i]->setFechaToma(muestraEditada->getFechaToma());
 
@@ -84,7 +126,6 @@ void MuestraController::editarMuestraArchivo(int idMuestra, Muestra^ muestraEdit
             lista[i]->setParasitos(muestraEditada->getParasitos());
 
             lista[i]->setCantidadExtraida(muestraEditada->getCantidadExtraida());
-            //lista[i]->setColorSangre(muestraEditada->getColorSangre());
             lista[i]->setCoagulos(muestraEditada->getCoagulos());
             lista[i]->setContaminacion(muestraEditada->getContaminacion());
             lista[i]->setColorSangre(muestraEditada->getColorSangre());
@@ -96,7 +137,7 @@ void MuestraController::editarMuestraArchivo(int idMuestra, Muestra^ muestraEdit
 
 // Eliminar muestra por ID
 void MuestraController::eliminarMuestraArchivo(int idMuestra) {
-    List<Muestra^>^ lista = buscarTodasMuestrasArchivo();
+    List<Muestra^>^ lista = buscarTodasMuestrasArchivo(nullptr);
     for (int i = 0; i < lista->Count; i++) {
         if (lista[i]->getIdMuestra() == idMuestra) {
             lista->RemoveAt(i);
@@ -107,7 +148,7 @@ void MuestraController::eliminarMuestraArchivo(int idMuestra) {
 }
 
 int MuestraController::generarNuevoId() {
-    List<Muestra^>^ lista = buscarTodasMuestrasArchivo(); // O readTxt() si usas ese nombre
+    List<Muestra^>^ lista = buscarTodasMuestrasArchivo(nullptr); // O readTxt() si usas ese nombre
     int maxId = 0;
     for each (Muestra ^ muestra in lista) {
         if (muestra->getIdMuestra() > maxId) {
@@ -122,12 +163,14 @@ void MuestraController::escribirArchivo(List<Muestra^>^ listaMuestras) {
     array<String^>^ lineas = gcnew array<String^>(listaMuestras->Count);
     for (int i = 0; i < listaMuestras->Count; i++) {
         Muestra^ m = listaMuestras[i];
-        /*lineas[i] = m->getIdMuestra() + ";" + m->getIdAnimal() + ";" + m->getTipo() + ";" + m->getFechaToma() + ";" +
+        Animal^ a = m->getAnimal();
+        String^ idAnimalStr = a != nullptr ? a->IdAnimal.ToString() : "0";
+        String^ especieStr = a != nullptr ? a->Especie : "null";
+
+        lineas[i] = m->getIdMuestra() + ";" + m->getTipo() + ";" + m->getFechaToma() + ";" +
             m->getConsistencia() + ";" + m->getColorHeces() + ";" + m->getOlor() + ";" + m->getParasitos() + ";" +
-            m->getCantidadExtraida() + ";" + m->getColorSangre() + ";" + m->getCoagulos() + ";" + m->getContaminacion();*/
-        lineas[i] = m->getIdMuestra() + ";" + m->getIdAnimal() + ";" + m->getTipo() + ";" + m->getFechaToma() + ";" +
-            m->getConsistencia() + ";" + m->getColorHeces() + ";" + m->getOlor() + ";" + m->getParasitos() + ";" +
-            m->getCantidadExtraida() + ";" + m->getCoagulos() + ";" + m->getContaminacion() + ";" + m->getColorSangre();
+            m->getCantidadExtraida() + ";" + m->getCoagulos() + ";" + m->getContaminacion() + ";" + m->getColorSangre() + ";" +
+            idAnimalStr + ";" + especieStr;
     }
     File::WriteAllLines("muestras.txt", lineas);
 }

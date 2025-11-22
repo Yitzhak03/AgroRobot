@@ -1,4 +1,6 @@
 #pragma once
+#include "MuestraController.h"
+#include "GestorNutricionalController.h"
 
 using namespace System;
 using namespace System::Collections::Generic;
@@ -10,19 +12,24 @@ namespace AgroRobotController {
     public:
         DiagnosticoController();
 
-        // Operaciones principales
-        void agregarDiagnosticoArchivo(Diagnostico^ nuevoDiagnostico);
-        void editarDiagnosticoArchivo(int idDiagnostico, Diagnostico^ diagnosticoEditado);
-        void eliminarDiagnosticoArchivo(int idDiagnostico);
-        int generarNuevoId();
+        // Generación automática
+        Diagnostico^ generarDiagnosticoParaAnimal(
+            int idAnimal,
+            MuestraController^ muestraController,
+            GestorNutricionalController^ gestor
+        );
 
         // Búsquedas
+        int generarNuevoId();
         List<Diagnostico^>^ buscarTodosDiagnosticosArchivo();
         Diagnostico^ buscarDiagnosticoPorIdArchivo(int idDiagnostico);
         List<Diagnostico^>^ buscarDiagnosticosPorAnimalArchivo(int idAnimal);
 
+        // Eliminación
+        void eliminarDiagnosticoArchivo(int idDiagnostico);
+
         // Persistencia
         void escribirArchivo(List<Diagnostico^>^ listaDiagnosticos);
+        void guardarDiagnosticoArchivo(Diagnostico^ diagnostico);
     };
 }
-

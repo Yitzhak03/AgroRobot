@@ -393,6 +393,7 @@ namespace AgroRobotView {
 			this->volverToolStripMenuItem->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"volverToolStripMenuItem.Image")));
 			this->volverToolStripMenuItem->Name = L"volverToolStripMenuItem";
 			this->volverToolStripMenuItem->Padding = System::Windows::Forms::Padding(15, 0, 15, 0);
+			this->volverToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::volverToolStripMenuItem_Click);
 			this->volverToolStripMenuItem->Size = System::Drawing::Size(135, 55);
 			this->volverToolStripMenuItem->Text = L"Volver";
 			// 
@@ -549,6 +550,10 @@ namespace AgroRobotView {
 		frmReporteAlimentacion^ ventanaReporteAlimentacion = gcnew frmReporteAlimentacion();
 		ventanaReporteAlimentacion->MdiParent = this;
 		ventanaReporteAlimentacion->Show();
+	}
+
+	private: System::Void volverToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Close();
 	}
 };
 }

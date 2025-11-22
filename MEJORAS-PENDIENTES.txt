@@ -21,8 +21,13 @@ MODULO ALMACÉN
 =====================
 MODULO DIAGNÓSTICO
 ======================
-•
-•
+• Implementación de frmMantDiagnostico ✅
+• Botón Buscar funcional: permite mostrar todos los diagnósticos o filtrarlos por ID de animal.
+• Mostrar diagnósticos en DataGridView con columnas: ID Diagnóstico, ID Animal, Especie, Heces, Sangre, Estado y Observaciones.
+• ComboBox dinámico que lista los animales sin diagnóstico generado.
+• Botón Generar: crea automáticamente el diagnóstico en base a las muestras registradas y lo guarda en archivo.
+• Actualización automática del DataGridView y del ComboBox después de generar un diagnóstico.
+• Integración con GestorNutricionalController y MuestraController para lectura de animales y muestras desde archivo.
 =====================
 MODULO GESTOR ALIMENTICIO
 ======================

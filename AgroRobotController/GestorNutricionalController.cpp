@@ -273,3 +273,41 @@ String^ GestorNutricionalController::verificarPesoAnimal(int idAnimal, double pe
 
 	return mensaje;
 }
+
+List<Animal^>^ GestorNutricionalController::leerArchivoAnimal() {
+	listaAnimales->Clear();
+
+	if (!File::Exists("animales.txt")) {
+		return listaAnimales;
+	}
+
+	array<String^>^ lineas = File::ReadAllLines("animales.txt");
+	for each (String ^ linea in lineas) {
+		if (String::IsNullOrWhiteSpace(linea)) continue;
+
+		array<String^>^ campos = linea->Split(';');
+		// Esperamos: 
+		if (campos->Length < 6) continue;
+
+		int idAnimal;
+		double peso, edad;
+
+		if (!Int32::TryParse(campos[0], idAnimal)) continue;
+		if (!Double::TryParse(campos[2], peso)) peso = 0;
+		if (!Double::TryParse(campos[3], edad)) edad = 0;
+
+		// Usamos el constructor intermedio
+		Animal^ a = gcnew Animal(
+			idAnimal,
+			campos[1]->Trim(),   // especie
+			peso,
+			edad,
+			campos[4]->Trim(),   // estadoSalud
+			campos[5]->Trim()    // ultimaDieta
+		);
+
+		listaAnimales->Add(a);
+	}
+
+	return listaAnimales;
+}
