@@ -31,9 +31,8 @@ namespace AgroRobotView {
 			InitializeComponent();
 			this->reporteController = reporteController;
 			this->objReporte = objReporte;
-			//
-			//TODO: agregar código de constructor aquí
-			//
+			// APLICAR ESTILO
+			AplicarEstiloProfesional();
 		}
 
 	protected:
@@ -98,7 +97,6 @@ namespace AgroRobotView {
 		void InitializeComponent(void)
 		{
 			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(frmEditarReporte::typeid));
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
 			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -455,7 +453,6 @@ namespace AgroRobotView {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->ClientSize = System::Drawing::Size(714, 458);
 			this->Controls->Add(this->button2);
@@ -547,7 +544,67 @@ private: System::Void frmEditarReporte_Load(System::Object^ sender, System::Even
 	}
 }
 
-private: void CargarDatosReporte() {
+private: 
+	
+	void AplicarEstiloProfesional() {
+		// PALETA
+		System::Drawing::Color colorFondo = System::Drawing::Color::FromArgb(238, 245, 233);
+		System::Drawing::Color colorVerde = System::Drawing::Color::FromArgb(67, 160, 71);
+		System::Drawing::Font^ fuente = gcnew System::Drawing::Font("Segoe UI", 9, FontStyle::Regular);
+		System::Drawing::Font^ fuenteBold = gcnew System::Drawing::Font("Segoe UI Semibold", 9, FontStyle::Bold);
+
+		// VENTANA
+		this->BackColor = colorFondo;
+		this->Font = fuente;
+		this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog; // Diálogo fijo
+		this->StartPosition = FormStartPosition::CenterParent; // Centrado respecto al padre
+
+		// GROUPBOXES
+		array<GroupBox^>^ grupos = { groupBox1, groupBox2 };
+		for each (GroupBox ^ gb in grupos) {
+			gb->BackColor = System::Drawing::Color::White;
+			gb->ForeColor = System::Drawing::Color::FromArgb(30, 60, 30);
+			gb->Font = fuenteBold;
+		}
+
+		// BOTONES
+		button1->BackColor = colorVerde; // Guardar
+		button1->ForeColor = System::Drawing::Color::White;
+		button1->FlatStyle = FlatStyle::Flat;
+		button1->FlatAppearance->BorderSize = 0;
+
+		button2->BackColor = System::Drawing::Color::FromArgb(220, 220, 220); // Cancelar
+		button2->ForeColor = System::Drawing::Color::Black;
+		button2->FlatStyle = FlatStyle::Flat;
+		button2->FlatAppearance->BorderSize = 0;
+
+		// DATAGRID (Info Resumen)
+		dataGridView1->BackgroundColor = System::Drawing::Color::White;
+		dataGridView1->BorderStyle = BorderStyle::None;
+		dataGridView1->EnableHeadersVisualStyles = false;
+		dataGridView1->ColumnHeadersDefaultCellStyle->BackColor = colorVerde;
+		dataGridView1->ColumnHeadersDefaultCellStyle->ForeColor = System::Drawing::Color::White;
+		dataGridView1->RowHeadersVisible = false;
+		dataGridView1->DefaultCellStyle->SelectionBackColor = System::Drawing::Color::White; // No seleccionable visualmente
+		dataGridView1->DefaultCellStyle->SelectionForeColor = System::Drawing::Color::Black;
+
+		// TEXTBOX GRANDE (Observaciones)
+		textBox2->BackColor = System::Drawing::Color::WhiteSmoke;
+		textBox2->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+
+		// CHECKBOXES
+		array<CheckBox^>^ checks = { checkBox1, checkBox2, checkBox3, checkBox4, checkBox5, checkBox6 };
+		for each (CheckBox ^ chk in checks) {
+			chk->ForeColor = System::Drawing::Color::FromArgb(30, 60, 30);
+			chk->Font = fuente;
+		}
+
+		// LABELS
+		array<Label^>^ labels = { label1, label2, label3, label4, label5 };
+		for each (Label ^ lbl in labels) lbl->ForeColor = System::Drawing::Color::FromArgb(30, 60, 30);
+	}
+	
+	void CargarDatosReporte() {
 	try {
 		// 1. Cargar DataGridView (solo lectura)
 		dataGridView1->Rows->Clear();

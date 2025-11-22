@@ -34,9 +34,10 @@ namespace AgroRobotView {
 			// CARGAR LAS IMÁGENES - Ajusta las rutas según donde tengas tus imágenes
 			CargarImagenesEstados();
 
-			//
-			//TODO: agregar código de constructor aquí
-			//
+			
+
+			// APLICAR ESTILO
+			AplicarEstiloProfesional();
 		}
 
 	protected:
@@ -423,9 +424,9 @@ namespace AgroRobotView {
 			// 
 			this->pictureBox1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(29, 84);
+			this->pictureBox1->Location = System::Drawing::Point(29, 65);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(100, 50);
+			this->pictureBox1->Size = System::Drawing::Size(100, 69);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox1->TabIndex = 1;
 			this->pictureBox1->TabStop = false;
@@ -783,54 +784,57 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 		if (dataGridView1->SelectedRows->Count > 0) {
 			DataGridViewRow^ selectedRow = dataGridView1->SelectedRows[0];
 
-			// Actualizar panel de monitoreo con el reporte seleccionado
+			// Verificamos que la celda del estado (Column7 o la que contenga el texto) no sea nula
 			if (selectedRow->Cells["Column7"]->Value != nullptr) {
 				String^ estado = selectedRow->Cells["Column7"]->Value->ToString();
-				comboBox3->SelectedItem = estado;
 
-				// También actualizar el TextBox y ProgressBar
+				// ESTO ES LO QUE HACE LA MAGIA VISUAL ??
 				ActualizarPanelMonitoreo(estado);
+
+				// Sincronizar también el combobox de abajo si quieres
+				if (comboBox3->Items->Contains(estado)) comboBox3->SelectedItem = estado;
 			}
 		}
 	}
 
 private: void ActualizarPanelMonitoreo(String^ estado) {
+	// Normalizamos el texto para evitar errores por mayúsculas/minúsculas
+	estado = estado->Trim();
+
 	if (estado == "Excelente") {
-		progressBar1->Value = 90;
+		progressBar1->Value = 100;
 		textBox2->Text = "Óptimo";
 		textBox2->ForeColor = Color::Green;
-		pictureBox1->Image = imgExcelente; // ASIGNAR IMAGEN
+		pictureBox1->Image = imgExcelente; // Pone la foto
 	}
 	else if (estado == "Bueno") {
-		progressBar1->Value = 70;
+		progressBar1->Value = 75;
 		textBox2->Text = "Adecuado";
 		textBox2->ForeColor = Color::Blue;
-		pictureBox1->Image = imgBueno; // ASIGNAR IMAGEN
+		pictureBox1->Image = imgBueno; // Pone la foto
 	}
 	else if (estado == "Regular") {
 		progressBar1->Value = 50;
-		textBox2->Text = "Requiere atención";
+		textBox2->Text = "Atención";
 		textBox2->ForeColor = Color::Orange;
-		pictureBox1->Image = imgRegular; // ASIGNAR IMAGEN
+		pictureBox1->Image = imgRegular; // Pone la foto
 	}
-	else if (estado == "Crítico") {
-		progressBar1->Value = 20;
+	else if (estado == "Crítico" || estado == "Critico") {
+		progressBar1->Value = 25;
 		textBox2->Text = "URGENTE";
 		textBox2->ForeColor = Color::Red;
-		pictureBox1->Image = imgCritico; // ASIGNAR IMAGEN
+		pictureBox1->Image = imgCritico; // Pone la foto
 	}
 	else {
-		// Estado desconocido
 		progressBar1->Value = 0;
-		textBox2->Text = "Desconocido";
-		textBox2->ForeColor = Color::Gray;
-		pictureBox1->Image = nullptr; // Sin imagen
+		textBox2->Text = "---";
+		pictureBox1->Image = nullptr;
 	}
 
-	// Actualizar el porcentaje en el label
+	// Actualizar texto de porcentaje
 	label7->Text = progressBar1->Value.ToString() + "%";
 
-	// Forzar el redibujado del PictureBox
+	// Refrescar para evitar parpadeos
 	pictureBox1->Refresh();
 }
 
@@ -995,23 +999,34 @@ private: void LimpiarFiltros() {
 
 private: void CargarImagenesEstados() {
 	try {
-		String^ appPath = Application::StartupPath;
-		String^ resourcesPath = Path::Combine(appPath, "Resources");
+		// Obtenemos la ruta donde está corriendo el programa (x64/Debug)
+		String^ rutaBase = Application::StartupPath;
 
-		// Si la carpeta Resources no existe, crear imágenes programáticamente
-		if (!Directory::Exists(resourcesPath)) {
-			CrearImagenesProgramaticamente();
-			return;
-		}
+		// Puedes poner las imagenes sueltas junto al exe, o en una carpeta Resources
+		// Aquí asumo que están junto al exe (como los txt) para facilitar las cosas
+		String^ pathExc = Path::Combine(rutaBase, "excelente.png");
+		String^ pathBue = Path::Combine(rutaBase, "bueno.png");
+		String^ pathReg = Path::Combine(rutaBase, "regular.png");
+		String^ pathCri = Path::Combine(rutaBase, "critico.png");
 
-		// Intentar cargar desde archivos
-		imgExcelente = gcnew Bitmap(Path::Combine(resourcesPath, "excelente.png"));
-		imgBueno = gcnew Bitmap(Path::Combine(resourcesPath, "bueno.png"));
-		imgRegular = gcnew Bitmap(Path::Combine(resourcesPath, "regular.png"));
-		imgCritico = gcnew Bitmap(Path::Combine(resourcesPath, "critico.png"));
+		// 1. EXCELENTE
+		if (File::Exists(pathExc)) imgExcelente = gcnew Bitmap(pathExc);
+		else imgExcelente = CrearImagenEstado(Color::Green, "EXCELENTE", Color::White); // Respaldo
+
+		// 2. BUENO
+		if (File::Exists(pathBue)) imgBueno = gcnew Bitmap(pathBue);
+		else imgBueno = CrearImagenEstado(Color::Blue, "BUENO", Color::White); // Respaldo
+
+		// 3. REGULAR
+		if (File::Exists(pathReg)) imgRegular = gcnew Bitmap(pathReg);
+		else imgRegular = CrearImagenEstado(Color::Orange, "REGULAR", Color::Black); // Respaldo
+
+		// 4. CRÍTICO
+		if (File::Exists(pathCri)) imgCritico = gcnew Bitmap(pathCri);
+		else imgCritico = CrearImagenEstado(Color::Red, "CRÍTICO", Color::White); // Respaldo
 	}
 	catch (Exception^ ex) {
-		// Si falla, crear imágenes programáticamente
+		// Si hay un error de permisos o formato, usamos los generados
 		CrearImagenesProgramaticamente();
 	}
 }
@@ -1059,6 +1074,76 @@ private: void CrearImagenesProgramaticamente() {
 	imgRegular = CrearImagenEstado(Color::Orange, "REGULAR", Color::Black);
 	imgCritico = CrearImagenEstado(Color::Red, "CRÍTICO", Color::White);
 }
+
+	   void AplicarEstiloProfesional() {
+		   // PALETA DE COLORES
+		   System::Drawing::Color colorFondo = System::Drawing::Color::FromArgb(238, 245, 233);
+		   System::Drawing::Color colorVerde = System::Drawing::Color::FromArgb(67, 160, 71);
+		   System::Drawing::Font^ fuente = gcnew System::Drawing::Font("Segoe UI", 9, FontStyle::Regular);
+		   System::Drawing::Font^ fuenteBold = gcnew System::Drawing::Font("Segoe UI Semibold", 9, FontStyle::Bold);
+
+		   // VENTANA
+		   this->BackColor = colorFondo;
+		   this->Font = fuente;
+		   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+		   this->StartPosition = FormStartPosition::CenterScreen;
+
+		   // GROUPBOXES
+		   array<GroupBox^>^ grupos = { groupBox1, groupBox2 };
+		   for each (GroupBox ^ gb in grupos) {
+			   gb->BackColor = System::Drawing::Color::White;
+			   gb->ForeColor = System::Drawing::Color::FromArgb(30, 60, 30); // Texto oscuro
+			   gb->Font = fuenteBold;
+			   gb->FlatStyle = FlatStyle::System;
+		   }
+
+		   // BOTONES
+		   array<Button^>^ botones = { button1, button2, button3 };
+		   for each (Button ^ btn in botones) {
+			   btn->BackColor = colorVerde;
+			   btn->ForeColor = System::Drawing::Color::White;
+			   btn->FlatStyle = FlatStyle::Flat;
+			   btn->FlatAppearance->BorderSize = 0;
+			   btn->Font = fuenteBold;
+			   btn->Cursor = Cursors::Hand;
+		   }
+		   // Cancelar (button4) en gris
+		   button4->BackColor = System::Drawing::Color::FromArgb(220, 220, 220);
+		   button4->ForeColor = System::Drawing::Color::Black;
+		   button4->FlatStyle = FlatStyle::Flat;
+		   button4->FlatAppearance->BorderSize = 0;
+
+		   // DATAGRIDVIEW
+		   dataGridView1->BackgroundColor = System::Drawing::Color::White;
+		   dataGridView1->BorderStyle = BorderStyle::None;
+		   dataGridView1->EnableHeadersVisualStyles = false;
+
+		   // Configuración de comportamiento
+		   dataGridView1->SelectionMode = DataGridViewSelectionMode::FullRowSelect; // 
+		   dataGridView1->MultiSelect = false; //
+
+		   dataGridView1->ColumnHeadersDefaultCellStyle->BackColor = colorVerde;
+		   dataGridView1->ColumnHeadersDefaultCellStyle->ForeColor = System::Drawing::Color::White;
+		   dataGridView1->ColumnHeadersDefaultCellStyle->Font = fuenteBold;
+
+		   dataGridView1->DefaultCellStyle->SelectionBackColor = System::Drawing::Color::FromArgb(180, 220, 180);
+		   dataGridView1->DefaultCellStyle->SelectionForeColor = System::Drawing::Color::Black;
+		   dataGridView1->RowHeadersVisible = false;
+
+		   // PICTUREBOX (Borde suave)
+		   pictureBox1->BorderStyle = BorderStyle::None;
+		   pictureBox1->BackColor = System::Drawing::Color::Transparent;
+
+		   // INPUTS
+		   textBox1->BackColor = System::Drawing::Color::WhiteSmoke;
+		   textBox1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+		   textBox2->BackColor = System::Drawing::Color::White; // Estado
+		   textBox2->BorderStyle = System::Windows::Forms::BorderStyle::None; // Solo lectura limpio
+
+		   // LABELS (Asegurar contraste)
+		   array<Label^>^ labels = { label1, label2, label3, label4, label5, label6, label7, label8 };
+		   for each (Label ^ lbl in labels) lbl->ForeColor = System::Drawing::Color::FromArgb(30, 60, 30);
+	   }
 
 private: Bitmap^ CrearImagenEstado(Color colorFondo, String^ texto, Color colorTexto) {
 	Bitmap^ bmp = gcnew Bitmap(100, 50);
