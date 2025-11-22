@@ -63,6 +63,7 @@ namespace AgroRobotView {
 		{
 			InitializeComponent();
 			this->menuStrip1->Renderer = gcnew ClickTransparentToolStripRenderer(System::Drawing::Color::FromArgb(120, 0, 0, 0));
+			this->formularioActivo = nullptr; // Inicializamos en nulo
 		}
 		// Nuevo constructor para recibir el usuario autenticado
 		frmMenu(Usuario^ usuario)
@@ -106,6 +107,9 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::ToolStripMenuItem^ planAlimenticioToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ insumosPorAlmacénToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ alimentaciónPorEspecieToolStripMenuItem;
+	private:
+		// Variable para recordar qué ventana está abierta
+		System::Windows::Forms::Form^ formularioActivo;
 	private:
 		/// <summary>
 		/// Variable del diseñador necesaria.
@@ -423,73 +427,96 @@ namespace AgroRobotView {
 		//===============================================================================
 
 
-	private: System::Void diagnosticoToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-	{
+	// ==========================================================================
+	// FUNCIÓN MÁGICA PARA GESTIÓN DE VENTANAS
+	// ==========================================================================
+	private: void AbrirFormulario(System::Windows::Forms::Form^ nuevoForm) {
+		// 1. Si ya hay un formulario activo, lo cerramos
+		if (this->formularioActivo != nullptr) {
+			this->formularioActivo->Close();
+		}
+
+		// 2. Guardamos la referencia del nuevo formulario
+		this->formularioActivo = nuevoForm;
+
+		// 3. Configuramos como hijo MDI (para que quede dentro del menú)
+		nuevoForm->MdiParent = this;
+
+		// 4. Ajustamos estilo para que se vea bien maximizado (opcional pero recomendado)
+		nuevoForm->Dock = DockStyle::Fill;
+
+		// 5. Lo mostramos
+		nuevoForm->Show();
 	}
 		   //===============================================================================
-		   //==============================Registro Insumos General=========================
-		   //===============================================================================
-	private: System::Void registroInsumosGeneralToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-	{
-		frmMantInsumo^ frm = gcnew frmMantInsumo();
-		frm->MdiParent = this;
-		frm->Show();
+			   //============================== EVENTOS DEL MENÚ ===============================
+			   //===============================================================================
+
+	private: System::Void diagnosticoToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {}
+
+		   // --- ALMACÉN ---
+	private: System::Void registroInsumosGeneralToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		AbrirFormulario(gcnew frmMantInsumo());
 	}
-	private: System::Void gestiónDeReportesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-	{
-		frmMantReportes^ reportesForm = gcnew frmMantReportes();
-		reportesForm->MdiParent = this;
-		reportesForm->Show();
+	private: System::Void registroGeneralDeAlmacenesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		AbrirFormulario(gcnew frmMantAlmacen());
 	}
 
-	private: System::Void registroDeDietasToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-	{
-		frmMantDietas^ frm = gcnew frmMantDietas();
-		frm->MdiParent = this;
-		frm->Show();
+		   // --- PLAN DE ALIMENTACIÓN ---
+	private: System::Void registroDeDietasToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		AbrirFormulario(gcnew frmMantDietas());
+	}
+	private: System::Void registroDeAnimalesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		AbrirFormulario(gcnew frmMantAnimales());
 	}
 
-	private: System::Void registroDeAnimalesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-	{
-		frmMantAnimales^ frm = gcnew frmMantAnimales();
-		frm->MdiParent = this;
-		frm->Show();
+		   // --- DIAGNÓSTICO ---
+	private: System::Void géstionDeDiagnosticosToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		AbrirFormulario(gcnew frmMantDiagnostico());
 	}
-	private: System::Void géstionDeDiagnosticosToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-	{
-		frmMantDiagnostico^ formMantDiagnostico = gcnew frmMantDiagnostico();
-		formMantDiagnostico->MdiParent = this;
-		formMantDiagnostico->Show();
-	}
-	private: System::Void gestiónDeMuestrasToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-	{
+	private: System::Void gestiónDeMuestrasToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {}
 
+	private: System::Void muestraDeHecesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		AbrirFormulario(gcnew frmMantHeces());
 	}
-	private: System::Void muestraDeHecesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-	{
-		frmMantHeces^ formMantHeces = gcnew frmMantHeces();
-		formMantHeces->MdiParent = this;
-		formMantHeces->Show();
-	}
-	private: System::Void muestraDeSangreToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-	{
-		frmMantSangre^ formMantSangre = gcnew frmMantSangre();
-		formMantSangre->MdiParent = this;
-		formMantSangre->Show();
+	private: System::Void muestraDeSangreToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		AbrirFormulario(gcnew frmMantSangre());
 	}
 
-	private: System::Void ordenesDeAlimentaciónToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-	{
-		frmOrdenesAlimentacion^ frm = gcnew frmOrdenesAlimentacion();
-		frm->MdiParent = this;
-		frm->Show();
+		   // --- REPORTES ---
+	private: System::Void gestiónDeReportesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		AbrirFormulario(gcnew frmMantReportes());
+	}
+	private: System::Void ordenesDeAlimentaciónToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		AbrirFormulario(gcnew frmOrdenesAlimentacion());
+	}
+	private: System::Void diagnósticosMédicosToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		AbrirFormulario(gcnew frmMantReporteDiagnostico());
+	}
+	private: System::Void planAlimenticioToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		AbrirFormulario(gcnew frmMantReporteAlimentacion());
+	}
+	private: System::Void insumosPorAlmacénToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		AbrirFormulario(gcnew frmReporteInsumosXalmacen());
+	}
+	private: System::Void alimentaciónPorEspecieToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		AbrirFormulario(gcnew frmReporteAlimentacion());
 	}
 
-	private: System::Void registroGeneralDeAlmacenesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-	{
-		frmMantAlmacen^ frm = gcnew frmMantAlmacen();
-		frm->MdiParent = this;
-		frm->Show();
+		   // --- ADMINISTRACIÓN ---
+	private: System::Void mantenimientoDeUsuariosToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		AbrirFormulario(gcnew frmMantUsuarios());
+	}
+	private: System::Void mantenimientoDeRolesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		AbrirFormulario(gcnew frmMantRoles());
+	}
+	private: System::Void programaciónDeAlimentaciónToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		AbrirFormulario(gcnew frmMantAlimentación());
+	}
+
+		   // --- SALIR ---
+	private: System::Void volverToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Close(); // Cierra el menú principal (regresa al login si está configurado así en Main)
 	}
 
 
@@ -506,54 +533,6 @@ namespace AgroRobotView {
 		this->mantenimientoDeRolesToolStripMenuItem->Visible = rolUsuario->GetPermisos()[0];
 		this->programaciónDeAlimentaciónToolStripMenuItem->Visible = (rolUsuario->GetPermisos()[0] || rolUsuario->GetPermisos()[2]);
 		this->gestiónDeReportesToolStripMenuItem->Visible = rolUsuario->GetPermisos()[1];
-	}
-
-
-	private: System::Void mantenimientoDeUsuariosToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-	{
-		frmMantUsuarios^ frm = gcnew frmMantUsuarios();
-		frm->MdiParent = this;
-		frm->Show();
-	}
-
-	private: System::Void mantenimientoDeRolesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-	{
-		frmMantRoles^ ventanaRoles = gcnew frmMantRoles();
-		ventanaRoles->MdiParent = this;
-		ventanaRoles->Show();
-	}
-	private: System::Void programaciónDeAlimentaciónToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-	{
-		frmMantAlimentación^ ventanaAlimentacion = gcnew frmMantAlimentación();
-		ventanaAlimentacion->MdiParent = this;
-		ventanaAlimentacion->Show();
-	}
-	private: System::Void diagnósticosMédicosToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-	{
-		frmMantReporteDiagnostico^ ventanaDiagnostico = gcnew frmMantReporteDiagnostico();
-		ventanaDiagnostico->MdiParent = this;
-		ventanaDiagnostico->Show();
-	}
-	private: System::Void planAlimenticioToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-	{
-		frmMantReporteAlimentacion^ ventanaPlanAlimenticio = gcnew frmMantReporteAlimentacion();
-		ventanaPlanAlimenticio->MdiParent = this;
-		ventanaPlanAlimenticio->Show();
-	}
-	private: System::Void insumosPorAlmacénToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-	{
-		frmReporteInsumosXalmacen^ ventanaInsumosXAlmacen = gcnew frmReporteInsumosXalmacen();
-		ventanaInsumosXAlmacen->MdiParent = this;
-		ventanaInsumosXAlmacen->Show();
-	}
-	private: System::Void alimentaciónPorEspecieToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-		frmReporteAlimentacion^ ventanaReporteAlimentacion = gcnew frmReporteAlimentacion();
-		ventanaReporteAlimentacion->MdiParent = this;
-		ventanaReporteAlimentacion->Show();
-	}
-
-	private: System::Void volverToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->Close();
 	}
 };
 }
