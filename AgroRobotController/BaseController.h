@@ -21,6 +21,13 @@ namespace AgroRobotController {
 		/*Cerrar conexión*/
 		void cerrarConexion();
 
+		/*SI EN CASO PODEMOS USAR LAS FUNCIONES PREDETERMINADAS*/
+		int BaseController::insertSql(String^ sSql); 
+
+		bool BaseController::executeSql(String^ sSql);
+
+
+		/*SI EN CASO NOS PIDEN CREAR NUESTRAS PROPIAS FUNCIONES*/
 		/*Obtener registros de la BD*/
 		SqlDataReader^ executeStoredProcedureReader(String^ tipoProcedimiento, array<SqlParameter^>^ parametros);
 
