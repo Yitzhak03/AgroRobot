@@ -15,7 +15,7 @@ Muestra::Muestra() {
     parasitos = "";
 
     // Sangre
-    cantidadExtraida = "";
+    cantidadExtraida = 0;
     colorSangre = "";
     coagulos = "";
     contaminacion = "";
@@ -27,7 +27,7 @@ Muestra::Muestra() {
 // Constructor parametrizado
 Muestra::Muestra(int idMuestra, String^ tipo, String^ fechaToma,
     String^ consistencia, String^ colorHeces, String^ olor, String^ parasitos,
-    String^ cantidadExtraida, String^ coagulos, String^ contaminacion, String^ colorSangre,
+    int cantidadExtraida, String^ coagulos, String^ contaminacion, String^ colorSangre,
     Animal^ animal) {
     this->idMuestra = idMuestra;
     this->tipo = tipo;
@@ -70,8 +70,8 @@ String^ Muestra::getParasitos() { return parasitos; }
 void Muestra::setParasitos(String^ parasitos) { this->parasitos = parasitos; }
 
 // Sangre
-String^ Muestra::getCantidadExtraida() { return cantidadExtraida; }
-void Muestra::setCantidadExtraida(String^ cantidadExtraida) { this->cantidadExtraida = cantidadExtraida; }
+int Muestra::getCantidadExtraida() { return cantidadExtraida; }
+void Muestra::setCantidadExtraida(int cantidadExtraida) { this->cantidadExtraida = cantidadExtraida; }
 
 String^ Muestra::getColorSangre() { return colorSangre; }
 void Muestra::setColorSangre(String^ colorSangre) { this->colorSangre = colorSangre; }

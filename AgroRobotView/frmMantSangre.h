@@ -367,7 +367,7 @@ namespace AgroRobotView {
 			array<String^>^ filaGrilla = gcnew array<String^>(7);
 			filaGrilla[0] = Convert::ToString(m->getIdMuestra());
 			filaGrilla[1] = m->getEspecie();
-			filaGrilla[2] = m->getCantidadExtraida();
+			filaGrilla[2] = Convert::ToString(m->getCantidadExtraida());
 			filaGrilla[3] = m->getCoagulos();
 			filaGrilla[4] = m->getContaminacion();
 			filaGrilla[5] = m->getColorSangre();
@@ -450,22 +450,33 @@ namespace AgroRobotView {
 
 	private: System::Void button2_Click_1(System::Object^ sender, System::EventArgs^ e) {
 		if (this->comboBox1->SelectedItem == nullptr) {
-			MessageBox::Show("Seleccione un animal válido antes de agregar una muestra de sangre.");
+			MessageBox::Show("Seleccione una especie válida antes de agregar una muestra de sangre.");
 			return;
 		}
-
-		int idAnimalSeleccionado = Convert::ToInt32(this->comboBox1->SelectedItem->ToString());
-
-		// Abrir el formulario de nueva muestra de sangre
+		// Especie seleccionada en el comboBox
+		String^ especieSeleccionada = this->comboBox1->SelectedItem->ToString();
+		// Buscar el animal correspondiente a esa especie
+		List<Animal^>^ animales = gestorNutricionalController->obtenerTodosAnimales();
+		Animal^ animalSeleccionado = nullptr;
+		for each (Animal ^ a in animales) {
+			if (a->Especie->Equals(especieSeleccionada)) {
+				animalSeleccionado = a;
+				break;
+			}
+		}
+		if (animalSeleccionado == nullptr) {
+			MessageBox::Show("No se encontró el animal para la especie seleccionada.");
+			return;
+		}
+		int idAnimalSeleccionado = animalSeleccionado->IdAnimal;
+		// Abrir el formulario de nueva muestra de sangre con el idAnimal seleccionado
 		frmNuevoMuestraS^ nuevaMuestraSangre = gcnew frmNuevoMuestraS(
 			idAnimalSeleccionado,
 			this->muestraController,
 			this->gestorNutricionalController
 		);
-
 		nuevaMuestraSangre->ShowDialog();
-
-		// Refrescar comboBox después de agregar
+		// Refrescar comboBox después de agregar (para que ya no aparezca ese animal)
 		cargarAnimalesDisponibles();
 	}
 };
