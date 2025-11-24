@@ -25,7 +25,7 @@ namespace AgroRobotView {
 			InitializeComponent();
 			this->muestraController = gcnew MuestraController();
 			this->gestorNutricionalController = gcnew GestorNutricionalController();
-			cargarAnimalesDisponibles();
+			
 			cargarAnimalesSinMuestraHeces();
 			this->BackColor = System::Drawing::Color::SeaGreen;
 			this->button1->BackColor = System::Drawing::Color::LightGreen;
@@ -54,32 +54,14 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::Button^ button4;
 	protected:
 	private: System::Windows::Forms::Button^ button3;
-
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
-
-
-
-
-
-
 	private: System::Windows::Forms::GroupBox^ groupBox1;
 	private: System::Windows::Forms::Button^ button1;
-
-
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::Windows::Forms::Label^ label1;
 
-
 	private: GestorNutricionalController^ gestorNutricionalController;
 	private: MuestraController^ muestraController;
-
-
-
-
-
-
-
-
 
 	private: System::Windows::Forms::GroupBox^ groupBox2;
 	private: System::Windows::Forms::Label^ label2;
@@ -93,18 +75,6 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Fecha;
-
-
-
-
-
-
-
-
-
-
-
-
 
 	private:
 		/// <summary>
@@ -122,6 +92,13 @@ namespace AgroRobotView {
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Fecha = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
@@ -131,13 +108,6 @@ namespace AgroRobotView {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->Column6 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Fecha = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
@@ -175,95 +145,6 @@ namespace AgroRobotView {
 			this->dataGridView1->RowHeadersWidth = 51;
 			this->dataGridView1->Size = System::Drawing::Size(595, 183);
 			this->dataGridView1->TabIndex = 19;
-			// 
-			// groupBox1
-			// 
-			this->groupBox1->Controls->Add(this->button5);
-			this->groupBox1->Controls->Add(this->button1);
-			this->groupBox1->Controls->Add(this->textBox1);
-			this->groupBox1->Controls->Add(this->label1);
-			this->groupBox1->Location = System::Drawing::Point(42, 23);
-			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(318, 100);
-			this->groupBox1->TabIndex = 18;
-			this->groupBox1->TabStop = false;
-			this->groupBox1->Text = L"Criterio de Búsqueda";
-			// 
-			// button5
-			// 
-			this->button5->Location = System::Drawing::Point(85, 71);
-			this->button5->Name = L"button5";
-			this->button5->Size = System::Drawing::Size(137, 23);
-			this->button5->TabIndex = 31;
-			this->button5->Text = L"Limpiar";
-			this->button5->UseVisualStyleBackColor = true;
-			this->button5->Click += gcnew System::EventHandler(this, &frmMantHeces::button5_Click);
-			// 
-			// button1
-			// 
-			this->button1->Location = System::Drawing::Point(210, 35);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
-			this->button1->TabIndex = 4;
-			this->button1->Text = L"Buscar";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &frmMantHeces::button1_Click);
-			// 
-			// textBox1
-			// 
-			this->textBox1->Location = System::Drawing::Point(67, 35);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(100, 20);
-			this->textBox1->TabIndex = 1;
-			// 
-			// label1
-			// 
-			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(6, 38);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(55, 13);
-			this->label1->TabIndex = 0;
-			this->label1->Text = L"ID Animal:";
-			// 
-			// groupBox2
-			// 
-			this->groupBox2->Controls->Add(this->label2);
-			this->groupBox2->Controls->Add(this->comboBox1);
-			this->groupBox2->Controls->Add(this->button2);
-			this->groupBox2->Location = System::Drawing::Point(399, 23);
-			this->groupBox2->Name = L"groupBox2";
-			this->groupBox2->Size = System::Drawing::Size(200, 100);
-			this->groupBox2->TabIndex = 23;
-			this->groupBox2->TabStop = false;
-			this->groupBox2->Text = L"Nueva Muestra Heces";
-			// 
-			// label2
-			// 
-			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(30, 35);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(55, 13);
-			this->label2->TabIndex = 28;
-			this->label2->Text = L"ID Animal:";
-			this->label2->Click += gcnew System::EventHandler(this, &frmMantHeces::label2_Click);
-			// 
-			// comboBox1
-			// 
-			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Location = System::Drawing::Point(93, 32);
-			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(77, 21);
-			this->comboBox1->TabIndex = 27;
-			// 
-			// button2
-			// 
-			this->button2->Location = System::Drawing::Point(33, 71);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(137, 23);
-			this->button2->TabIndex = 26;
-			this->button2->Text = L"Agregar";
-			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &frmMantHeces::button2_Click_1);
 			// 
 			// Column6
 			// 
@@ -314,6 +195,95 @@ namespace AgroRobotView {
 			this->Fecha->Name = L"Fecha";
 			this->Fecha->Width = 125;
 			// 
+			// groupBox1
+			// 
+			this->groupBox1->Controls->Add(this->button5);
+			this->groupBox1->Controls->Add(this->button1);
+			this->groupBox1->Controls->Add(this->textBox1);
+			this->groupBox1->Controls->Add(this->label1);
+			this->groupBox1->Location = System::Drawing::Point(42, 23);
+			this->groupBox1->Name = L"groupBox1";
+			this->groupBox1->Size = System::Drawing::Size(318, 100);
+			this->groupBox1->TabIndex = 18;
+			this->groupBox1->TabStop = false;
+			this->groupBox1->Text = L"Criterio de Búsqueda";
+			// 
+			// button5
+			// 
+			this->button5->Location = System::Drawing::Point(85, 71);
+			this->button5->Name = L"button5";
+			this->button5->Size = System::Drawing::Size(137, 23);
+			this->button5->TabIndex = 31;
+			this->button5->Text = L"Limpiar";
+			this->button5->UseVisualStyleBackColor = true;
+			this->button5->Click += gcnew System::EventHandler(this, &frmMantHeces::button5_Click);
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(210, 35);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->TabIndex = 4;
+			this->button1->Text = L"Buscar";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &frmMantHeces::button1_Click);
+			// 
+			// textBox1
+			// 
+			this->textBox1->Location = System::Drawing::Point(67, 35);
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(100, 20);
+			this->textBox1->TabIndex = 1;
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Location = System::Drawing::Point(6, 38);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(48, 13);
+			this->label1->TabIndex = 0;
+			this->label1->Text = L"Especie:";
+			// 
+			// groupBox2
+			// 
+			this->groupBox2->Controls->Add(this->label2);
+			this->groupBox2->Controls->Add(this->comboBox1);
+			this->groupBox2->Controls->Add(this->button2);
+			this->groupBox2->Location = System::Drawing::Point(399, 23);
+			this->groupBox2->Name = L"groupBox2";
+			this->groupBox2->Size = System::Drawing::Size(200, 100);
+			this->groupBox2->TabIndex = 23;
+			this->groupBox2->TabStop = false;
+			this->groupBox2->Text = L"Nueva Muestra Heces";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(30, 35);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(48, 13);
+			this->label2->TabIndex = 28;
+			this->label2->Text = L"Especie:";
+			this->label2->Click += gcnew System::EventHandler(this, &frmMantHeces::label2_Click);
+			// 
+			// comboBox1
+			// 
+			this->comboBox1->FormattingEnabled = true;
+			this->comboBox1->Location = System::Drawing::Point(93, 32);
+			this->comboBox1->Name = L"comboBox1";
+			this->comboBox1->Size = System::Drawing::Size(77, 21);
+			this->comboBox1->TabIndex = 27;
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(33, 71);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(137, 23);
+			this->button2->TabIndex = 26;
+			this->button2->Text = L"Agregar";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &frmMantHeces::button2_Click_1);
+			// 
 			// frmMantHeces
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -336,41 +306,17 @@ namespace AgroRobotView {
 
 		}
 #pragma endregion
-	private: void cargarAnimalesDisponibles() {
-		this->comboBox1->Items->Clear();
-
-		// Obtener todos los animales
-		List<Animal^>^ todosAnimales = gestorNutricionalController->obtenerTodosAnimales();
-		// Obtener todas las muestras
-		List<Muestra^>^ todasMuestras = muestraController->buscarTodasMuestrasArchivo(gestorNutricionalController);
-
-		for each (Animal ^ a in todosAnimales) {
-			bool tieneHeces = false;
-			for each (Muestra ^ m in todasMuestras) {
-				if (m->getAnimal() != nullptr &&
-					m->getAnimal()->IdAnimal == a->IdAnimal &&
-					m->getTipo()->Equals("Heces")) {
-					tieneHeces = true;
-					break;
-				}
-			}
-			if (!tieneHeces) {
-				this->comboBox1->Items->Add(a->IdAnimal);
-			}
-		}
-	}
-
+	
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		String^ textoId = this->textBox1->Text->Trim();
-		int idAnimal;
+		String^ texto = this->textBox1->Text->Trim();
 
 		//MuestraController^ controller = gcnew MuestraController();
 		List<Muestra^>^ listaFiltrada = gcnew List<Muestra^>();
 
-		if (String::IsNullOrEmpty(textoId)) {
+		if (String::IsNullOrEmpty(texto)) {
 			// Mostrar todas las muestras de heces
 			List<Muestra^>^ todas = muestraController->buscarTodasMuestrasArchivo(gestorNutricionalController);
 			for each (Muestra ^ m in todas) {
@@ -380,11 +326,8 @@ namespace AgroRobotView {
 			}
 		}
 		else {
-			if (!Int32::TryParse(textoId, idAnimal)) {
-				MessageBox::Show("Ingrese un ID de animal válido.");
-				return;
-			}
-			List<Muestra^>^ todas = muestraController->buscarMuestrasPorAnimalArchivo(idAnimal, gestorNutricionalController);
+			// Buscar por especie directamente
+			List<Muestra^>^ todas = muestraController->buscarMuestrasPorEspecieArchivo(texto, gestorNutricionalController);
 			for each (Muestra ^ m in todas) {
 				if (m->getTipo()->Equals("Heces")) {
 					listaFiltrada->Add(m);
@@ -489,10 +432,8 @@ namespace AgroRobotView {
 	}
 
 	private: void cargarAnimalesSinMuestraHeces() {
-		
-		List<Animal^>^ animales = gestorNutricionalController->leerArchivoAnimal();
+		List<Animal^>^ animales = gestorNutricionalController->obtenerTodosAnimales();
 		List<Muestra^>^ muestras = muestraController->buscarTodasMuestrasArchivo(gestorNutricionalController);
-
 		this->comboBox1->Items->Clear();
 
 		for each (Animal ^ a in animales) {
@@ -504,18 +445,32 @@ namespace AgroRobotView {
 				}
 			}
 			if (!tieneMuestraHeces) {
-				this->comboBox1->Items->Add(a->IdAnimal);
+				this->comboBox1->Items->Add(a->Especie);
 			}
 		}
 	}
 
 	private: System::Void button2_Click_1(System::Object^ sender, System::EventArgs^ e) {
 		if (this->comboBox1->SelectedItem == nullptr) {
-			MessageBox::Show("Seleccione un animal válido antes de agregar una muestra de heces.");
+			MessageBox::Show("Seleccione una especie válida antes de agregar una muestra de heces.");
 			return;
 		}
-		int idAnimalSeleccionado = Convert::ToInt32(this->comboBox1->SelectedItem->ToString());
-
+		// Especie seleccionada en el comboBox
+		String^ especieSeleccionada = this->comboBox1->SelectedItem->ToString();
+		// Buscar el animal correspondiente a esa especie
+		List<Animal^>^ animales = gestorNutricionalController->obtenerTodosAnimales();
+		Animal^ animalSeleccionado = nullptr;
+		for each (Animal ^ a in animales) {
+			if (a->Especie->Equals(especieSeleccionada)) {
+				animalSeleccionado = a;
+				break;
+			}
+		}
+		if (animalSeleccionado == nullptr) {
+			MessageBox::Show("No se encontró el animal para la especie seleccionada.");
+			return;
+		}
+		int idAnimalSeleccionado = animalSeleccionado->IdAnimal;
 		// Abrir el formulario de nueva muestra de heces con el idAnimal seleccionado
 		frmNuevoMuestraH^ nuevaMuestraHeces = gcnew frmNuevoMuestraH(
 			idAnimalSeleccionado,
@@ -523,9 +478,8 @@ namespace AgroRobotView {
 			this->gestorNutricionalController
 		);
 		nuevaMuestraHeces->ShowDialog();
-
 		// Refrescar el comboBox después de agregar (para que ya no aparezca ese animal)
-		cargarAnimalesDisponibles();
+		cargarAnimalesSinMuestraHeces();
 	}
 };
 }

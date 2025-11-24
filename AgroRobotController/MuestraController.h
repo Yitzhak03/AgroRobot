@@ -21,6 +21,7 @@ namespace AgroRobotController {
         // Búsquedas
         List<Muestra^>^ buscarTodasMuestrasArchivo(GestorNutricionalController^ gestor);
         Muestra^ buscarMuestraPorIdArchivo(int idMuestra, GestorNutricionalController^ gestor);
+        List<Muestra^>^ buscarMuestrasPorEspecieArchivo(String^ especie, GestorNutricionalController^ gestor);
         List<Muestra^>^ buscarMuestrasPorAnimalArchivo(int idAnimal, GestorNutricionalController^ gestor);
 
         // Persistencia

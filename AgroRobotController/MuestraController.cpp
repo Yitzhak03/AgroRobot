@@ -94,6 +94,20 @@ List<Muestra^>^ MuestraController::buscarMuestrasPorAnimalArchivo(int idAnimal, 
     return resultado;
 }
 
+List<Muestra^>^ MuestraController::buscarMuestrasPorEspecieArchivo(String^ especie, GestorNutricionalController^ gestor) {
+    
+    List<Muestra^>^ todas = this->buscarTodasMuestrasArchivo(gestor);
+    List<Muestra^>^ filtradas = gcnew List<Muestra^>();
+    for each (Muestra ^ m in todas) {
+        if (m->getAnimal() != nullptr &&
+            m->getAnimal()->Especie->Equals(especie, StringComparison::OrdinalIgnoreCase)) {
+            filtradas->Add(m);
+        }
+    }
+    return filtradas;
+}
+
+
 // Agregar nueva muestra
 void MuestraController::agregarMuestraArchivo(Muestra^ nuevaMuestra, GestorNutricionalController^ gestor) {
     // Validar que la muestra tenga un animal asociado
