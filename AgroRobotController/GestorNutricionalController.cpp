@@ -326,10 +326,12 @@ void GestorNutricionalController::closeDieta() {
 void GestorNutricionalController::enviarOrdenAlimentacion(int idDieta, String^ prioridad) {
 	AlmacenController^ gestorAlmacen = gcnew AlmacenController();
 
-	int nuevoId = gestorAlmacen->listarOrdenes()->Count + 1;
+	int nuevoId = gestorAlmacen->obtenerMaximoIdOrden() + 1;
+
 	String^ fecha = DateTime::Now.ToString("yyyy-MM-dd");
 
 	OrdenDistribucion^ nuevaOrden = gcnew OrdenDistribucion(nuevoId, idDieta, "AgroRobot", fecha, "Ruta X", prioridad, nullptr, nullptr, gcnew List<Insumo^>());
+
 	gestorAlmacen->registrarOrden(nuevaOrden);
 }
 

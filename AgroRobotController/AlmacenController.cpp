@@ -2,6 +2,7 @@
 using namespace AgroRobotController;
 using namespace System::IO;
 using namespace System;
+using namespace System::Runtime::Serialization::Formatters::Binary;
 
 AlmacenController::AlmacenController()
 {
@@ -112,8 +113,7 @@ int AlmacenController::buscarIdPorNombre(String^ nombre)
 	return -1;
 }
 //=====================================OTROS=================================================
-void AlmacenController::guardarOrdenesEnArchivo()
-{
+void AlmacenController::guardarOrdenesEnArchivo() {
 	List<String^>^ lineas = gcnew List<String^>();
 	for each (OrdenDistribucion ^ orden in this->listaOrdenes) {
 		String^ linea = orden->Id + ";" +
@@ -126,33 +126,100 @@ void AlmacenController::guardarOrdenesEnArchivo()
 	}
 	File::WriteAllLines("ordenes.txt", lineas->ToArray());
 }
-void AlmacenController::cargarOrdenesDesdeArchivo()
-{
-	array<String^>^ lineas = File::ReadAllLines("ordenes.txt");
-	String^ separador = ";";
-	for each (String ^ linea in lineas) {
-		if (String::IsNullOrWhiteSpace(linea)) continue;
 
-		array<String^>^ datos = linea->Split(separador->ToCharArray());
-		if (datos->Length < 6) continue;
+void AlmacenController::cargarOrdenesDesdeArchivo() {
+	this->listaOrdenes = gcnew List<OrdenDistribucion^>(); // Inicializar la lista
 
-		int id = Convert::ToInt32(datos[0]);
-		int idDieta = Convert::ToInt32(datos[1]);
-		String^ robot = datos[2];
-		String^ fecha = datos[3];
-		String^ ruta = datos[4];
-		String^ prioridad = datos[5];
+	try {
+		abrirConexion();
 
-		OrdenDistribucion^ orden = gcnew OrdenDistribucion(id, idDieta, robot, fecha, ruta, prioridad, nullptr, nullptr, gcnew List<Insumo^>());
-		this->listaOrdenes->Add(orden);
+		// 1. Crear la consulta SQL
+		String^ sSqlOrdenes = "SELECT Id, IdDieta, RobotAsignado, FechaHoraEntrega, Ruta, Prioridad ";
+		sSqlOrdenes += " FROM OrdenesDistribucion ";
+
+		SqlCommand^ comando = gcnew SqlCommand(sSqlOrdenes, getObjConexion());
+		SqlDataReader^ objData = comando->ExecuteReader();
+
+		// 2. Leer los registros
+		while (objData->Read()) {
+			int id = objData->GetInt32(0);
+			int idDieta = objData->GetInt32(1);
+			String^ robot = objData->GetString(2)->Trim();
+			String^ fecha = objData->GetString(3)->Trim();
+			String^ ruta = objData->GetString(4)->Trim();
+			String^ prioridad = objData->GetString(5)->Trim();
+
+			// Nota: Se asume que los campos para 'Animal^', 'Dieta^' e 'List<Insumo^>'
+			// se cargan o inicializan aparte o son pasados como nulos por ahora.
+			OrdenDistribucion^ orden = gcnew OrdenDistribucion(id, idDieta, robot, fecha, ruta, prioridad, nullptr, nullptr, gcnew List<Insumo^>());
+			this->listaOrdenes->Add(orden);
+		}
+
+		objData->Close();
+		cerrarConexion();
+	}
+	catch (Exception^ ex) {
+		// Manejo de errores de conexión o SQL
+		Console::WriteLine("Error al cargar órdenes desde la base de datos: " + ex->Message);
+		this->listaOrdenes = gcnew List<OrdenDistribucion^>();
 	}
 }
-void AlmacenController::registrarOrden(OrdenDistribucion^ orden)
-{
+
+bool AlmacenController::registrarOrden(OrdenDistribucion^ orden) {
+	// 1. Agregar a la lista en memoria
 	this->listaOrdenes->Add(orden);
-	this->guardarOrdenesEnArchivo();
+
+	// 2. Crear la sentencia SQL para inserción
+	String^ sSqlOrden = "INSERT INTO OrdenesComida (Id, IdDieta, RobotAsignado, FechaHoraEntrega, Ruta, Prioridad) ";
+	sSqlOrden += " VALUES(" + orden->Id + ", ";
+	sSqlOrden += " " + orden->IdDieta + ", "; // IdDieta es INT, sin comillas
+	sSqlOrden += " '" + orden->RobotAsignado + "', ";
+	sSqlOrden += " '" + orden->FechaHoraEntrega + "', ";
+	sSqlOrden += " '" + orden->Ruta + "', ";
+	sSqlOrden += " '" + orden->Prioridad + "')";
+
+	// 3. Ejecutar el SQL (se asume que executeSql devuelve el número de filas afectadas o un booleano)
+	int filasAfectadas = executeSql(sSqlOrden);
+
+	if (filasAfectadas > 0)
+		return true;
+	else {
+		// Opcional: Si falla la BD, remover de la lista en memoria
+		this->listaOrdenes->Remove(orden);
+		return false;
+	}
 }
-List <OrdenDistribucion^>^ AlmacenController::listarOrdenes()
-{
+
+List <OrdenDistribucion^>^ AlmacenController::listarOrdenes() {
 	return this->listaOrdenes;
+}
+
+void AlmacenController::escribirArchivoBINOrdenes() {
+	Stream^ stream = File::Open(this->archivoOrdenes, FileMode::Create);
+	BinaryFormatter^ formateador = gcnew BinaryFormatter();
+	formateador->Serialize(stream, this->listaOrdenes);
+	stream->Close();
+}
+
+// **Función para agregar a AlmacenController.cpp**
+int AlmacenController::obtenerMaximoIdOrden() {
+	int maxId = 0;
+	try {
+		abrirConexion();
+		// SQL: Obtiene el Id más alto. Si no hay registros, devuelve NULL.
+		String^ sSqlMaxId = "SELECT MAX(Id) FROM OrdenesDistribucion";
+		SqlCommand^ comando = gcnew SqlCommand(sSqlMaxId, getObjConexion());
+		Object^ resultado = comando->ExecuteScalar(); // Ejecuta y devuelve un único valor
+
+		if (resultado != nullptr && resultado != DBNull::Value) {
+			maxId = Convert::ToInt32(resultado);
+		}
+		cerrarConexion();
+	}
+	catch (Exception^ ex) {
+		Console::WriteLine("Error al obtener MaxId: " + ex->Message);
+		// Si hay error, asumimos 0.
+		return 0;
+	}
+	return maxId;
 }
