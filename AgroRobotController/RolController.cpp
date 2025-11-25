@@ -189,3 +189,11 @@ List<bool>^ RolController::ConvertirStringAPermisos(String^ permisosString)
 
 	return listaPermisos;
 }
+
+void RolController::escribirArchivoBINRoles() {
+	//Creamos el archivo
+	Stream^ stream = File::Open(this->archivo, FileMode::Create);
+	BinaryFormatter^ formateador = gcnew BinaryFormatter();
+	formateador->Serialize(stream, this->listaRoles);
+	stream->Close();
+}
