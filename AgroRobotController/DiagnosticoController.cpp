@@ -68,6 +68,19 @@ List<Diagnostico^>^ DiagnosticoController::buscarDiagnosticosPorAnimalArchivo(in
     return resultado;
 }
 
+List<Diagnostico^>^ DiagnosticoController::buscarDiagnosticosPorEspecieArchivo(String^ especie) {
+    List<Diagnostico^>^ todos = this->buscarTodosDiagnosticosArchivo();
+    List<Diagnostico^>^ filtrados = gcnew List<Diagnostico^>();
+
+    for each (Diagnostico ^ d in todos) {
+        if (!String::IsNullOrEmpty(d->Especie) &&
+            d->Especie->Equals(especie, StringComparison::OrdinalIgnoreCase)) {
+            filtrados->Add(d);
+        }
+    }
+    return filtrados;
+}
+
 void DiagnosticoController::escribirArchivo(List<Diagnostico^>^ listaDiagnosticos) {
     array<String^>^ lineas = gcnew array<String^>(listaDiagnosticos->Count);
     for (int i = 0; i < listaDiagnosticos->Count; i++) {
