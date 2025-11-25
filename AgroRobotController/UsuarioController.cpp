@@ -40,25 +40,33 @@ UsuarioController::UsuarioController(){
 	try {
 		// Paso1: Establecer la conexion
 		abrirConexion();
+
 		// Paso2: Crear el comando SQL
-		String^ sSqlUsuarios = "SELECT Id, Nombre, Email, Contrasenha, UltimoAcceso, EstadoCuenta ";
+		String^ sSqlUsuarios = "SELECT Id, Nombre, Email, Contrasenha, UltimoAcceso, EstadoCuenta, IdRol ";
 		sSqlUsuarios += " FROM Usuarios ";
+
 		// Paso3: Crear el SqlCommand, donde le paso la sentencia SQL y la conexion
 		SqlCommand^ comando = gcnew SqlCommand(sSqlUsuarios, getObjConexion());
+
 		// Paso4: Ahora para ejecutar voy a utilizar ExecuteReader cuando la sentencia es SELECT
-		// Para recuperar la informacion que me devuelve un select, utilizo SqlDataReader
 		SqlDataReader^ objData = comando->ExecuteReader();
+
 		// Paso5: Leer los registros de la tabla
 		while (objData->Read()) {
 			int id = objData->GetInt32(0); // Id
-			String^ nombre = objData->GetString(1); // Nombre
-			String^ email = objData->GetString(2); // Email
-			String^ contrasenha = objData->GetString(3); // Contrasenha
-			String^ ultimoAcceso = objData->GetString(4); // UltimoAcceso
-			bool estadoCuenta = objData->GetBoolean(5); // EstadoCuenta
+			String^ nombre = objData->GetString(1)->Trim(); // Nombre
+			String^ email = objData->GetString(2)->Trim(); // Email
+			String^ contrasenha = objData->GetString(3)->Trim(); // Contrasenha
+			String^ ultimoAcceso = objData->GetString(4)->Trim(); // UltimoAcceso
+			String^ estadoCuentaString = objData->GetString(5)->Trim();
+			bool estadoCuenta = false;
+			if (String::Equals(estadoCuentaString, "True", StringComparison::OrdinalIgnoreCase)) {
+				estadoCuenta = true;
+			}
+			int idRol = objData->GetInt32(6); // IdRol
 			// Obtener el Rol asociado
 			RolController^ rolController = gcnew RolController();
-			Rol^ rol = rolController->obtenerRolPorId(id);
+			Rol^ rol = rolController->obtenerRolPorId(idRol);
 			Usuario^ usuario = gcnew Usuario(id, nombre, email, contrasenha, ultimoAcceso, estadoCuenta, rol);
 			this->listaUsuarios->Add(usuario);
 		}

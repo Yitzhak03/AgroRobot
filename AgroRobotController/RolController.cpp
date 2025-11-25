@@ -66,6 +66,7 @@ RolController::RolController(){
 			List<bool>^ permisos = ConvertirStringAPermisos(permisosString);
 
 			Rol^ rol = gcnew Rol(id, nombre);
+			rol->SetPermisos(permisos);
 			this->listaRoles->Add(rol);
 		}
 		// Paso6: Cerrar el DataReader y la conexion
@@ -110,12 +111,22 @@ void RolController::escribirArchivo(){
 	File::WriteAllLines(path, lineasArchivo);
 }
 
-void RolController::agregarRol(Rol^ rol) {
+bool RolController::agregarRol(Rol^ rol) {
 	this->listaRoles->Add(rol);
-	//escribirArchivo();
-	String^ sSqlRol = "INSERT INTO Roles (Id, Nombre, Permisos) ";
-	sSqlRol += " VALUES(" + rol->Id + ", ";
-	sSqlRol += " '" + rol->Nombre + "', "; 
+
+	String^ permisosTxt = ConvertirPermisosAString(rol->GetPermisos()); // ASUMIMOS ESTO
+
+	String^ sSqlRol = "INSERT INTO Roles (Id, Nombre, ListaPermisos) ";
+	sSqlRol += " VALUES(" + rol->GetId() + ", ";
+	sSqlRol += " '" + rol->GetNombre() + "', ";
+	sSqlRol += " '" + permisosTxt + "')"; // <<-- COMPLETAR LA SENTENCIA INSERT
+
+	// Nota: Debes usar executeSql o insertSql aquí.
+	int filasAfectadas = executeSql(sSqlRol);
+	if (filasAfectadas > 0)
+		return true;
+	else
+		return false;
 }
 
 bool RolController::eliminarRol(int id) {
@@ -131,16 +142,26 @@ bool RolController::eliminarRol(int id) {
 }
 
 bool RolController::modificarRol(int id, String^ nombre, List<bool>^ listaPermisos) {
+	// 1. Obtener el objeto Rol de la lista en memoria
 	Rol^ rol = obtenerRolPorId(id);
 
 	if (rol != nullptr) {
+		// 2. Actualizar el objeto Rol en memoria
 		rol->SetNombre(nombre);
 		rol->SetPermisos(listaPermisos);
-		//escribirArchivo();
 
+		// 3. Convertir la lista de permisos a un string para la BD (ej: "1|0|1|1")
+		// Esta función debe estar definida en el controlador.
+		String^ permisosTxt = ConvertirPermisosAString(listaPermisos);
+
+		// 4. Construir la consulta SQL para la base de datos
 		String^ sSqlRol = "UPDATE Roles SET ";
 		sSqlRol += " Nombre = '" + nombre + "', ";
+		// Asegúrate de que el nombre de la columna sea 'ListaPermisos'
+		sSqlRol += " ListaPermisos = '" + permisosTxt + "' ";
 		sSqlRol += " WHERE Id = " + id;
+
+		// 5. Ejecutar la consulta SQL (usando la función que maneja la BD)
 		return executeSql(sSqlRol);
 	}
 	return false;
@@ -196,4 +217,23 @@ void RolController::escribirArchivoBINRoles() {
 	BinaryFormatter^ formateador = gcnew BinaryFormatter();
 	formateador->Serialize(stream, this->listaRoles);
 	stream->Close();
+}
+
+String^ RolController::ConvertirPermisosAString(List<bool>^ listaPermisos)
+{
+	String^ permisosTxt = "";
+
+	if (listaPermisos == nullptr) return ""; // Manejar el caso nulo
+
+	for (int j = 0; j < listaPermisos->Count; ++j) {
+		if (listaPermisos[j]) {
+			permisosTxt += "1";
+		}
+		else {
+			permisosTxt += "0";
+		}
+
+		if (j < listaPermisos->Count - 1) permisosTxt += "|"; // Usar el separador '|'
+	}
+	return permisosTxt;
 }
