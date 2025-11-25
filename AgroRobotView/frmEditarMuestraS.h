@@ -162,7 +162,7 @@ namespace AgroRobotView {
 			// comboBox3
 			// 
 			this->comboBox3->FormattingEnabled = true;
-			this->comboBox3->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Rojo Claro", L"Rojo Oscuro", L"Amarillento" });
+			this->comboBox3->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"Rojo", L"Rojo Claro", L"Rojo Oscuro", L"Amarillento" });
 			this->comboBox3->Location = System::Drawing::Point(101, 239);
 			this->comboBox3->Name = L"comboBox3";
 			this->comboBox3->Size = System::Drawing::Size(100, 21);
