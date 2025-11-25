@@ -1,9 +1,46 @@
 #include "DiagnosticoController.h"
 
+using namespace System::Runtime::Serialization::Formatters::Binary;
 using namespace AgroRobotController;
 using namespace System::IO;
+using namespace System::Collections::Generic;
+using namespace System::Globalization;
 
-DiagnosticoController::DiagnosticoController() {}
+DiagnosticoController::DiagnosticoController() {
+	this->listaDiagnosticos = gcnew List<Diagnostico^>();
+    try {
+        // Paso1: Establecer la conexion
+        abrirConexion();
+        // Paso2: Crear el comando SQL
+		String^ sSqlDiagnostico = "SELECT IdDiagnostico, IdAnimal, Especie, ResultadoHeces, ResultadoSangre, EstadoSalud, Observaciones ";
+        sSqlDiagnostico += " FROM Diagnosticos ";
+        // Paso3: Crear el SqlCommand, donde le paso la sentencia SQL y la conexion
+        SqlCommand^ comando = gcnew SqlCommand(sSqlDiagnostico, getObjConexion());
+        // Paso4: Ahora para ejecutar voy a utilizar ExecuteReader cuando la sentencia es SELECT
+        // Para recuperar la informacion que me devuelve un select, utilizo SqlDataReader
+        SqlDataReader^ objData = comando->ExecuteReader();
+        // Paso5: Leer los registros de la tabla
+        while (objData->Read()) {
+			int idDiagnostico = objData->GetInt32(0); // IdDiagnostico
+			int idAnimal = objData->GetInt32(1); // IdAnimal
+			String^ especie = objData->GetString(2); // Especie
+			String^ resultadoHeces = objData->GetString(3); // ResultadoHeces
+			String^ resultadoSangre = objData->GetString(4); // ResultadoSangre
+			String^ estadoSalud = objData->GetString(5); // EstadoSalud
+			String^ observaciones = objData->GetString(6); // Observaciones
+            Diagnostico^ diagnostico = gcnew Diagnostico(idDiagnostico, idAnimal, especie, resultadoHeces, resultadoSangre, estadoSalud, observaciones);
+            this->listaDiagnosticos->Add(diagnostico);
+        }
+        // Paso6: Cerrar el DataReader y la conexion
+        objData->Close();
+        cerrarConexion();
+    }
+    catch (Exception^ ex) {
+        Console::WriteLine("Error al conectar a la base de datos: " + ex->Message);
+        // En caso de cualquier error, crear lista vacía
+        this->listaDiagnosticos = gcnew List<Diagnostico^>();
+    }
+}
 
 int DiagnosticoController::generarNuevoId() {
     List<Diagnostico^>^ lista = buscarTodosDiagnosticosArchivo();
@@ -17,7 +54,7 @@ int DiagnosticoController::generarNuevoId() {
 }
 
 List<Diagnostico^>^ DiagnosticoController::buscarTodosDiagnosticosArchivo() {
-    List<Diagnostico^>^ lista = gcnew List<Diagnostico^>();
+    /*List<Diagnostico^>^ lista = gcnew List<Diagnostico^>();
     if (!File::Exists("diagnosticos.txt")) return lista;
 
     array<String^>^ lineas = File::ReadAllLines("diagnosticos.txt");
@@ -44,7 +81,8 @@ List<Diagnostico^>^ DiagnosticoController::buscarTodosDiagnosticosArchivo() {
         lista->Add(d);
     }
 
-    return lista;
+    return lista;*/
+    return this->listaDiagnosticos;
 }
 
 Diagnostico^ DiagnosticoController::buscarDiagnosticoPorIdArchivo(int idDiagnostico) {
@@ -85,11 +123,7 @@ void DiagnosticoController::guardarDiagnosticoArchivo(Diagnostico^ diagnostico) 
     escribirArchivo(lista);
 }
 
-Diagnostico^ DiagnosticoController::generarDiagnosticoParaAnimal(
-    int idAnimal,
-    MuestraController^ muestraController,
-    GestorNutricionalController^ gestor
-) {
+Diagnostico^ DiagnosticoController::generarDiagnosticoParaAnimal(int idAnimal, MuestraController^ muestraController, GestorNutricionalController^ gestor) {
     List<Muestra^>^ muestras = muestraController->buscarMuestrasPorAnimalArchivo(idAnimal, gestor);
 
     if (muestras == nullptr || muestras->Count == 0) {
@@ -173,4 +207,12 @@ void DiagnosticoController::eliminarDiagnosticoArchivo(int idDiagnostico) {
         }
     }
     escribirArchivo(lista); 
+}
+
+void DiagnosticoController::escribirArchivoBINDiagnosticos() {
+    //Creamos el archivo
+    Stream^ stream = File::Open(this->archivo, FileMode::Create);
+    BinaryFormatter^ formateador = gcnew BinaryFormatter();
+    formateador->Serialize(stream, this->listaDiagnosticos);
+    stream->Close();
 }
