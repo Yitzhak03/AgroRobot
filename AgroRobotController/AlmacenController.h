@@ -1,11 +1,16 @@
 #pragma once
+#include "BaseController.h"
+
 namespace AgroRobotController {
 	using namespace System::Collections::Generic;
 	using namespace AgroRobotModel;
 	using namespace System;
-	public ref class AlmacenController {
+
+	public ref class AlmacenController : public BaseController {
 	private:
 		List<OrdenDistribucion^>^ listaOrdenes;
+		String^ archivoOrdenes;
+
 	public:
 		AlmacenController();
 		List<Almacen^>^ readTxt();

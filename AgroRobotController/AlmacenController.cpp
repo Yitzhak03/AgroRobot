@@ -2,6 +2,7 @@
 using namespace AgroRobotController;
 using namespace System::IO;
 using namespace System;
+
 AlmacenController::AlmacenController()
 {
 	this->listaOrdenes = gcnew List<OrdenDistribucion^>();

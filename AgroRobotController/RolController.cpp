@@ -1,11 +1,13 @@
 #include "RolController.h"
+
 using namespace AgroRobotController;
 using namespace System::IO;
+using namespace System::Runtime::Serialization::Formatters::Binary;
 
 RolController::RolController(){
 	this->listaRoles = gcnew List<Rol^>();
 
-	String^ path = "roles.txt";
+	/*String^ path = "roles.txt";
 	
 	if (!File::Exists(path)) {
 		File::WriteAllText(path, "");
@@ -34,7 +36,48 @@ RolController::RolController(){
 		Rol^ rol = gcnew Rol(id, nombre);
 		rol->SetPermisos(listaPermisos);
 		listaRoles->Add(rol);
+	}*/
+
+	try {
+		// Paso1: Establecer la conexion
+		abrirConexion();
+		// Paso2: Crear el comando SQL
+		String^ sSqlRoles = "SELECT Id, Nombre, Permisos ";
+		sSqlRoles += " FROM Roles ";
+		// Paso3: Crear el SqlCommand, donde le paso la sentencia SQL y la conexion
+		SqlCommand^ comando = gcnew SqlCommand(sSqlRoles, getObjConexion());
+		// Paso4: Ahora para ejecutar voy a utilizar ExecuteReader cuando la sentencia es SELECT
+		// Para recuperar la informacion que me devuelve un select, utilizo SqlDataReader
+		SqlDataReader^ objData = comando->ExecuteReader();
+		// Paso5: Leer los registros de la tabla
+		while (objData->Read()) {
+			int id = objData->GetInt32(0); // Id
+			String^ nombre = objData->GetString(1); // Nombre
+			/*bool listaPermisosNull = objData->IsDBNull(2); // Permisos puede ser null
+			List<bool>^ listaPermisos = gcnew List<bool>();
+			if (!listaPermisosNull) {
+				String^ permisosTxt = objData->GetString(2); // Permisos
+				array<String^>^ permisosBoolean = permisosTxt->Split('|');
+				for each (String ^ permisoBool in permisosBoolean)
+					listaPermisos->Add(Convert::ToBoolean(Convert::ToInt32(permisoBool)));
+			}
+			else listaPermisos = nullptr;*/
+			String^ permisosString = objData->GetString(2); // Permisos
+			List<bool>^ permisos = ConvertirStringAPermisos(permisosString);
+
+			Rol^ rol = gcnew Rol(id, nombre);
+			this->listaRoles->Add(rol);
+		}
+		// Paso6: Cerrar el DataReader y la conexion
+		objData->Close();
+		cerrarConexion();
 	}
+	catch (Exception^ ex) {
+		Console::WriteLine("Error al conectar a la base de datos: " + ex->Message);
+		// En caso de cualquier error, crear lista vacía
+		this->listaRoles = gcnew List<Rol^>();
+	}
+
 }
 
 void RolController::escribirArchivo(){
@@ -69,15 +112,20 @@ void RolController::escribirArchivo(){
 
 void RolController::agregarRol(Rol^ rol) {
 	this->listaRoles->Add(rol);
-	escribirArchivo();
+	//escribirArchivo();
+	String^ sSqlRol = "INSERT INTO Roles (Id, Nombre, Permisos) ";
+	sSqlRol += " VALUES(" + rol->Id + ", ";
+	sSqlRol += " '" + rol->Nombre + "', "; 
 }
 
 bool RolController::eliminarRol(int id) {
 	Rol^ rol = obtenerRolPorId(id);
 	if (rol != nullptr) {
 		this->listaRoles->Remove(rol);
-		escribirArchivo();
-		return true;
+		//escribirArchivo();
+		//return true;
+		String^ sSqlRoles = "DELETE FROM Roles WHERE Id = " + id;
+		return executeSql(sSqlRoles);
 	}
 	return false;
 }
@@ -88,8 +136,12 @@ bool RolController::modificarRol(int id, String^ nombre, List<bool>^ listaPermis
 	if (rol != nullptr) {
 		rol->SetNombre(nombre);
 		rol->SetPermisos(listaPermisos);
-		escribirArchivo();
-		return true;
+		//escribirArchivo();
+
+		String^ sSqlRol = "UPDATE Roles SET ";
+		sSqlRol += " Nombre = '" + nombre + "', ";
+		sSqlRol += " WHERE Id = " + id;
+		return executeSql(sSqlRol);
 	}
 	return false;
 }
@@ -110,7 +162,30 @@ Rol^ RolController::obtenerRolPorNombre(String^ nombre) {
 	}
 }
 
-
 List<Rol^>^ RolController::obtenerTodosRoles() {
 	return this->listaRoles;
+}
+
+List<bool>^ RolController::ConvertirStringAPermisos(String^ permisosString)
+{
+	List<bool>^ listaPermisos = gcnew List<bool>();
+
+	// Usamos 'Split' para dividir la cadena por el delimitador '|'
+	array<String^>^ arrayPermisos = permisosString->Split('|');
+
+	// Recorremos cada elemento del array resultante
+	for each (String ^ permiso in arrayPermisos)
+	{
+		// El 'permiso' será "1" o "0"
+		if (permiso == "1")
+		{
+			listaPermisos->Add(true);
+		}
+		else // Asume que cualquier otro valor es "0" o false
+		{
+			listaPermisos->Add(false);
+		}
+	}
+
+	return listaPermisos;
 }
