@@ -80,7 +80,7 @@ List<Muestra^>^ MuestraController::buscarTodasMuestrasArchivo(GestorNutricionalC
         String^ parasitos = campos[6];
 
         // Campos de sangre
-        int cantidadExtraida;
+        int cantidadExtraida = 0;
         if (!Int32::TryParse(campos[7], cantidadExtraida)) continue;
         String^ coagulos = campos[8];
         String^ contaminacion = campos[9];

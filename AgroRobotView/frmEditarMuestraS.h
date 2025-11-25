@@ -89,6 +89,7 @@ namespace AgroRobotView {
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			this->comboBox3 = (gcnew System::Windows::Forms::ComboBox());
 			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
@@ -103,7 +104,6 @@ namespace AgroRobotView {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -152,6 +152,13 @@ namespace AgroRobotView {
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Datos Sangre";
 			// 
+			// textBox3
+			// 
+			this->textBox3->Location = System::Drawing::Point(101, 282);
+			this->textBox3->Name = L"textBox3";
+			this->textBox3->Size = System::Drawing::Size(100, 20);
+			this->textBox3->TabIndex = 26;
+			// 
 			// comboBox3
 			// 
 			this->comboBox3->FormattingEnabled = true;
@@ -171,7 +178,6 @@ namespace AgroRobotView {
 			// 
 			// textBox2
 			// 
-			this->textBox2->Enabled = false;
 			this->textBox2->Location = System::Drawing::Point(101, 105);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(76, 20);
@@ -268,14 +274,6 @@ namespace AgroRobotView {
 			this->label1->Size = System::Drawing::Size(55, 13);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Especie:";
-			// 
-			// textBox3
-			// 
-			this->textBox3->Enabled = false;
-			this->textBox3->Location = System::Drawing::Point(101, 282);
-			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(100, 20);
-			this->textBox3->TabIndex = 26;
 			// 
 			// frmEditarMuestraS
 			// 

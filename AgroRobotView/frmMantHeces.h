@@ -25,7 +25,7 @@ namespace AgroRobotView {
 			InitializeComponent();
 			this->muestraController = gcnew MuestraController();
 			this->gestorNutricionalController = gcnew GestorNutricionalController();
-			
+			cargarAnimalesDisponibles();
 			cargarAnimalesSinMuestraHeces();
 			this->BackColor = System::Drawing::Color::SeaGreen;
 			this->button1->BackColor = System::Drawing::Color::LightGreen;
@@ -306,10 +306,32 @@ namespace AgroRobotView {
 
 		}
 #pragma endregion
+	private: void cargarAnimalesDisponibles() {
+		this->comboBox1->Items->Clear();
+		// Obtener todos los animales
+		List<Animal^>^ todosAnimales = gestorNutricionalController->obtenerTodosAnimales();
+		// Obtener todas las muestras
+		List<Muestra^>^ todasMuestras = muestraController->buscarTodasMuestrasArchivo(gestorNutricionalController);
+		for each (Animal ^ a in todosAnimales) {
+			bool tieneHeces = false;
+			for each (Muestra ^ m in todasMuestras) {
+				if (m->getAnimal() != nullptr &&
+					m->getAnimal()->IdAnimal == a->IdAnimal &&
+					m->getTipo()->Equals("Heces")) {
+					tieneHeces = true;
+					break;
+				}
+			}
+			if (!tieneHeces) {
+				this->comboBox1->Items->Add(a->IdAnimal.ToString() + " - " + a->Especie);
+			}
+		}
+	}
 	
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		
 	}
+
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ texto = this->textBox1->Text->Trim();
 
@@ -445,41 +467,30 @@ namespace AgroRobotView {
 				}
 			}
 			if (!tieneMuestraHeces) {
-				this->comboBox1->Items->Add(a->Especie);
+				this->comboBox1->Items->Add(a->IdAnimal.ToString() + " - " + a->Especie);
 			}
 		}
 	}
 
 	private: System::Void button2_Click_1(System::Object^ sender, System::EventArgs^ e) {
 		if (this->comboBox1->SelectedItem == nullptr) {
-			MessageBox::Show("Seleccione una especie válida antes de agregar una muestra de heces.");
+			MessageBox::Show("Seleccione un animal válido antes de agregar una muestra de Heces.");
 			return;
 		}
-		// Especie seleccionada en el comboBox
-		String^ especieSeleccionada = this->comboBox1->SelectedItem->ToString();
-		// Buscar el animal correspondiente a esa especie
-		List<Animal^>^ animales = gestorNutricionalController->obtenerTodosAnimales();
-		Animal^ animalSeleccionado = nullptr;
-		for each (Animal ^ a in animales) {
-			if (a->Especie->Equals(especieSeleccionada)) {
-				animalSeleccionado = a;
-				break;
-			}
-		}
-		if (animalSeleccionado == nullptr) {
-			MessageBox::Show("No se encontró el animal para la especie seleccionada.");
-			return;
-		}
-		int idAnimalSeleccionado = animalSeleccionado->IdAnimal;
-		// Abrir el formulario de nueva muestra de heces con el idAnimal seleccionado
+		// Recuperar el texto seleccionado: "IdAnimal - Especie"
+		String^ seleccionado = this->comboBox1->SelectedItem->ToString();
+		array<String^>^ partes = seleccionado->Split('-');
+
+		int idAnimalSeleccionado = Convert::ToInt32(partes[0]->Trim());
+		String^ especieSeleccionada = partes[1]->Trim();
+
 		frmNuevoMuestraH^ nuevaMuestraHeces = gcnew frmNuevoMuestraH(
 			idAnimalSeleccionado,
 			this->muestraController,
 			this->gestorNutricionalController
 		);
 		nuevaMuestraHeces->ShowDialog();
-		// Refrescar el comboBox después de agregar (para que ya no aparezca ese animal)
-		cargarAnimalesSinMuestraHeces();
+		cargarAnimalesDisponibles();
 	}
 };
 }

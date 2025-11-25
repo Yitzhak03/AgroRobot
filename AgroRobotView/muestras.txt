@@ -1,12 +1,12 @@
-1;Heces;25/10/2025;Líquida;Negro;Fétido;Sí;;;;;1;Vaca
-2;Heces;26/10/2025;Pastosa;Marrón;Normal;No;;;;;2;Pollo
-3;Heces;27/10/2025;Sólida;Verde;Fétido;Sí;;;;;3;Cerdo
-4;Heces;28/10/2025;Líquida;Negro;Fétido;Sí;;;;;4;Oveja
-5;Heces;29/10/2025;Pastosa;Marrón;Normal;No;;;;;5;Cabra
-6;Heces;30/10/2025;Sólida;Marrón;Normal;No;;;;;6;Pato
-7;Sangre;25/10/2025;;;;;4ml;No;Sí;Oscuro;1;Vaca
-8;Sangre;26/10/2025;;;;;5ml;No;Sí;Rojo Oscuro;2;Pollo
-9;Sangre;27/10/2025;;;;;6ml;No;No;Claro;3;Cerdo
-10;Sangre;28/10/2025;;;;;5ml;Sí;No;Rojo Claro;4;Oveja
-11;Sangre;29/10/2025;;;;;4ml;Sí;Sí;Rojo Oscuro;5;Cabra
-12;Sangre;30/10/2025;;;;;6ml;No;No;Rojo;6;Pato
+1;Heces;25/10/2025;Líquida;Negro;Fétido;Sí;0;;;;1;Vaca
+2;Heces;26/10/2025;Pastosa;Marrón;Normal;No;0;;;;2;Pollo
+3;Heces;27/10/2025;Sólida;Verde;Fétido;Sí;0;;;;3;Cerdo
+4;Heces;28/10/2025;Líquida;Negro;Fétido;Sí;0;;;;4;Oveja
+5;Heces;29/10/2025;Pastosa;Marrón;Normal;No;0;;;;5;Cabra
+6;Heces;30/10/2025;Sólida;Marrón;Normal;No;0;;;;6;Pato
+7;Sangre;25/10/2025;;;;;4;No;Sí;Oscuro;1;Vaca
+8;Sangre;26/10/2025;;;;;5;No;Sí;Rojo Oscuro;2;Pollo
+9;Sangre;27/10/2025;;;;;6;No;No;Claro;3;Cerdo
+10;Sangre;28/10/2025;;;;;5;Sí;No;Rojo Claro;4;Oveja
+11;Sangre;29/10/2025;;;;;4;Sí;Sí;Rojo Oscuro;5;Cabra
+12;Sangre;30/10/2025;;;;;6;No;No;Rojo;6;Pato

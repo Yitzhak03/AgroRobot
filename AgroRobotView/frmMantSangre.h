@@ -26,7 +26,7 @@ namespace AgroRobotView {
 			this->muestraController = gcnew MuestraController();
 			this->gestorNutricionalController = gcnew GestorNutricionalController();
 			cargarAnimalesDisponibles();
-			
+			cargarAnimalesSinMuestraSangre();
 			this->BackColor = System::Drawing::Color::SeaGreen;
 			this->button1->BackColor = System::Drawing::Color::LightGreen;
 			this->button1->ForeColor = System::Drawing::Color::DarkGreen;
@@ -320,7 +320,7 @@ namespace AgroRobotView {
 				}
 			}
 			if (!tieneSangre) {
-				this->comboBox1->Items->Add(a->Especie);
+				this->comboBox1->Items->Add(a->IdAnimal.ToString() + " - " + a->Especie);
 			}
 		}
 	}
@@ -427,7 +427,7 @@ namespace AgroRobotView {
 			}
 			this->dataGridView1->Rows->Clear();
 			mostrarGrilla(listaFiltrada);
-			cargarAnimalesDisponibles();
+			cargarAnimalesSinMuestraSangre();
 		}
 	}
 
@@ -448,35 +448,45 @@ namespace AgroRobotView {
 		this->textBox1->Clear();
 	}
 
-	private: System::Void button2_Click_1(System::Object^ sender, System::EventArgs^ e) {
-		if (this->comboBox1->SelectedItem == nullptr) {
-			MessageBox::Show("Seleccione una especie válida antes de agregar una muestra de sangre.");
-			return;
-		}
-		// Especie seleccionada en el comboBox
-		String^ especieSeleccionada = this->comboBox1->SelectedItem->ToString();
-		// Buscar el animal correspondiente a esa especie
-		List<Animal^>^ animales = gestorNutricionalController->obtenerTodosAnimales();
-		Animal^ animalSeleccionado = nullptr;
+	private: void cargarAnimalesSinMuestraSangre() {
+
+		List<Animal^>^ animales = gestorNutricionalController->leerArchivoAnimal();
+		List<Muestra^>^ muestras = muestraController->buscarTodasMuestrasArchivo(gestorNutricionalController);
+
+		this->comboBox1->Items->Clear();
+
 		for each (Animal ^ a in animales) {
-			if (a->Especie->Equals(especieSeleccionada)) {
-				animalSeleccionado = a;
-				break;
+			bool tieneMuestraSangre = false;
+			for each (Muestra ^ m in muestras) {
+				if (m->getIdAnimal() == a->IdAnimal && m->getTipo()->Equals("Sangre")) {
+					tieneMuestraSangre = true;
+					break;
+				}
+			}
+			if (!tieneMuestraSangre) {
+				this->comboBox1->Items->Add(a->IdAnimal.ToString() + " - " + a->Especie);
 			}
 		}
-		if (animalSeleccionado == nullptr) {
-			MessageBox::Show("No se encontró el animal para la especie seleccionada.");
+	}
+
+	private: System::Void button2_Click_1(System::Object^ sender, System::EventArgs^ e) {
+		if (this->comboBox1->SelectedItem == nullptr) {
+			MessageBox::Show("Seleccione un animal válido antes de agregar una muestra de Sangre.");
 			return;
 		}
-		int idAnimalSeleccionado = animalSeleccionado->IdAnimal;
-		// Abrir el formulario de nueva muestra de sangre con el idAnimal seleccionado
+		// Recuperar el texto seleccionado: "IdAnimal - Especie"
+		String^ seleccionado = this->comboBox1->SelectedItem->ToString();
+		array<String^>^ partes = seleccionado->Split('-');
+
+		int idAnimalSeleccionado = Convert::ToInt32(partes[0]->Trim());
+		String^ especieSeleccionada = partes[1]->Trim();
+
 		frmNuevoMuestraS^ nuevaMuestraSangre = gcnew frmNuevoMuestraS(
 			idAnimalSeleccionado,
 			this->muestraController,
 			this->gestorNutricionalController
 		);
 		nuevaMuestraSangre->ShowDialog();
-		// Refrescar comboBox después de agregar (para que ya no aparezca ese animal)
 		cargarAnimalesDisponibles();
 	}
 };
