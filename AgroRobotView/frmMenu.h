@@ -425,21 +425,26 @@ namespace AgroRobotView {
 	// FUNCIÓN MÁGICA PARA GESTIÓN DE VENTANAS
 	// ==========================================================================
 	private: void AbrirFormulario(System::Windows::Forms::Form^ nuevoForm) {
-		// 1. Si ya hay un formulario activo, lo cerramos
+		// 1. Cerrar el anterior
 		if (this->formularioActivo != nullptr) {
 			this->formularioActivo->Close();
 		}
-
-		// 2. Guardamos la referencia del nuevo formulario
 		this->formularioActivo = nuevoForm;
 
-		// 3. Configuramos como hijo MDI (para que quede dentro del menú)
+		// 2. Configurar Padre
 		nuevoForm->MdiParent = this;
 
-		// 4. Ajustamos estilo para que se vea bien maximizado (opcional pero recomendado)
+		// 3. TRUCOS PARA PANTALLA COMPLETA:
+		// A) Quitar bordes para que parezca una página nativa
+		nuevoForm->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+
+		// B) Desactivar que se encoja solo
+		nuevoForm->AutoSize = false;
+
+		// C) Ordenar que llene todo el espacio disponible
 		nuevoForm->Dock = DockStyle::Fill;
 
-		// 5. Lo mostramos
+		// 4. Mostrar
 		nuevoForm->Show();
 	}
 		   //===============================================================================

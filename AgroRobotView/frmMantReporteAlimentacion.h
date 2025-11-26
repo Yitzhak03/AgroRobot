@@ -439,7 +439,7 @@ namespace AgroRobotView {
 			this->dateTimePicker3->Format = System::Windows::Forms::DateTimePickerFormat::Short;
 			this->dateTimePicker3->Location = System::Drawing::Point(295, 73);
 			this->dateTimePicker3->Name = L"dateTimePicker3";
-			this->dateTimePicker3->Size = System::Drawing::Size(87, 22);
+			this->dateTimePicker3->Size = System::Drawing::Size(97, 22);
 			this->dateTimePicker3->TabIndex = 10;
 			// 
 			// textBox3
@@ -631,22 +631,72 @@ namespace AgroRobotView {
 			   dateTimePicker1->Enabled = true; dateTimePicker2->Enabled = true;
 		   }
 		   void AplicarEstiloProfesional() {
-			   // COLORES Y FUENTE
+			   // 1. COLORES Y FUENTE
 			   System::Drawing::Color colorFondo = System::Drawing::Color::FromArgb(238, 245, 233);
 			   System::Drawing::Color colorVerde = System::Drawing::Color::FromArgb(67, 160, 71);
 			   System::Drawing::Color colorTexto = System::Drawing::Color::FromArgb(30, 60, 30);
-			   // Usamos Segoe UI 9pt para respetar el espacio
 			   System::Drawing::Font^ fuente = gcnew System::Drawing::Font("Segoe UI", 9, FontStyle::Regular);
 			   System::Drawing::Font^ fuenteBold = gcnew System::Drawing::Font("Segoe UI Semibold", 9, FontStyle::Bold);
 
-			   // FORMULARIO
+			   // 2. CONFIGURACIÓN DE VENTANA
 			   this->BackgroundImage = nullptr;
 			   this->BackColor = colorFondo;
 			   this->Font = fuente;
-			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			   // No tocamos el tamaño (ClientSize) para que use el que pusiste en el diseñador (957, 401)
+			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None; // Sin bordes (Integrado)
+			   this->AutoSize = false; // IMPORTANTE: Permitir estirar
+			   this->Dock = DockStyle::Fill; // Llenar el contenedor padre
 
-			   // GROUPBOXES
+			   // =========================================================
+			   // 3. AUTO-ESCALADO Y ANCLAJES (RESPONSIVE DESIGN)
+			   // =========================================================
+
+			   // A) EL PANEL DE PESTAÑAS (Charts y Tablas) -> Se estira en TODAS direcciones
+			   // Esto hará que ocupe todo el espacio sobrante a la derecha y abajo
+			   tabControl1->Anchor = static_cast<AnchorStyles>(
+				   AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right);
+
+			   // B) LA TABLA DENTRO DE LA PESTAÑA -> Llena todo el espacio de la pestaña
+			   dataGridEstadisticas->Dock = DockStyle::Fill;
+
+			   // C) LOS GRÁFICOS DENTRO DE LA PESTAÑA
+			   // Gráfico de arriba: Se estira a lo ancho
+			   if (chartTipoAnalisis != nullptr) {
+				   chartTipoAnalisis->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left | AnchorStyles::Right);
+				   chartTipoAnalisis->Width = tabPage1->Width - 20; // Ajuste inicial
+			   }
+			   // Gráfico de abajo: Se estira a lo ancho y hacia abajo
+			   if (chartEstadoSalud != nullptr) {
+				   chartEstadoSalud->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right);
+				   chartEstadoSalud->Width = tabPage1->Width - 20;
+				   chartEstadoSalud->Height = tabPage1->Height - chartEstadoSalud->Top - 10;
+			   }
+
+			   // D) LOS PANELES DE LA IZQUIERDA (Búsqueda y Métricas) -> Se quedan a la izquierda
+			   groupBox1->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left);
+			   groupBox2->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left);
+
+			   // E) LOS BOTONES -> Se quedan ARRIBA a la izquierda (cerca de los inputs)
+			   array<Button^>^ botonesAccion = { button1, button2, button3, button4 };
+			   for each (Button ^ btn in botonesAccion) {
+				   // CAMBIO CLAVE: Usamos 'Top' en vez de 'Bottom'
+				   // Así se mantienen fijos debajo de los GroupBox, sin irse al fondo
+				   btn->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left);
+
+				   // Estilo visual
+				   btn->BackColor = colorVerde;
+				   btn->ForeColor = System::Drawing::Color::White;
+				   btn->FlatStyle = FlatStyle::Flat;
+				   btn->FlatAppearance->BorderSize = 0;
+				   btn->Font = fuenteBold;
+				   btn->Cursor = Cursors::Hand;
+			   }
+
+			   // Corrección botón Cancelar
+			   button5->BackColor = System::Drawing::Color::FromArgb(200, 200, 200);
+			   button5->ForeColor = System::Drawing::Color::Black;
+
+			   // 4. ESTILOS VISUALES RESTANTES
+			   // GroupBoxes
 			   array<GroupBox^>^ grupos = { groupBox1, groupBox2 };
 			   for each (GroupBox ^ gb in grupos) {
 				   gb->BackColor = System::Drawing::Color::White;
@@ -655,23 +705,19 @@ namespace AgroRobotView {
 				   gb->FlatStyle = FlatStyle::System;
 			   }
 
-			   // BOTONES
-			   array<Button^>^ botones = { button1, button2, button3, button4 };
-			   for each (Button ^ btn in botones) {
-				   btn->BackColor = colorVerde;
-				   btn->ForeColor = System::Drawing::Color::White;
-				   btn->FlatStyle = FlatStyle::Flat;
-				   btn->FlatAppearance->BorderSize = 0;
-				   btn->Font = fuenteBold;
-				   btn->Cursor = Cursors::Hand;
-			   }
-			   // Cancelar Gris
-			   button5->BackColor = System::Drawing::Color::FromArgb(220, 220, 220);
+			   // BOTÓN CANCELAR (Opcional: Este sí puede ir abajo a la derecha o izquierda)
+				// Si quieres que el botón "Cancelar" también se quede arriba con los otros,
+				// cambia 'Bottom' por 'Top' en la siguiente línea.
+				// Si prefieres que se vaya al fondo para estar separado, déjalo en Bottom.
+			   button5->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left);
+
+			   button5->BackColor = System::Drawing::Color::FromArgb(200, 200, 200);
 			   button5->ForeColor = System::Drawing::Color::Black;
 			   button5->FlatStyle = FlatStyle::Flat;
 			   button5->FlatAppearance->BorderSize = 0;
+			   button5->Font = fuenteBold;
 
-			   // TABLA
+			   // Tabla
 			   dataGridEstadisticas->BackgroundColor = System::Drawing::Color::White;
 			   dataGridEstadisticas->BorderStyle = BorderStyle::None;
 			   dataGridEstadisticas->EnableHeadersVisualStyles = false;
@@ -682,25 +728,22 @@ namespace AgroRobotView {
 			   dataGridEstadisticas->DefaultCellStyle->SelectionForeColor = System::Drawing::Color::Black;
 			   dataGridEstadisticas->RowHeadersVisible = false;
 
-			   // TABS
+			   // Pestañas y Gráficos
 			   tabControl1->Font = fuente;
 			   tabPage1->BackColor = colorFondo;
 			   tabPage2->BackColor = System::Drawing::Color::White;
 
-			   // GRÁFICOS
 			   array<Chart^>^ charts = { chartTipoAnalisis, chartEstadoSalud };
 			   for each (Chart ^ ch in charts) {
 				   ch->BackColor = System::Drawing::Color::Transparent;
-				   if (ch->ChartAreas->Count > 0)
-					   ch->ChartAreas[0]->BackColor = System::Drawing::Color::White;
-
+				   if (ch->ChartAreas->Count > 0) ch->ChartAreas[0]->BackColor = System::Drawing::Color::White;
 				   for each (Title ^ t in ch->Titles) {
 					   t->ForeColor = colorTexto;
 					   t->Font = gcnew System::Drawing::Font("Segoe UI", 11, FontStyle::Bold);
 				   }
 			   }
 
-			   // LABELS Y RADIOS
+			   // Labels
 			   array<Label^>^ labels = { label1, label2, label3, label4, label5, label6 };
 			   for each (Label ^ lbl in labels) lbl->ForeColor = colorTexto;
 
