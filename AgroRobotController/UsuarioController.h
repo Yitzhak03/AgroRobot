@@ -15,7 +15,7 @@ namespace AgroRobotController {
 		UsuarioController();
 		void escribirArchivo();
 
-		bool agregarUsuario(Usuario^ usuario);
+		void agregarUsuario(Usuario^ usuario);
 		List<Usuario^>^ obtenerUsuariosPorEstado(Nullable<bool> estado);
 		List<Usuario^>^ obtenerUsuariosHabilitados();
 		List<Usuario^>^ obtenerUsuariosDeshabilitados();

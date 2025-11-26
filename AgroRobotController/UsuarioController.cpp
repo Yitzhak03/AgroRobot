@@ -10,7 +10,7 @@ using namespace System::Runtime::Serialization::Formatters::Binary;
 //  1 = MODO BASE DE DATOS (SQL Server) -> Úsenlo en la pucp
 //  0 = MODO TEXTO (usuarios.txt)       -> Úsenlo en sus casitas
 // ==========================================================================
-#define USAR_BASE_DE_DATOS 1  // <--- cambien este número según el modo deseado
+#define USAR_BASE_DE_DATOS 0  // <--- cambien este número según el modo deseado
 
 
 UsuarioController::UsuarioController() {
@@ -107,7 +107,7 @@ void UsuarioController::escribirArchivo() {
 	File::WriteAllLines(path, lineasArchivo);
 }
 
-bool UsuarioController::agregarUsuario(Usuario^ usuario) {
+void UsuarioController::agregarUsuario(Usuario^ usuario) {
 	this->listaUsuarios->Add(usuario);
 
 #if USAR_BASE_DE_DATOS
@@ -126,7 +126,7 @@ bool UsuarioController::agregarUsuario(Usuario^ usuario) {
 #else
 	// --- MODO TXT ---
 	escribirArchivo();
-	return true;
+	//return true;
 #endif
 }
 
@@ -159,8 +159,8 @@ void UsuarioController::actualizarUsuario(Usuario^ usuario) {
 void UsuarioController::cambiarEstadoUsuario(int id) {
 	Usuario^ usuario = obtenerUsuarioPorId(id);
 	if (usuario != nullptr) {
-		bool nuevoEstado = !usuario->GetEstadoCuenta();
-		usuario->SetEstadoCuenta(nuevoEstado);
+		/*bool nuevoEstado = !usuario->GetEstadoCuenta();
+		usuario->SetEstadoCuenta(nuevoEstado);*/
 
 #if USAR_BASE_DE_DATOS
 		// --- MODO SQL ---
@@ -168,6 +168,12 @@ void UsuarioController::cambiarEstadoUsuario(int id) {
 		executeSql(sSqlUsuario);
 #else
 		// --- MODO TXT ---
+		if (usuario->GetEstadoCuenta()) {
+			usuario->SetEstadoCuenta(false);
+		}
+		else {
+			usuario->SetEstadoCuenta(true);
+		}
 		escribirArchivo();
 #endif
 	}
