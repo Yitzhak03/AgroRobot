@@ -59,17 +59,20 @@ namespace AgroRobotView {
 	
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::Label^ label4;
-	private: System::Windows::Forms::TextBox^ textBox3;
+
 	private: System::Windows::Forms::Label^ label3;
-	private: System::Windows::Forms::TextBox^ textBox2;
+
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::TextBox^ textBox5;
-	private: System::Windows::Forms::TextBox^ textBox4;
+
 	private: System::Windows::Forms::TextBox^ textBox6;
 	private: System::Windows::Forms::Label^ label7;
+	private: System::Windows::Forms::ComboBox^ comboBox4;
+	private: System::Windows::Forms::ComboBox^ comboBox3;
+	private: System::Windows::Forms::ComboBox^ comboBox1;
 
 
 	private:
@@ -91,17 +94,17 @@ namespace AgroRobotView {
 			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->comboBox2 = (gcnew System::Windows::Forms::ComboBox());
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
+			this->comboBox3 = (gcnew System::Windows::Forms::ComboBox());
+			this->comboBox4 = (gcnew System::Windows::Forms::ComboBox());
 			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -127,17 +130,17 @@ namespace AgroRobotView {
 			// 
 			// groupBox1
 			// 
+			this->groupBox1->Controls->Add(this->comboBox4);
+			this->groupBox1->Controls->Add(this->comboBox3);
+			this->groupBox1->Controls->Add(this->comboBox1);
 			this->groupBox1->Controls->Add(this->textBox6);
 			this->groupBox1->Controls->Add(this->label7);
 			this->groupBox1->Controls->Add(this->textBox5);
-			this->groupBox1->Controls->Add(this->textBox4);
 			this->groupBox1->Controls->Add(this->label6);
 			this->groupBox1->Controls->Add(this->comboBox2);
 			this->groupBox1->Controls->Add(this->label5);
 			this->groupBox1->Controls->Add(this->label4);
-			this->groupBox1->Controls->Add(this->textBox3);
 			this->groupBox1->Controls->Add(this->label3);
-			this->groupBox1->Controls->Add(this->textBox2);
 			this->groupBox1->Controls->Add(this->label2);
 			this->groupBox1->Controls->Add(this->textBox1);
 			this->groupBox1->Controls->Add(this->label1);
@@ -172,13 +175,6 @@ namespace AgroRobotView {
 			this->textBox5->Size = System::Drawing::Size(100, 20);
 			this->textBox5->TabIndex = 13;
 			// 
-			// textBox4
-			// 
-			this->textBox4->Location = System::Drawing::Point(85, 207);
-			this->textBox4->Name = L"textBox4";
-			this->textBox4->Size = System::Drawing::Size(100, 20);
-			this->textBox4->TabIndex = 12;
-			// 
 			// label6
 			// 
 			this->label6->Location = System::Drawing::Point(9, 298);
@@ -190,8 +186,8 @@ namespace AgroRobotView {
 			// comboBox2
 			// 
 			this->comboBox2->FormattingEnabled = true;
-			this->comboBox2->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Sí", L"No" });
-			this->comboBox2->Location = System::Drawing::Point(85, 251);
+			this->comboBox2->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"Negro", L"Marrón", L"Verde", L"Gris" });
+			this->comboBox2->Location = System::Drawing::Point(85, 165);
 			this->comboBox2->Name = L"comboBox2";
 			this->comboBox2->Size = System::Drawing::Size(100, 21);
 			this->comboBox2->TabIndex = 10;
@@ -212,13 +208,6 @@ namespace AgroRobotView {
 			this->label4->TabIndex = 6;
 			this->label4->Text = L"Olor:";
 			// 
-			// textBox3
-			// 
-			this->textBox3->Location = System::Drawing::Point(85, 161);
-			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(100, 20);
-			this->textBox3->TabIndex = 5;
-			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
@@ -227,13 +216,6 @@ namespace AgroRobotView {
 			this->label3->Size = System::Drawing::Size(34, 13);
 			this->label3->TabIndex = 4;
 			this->label3->Text = L"Color:";
-			// 
-			// textBox2
-			// 
-			this->textBox2->Location = System::Drawing::Point(85, 123);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(100, 20);
-			this->textBox2->TabIndex = 3;
 			// 
 			// label2
 			// 
@@ -261,6 +243,33 @@ namespace AgroRobotView {
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Especie:";
 			// 
+			// comboBox1
+			// 
+			this->comboBox1->FormattingEnabled = true;
+			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"Líquida", L"Pastosa", L"Sólida", L"Viscosa" });
+			this->comboBox1->Location = System::Drawing::Point(85, 123);
+			this->comboBox1->Name = L"comboBox1";
+			this->comboBox1->Size = System::Drawing::Size(100, 21);
+			this->comboBox1->TabIndex = 11;
+			// 
+			// comboBox3
+			// 
+			this->comboBox3->FormattingEnabled = true;
+			this->comboBox3->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"Fétido", L"Normal", L"Rancio", L"Putrefacto" });
+			this->comboBox3->Location = System::Drawing::Point(85, 206);
+			this->comboBox3->Name = L"comboBox3";
+			this->comboBox3->Size = System::Drawing::Size(100, 21);
+			this->comboBox3->TabIndex = 16;
+			// 
+			// comboBox4
+			// 
+			this->comboBox4->FormattingEnabled = true;
+			this->comboBox4->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Sí", L"No" });
+			this->comboBox4->Location = System::Drawing::Point(85, 251);
+			this->comboBox4->Name = L"comboBox4";
+			this->comboBox4->Size = System::Drawing::Size(100, 21);
+			this->comboBox4->TabIndex = 17;
+			// 
 			// frmNuevoMuestraH
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -283,10 +292,10 @@ namespace AgroRobotView {
 		int idMuestra = Convert::ToInt32(this->textBox6->Text);
 		int idAnimal = this->idAnimal;
 
-		String^ consistencia = this->textBox2->Text;
-		String^ color = this->textBox3->Text;
-		String^ olor = this->textBox4->Text;
-		String^ parasitos = this->comboBox2->Text;
+		String^ consistencia = this->comboBox1->Text;
+		String^ color = this->comboBox2->Text;
+		String^ olor = this->comboBox3->Text;
+		String^ parasitos = this->comboBox4->Text;
 		String^ fecha = this->textBox5->Text;
 
 		// Validaciones básicas
@@ -304,7 +313,7 @@ namespace AgroRobotView {
 
 		// Crear objeto muestra
 		Muestra^ nuevaMuestra = gcnew Muestra(idMuestra, "Heces", fecha,
-			consistencia, color, olor, parasitos, "", "", "", "", animal);
+			consistencia, color, olor, parasitos, 0, "", "", "", animal);
 
 		// Guardar en archivo
 		this->muestraController->agregarMuestraArchivo(nuevaMuestra, this->gestorNutricionalController);
@@ -312,9 +321,11 @@ namespace AgroRobotView {
 		MessageBox::Show("Muestra de heces registrada correctamente.");
 		this->Close();
 	}
+
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
 	}
+
 	private: System::Void frmNuevoMuestraH_Load(System::Object^ sender, System::EventArgs^ e) {
 		int nuevoId = this->muestraController->generarNuevoId();
 		this->textBox6->Text = Convert::ToString(nuevoId);

@@ -242,7 +242,7 @@ namespace AgroRobotView {
 		//==============================================================================
 		//==============================INGRESAR========================================
 		//==============================================================================
-	private: System::Void btnLogin_Click(System::Object^ sender, System::EventArgs^ e)
+	/*private: System::Void btnLogin_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		String^ usuario = txtUser->Text;
 		String^ contrasenha = txtPassword->Text;
@@ -272,7 +272,48 @@ namespace AgroRobotView {
 		}
 		// No encontrado / credenciales inválidas
 		MessageBox::Show("Usuario o contraseña incorrectos.", "Login", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}*/
+
+	private: System::Void btnLogin_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		// 1. Limpiar los datos ingresados por el usuario inmediatamente
+		String^ usuarioIngresado = txtUser->Text->Trim();
+		String^ contrasenhaIngresada = txtPassword->Text->Trim();
+
+		// Validar campos vacíos (usando los strings limpios)
+		if (String::IsNullOrEmpty(usuarioIngresado) || String::IsNullOrEmpty(contrasenhaIngresada)) {
+			MessageBox::Show("Ingrese usuario y contraseña.", "Login", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+			return;
+		}
+
+		UsuarioController^ ctrl = gcnew UsuarioController();
+		// Asumo que obtenerUsuariosHabilitados() ya fue corregido para cargar datos de la BD correctamente.
+		List<Usuario^>^ lista = ctrl->obtenerUsuariosHabilitados();
+
+		for each (Usuario ^ u in lista) {
+			// 2. Comparación de Credenciales Limpias
+			// Se usa String::Equals para una comparación estricta de strings, aunque '==' es común en C++/CLI.
+			if (String::Equals(u->GetNombre(), usuarioIngresado) &&
+				String::Equals(u->GetContrasenha(), contrasenhaIngresada))
+			{
+				// Autenticado
+				MessageBox::Show("Acceso correcto. Bienvenido " + u->GetNombre(), "Login", MessageBoxButtons::OK, MessageBoxIcon::Information);
+
+				// Actualizar la hora del último acceso antes de continuar
+				u->SetUltimoAcceso(DateTime::Now.ToString("dd/MM/yyyy HH:mm"));
+				ctrl->actualizarUsuario(u); // Esto actualiza el registro en la BD
+
+				this->Hide(); // Ocultar el formulario de login
+				frmMenu^ menu = gcnew frmMenu(u); // Pasar el usuario autenticado
+				menu->ShowDialog(); // Mostrar el formulario del menú principal
+				this->Close(); // Cerrar el formulario de login al volver del menú
+				return;
+			}
+		}
+		// No encontrado / credenciales inválidas
+		MessageBox::Show("Usuario o contraseña incorrectos.", "Login", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
+
 		   //==============================================================================
 		   //==============================Ver contraseña==================================
 		   //==============================================================================
