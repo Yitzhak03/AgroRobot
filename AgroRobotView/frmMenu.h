@@ -434,17 +434,17 @@ namespace AgroRobotView {
 		// 2. Configurar Padre
 		nuevoForm->MdiParent = this;
 
-		//// 3. TRUCOS PARA PANTALLA COMPLETA:
-		//// A) Quitar bordes para que parezca una página nativa
-		//nuevoForm->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+		// 3. TRUCOS PARA PANTALLA COMPLETA:
+		// A) Quitar bordes para que parezca una página nativa
+		nuevoForm->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+		/*
+		// B) Desactivar que se encoja solo
+		nuevoForm->AutoSize = false;
 
-		//// B) Desactivar que se encoja solo
-		//nuevoForm->AutoSize = false;
-
-		//// C) Ordenar que llene todo el espacio disponible
+		// C) Ordenar que llene todo el espacio disponible
 		nuevoForm->Dock = DockStyle::Fill;
-
-		//// 4. Mostrar
+		*/
+		// 4. Mostrar
 		nuevoForm->Show();
 	}
 		   //===============================================================================

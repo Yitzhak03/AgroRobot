@@ -77,6 +77,7 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
 	private: System::Windows::Forms::Panel^ panel1;
+	private: System::Windows::Forms::Label^ label2;
 
 
 
@@ -108,9 +109,9 @@ namespace AgroRobotView {
 		   /// </summary>
 		   void InitializeComponent(void)
 		   {
-			   System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle4 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			   System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle5 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			   System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle6 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			   System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			   System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			   System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			   this->button5 = (gcnew System::Windows::Forms::Button());
 			   this->button3 = (gcnew System::Windows::Forms::Button());
 			   this->button2 = (gcnew System::Windows::Forms::Button());
@@ -127,6 +128,7 @@ namespace AgroRobotView {
 			   this->button6 = (gcnew System::Windows::Forms::Button());
 			   this->button7 = (gcnew System::Windows::Forms::Button());
 			   this->panel1 = (gcnew System::Windows::Forms::Panel());
+			   this->label2 = (gcnew System::Windows::Forms::Label());
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			   this->groupBox1->SuspendLayout();
 			   this->panel1->SuspendLayout();
@@ -158,7 +160,7 @@ namespace AgroRobotView {
 				   static_cast<System::Byte>(0)));
 			   this->button3->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(106)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(90)));
-			   this->button3->Location = System::Drawing::Point(115, 383);
+			   this->button3->Location = System::Drawing::Point(115, 516);
 			   this->button3->Margin = System::Windows::Forms::Padding(2);
 			   this->button3->Name = L"button3";
 			   this->button3->Size = System::Drawing::Size(88, 32);
@@ -178,7 +180,7 @@ namespace AgroRobotView {
 				   static_cast<System::Byte>(0)));
 			   this->button2->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(106)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(90)));
-			   this->button2->Location = System::Drawing::Point(18, 383);
+			   this->button2->Location = System::Drawing::Point(18, 516);
 			   this->button2->Margin = System::Windows::Forms::Padding(2);
 			   this->button2->Name = L"button2";
 			   this->button2->Size = System::Drawing::Size(88, 32);
@@ -192,48 +194,48 @@ namespace AgroRobotView {
 			   this->dataGridView1->AllowUserToAddRows = false;
 			   this->dataGridView1->AllowUserToResizeColumns = false;
 			   this->dataGridView1->AllowUserToResizeRows = false;
-			   dataGridViewCellStyle4->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)),
+			   dataGridViewCellStyle1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(250)), static_cast<System::Int32>(static_cast<System::Byte>(246)));
-			   dataGridViewCellStyle4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			   dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
-			   dataGridViewCellStyle4->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(22)), static_cast<System::Int32>(static_cast<System::Byte>(53)),
+			   dataGridViewCellStyle1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(22)), static_cast<System::Int32>(static_cast<System::Byte>(53)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(45)));
-			   dataGridViewCellStyle4->SelectionBackColor = System::Drawing::Color::LightGreen;
-			   dataGridViewCellStyle4->SelectionForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(22)),
+			   dataGridViewCellStyle1->SelectionBackColor = System::Drawing::Color::LightGreen;
+			   dataGridViewCellStyle1->SelectionForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(22)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(53)), static_cast<System::Int32>(static_cast<System::Byte>(45)));
-			   this->dataGridView1->AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+			   this->dataGridView1->AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
 			   this->dataGridView1->BackgroundColor = System::Drawing::Color::White;
 			   this->dataGridView1->CellBorderStyle = System::Windows::Forms::DataGridViewCellBorderStyle::SingleHorizontal;
 			   this->dataGridView1->ColumnHeadersBorderStyle = System::Windows::Forms::DataGridViewHeaderBorderStyle::Single;
-			   dataGridViewCellStyle5->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			   dataGridViewCellStyle5->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(236)),
+			   dataGridViewCellStyle2->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			   dataGridViewCellStyle2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(236)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(246)), static_cast<System::Int32>(static_cast<System::Byte>(240)));
-			   dataGridViewCellStyle5->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10));
-			   dataGridViewCellStyle5->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(22)), static_cast<System::Int32>(static_cast<System::Byte>(53)),
+			   dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10));
+			   dataGridViewCellStyle2->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(22)), static_cast<System::Int32>(static_cast<System::Byte>(53)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(45)));
-			   dataGridViewCellStyle5->SelectionBackColor = System::Drawing::Color::White;
-			   dataGridViewCellStyle5->SelectionForeColor = System::Drawing::Color::White;
-			   dataGridViewCellStyle5->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			   this->dataGridView1->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+			   dataGridViewCellStyle2->SelectionBackColor = System::Drawing::Color::White;
+			   dataGridViewCellStyle2->SelectionForeColor = System::Drawing::Color::White;
+			   dataGridViewCellStyle2->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			   this->dataGridView1->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
 			   this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			   this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4)
 			   {
 				   this->Column1,
 					   this->Column2, this->Column3, this->Column5
 			   });
-			   dataGridViewCellStyle6->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
-			   dataGridViewCellStyle6->BackColor = System::Drawing::SystemColors::Window;
-			   dataGridViewCellStyle6->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9));
-			   dataGridViewCellStyle6->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(22)), static_cast<System::Int32>(static_cast<System::Byte>(53)),
+			   dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			   dataGridViewCellStyle3->BackColor = System::Drawing::SystemColors::Window;
+			   dataGridViewCellStyle3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9));
+			   dataGridViewCellStyle3->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(22)), static_cast<System::Int32>(static_cast<System::Byte>(53)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(45)));
-			   dataGridViewCellStyle6->SelectionBackColor = System::Drawing::Color::LightGreen;
-			   dataGridViewCellStyle6->SelectionForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(22)),
+			   dataGridViewCellStyle3->SelectionBackColor = System::Drawing::Color::LightGreen;
+			   dataGridViewCellStyle3->SelectionForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(22)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(53)), static_cast<System::Int32>(static_cast<System::Byte>(45)));
-			   dataGridViewCellStyle6->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
-			   this->dataGridView1->DefaultCellStyle = dataGridViewCellStyle6;
+			   dataGridViewCellStyle3->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
+			   this->dataGridView1->DefaultCellStyle = dataGridViewCellStyle3;
 			   this->dataGridView1->GridColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(183)), static_cast<System::Int32>(static_cast<System::Byte>(220)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(200)));
-			   this->dataGridView1->Location = System::Drawing::Point(18, 120);
+			   this->dataGridView1->Location = System::Drawing::Point(18, 171);
 			   this->dataGridView1->Margin = System::Windows::Forms::Padding(2);
 			   this->dataGridView1->MultiSelect = false;
 			   this->dataGridView1->Name = L"dataGridView1";
@@ -241,7 +243,7 @@ namespace AgroRobotView {
 			   this->dataGridView1->RowHeadersWidth = 51;
 			   this->dataGridView1->RowTemplate->Height = 24;
 			   this->dataGridView1->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
-			   this->dataGridView1->Size = System::Drawing::Size(638, 249);
+			   this->dataGridView1->Size = System::Drawing::Size(638, 329);
 			   this->dataGridView1->TabIndex = 18;
 			   this->dataGridView1->UserDeletingRow += gcnew System::Windows::Forms::DataGridViewRowCancelEventHandler(this, &frmMantInsumo::dataGridView1_UserDeletingRow);
 			   // 
@@ -284,7 +286,7 @@ namespace AgroRobotView {
 				   static_cast<System::Byte>(0)));
 			   this->groupBox1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(106)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(90)));
-			   this->groupBox1->Location = System::Drawing::Point(18, 12);
+			   this->groupBox1->Location = System::Drawing::Point(18, 63);
 			   this->groupBox1->Margin = System::Windows::Forms::Padding(2);
 			   this->groupBox1->Name = L"groupBox1";
 			   this->groupBox1->Padding = System::Windows::Forms::Padding(2);
@@ -352,7 +354,7 @@ namespace AgroRobotView {
 				   static_cast<System::Byte>(0)));
 			   this->button4->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(106)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(90)));
-			   this->button4->Location = System::Drawing::Point(212, 383);
+			   this->button4->Location = System::Drawing::Point(212, 516);
 			   this->button4->Margin = System::Windows::Forms::Padding(2);
 			   this->button4->Name = L"button4";
 			   this->button4->Size = System::Drawing::Size(88, 32);
@@ -372,7 +374,7 @@ namespace AgroRobotView {
 				   static_cast<System::Byte>(0)));
 			   this->button6->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(106)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(90)));
-			   this->button6->Location = System::Drawing::Point(309, 383);
+			   this->button6->Location = System::Drawing::Point(309, 516);
 			   this->button6->Name = L"button6";
 			   this->button6->Size = System::Drawing::Size(88, 32);
 			   this->button6->TabIndex = 23;
@@ -389,7 +391,7 @@ namespace AgroRobotView {
 			   this->button7->Font = (gcnew System::Drawing::Font(L"Microsoft Tai Le", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
 			   this->button7->ForeColor = System::Drawing::Color::White;
-			   this->button7->Location = System::Drawing::Point(523, 383);
+			   this->button7->Location = System::Drawing::Point(523, 516);
 			   this->button7->Name = L"button7";
 			   this->button7->Size = System::Drawing::Size(133, 32);
 			   this->button7->TabIndex = 24;
@@ -399,6 +401,7 @@ namespace AgroRobotView {
 			   // 
 			   // panel1
 			   // 
+			   this->panel1->Controls->Add(this->label2);
 			   this->panel1->Controls->Add(this->button7);
 			   this->panel1->Controls->Add(this->groupBox1);
 			   this->panel1->Controls->Add(this->button6);
@@ -408,8 +411,18 @@ namespace AgroRobotView {
 			   this->panel1->Controls->Add(this->button2);
 			   this->panel1->Location = System::Drawing::Point(12, 12);
 			   this->panel1->Name = L"panel1";
-			   this->panel1->Size = System::Drawing::Size(680, 432);
+			   this->panel1->Size = System::Drawing::Size(680, 565);
 			   this->panel1->TabIndex = 25;
+			   // 
+			   // label2
+			   // 
+			   this->label2->AutoSize = true;
+			   this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Tai Le", 17, System::Drawing::FontStyle::Bold));
+			   this->label2->Location = System::Drawing::Point(13, 16);
+			   this->label2->Name = L"label2";
+			   this->label2->Size = System::Drawing::Size(319, 29);
+			   this->label2->TabIndex = 26;
+			   this->label2->Text = L"Registro General de Insumos";
 			   // 
 			   // frmMantInsumo
 			   // 
@@ -418,7 +431,7 @@ namespace AgroRobotView {
 			   this->AutoSize = true;
 			   this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(246)), static_cast<System::Int32>(static_cast<System::Byte>(251)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(248)));
-			   this->ClientSize = System::Drawing::Size(707, 460);
+			   this->ClientSize = System::Drawing::Size(707, 589);
 			   this->Controls->Add(this->panel1);
 			   this->Name = L"frmMantInsumo";
 			   this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
@@ -429,6 +442,7 @@ namespace AgroRobotView {
 			   this->groupBox1->ResumeLayout(false);
 			   this->groupBox1->PerformLayout();
 			   this->panel1->ResumeLayout(false);
+			   this->panel1->PerformLayout();
 			   this->ResumeLayout(false);
 
 		   }
