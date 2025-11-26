@@ -44,62 +44,147 @@ namespace AgroRobotView {
 
 		void aplicarEstilo()
 		{
-			this->BackColor = System::Drawing::Color::FromArgb(30, 61, 54);
+			// 1. COLORES Y FUENTES
+			System::Drawing::Color colorFondo = System::Drawing::Color::FromArgb(30, 61, 54);
+			System::Drawing::Color colorPanel = System::Drawing::Color::FromArgb(45, 93, 80);
+			System::Drawing::Color colorInput = System::Drawing::Color::FromArgb(60, 110, 95);
+			System::Drawing::Color colorVerdeClaro = System::Drawing::Color::FromArgb(123, 228, 149);
+			System::Drawing::Color colorTexto = System::Drawing::Color::FromArgb(242, 242, 242);
 
-			this->Font = gcnew System::Drawing::Font(L"Bahnschrift", 10, FontStyle::Regular);
-			this->ForeColor = System::Drawing::Color::FromArgb(242, 242, 242);
+			this->BackColor = colorFondo;
+			this->ForeColor = colorTexto;
+			// Aumentamos fuente base a 11pt
+			this->Font = gcnew System::Drawing::Font(L"Bahnschrift", 11, FontStyle::Regular);
 
-			this->groupBox1->BackColor = System::Drawing::Color::FromArgb(45, 93, 80);
-			this->groupBox1->ForeColor = System::Drawing::Color::FromArgb(242, 242, 242);
-			this->groupBox1->Font = gcnew System::Drawing::Font(L"Bahnschrift", 11, FontStyle::Bold);
-			this->groupBox1->Text = L"Criterios de búsqueda";
-
-			array<TextBox^>^ textos = { this->txtBuscar};
-			for each (TextBox ^ t in textos) {
-				t->BackColor = System::Drawing::Color::FromArgb(60, 110, 95);
-				t->ForeColor = System::Drawing::Color::White;
-				t->BorderStyle = BorderStyle::FixedSingle;
-				t->Font = gcnew System::Drawing::Font(L"Bahnschrift", 10);
-			}
-
-			this->button1->BackColor = System::Drawing::Color::FromArgb(123, 228, 149);
-			this->button1->FlatStyle = FlatStyle::Flat;
-			this->button1->FlatAppearance->BorderSize = 0;
-			this->button1->ForeColor = System::Drawing::Color::Black;
-			this->button1->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 10);
-
-
-			this->dataGridView1->BackgroundColor = System::Drawing::Color::FromArgb(45, 93, 80);
-			this->dataGridView1->BorderStyle = BorderStyle::None;
-			this->dataGridView1->GridColor = System::Drawing::Color::FromArgb(30, 61, 54);
-			this->dataGridView1->EnableHeadersVisualStyles = false;
-			this->dataGridView1->ColumnHeadersDefaultCellStyle->BackColor = System::Drawing::Color::FromArgb(30, 61, 54);
-			this->dataGridView1->ColumnHeadersDefaultCellStyle->ForeColor = System::Drawing::Color::White;
-			this->dataGridView1->DefaultCellStyle->BackColor = System::Drawing::Color::FromArgb(60, 110, 95);
-			this->dataGridView1->DefaultCellStyle->ForeColor = System::Drawing::Color::White;
-			this->dataGridView1->DefaultCellStyle->SelectionBackColor = System::Drawing::Color::FromArgb(123, 228, 149);
-			this->dataGridView1->DefaultCellStyle->SelectionForeColor = System::Drawing::Color::Black;
-
-			array<Button^>^ botones = { this->button2, this->button3, this->btnEliminar, this->btnBuscar, this->btnMostrarTodos};
-			for each (Button ^ b in botones) {
-				b->BackColor = System::Drawing::Color::FromArgb(123, 228, 149);
-				b->FlatStyle = FlatStyle::Flat;
-				b->FlatAppearance->BorderSize = 0;
-				b->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 10);
-				b->ForeColor = System::Drawing::Color::Black;
-				b->Cursor = Cursors::Hand;
-			}
-
-			// 🏷️ Etiquetas
-			array<Label^>^ labels = { this->label1};
-			for each (Label ^ l in labels) {
-				l->ForeColor = System::Drawing::Color::White;
-				l->Font = gcnew System::Drawing::Font(L"Bahnschrift", 10);
-			}
-
-			// 📏 Config general
 			this->Text = L"AgroRobot - Mantenimiento de Roles";
 			this->StartPosition = FormStartPosition::CenterScreen;
+
+			// =========================================================
+			// 2. GROUP BOX (BÚSQUEDA) - CENTRADO
+			// =========================================================
+			int margenLateral = 40;
+
+			this->groupBox1->Text = L"Criterio de Búsqueda";
+			this->groupBox1->Font = gcnew System::Drawing::Font(L"Bahnschrift", 12, FontStyle::Bold);
+			this->groupBox1->ForeColor = colorTexto;
+			this->groupBox1->BackColor = colorPanel;
+
+			this->groupBox1->Location = System::Drawing::Point(margenLateral, 20);
+			this->groupBox1->Height = 110;
+			this->groupBox1->Width = this->ClientSize.Width - (margenLateral * 2);
+			this->groupBox1->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left | AnchorStyles::Right);
+
+			// --- CÁLCULO PARA CENTRAR ELEMENTOS ---
+			int wLabel = 40;  // "Id:" es corto
+			int wInput = 150;
+			int wBtn = 120;
+			int gap = 40;     // Separación generosa
+
+			// Ancho total: Lbl + Input + Gap + Btn + Gap + Btn
+			int anchoTotal = wLabel + wInput + gap + wBtn + gap + wBtn;
+
+			// Inicio X centrado
+			int xStart = (this->groupBox1->Width - anchoTotal) / 2;
+			if (xStart < 10) xStart = 10; // Protección para pantallas muy chicas
+
+			int yFila = 45;
+
+			// 1. Label Id
+			this->label1->AutoSize = false;
+			this->label1->Width = wLabel;
+			this->label1->Location = System::Drawing::Point(xStart, yFila + 5);
+			this->label1->Anchor = AnchorStyles::None;
+			this->label1->ForeColor = System::Drawing::Color::White;
+
+			xStart += wLabel;
+
+			// 2. TextBox Buscar
+			this->txtBuscar->Width = wInput;
+			this->txtBuscar->Location = System::Drawing::Point(xStart, yFila);
+			this->txtBuscar->Anchor = AnchorStyles::None;
+			this->txtBuscar->BackColor = colorInput;
+			this->txtBuscar->ForeColor = System::Drawing::Color::White;
+			this->txtBuscar->BorderStyle = BorderStyle::FixedSingle;
+
+			xStart += wInput + gap;
+
+			// 3. Botón Buscar
+			this->btnBuscar->Width = wBtn;
+			this->btnBuscar->Height = 30;
+			this->btnBuscar->Location = System::Drawing::Point(xStart, yFila - 2);
+			this->btnBuscar->Anchor = AnchorStyles::None;
+			this->btnBuscar->BackColor = colorVerdeClaro;
+			this->btnBuscar->ForeColor = System::Drawing::Color::Black;
+			this->btnBuscar->FlatStyle = FlatStyle::Flat;
+			this->btnBuscar->FlatAppearance->BorderSize = 0;
+			this->btnBuscar->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 10);
+			this->btnBuscar->Cursor = Cursors::Hand;
+
+			xStart += wBtn + gap;
+
+			// 4. Botón Mostrar Todos
+			this->btnMostrarTodos->Width = wBtn;
+			this->btnMostrarTodos->Height = 30;
+			this->btnMostrarTodos->Location = System::Drawing::Point(xStart, yFila - 2);
+			this->btnMostrarTodos->Anchor = AnchorStyles::None;
+			this->btnMostrarTodos->BackColor = colorVerdeClaro;
+			this->btnMostrarTodos->ForeColor = System::Drawing::Color::Black;
+			this->btnMostrarTodos->FlatStyle = FlatStyle::Flat;
+			this->btnMostrarTodos->FlatAppearance->BorderSize = 0;
+			this->btnMostrarTodos->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 10);
+			this->btnMostrarTodos->Cursor = Cursors::Hand;
+
+			// =========================================================
+			// 3. GRILLA (CENTRAL - ESTIRADA)
+			// =========================================================
+			int espacioVertical = 20;
+			int yGrilla = this->groupBox1->Bottom + espacioVertical;
+			int alturaBotonera = 80;
+
+			this->dataGridView1->Location = System::Drawing::Point(margenLateral, yGrilla);
+			this->dataGridView1->Width = this->ClientSize.Width - (margenLateral * 2);
+			this->dataGridView1->Height = this->ClientSize.Height - yGrilla - alturaBotonera;
+			this->dataGridView1->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right);
+
+			// Estilos Visuales
+			this->dataGridView1->BackgroundColor = colorPanel;
+			this->dataGridView1->BorderStyle = BorderStyle::None;
+			this->dataGridView1->ColumnHeadersDefaultCellStyle->BackColor = colorFondo;
+			this->dataGridView1->ColumnHeadersDefaultCellStyle->ForeColor = System::Drawing::Color::White;
+			this->dataGridView1->ColumnHeadersDefaultCellStyle->Font = gcnew System::Drawing::Font(L"Bahnschrift", 11, FontStyle::Bold);
+			this->dataGridView1->ColumnHeadersHeight = 40;
+			this->dataGridView1->EnableHeadersVisualStyles = false;
+
+			this->dataGridView1->DefaultCellStyle->BackColor = colorInput;
+			this->dataGridView1->DefaultCellStyle->ForeColor = System::Drawing::Color::White;
+			this->dataGridView1->DefaultCellStyle->SelectionBackColor = colorVerdeClaro;
+			this->dataGridView1->DefaultCellStyle->SelectionForeColor = System::Drawing::Color::Black;
+			this->dataGridView1->RowTemplate->Height = 35;
+			this->dataGridView1->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::Fill;
+
+			// =========================================================
+			// 4. BOTONES INFERIORES (ALINEADOS)
+			// =========================================================
+			int yBotones = this->ClientSize.Height - 60;
+			array<Button^>^ botonesAccion = { this->button1, this->button3, this->btnEliminar, this->button2 }; // Nuevo, Editar, Eliminar, Cancelar
+
+			int xActual = margenLateral;
+
+			for each (Button ^ btn in botonesAccion) {
+				btn->BackColor = colorVerdeClaro;
+				btn->ForeColor = System::Drawing::Color::Black;
+				btn->FlatStyle = FlatStyle::Flat;
+				btn->FlatAppearance->BorderSize = 0;
+				btn->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 11);
+				btn->Cursor = Cursors::Hand;
+				btn->Height = 40;
+				btn->Width = 120;
+
+				btn->Location = System::Drawing::Point(xActual, yBotones);
+				btn->Anchor = static_cast<AnchorStyles>(AnchorStyles::Bottom | AnchorStyles::Left);
+
+				xActual += btn->Width + 15; // Espacio entre botones
+			}
 		}
 	
 	private: RolController^ rolController;
@@ -368,6 +453,9 @@ namespace AgroRobotView {
 
 			this->dataGridView1->AutoGenerateColumns = false; // Desactivar la generaci�n autom�tica de columnas
 			this->dataGridView1->AllowUserToAddRows = false;	 // Evitar que el usuario pueda agregar filas manualmente
+			this->dataGridView1->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::Fill;
+			this->dataGridView1->AutoGenerateColumns = false;
+			this->dataGridView1->AllowUserToAddRows = false;
 		}
 
 		private: System::Void btnMostrarTodos_Click(System::Object^ sender, System::EventArgs^ e) {

@@ -42,7 +42,7 @@
 
 			void aplicarEstilo()
 			{
-				// 1. COLORES (Tus colores originales)
+				// 1. COLORES Y FUENTES
 				System::Drawing::Color colorFondo = System::Drawing::Color::FromArgb(30, 61, 54);
 				System::Drawing::Color colorPanel = System::Drawing::Color::FromArgb(45, 93, 80);
 				System::Drawing::Color colorInput = System::Drawing::Color::FromArgb(60, 110, 95);
@@ -51,94 +51,158 @@
 
 				this->BackColor = colorFondo;
 				this->ForeColor = colorTexto;
-
-				// 2. ESCALADO DE FUENTE GENERAL (Cambio de 10 a 12)
-				this->Font = gcnew System::Drawing::Font(L"Bahnschrift", 12, FontStyle::Regular);
-
-				// 3. CONFIGURACIÓN DEL FORMULARIO (Maximizar y permitir redimensionar)
+				this->Font = gcnew System::Drawing::Font(L"Bahnschrift", 11, FontStyle::Regular);
 				this->Text = L"AgroRobot - Mantenimiento de Usuarios";
 				this->StartPosition = FormStartPosition::CenterScreen;
-				this->WindowState = FormWindowState::Maximized; // Iniciar en pantalla completa (Opcional)
 
-				// --- GROUP BOX (BÚSQUEDA) ---
-				this->groupBox1->BackColor = colorPanel;
-				this->groupBox1->ForeColor = colorTexto;
-				this->groupBox1->Font = gcnew System::Drawing::Font(L"Bahnschrift", 13, FontStyle::Bold); // Fuente más grande
+				// =========================================================
+				// 2. GROUP BOX (ENCABEZADO)
+				// =========================================================
+				int margenLateral = 40;
+
 				this->groupBox1->Text = L"Criterios de búsqueda";
-				// ANCLAJE: Se estira a la izquierda y derecha
-				this->groupBox1->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left | AnchorStyles::Right);
-				this->groupBox1->Width = this->ClientSize.Width - 22; // Ajuste inicial al ancho
+				this->groupBox1->Font = gcnew System::Drawing::Font(L"Bahnschrift", 12, FontStyle::Bold);
+				this->groupBox1->ForeColor = colorTexto;
+				this->groupBox1->BackColor = colorPanel;
 
-				// Controles dentro del GroupBox
+				this->groupBox1->Location = System::Drawing::Point(margenLateral, 20);
+				this->groupBox1->Height = 110;
+				this->groupBox1->Width = this->ClientSize.Width - (margenLateral * 2);
+				this->groupBox1->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left | AnchorStyles::Right);
+
+				// --- CÁLCULO PARA CENTRAR CON MÁS SEPARACIÓN ---
+				int wLabel = 70;
+				int wInput = 150;
+				int wBtn = 120; // Botones un poco más anchos
+
+				// CAMBIO AQUÍ: Aumentamos el espacio (gap) de 15 a 40
+				int gap = 40;
+
+				// Ancho total de la fila de controles
+				int anchoTotalContenido = wLabel + wInput + gap + wLabel + wInput + gap + wBtn + gap + wBtn;
+
+				// Calculamos el inicio X para centrar todo el bloque
+				int xStart = (this->groupBox1->Width - anchoTotalContenido) / 2;
+
+				// Si la pantalla es muy chica y xStart da negativo, lo forzamos a 10 para que no se esconda
+				if (xStart < 10) xStart = 10;
+
+				int yFila = 45;
+
+				// 1. Label Nombre
+				this->label1->AutoSize = false;
+				this->label1->Width = wLabel;
+				this->label1->Location = System::Drawing::Point(xStart, yFila + 5);
+				this->label1->Anchor = AnchorStyles::None;
+				this->label1->ForeColor = System::Drawing::Color::White;
+
+				xStart += wLabel;
+
+				// 2. TextBox Nombre
+				this->textBox1->Width = wInput;
+				this->textBox1->Location = System::Drawing::Point(xStart, yFila);
+				this->textBox1->Anchor = AnchorStyles::None;
 				this->textBox1->BackColor = colorInput;
 				this->textBox1->ForeColor = System::Drawing::Color::White;
 				this->textBox1->BorderStyle = BorderStyle::FixedSingle;
-				this->textBox1->Font = gcnew System::Drawing::Font(L"Bahnschrift", 12); // Más grande
 
+				xStart += wInput + gap; // Aplicamos la separación grande
+
+				// 3. Label Estado
+				this->label2->AutoSize = false;
+				this->label2->Width = wLabel;
+				this->label2->Location = System::Drawing::Point(xStart, yFila + 5);
+				this->label2->Anchor = AnchorStyles::None;
+				this->label2->ForeColor = System::Drawing::Color::White;
+
+				xStart += wLabel;
+
+				// 4. ComboBox Estado
+				this->comboBox1->Width = wInput;
+				this->comboBox1->Location = System::Drawing::Point(xStart, yFila);
+				this->comboBox1->Anchor = AnchorStyles::None;
+				this->comboBox1->BackColor = colorInput;
+				this->comboBox1->ForeColor = System::Drawing::Color::White;
+				this->comboBox1->FlatStyle = FlatStyle::Flat;
+
+				xStart += wInput + gap; // Aplicamos la separación grande
+
+				// 5. Botón Buscar
+				this->btnBuscar->Width = wBtn;
+				this->btnBuscar->Height = 30;
+				this->btnBuscar->Location = System::Drawing::Point(xStart, yFila - 2);
+				this->btnBuscar->Anchor = AnchorStyles::None;
 				this->btnBuscar->BackColor = colorVerdeClaro;
+				this->btnBuscar->ForeColor = System::Drawing::Color::Black;
 				this->btnBuscar->FlatStyle = FlatStyle::Flat;
 				this->btnBuscar->FlatAppearance->BorderSize = 0;
-				this->btnBuscar->ForeColor = System::Drawing::Color::Black;
-				this->btnBuscar->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 12);
-				// ANCLAJE: El botón buscar se queda pegado a la derecha si agrandas el groupbox (opcional)
-				// this->btnBuscar->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Right); 
+				this->btnBuscar->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 10);
+				this->btnBuscar->Cursor = Cursors::Hand;
 
+				xStart += wBtn + gap; // Aplicamos la separación grande
+
+				// 6. Botón Mostrar Todos
+				this->btnMostrarTodos->Width = wBtn;
+				this->btnMostrarTodos->Height = 30;
+				this->btnMostrarTodos->Location = System::Drawing::Point(xStart, yFila - 2);
+				this->btnMostrarTodos->Anchor = AnchorStyles::None;
 				this->btnMostrarTodos->BackColor = colorVerdeClaro;
+				this->btnMostrarTodos->ForeColor = System::Drawing::Color::Black;
 				this->btnMostrarTodos->FlatStyle = FlatStyle::Flat;
-				this->btnMostrarTodos->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 11);
-				this->btnMostrarTodos->Size = System::Drawing::Size(120, 35); // Botón más grande
+				this->btnMostrarTodos->FlatAppearance->BorderSize = 0;
+				this->btnMostrarTodos->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 10);
+				this->btnMostrarTodos->Cursor = Cursors::Hand;
 
-				// --- DATAGRIDVIEW (TABLA) ---
+
+				// =========================================================
+				// 3. GRILLA (CENTRAL)
+				// =========================================================
+				int espacioVertical = 20;
+				int yGrilla = this->groupBox1->Bottom + espacioVertical;
+				int alturaBotonera = 80;
+
+				this->dataGridView1->Location = System::Drawing::Point(margenLateral, yGrilla);
+				this->dataGridView1->Width = this->ClientSize.Width - (margenLateral * 2);
+				this->dataGridView1->Height = this->ClientSize.Height - yGrilla - alturaBotonera;
+				this->dataGridView1->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right);
+
+				// Estilos de Grilla
 				this->dataGridView1->BackgroundColor = colorPanel;
 				this->dataGridView1->BorderStyle = BorderStyle::None;
-				this->dataGridView1->GridColor = colorFondo;
-				this->dataGridView1->EnableHeadersVisualStyles = false;
-
-				// Estilo de Cabecera
 				this->dataGridView1->ColumnHeadersDefaultCellStyle->BackColor = colorFondo;
 				this->dataGridView1->ColumnHeadersDefaultCellStyle->ForeColor = System::Drawing::Color::White;
-				this->dataGridView1->ColumnHeadersDefaultCellStyle->Font = gcnew System::Drawing::Font(L"Bahnschrift", 12, FontStyle::Bold);
-				this->dataGridView1->ColumnHeadersHeight = 40; // Cabecera más alta
-
-				// Estilo de Celdas
+				this->dataGridView1->ColumnHeadersDefaultCellStyle->Font = gcnew System::Drawing::Font(L"Bahnschrift", 11, FontStyle::Bold);
+				this->dataGridView1->ColumnHeadersHeight = 40;
+				this->dataGridView1->EnableHeadersVisualStyles = false;
 				this->dataGridView1->DefaultCellStyle->BackColor = colorInput;
 				this->dataGridView1->DefaultCellStyle->ForeColor = System::Drawing::Color::White;
 				this->dataGridView1->DefaultCellStyle->SelectionBackColor = colorVerdeClaro;
 				this->dataGridView1->DefaultCellStyle->SelectionForeColor = System::Drawing::Color::Black;
-				this->dataGridView1->DefaultCellStyle->Font = gcnew System::Drawing::Font(L"Bahnschrift", 11);
-				this->dataGridView1->RowTemplate->Height = 35; // Filas más altas para que quepa la letra grande
-
-				// ANCLAJE TOTAL: Se estira en las 4 direcciones al agrandar la ventana
-				this->dataGridView1->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right);
-
-				// COLUMNAS AUTO-AJUSTABLES (Llenan el espacio)
+				this->dataGridView1->RowTemplate->Height = 35;
 				this->dataGridView1->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::Fill;
 
-				// --- BOTONES INFERIORES ---
-				array<Button^>^ botonesAccion = { this->button2, this->btnCambiarEstado, this->btnEditar };
+				// =========================================================
+				// 4. BOTONES INFERIORES (ALINEADOS)
+				// =========================================================
+				int yBotones = this->ClientSize.Height - 60;
+				array<Button^>^ botonesAccion = { this->button2, this->btnEditar, this->btnCambiarEstado };
 
-				// Calculamos una posición base para centrarlos o dejarlos a la izquierda
-				int espacio = 20;
-				int xInicial = 200;
+				int xActual = margenLateral;
 
-				for each (Button ^ b in botonesAccion) {
-					b->BackColor = colorVerdeClaro;
-					b->FlatStyle = FlatStyle::Flat;
-					b->FlatAppearance->BorderSize = 0;
-					b->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 12);
-					b->ForeColor = System::Drawing::Color::Black;
-					b->Cursor = Cursors::Hand;
-					b->Size = System::Drawing::Size(140, 40); // Botones más grandes y cómodos
+				for each (Button ^ btn in botonesAccion) {
+					btn->BackColor = colorVerdeClaro;
+					btn->ForeColor = System::Drawing::Color::Black;
+					btn->FlatStyle = FlatStyle::Flat;
+					btn->FlatAppearance->BorderSize = 0;
+					btn->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 11);
+					btn->Cursor = Cursors::Hand;
+					btn->Height = 40;
+					btn->Width = 150;
 
-					// ANCLAJE INFERIOR: Se quedan pegados abajo a la izquierda
-					b->Anchor = static_cast<AnchorStyles>(AnchorStyles::Bottom | AnchorStyles::Left);
-				}
+					btn->Location = System::Drawing::Point(xActual, yBotones);
+					btn->Anchor = static_cast<AnchorStyles>(AnchorStyles::Bottom | AnchorStyles::Left);
 
-				// Ajuste de etiquetas
-				array<Label^>^ labels = { this->label1, this->label2 };
-				for each (Label ^ l in labels) {
-					l->ForeColor = System::Drawing::Color::White;
-					l->Font = gcnew System::Drawing::Font(L"Bahnschrift", 12);
+					xActual += btn->Width + 15;
 				}
 			}
 
@@ -437,6 +501,7 @@
 				this->Controls->Add(this->groupBox1);
 				this->Name = L"frmMantUsuarios";
 				this->Text = L"Gestión de Usuarios";
+				this->Load += gcnew System::EventHandler(this, &frmMantUsuarios::frmMantUsuarios_Load);
 				(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 				this->groupBox1->ResumeLayout(false);
 				this->groupBox1->PerformLayout();
@@ -582,5 +647,7 @@
 				MessageBox::Show("Por favor, seleccione un usuario para editar.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
 			}
 		}
-	};
+	private: System::Void frmMantUsuarios_Load(System::Object^ sender, System::EventArgs^ e) {
+	}
+};
 	}
