@@ -29,30 +29,30 @@ namespace AgroRobotView {
 	// !!!!Comentar esta clase y sus llamadas en el construcctor para poder usar el diseñador visual !!!!
 	// Renderer: mantiene hover por defecto, pinta un fondo semitransparente sólo al hacer click
 	
-	public ref class ClickTransparentToolStripRenderer : public System::Windows::Forms::ToolStripProfessionalRenderer {
-	private:
-		System::Drawing::Color pressedColor;
-	public:
-		ClickTransparentToolStripRenderer(System::Drawing::Color color):
-		System::Windows::Forms::ToolStripProfessionalRenderer(){
-			this->pressedColor = color;
-		}
-	protected:
-		virtual void OnRenderMenuItemBackground(System::Windows::Forms::ToolStripItemRenderEventArgs^ e) override
-		{
-			if (e == nullptr || e->Item == nullptr) return;
-			// Si está presionado, pintamos un fondo semitransparente
-			if (e->Item->Pressed) {
-				System::Drawing::Rectangle rect = e->Item->Bounds;
-				// Ajuste para menú superior: dibujar desde 0 en X
-				rect.X = 0;
-				e->Graphics->FillRectangle(gcnew System::Drawing::SolidBrush(this->pressedColor), rect);
-				return;
-			}
-			// Para hover y estado normal usamos el renderizado por defecto (mantiene el fondo natural)
-			System::Windows::Forms::ToolStripProfessionalRenderer::OnRenderMenuItemBackground(e);
-		}
-	};
+	//public ref class ClickTransparentToolStripRenderer : public System::Windows::Forms::ToolStripProfessionalRenderer {
+	//private:
+	//	System::Drawing::Color pressedColor;
+	//public:
+	//	ClickTransparentToolStripRenderer(System::Drawing::Color color):
+	//	System::Windows::Forms::ToolStripProfessionalRenderer(){
+	//		this->pressedColor = color;
+	//	}
+	//protected:
+	//	virtual void OnRenderMenuItemBackground(System::Windows::Forms::ToolStripItemRenderEventArgs^ e) override
+	//	{
+	//		if (e == nullptr || e->Item == nullptr) return;
+	//		// Si está presionado, pintamos un fondo semitransparente
+	//		if (e->Item->Pressed) {
+	//			System::Drawing::Rectangle rect = e->Item->Bounds;
+	//			// Ajuste para menú superior: dibujar desde 0 en X
+	//			rect.X = 0;
+	//			e->Graphics->FillRectangle(gcnew System::Drawing::SolidBrush(this->pressedColor), rect);
+	//			return;
+	//		}
+	//		// Para hover y estado normal usamos el renderizado por defecto (mantiene el fondo natural)
+	//		System::Windows::Forms::ToolStripProfessionalRenderer::OnRenderMenuItemBackground(e);
+	//	}
+	//};
 	
 	
 	/// <summary>
@@ -64,7 +64,7 @@ namespace AgroRobotView {
 		frmMenu(void)
 		{
 			InitializeComponent();
-			this->menuStrip1->Renderer = gcnew ClickTransparentToolStripRenderer(System::Drawing::Color::FromArgb(120, 0, 0, 0));
+			//this->menuStrip1->Renderer = gcnew ClickTransparentToolStripRenderer(System::Drawing::Color::FromArgb(120, 0, 0, 0));
 			this->formularioActivo = nullptr; // Inicializamos en nulo
 			this->CerrarSesion = false; // Inicializar en falso
 		}
@@ -73,7 +73,7 @@ namespace AgroRobotView {
 		{
 			this->usuario = usuario;
 			InitializeComponent();
-			this->menuStrip1->Renderer = gcnew ClickTransparentToolStripRenderer(System::Drawing::Color::FromArgb(120, 0, 0, 0));
+			//this->menuStrip1->Renderer = gcnew ClickTransparentToolStripRenderer(System::Drawing::Color::FromArgb(120, 0, 0, 0));
 			this->CerrarSesion = false; // Inicializar en falso
 		}
 	protected:
@@ -434,17 +434,17 @@ namespace AgroRobotView {
 		// 2. Configurar Padre
 		nuevoForm->MdiParent = this;
 
-		// 3. TRUCOS PARA PANTALLA COMPLETA:
-		// A) Quitar bordes para que parezca una página nativa
-		nuevoForm->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+		//// 3. TRUCOS PARA PANTALLA COMPLETA:
+		//// A) Quitar bordes para que parezca una página nativa
+		//nuevoForm->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 
-		// B) Desactivar que se encoja solo
-		nuevoForm->AutoSize = false;
+		//// B) Desactivar que se encoja solo
+		//nuevoForm->AutoSize = false;
 
-		// C) Ordenar que llene todo el espacio disponible
+		//// C) Ordenar que llene todo el espacio disponible
 		nuevoForm->Dock = DockStyle::Fill;
 
-		// 4. Mostrar
+		//// 4. Mostrar
 		nuevoForm->Show();
 	}
 		   //===============================================================================
