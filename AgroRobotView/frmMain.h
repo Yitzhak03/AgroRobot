@@ -302,11 +302,33 @@ namespace AgroRobotView {
 				// Actualizar la hora del último acceso antes de continuar
 				u->SetUltimoAcceso(DateTime::Now.ToString("dd/MM/yyyy HH:mm"));
 				ctrl->actualizarUsuario(u); // Esto actualiza el registro en la BD
+				// 1. Nos escondemos (el Login desaparece)
+				this->Hide();
 
-				this->Hide(); // Ocultar el formulario de login
-				frmMenu^ menu = gcnew frmMenu(u); // Pasar el usuario autenticado
-				menu->ShowDialog(); // Mostrar el formulario del menú principal
-				this->Close(); // Cerrar el formulario de login al volver del menú
+				// 2. Creamos el menú
+				frmMenu^ menu = gcnew frmMenu(u);
+
+				// 3. PAUSA DE EJECUCIÓN: ShowDialog congela este código aquí
+				// El Login se queda "dormido" y oculto esperando a que el Menú se cierre.
+				menu->ShowDialog();
+
+				// 4. AL DESPERTAR (Cuando el menú se cerró):
+				// Verificamos la variable bandera que pusimos en el paso anterior en frmMenu
+				if (menu->CerrarSesion) {
+					// CAMBIO: YA NO BORRAMOS LOS TEXTBOX
+					// this->txtUser->Text = "";      <-- Eliminado
+					// this->txtPassword->Text = "";  <-- Eliminado
+
+					// Solo reaparecemos la ventana tal cual estaba
+					this->Show();
+				}
+				else {
+					// CASO 2: El usuario dio click en la "X" roja de la ventana
+					// Aquí sí cerramos la aplicación completa.
+					this->Close();
+				}
+
+				// Salimos de la función para que no siga el bucle
 				return;
 			}
 		}
