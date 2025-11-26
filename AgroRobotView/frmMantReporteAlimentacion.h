@@ -553,16 +553,21 @@ namespace AgroRobotView {
 				   Series^ sBar = gcnew Series("Tipos");
 				   sBar->ChartType = SeriesChartType::Column;
 
-				   // ESTILO VISUAL
-				   sBar->Color = System::Drawing::Color::FromArgb(67, 160, 71); // Verde Corporativo
-				   sBar->IsValueShownAsLabel = true;
-				   sBar->LabelForeColor = System::Drawing::Color::White; // Letra Blanca
-				   sBar->Font = gcnew System::Drawing::Font("Segoe UI", 10, FontStyle::Bold);
+				   // COLOR VERDE CORPORATIVO
+				   sBar->Color = System::Drawing::Color::FromArgb(67, 160, 71);
 
-				   // =========================================================
-				   // CORRECCIÓN: Así se centra el texto dentro de la barra
-				   // =========================================================
-				   sBar->SetCustomProperty("BarLabelStyle", "Center");
+				   // --- CORRECCIÓN DE VISIBILIDAD ---
+				   sBar->IsValueShownAsLabel = true;
+
+				   // 1. Usamos NEGRO para que se vea siempre (sea dentro o fuera)
+				   sBar->LabelForeColor = System::Drawing::Color::Black;
+
+				   // 2. Quitamos la propiedad "Center" forzada. 
+				   // Esto deja que Windows Forms ponga el número ARRIBA de la barra
+				   // que es el estándar más legible.
+				   // sBar->SetCustomProperty("BarLabelStyle", "Center"); <--- ELIMINADA
+
+				   sBar->Font = gcnew System::Drawing::Font("Segoe UI", 10, FontStyle::Bold);
 
 				   chartTipoAnalisis->Series->Add(sBar);
 

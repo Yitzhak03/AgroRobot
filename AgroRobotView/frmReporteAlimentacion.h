@@ -153,6 +153,7 @@ namespace AgroRobotView {
 		}
 
 	private: System::Void frmReporteAlimentacion_Load(System::Object^ sender, System::EventArgs^ e) {
+		// 1. RECOLECCIÓN DE DATOS
 		Dictionary<String^, int>^ contador = gcnew Dictionary<String^, int>();
 
 		if (File::Exists("animales.txt")) {
@@ -171,44 +172,63 @@ namespace AgroRobotView {
 			}
 		}
 
+		// 2. LIMPIEZA Y CONFIGURACIÓN BÁSICA
 		chart1->Series["Series1"]->Points->Clear();
 		chart1->Series["Series1"]->ChartType = SeriesChartType::Pie;
-		if (chart1->ChartAreas->Count > 0) chart1->ChartAreas[0]->Area3DStyle->Enable3D = false;
 
-		// =========================================================
-		// CORRECCIÓN CLAVE PARA PASTEL (PIE CHART)
-		// Esto fuerza al pastel a usar todo el espacio del contenedor estirado
-		// =========================================================
 		if (chart1->ChartAreas->Count > 0) {
-			// El área total del gráfico ocupa el 100% del control
-			chart1->ChartAreas[0]->Position->Auto = false;
-			chart1->ChartAreas[0]->Position->X = 0;
-			chart1->ChartAreas[0]->Position->Y = 0;
-			chart1->ChartAreas[0]->Position->Height = 100;
-			chart1->ChartAreas[0]->Position->Width = 100;
+			chart1->ChartAreas[0]->Area3DStyle->Enable3D = false;
 
-			// El "InnerPlot" (donde se dibuja el pastel) también ocupa casi el 100%
-			// Dejamos un pequeño margen (5%) para que las etiquetas externas no se corten
+			// Margen interno para las líneas conectoras
 			chart1->ChartAreas[0]->InnerPlotPosition->Auto = false;
-			chart1->ChartAreas[0]->InnerPlotPosition->X = 5;
-			chart1->ChartAreas[0]->InnerPlotPosition->Y = 5;
-			chart1->ChartAreas[0]->InnerPlotPosition->Height = 90;
-			chart1->ChartAreas[0]->InnerPlotPosition->Width = 90;
+			chart1->ChartAreas[0]->InnerPlotPosition->X = 12;
+			chart1->ChartAreas[0]->InnerPlotPosition->Y = 12;
+			chart1->ChartAreas[0]->InnerPlotPosition->Height = 76;
+			chart1->ChartAreas[0]->InnerPlotPosition->Width = 76;
 		}
-		// =========================================================
 
-		chart1->Series["Series1"]->Font = gcnew System::Drawing::Font("Segoe UI", 10, FontStyle::Bold);
-		chart1->Series["Series1"]->Label = "#VALX (#PERCENT)";
-		chart1->Series["Series1"]->LegendText = "#VALX";
+		// 3. CONFIGURACIÓN DE TEXTOS
+		chart1->Series["Series1"]->Font = gcnew System::Drawing::Font("Segoe UI", 12, FontStyle::Bold);
+
+		// Mostrar solo NOMBRE en el gráfico
+		chart1->Series["Series1"]->Label = "#VALX";
+
+		// Mostrar NOMBRE y PORCENTAJE en la leyenda
+		chart1->Series["Series1"]->LegendText = "#VALX: #PERCENT";
+
+		// Estilo de Líneas Conectoras
 		chart1->Series["Series1"]->SetCustomProperty("PieLabelStyle", "Outside");
+		chart1->Series["Series1"]->SetCustomProperty("PieLineColor", "Black");
 		chart1->Series["Series1"]->SmartLabelStyle->Enabled = true;
-		chart1->Series["Series1"]->SmartLabelStyle->AllowOutsidePlotArea = System::Windows::Forms::DataVisualization::Charting::LabelOutsidePlotAreaStyle::Yes;
 
+		// Configurar Leyenda
+		if (chart1->Legends->Count > 0) {
+			chart1->Legends[0]->Font = gcnew System::Drawing::Font("Segoe UI", 11, FontStyle::Regular);
+			chart1->Legends[0]->Docking = Docking::Right;
+			chart1->Legends[0]->Alignment = System::Drawing::StringAlignment::Center;
+		}
+
+		// 4. PALETA OTOÑAL / TIERRA (Elegante y con contraste)
+		array<System::Drawing::Color>^ paletaColores = {
+			System::Drawing::Color::FromArgb(204, 88, 67),   // Rojo Ladrillo (Cálido)
+			System::Drawing::Color::FromArgb(242, 186, 73),  // Amarillo Mostaza (Luminoso)
+			System::Drawing::Color::FromArgb(106, 142, 79),  // Verde Oliva (Natural)
+			System::Drawing::Color::FromArgb(70, 130, 180),  // Azul Acero (Contraste Frío)
+			System::Drawing::Color::FromArgb(211, 84, 0),    // Calabaza / Naranja Fuerte
+			System::Drawing::Color::FromArgb(139, 69, 19),   // Marrón Chocolate (Tierra)
+			System::Drawing::Color::FromArgb(142, 68, 173),  // Púrpura Ciruela (Profundo)
+			System::Drawing::Color::FromArgb(189, 195, 199)  // Gris Plata (Neutro)
+		};
+
+		int colorIndex = 0;
+
+		// 5. LLENADO DE DATOS
 		for each (KeyValuePair<String^, int> kvp in contador) {
 			int idx = chart1->Series["Series1"]->Points->AddXY(kvp.Key, kvp.Value);
-			if (kvp.Key == "Pavo") chart1->Series["Series1"]->Points[idx]->Color = System::Drawing::Color::FromArgb(118, 222, 146);
-			if (kvp.Key == "Pollo") chart1->Series["Series1"]->Points[idx]->Color = System::Drawing::Color::FromArgb(255, 200, 100);
-			if (kvp.Key == "Cerdo") chart1->Series["Series1"]->Points[idx]->Color = System::Drawing::Color::FromArgb(100, 180, 255);
+
+			// Asignar color otoñal cíclicamente
+			chart1->Series["Series1"]->Points[idx]->Color = paletaColores[colorIndex % paletaColores->Length];
+			colorIndex++;
 		}
 	}
 
