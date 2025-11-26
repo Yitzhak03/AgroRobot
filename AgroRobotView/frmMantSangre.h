@@ -55,12 +55,6 @@ namespace AgroRobotView {
 	protected:
 	private: System::Windows::Forms::Button^ button3;
 
-
-
-
-
-
-
 	private: GestorNutricionalController^ gestorNutricionalController;
 	private: System::Windows::Forms::GroupBox^ groupBox1;
 	private: System::Windows::Forms::Button^ button1;
@@ -68,13 +62,6 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::Label^ label1;
 	private: MuestraController^ muestraController;
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
-
-
-
-
-
-
-
 	private: System::Windows::Forms::GroupBox^ groupBox2;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::ComboBox^ comboBox1;
@@ -87,65 +74,6 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column7;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -256,9 +184,9 @@ namespace AgroRobotView {
 			this->label1->AutoSize = true;
 			this->label1->Location = System::Drawing::Point(6, 38);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(55, 13);
+			this->label1->Size = System::Drawing::Size(48, 13);
 			this->label1->TabIndex = 0;
-			this->label1->Text = L"ID Animal:";
+			this->label1->Text = L"Especie:";
 			// 
 			// dataGridView1
 			// 
@@ -290,9 +218,9 @@ namespace AgroRobotView {
 			this->label2->AutoSize = true;
 			this->label2->Location = System::Drawing::Point(30, 35);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(55, 13);
+			this->label2->Size = System::Drawing::Size(48, 13);
 			this->label2->TabIndex = 28;
-			this->label2->Text = L"ID Animal:";
+			this->label2->Text = L"Especie:";
 			// 
 			// comboBox1
 			// 
@@ -328,7 +256,7 @@ namespace AgroRobotView {
 			// 
 			// Column3
 			// 
-			this->Column3->HeaderText = L"Cantidad Extraída";
+			this->Column3->HeaderText = L"Cantidad Extraída (ml)";
 			this->Column3->MinimumWidth = 6;
 			this->Column3->Name = L"Column3";
 			this->Column3->Width = 125;
@@ -385,10 +313,7 @@ namespace AgroRobotView {
 #pragma endregion
 	private: void cargarAnimalesDisponibles() {
 		this->comboBox1->Items->Clear();
-
-		// Obtener todos los animales
 		List<Animal^>^ todosAnimales = gestorNutricionalController->obtenerTodosAnimales();
-		// Obtener todas las muestras
 		List<Muestra^>^ todasMuestras = muestraController->buscarTodasMuestrasArchivo(gestorNutricionalController);
 
 		for each (Animal ^ a in todosAnimales) {
@@ -402,7 +327,7 @@ namespace AgroRobotView {
 				}
 			}
 			if (!tieneSangre) {
-				this->comboBox1->Items->Add(a->IdAnimal);
+				this->comboBox1->Items->Add(a->IdAnimal.ToString() + " - " + a->Especie);
 			}
 		}
 	}
@@ -411,13 +336,11 @@ namespace AgroRobotView {
 		
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		String^ textoId = this->textBox1->Text->Trim();
-		int idAnimal;
-
-		//MuestraController^ controller = gcnew MuestraController();
+		String^ texto = this->textBox1->Text->Trim();
+		
 		List<Muestra^>^ listaFiltrada = gcnew List<Muestra^>();
 
-		if (String::IsNullOrEmpty(textoId)) {
+		if (String::IsNullOrEmpty(texto)) {
 			// Mostrar todas las muestras de sangre
 			List<Muestra^>^ todas = muestraController->buscarTodasMuestrasArchivo(gestorNutricionalController);
 			for each (Muestra ^ m in todas) {
@@ -427,13 +350,9 @@ namespace AgroRobotView {
 			}
 		}
 		else {
-
-			if (!Int32::TryParse(textoId, idAnimal)) {
-				MessageBox::Show("Ingrese un ID de animal válido.");
-				return;
-			}
-			List<Muestra^>^ listaMuestras = muestraController->buscarMuestrasPorAnimalArchivo(idAnimal, gestorNutricionalController);
-			for each (Muestra ^ m in listaMuestras) {
+			// Buscar por especie directamente
+			List<Muestra^>^ todas = muestraController->buscarMuestrasPorEspecieArchivo(texto, gestorNutricionalController);
+			for each (Muestra ^ m in todas) {
 				if (m->getTipo()->Equals("Sangre")) {
 					listaFiltrada->Add(m);
 				}
@@ -455,7 +374,7 @@ namespace AgroRobotView {
 			array<String^>^ filaGrilla = gcnew array<String^>(7);
 			filaGrilla[0] = Convert::ToString(m->getIdMuestra());
 			filaGrilla[1] = m->getEspecie();
-			filaGrilla[2] = m->getCantidadExtraida();
+			filaGrilla[2] = Convert::ToString(m->getCantidadExtraida());
 			filaGrilla[3] = m->getCoagulos();
 			filaGrilla[4] = m->getContaminacion();
 			filaGrilla[5] = m->getColorSangre();
@@ -537,7 +456,7 @@ namespace AgroRobotView {
 	}
 
 	private: void cargarAnimalesSinMuestraSangre() {
-		
+
 		List<Animal^>^ animales = gestorNutricionalController->leerArchivoAnimal();
 		List<Muestra^>^ muestras = muestraController->buscarTodasMuestrasArchivo(gestorNutricionalController);
 
@@ -552,29 +471,29 @@ namespace AgroRobotView {
 				}
 			}
 			if (!tieneMuestraSangre) {
-				this->comboBox1->Items->Add(a->IdAnimal);
+				this->comboBox1->Items->Add(a->IdAnimal.ToString() + " - " + a->Especie);
 			}
 		}
 	}
 
 	private: System::Void button2_Click_1(System::Object^ sender, System::EventArgs^ e) {
 		if (this->comboBox1->SelectedItem == nullptr) {
-			MessageBox::Show("Seleccione un animal válido antes de agregar una muestra de sangre.");
+			MessageBox::Show("Seleccione un animal válido antes de agregar una muestra de Sangre.");
 			return;
 		}
+		// Recuperar el texto seleccionado: "IdAnimal - Especie"
+		String^ seleccionado = this->comboBox1->SelectedItem->ToString();
+		array<String^>^ partes = seleccionado->Split('-');
 
-		int idAnimalSeleccionado = Convert::ToInt32(this->comboBox1->SelectedItem->ToString());
+		int idAnimalSeleccionado = Convert::ToInt32(partes[0]->Trim());
+		String^ especieSeleccionada = partes[1]->Trim();
 
-		// Abrir el formulario de nueva muestra de sangre
 		frmNuevoMuestraS^ nuevaMuestraSangre = gcnew frmNuevoMuestraS(
 			idAnimalSeleccionado,
 			this->muestraController,
 			this->gestorNutricionalController
 		);
-
 		nuevaMuestraSangre->ShowDialog();
-
-		// Refrescar comboBox después de agregar
 		cargarAnimalesDisponibles();
 	}
 };

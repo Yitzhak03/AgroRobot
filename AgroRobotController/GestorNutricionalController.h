@@ -1,15 +1,18 @@
 #pragma once
+#include "BaseController.h"
 
 namespace AgroRobotController {
 	using namespace System;
 	using namespace System::Collections::Generic;
 	using namespace AgroRobotModel;
 
-	public ref class GestorNutricionalController {
+	public ref class GestorNutricionalController : public BaseController {
 	private:
 		List<Dieta^>^ listaDietas;
 		List<Animal^>^ listaAnimales;
 		List<OrdenDistribucion^>^ listaOrdenes;
+		String^ archivoDietas;
+		String^ archivoAnimales;
 
 	public:
 		/*Inicio*/
@@ -33,7 +36,7 @@ namespace AgroRobotController {
 
 		/*Dieta*/
 		List<Dieta^>^ obtenerTodasDietas();
-		void registrarDieta(Dieta^ dieta);
+		bool registrarDieta(Dieta^ dieta);
 		bool existeDieta(int id);
 		Dieta^ consultarDietaporId(int id);
 		void escribirArchivoDieta();
@@ -46,5 +49,8 @@ namespace AgroRobotController {
 		String^ verificarPesoAnimal(int idAnimal, double pesoEsperado, double peso);
 		/*void recibirNuevaDieta(Dieta^ nuevaDieta);
 		void generarAlerta(String^ mensaje);*/
+
+		/*exportación a bd*/
+		void escribirArchivoBINDietas();
 	};
 }

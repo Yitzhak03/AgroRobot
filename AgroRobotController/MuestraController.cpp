@@ -1,11 +1,53 @@
 #include "MuestraController.h"
 #include "GestorNutricionalController.h"
 
+using namespace System::Runtime::Serialization::Formatters::Binary;
 using namespace AgroRobotController;
 using namespace System::IO;
 
 MuestraController::MuestraController() {
-
+    this->listaMuestras = gcnew List<Muestra^>();
+    try {
+        // Paso1: Establecer la conexion
+        abrirConexion();
+        // Paso2: Crear el comando SQL
+        String^ sSqlDiagnostico = "SELECT IdMuestra, Tipo, FechaToma, Consistencia, ColorHeces, Olor, Parasistos, CantidadExtraida, ColorSangre, Coagulos, Contaminacion ";
+        sSqlDiagnostico += " FROM Muestras ";
+        // Paso3: Crear el SqlCommand, donde le paso la sentencia SQL y la conexion
+        SqlCommand^ comando = gcnew SqlCommand(sSqlDiagnostico, getObjConexion());
+        // Paso4: Ahora para ejecutar voy a utilizar ExecuteReader cuando la sentencia es SELECT
+        // Para recuperar la informacion que me devuelve un select, utilizo SqlDataReader
+        SqlDataReader^ objData = comando->ExecuteReader();
+        // Paso5: Leer los registros de la tabla
+        while (objData->Read()) {
+			int idMuestra = objData->GetInt32(0); // IdMuestra
+			String^ tipo = objData->GetString(1); // Tipo
+			String^ fechaToma = objData->GetString(2); // FechaToma
+			String^ consistencia = objData->GetString(3); // Consistencia
+			String^ colorHeces = objData->GetString(4); // ColorHeces
+			String^ olor = objData->GetString(5); // Olor
+			String^ parasitos = objData->GetString(6); // Parasistos
+			int cantidadExtraida = objData->GetInt32(7); // CantidadExtraida
+			String^ colorSangre = objData->GetString(8); // ColorSangre
+			String^ coagulos = objData->GetString(9); // Coagulos
+            String^ contaminacion = objData->GetString(10); // Contaminacion
+            Muestra^ muestra = gcnew Muestra(
+                idMuestra, tipo, fechaToma,
+                consistencia, colorHeces, olor, parasitos,
+                cantidadExtraida, coagulos, contaminacion,
+                colorSangre, nullptr // Animal se asigna después
+            );
+			this->listaMuestras->Add(muestra);
+        }
+        // Paso6: Cerrar el DataReader y la conexion
+        objData->Close();
+        cerrarConexion();
+    }
+    catch (Exception^ ex) {
+        Console::WriteLine("Error al conectar a la base de datos: " + ex->Message);
+        // En caso de cualquier error, crear lista vacía
+        this->listaMuestras = gcnew List<Muestra^>();
+    }
 }
 
 // Leer todas las muestras desde archivo
@@ -38,7 +80,8 @@ List<Muestra^>^ MuestraController::buscarTodasMuestrasArchivo(GestorNutricionalC
         String^ parasitos = campos[6];
 
         // Campos de sangre
-        String^ cantidadExtraida = campos[7];
+        int cantidadExtraida = 0;
+        if (!Int32::TryParse(campos[7], cantidadExtraida)) continue;
         String^ coagulos = campos[8];
         String^ contaminacion = campos[9];
         String^ colorSangre = campos[10];
@@ -93,6 +136,20 @@ List<Muestra^>^ MuestraController::buscarMuestrasPorAnimalArchivo(int idAnimal, 
     }
     return resultado;
 }
+
+List<Muestra^>^ MuestraController::buscarMuestrasPorEspecieArchivo(String^ especie, GestorNutricionalController^ gestor) {
+    
+    List<Muestra^>^ todas = this->buscarTodasMuestrasArchivo(gestor);
+    List<Muestra^>^ filtradas = gcnew List<Muestra^>();
+    for each (Muestra ^ m in todas) {
+        if (m->getAnimal() != nullptr &&
+            m->getAnimal()->Especie->Equals(especie, StringComparison::OrdinalIgnoreCase)) {
+            filtradas->Add(m);
+        }
+    }
+    return filtradas;
+}
+
 
 // Agregar nueva muestra
 void MuestraController::agregarMuestraArchivo(Muestra^ nuevaMuestra, GestorNutricionalController^ gestor) {
@@ -173,4 +230,12 @@ void MuestraController::escribirArchivo(List<Muestra^>^ listaMuestras) {
             idAnimalStr + ";" + especieStr;
     }
     File::WriteAllLines("muestras.txt", lineas);
+}
+
+void MuestraController::escribirArchivoBINMuestras() {
+    //Creamos el archivo
+    Stream^ stream = File::Open(this->archivo, FileMode::Create);
+    BinaryFormatter^ formateador = gcnew BinaryFormatter();
+    formateador->Serialize(stream, this->listaMuestras);
+    stream->Close();
 }

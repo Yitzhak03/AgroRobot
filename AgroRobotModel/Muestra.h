@@ -19,7 +19,7 @@ namespace AgroRobotModel {
         String^ parasitos;
 
         // Datos de sangre
-        String^ cantidadExtraida;
+        int cantidadExtraida;
         String^ colorSangre;
         String^ coagulos;
         String^ contaminacion;
@@ -32,7 +32,7 @@ namespace AgroRobotModel {
         Muestra();
         Muestra(int idMuestra, String^ tipo, String^ fechaToma,
             String^ consistencia, String^ colorHeces, String^ olor, String^ parasitos,
-            String^ cantidadExtraida, String^ coagulos, String^ contaminacion,
+            int cantidadExtraida, String^ coagulos, String^ contaminacion,
             String^ colorSangre, Animal^ animal);
 
         // Getters y setters
@@ -59,8 +59,8 @@ namespace AgroRobotModel {
         void setParasitos(String^ parasitos);
 
         // Sangre
-        String^ getCantidadExtraida();
-        void setCantidadExtraida(String^ cantidadExtraida);
+        int getCantidadExtraida();
+        void setCantidadExtraida(int cantidadExtraida);
 
         String^ getColorSangre();
         void setColorSangre(String^ colorSangre);

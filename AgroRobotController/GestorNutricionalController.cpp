@@ -6,15 +6,19 @@ using namespace System::Runtime::Serialization::Formatters::Binary;
 using namespace System::IO;
 using namespace AgroRobotController;
 using namespace System::Collections::Generic;
+using namespace System::Globalization;
 
 GestorNutricionalController::GestorNutricionalController() {
 	this->listaDietas = gcnew List<Dieta^>();
 	this->listaAnimales = gcnew List<Animal^>();
 	this->listaOrdenes = gcnew List<OrdenDistribucion^>();
 
+	/*
 	if (!File::Exists("animales.txt")) {
 		File::WriteAllText("animales.txt", "");
 	}
+	*/
+	
 
 	if (!File::Exists("dietas.txt")) {
 		File::WriteAllText("dietas.txt", "");
@@ -63,24 +67,82 @@ GestorNutricionalController::GestorNutricionalController() {
 		this->listaAnimales->Add(animal);
 	}
 
-	/*PARA DIETAS*/
+	/*PARA ANIMALES: BD
+	try {
+		abrirConexion();
+		String^ sSqlAnimal = "SELECT IdAnimal, Especie, Peso, Edad, Estado ";
+		sSqlAnimal += " FROM Animales ";
+		SqlCommand^ comando = gcnew SqlCommand(sSqlAnimal, getObjConexion());
+		SqlDataReader^ objData = comando->ExecuteReader();
+		// Paso5: Leer los registros de la tabla
+		while (objData->Read()) {
+			int id = objData->GetInt32(0); // MachineId
+			String^ nombre = objData->GetString(1); // Name
+			String^ tipo = objData->GetString(2); // Type
+			String^ estado = objData->GetString(3); // State
+			String^ ubicacion = objData->GetString(4); // Location
+			Maquina^ maquina = gcnew Maquina(id, nombre, tipo, estado, ubicacion);
+			this->listaMaquinas->Add(maquina);
+		}
+		// Paso6: Cerrar el DataReader y la conexion
+		objData->Close();
+		cerrarConexion();
+	}
+	*/
+
+	/*PARA DIETAS
 	array<String^>^ lineasDietas = File::ReadAllLines("dietas.txt");
 	for each (String ^ linea in lineasDietas) {
 		if (String::IsNullOrEmpty(linea)) continue;
 
 		array<String^>^ camposDietas = linea->Split(separadores->ToCharArray());
-		/*campos obligatorios*/
+		/*campos obligatorios
 		int id = Convert::ToInt32(camposDietas[0]);
 		int idAnimal = Convert::ToInt32(camposDietas[1]);
 		String^ fechaInicio = camposDietas[2];
 		String^ alimentos = camposDietas[3];
 		String^ frecuencia = camposDietas[4];
-		/*para que no haya error*/
+		/*para que no haya error
 		List<OrdenDistribucion^>^ ordenesDistribucion = gcnew List<OrdenDistribucion^>();
 
 		Dieta^ dieta = gcnew Dieta(id, idAnimal, fechaInicio, alimentos, frecuencia, ordenesDistribucion);
 		this->listaDietas->Add(dieta);
 	}
+	*/
+
+	/*PARA DIETAS: BD*/
+	try {
+		// Paso1: Establecer la conexion
+		abrirConexion();
+		// Paso2: Crear el comando SQL
+		String^ sSqlDieta = "SELECT IdDieta, IdAnimal, FechaInicio, Alimentos, Frecuencia ";
+		sSqlDieta += " FROM Dietas ";
+		// Paso3: Crear el SqlCommand, donde le paso la sentencia SQL y la conexion
+		SqlCommand^ comando = gcnew SqlCommand(sSqlDieta, getObjConexion());
+		// Paso4: Ahora para ejecutar voy a utilizar ExecuteReader cuando la sentencia es SELECT
+		// Para recuperar la informacion que me devuelve un select, utilizo SqlDataReader
+		SqlDataReader^ objData = comando->ExecuteReader();
+		// Paso5: Leer los registros de la tabla
+		while (objData->Read()) {
+			int idDieta = objData->GetInt32(0); // IdDieta
+			int idAnimal = objData->GetInt32(1); // IdAnimal
+			String^ fechaInicio = objData->GetString(2); // FechaInicio
+			String^ alimentos = objData->GetString(3); // Alimentos
+			String^ frecuencia = objData->GetString(4); // Frecuencia
+			List<OrdenDistribucion^>^ ordenesDistribucion = gcnew List<OrdenDistribucion^>();
+			Dieta^ dieta = gcnew Dieta(idDieta, idAnimal, fechaInicio, alimentos, frecuencia, ordenesDistribucion);
+			this->listaDietas->Add(dieta);
+		}
+		// Paso6: Cerrar el DataReader y la conexion
+		objData->Close();
+		cerrarConexion();
+	}
+	catch (Exception^ ex) {
+		Console::WriteLine("Error al conectar a la base de datos: " + ex->Message);
+		// En caso de cualquier error, crear lista vacía
+		this->listaDietas = gcnew List<Dieta^>();
+	}
+
 }
 
 List<Animal^>^ GestorNutricionalController::obtenerTodosAnimales() {
@@ -172,14 +234,28 @@ void GestorNutricionalController::closeAnimal() {
 	this->listaAnimales = nullptr;
 }
 
+
+
+
 List<Dieta^>^ GestorNutricionalController::obtenerTodasDietas() {
 	return this->listaDietas;
 }
 
-void GestorNutricionalController::registrarDieta(Dieta^ dieta) {
+bool GestorNutricionalController::registrarDieta(Dieta^ dieta) {
 	if (!existeDieta(dieta->Id)) {
 		this->listaDietas->Add(dieta);
-		escribirArchivoDieta();
+		/*escribirArchivoDieta();*/
+		String^ sSqlDieta = "INSERT INTO Dietas (IdDieta, IdAnimal, FechaInicio, Alimentos, Frecuencia) ";
+		sSqlDieta += " VALUES(" + dieta->Id + ", "; // Suponiendo que MachineId es de tipo INT
+		sSqlDieta += " '" + dieta->IdAnimal + "', "; // Suponiendo que Name es de tipo VARCHAR
+		sSqlDieta += " '" + dieta->FechaInicio + "', ";  // Suponiendo que Type es de tipo VARCHAR
+		sSqlDieta += " '" + dieta->Alimentos + "', "; // Suponiendo que State es de tipo VARCHAR
+		sSqlDieta += " '" + dieta->Frecuencia + "')"; // Suponiendo que Location es de tipo VARCHAR
+		int idDieta = insertSql(sSqlDieta);
+		if (idDieta > 0)
+			return true;
+		else
+			return false;
 	}
 }
 
@@ -220,8 +296,14 @@ bool GestorNutricionalController::modificarDieta(int id, int idAnimal, String^ f
 		dieta->FechaInicio = fechaInicio;
 		dieta->Alimentos = alimentos;
 		dieta->Frecuencia = frecuencia;
-		escribirArchivoDieta();
-		return true;
+		//escribirArchivoDieta();
+		String^ sSqlDieta = "UPDATE Dietas SET ";
+		sSqlDieta += " IdAnimal = '" + idAnimal + "', ";
+		sSqlDieta += " FechaInicio = '" + fechaInicio + "', ";
+		sSqlDieta += " Alimentos = '" + alimentos + "', ";
+		sSqlDieta += " Frecuencia = '" + frecuencia + "' ";
+		sSqlDieta += " WHERE IdDieta = " + id;
+		return executeSql(sSqlDieta);
 	}
 	return false;
 }
@@ -230,7 +312,8 @@ bool GestorNutricionalController::eliminarDieta(int id) {
 	Dieta^ dieta = consultarDietaporId(id);
 	if (dieta != nullptr) {
 		this->listaDietas->Remove(dieta);
-		return true;
+		String^ sSqlDieta = "DELETE FROM Dietas WHERE IdDieta = " + id;
+		return executeSql(sSqlDieta);
 	}
 	return false;
 }
@@ -243,49 +326,60 @@ void GestorNutricionalController::closeDieta() {
 void GestorNutricionalController::enviarOrdenAlimentacion(int idDieta, String^ prioridad) {
 	AlmacenController^ gestorAlmacen = gcnew AlmacenController();
 
-	int nuevoId = gestorAlmacen->listarOrdenes()->Count + 1;
+	int nuevoId = gestorAlmacen->obtenerMaximoIdOrden() + 1;
+
 	String^ fecha = DateTime::Now.ToString("yyyy-MM-dd");
 
 	OrdenDistribucion^ nuevaOrden = gcnew OrdenDistribucion(nuevoId, idDieta, "AgroRobot", fecha, "Ruta X", prioridad, nullptr, nullptr, gcnew List<Insumo^>());
+
 	gestorAlmacen->registrarOrden(nuevaOrden);
 }
 
 String^ GestorNutricionalController::verificarPesoAnimal(int idAnimal, double pesoEsperado, double peso) {
+	// 1. Obtener el Animal (asumo que esta función ya usa la BD)
 	Animal^ animal = consultarAnimalporId(idAnimal);
 	if (animal == nullptr) {
 		return "No se encontró el animal con el ID especificado.";
 	}
 
-	// Calculamos diferencia y porcentaje
+	// 2. Calculamos diferencia y porcentaje (Lógica sin cambios)
 	double diferencia = peso - pesoEsperado;
 	double porcentaje = (diferencia / pesoEsperado) * 100.0;
 
 	String^ mensaje;
+	String^ nuevoEstadoSalud;
 
-	// Determinamos estado según la diferencia
+	// 3. Determinamos estado según la diferencia
 	if (Math::Abs(porcentaje) <= 5) {
 		mensaje = "El peso del animal está dentro del rango adecuado.";
-		animal->EstadoSalud = "Normal";
+		nuevoEstadoSalud = "Normal";
 	}
 	else if (porcentaje > 5) {
 		mensaje = String::Format("El animal presenta sobrepeso (+{0:F2}%).", porcentaje);
-		animal->EstadoSalud = "Sobrepeso";
+		nuevoEstadoSalud = "Sobrepeso";
 	}
 	else {
 		mensaje = String::Format("El animal presenta bajo peso ({0:F2}%).", porcentaje);
-		animal->EstadoSalud = "Bajo peso";
+		nuevoEstadoSalud = "Bajo peso";
 	}
 
-	modificarAnimal(
-		idAnimal,
-		animal->Especie,
-		peso,                      
-		animal->Edad,
-		animal->EstadoSalud,
-		animal->UltimaDieta
-	);
+	// 4. Actualizar el registro en la Base de Datos
+	String^ sSqlAnimal = "UPDATE Animales SET ";
+	sSqlAnimal += " Peso = " + peso.ToString(CultureInfo::InvariantCulture) + ", "; // Usar InvariantCulture para evitar problemas de formato decimal
+	sSqlAnimal += " EstadoSalud = '" + nuevoEstadoSalud + "' ";
+	sSqlAnimal += " WHERE IdAnimal = " + idAnimal;
 
-	escribirArchivoAnimal();
+	// Ejecutar la actualización
+	if (executeSql(sSqlAnimal)) {
+		// Opcional: Actualizar el objeto Animal en memoria
+		animal->Peso = peso;
+		animal->EstadoSalud = nuevoEstadoSalud;
+		// La actualización fue exitosa
+	}
+	else {
+		// Manejo de error si la actualización falla
+		return "Error al actualizar el peso y estado de salud del animal en la base de datos.";
+	}
 
 	return mensaje;
 }
@@ -326,4 +420,12 @@ List<Animal^>^ GestorNutricionalController::leerArchivoAnimal() {
 	}
 
 	return listaAnimales;
+}
+
+void GestorNutricionalController::escribirArchivoBINDietas() {
+	//Creamos el archivo
+	Stream^ stream = File::Open(this->archivoDietas, FileMode::Create);
+	BinaryFormatter^ formateador = gcnew BinaryFormatter();
+	formateador->Serialize(stream, this->listaDietas);
+	stream->Close();
 }

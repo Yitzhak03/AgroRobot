@@ -116,6 +116,13 @@ namespace AgroRobotView {
 		void InitializeComponent(void)
 		{
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->Column7 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column8 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
@@ -126,13 +133,6 @@ namespace AgroRobotView {
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
-			this->Column7 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column8 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
@@ -150,104 +150,6 @@ namespace AgroRobotView {
 			this->dataGridView1->RowHeadersWidth = 51;
 			this->dataGridView1->Size = System::Drawing::Size(595, 183);
 			this->dataGridView1->TabIndex = 9;
-			// 
-			// groupBox1
-			// 
-			this->groupBox1->Controls->Add(this->button4);
-			this->groupBox1->Controls->Add(this->button1);
-			this->groupBox1->Controls->Add(this->textBox1);
-			this->groupBox1->Controls->Add(this->label1);
-			this->groupBox1->Location = System::Drawing::Point(43, 29);
-			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(303, 100);
-			this->groupBox1->TabIndex = 8;
-			this->groupBox1->TabStop = false;
-			this->groupBox1->Text = L"Criterio de Búsqueda";
-			// 
-			// button4
-			// 
-			this->button4->Location = System::Drawing::Point(83, 71);
-			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(137, 23);
-			this->button4->TabIndex = 30;
-			this->button4->Text = L"Limpiar";
-			this->button4->UseVisualStyleBackColor = true;
-			this->button4->Click += gcnew System::EventHandler(this, &frmMantDiagnostico::button4_Click);
-			// 
-			// button1
-			// 
-			this->button1->Location = System::Drawing::Point(192, 32);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(86, 23);
-			this->button1->TabIndex = 4;
-			this->button1->Text = L"Buscar";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &frmMantDiagnostico::button1_Click);
-			// 
-			// textBox1
-			// 
-			this->textBox1->Location = System::Drawing::Point(67, 35);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(100, 20);
-			this->textBox1->TabIndex = 1;
-			// 
-			// label1
-			// 
-			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(6, 38);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(55, 13);
-			this->label1->TabIndex = 0;
-			this->label1->Text = L"ID Animal:";
-			// 
-			// groupBox2
-			// 
-			this->groupBox2->Controls->Add(this->label2);
-			this->groupBox2->Controls->Add(this->comboBox1);
-			this->groupBox2->Controls->Add(this->button2);
-			this->groupBox2->Location = System::Drawing::Point(389, 29);
-			this->groupBox2->Name = L"groupBox2";
-			this->groupBox2->Size = System::Drawing::Size(230, 100);
-			this->groupBox2->TabIndex = 10;
-			this->groupBox2->TabStop = false;
-			this->groupBox2->Text = L"Nuevo Diagnóstico";
-			// 
-			// label2
-			// 
-			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(45, 25);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(55, 13);
-			this->label2->TabIndex = 31;
-			this->label2->Text = L"ID Animal:";
-			// 
-			// comboBox1
-			// 
-			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Location = System::Drawing::Point(106, 20);
-			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(77, 21);
-			this->comboBox1->TabIndex = 30;
-			// 
-			// button2
-			// 
-			this->button2->Location = System::Drawing::Point(48, 58);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(137, 23);
-			this->button2->TabIndex = 29;
-			this->button2->Text = L"Generar";
-			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &frmMantDiagnostico::button2_Click);
-			// 
-			// button3
-			// 
-			this->button3->Location = System::Drawing::Point(235, 393);
-			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(151, 23);
-			this->button3->TabIndex = 11;
-			this->button3->Text = L"Eliminar";
-			this->button3->UseVisualStyleBackColor = true;
-			this->button3->Click += gcnew System::EventHandler(this, &frmMantDiagnostico::button3_Click);
 			// 
 			// Column7
 			// 
@@ -298,6 +200,104 @@ namespace AgroRobotView {
 			this->Column8->Name = L"Column8";
 			this->Column8->Width = 125;
 			// 
+			// groupBox1
+			// 
+			this->groupBox1->Controls->Add(this->button4);
+			this->groupBox1->Controls->Add(this->button1);
+			this->groupBox1->Controls->Add(this->textBox1);
+			this->groupBox1->Controls->Add(this->label1);
+			this->groupBox1->Location = System::Drawing::Point(43, 29);
+			this->groupBox1->Name = L"groupBox1";
+			this->groupBox1->Size = System::Drawing::Size(303, 100);
+			this->groupBox1->TabIndex = 8;
+			this->groupBox1->TabStop = false;
+			this->groupBox1->Text = L"Criterio de Búsqueda";
+			// 
+			// button4
+			// 
+			this->button4->Location = System::Drawing::Point(83, 71);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(137, 23);
+			this->button4->TabIndex = 30;
+			this->button4->Text = L"Limpiar";
+			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &frmMantDiagnostico::button4_Click);
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(192, 32);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(86, 23);
+			this->button1->TabIndex = 4;
+			this->button1->Text = L"Buscar";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &frmMantDiagnostico::button1_Click);
+			// 
+			// textBox1
+			// 
+			this->textBox1->Location = System::Drawing::Point(67, 35);
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(100, 20);
+			this->textBox1->TabIndex = 1;
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Location = System::Drawing::Point(6, 38);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(48, 13);
+			this->label1->TabIndex = 0;
+			this->label1->Text = L"Especie:";
+			// 
+			// groupBox2
+			// 
+			this->groupBox2->Controls->Add(this->label2);
+			this->groupBox2->Controls->Add(this->comboBox1);
+			this->groupBox2->Controls->Add(this->button2);
+			this->groupBox2->Location = System::Drawing::Point(389, 29);
+			this->groupBox2->Name = L"groupBox2";
+			this->groupBox2->Size = System::Drawing::Size(230, 100);
+			this->groupBox2->TabIndex = 10;
+			this->groupBox2->TabStop = false;
+			this->groupBox2->Text = L"Nuevo Diagnóstico";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(45, 25);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(48, 13);
+			this->label2->TabIndex = 31;
+			this->label2->Text = L"Especie:";
+			// 
+			// comboBox1
+			// 
+			this->comboBox1->FormattingEnabled = true;
+			this->comboBox1->Location = System::Drawing::Point(106, 20);
+			this->comboBox1->Name = L"comboBox1";
+			this->comboBox1->Size = System::Drawing::Size(77, 21);
+			this->comboBox1->TabIndex = 30;
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(48, 58);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(137, 23);
+			this->button2->TabIndex = 29;
+			this->button2->Text = L"Generar";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &frmMantDiagnostico::button2_Click);
+			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(235, 393);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(151, 23);
+			this->button3->TabIndex = 11;
+			this->button3->Text = L"Eliminar";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &frmMantDiagnostico::button3_Click);
+			// 
 			// frmMantDiagnostico
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -335,31 +335,28 @@ namespace AgroRobotView {
 				}
 			}
 			if (!tieneDiagnostico) {
-				this->comboBox1->Items->Add(a->IdAnimal);
+				//this->comboBox1->Items->Add(a->Especie);
+				this->comboBox1->Items->Add(a->IdAnimal.ToString() + " - " + a->Especie);
+
 			}
 		}
 	}
 	
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		// Buscar por ID Animal (textBox1)
-		String^ textoId = this->textBox1->Text->Trim();
+		String^ texto = this->textBox1->Text->Trim();
 		List<Diagnostico^>^ listaFiltrada = gcnew List<Diagnostico^>();
 
-		if (String::IsNullOrEmpty(textoId)) {
+		if (String::IsNullOrEmpty(texto)) {
 			listaFiltrada = diagnosticoController->buscarTodosDiagnosticosArchivo();
 		}
 		else {
-			int idAnimal;
-			if (!Int32::TryParse(textoId, idAnimal)) {
-				MessageBox::Show("Ingrese un ID de animal válido.");
-				return;
-			}
-			listaFiltrada = diagnosticoController->buscarDiagnosticosPorAnimalArchivo(idAnimal);
+			listaFiltrada = diagnosticoController->buscarDiagnosticosPorEspecieArchivo(texto);
 		}
 
 		this->dataGridView1->Rows->Clear();
 		if (listaFiltrada->Count == 0) {
-			MessageBox::Show("No se encontraron diagnósticos.");
+			MessageBox::Show("No se encontraron diagnósticos para la especie ingresada.");
 		}
 		else {
 			mostrarGrillaDiagnostico(listaFiltrada);
@@ -385,15 +382,19 @@ namespace AgroRobotView {
 			MessageBox::Show("Seleccione un animal.");
 			return;
 		}
+		// Recuperar el texto seleccionado: "IdAnimal - Especie"
+		String^ seleccionado = this->comboBox1->SelectedItem->ToString();
+		array<String^>^ partes = seleccionado->Split('-');
 
-		int idAnimal = Convert::ToInt32(this->comboBox1->SelectedItem);
+		int idAnimal = Convert::ToInt32(partes[0]->Trim());
+		String^ especieSeleccionada = partes[1]->Trim();
 
+		// Generar diagnóstico para el animal
 		Diagnostico^ nuevoDiag = diagnosticoController->generarDiagnosticoParaAnimal(
 			idAnimal,
 			muestraController,
 			gestorController
 		);
-
 		if (nuevoDiag == nullptr) {
 			MessageBox::Show(
 				"No se pudo generar el diagnóstico.\n" +
@@ -404,18 +405,12 @@ namespace AgroRobotView {
 			);
 			return;
 		}
-
-		// Guardar en archivo
 		diagnosticoController->guardarDiagnosticoArchivo(nuevoDiag);
-
 		// Refrescar grilla
 		List<Diagnostico^>^ lista = diagnosticoController->buscarTodosDiagnosticosArchivo();
 		this->dataGridView1->Rows->Clear();
 		mostrarGrillaDiagnostico(lista);
-
-		// Actualizar comboBox
 		cargarAnimalesSinDiagnostico();
-
 		MessageBox::Show("Diagnóstico generado correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
 	}
 
