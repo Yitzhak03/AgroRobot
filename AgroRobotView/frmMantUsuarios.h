@@ -42,62 +42,104 @@
 
 			void aplicarEstilo()
 			{
-				this->BackColor = System::Drawing::Color::FromArgb(30, 61, 54);
+				// 1. COLORES (Tus colores originales)
+				System::Drawing::Color colorFondo = System::Drawing::Color::FromArgb(30, 61, 54);
+				System::Drawing::Color colorPanel = System::Drawing::Color::FromArgb(45, 93, 80);
+				System::Drawing::Color colorInput = System::Drawing::Color::FromArgb(60, 110, 95);
+				System::Drawing::Color colorVerdeClaro = System::Drawing::Color::FromArgb(123, 228, 149);
+				System::Drawing::Color colorTexto = System::Drawing::Color::FromArgb(242, 242, 242);
 
-				this->Font = gcnew System::Drawing::Font(L"Bahnschrift", 10, FontStyle::Regular);
-				this->ForeColor = System::Drawing::Color::FromArgb(242, 242, 242);
+				this->BackColor = colorFondo;
+				this->ForeColor = colorTexto;
 
-				this->groupBox1->BackColor = System::Drawing::Color::FromArgb(45, 93, 80);
-				this->groupBox1->ForeColor = System::Drawing::Color::FromArgb(242, 242, 242);
-				this->groupBox1->Font = gcnew System::Drawing::Font(L"Bahnschrift", 11, FontStyle::Bold);
+				// 2. ESCALADO DE FUENTE GENERAL (Cambio de 10 a 12)
+				this->Font = gcnew System::Drawing::Font(L"Bahnschrift", 12, FontStyle::Regular);
+
+				// 3. CONFIGURACIÓN DEL FORMULARIO (Maximizar y permitir redimensionar)
+				this->Text = L"AgroRobot - Mantenimiento de Usuarios";
+				this->StartPosition = FormStartPosition::CenterScreen;
+				this->WindowState = FormWindowState::Maximized; // Iniciar en pantalla completa (Opcional)
+
+				// --- GROUP BOX (BÚSQUEDA) ---
+				this->groupBox1->BackColor = colorPanel;
+				this->groupBox1->ForeColor = colorTexto;
+				this->groupBox1->Font = gcnew System::Drawing::Font(L"Bahnschrift", 13, FontStyle::Bold); // Fuente más grande
 				this->groupBox1->Text = L"Criterios de búsqueda";
+				// ANCLAJE: Se estira a la izquierda y derecha
+				this->groupBox1->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left | AnchorStyles::Right);
+				this->groupBox1->Width = this->ClientSize.Width - 22; // Ajuste inicial al ancho
 
-				array<TextBox^>^ textos = { this->textBox1};
-				for each (TextBox ^ t in textos) {
-					t->BackColor = System::Drawing::Color::FromArgb(60, 110, 95);
-					t->ForeColor = System::Drawing::Color::White;
-					t->BorderStyle = BorderStyle::FixedSingle;
-					t->Font = gcnew System::Drawing::Font(L"Bahnschrift", 10);
-				}
+				// Controles dentro del GroupBox
+				this->textBox1->BackColor = colorInput;
+				this->textBox1->ForeColor = System::Drawing::Color::White;
+				this->textBox1->BorderStyle = BorderStyle::FixedSingle;
+				this->textBox1->Font = gcnew System::Drawing::Font(L"Bahnschrift", 12); // Más grande
 
-				this->btnBuscar->BackColor = System::Drawing::Color::FromArgb(123, 228, 149);
+				this->btnBuscar->BackColor = colorVerdeClaro;
 				this->btnBuscar->FlatStyle = FlatStyle::Flat;
 				this->btnBuscar->FlatAppearance->BorderSize = 0;
 				this->btnBuscar->ForeColor = System::Drawing::Color::Black;
-				this->btnBuscar->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 10);
+				this->btnBuscar->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 12);
+				// ANCLAJE: El botón buscar se queda pegado a la derecha si agrandas el groupbox (opcional)
+				// this->btnBuscar->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Right); 
 
+				this->btnMostrarTodos->BackColor = colorVerdeClaro;
+				this->btnMostrarTodos->FlatStyle = FlatStyle::Flat;
+				this->btnMostrarTodos->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 11);
+				this->btnMostrarTodos->Size = System::Drawing::Size(120, 35); // Botón más grande
 
-				this->dataGridView1->BackgroundColor = System::Drawing::Color::FromArgb(45, 93, 80);
+				// --- DATAGRIDVIEW (TABLA) ---
+				this->dataGridView1->BackgroundColor = colorPanel;
 				this->dataGridView1->BorderStyle = BorderStyle::None;
-				this->dataGridView1->GridColor = System::Drawing::Color::FromArgb(30, 61, 54);
+				this->dataGridView1->GridColor = colorFondo;
 				this->dataGridView1->EnableHeadersVisualStyles = false;
-				this->dataGridView1->ColumnHeadersDefaultCellStyle->BackColor = System::Drawing::Color::FromArgb(30, 61, 54);
-				this->dataGridView1->ColumnHeadersDefaultCellStyle->ForeColor = System::Drawing::Color::White;
-				this->dataGridView1->DefaultCellStyle->BackColor = System::Drawing::Color::FromArgb(60, 110, 95);
-				this->dataGridView1->DefaultCellStyle->ForeColor = System::Drawing::Color::White;
-				this->dataGridView1->DefaultCellStyle->SelectionBackColor = System::Drawing::Color::FromArgb(123, 228, 149);
-				this->dataGridView1->DefaultCellStyle->SelectionForeColor = System::Drawing::Color::Black;
 
-				array<Button^>^ botones = { this->button2, this->btnBuscar, this->btnCambiarEstado, this->btnEditar, this->btnMostrarTodos };
-				for each (Button ^ b in botones) {
-					b->BackColor = System::Drawing::Color::FromArgb(123, 228, 149);
+				// Estilo de Cabecera
+				this->dataGridView1->ColumnHeadersDefaultCellStyle->BackColor = colorFondo;
+				this->dataGridView1->ColumnHeadersDefaultCellStyle->ForeColor = System::Drawing::Color::White;
+				this->dataGridView1->ColumnHeadersDefaultCellStyle->Font = gcnew System::Drawing::Font(L"Bahnschrift", 12, FontStyle::Bold);
+				this->dataGridView1->ColumnHeadersHeight = 40; // Cabecera más alta
+
+				// Estilo de Celdas
+				this->dataGridView1->DefaultCellStyle->BackColor = colorInput;
+				this->dataGridView1->DefaultCellStyle->ForeColor = System::Drawing::Color::White;
+				this->dataGridView1->DefaultCellStyle->SelectionBackColor = colorVerdeClaro;
+				this->dataGridView1->DefaultCellStyle->SelectionForeColor = System::Drawing::Color::Black;
+				this->dataGridView1->DefaultCellStyle->Font = gcnew System::Drawing::Font(L"Bahnschrift", 11);
+				this->dataGridView1->RowTemplate->Height = 35; // Filas más altas para que quepa la letra grande
+
+				// ANCLAJE TOTAL: Se estira en las 4 direcciones al agrandar la ventana
+				this->dataGridView1->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right);
+
+				// COLUMNAS AUTO-AJUSTABLES (Llenan el espacio)
+				this->dataGridView1->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::Fill;
+
+				// --- BOTONES INFERIORES ---
+				array<Button^>^ botonesAccion = { this->button2, this->btnCambiarEstado, this->btnEditar };
+
+				// Calculamos una posición base para centrarlos o dejarlos a la izquierda
+				int espacio = 20;
+				int xInicial = 200;
+
+				for each (Button ^ b in botonesAccion) {
+					b->BackColor = colorVerdeClaro;
 					b->FlatStyle = FlatStyle::Flat;
 					b->FlatAppearance->BorderSize = 0;
-					b->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 10);
+					b->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 12);
 					b->ForeColor = System::Drawing::Color::Black;
 					b->Cursor = Cursors::Hand;
+					b->Size = System::Drawing::Size(140, 40); // Botones más grandes y cómodos
+
+					// ANCLAJE INFERIOR: Se quedan pegados abajo a la izquierda
+					b->Anchor = static_cast<AnchorStyles>(AnchorStyles::Bottom | AnchorStyles::Left);
 				}
 
-				// 🏷️ Etiquetas
-				array<Label^>^ labels = { this->label1 };
+				// Ajuste de etiquetas
+				array<Label^>^ labels = { this->label1, this->label2 };
 				for each (Label ^ l in labels) {
 					l->ForeColor = System::Drawing::Color::White;
-					l->Font = gcnew System::Drawing::Font(L"Bahnschrift", 10);
+					l->Font = gcnew System::Drawing::Font(L"Bahnschrift", 12);
 				}
-
-				// 📏 Config general
-				this->Text = L"AgroRobot - Mantenimiento de Usuarios";
-				this->StartPosition = FormStartPosition::CenterScreen;
 			}
 
 		private: System::Windows::Forms::Button^ btnMostrarTodos;
@@ -422,6 +464,10 @@
 		}
 		this->dataGridView1->AutoGenerateColumns = false; // Desactivar la generaci�n autom�tica de columnas
 		this->dataGridView1->AllowUserToAddRows = false;	 // Evitar que el usuario pueda agregar filas manualmente
+		// AGREGAR ESTAS LÍNEAS AL FINAL:
+		this->dataGridView1->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::Fill; // Estira las columnas
+		this->dataGridView1->AutoGenerateColumns = false;
+		this->dataGridView1->AllowUserToAddRows = false;
 	}
 
 		private: System::Void btnMostrarTodos_Click(System::Object^ sender, System::EventArgs^ e){
