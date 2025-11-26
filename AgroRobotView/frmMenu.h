@@ -527,8 +527,8 @@ namespace AgroRobotView {
 	{
 		Rol^ rolUsuario = this->usuario->GetRol();
 		this->admnistracionToolStripMenuItem->Visible = (rolUsuario->GetPermisos()[0] || rolUsuario->GetPermisos()[2]);
-		this->mantenimientoDeUsuariosToolStripMenuItem->Visible = rolUsuario->GetPermisos()[0];
-		this->mantenimientoDeRolesToolStripMenuItem->Visible = rolUsuario->GetPermisos()[0];
+		this->mantenimientoDeUsuariosToolStripMenuItem->Visible = !rolUsuario->GetPermisos()[0];
+		this->mantenimientoDeRolesToolStripMenuItem->Visible = !rolUsuario->GetPermisos()[0];
 		this->programaciónDeAlimentaciónToolStripMenuItem->Visible = (rolUsuario->GetPermisos()[0] || rolUsuario->GetPermisos()[2]);
 		
 	}
