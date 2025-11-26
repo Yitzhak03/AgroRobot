@@ -1,6 +1,6 @@
-1;Becquer;birr.becquer2003@gmail.com;123456;24/11/2025 19:12;True;1
+1;Becquer;birr.becquer2003@gmail.com;123456;26/11/2025 11:10;True;3
 2;Mauricio;mau.ricio@gmail,com;schrodinger;-;False;3
-3;Farid;faridssj@gmail.com;1304;;True;2
+3;Farid;faridssj@gmail.com;1304;;True;3
 4;Bryan;bry_an@gmail.com;721577;-;False;3
 5;Leonardo;leonar1420@gmail.com;31416;14/11/2025 12:26;True;3
 6;Vincent;v.tejada@gmail.com;wa;;False;3

@@ -8,27 +8,22 @@ namespace AgroRobotView {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-	using namespace System::IO; // Necesario para exportar archivos
+	using namespace System::IO;
 	using namespace System::Collections::Generic;
-
-	// Referencias a tus proyectos
 	using namespace AgroRobotController;
+	using namespace System::Windows::Forms::DataVisualization::Charting;
 	using namespace AgroRobotModel;
 
-	/// <summary>
-	/// Resumen de frmReporteInsumosXalmacen
-	/// </summary>
 	public ref class frmReporteInsumosXalmacen : public System::Windows::Forms::Form {
 	public:
 		frmReporteInsumosXalmacen(void)
 		{
 			InitializeComponent();
+			// APLICAR EL NUEVO ESTILO CON AJUSTE DE POSICIONES
+			AplicarEstiloProfesional();
 		}
 
 	protected:
-		/// <summary>
-		/// Limpiar los recursos que se estén usando.
-		/// </summary>
 		~frmReporteInsumosXalmacen()
 		{
 			if (components) {
@@ -39,19 +34,12 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::DataVisualization::Charting::Chart^ chart1;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::Button^ btnExportar; // <--- BOTÓN NUEVO
+	private: System::Windows::Forms::Button^ btnExportar;
 
 	private:
-		/// <summary>
-		/// Variable del diseñador necesaria.
-		/// </summary>
 		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Método necesario para admitir el Diseñador. No se puede modificar
-		/// el contenido de este método con el editor de código.
-		/// </summary>
 		void InitializeComponent(void)
 		{
 			System::Windows::Forms::DataVisualization::Charting::ChartArea^ chartArea2 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
@@ -60,101 +48,60 @@ namespace AgroRobotView {
 			this->chart1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->btnExportar = (gcnew System::Windows::Forms::Button()); // Inicializar botón
+			this->btnExportar = (gcnew System::Windows::Forms::Button());
 
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
 			this->SuspendLayout();
 
-			// 
 			// chart1
-			// 
-			this->chart1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(210)), static_cast<System::Int32>(static_cast<System::Byte>(246)),
-				static_cast<System::Int32>(static_cast<System::Byte>(224)));
-			chartArea2->AxisX->Title = L"Nombre del almacén";
-			chartArea2->AxisX->TitleFont = (gcnew System::Drawing::Font(L"Noto Mono", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			chartArea2->AxisY->Title = L"Cantidad de insumos";
-			chartArea2->AxisY->TitleFont = (gcnew System::Drawing::Font(L"Noto Mono", 8.25F, System::Drawing::FontStyle::Bold));
+			this->chart1->BackColor = System::Drawing::Color::White;
 			chartArea2->Name = L"ChartArea1";
 			this->chart1->ChartAreas->Add(chartArea2);
 			legend2->Name = L"Legend1";
 			this->chart1->Legends->Add(legend2);
 			this->chart1->Location = System::Drawing::Point(33, 98);
 			this->chart1->Name = L"chart1";
-			series2->BackGradientStyle = System::Windows::Forms::DataVisualization::Charting::GradientStyle::TopBottom;
-			series2->BackSecondaryColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(70)), static_cast<System::Int32>(static_cast<System::Byte>(132)),
-				static_cast<System::Int32>(static_cast<System::Byte>(87)));
-			series2->BorderDashStyle = System::Windows::Forms::DataVisualization::Charting::ChartDashStyle::NotSet;
 			series2->ChartArea = L"ChartArea1";
-			series2->Color = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(118)), static_cast<System::Int32>(static_cast<System::Byte>(222)),
-				static_cast<System::Int32>(static_cast<System::Byte>(146)));
-			series2->IsVisibleInLegend = false;
-			series2->Legend = L"Legend1";
 			series2->Name = L"Series1";
 			this->chart1->Series->Add(series2);
 			this->chart1->Size = System::Drawing::Size(679, 393);
 			this->chart1->TabIndex = 0;
 			this->chart1->Text = L"chart1";
 
-			// 
 			// label1
-			// 
 			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(22)), static_cast<System::Int32>(static_cast<System::Byte>(53)),
-				static_cast<System::Int32>(static_cast<System::Byte>(45)));
 			this->label1->Location = System::Drawing::Point(28, 27);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(223, 30);
 			this->label1->TabIndex = 1;
 			this->label1->Text = L"Insumos por almacén";
 
-			// 
 			// label2
-			// 
 			this->label2->AutoSize = true;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label2->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(74)), static_cast<System::Int32>(static_cast<System::Byte>(110)),
-				static_cast<System::Int32>(static_cast<System::Byte>(96)));
 			this->label2->Location = System::Drawing::Point(30, 66);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(258, 13);
 			this->label2->TabIndex = 2;
 			this->label2->Text = L"Conteo de insumos registrados en cada almacén";
 
-			// 
-			// btnExportar (CONFIGURACIÓN VISUAL)
-			// 
-			this->btnExportar->Location = System::Drawing::Point(532, 37); // Arriba a la derecha
+			// btnExportar
+			this->btnExportar->Location = System::Drawing::Point(532, 37);
 			this->btnExportar->Name = L"btnExportar";
 			this->btnExportar->Size = System::Drawing::Size(180, 35);
 			this->btnExportar->TabIndex = 3;
 			this->btnExportar->Text = L"Exportar Reporte";
 			this->btnExportar->UseVisualStyleBackColor = true;
-			this->btnExportar->BackColor = System::Drawing::Color::FromArgb(118, 222, 146); // Verde suave
-			this->btnExportar->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->btnExportar->FlatAppearance->BorderSize = 0;
-			this->btnExportar->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Bold));
-			this->btnExportar->ForeColor = System::Drawing::Color::FromArgb(22, 53, 45);
-			this->btnExportar->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->btnExportar->Click += gcnew System::EventHandler(this, &frmReporteInsumosXalmacen::btnExportar_Click);
 
-			// 
 			// frmReporteInsumosXalmacen
-			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(246)), static_cast<System::Int32>(static_cast<System::Byte>(251)),
-				static_cast<System::Int32>(static_cast<System::Byte>(248)));
 			this->ClientSize = System::Drawing::Size(755, 529);
-			this->Controls->Add(this->btnExportar); // Agregar botón
+			this->Controls->Add(this->btnExportar);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->chart1);
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->MaximizeBox = false;
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Name = L"frmReporteInsumosXalmacen";
 			this->Text = L"Insumos por almacén";
 			this->Load += gcnew System::EventHandler(this, &frmReporteInsumosXalmacen::frmReporteInsumosXalmacen_Load);
@@ -167,20 +114,22 @@ namespace AgroRobotView {
 
 	private: System::Void frmReporteInsumosXalmacen_Load(System::Object^ sender, System::EventArgs^ e)
 	{
-		// Cargar datos en el gráfico
 		ReporteInsumosXalmacenController^ reporteCtrl = gcnew ReporteInsumosXalmacenController();
 		List<ReporteInsumosXalmacen^>^ reporte = reporteCtrl->generarReporte();
 
 		this->chart1->Series["Series1"]->Points->Clear();
+		this->chart1->Series["Series1"]->ChartType = SeriesChartType::Column;
+		this->chart1->Series["Series1"]->Color = System::Drawing::Color::FromArgb(118, 222, 146);
+		this->chart1->Series["Series1"]->IsValueShownAsLabel = true;
+		this->chart1->Series["Series1"]->Font = gcnew System::Drawing::Font("Segoe UI", 10, FontStyle::Bold);
+
 		for each (ReporteInsumosXalmacen ^ item in reporte) {
 			this->chart1->Series["Series1"]->Points->AddXY(item->Nombre, item->CantInsumos);
 		}
 	}
 
-		   // --- LÓGICA DE EXPORTACIÓN ---
 	private: System::Void btnExportar_Click(System::Object^ sender, System::EventArgs^ e) {
 		try {
-			// 1. Obtener datos (usando el mismo controller)
 			ReporteInsumosXalmacenController^ reporteCtrl = gcnew ReporteInsumosXalmacenController();
 			List<ReporteInsumosXalmacen^>^ datos = reporteCtrl->generarReporte();
 
@@ -188,50 +137,121 @@ namespace AgroRobotView {
 				MessageBox::Show("No hay datos para exportar.", "Aviso", MessageBoxButtons::OK, MessageBoxIcon::Warning);
 				return;
 			}
-
-			// 2. Diálogo de guardado
 			SaveFileDialog^ saveDialog = gcnew SaveFileDialog();
 			saveDialog->Filter = "Reporte de Texto|*.txt";
-			saveDialog->Title = "Guardar Reporte de Insumos";
 			saveDialog->FileName = "Reporte_Insumos_Almacen_" + DateTime::Now.ToString("yyyyMMdd_HHmmss") + ".txt";
 
 			if (saveDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
-
-				// 3. Escribir archivo
 				StreamWriter^ writer = gcnew StreamWriter(saveDialog->FileName, false, System::Text::Encoding::UTF8);
-				try {
-					writer->WriteLine("============================================================");
-					writer->WriteLine("              REPORTE DE INSUMOS POR ALMACÉN                ");
-					writer->WriteLine("============================================================");
-					writer->WriteLine("Fecha de Generación: " + DateTime::Now.ToString("dd/MM/yyyy HH:mm:ss"));
-					writer->WriteLine("Total Almacenes:     " + datos->Count);
-					writer->WriteLine("------------------------------------------------------------");
-					writer->WriteLine("");
-
-					// Cabecera alineada
-					writer->WriteLine(String::Format("{0,-30} | {1,15}", "ALMACÉN", "CANTIDAD INSUMOS"));
-					writer->WriteLine("------------------------------------------------------------");
-
-					// Filas
-					int totalInsumos = 0;
-					for each (ReporteInsumosXalmacen ^ item in datos) {
-						writer->WriteLine(String::Format("{0,-30} | {1,15}", item->Nombre, item->CantInsumos));
-						totalInsumos += item->CantInsumos;
-					}
-
-					writer->WriteLine("------------------------------------------------------------");
-					writer->WriteLine(String::Format("{0,-30} | {1,15}", "TOTAL GENERAL", totalInsumos));
-					writer->WriteLine("============================================================");
+				writer->WriteLine("AGROROBOT - REPORTE DE INSUMOS");
+				writer->WriteLine("Fecha: " + DateTime::Now.ToString("g"));
+				writer->WriteLine("------------------------------------------------------------");
+				writer->WriteLine(String::Format("{0,-30} | {1,15}", "ALMACÉN", "CANTIDAD"));
+				writer->WriteLine("------------------------------------------------------------");
+				int total = 0;
+				for each (ReporteInsumosXalmacen ^ item in datos) {
+					writer->WriteLine(String::Format("{0,-30} | {1,15}", item->Nombre, item->CantInsumos));
+					total += item->CantInsumos;
 				}
-				finally {
-					writer->Close();
-				}
-
-				MessageBox::Show("Reporte exportado correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+				writer->WriteLine("------------------------------------------------------------");
+				writer->WriteLine("TOTAL: " + total);
+				writer->Close();
+				MessageBox::Show("Reporte exportado correctamente.");
 			}
 		}
 		catch (Exception^ ex) {
-			MessageBox::Show("Error al exportar: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			MessageBox::Show("Error: " + ex->Message);
+		}
+	}
+
+		   // =========================================================
+		   //  ESTILO PROFESIONAL (CORREGIDO POSICIONES)
+		   // =========================================================
+	private: void AplicarEstiloProfesional() {
+		// 1. FUENTES
+		System::Drawing::Font^ fuenteBase = gcnew System::Drawing::Font("Segoe UI", 12, FontStyle::Regular);
+		System::Drawing::Font^ fuenteTitulo = gcnew System::Drawing::Font("Segoe UI", 20, FontStyle::Bold);
+		System::Drawing::Font^ fuenteSubtitulo = gcnew System::Drawing::Font("Segoe UI", 12, FontStyle::Italic);
+		System::Drawing::Font^ fuenteChart = gcnew System::Drawing::Font("Segoe UI", 10, FontStyle::Bold);
+
+		// 2. COLORES
+		System::Drawing::Color colorFondo = System::Drawing::Color::FromArgb(238, 245, 233);
+		System::Drawing::Color colorVerde = System::Drawing::Color::FromArgb(67, 160, 71);
+		System::Drawing::Color colorTexto = System::Drawing::Color::FromArgb(30, 60, 30);
+
+		// 3. VENTANA
+		this->BackColor = colorFondo;
+		this->Font = fuenteBase;
+		this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+		this->AutoSize = false;
+		this->Dock = DockStyle::Fill;
+
+		// 4. ALINEACIÓN DE TEXTOS (CORRECCIÓN)
+
+		// Título: Lo subimos bien arriba
+		this->label1->Top = 15;
+		this->label1->Left = 28;
+		this->label1->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left);
+		this->label1->ForeColor = colorTexto;
+		this->label1->Font = fuenteTitulo;
+		this->label1->Text = "Insumos por Almacén";
+
+		// Subtítulo: Lo bajamos para separarlo del título grande
+		this->label2->Top = 65;
+		this->label2->Left = 30;
+		this->label2->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left);
+		this->label2->ForeColor = colorTexto;
+		this->label2->Font = fuenteSubtitulo;
+
+		// Botón Exportar: Alineado con el Título
+		this->btnExportar->Top = 15; // Misma altura que el título
+		this->btnExportar->Size = System::Drawing::Size(200, 45);
+		this->btnExportar->Left = this->ClientSize.Width - this->btnExportar->Width - 30;
+		this->btnExportar->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Right);
+
+		this->btnExportar->BackColor = colorVerde;
+		this->btnExportar->ForeColor = System::Drawing::Color::White;
+		this->btnExportar->FlatStyle = FlatStyle::Flat;
+		this->btnExportar->FlatAppearance->BorderSize = 0;
+		this->btnExportar->Font = gcnew System::Drawing::Font("Segoe UI", 12, FontStyle::Bold);
+		this->btnExportar->Cursor = Cursors::Hand;
+
+		// 5. GRÁFICO (CHART)
+		int margen = 30;
+		this->chart1->Top = 100; // Suficiente espacio tras el subtítulo
+		this->chart1->Left = margen;
+		this->chart1->Width = this->ClientSize.Width - (margen * 2);
+		this->chart1->Height = this->ClientSize.Height - this->chart1->Top - margen;
+
+		this->chart1->Anchor = static_cast<AnchorStyles>(
+			AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right);
+
+		this->chart1->BackColor = System::Drawing::Color::White;
+		this->chart1->BorderlineColor = System::Drawing::Color::Empty;
+
+		if (this->chart1->ChartAreas->Count > 0) {
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^ area = this->chart1->ChartAreas[0];
+			area->BackColor = System::Drawing::Color::White;
+			area->AxisX->LineColor = colorVerde;
+			area->AxisY->LineColor = colorVerde;
+			area->AxisX->MajorGrid->LineColor = System::Drawing::Color::FromArgb(240, 240, 240);
+			area->AxisY->MajorGrid->LineColor = System::Drawing::Color::FromArgb(240, 240, 240);
+
+			area->AxisX->LabelStyle->Font = fuenteChart;
+			area->AxisY->LabelStyle->Font = fuenteChart;
+			area->AxisX->LabelStyle->ForeColor = colorTexto;
+			area->AxisY->LabelStyle->ForeColor = colorTexto;
+
+			area->AxisX->Title = "Almacén";
+			area->AxisX->TitleFont = gcnew System::Drawing::Font("Segoe UI", 11, FontStyle::Bold);
+			area->AxisX->TitleForeColor = colorTexto;
+			area->AxisY->Title = "Cantidad";
+			area->AxisY->TitleFont = gcnew System::Drawing::Font("Segoe UI", 11, FontStyle::Bold);
+			area->AxisY->TitleForeColor = colorTexto;
+		}
+
+		if (this->chart1->Legends->Count > 0) {
+			this->chart1->Legends[0]->Enabled = false;
 		}
 	}
 	};
