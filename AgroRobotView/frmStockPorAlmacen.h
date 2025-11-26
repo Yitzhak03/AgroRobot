@@ -56,7 +56,7 @@ namespace AgroRobotView {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(612, 655);
 			this->Name = L"frmStockPorAlmacen";
-			this->Text = L"frmStockPorAlmacen";
+			this->Text = L"Stock por Almacen";
 			this->ResumeLayout(false);
 
 		}

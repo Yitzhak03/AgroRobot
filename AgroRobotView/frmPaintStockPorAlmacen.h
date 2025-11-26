@@ -166,6 +166,7 @@ namespace AgroRobotView {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::Color::Honeydew;
 			this->ClientSize = System::Drawing::Size(371, 516);
 			this->Controls->Add(this->panel2);
 			this->Controls->Add(this->panel1);

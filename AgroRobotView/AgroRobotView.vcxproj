@@ -293,6 +293,9 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmAgregarInsumoToAlmacen.resx">
+      <DependentUpon>frmAgregarInsumoToAlmacen.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmEditarAnimal.resx">
       <DependentUpon>frmEditarAnimal.h</DependentUpon>
     </EmbeddedResource>
@@ -382,6 +385,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmNuevoRol.resx">
       <DependentUpon>frmNuevoRol.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNuevoStock.resx">
+      <DependentUpon>frmNuevoStock.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNuevoUsuario.resx">
       <DependentUpon>frmNuevoUsuario.h</DependentUpon>

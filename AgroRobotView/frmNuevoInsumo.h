@@ -98,6 +98,7 @@ namespace AgroRobotView {
 			// 
 			// label1
 			// 
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Tai Le", 9, System::Drawing::FontStyle::Bold));
 			this->label1->Location = System::Drawing::Point(26, 34);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(19, 17);
@@ -114,6 +115,7 @@ namespace AgroRobotView {
 			// 
 			// label2
 			// 
+			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Tai Le", 9, System::Drawing::FontStyle::Bold));
 			this->label2->Location = System::Drawing::Point(26, 74);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(56, 17);
@@ -129,6 +131,7 @@ namespace AgroRobotView {
 			// 
 			// label3
 			// 
+			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Tai Le", 9, System::Drawing::FontStyle::Bold));
 			this->label3->Location = System::Drawing::Point(27, 116);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(31, 20);
@@ -137,6 +140,7 @@ namespace AgroRobotView {
 			// 
 			// label5
 			// 
+			this->label5->Font = (gcnew System::Drawing::Font(L"Microsoft Tai Le", 9, System::Drawing::FontStyle::Bold));
 			this->label5->Location = System::Drawing::Point(27, 160);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(55, 20);
@@ -152,23 +156,33 @@ namespace AgroRobotView {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(29, 211);
+			this->button1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(46)), static_cast<System::Int32>(static_cast<System::Byte>(143)),
+				static_cast<System::Int32>(static_cast<System::Byte>(77)));
+			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Tai Le", 9, System::Drawing::FontStyle::Bold));
+			this->button1->ForeColor = System::Drawing::Color::White;
+			this->button1->Location = System::Drawing::Point(29, 205);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->Size = System::Drawing::Size(88, 29);
 			this->button1->TabIndex = 4;
 			this->button1->Text = L"Agregar";
 			this->button1->TextImageRelation = System::Windows::Forms::TextImageRelation::TextBeforeImage;
-			this->button1->UseVisualStyleBackColor = true;
+			this->button1->UseVisualStyleBackColor = false;
 			this->button1->Click += gcnew System::EventHandler(this, &frmNuevoInsumo::button1_Click);
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(140, 211);
+			this->button2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(46)), static_cast<System::Int32>(static_cast<System::Byte>(143)),
+				static_cast<System::Int32>(static_cast<System::Byte>(77)));
+			this->button2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button2->Font = (gcnew System::Drawing::Font(L"Microsoft Tai Le", 9, System::Drawing::FontStyle::Bold));
+			this->button2->ForeColor = System::Drawing::Color::White;
+			this->button2->Location = System::Drawing::Point(140, 205);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(75, 23);
+			this->button2->Size = System::Drawing::Size(86, 29);
 			this->button2->TabIndex = 5;
 			this->button2->Text = L"Cancelar";
-			this->button2->UseVisualStyleBackColor = true;
+			this->button2->UseVisualStyleBackColor = false;
 			this->button2->Click += gcnew System::EventHandler(this, &frmNuevoInsumo::button2_Click);
 			// 
 			// textBox4
@@ -192,7 +206,7 @@ namespace AgroRobotView {
 			this->groupBox1->Controls->Add(this->label1);
 			this->groupBox1->Location = System::Drawing::Point(12, 12);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(262, 297);
+			this->groupBox1->Size = System::Drawing::Size(262, 256);
 			this->groupBox1->TabIndex = 5;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Datos del insumo";
@@ -201,7 +215,9 @@ namespace AgroRobotView {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(284, 318);
+			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(246)), static_cast<System::Int32>(static_cast<System::Byte>(251)),
+				static_cast<System::Int32>(static_cast<System::Byte>(248)));
+			this->ClientSize = System::Drawing::Size(284, 278);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmNuevoInsumo";
 			this->Text = L"frmNuevoInsumo";

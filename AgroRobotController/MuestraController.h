@@ -1,5 +1,6 @@
 #pragma once
 #include "GestorNutricionalController.h"
+#include "BaseController.h"
 
 using namespace System;
 using namespace System::Collections::Generic;
@@ -7,7 +8,10 @@ using namespace AgroRobotModel;
 
 namespace AgroRobotController {
 
-    public ref class MuestraController {
+    public ref class MuestraController : public BaseController {
+    private:
+        String^ archivo;
+		List<Muestra^>^ listaMuestras;
 
     public:
         MuestraController();
@@ -21,10 +25,13 @@ namespace AgroRobotController {
         // Búsquedas
         List<Muestra^>^ buscarTodasMuestrasArchivo(GestorNutricionalController^ gestor);
         Muestra^ buscarMuestraPorIdArchivo(int idMuestra, GestorNutricionalController^ gestor);
+        List<Muestra^>^ buscarMuestrasPorEspecieArchivo(String^ especie, GestorNutricionalController^ gestor);
         List<Muestra^>^ buscarMuestrasPorAnimalArchivo(int idAnimal, GestorNutricionalController^ gestor);
 
         // Persistencia
         void escribirArchivo(List<Muestra^>^ listaMuestras);
 
+		// Base de datos:
+		void escribirArchivoBINMuestras();
     };
 }
