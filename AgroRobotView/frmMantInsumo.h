@@ -307,7 +307,7 @@ namespace AgroRobotView {
 			   this->comboBox1->IntegralHeight = false;
 			   this->comboBox1->ItemHeight = 19;
 			   this->comboBox1->Location = System::Drawing::Point(25, 63);
-			   this->comboBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			   this->comboBox1->Margin = System::Windows::Forms::Padding(4);
 			   this->comboBox1->MaxDropDownItems = 15;
 			   this->comboBox1->Name = L"comboBox1";
 			   this->comboBox1->Size = System::Drawing::Size(301, 27);
@@ -377,7 +377,7 @@ namespace AgroRobotView {
 			   this->button6->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(106)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(90)));
 			   this->button6->Location = System::Drawing::Point(412, 635);
-			   this->button6->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			   this->button6->Margin = System::Windows::Forms::Padding(4);
 			   this->button6->Name = L"button6";
 			   this->button6->Size = System::Drawing::Size(117, 39);
 			   this->button6->TabIndex = 23;
@@ -395,7 +395,7 @@ namespace AgroRobotView {
 				   static_cast<System::Byte>(0)));
 			   this->button7->ForeColor = System::Drawing::Color::White;
 			   this->button7->Location = System::Drawing::Point(697, 635);
-			   this->button7->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			   this->button7->Margin = System::Windows::Forms::Padding(4);
 			   this->button7->Name = L"button7";
 			   this->button7->Size = System::Drawing::Size(177, 39);
 			   this->button7->TabIndex = 24;
@@ -415,7 +415,7 @@ namespace AgroRobotView {
 			   this->panel1->Controls->Add(this->button3);
 			   this->panel1->Controls->Add(this->button2);
 			   this->panel1->Location = System::Drawing::Point(16, 15);
-			   this->panel1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			   this->panel1->Margin = System::Windows::Forms::Padding(4);
 			   this->panel1->Name = L"panel1";
 			   this->panel1->Size = System::Drawing::Size(907, 695);
 			   this->panel1->TabIndex = 25;
@@ -440,7 +440,7 @@ namespace AgroRobotView {
 				   static_cast<System::Int32>(static_cast<System::Byte>(248)));
 			   this->ClientSize = System::Drawing::Size(943, 725);
 			   this->Controls->Add(this->panel1);
-			   this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			   this->Margin = System::Windows::Forms::Padding(4);
 			   this->Name = L"frmMantInsumo";
 			   this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			   this->Text = L"Registro General de Insumos";
