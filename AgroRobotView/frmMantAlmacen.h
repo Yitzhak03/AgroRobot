@@ -2,6 +2,7 @@
 #include "frmNuevoAlmacen.h"
 #include "frmPaintStockPorAlmacen.h"
 #include "frmAgregarInsumoToAlmacen.h"
+
 namespace AgroRobotView {
 
 	using namespace System;
@@ -10,8 +11,7 @@ namespace AgroRobotView {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-	using namespace System::Collections::Generic; // Para usar List<>
-	// Referencias a controladores y modelos
+	using namespace System::Collections::Generic;
 	using namespace AgroRobotController;
 	using namespace AgroRobotModel;
 
@@ -23,92 +23,162 @@ namespace AgroRobotView {
 		frmMantAlmacen(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: agregar código de constructor aquí
-			//
-			aplicarEstilo();
+			// Aplicamos el nuevo diseño profesional al iniciar
+			AplicarEstiloProfesional();
+			// Cargar datos iniciales
+			button4_Click(nullptr, nullptr);
 		}
 
 	protected:
-		/// <summary>
-		/// Limpiar los recursos que se estén usando.
-		/// </summary>
 		~frmMantAlmacen()
 		{
 			if (components) {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Button^ button4;
-	protected:
-	private: System::Windows::Forms::Button^ button2;
+
+	private: System::Windows::Forms::Button^ button4; // Mostrar
+	private: System::Windows::Forms::Button^ button2; // Nuevo
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
-
-
-
-
-	private: System::Windows::Forms::Button^ button1;
-	private: System::Windows::Forms::Button^ button3;
+	private: System::Windows::Forms::Button^ button1; // Agregar Insumos
+	private: System::Windows::Forms::Button^ button3; // Ver Insumos
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
 
-		   void aplicarEstilo()
-		   {
-			   this->BackColor = System::Drawing::Color::FromArgb(30, 61, 54);
+		   // Etiqueta de Título dinámica (para no modificar el InitializeComponent manual)
+	private: System::Windows::Forms::Label^ lblTituloPrincipal;
 
-			   this->Font = gcnew System::Drawing::Font(L"Bahnschrift", 10, FontStyle::Regular);
-			   this->ForeColor = System::Drawing::Color::FromArgb(242, 242, 242);
+		   // ===================================================================================
+		   // MÉTODO DE ESTILO PROFESIONAL (MENTA/BOSQUE)
+		   // ===================================================================================
+		   void AplicarEstiloProfesional() {
+			   // 1. PALETA DE COLORES
+			   System::Drawing::Color colorFondo = System::Drawing::Color::FromArgb(246, 251, 248);   // Menta Pálido
+			   System::Drawing::Color colorPanel = System::Drawing::Color::FromArgb(236, 246, 240);   // Menta Crema
+			   System::Drawing::Color colorBtnPrimario = System::Drawing::Color::FromArgb(46, 143, 77); // Verde Bosque
+			   System::Drawing::Color colorTextoMain = System::Drawing::Color::FromArgb(22, 53, 45);    // Verde Petróleo
+			   System::Drawing::Color colorTextoSec = System::Drawing::Color::FromArgb(64, 106, 90);    // Verde Azulado
+			   System::Drawing::Color colorGridLine = System::Drawing::Color::FromArgb(183, 220, 200);   // Verde Agua
+			   System::Drawing::Color colorGridAlt = System::Drawing::Color::FromArgb(244, 250, 246);   // Filas alternas
 
-			   this->button1->BackColor = System::Drawing::Color::FromArgb(123, 228, 149);
-			   this->button1->FlatStyle = FlatStyle::Flat;
-			   this->button1->FlatAppearance->BorderSize = 0;
-			   this->button1->ForeColor = System::Drawing::Color::Black;
-			   this->button1->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 10);
+			   // 2. FUENTES
+			   System::Drawing::Font^ fontTitulo = gcnew System::Drawing::Font("Microsoft Tai Le", 17, FontStyle::Bold);
+			   System::Drawing::Font^ fontBoton = gcnew System::Drawing::Font("Microsoft Tai Le", 9, FontStyle::Bold);
+			   System::Drawing::Font^ fontGridHeader = gcnew System::Drawing::Font("Segoe UI Semibold", 10);
+			   System::Drawing::Font^ fontGridCell = gcnew System::Drawing::Font("Microsoft Sans Serif", 9);
 
+			   // 3. CONFIGURACIÓN VENTANA
+			   this->BackColor = colorFondo;
+			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+			   this->AutoSize = false;
+			   this->Dock = DockStyle::Fill;
+			   this->Text = "Registro General de Almacenes";
 
-			   this->dataGridView1->BackgroundColor = System::Drawing::Color::FromArgb(45, 93, 80);
-			   this->dataGridView1->BorderStyle = BorderStyle::None;
-			   this->dataGridView1->GridColor = System::Drawing::Color::FromArgb(30, 61, 54);
+			   // 4. CREACIÓN DINÁMICA DEL TÍTULO (Para consistencia visual)
+			   this->lblTituloPrincipal = (gcnew System::Windows::Forms::Label());
+			   this->lblTituloPrincipal->Text = "Gestión de Almacenes";
+			   this->lblTituloPrincipal->Font = fontTitulo;
+			   this->lblTituloPrincipal->ForeColor = colorTextoMain;
+			   this->lblTituloPrincipal->AutoSize = true;
+			   this->lblTituloPrincipal->Location = System::Drawing::Point(20, 20);
+			   this->Controls->Add(this->lblTituloPrincipal);
+
+			   // 5. RE-ORGANIZACIÓN DEL LAYOUT (Barra Lateral Izquierda)
+			   // Definimos coordenadas para alinear los botones verticalmente a la izquierda
+			   int btnLeft = 20;
+			   int startY = 70;
+			   int btnWidth = 160;
+			   int btnHeight = 40;
+			   int gap = 10;
+
+			   // Botón 2: NUEVO (Acción Principal)
+			   this->button2->Text = "Nuevo Almacén";
+			   this->button2->Location = System::Drawing::Point(btnLeft, startY);
+			   this->button2->Size = System::Drawing::Size(btnWidth, btnHeight);
+			   this->button2->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left);
+			   EstilarBotonPrimario(this->button2, colorBtnPrimario, fontBoton);
+
+			   // Botón 1: AGREGAR INSUMOS (Acción Principal)
+			   this->button1->Location = System::Drawing::Point(btnLeft, startY + btnHeight + gap);
+			   this->button1->Size = System::Drawing::Size(btnWidth, btnHeight);
+			   this->button1->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left);
+			   EstilarBotonPrimario(this->button1, colorBtnPrimario, fontBoton);
+
+			   // Botón 3: VER INSUMOS (Acción Secundaria)
+			   this->button3->Location = System::Drawing::Point(btnLeft, startY + (btnHeight + gap) * 2);
+			   this->button3->Size = System::Drawing::Size(btnWidth, btnHeight);
+			   this->button3->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left);
+			   EstilarBotonSecundario(this->button3, colorPanel, colorTextoSec, colorGridLine, fontBoton);
+
+			   // Botón 4: MOSTRAR/REFRESCAR (Acción Secundaria)
+			   this->button4->Text = "Refrescar Lista";
+			   this->button4->Location = System::Drawing::Point(btnLeft, startY + (btnHeight + gap) * 3);
+			   this->button4->Size = System::Drawing::Size(btnWidth, btnHeight);
+			   this->button4->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left);
+			   EstilarBotonSecundario(this->button4, colorPanel, colorTextoSec, colorGridLine, fontBoton);
+
+			   // 6. ESTILIZADO DE LA GRILLA
+			   // Posicionamos la grilla a la derecha de los botones
+			   int gridX = btnLeft + btnWidth + 20;
+			   this->dataGridView1->Location = System::Drawing::Point(gridX, 70);
+			   this->dataGridView1->Size = System::Drawing::Size(this->ClientSize.Width - gridX - 20, this->ClientSize.Height - 90);
+			   // Importante: Anclajes para que la grilla crezca
+			   this->dataGridView1->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right);
+
+			   this->dataGridView1->BackgroundColor = System::Drawing::Color::White;
+			   this->dataGridView1->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			   this->dataGridView1->CellBorderStyle = DataGridViewCellBorderStyle::SingleHorizontal;
+			   this->dataGridView1->GridColor = colorGridLine;
 			   this->dataGridView1->EnableHeadersVisualStyles = false;
-			   this->dataGridView1->ColumnHeadersDefaultCellStyle->BackColor = System::Drawing::Color::FromArgb(30, 61, 54);
-			   this->dataGridView1->ColumnHeadersDefaultCellStyle->ForeColor = System::Drawing::Color::White;
-			   this->dataGridView1->DefaultCellStyle->BackColor = System::Drawing::Color::FromArgb(60, 110, 95);
-			   this->dataGridView1->DefaultCellStyle->ForeColor = System::Drawing::Color::White;
-			   this->dataGridView1->DefaultCellStyle->SelectionBackColor = System::Drawing::Color::FromArgb(123, 228, 149);
-			   this->dataGridView1->DefaultCellStyle->SelectionForeColor = System::Drawing::Color::Black;
 
+			   // Header
+			   this->dataGridView1->ColumnHeadersHeight = 45;
+			   this->dataGridView1->ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle::Single;
+			   this->dataGridView1->ColumnHeadersDefaultCellStyle->BackColor = colorPanel;
+			   this->dataGridView1->ColumnHeadersDefaultCellStyle->ForeColor = colorTextoMain;
+			   this->dataGridView1->ColumnHeadersDefaultCellStyle->Font = fontGridHeader;
+			   this->dataGridView1->ColumnHeadersDefaultCellStyle->SelectionBackColor = System::Drawing::Color::White;
+			   this->dataGridView1->ColumnHeadersDefaultCellStyle->SelectionForeColor = colorTextoMain;
 
-			   array<Button^>^ botones = { this->button2, this->button3, this->button1, this->button4 };
-			   for each (Button ^ b in botones) {
-				   b->BackColor = System::Drawing::Color::FromArgb(123, 228, 149);
-				   b->FlatStyle = FlatStyle::Flat;
-				   b->FlatAppearance->BorderSize = 0;
-				   b->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 10);
-				   b->ForeColor = System::Drawing::Color::Black;
-				   b->Cursor = Cursors::Hand;
-			   }
+			   // Filas
+			   this->dataGridView1->RowTemplate->Height = 35;
+			   this->dataGridView1->DefaultCellStyle->Font = fontGridCell;
+			   this->dataGridView1->DefaultCellStyle->ForeColor = colorTextoMain;
+			   this->dataGridView1->DefaultCellStyle->SelectionBackColor = System::Drawing::Color::LightGreen;
+			   this->dataGridView1->DefaultCellStyle->SelectionForeColor = colorTextoMain;
+			   this->dataGridView1->AlternatingRowsDefaultCellStyle->BackColor = colorGridAlt;
 
-			   // ?? Config general
-			   this->Text = L"AgroRobot - Mantenimiento de almacenes";
-			   this->StartPosition = FormStartPosition::CenterScreen;
+			   this->dataGridView1->RowHeadersVisible = false;
+			   this->dataGridView1->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::Fill;
+			   this->dataGridView1->SelectionMode = DataGridViewSelectionMode::FullRowSelect;
 		   }
 
+		   // Helpers para reducir código repetitivo
+		   void EstilarBotonPrimario(Button^ btn, Color backColor, System::Drawing::Font^ font) {
+			   btn->BackColor = backColor;
+			   btn->ForeColor = System::Drawing::Color::White;
+			   btn->FlatStyle = FlatStyle::Flat;
+			   btn->FlatAppearance->BorderSize = 0;
+			   btn->Font = font;
+			   btn->Cursor = Cursors::Hand;
+		   }
 
-
+		   void EstilarBotonSecundario(Button^ btn, Color backColor, Color foreColor, Color borderColor, System::Drawing::Font^ font) {
+			   btn->BackColor = backColor;
+			   btn->ForeColor = foreColor;
+			   btn->FlatStyle = FlatStyle::Flat;
+			   btn->FlatAppearance->BorderColor = borderColor;
+			   btn->FlatAppearance->BorderSize = 1;
+			   btn->Font = font;
+			   btn->Cursor = Cursors::Hand;
+		   }
 
 	private:
-		/// <summary>
-		/// Variable del diseñador necesaria.
-		/// </summary>
 		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Método necesario para admitir el Diseñador. No se puede modificar
-		/// el contenido de este método con el editor de código.
-		/// </summary>
 		void InitializeComponent(void)
 		{
 			this->button4 = (gcnew System::Windows::Forms::Button());
@@ -240,14 +310,11 @@ namespace AgroRobotView {
 		List<Almacen^>^ lista = almacenCtrl->readTxt();
 		mostrarGrilla(lista);
 	}
-		   //Método para mostrar todos los insumos en el DataGridView
+
 	private: System::Void mostrarGrilla(List<Almacen^>^ lista)
 	{
-		//Limpiar el DataGridView
 		dataGridView1->Rows->Clear();
-		//Crear el controlador de StockInsumo para contar insumos por almacén
 		StockInsumoController^ SICtrl = gcnew StockInsumoController();
-		//Cargar los insumos en el DataGridView
 		for each (Almacen ^ a in lista) {
 			dataGridView1->Rows->Add(
 				Convert::ToString(a->Id),
@@ -257,17 +324,14 @@ namespace AgroRobotView {
 			);
 		}
 	}
-		   //========================================================================
-		   //=============================Nuevo======================================
-		   //========================================================================
+
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		frmNuevoAlmacen^ frmNA = gcnew frmNuevoAlmacen();
 		frmNA->ShowDialog();
+		button4_Click(nullptr, nullptr); // Refrescar tras cerrar
 	}
-		   //========================================================================
-		   //========================Agregar Insumos=================================
-		   //========================================================================
+
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		if (dataGridView1->SelectedRows->Count == 0) {
@@ -282,10 +346,9 @@ namespace AgroRobotView {
 		int idAlmacen = Convert::ToInt32(dataGridView1->SelectedRows[0]->Cells[0]->Value);
 		frmAgregarInsumoToAlmacen^ frm = gcnew frmAgregarInsumoToAlmacen(idAlmacen);
 		frm->ShowDialog();
+		button4_Click(nullptr, nullptr); // Refrescar tras cerrar
 	}
-		   //========================================================================
-		   //===========================Ver Insumos==================================
-		   //========================================================================
+
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		if (dataGridView1->SelectedRows->Count == 0) {

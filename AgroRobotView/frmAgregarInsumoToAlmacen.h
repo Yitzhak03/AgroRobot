@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "frmNuevoStock2.h"
+
 namespace AgroRobotView {
 
 	using namespace System;
@@ -8,133 +9,192 @@ namespace AgroRobotView {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-	/// Agregar referencia al controlador de almacenes
 	using namespace AgroRobotController;
-	using namespace System::Collections::Generic; //Para List<>
+	using namespace System::Collections::Generic;
 	using namespace AgroRobotModel;
 
-	/// <summary>
-	/// Resumen de frmAgregarInsumoToAlmacen
-	/// </summary>
 	public ref class frmAgregarInsumoToAlmacen : public System::Windows::Forms::Form {
 	public:
 		frmAgregarInsumoToAlmacen(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: agregar código de constructor aquí
-			//
-			aplicarEstilo();
+			AplicarEstiloCompacto();
 		}
+
 		frmAgregarInsumoToAlmacen(int idAlmacen)
 		{
 			InitializeComponent();
 			this->idAlmacenDestino = idAlmacen;
+			AplicarEstiloCompacto();
 		}
 
 	protected:
-		/// <summary>
-		/// Limpiar los recursos que se estén usando.
-		/// </summary>
 		~frmAgregarInsumoToAlmacen()
 		{
 			if (components) {
 				delete components;
 			}
 		}
+
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
 	protected:
 	private: System::Windows::Forms::DataGridView^ dataGridView2;
-	private: System::Windows::Forms::Button^ button1;
-	private: System::Windows::Forms::Button^ button2;
-	private: System::Windows::Forms::TextBox^ textBox1;
-	private: System::Windows::Forms::ComboBox^ comboBox1;
-	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::TextBox^ textBox2;
-	private: System::Windows::Forms::Button^ button3;
+	private: System::Windows::Forms::Button^ button1; // Añadir
+	private: System::Windows::Forms::Button^ button2; // Quitar (Oculto)
+	private: System::Windows::Forms::TextBox^ textBox1; // Cantidad
+	private: System::Windows::Forms::ComboBox^ comboBox1; // Origen Combo
+	private: System::Windows::Forms::Label^ label1; // Lbl Origen
+	private: System::Windows::Forms::Label^ label2; // Lbl Destino
+	private: System::Windows::Forms::TextBox^ textBox2; // Destino Texto
+	private: System::Windows::Forms::Button^ button3; // Buscar Origen
 	private: int idAlmacenDestino;
-	private: System::Windows::Forms::Button^ button4;
-	private: System::Windows::Forms::Label^ label3;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column8;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column11;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column12;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
+	private: System::Windows::Forms::Button^ button4; // Actualizar Destino
+	private: System::Windows::Forms::Label^ label3; // Lbl Cantidad
+
+		   // Columnas (Las defino genéricas para no ocupar espacio visual aquí)
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column7;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column9;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column10;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column8;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column11;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column12;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
 
-		   void aplicarEstilo()
+		   // ===================================================================================
+		   // MÉTODO DE ESTILO: MENTA/BOSQUE (VERSIÓN COMPACTA Y ORDENADA)
+		   // ===================================================================================
+		   void AplicarEstiloCompacto()
 		   {
-			   this->BackColor = System::Drawing::Color::FromArgb(30, 61, 54);
+			   // 1. PALETA DE COLORES (Menta/Bosque)
+			   System::Drawing::Color colorFondo = System::Drawing::Color::FromArgb(246, 251, 248);
+			   System::Drawing::Color colorPanel = System::Drawing::Color::FromArgb(236, 246, 240);
+			   System::Drawing::Color colorBtn = System::Drawing::Color::FromArgb(46, 143, 77); // Verde Bosque
+			   System::Drawing::Color colorTexto = System::Drawing::Color::FromArgb(22, 53, 45);
+			   System::Drawing::Color colorLineas = System::Drawing::Color::FromArgb(183, 220, 200);
 
-			   this->Font = gcnew System::Drawing::Font(L"Bahnschrift", 10, FontStyle::Regular);
-			   this->ForeColor = System::Drawing::Color::FromArgb(242, 242, 242);
+			   // 2. FUENTES (Tamaños estándar, nada gigante)
+			   System::Drawing::Font^ fontLabel = gcnew System::Drawing::Font("Microsoft Tai Le", 9, FontStyle::Bold);
+			   System::Drawing::Font^ fontNormal = gcnew System::Drawing::Font("Microsoft Sans Serif", 9, FontStyle::Regular);
+			   System::Drawing::Font^ fontGridHead = gcnew System::Drawing::Font("Segoe UI Semibold", 9);
 
-			   array<TextBox^>^ textos = { this->textBox1, this->textBox2 };
-			   for each (TextBox ^ t in textos) {
-				   t->BackColor = System::Drawing::Color::FromArgb(60, 110, 95);
-				   t->ForeColor = System::Drawing::Color::White;
-				   t->BorderStyle = BorderStyle::FixedSingle;
-				   t->Font = gcnew System::Drawing::Font(L"Bahnschrift", 10);
-			   }
+			   // 3. CONFIGURACIÓN DEL FORMULARIO
+			   this->BackColor = colorFondo;
+			   this->Text = "Transferencia de Insumos";
+			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			   this->MaximizeBox = false;
+			   // Ajustamos el tamaño para que todo entre cómodo pero sin sobrar mucho espacio
+			   this->ClientSize = System::Drawing::Size(920, 500);
 
-			   this->button1->BackColor = System::Drawing::Color::FromArgb(123, 228, 149);
-			   this->button1->FlatStyle = FlatStyle::Flat;
-			   this->button1->FlatAppearance->BorderSize = 0;
-			   this->button1->ForeColor = System::Drawing::Color::Black;
-			   this->button1->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 10);
+			   // 4. RE-POSICIONAMIENTO ORDENADO (Manual layout para evitar desorden)
+			   // Lado Izquierdo (ORIGEN)
+			   int xIzq = 20;
+			   int yTop = 20;
 
+			   this->label1->Text = "Almacén Origen:";
+			   this->label1->Font = fontLabel;
+			   this->label1->ForeColor = colorTexto;
+			   this->label1->Location = System::Drawing::Point(xIzq, yTop);
 
-			   this->dataGridView1->BackgroundColor = System::Drawing::Color::FromArgb(45, 93, 80);
-			   this->dataGridView1->BorderStyle = BorderStyle::None;
-			   this->dataGridView1->GridColor = System::Drawing::Color::FromArgb(30, 61, 54);
-			   this->dataGridView1->EnableHeadersVisualStyles = false;
-			   this->dataGridView1->ColumnHeadersDefaultCellStyle->BackColor = System::Drawing::Color::FromArgb(30, 61, 54);
-			   this->dataGridView1->ColumnHeadersDefaultCellStyle->ForeColor = System::Drawing::Color::White;
-			   this->dataGridView1->DefaultCellStyle->BackColor = System::Drawing::Color::FromArgb(60, 110, 95);
-			   this->dataGridView1->DefaultCellStyle->ForeColor = System::Drawing::Color::White;
-			   this->dataGridView1->DefaultCellStyle->SelectionBackColor = System::Drawing::Color::FromArgb(123, 228, 149);
-			   this->dataGridView1->DefaultCellStyle->SelectionForeColor = System::Drawing::Color::Black;
+			   this->comboBox1->Location = System::Drawing::Point(xIzq, yTop + 25);
+			   this->comboBox1->Size = System::Drawing::Size(220, 23);
+			   this->comboBox1->Font = fontNormal;
 
-			   array<Button^>^ botones = { this->button2, this->button3, this->button1, this->button4};
-			   for each (Button ^ b in botones) {
-				   b->BackColor = System::Drawing::Color::FromArgb(123, 228, 149);
-				   b->FlatStyle = FlatStyle::Flat;
-				   b->FlatAppearance->BorderSize = 0;
-				   b->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 10);
-				   b->ForeColor = System::Drawing::Color::Black;
-				   b->Cursor = Cursors::Hand;
-			   }
+			   this->button3->Text = "Cargar";
+			   this->button3->Location = System::Drawing::Point(xIzq + 230, yTop + 24); // Al lado del combo
+			   this->button3->Size = System::Drawing::Size(80, 25);
+			   EstilarBoton(this->button3, colorBtn, fontLabel);
 
-			   // 🏷️ Etiquetas
-			   array<Label^>^ labels = { this->label1 };
-			   for each (Label ^ l in labels) {
-				   l->ForeColor = System::Drawing::Color::White;
-				   l->Font = gcnew System::Drawing::Font(L"Bahnschrift", 10);
-			   }
+			   this->dataGridView1->Location = System::Drawing::Point(xIzq, yTop + 60);
+			   this->dataGridView1->Size = System::Drawing::Size(380, 380);
+			   EstilarGrillaCompacta(this->dataGridView1, colorPanel, colorTexto, colorLineas, fontGridHead, fontNormal);
 
-			   // 📏 Config general
-			   this->Text = L"AgroRobot - Mantenimiento de Roles";
-			   this->StartPosition = FormStartPosition::CenterScreen;
+			   // Lado Derecho (DESTINO)
+			   int xDer = 520; // Dejamos espacio en el medio
+
+			   this->label2->Text = "Almacén Destino:";
+			   this->label2->Font = fontLabel;
+			   this->label2->ForeColor = colorTexto;
+			   this->label2->Location = System::Drawing::Point(xDer, yTop);
+
+			   this->textBox2->Location = System::Drawing::Point(xDer, yTop + 25);
+			   this->textBox2->Size = System::Drawing::Size(220, 23);
+			   this->textBox2->Font = fontNormal;
+			   this->textBox2->BackColor = System::Drawing::Color::FromArgb(235, 235, 235); // Gris suave para indicar ReadOnly
+
+			   this->button4->Text = "Refrescar";
+			   this->button4->Location = System::Drawing::Point(xDer + 230, yTop + 24);
+			   this->button4->Size = System::Drawing::Size(80, 25);
+			   EstilarBoton(this->button4, colorBtn, fontLabel);
+
+			   this->dataGridView2->Location = System::Drawing::Point(xDer, yTop + 60);
+			   this->dataGridView2->Size = System::Drawing::Size(380, 380);
+			   EstilarGrillaCompacta(this->dataGridView2, colorPanel, colorTexto, colorLineas, fontGridHead, fontNormal);
+
+			   // Centro (ACCIONES)
+			   int xCentro = 410;
+			   int yCentro = 200;
+
+			   this->label3->Text = "Cantidad:";
+			   this->label3->Font = fontLabel;
+			   this->label3->ForeColor = colorTexto;
+			   this->label3->Location = System::Drawing::Point(xCentro + 15, yCentro);
+			   this->label3->AutoSize = true;
+
+			   this->textBox1->Location = System::Drawing::Point(xCentro + 10, yCentro + 25);
+			   this->textBox1->Size = System::Drawing::Size(90, 23);
+			   this->textBox1->Font = fontNormal;
+			   this->textBox1->TextAlign = HorizontalAlignment::Center;
+
+			   this->button1->Text = "Añadir  >>";
+			   this->button1->Location = System::Drawing::Point(xCentro + 10, yCentro + 60);
+			   this->button1->Size = System::Drawing::Size(90, 35);
+			   EstilarBoton(this->button1, colorBtn, fontLabel);
+		   }
+
+		   // Helpers compactos
+		   void EstilarBoton(Button^ btn, Color back, System::Drawing::Font^ font) {
+			   btn->BackColor = back;
+			   btn->ForeColor = Color::White;
+			   btn->FlatStyle = FlatStyle::Flat;
+			   btn->FlatAppearance->BorderSize = 0;
+			   btn->Font = font;
+			   btn->Cursor = Cursors::Hand;
+		   }
+
+		   void EstilarGrillaCompacta(DataGridView^ dgv, Color headBack, Color fore, Color line, System::Drawing::Font^ fHead, System::Drawing::Font^ fCell) {
+			   dgv->BackgroundColor = Color::White;
+			   dgv->BorderStyle = BorderStyle::FixedSingle; // Borde fino
+			   dgv->CellBorderStyle = DataGridViewCellBorderStyle::SingleHorizontal;
+			   dgv->GridColor = line;
+			   dgv->EnableHeadersVisualStyles = false;
+
+			   // Header Compacto
+			   dgv->ColumnHeadersHeight = 30; // Altura reducida
+			   dgv->ColumnHeadersDefaultCellStyle->BackColor = headBack;
+			   dgv->ColumnHeadersDefaultCellStyle->ForeColor = fore;
+			   dgv->ColumnHeadersDefaultCellStyle->Font = fHead;
+			   dgv->ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle::Single;
+
+			   // Celdas Compactas
+			   dgv->RowTemplate->Height = 24; // Altura estándar de Excel/Windows
+			   dgv->DefaultCellStyle->Font = fCell;
+			   dgv->DefaultCellStyle->ForeColor = fore;
+			   dgv->DefaultCellStyle->SelectionBackColor = Color::LightGreen;
+			   dgv->DefaultCellStyle->SelectionForeColor = fore;
+
+			   dgv->RowHeadersVisible = false;
+			   dgv->SelectionMode = DataGridViewSelectionMode::FullRowSelect;
 		   }
 
 	private:
-		/// <summary>
-		/// Variable del diseñador necesaria.
-		/// </summary>
 		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Método necesario para admitir el Diseñador. No se puede modificar
-		/// el contenido de este método con el editor de código.
-		/// </summary>
 		void InitializeComponent(void)
 		{
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
@@ -406,10 +466,8 @@ namespace AgroRobotView {
 		}
 #pragma endregion
 
-		//Mostrar todos los nombres de los almacenes existentes
 	private: System::Void comboBox1_DropDown(System::Object^ sender, System::EventArgs^ e)
 	{
-		//Cargar los nombres de los almacenes en el comboBox
 		comboBox1->Items->Clear();
 		AlmacenController^ almacenCtrl = gcnew AlmacenController();
 		List<String^>^ nombres = almacenCtrl->obtenerNombresAlmacenes();
@@ -417,19 +475,7 @@ namespace AgroRobotView {
 			comboBox1->Items->Add(nombre);
 		}
 	}
-		   //Mostrar los insumos del almacén seleccionado al cerrar el comboBox
-	/*private: System::Void comboBox1_DropDownClosed(System::Object^ sender, System::EventArgs^ e)
-	{
-		String^ nombreAlmacen = comboBox1->Text;
-		AlmacenController^ aCtrl = gcnew AlmacenController();
-		Almacen^ almacen = aCtrl->obtenerAlmacenPorNombre(nombreAlmacen);
-		if (almacen != nullptr) {
-			StockInsumoController^ sCtrl = gcnew StockInsumoController();
-			List<StockInsumo^>^ listaStockInsumos = sCtrl->buscarPorIdAlmacen(almacen->Id);
-			mostrarGrilla(listaStockInsumos);
-		}
-	}*/
-	//Mostrar la grilla de insumos del almacén seleccionado
+
 	private: System::Void mostrarGrilla1(List<StockInsumo^>^ lista)
 	{
 		dataGridView1->Rows->Clear();
@@ -458,7 +504,7 @@ namespace AgroRobotView {
 			);
 		}
 	}
-		   //Acción al presionar el boton de buscar
+
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		String^ nombreAlmacen = comboBox1->Text;
@@ -470,7 +516,7 @@ namespace AgroRobotView {
 			mostrarGrilla1(listaStockInsumos);
 		}
 	}
-		   //Mostrar nombre y grilla del almacén destino al cargar el formulario
+
 	private: System::Void frmAgregarInsumoToAlmacen_Load(System::Object^ sender, System::EventArgs^ e)
 	{
 		AlmacenController^ aCtrl = gcnew AlmacenController();
@@ -481,38 +527,58 @@ namespace AgroRobotView {
 		List<StockInsumo^>^ listaStockInsumos = sCtrl->buscarPorIdAlmacen(this->idAlmacenDestino);
 		mostrarGrilla2(listaStockInsumos);
 	}
+
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e)
 	{
-		//Validar si existe el insumo en el almacén destino por nombre
 		if (dataGridView1->SelectedRows->Count > 0) {
 			StockInsumoController^ sCtrl = gcnew StockInsumoController();
-			//Obtener el insumo seleccionado del dataGridView1
 			int idStock = Convert::ToInt32(dataGridView1->SelectedRows[0]->Cells[0]->Value);
 			StockInsumo^ stockOrigen = sCtrl->buscarPorId(idStock);
-			//Verificar si el insumo ya existe en el almacén destino
-			//buscarPorIdInsumoYAlmacen
+
 			StockInsumo^ stockDestino = sCtrl->buscarPorIdInsumoYAlmacen(stockOrigen->Insumoo->Id, this->idAlmacenDestino);
+
 			if (stockDestino != nullptr) {
-				//Si existe, actualizar ambos stocks de acuerdo a la cantidad a transferir 
-				float cantidadATransferir = Convert::ToSingle(textBox1->Text);
+				float cantidadATransferir;
+				try {
+					cantidadATransferir = Convert::ToSingle(textBox1->Text);
+				}
+				catch (...) {
+					MessageBox::Show("Cantidad inválida", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					return;
+				}
+
+				if (stockOrigen->Stock < cantidadATransferir) {
+					MessageBox::Show("No hay suficiente stock en el almacén de origen.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+					return;
+				}
+
 				stockOrigen->Stock -= cantidadATransferir;
 				stockDestino->Stock += cantidadATransferir;
 				sCtrl->actualizarStockInsumo(stockOrigen);
 				sCtrl->actualizarStockInsumo(stockDestino);
-			} else {
-				//Si no existe, mostrar mensaje para agregar limites de stock minimo y maximo
-				MessageBox::Show("El insumo no existe en el almacén destino. Por favor, agregue los límites de stock mínimo y máximo en la siguiente ventana.", "Atención", MessageBoxButtons::OK, MessageBoxIcon::Information);
-				frmNuevoStock2^ frm = gcnew frmNuevoStock2(stockOrigen, this->idAlmacenDestino, Convert::ToSingle(textBox1->Text));
-				frm->ShowDialog();
 
+				button3_Click(nullptr, nullptr);
+				button4_Click(nullptr, nullptr);
+			}
+			else {
+				MessageBox::Show("El insumo no existe en el almacén destino. Por favor, agregue los límites de stock mínimo y máximo.", "Atención", MessageBoxButtons::OK, MessageBoxIcon::Information);
+
+				float cant = 0;
+				try { cant = Convert::ToSingle(textBox1->Text); }
+				catch (...) {}
+
+				frmNuevoStock2^ frm = gcnew frmNuevoStock2(stockOrigen, this->idAlmacenDestino, cant);
+				frm->ShowDialog();
+				button4_Click(nullptr, nullptr);
+				button3_Click(nullptr, nullptr);
 			}
 
-		} else {
+		}
+		else {
 			MessageBox::Show("Seleccione un insumo para agregar.", "Atención", MessageBoxButtons::OK, MessageBoxIcon::Warning);
 		}
-
 	}
-		   //Actualizar grilla del almacén destino
+
 	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		StockInsumoController^ sCtrl = gcnew StockInsumoController();
