@@ -210,138 +210,211 @@ namespace AgroRobotView {
 		   // ESTILO PROFESIONAL Y ESCALADO
 		   // =====================================================================
 		   void AplicarEstiloProfesional() {
-			   // 1. COLORES Y FUENTES
-			   System::Drawing::Color colorFondo = System::Drawing::Color::FromArgb(30, 61, 54);
-			   System::Drawing::Color colorPanel = System::Drawing::Color::FromArgb(45, 93, 80);
-			   System::Drawing::Color colorInput = System::Drawing::Color::FromArgb(60, 110, 95);
-			   System::Drawing::Color colorVerdeClaro = System::Drawing::Color::FromArgb(123, 228, 149);
-			   System::Drawing::Color colorTexto = System::Drawing::Color::FromArgb(242, 242, 242);
+			   // 1. PALETA DE COLORES
+			   System::Drawing::Color colorFondo = System::Drawing::Color::FromArgb(246, 251, 248); // Blanco Menta
+			   System::Drawing::Color colorPanel = System::Drawing::Color::FromArgb(236, 246, 240); // Menta Suave
+			   System::Drawing::Color colorVerdeOscuro = System::Drawing::Color::FromArgb(64, 106, 90); // Texto Títulos
+			   System::Drawing::Color colorTexto = System::Drawing::Color::FromArgb(22, 53, 45);      // Texto Normal
+			   System::Drawing::Color colorTextoClaro = System::Drawing::Color::FromArgb(64, 106, 90); // Texto Secundario/Labels
+			   System::Drawing::Color colorBotonPrimario = System::Drawing::Color::FromArgb(46, 143, 77); // Verde Esmeralda
+			   System::Drawing::Color colorBotonSecundario = System::Drawing::Color::FromArgb(236, 246, 240); // Menta Botón
+			   System::Drawing::Color colorBordeBoton = System::Drawing::Color::FromArgb(203, 233, 217);
+			   System::Drawing::Color colorEliminar = System::Drawing::Color::FromArgb(220, 53, 69); // Rojo para Eliminar
 
+			   // =========================================================
+			   // 2. FUENTES (AUMENTADAS)
+			   // =========================================================
+			   // Aumentar de 9 a 10.5
+			   System::Drawing::Font^ fuenteTitulo = gcnew System::Drawing::Font("Microsoft Tai Le", 10.5, FontStyle::Bold);
+			   // Aumentar de 8.25 a 9.75
+			   System::Drawing::Font^ fuenteLabel = gcnew System::Drawing::Font("Microsoft Tai Le", 9.75F, FontStyle::Bold);
+			   // Aumentar de 10 a 11
+			   System::Drawing::Font^ fuenteGridHeader = gcnew System::Drawing::Font("Segoe UI Semibold", 11);
+			   // Aumentar de 9 a 10
+			   System::Drawing::Font^ fuenteGridCell = gcnew System::Drawing::Font("Microsoft Sans Serif", 10);
+			   // Aumentar el botón Eliminar de 10 a 11
+			   System::Drawing::Font^ fuenteBotonEliminar = gcnew System::Drawing::Font(L"Microsoft Tai Le", 11, FontStyle::Bold);
+			   // 3. CONFIGURACIÓN FORMULARIO
 			   this->BackColor = colorFondo;
-			   this->ForeColor = colorTexto;
-			   this->Font = gcnew System::Drawing::Font(L"Bahnschrift", 11, FontStyle::Regular);
 			   this->StartPosition = FormStartPosition::CenterScreen;
+			   this->Text = "Gestión de Diagnósticos";
+			   int margenLateral = 30;
+			   int espaciadoY = 20;
 
-			   // =========================================================
-			   // 2. PANELES SUPERIORES (BÚSQUEDA Y NUEVO)
-			   // =========================================================
-			   int margenLateral = 20;
-			   int espacioEntreGrupos = 20;
-			   int yGrupos = 20;
-
-			   // Calcular anchos para que ocupen mitad y mitad (aprox)
-			   // Ancho total disponible menos márgenes
-			   int anchoTotal = this->ClientSize.Width - (margenLateral * 2) - espacioEntreGrupos;
-			   int anchoGrupo1 = anchoTotal * 0.6; // Búsqueda un poco más grande
-			   int anchoGrupo2 = anchoTotal * 0.4; // Nuevo Diagnóstico
-
-			   // GroupBox 1: Búsqueda
-			   this->groupBox1->Text = L"Criterio de Búsqueda";
-			   this->groupBox1->Font = gcnew System::Drawing::Font(L"Bahnschrift", 12, FontStyle::Bold);
-			   this->groupBox1->ForeColor = colorTexto;
+			   // 4. GROUP BOX (BÚSQUEDA)
 			   this->groupBox1->BackColor = colorPanel;
-			   this->groupBox1->Location = System::Drawing::Point(margenLateral, yGrupos);
-			   this->groupBox1->Width = anchoGrupo1;
-			   this->groupBox1->Height = 120; // Altura fija
-			   this->groupBox1->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left | AnchorStyles::Right); // Se estira
+			   this->groupBox1->ForeColor = colorVerdeOscuro;
+			   this->groupBox1->Font = fuenteTitulo;
+			   this->groupBox1->FlatStyle = FlatStyle::System; // Para que tome el color
+			   this->groupBox1->Location = System::Drawing::Point(margenLateral, espaciadoY);
+			   this->groupBox1->Location = System::Drawing::Point(margenLateral, 20);
+			   this->groupBox1->Height = 110;
+			   this->groupBox1->Width = 400;
+			   this->groupBox1->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left | AnchorStyles::Right);
 
-			   // GroupBox 2: Nuevo (Fijo a la derecha)
-			   this->groupBox2->Text = L"Nuevo Diagnóstico";
-			   this->groupBox2->Font = gcnew System::Drawing::Font(L"Bahnschrift", 12, FontStyle::Bold);
-			   this->groupBox2->ForeColor = colorTexto;
-			   this->groupBox2->BackColor = colorPanel;
-			   // Truco: Lo ponemos a la derecha y lo anclamos a la derecha
-			   this->groupBox2->Width = anchoGrupo2;
-			   this->groupBox2->Height = 120;
-			   this->groupBox2->Location = System::Drawing::Point(this->ClientSize.Width - margenLateral - anchoGrupo2, yGrupos);
-			   this->groupBox2->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Right);
+			   // Controles dentro del GroupBox
+			   array<Label^>^ labels = { label1, label2 };
+			   for each (Label ^ l in labels) {
+				   l->Font = fuenteLabel;
+				   l->ForeColor = colorVerdeOscuro;
+			   }
 
-			   // --- CENTRAR CONTROLES INTERNOS (GB1) ---
-			   // Label + TextBox + BtnBuscar
-			   this->label1->Location = System::Drawing::Point(20, 40);
-			   this->label1->ForeColor = System::Drawing::Color::White;
+			   // Configuración de TextBox para entrada de texto
+			   textBox1->BorderStyle = BorderStyle::FixedSingle;
+			   textBox1->BackColor = System::Drawing::Color::White;
+			   textBox1->ForeColor = colorVerdeOscuro;
 
-			   this->textBox1->Location = System::Drawing::Point(90, 37);
-			   this->textBox1->Width = 150;
-			   this->textBox1->BackColor = colorInput;
-			   this->textBox1->ForeColor = System::Drawing::Color::White;
-			   this->textBox1->BorderStyle = BorderStyle::FixedSingle;
+			   // Centrado de controles en GroupBox1
+			   int yControl = 45;
+			   label1->Location = Point(20, yControl + 4);
+			   textBox1->Location = Point(80, yControl); textBox1->Width = 120;
 
-			   this->button1->Location = System::Drawing::Point(260, 35);
-			   this->button1->Size = System::Drawing::Size(90, 30);
-			   this->button1->BackColor = colorVerdeClaro;
-			   this->button1->ForeColor = System::Drawing::Color::Black;
+			   // Botón Buscar (Primario)
+			   this->button1->BackColor = colorBotonPrimario;
+			   this->button1->ForeColor = System::Drawing::Color::White;
 			   this->button1->FlatStyle = FlatStyle::Flat;
 			   this->button1->FlatAppearance->BorderSize = 0;
+			   this->button1->Font = fuenteTitulo;
 			   this->button1->Cursor = Cursors::Hand;
-			   this->button1->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 10);
+			   button1->Location = Point(220, yControl - 5); button1->Width = 75;
 
-			   this->button4->Location = System::Drawing::Point(260, 75); // Limpiar debajo de Buscar
-			   this->button4->Size = System::Drawing::Size(90, 30);
-			   this->button4->BackColor = colorVerdeClaro;
-			   this->button4->ForeColor = System::Drawing::Color::Black;
+			   // Botón Limpiar (Secundario pero en panel claro)
+			   this->button4->BackColor = System::Drawing::Color::White; // Contraste sobre el panel menta
+			   this->button4->ForeColor = colorVerdeOscuro;
 			   this->button4->FlatStyle = FlatStyle::Flat;
-			   this->button4->FlatAppearance->BorderSize = 0;
+			   this->button4->FlatAppearance->BorderColor = colorBordeBoton;
+			   this->button4->FlatAppearance->BorderSize = 1;
+			   this->button4->Font = fuenteTitulo;
 			   this->button4->Cursor = Cursors::Hand;
-			   this->button4->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 10);
+			   this->button4->Location = Point(305, yControl - 5); button4->Width = 75;
 
-			   // --- CENTRAR CONTROLES INTERNOS (GB2) ---
-			   this->label2->Location = System::Drawing::Point(20, 40);
-			   this->label2->ForeColor = System::Drawing::Color::White;
-
-			   this->comboBox1->Location = System::Drawing::Point(90, 37);
-			   this->comboBox1->Width = 120;
-			   this->comboBox1->BackColor = colorInput;
-			   this->comboBox1->ForeColor = System::Drawing::Color::White;
-			   this->comboBox1->FlatStyle = FlatStyle::Flat;
-
-			   this->button2->Location = System::Drawing::Point(90, 75);
-			   this->button2->Size = System::Drawing::Size(120, 30);
-			   this->button2->BackColor = colorVerdeClaro;
-			   this->button2->ForeColor = System::Drawing::Color::Black;
+			   /*/ Botón Generar (Secundario pero en panel claro)
+			   this->button2->BackColor = System::Drawing::Color::White; // Para que tenga el mismo dieño que el botón Limpiar
+			   this->button2->ForeColor = colorVerdeOscuro;
 			   this->button2->FlatStyle = FlatStyle::Flat;
-			   this->button2->FlatAppearance->BorderSize = 0;
-			   this->button2->Cursor = Cursors::Hand;
-			   this->button2->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 10);
+			   this->button2->FlatAppearance->BorderColor = colorBordeBoton;
+			   this->button2->Font = fuenteTitulo;
+			   this->button2->Cursor = Cursors::Hand;*/
 
 			   // =========================================================
-			   // 3. GRILLA (CENTRAL)
+			   // 5. GROUP BOX: NUEVO DIAGNÓSTICO
+			   // Asumo que tu GroupBox2 es 'Nuevo Diagnóstico' (Necesitarás agregarlo al formulario)
 			   // =========================================================
-			   int yGrilla = this->groupBox1->Bottom + 20;
-			   int espacioBotonAbajo = 60;
+			   this->groupBox2->Text = "Nuevo Diagnóstico";
+			   this->groupBox2->BackColor = colorPanel;
+			   this->groupBox2->ForeColor = colorVerdeOscuro;
+			   this->groupBox2->Font = fuenteTitulo;
+			   this->groupBox2->Location = System::Drawing::Point(groupBox1->Right + margenLateral, espaciadoY);
+			   this->groupBox2->Height = 110;
+			   this->groupBox2->Width = 350; // Ancho fijo para Nuevo Diagnóstico
+			   this->groupBox2->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left);
 
-			   this->dataGridView1->Location = System::Drawing::Point(margenLateral, yGrilla);
-			   this->dataGridView1->Width = this->ClientSize.Width - (margenLateral * 2);
-			   this->dataGridView1->Height = this->ClientSize.Height - yGrilla - espacioBotonAbajo;
-			   this->dataGridView1->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right);
+			   // Controles de Nuevo Diagnóstico
+			   // Asumo que 'label3' es 'Especie' y 'comboBox2' es el control de selección
+			   label2->Text = "Especie:";
+			   label2->Font = fuenteLabel;
+			   label2->ForeColor = colorTextoClaro;
 
-			   // Estilo Grilla
-			   this->dataGridView1->BackgroundColor = colorPanel;
-			   this->dataGridView1->BorderStyle = BorderStyle::None;
-			   this->dataGridView1->EnableHeadersVisualStyles = false;
-			   this->dataGridView1->ColumnHeadersHeight = 35;
-			   this->dataGridView1->RowTemplate->Height = 30;
-			   this->dataGridView1->ColumnHeadersDefaultCellStyle->BackColor = colorFondo;
-			   this->dataGridView1->ColumnHeadersDefaultCellStyle->ForeColor = System::Drawing::Color::White;
-			   this->dataGridView1->ColumnHeadersDefaultCellStyle->Font = gcnew System::Drawing::Font(L"Bahnschrift", 11, FontStyle::Bold);
-			   this->dataGridView1->DefaultCellStyle->BackColor = colorInput;
-			   this->dataGridView1->DefaultCellStyle->ForeColor = System::Drawing::Color::White;
-			   this->dataGridView1->DefaultCellStyle->SelectionBackColor = colorVerdeClaro;
-			   this->dataGridView1->DefaultCellStyle->SelectionForeColor = System::Drawing::Color::Black;
-			   this->dataGridView1->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::Fill;
+			   // Configuración de ComboBox (Dropdown)
+			   comboBox1->FlatStyle = FlatStyle::Flat;
+			   comboBox1->BackColor = System::Drawing::Color::White;
+			   comboBox1->ForeColor = colorVerdeOscuro;
+
+			   // Centrado de controles en GroupBox2
+			   label2->Location = Point(20, yControl + 4);
+			   comboBox1->Location = Point(80, yControl); comboBox1->Width = 120;
+
+			   button2->Text = "Generar";
+			   button2->BackColor = colorBotonPrimario;
+			   button2->ForeColor = System::Drawing::Color::White;
+			   button2->FlatStyle = FlatStyle::Flat;
+			   button2->FlatAppearance->BorderSize = 0;
+			   button2->Font = fuenteTitulo;
+			   button2->Cursor = Cursors::Hand;
+			   button2->Location = Point(220, yControl - 5); button2->Width = 100;
+
+			   /*/ Centrar controles dentro del GroupBox (Cálculo)
+			   int startX = (this->groupBox1->Width - (50 + 130 + 30 + 50 + 130 + 30 + 100 + 20 + 120)) / 2;
+			   if (startX < 10) startX = 10;
+			   int yControl = 45;
+
+			   label1->Location = Point(startX, yControl + 4);
+			   textBox1->Location = Point(startX + 60, yControl); textBox1->Width = 130;
+
+			   label2->Location = Point(startX + 210, yControl + 4);
+			   comboBox1->Location = Point(startX + 270, yControl); comboBox1->Width = 130;
+
+			   button1->Location = Point(startX + 430, yControl - 5);
+			   button4->Location = Point(startX + 550, yControl - 5);*/
+
+			   // 5. GRILLA (DATAGRIDVIEW)
+			   int yGrilla = System::Math::Max(groupBox1->Bottom, groupBox2->Bottom) + espaciadoY;
+			   int hFooter = 70;
+
+			   dataGridView1->Location = Point(margenLateral, yGrilla);
+			   dataGridView1->Width = this->ClientSize.Width - (margenLateral * 2);
+			   dataGridView1->Height = this->ClientSize.Height - yGrilla - hFooter;
+			   dataGridView1->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right);
+
+			   // Estilo Visual Grilla
+			   dataGridView1->BackgroundColor = System::Drawing::Color::White;
+			   dataGridView1->BorderStyle = BorderStyle::FixedSingle; // Un borde sutil
+			   dataGridView1->CellBorderStyle = DataGridViewCellBorderStyle::SingleHorizontal;
+			   dataGridView1->EnableHeadersVisualStyles = false;
+			   dataGridView1->GridColor = System::Drawing::Color::FromArgb(220, 235, 230); // Líneas verdes muy suaves
+
+			   // Cabecera
+			   dataGridView1->ColumnHeadersDefaultCellStyle->BackColor = colorPanel; // Menta suave
+			   dataGridView1->ColumnHeadersDefaultCellStyle->ForeColor = colorVerdeOscuro;
+			   dataGridView1->ColumnHeadersDefaultCellStyle->Font = fuenteGridHeader;
+			   dataGridView1->ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle::None; // Borde none para un look más moderno
+			   dataGridView1->ColumnHeadersHeight = 45;
+
+			   // Filas
+			   dataGridView1->DefaultCellStyle->BackColor = System::Drawing::Color::White;
+			   dataGridView1->DefaultCellStyle->ForeColor = colorVerdeOscuro;
+			   dataGridView1->DefaultCellStyle->SelectionBackColor = System::Drawing::Color::FromArgb(183, 220, 200); // Verde suave en selección
+			   dataGridView1->DefaultCellStyle->SelectionForeColor = colorVerdeOscuro;
+			   dataGridView1->DefaultCellStyle->Font = fuenteGridCell;
+			   dataGridView1->RowTemplate->Height = 40;
+			   dataGridView1->AlternatingRowsDefaultCellStyle->BackColor = System::Drawing::Color::FromArgb(248, 252, 250); // Alternado muy sutil
+
+			   dataGridView1->RowHeadersVisible = false;
+			   dataGridView1->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::Fill;
+
+			   // 6. BOTONES INFERIORES (CRUD - Secundarios)
+			   /*int yBotones = this->ClientSize.Height - 55;
+			   array<Button^>^ botonesCRUD = { button2 };
+			   int xBtn = margenLateral;
+
+			   /*for each (Button ^ btn in botonesCRUD) {
+				   btn->BackColor = colorBotonSecundario;
+				   btn->ForeColor = colorVerdeOscuro;
+				   btn->FlatStyle = FlatStyle::Flat;
+				   btn->FlatAppearance->BorderColor = colorBordeBoton;
+				   btn->Font = fuenteTitulo;
+				   btn->Cursor = Cursors::Hand;
+				   btn->Height = 39; // Altura estándar del diseño
+
+				   btn->Location = Point(xBtn, yBotones);
+				   btn->Anchor = static_cast<AnchorStyles>(AnchorStyles::Bottom | AnchorStyles::Left);
+
+				   xBtn += btn->Width + 15;
+			   }*/
 
 			   // =========================================================
 			   // 4. BOTÓN ELIMINAR (ABAJO IZQUIERDA)
 			   // =========================================================
-			   this->button3->Location = System::Drawing::Point(margenLateral, this->ClientSize.Height - 45);
-			   this->button3->Size = System::Drawing::Size(120, 35);
-			   this->button3->Anchor = static_cast<AnchorStyles>(AnchorStyles::Bottom | AnchorStyles::Left);
-			   this->button3->BackColor = System::Drawing::Color::FromArgb(220, 53, 69); // Rojo para eliminar
-			   this->button3->ForeColor = System::Drawing::Color::White;
-			   this->button3->FlatStyle = FlatStyle::Flat;
-			   this->button3->FlatAppearance->BorderSize = 0;
-			   this->button3->Cursor = Cursors::Hand;
-			   this->button3->Font = gcnew System::Drawing::Font(L"Bahnschrift SemiBold", 10);
+			   button3->Text = "Eliminar Diagnóstico";
+			   button3->Location = System::Drawing::Point(margenLateral, this->ClientSize.Height - 50);
+			   button3->Size = System::Drawing::Size(200, 40);
+			   button3->Anchor = static_cast<AnchorStyles>(AnchorStyles::Bottom | AnchorStyles::Left);
+			   button3->BackColor = colorEliminar; // Rojo de advertencia
+			   button3->ForeColor = System::Drawing::Color::White;
+			   button3->FlatStyle = FlatStyle::Flat;
+			   button3->FlatAppearance->BorderSize = 0;
+			   button3->Cursor = Cursors::Hand;
+			   button3->Font = gcnew System::Drawing::Font(L"Microsoft Tai Le", 10, FontStyle::Bold);
 		   }
 
 	private: void cargarAnimalesSinDiagnostico() {

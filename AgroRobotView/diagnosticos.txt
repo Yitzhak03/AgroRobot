@@ -1,6 +1,2 @@
-1;1;Vaca;Sí;Sí;Enfermo;Atención urgente
-2;2;Pollo;No;Sí;En observación;Sangre contaminada
-3;3;Cerdo;Sí;No;En observación;Parásitos detectados
-4;4;Oveja;Sí;No;En observación;Parásitos detectados
-5;5;Cabra;No;Sí;En observación;Sangre contaminada
-6;6;Pato;No;No;Saludable;Sin problemas
+1;3;Cerdo;Sí;No;En observación;Parásitos detectados
+2;1;Vaca;Sí;Sí;Enfermo;Atención urgente
