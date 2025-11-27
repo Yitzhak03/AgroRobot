@@ -1,2 +1,1 @@
-1;3;Cerdo;Sí;No;En observación;Parásitos detectados
-2;1;Vaca;Sí;Sí;Enfermo;Atención urgente
+1;2;Pollo;No;Sí;En observación;Sangre contaminada

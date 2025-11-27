@@ -20,10 +20,8 @@ namespace AgroRobotView {
 		frmNuevoAlmacen(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: agregar código de constructor aquí
-			//
-			aplicarEstilo();
+			// Aplicar el diseño Menta/Bosque al iniciar
+			AplicarEstiloProfesional();
 		}
 
 	protected:
@@ -46,51 +44,89 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::TextBox^ textBox3;
-	private: void aplicarEstilo()
+
+		   // ===================================================================================
+		   // MÉTODO DE ESTILO PROFESIONAL (MENTA/BOSQUE - VERSIÓN DIÁLOGO)
+		   // ===================================================================================
+	private: void AplicarEstiloProfesional()
 	{
-		System::Drawing::Font^ fuenteGeneral = gcnew System::Drawing::Font("Segoe UI", 10, FontStyle::Regular);
-		System::Drawing::Font^ fuenteNegrita = gcnew System::Drawing::Font("Segoe UI Semibold", 10, FontStyle::Bold);
+		// 1. PALETA DE COLORES
+		System::Drawing::Color colorFondo = System::Drawing::Color::FromArgb(246, 251, 248);   // Menta Pálido
+		System::Drawing::Color colorPanel = System::Drawing::Color::FromArgb(236, 246, 240);   // Menta Crema
+		System::Drawing::Color colorBtnPrimario = System::Drawing::Color::FromArgb(46, 143, 77); // Verde Bosque
+		System::Drawing::Color colorBtnCancelar = System::Drawing::Color::FromArgb(220, 220, 220); // Gris claro
+		System::Drawing::Color colorTextoMain = System::Drawing::Color::FromArgb(22, 53, 45);    // Verde Petróleo
+		System::Drawing::Color colorTextoSec = System::Drawing::Color::FromArgb(64, 106, 90);    // Verde Azulado
 
-		this->BackColor = System::Drawing::Color::FromArgb(232, 245, 233);
-		this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+		// 2. FUENTES (Explícitas)
+		System::Drawing::Font^ fontTitulo = gcnew System::Drawing::Font("Microsoft Tai Le", 10, FontStyle::Bold);
+		System::Drawing::Font^ fontCuerpo = gcnew System::Drawing::Font("Microsoft Tai Le", 9, FontStyle::Regular);
+		System::Drawing::Font^ fontLabel = gcnew System::Drawing::Font("Microsoft Tai Le", 9, FontStyle::Bold);
+
+		// 3. CONFIGURACIÓN VENTANA
+		this->BackColor = colorFondo;
+		this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog; // Ventana fija
 		this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-		this->Text = L"Registrar nueva dieta";
+		this->MaximizeBox = false;
+		this->MinimizeBox = false;
+		this->Text = L"Registrar Nuevo Almacén";
 
-		array<GroupBox^>^ grupos = { groupBox1 };
-		for each (GroupBox ^ g in grupos)
-		{
-			g->BackColor = System::Drawing::Color::FromArgb(240, 250, 240);
-			g->Font = fuenteNegrita;
-			g->ForeColor = System::Drawing::Color::FromArgb(45, 85, 45);
-		}
+		// 4. GROUPBOX
+		this->groupBox1->BackColor = colorPanel;
+		this->groupBox1->Font = fontTitulo;
+		this->groupBox1->ForeColor = colorTextoSec;
 
+		// Centrado visual del GroupBox
+		this->groupBox1->Left = (this->ClientSize.Width - this->groupBox1->Width) / 2;
+		this->groupBox1->Top = (this->ClientSize.Height - this->groupBox1->Height) / 2;
+
+		// 5. ETIQUETAS (LABELS)
 		array<Label^>^ etiquetas = { this->label1, this->label2, this->label6 };
 		for each (Label ^ lbl in etiquetas)
 		{
-			lbl->Font = fuenteGeneral;
-			lbl->ForeColor = System::Drawing::Color::FromArgb(35, 75, 45);
+			lbl->Font = fontLabel;
+			lbl->ForeColor = colorTextoMain;
 		}
 
-		array<TextBox^>^ textos = { textBox1, textBox2, textBox3};
+		// 6. CAJAS DE TEXTO
+		array<TextBox^>^ textos = { textBox1, textBox2, textBox3 };
 		for each (TextBox ^ t in textos)
 		{
-			t->Font = fuenteGeneral;
+			t->Font = fontCuerpo;
 			t->BackColor = System::Drawing::Color::White;
-			t->ForeColor = System::Drawing::Color::FromArgb(30, 70, 40);
+			t->ForeColor = System::Drawing::Color::Black;
 			t->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 		}
+		// ID ReadOnly visual
+		this->textBox1->BackColor = System::Drawing::Color::FromArgb(240, 240, 240);
 
-		array<Button^>^ botones = { button1, button2 };
-		for each (Button ^ b in botones)
-		{
-			b->FlatStyle = FlatStyle::Flat;
-			b->FlatAppearance->BorderSize = 0;
-			b->BackColor = System::Drawing::Color::FromArgb(183, 223, 185);
-			b->ForeColor = System::Drawing::Color::FromArgb(20, 60, 30);
-			b->Font = fuenteNegrita;
-			b->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(153, 203, 155);
-		}
+		// 7. BOTONES
+		// Botón Guardar (Primario)
+		EstilarBotonPrimario(this->button1, colorBtnPrimario, fontTitulo);
+
+		// Botón Cancelar (Secundario)
+		EstilarBotonSecundario(this->button2, colorBtnCancelar, System::Drawing::Color::Black, System::Drawing::Color::Gray, fontTitulo);
 	}
+
+		   // Helpers de Estilo
+		   void EstilarBotonPrimario(Button^ btn, Color backColor, System::Drawing::Font^ font) {
+			   btn->BackColor = backColor;
+			   btn->ForeColor = System::Drawing::Color::White;
+			   btn->FlatStyle = FlatStyle::Flat;
+			   btn->FlatAppearance->BorderSize = 0;
+			   btn->Font = font;
+			   btn->Cursor = Cursors::Hand;
+		   }
+
+		   void EstilarBotonSecundario(Button^ btn, Color backColor, Color foreColor, Color borderColor, System::Drawing::Font^ font) {
+			   btn->BackColor = backColor;
+			   btn->ForeColor = foreColor;
+			   btn->FlatStyle = FlatStyle::Flat;
+			   btn->FlatAppearance->BorderColor = borderColor;
+			   btn->FlatAppearance->BorderSize = 1;
+			   btn->Font = font;
+			   btn->Cursor = Cursors::Hand;
+		   }
 
 	private:
 		/// <summary>
@@ -245,17 +281,26 @@ namespace AgroRobotView {
 		   //========================================================================
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e)
 	{
+		// Validación básica
+		if (String::IsNullOrWhiteSpace(textBox2->Text) || String::IsNullOrWhiteSpace(textBox3->Text)) {
+			MessageBox::Show("Por favor complete todos los campos.", "Advertencia", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+			return;
+		}
+
 		Almacen^ nuevoAlmacen = gcnew Almacen();
 		AlmacenController^ aCtrl = gcnew AlmacenController();
+
 		//Asignar valores al nuevo almacén
 		nuevoAlmacen->Id = Convert::ToInt32(this->textBox1->Text);
 		nuevoAlmacen->Nombre = this->textBox2->Text;
 		nuevoAlmacen->Ubicacion = this->textBox3->Text;
+
 		//Guardar el nuevo almacén
 		aCtrl->agregarAlmacen(nuevoAlmacen);
-		this->Close();
+
 		//Mensaje de confirmación
 		MessageBox::Show("Almacén guardado correctamente.", "Confirmación", MessageBoxButtons::OK, MessageBoxIcon::Information);
+		this->Close();
 	}
-};
+	};
 }
