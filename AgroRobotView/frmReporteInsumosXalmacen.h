@@ -168,57 +168,74 @@ namespace AgroRobotView {
 		   //  ESTILO PROFESIONAL (CORREGIDO POSICIONES)
 		   // =========================================================
 	private: void AplicarEstiloProfesional() {
-		// 1. FUENTES
-		System::Drawing::Font^ fuenteBase = gcnew System::Drawing::Font("Segoe UI", 12, FontStyle::Regular);
-		System::Drawing::Font^ fuenteTitulo = gcnew System::Drawing::Font("Segoe UI", 20, FontStyle::Bold);
-		System::Drawing::Font^ fuenteSubtitulo = gcnew System::Drawing::Font("Segoe UI", 12, FontStyle::Italic);
-		System::Drawing::Font^ fuenteChart = gcnew System::Drawing::Font("Segoe UI", 10, FontStyle::Bold);
+		// ===================================================================================
+		// 1. PALETA DE COLORES "AGROROBOT"
+		// ===================================================================================
+		System::Drawing::Color colorFondo = System::Drawing::Color::FromArgb(246, 251, 248); // Menta Pálido
+		System::Drawing::Color colorBoton = System::Drawing::Color::FromArgb(46, 143, 77);   // Verde Bosque
+		System::Drawing::Color colorTextoMain = System::Drawing::Color::FromArgb(22, 53, 45); // Verde Petróleo (Títulos)
+		System::Drawing::Color colorTextoSec = System::Drawing::Color::FromArgb(64, 106, 90);  // Verde Azulado (Subtítulos/Ejes)
+		System::Drawing::Color colorGridLine = System::Drawing::Color::FromArgb(183, 220, 200); // Verde Agua (Líneas suaves)
 
-		// 2. COLORES
-		System::Drawing::Color colorFondo = System::Drawing::Color::FromArgb(238, 245, 233);
-		System::Drawing::Color colorVerde = System::Drawing::Color::FromArgb(67, 160, 71);
-		System::Drawing::Color colorTexto = System::Drawing::Color::FromArgb(30, 60, 30);
+		// ===================================================================================
+		// 2. FUENTES
+		// ===================================================================================
+		// Título Principal (Coincide con frmMantInsumo)
+		System::Drawing::Font^ fuenteTitulo = gcnew System::Drawing::Font("Microsoft Tai Le", 17, FontStyle::Bold);
+		// Subtítulo
+		System::Drawing::Font^ fuenteSubtitulo = gcnew System::Drawing::Font("Microsoft Tai Le", 10, FontStyle::Regular);
+		// Botón
+		System::Drawing::Font^ fuenteBoton = gcnew System::Drawing::Font("Microsoft Tai Le", 10, FontStyle::Bold);
+		// Textos del Gráfico (Ejes)
+		System::Drawing::Font^ fuenteChartAxis = gcnew System::Drawing::Font("Segoe UI Semibold", 9);
+		// Títulos de Ejes del Gráfico
+		System::Drawing::Font^ fuenteChartTitle = gcnew System::Drawing::Font("Microsoft Tai Le", 10, FontStyle::Bold);
 
-		// 3. VENTANA
+		// ===================================================================================
+		// 3. CONFIGURACIÓN VENTANA
+		// ===================================================================================
 		this->BackColor = colorFondo;
-		this->Font = fuenteBase;
 		this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 		this->AutoSize = false;
 		this->Dock = DockStyle::Fill;
 
-		// 4. ALINEACIÓN DE TEXTOS (CORRECCIÓN)
+		// ===================================================================================
+		// 4. ALINEACIÓN DE TEXTOS Y BOTONES
+		// ===================================================================================
 
-		// Título: Lo subimos bien arriba
-		this->label1->Top = 15;
+		// Título Principal
+		this->label1->Top = 20;
 		this->label1->Left = 28;
 		this->label1->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left);
-		this->label1->ForeColor = colorTexto;
+		this->label1->ForeColor = colorTextoMain; // Verde oscuro
 		this->label1->Font = fuenteTitulo;
 		this->label1->Text = "Insumos por Almacén";
 
-		// Subtítulo: Lo bajamos para separarlo del título grande
-		this->label2->Top = 65;
+		// Subtítulo (Detalle o descripción)
+		this->label2->Top = 55; // Ajustado para quedar justo debajo del título
 		this->label2->Left = 30;
 		this->label2->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left);
-		this->label2->ForeColor = colorTexto;
+		this->label2->ForeColor = colorTextoSec; // Verde azulado suave
 		this->label2->Font = fuenteSubtitulo;
 
-		// Botón Exportar: Alineado con el Título
-		this->btnExportar->Top = 15; // Misma altura que el título
-		this->btnExportar->Size = System::Drawing::Size(200, 45);
+		// Botón Exportar
+		this->btnExportar->Top = 20; // Alineado visualmente con el título
+		this->btnExportar->Size = System::Drawing::Size(160, 40); // Tamaño un poco más compacto
 		this->btnExportar->Left = this->ClientSize.Width - this->btnExportar->Width - 30;
 		this->btnExportar->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Right);
 
-		this->btnExportar->BackColor = colorVerde;
+		this->btnExportar->BackColor = colorBoton; // Verde Bosque
 		this->btnExportar->ForeColor = System::Drawing::Color::White;
 		this->btnExportar->FlatStyle = FlatStyle::Flat;
 		this->btnExportar->FlatAppearance->BorderSize = 0;
-		this->btnExportar->Font = gcnew System::Drawing::Font("Segoe UI", 12, FontStyle::Bold);
+		this->btnExportar->Font = fuenteBoton;
 		this->btnExportar->Cursor = Cursors::Hand;
 
-		// 5. GRÁFICO (CHART)
+		// ===================================================================================
+		// 5. ESTILIZACIÓN DEL GRÁFICO (CHART)
+		// ===================================================================================
 		int margen = 30;
-		this->chart1->Top = 100; // Suficiente espacio tras el subtítulo
+		this->chart1->Top = 100;
 		this->chart1->Left = margen;
 		this->chart1->Width = this->ClientSize.Width - (margen * 2);
 		this->chart1->Height = this->ClientSize.Height - this->chart1->Top - margen;
@@ -226,30 +243,48 @@ namespace AgroRobotView {
 		this->chart1->Anchor = static_cast<AnchorStyles>(
 			AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right);
 
-		this->chart1->BackColor = System::Drawing::Color::White;
+		// El fondo externo del chart sigue el color del formulario
+		this->chart1->BackColor = colorFondo;
 		this->chart1->BorderlineColor = System::Drawing::Color::Empty;
 
 		if (this->chart1->ChartAreas->Count > 0) {
 			System::Windows::Forms::DataVisualization::Charting::ChartArea^ area = this->chart1->ChartAreas[0];
+
+			// El área de dibujo (plot) en blanco para resaltar los datos (igual que la Grilla)
 			area->BackColor = System::Drawing::Color::White;
-			area->AxisX->LineColor = colorVerde;
-			area->AxisY->LineColor = colorVerde;
-			area->AxisX->MajorGrid->LineColor = System::Drawing::Color::FromArgb(240, 240, 240);
-			area->AxisY->MajorGrid->LineColor = System::Drawing::Color::FromArgb(240, 240, 240);
 
-			area->AxisX->LabelStyle->Font = fuenteChart;
-			area->AxisY->LabelStyle->Font = fuenteChart;
-			area->AxisX->LabelStyle->ForeColor = colorTexto;
-			area->AxisY->LabelStyle->ForeColor = colorTexto;
+			// Sombras suaves o bordes
+			area->BorderColor = colorGridLine;
+			area->BorderDashStyle = System::Windows::Forms::DataVisualization::Charting::ChartDashStyle::Solid;
+			area->BorderWidth = 1;
 
+			// Ejes X e Y (Líneas principales)
+			area->AxisX->LineColor = colorTextoSec;
+			area->AxisY->LineColor = colorTextoSec;
+
+			// Líneas de la cuadrícula (Grid) - Usamos el "Verde Agua" suave
+			area->AxisX->MajorGrid->LineColor = colorGridLine;
+			area->AxisY->MajorGrid->LineColor = colorGridLine;
+			area->AxisX->MajorGrid->LineDashStyle = System::Windows::Forms::DataVisualization::Charting::ChartDashStyle::Dot; // Punteado para sutileza
+			area->AxisY->MajorGrid->LineDashStyle = System::Windows::Forms::DataVisualization::Charting::ChartDashStyle::Dot;
+
+			// Etiquetas de los ejes (Números/Nombres)
+			area->AxisX->LabelStyle->Font = fuenteChartAxis;
+			area->AxisY->LabelStyle->Font = fuenteChartAxis;
+			area->AxisX->LabelStyle->ForeColor = colorTextoSec;
+			area->AxisY->LabelStyle->ForeColor = colorTextoSec;
+
+			// Títulos de los ejes
 			area->AxisX->Title = "Almacén";
-			area->AxisX->TitleFont = gcnew System::Drawing::Font("Segoe UI", 11, FontStyle::Bold);
-			area->AxisX->TitleForeColor = colorTexto;
+			area->AxisX->TitleFont = fuenteChartTitle;
+			area->AxisX->TitleForeColor = colorTextoMain;
+
 			area->AxisY->Title = "Cantidad";
-			area->AxisY->TitleFont = gcnew System::Drawing::Font("Segoe UI", 11, FontStyle::Bold);
-			area->AxisY->TitleForeColor = colorTexto;
+			area->AxisY->TitleFont = fuenteChartTitle;
+			area->AxisY->TitleForeColor = colorTextoMain;
 		}
 
+		// Leyenda (Opcional, desactivada según tu código original)
 		if (this->chart1->Legends->Count > 0) {
 			this->chart1->Legends[0]->Enabled = false;
 		}

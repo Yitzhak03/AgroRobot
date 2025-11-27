@@ -106,50 +106,107 @@ namespace AgroRobotView {
 		// APLICAR ESTILO Y ESCALADO (AQUÍ ESTÁ LA LÓGICA)
 		// =========================================================
 		void AplicarEstiloProfesional() {
-			// A) COLORES
-			System::Drawing::Color colorFondo = System::Drawing::Color::FromArgb(238, 245, 233);
-			System::Drawing::Color colorVerde = System::Drawing::Color::FromArgb(67, 160, 71);
-			System::Drawing::Color colorTexto = System::Drawing::Color::FromArgb(30, 60, 30);
+			// ===================================================================================
+			// A) DEFINICIÓN DE LA PALETA "AGROROBOT MENTA/BOSQUE"
+			// ===================================================================================
+			System::Drawing::Color colorFondo = System::Drawing::Color::FromArgb(246, 251, 248);   // Menta Pálido
+			System::Drawing::Color colorBoton = System::Drawing::Color::FromArgb(46, 143, 77);     // Verde Bosque
+			System::Drawing::Color colorTextoMain = System::Drawing::Color::FromArgb(22, 53, 45);   // Verde Petróleo
+			System::Drawing::Color colorTextoSec = System::Drawing::Color::FromArgb(64, 106, 90);    // Verde Azulado
+			System::Drawing::Color colorGridLine = System::Drawing::Color::FromArgb(183, 220, 200);   // Verde Agua
 
-			// B) CONFIGURACIÓN VENTANA PADRE (Para que llene el MDI)
+			// Fuentes estandarizadas
+			System::Drawing::Font^ fuenteTitulo = gcnew System::Drawing::Font("Microsoft Tai Le", 17, FontStyle::Bold);
+			System::Drawing::Font^ fuenteBoton = gcnew System::Drawing::Font("Microsoft Tai Le", 9, FontStyle::Bold);
+			System::Drawing::Font^ fuenteChartAxis = gcnew System::Drawing::Font("Segoe UI Semibold", 9);
+			System::Drawing::Font^ fuenteLegend = gcnew System::Drawing::Font("Microsoft Sans Serif", 9);
+
+			// ===================================================================================
+			// B) CONFIGURACIÓN VENTANA PADRE
+			// ===================================================================================
 			this->BackColor = colorFondo;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->AutoSize = false;
 			this->Dock = DockStyle::Fill;
 
+			// ===================================================================================
 			// C) CONTROLES FIJOS (Título y Botón)
-			this->label1->ForeColor = colorTexto;
+			// ===================================================================================
+
+			// 1. Título (Label1)
+			this->label1->ForeColor = colorTextoMain;
+			this->label1->Font = fuenteTitulo;
+			this->label1->Top = 20; // Espaciado superior estándar
+			this->label1->Left = 28;
 			this->label1->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left);
 
-			this->btnExportar->Left = this->ClientSize.Width - this->btnExportar->Width - 30; // Pegar derecha
-			this->btnExportar->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Right); // Mantener derecha
+			// 2. Botón Exportar
+			this->btnExportar->Size = System::Drawing::Size(160, 40); // Tamaño consistente con otras pantallas
+			this->btnExportar->Top = 20; // Alineado con el título
+			this->btnExportar->Left = this->ClientSize.Width - this->btnExportar->Width - 30;
+			this->btnExportar->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Right);
 
-			this->btnExportar->BackColor = colorVerde;
+			this->btnExportar->BackColor = colorBoton; // Verde Bosque exacto
 			this->btnExportar->ForeColor = System::Drawing::Color::White;
 			this->btnExportar->FlatStyle = FlatStyle::Flat;
 			this->btnExportar->FlatAppearance->BorderSize = 0;
-			this->btnExportar->Font = gcnew System::Drawing::Font("Segoe UI", 9, FontStyle::Bold);
+			this->btnExportar->Font = fuenteBoton;
 			this->btnExportar->Cursor = Cursors::Hand;
 
-			// D) ESCALADO DEL GRÁFICO (ESTA ES LA PARTE CLAVE)
+			// ===================================================================================
+			// D) ESCALADO Y ESTILO DEL GRÁFICO
+			// ===================================================================================
 			int margen = 30;
-			this->chart1->Top = 80;
+			this->chart1->Top = 80; // Espacio suficiente bajo el título
 			this->chart1->Left = margen;
 
-			// 1. Calculamos el tamaño inicial basado en la ventana actual
+			// 1. Calculamos tamaño inicial
 			this->chart1->Width = this->ClientSize.Width - (margen * 2);
 			this->chart1->Height = this->ClientSize.Height - this->chart1->Top - margen;
 
-			// 2. Aplicamos los 4 anclajes. Esto hace que el control contenedor se estire.
+			// 2. Anclajes (Logic original preservada)
 			this->chart1->Anchor = static_cast<AnchorStyles>(
 				AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right);
 
-			// Estilo limpio
-			this->chart1->BackColor = System::Drawing::Color::White;
-			this->chart1->BorderlineColor = System::Drawing::Color::Transparent;
+			// 3. Estilo Visual del Chart
+			// El fondo contenedor se funde con la ventana
+			this->chart1->BackColor = colorFondo;
+			this->chart1->BorderlineColor = System::Drawing::Color::Empty;
 
-			if (this->chart1->ChartAreas->Count > 0) this->chart1->ChartAreas[0]->BackColor = System::Drawing::Color::White;
-			if (this->chart1->Legends->Count > 0) this->chart1->Legends[0]->ForeColor = colorTexto;
+			// Configuración del Área del Gráfico (Plot Area)
+			if (this->chart1->ChartAreas->Count > 0) {
+				System::Windows::Forms::DataVisualization::Charting::ChartArea^ area = this->chart1->ChartAreas[0];
+
+				// Fondo blanco para resaltar los datos (Efecto papel)
+				area->BackColor = System::Drawing::Color::White;
+
+				// Bordes suaves del área
+				area->BorderColor = colorGridLine;
+				area->BorderDashStyle = System::Windows::Forms::DataVisualization::Charting::ChartDashStyle::Solid;
+
+				// Estilo de Ejes
+				area->AxisX->LabelStyle->ForeColor = colorTextoSec;
+				area->AxisX->LabelStyle->Font = fuenteChartAxis;
+				area->AxisX->LineColor = colorTextoSec;
+
+				area->AxisY->LabelStyle->ForeColor = colorTextoSec;
+				area->AxisY->LabelStyle->Font = fuenteChartAxis;
+				area->AxisY->LineColor = colorTextoSec;
+
+				// Estilo de la Grilla (Grid Lines) - Punteada y color suave
+				area->AxisX->MajorGrid->LineColor = colorGridLine;
+				area->AxisX->MajorGrid->LineDashStyle = System::Windows::Forms::DataVisualization::Charting::ChartDashStyle::Dot;
+
+				area->AxisY->MajorGrid->LineColor = colorGridLine;
+				area->AxisY->MajorGrid->LineDashStyle = System::Windows::Forms::DataVisualization::Charting::ChartDashStyle::Dot;
+			}
+
+			// Configuración de la Leyenda
+			if (this->chart1->Legends->Count > 0) {
+				this->chart1->Legends[0]->BackColor = colorFondo; // Se funde con el fondo
+				this->chart1->Legends[0]->ForeColor = colorTextoMain;
+				this->chart1->Legends[0]->Font = fuenteLegend;
+			}
 		}
 
 	private: System::Void frmReporteAlimentacion_Load(System::Object^ sender, System::EventArgs^ e) {

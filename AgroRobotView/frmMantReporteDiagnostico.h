@@ -558,83 +558,152 @@ namespace AgroRobotView {
 		// ESTILO PROFESIONAL (RESPETANDO PROPORCIONES ORIGINALES)
 		// =====================================================================
 		void AplicarEstiloProfesional() {
-			// 1. FUENTES (Sutilmente más grandes: 10pt)
-			System::Drawing::Font^ fuenteBase = gcnew System::Drawing::Font("Segoe UI", 10, FontStyle::Regular);
-			System::Drawing::Font^ fuenteBold = gcnew System::Drawing::Font("Segoe UI", 10, FontStyle::Bold);
+			// =========================================================
+			// 1. DEFINICIÓN DEL KIT DE DISEÑO "MENTA/BOSQUE"
+			// =========================================================
 
-			// 2. COLORES
-			System::Drawing::Color colorFondo = System::Drawing::Color::FromArgb(238, 245, 233);
-			System::Drawing::Color colorVerde = System::Drawing::Color::FromArgb(67, 160, 71);
-			System::Drawing::Color colorTexto = System::Drawing::Color::FromArgb(30, 60, 30);
+			// Fuentes
+			System::Drawing::Font^ fontTitulo = gcnew System::Drawing::Font("Microsoft Tai Le", 10, FontStyle::Bold);
+			System::Drawing::Font^ fontCuerpo = gcnew System::Drawing::Font("Microsoft Tai Le", 9, FontStyle::Regular);
+			System::Drawing::Font^ fontGridHeader = gcnew System::Drawing::Font("Segoe UI Semibold", 10);
+			System::Drawing::Font^ fontGridCell = gcnew System::Drawing::Font("Microsoft Sans Serif", 9);
 
-			// 3. VENTANA PRINCIPAL
+			// Paleta de Colores
+			System::Drawing::Color colorFondo = System::Drawing::Color::FromArgb(246, 251, 248);      // Blanco Menta (Fondo General)
+			System::Drawing::Color colorPanel = System::Drawing::Color::FromArgb(236, 246, 240);      // Menta Suave (Para GroupBoxes)
+			System::Drawing::Color colorTextoTitulo = System::Drawing::Color::FromArgb(64, 106, 90);  // Verde Petróleo (Títulos)
+			System::Drawing::Color colorTextoCuerpo = System::Drawing::Color::FromArgb(22, 53, 45);   // Verde Bosque (Texto General)
+
+			// Colores Botones
+			System::Drawing::Color colorBtnPrimario = System::Drawing::Color::FromArgb(46, 143, 77);  // Verde Esmeralda (Acción Principal)
+			System::Drawing::Color colorBtnSecundario = System::Drawing::Color::FromArgb(236, 246, 240);// Menta Pálido (Secundario)
+			System::Drawing::Color colorBordeBtn = System::Drawing::Color::FromArgb(203, 233, 217);   // Borde sutil
+
+			// =========================================================
+			// 2. CONFIGURACIÓN VENTANA PRINCIPAL
+			// =========================================================
 			this->BackColor = colorFondo;
-			this->Font = fuenteBase; // Esto ajusta la fuente base de todo el form a 10pt
+			this->Font = fontCuerpo;
+			this->ForeColor = colorTextoCuerpo;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->AutoSize = false;
 			this->Dock = DockStyle::Fill;
 
-			// 4. ANCLAJES (Para responsividad, sin mover posiciones iniciales)
-
-			// Paneles Izquierda (Se quedan fijos a la izquierda)
-			groupBox1->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left);
-			groupBox2->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left);
-			groupBox3->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left);
-
-			// TabControl (Se estira a la derecha y abajo)
-			tabControl1->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right);
-			// Grillas (Se estiran dentro del Tab)
-			dataGridEstadisticas->Dock = DockStyle::Fill;
-			dataGridDetalle->Dock = DockStyle::Fill;
-			// Gráficos (Responsive)
-			chartTipoAnalisis->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left | AnchorStyles::Right);
-			chartEstadoSalud->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right);
-
-			// 5. ESTILOS VISUALES DE CONTROLES
-			// GroupBoxes
+			// =========================================================
+			// 3. PANELES IZQUIERDOS (GROUPBOXES)
+			// =========================================================
+			// Aquí incluimos groupBox1 (Búsqueda), groupBox2 (Métricas) y groupBox3 (Exportar)
 			array<GroupBox^>^ grupos = { groupBox1, groupBox2, groupBox3 };
 			for each (GroupBox ^ gb in grupos) {
-				gb->BackColor = System::Drawing::Color::White;
-				gb->ForeColor = colorTexto;
-				gb->Font = fuenteBold;
+				gb->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left);
+				gb->BackColor = colorPanel;       // Fondo Menta Suave
+				gb->ForeColor = colorTextoTitulo; // Título en Verde Petróleo
+				gb->Font = fontTitulo;
+				gb->FlatStyle = FlatStyle::System;
 			}
 
-			// Botones (Estilo Verde y Flat)
-			array<Button^>^ botones = { button1, button3, button2, button4, button5 };
-			for each (Button ^ btn in botones) {
-				btn->BackColor = colorVerde;
-				btn->ForeColor = System::Drawing::Color::White;
-				btn->FlatStyle = FlatStyle::Flat;
-				btn->FlatAppearance->BorderSize = 0;
-				btn->Cursor = Cursors::Hand;
-				btn->Font = fuenteBold;
-			}
-			// Cancelar en gris
-			button5->BackColor = System::Drawing::Color::FromArgb(200, 200, 200);
-			button5->ForeColor = System::Drawing::Color::Black;
+			// =========================================================
+			// 4. TAB CONTROL Y PESTAÑAS
+			// =========================================================
+			tabControl1->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right);
+			tabControl1->Font = fontTitulo;
+			tabControl1->ItemSize = System::Drawing::Size(100, 30); // Pestañas cómodas
 
-			// DataGridViews
-			array<DataGridView^>^ grids = { dataGridEstadisticas, dataGridDetalle };
-			for each (DataGridView ^ dgv in grids) {
-				dgv->BackgroundColor = System::Drawing::Color::White;
-				dgv->BorderStyle = BorderStyle::None;
-				dgv->ColumnHeadersDefaultCellStyle->BackColor = colorVerde;
-				dgv->ColumnHeadersDefaultCellStyle->ForeColor = System::Drawing::Color::White;
-				dgv->ColumnHeadersDefaultCellStyle->Font = fuenteBold;
-				dgv->DefaultCellStyle->SelectionBackColor = System::Drawing::Color::FromArgb(180, 220, 180);
-				dgv->DefaultCellStyle->SelectionForeColor = System::Drawing::Color::Black;
-				dgv->EnableHeadersVisualStyles = false;
-				dgv->RowHeadersVisible = false;
-			}
-
-			// Pestañas
+			// Pestaña 1 (Gráficos): Fondo igual al formulario para que los charts se integren
 			tabPage1->BackColor = colorFondo;
+
+			// Pestañas de Datos (Tablas): Fondo blanco limpio
 			tabPage2->BackColor = System::Drawing::Color::White;
 			tabPage3->BackColor = System::Drawing::Color::White;
 
-			// Charts (Fondo transparente para integrarse)
-			if (chartTipoAnalisis != nullptr) chartTipoAnalisis->BackColor = System::Drawing::Color::White;
-			if (chartEstadoSalud != nullptr) chartEstadoSalud->BackColor = System::Drawing::Color::White;
+			// =========================================================
+			// 5. GRÁFICOS (CHARTS)
+			// =========================================================
+			// Mantienen sus anclajes de escalado
+			chartTipoAnalisis->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left | AnchorStyles::Right);
+			chartEstadoSalud->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right);
+
+			array<Chart^>^ charts = { chartTipoAnalisis, chartEstadoSalud };
+			for each (Chart ^ ch in charts) {
+				ch->BackColor = System::Drawing::Color::White; // Contenedor blanco
+				ch->BorderlineColor = System::Drawing::Color::Empty;
+
+				if (ch->ChartAreas->Count > 0) {
+					ch->ChartAreas[0]->BackColor = System::Drawing::Color::White;
+					// Estilizar Ejes con la fuente del kit
+					ch->ChartAreas[0]->AxisX->LabelStyle->ForeColor = colorTextoCuerpo;
+					ch->ChartAreas[0]->AxisY->LabelStyle->ForeColor = colorTextoCuerpo;
+					ch->ChartAreas[0]->AxisX->LabelStyle->Font = gcnew System::Drawing::Font("Microsoft Sans Serif", 8);
+					ch->ChartAreas[0]->AxisY->LabelStyle->Font = gcnew System::Drawing::Font("Microsoft Sans Serif", 8);
+				}
+				// Estilizar Títulos
+				for each (Title ^ t in ch->Titles) {
+					t->ForeColor = colorTextoTitulo;
+					t->Font = fontTitulo;
+				}
+			}
+
+			// =========================================================
+			// 6. DATA GRID VIEWS (TABLAS)
+			// =========================================================
+			array<DataGridView^>^ grids = { dataGridEstadisticas, dataGridDetalle };
+
+			for each (DataGridView ^ dgv in grids) {
+				dgv->Dock = DockStyle::Fill;
+				dgv->BackgroundColor = System::Drawing::Color::White;
+				dgv->BorderStyle = BorderStyle::None;
+				dgv->CellBorderStyle = DataGridViewCellBorderStyle::SingleHorizontal;
+				dgv->GridColor = System::Drawing::Color::FromArgb(183, 220, 200); // Líneas verdes suaves
+				dgv->EnableHeadersVisualStyles = false;
+
+				// Cabecera
+				dgv->ColumnHeadersHeight = 35;
+				dgv->ColumnHeadersDefaultCellStyle->BackColor = colorPanel; // Menta Suave
+				dgv->ColumnHeadersDefaultCellStyle->ForeColor = colorTextoCuerpo;
+				dgv->ColumnHeadersDefaultCellStyle->Font = fontGridHeader;
+				dgv->ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle::Single;
+
+				// Celdas
+				dgv->RowTemplate->Height = 30;
+				dgv->DefaultCellStyle->Font = fontGridCell;
+				dgv->DefaultCellStyle->BackColor = System::Drawing::Color::White;
+				dgv->DefaultCellStyle->ForeColor = colorTextoCuerpo;
+				dgv->DefaultCellStyle->SelectionBackColor = System::Drawing::Color::LightGreen;
+				dgv->DefaultCellStyle->SelectionForeColor = colorTextoCuerpo;
+
+				// Alternancia sutil
+				dgv->AlternatingRowsDefaultCellStyle->BackColor = System::Drawing::Color::FromArgb(244, 250, 246);
+
+				dgv->RowHeadersVisible = false;
+			}
+
+			// =========================================================
+			// 7. BOTONES
+			// =========================================================
+			// Configuramos todos los botones primero con estilo base
+			array<Button^>^ todosBotones = { button1, button3, button2, button4, button5 };
+
+			for each (Button ^ btn in todosBotones) {
+				btn->Size = System::Drawing::Size(btn->Width, 35); // Altura estándar 35px
+				btn->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left);
+				btn->FlatStyle = FlatStyle::Flat;
+				btn->Font = fontTitulo;
+				btn->Cursor = Cursors::Hand;
+			}
+
+			// A) Botón PRIMARIO (Generar/Buscar) -> button1
+			button1->BackColor = colorBtnPrimario;       // Verde Esmeralda
+			button1->ForeColor = System::Drawing::Color::White;
+			button1->FlatAppearance->BorderSize = 0;
+
+			// B) Botones SECUNDARIOS (Limpiar, Exportar, Cancelar) -> El resto
+			array<Button^>^ botonesSecundarios = { button3, button2, button4, button5 };
+			for each (Button ^ btn in botonesSecundarios) {
+				btn->BackColor = colorBtnSecundario;     // Menta Pálido
+				btn->ForeColor = colorTextoTitulo;       // Verde Petróleo
+				btn->FlatAppearance->BorderSize = 1;
+				btn->FlatAppearance->BorderColor = colorBordeBtn;
+			}
 		}
 	};
 }

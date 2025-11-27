@@ -122,26 +122,50 @@ namespace AgroRobotView {
 		// LÓGICA DE ESTILO PROFESIONAL
 		// =========================================================
 		void AplicarEstiloProfesional() {
-			// 1. COLORES
-			System::Drawing::Color colorFondo = System::Drawing::Color::FromArgb(238, 245, 233);
-			System::Drawing::Color colorVerde = System::Drawing::Color::FromArgb(67, 160, 71);
-			System::Drawing::Color colorTexto = System::Drawing::Color::FromArgb(30, 60, 30);
-			System::Drawing::Color colorSeleccion = System::Drawing::Color::FromArgb(180, 220, 180);
+			// ===================================================================================
+			// 1. DEFINICIÓN DE LA PALETA "MENTA/BOSQUE"
+			// ===================================================================================
+			// Fondo General (Menta Pálido)
+			System::Drawing::Color colorFondoForm = System::Drawing::Color::FromArgb(246, 251, 248);
+			// Fondo Paneles/Cabeceras (Menta Crema)
+			System::Drawing::Color colorFondoPanel = System::Drawing::Color::FromArgb(236, 246, 240);
+			// Acción Principal (Verde Bosque)
+			System::Drawing::Color colorBotonMain = System::Drawing::Color::FromArgb(46, 143, 77);
+			// Texto Principal (Verde Petróleo)
+			System::Drawing::Color colorTextoMain = System::Drawing::Color::FromArgb(22, 53, 45);
+			// Texto Secundario/Etiquetas (Verde Azulado)
+			System::Drawing::Color colorTextoSec = System::Drawing::Color::FromArgb(64, 106, 90);
+			// Líneas de la Grilla (Verde Agua)
+			System::Drawing::Color colorGridLine = System::Drawing::Color::FromArgb(183, 220, 200);
+			// Filas Alternas (Menta Muy Claro)
+			System::Drawing::Color colorGridAlt = System::Drawing::Color::FromArgb(244, 250, 246);
+			// Selección
+			System::Drawing::Color colorSeleccion = System::Drawing::Color::LightGreen;
 
-			// 2. FUENTES
-			System::Drawing::Font^ fuenteBase = gcnew System::Drawing::Font("Segoe UI", 12, FontStyle::Regular);
-			System::Drawing::Font^ fuenteBold = gcnew System::Drawing::Font("Segoe UI", 12, FontStyle::Bold);
-			System::Drawing::Font^ fuenteHeader = gcnew System::Drawing::Font("Segoe UI", 11, FontStyle::Bold);
-			System::Drawing::Font^ fuenteTituloGrupo = gcnew System::Drawing::Font("Segoe UI", 14, FontStyle::Bold);
+			// ===================================================================================
+			// 2. FUENTES (TIPOGRAFÍA DE LA GUÍA DE ESTILO)
+			// ===================================================================================
+			// Títulos de Grupo: Microsoft Tai Le, Bold
+			System::Drawing::Font^ fuenteTitulo = gcnew System::Drawing::Font("Microsoft Tai Le", 14, FontStyle::Bold);
+			// Botones: Microsoft Tai Le, Bold
+			System::Drawing::Font^ fuenteBoton = gcnew System::Drawing::Font("Microsoft Tai Le", 9, FontStyle::Bold);
+			// Cabecera de Grilla: Segoe UI Semibold
+			System::Drawing::Font^ fuenteGridHeader = gcnew System::Drawing::Font("Segoe UI Semibold", 10);
+			// Celdas de Grilla: Microsoft Sans Serif
+			System::Drawing::Font^ fuenteGridCell = gcnew System::Drawing::Font("Microsoft Sans Serif", 9);
 
+			// ===================================================================================
 			// 3. CONFIGURACIÓN VENTANA
-			this->BackColor = colorFondo;
-			this->Font = fuenteBase;
+			// ===================================================================================
+			this->BackColor = colorFondoForm;
+			this->Font = fuenteGridCell; // Fuente base
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->AutoSize = false;
 			this->Dock = DockStyle::Fill;
 
+			// ===================================================================================
 			// 4. GROUPBOX (CONTENEDOR)
+			// ===================================================================================
 			int margenH = 20;
 			int espacioBoton = 70;
 
@@ -151,52 +175,60 @@ namespace AgroRobotView {
 			this->groupBox1->Height = this->ClientSize.Height - espacioBoton - 20;
 			this->groupBox1->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right);
 
-			this->groupBox1->BackColor = System::Drawing::Color::White;
-			this->groupBox1->ForeColor = colorTexto;
-			this->groupBox1->Font = fuenteTituloGrupo;
+			// Estilo Menta Crema
+			this->groupBox1->BackColor = colorFondoPanel;
+			this->groupBox1->ForeColor = colorTextoSec; // Color de la etiqueta del grupo
+			this->groupBox1->Font = fuenteTitulo;
 
-			// ===================================================================================
-			// CAMBIO: AGREGAR PADDING AL GROUPBOX PARA BAJAR LA GRILLA
-			// (Izquierda, Arriba, Derecha, Abajo). 50px Arriba separa la grilla del título.
-			// ===================================================================================
+			// Padding para separar el contenido del título del GroupBox
 			this->groupBox1->Padding = System::Windows::Forms::Padding(15, 50, 15, 15);
 
-			// 5. DATAGRIDVIEW (TABLA)
-			this->dataGridView1->Dock = DockStyle::Fill; // Se ajustará al padding nuevo
-			this->dataGridView1->BackgroundColor = System::Drawing::Color::White;
+			// ===================================================================================
+			// 5. DATAGRIDVIEW (TABLA - ESTILO COINCIDENTE CON frmMantInsumo)
+			// ===================================================================================
+			this->dataGridView1->Dock = DockStyle::Fill;
+			this->dataGridView1->BackgroundColor = System::Drawing::Color::White; // Fondo blanco limpio
 			this->dataGridView1->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->dataGridView1->CellBorderStyle = DataGridViewCellBorderStyle::SingleHorizontal;
+			this->dataGridView1->GridColor = colorGridLine; // Color específico de líneas
 			this->dataGridView1->EnableHeadersVisualStyles = false;
 
-			// Estilo de Cabecera
-			this->dataGridView1->ColumnHeadersHeight = 50;
-			this->dataGridView1->ColumnHeadersDefaultCellStyle->BackColor = colorVerde;
-			this->dataGridView1->ColumnHeadersDefaultCellStyle->ForeColor = System::Drawing::Color::White;
-			this->dataGridView1->ColumnHeadersDefaultCellStyle->Font = fuenteHeader;
-			this->dataGridView1->ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle::None;
+			// Estilo de Cabecera (Header)
+			this->dataGridView1->ColumnHeadersHeight = 45; // Altura cómoda
+			this->dataGridView1->ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle::Single;
+			this->dataGridView1->ColumnHeadersDefaultCellStyle->BackColor = colorFondoPanel; // Menta Crema
+			this->dataGridView1->ColumnHeadersDefaultCellStyle->ForeColor = colorTextoMain;  // Texto oscuro
+			this->dataGridView1->ColumnHeadersDefaultCellStyle->Font = fuenteGridHeader;
+			this->dataGridView1->ColumnHeadersDefaultCellStyle->SelectionBackColor = System::Drawing::Color::White; // Evitar resalte azul en header
+			this->dataGridView1->ColumnHeadersDefaultCellStyle->SelectionForeColor = colorTextoMain;
 
-			// Estilo de Filas
-			this->dataGridView1->RowTemplate->Height = 40;
-			this->dataGridView1->DefaultCellStyle->SelectionBackColor = colorSeleccion;
-			this->dataGridView1->DefaultCellStyle->SelectionForeColor = System::Drawing::Color::Black;
-			this->dataGridView1->DefaultCellStyle->Font = fuenteBase;
-			this->dataGridView1->DefaultCellStyle->ForeColor = colorTexto;
+			// Estilo de Filas (Rows)
+			this->dataGridView1->RowTemplate->Height = 35;
+			this->dataGridView1->DefaultCellStyle->Font = fuenteGridCell;
+			this->dataGridView1->DefaultCellStyle->ForeColor = colorTextoMain;
+			this->dataGridView1->DefaultCellStyle->SelectionBackColor = colorSeleccion; // LightGreen
+			this->dataGridView1->DefaultCellStyle->SelectionForeColor = colorTextoMain; // Mantiene texto oscuro al seleccionar
+
+			// Filas Alternas (Zebra striping)
+			this->dataGridView1->AlternatingRowsDefaultCellStyle->BackColor = colorGridAlt; // Menta muy claro
 
 			this->dataGridView1->RowHeadersVisible = false;
 			this->dataGridView1->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::Fill;
 			this->dataGridView1->SelectionMode = DataGridViewSelectionMode::FullRowSelect;
 
-			// 6. BOTÓN EXPORTAR
+			// ===================================================================================
+			// 6. BOTÓN EXPORTAR (Estilo Botón Primario)
+			// ===================================================================================
 			this->btnExportar->Size = System::Drawing::Size(200, 45);
 			this->btnExportar->Left = this->ClientSize.Width - this->btnExportar->Width - margenH;
 			this->btnExportar->Top = this->ClientSize.Height - this->btnExportar->Height - 20;
 			this->btnExportar->Anchor = static_cast<AnchorStyles>(AnchorStyles::Bottom | AnchorStyles::Right);
 
-			this->btnExportar->BackColor = colorVerde;
+			this->btnExportar->BackColor = colorBotonMain; // Verde Bosque
 			this->btnExportar->ForeColor = System::Drawing::Color::White;
 			this->btnExportar->FlatStyle = FlatStyle::Flat;
 			this->btnExportar->FlatAppearance->BorderSize = 0;
-			this->btnExportar->Font = fuenteBold;
+			this->btnExportar->Font = fuenteBoton;
 			this->btnExportar->Cursor = Cursors::Hand;
 		}
 
