@@ -38,6 +38,7 @@ namespace AgroRobotView {
 			this->button4->ForeColor = System::Drawing::Color::DarkGreen;
 			this->button5->BackColor = System::Drawing::Color::LightGreen;
 			this->button5->ForeColor = System::Drawing::Color::DarkGreen;
+			AplicarEstiloProfesional();
 		}
 
 	protected:
@@ -75,7 +76,6 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Fecha;
-
 	private:
 		/// <summary>
 		/// Variable del diseñador necesaria.
@@ -87,6 +87,194 @@ namespace AgroRobotView {
 		/// Método necesario para admitir el Diseñador. No se puede modificar
 		/// el contenido de este método con el editor de código.
 		/// </summary>
+
+		// =====================================================================
+		   // ESTILO PROFESIONAL Y ESCALADO
+		   // =====================================================================
+		void AplicarEstiloProfesional() {
+			// 1. PALETA DE COLORES
+			System::Drawing::Color colorFondo = System::Drawing::Color::FromArgb(246, 251, 248); // Blanco Menta
+			System::Drawing::Color colorPanel = System::Drawing::Color::FromArgb(236, 246, 240); // Menta Suave
+			System::Drawing::Color colorVerdeOscuro = System::Drawing::Color::FromArgb(64, 106, 90); // Texto Títulos
+			System::Drawing::Color colorTexto = System::Drawing::Color::FromArgb(22, 53, 45);      // Texto Normal
+			System::Drawing::Color colorTextoClaro = System::Drawing::Color::FromArgb(64, 106, 90); // Texto Secundario/Labels
+			System::Drawing::Color colorBotonPrimario = System::Drawing::Color::FromArgb(46, 143, 77); // Verde Esmeralda
+			System::Drawing::Color colorBotonSecundario = System::Drawing::Color::FromArgb(236, 246, 240); // Menta Botón
+			System::Drawing::Color colorBordeBoton = System::Drawing::Color::FromArgb(203, 233, 217);
+			System::Drawing::Color colorEliminar = System::Drawing::Color::FromArgb(220, 53, 69); // Rojo para Eliminar
+
+			// =========================================================
+			// 2. FUENTES (AUMENTADAS)
+			// =========================================================
+			// Aumentar de 9 a 10.5
+			System::Drawing::Font^ fuenteTitulo = gcnew System::Drawing::Font("Microsoft Tai Le", 10.5, FontStyle::Bold);
+			// Aumentar de 8.25 a 9.75
+			System::Drawing::Font^ fuenteLabel = gcnew System::Drawing::Font("Microsoft Tai Le", 9.75F, FontStyle::Bold);
+			// Aumentar de 10 a 11
+			System::Drawing::Font^ fuenteGridHeader = gcnew System::Drawing::Font("Segoe UI Semibold", 11);
+			// Aumentar de 9 a 10
+			System::Drawing::Font^ fuenteGridCell = gcnew System::Drawing::Font("Microsoft Sans Serif", 10);
+			// Aumentar el botón Eliminar de 10 a 11
+			System::Drawing::Font^ fuenteBotonEliminar = gcnew System::Drawing::Font(L"Microsoft Tai Le", 11, FontStyle::Bold);
+
+			// 3. CONFIGURACIÓN FORMULARIO
+			this->BackColor = colorFondo;
+			this->StartPosition = FormStartPosition::CenterScreen;
+			this->Text = "Gestión de Muestras de Heces";
+			int margenLateral = 30;
+			int espaciadoY = 20;
+
+			// 4. GROUP BOX (BÚSQUEDA)
+			this->groupBox1->BackColor = colorPanel;
+			this->groupBox1->ForeColor = colorVerdeOscuro;
+			this->groupBox1->Font = fuenteTitulo;
+			this->groupBox1->FlatStyle = FlatStyle::System; // Para que tome el color
+			this->groupBox1->Location = System::Drawing::Point(margenLateral, espaciadoY);
+			this->groupBox1->Location = System::Drawing::Point(margenLateral, 20);
+			this->groupBox1->Height = 110;
+			this->groupBox1->Width = 400;
+			this->groupBox1->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left | AnchorStyles::Right);
+
+			// Controles dentro del GroupBox
+			array<Label^>^ labels = { label1, label2 };
+			for each (Label ^ l in labels) {
+				l->Font = fuenteLabel;
+				l->ForeColor = colorVerdeOscuro;
+			}
+
+			// Configuración de TextBox para entrada de texto
+			textBox1->BorderStyle = BorderStyle::FixedSingle;
+			textBox1->BackColor = System::Drawing::Color::White;
+			textBox1->ForeColor = colorVerdeOscuro;
+
+			// Centrado de controles en GroupBox1
+			int yControl = 45;
+			label1->Location = Point(20, yControl + 4);
+			textBox1->Location = Point(80, yControl); textBox1->Width = 120;
+
+			// Botón Buscar (Primario)
+			this->button1->BackColor = colorBotonPrimario;
+			this->button1->ForeColor = System::Drawing::Color::White;
+			this->button1->FlatStyle = FlatStyle::Flat;
+			this->button1->FlatAppearance->BorderSize = 0;
+			this->button1->Font = fuenteTitulo;
+			this->button1->Cursor = Cursors::Hand;
+			this->button1->Location = Point(220, yControl - 5); button1->Width = 75;
+
+			// Botón Limpiar (Secundario pero en panel claro)
+			this->button5->BackColor = System::Drawing::Color::White; // Contraste sobre el panel menta
+			this->button5->ForeColor = colorVerdeOscuro;
+			this->button5->FlatStyle = FlatStyle::Flat;
+			this->button5->FlatAppearance->BorderColor = colorBordeBoton;
+			this->button5->FlatAppearance->BorderSize = 1;
+			this->button5->Font = fuenteTitulo;
+			this->button5->Cursor = Cursors::Hand;
+			this->button5->Location = Point(305, yControl - 5); button4->Width = 75;
+
+			// =========================================================
+			// 5. GROUP BOX: NUEVO DIAGNÓSTICO
+			// Asumo que tu GroupBox2 es 'Nuevo Diagnóstico' (Necesitarás agregarlo al formulario)
+			// =========================================================
+			this->groupBox2->Text = "Nuevo Diagnóstico";
+			this->groupBox2->BackColor = colorPanel;
+			this->groupBox2->ForeColor = colorVerdeOscuro;
+			this->groupBox2->Font = fuenteTitulo;
+			this->groupBox2->Location = System::Drawing::Point(groupBox1->Right + margenLateral, espaciadoY);
+			this->groupBox2->Height = 110;
+			this->groupBox2->Width = 350; // Ancho fijo para Nuevo Diagnóstico
+			this->groupBox2->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Left);
+
+			// Controles de Nuevo Diagnóstico
+			// Asumo que 'label3' es 'Especie' y 'comboBox2' es el control de selección
+			label2->Text = "Especie:";
+			label2->Font = fuenteLabel;
+			label2->ForeColor = colorTextoClaro;
+
+			// Configuración de ComboBox (Dropdown)
+			comboBox1->FlatStyle = FlatStyle::Flat;
+			comboBox1->BackColor = System::Drawing::Color::White;
+			comboBox1->ForeColor = colorVerdeOscuro;
+
+			// Centrado de controles en GroupBox2
+			label2->Location = Point(20, yControl + 4);
+			comboBox1->Location = Point(80, yControl); comboBox1->Width = 120;
+
+			button2->Text = "Agregar";
+			button2->BackColor = colorBotonPrimario;
+			button2->ForeColor = System::Drawing::Color::White;
+			button2->FlatStyle = FlatStyle::Flat;
+			button2->FlatAppearance->BorderSize = 0;
+			button2->Font = fuenteTitulo;
+			button2->Cursor = Cursors::Hand;
+			button2->Location = Point(220, yControl - 5); button2->Width = 100;
+
+			// 5. GRILLA (DATAGRIDVIEW)
+			int yGrilla = System::Math::Max(groupBox1->Bottom, groupBox2->Bottom) + espaciadoY;
+			int hFooter = 70;
+
+			dataGridView1->Location = Point(margenLateral, yGrilla);
+			dataGridView1->Width = this->ClientSize.Width - (margenLateral * 2);
+			dataGridView1->Height = this->ClientSize.Height - yGrilla - hFooter;
+			dataGridView1->Anchor = static_cast<AnchorStyles>(AnchorStyles::Top | AnchorStyles::Bottom | AnchorStyles::Left | AnchorStyles::Right);
+
+			// Estilo Visual Grilla
+			dataGridView1->BackgroundColor = System::Drawing::Color::White;
+			dataGridView1->BorderStyle = BorderStyle::FixedSingle; // Un borde sutil
+			dataGridView1->CellBorderStyle = DataGridViewCellBorderStyle::SingleHorizontal;
+			dataGridView1->EnableHeadersVisualStyles = false;
+			dataGridView1->GridColor = System::Drawing::Color::FromArgb(220, 235, 230); // Líneas verdes muy suaves
+
+			// Cabecera
+			dataGridView1->ColumnHeadersDefaultCellStyle->BackColor = colorPanel; // Menta suave
+			dataGridView1->ColumnHeadersDefaultCellStyle->ForeColor = colorVerdeOscuro;
+			dataGridView1->ColumnHeadersDefaultCellStyle->Font = fuenteGridHeader;
+			dataGridView1->ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle::None; // Borde none para un look más moderno
+			dataGridView1->ColumnHeadersHeight = 45;
+
+			// Filas
+			dataGridView1->DefaultCellStyle->BackColor = System::Drawing::Color::White;
+			dataGridView1->DefaultCellStyle->ForeColor = colorVerdeOscuro;
+			dataGridView1->DefaultCellStyle->SelectionBackColor = System::Drawing::Color::FromArgb(183, 220, 200); // Verde suave en selección
+			dataGridView1->DefaultCellStyle->SelectionForeColor = colorVerdeOscuro;
+			dataGridView1->DefaultCellStyle->Font = fuenteGridCell;
+			dataGridView1->RowTemplate->Height = 40;
+			dataGridView1->AlternatingRowsDefaultCellStyle->BackColor = System::Drawing::Color::FromArgb(248, 252, 250); // Alternado muy sutil
+
+			dataGridView1->RowHeadersVisible = false;
+			dataGridView1->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::Fill;
+
+			// =========================================================
+			// 4. BOTÓN ELIMINAR (ABAJO IZQUIERDA)
+			// =========================================================
+			int yBotones = this->ClientSize.Height - 50;
+			int anchoBoton = 120;
+			int espaciadoBotones = 20;
+			int anchoTotalBotones = (anchoBoton * 2) + espaciadoBotones;
+			int inicioX = (this->ClientSize.Width - anchoTotalBotones) / 2; // Centrado horizontal
+
+			button4->Text = "Eliminar";
+			button4->Location = System::Drawing::Point(margenLateral, this->ClientSize.Height - 50);
+			button4->Size = System::Drawing::Size(200, 40);
+			button4->Anchor = static_cast<AnchorStyles>(AnchorStyles::Bottom | AnchorStyles::Left);
+			button4->BackColor = colorEliminar; // Rojo de advertencia
+			button4->ForeColor = System::Drawing::Color::White;
+			button4->FlatStyle = FlatStyle::Flat;
+			button4->FlatAppearance->BorderSize = 0;
+			button4->Cursor = Cursors::Hand;
+			button4->Font = gcnew System::Drawing::Font(L"Microsoft Tai Le", 10, FontStyle::Bold);
+
+			button3->Text = "Editar";
+			button3->Location = System::Drawing::Point(inicioX + anchoBoton + espaciadoBotones, yBotones);
+			button3->Size = System::Drawing::Size(200, 40);
+			button3->Anchor = static_cast<AnchorStyles>(AnchorStyles::Bottom | AnchorStyles::Left);
+			button3->BackColor = colorBotonPrimario;
+			button3->ForeColor = System::Drawing::Color::White;
+			button3->FlatStyle = FlatStyle::Flat;
+			button3->FlatAppearance->BorderSize = 0;
+			button3->Cursor = Cursors::Hand;
+			button3->Font = gcnew System::Drawing::Font(L"Microsoft Tai Le", 10, FontStyle::Bold);
+		}
+
 		void InitializeComponent(void)
 		{
 			this->button4 = (gcnew System::Windows::Forms::Button());
