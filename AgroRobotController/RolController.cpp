@@ -7,7 +7,7 @@ using namespace System::Runtime::Serialization::Formatters::Binary;
 RolController::RolController(){
 	this->listaRoles = gcnew List<Rol^>();
 
-	/*String^ path = "roles.txt";
+	String^ path = "roles.txt";
 	
 	if (!File::Exists(path)) {
 		File::WriteAllText(path, "");
@@ -36,9 +36,9 @@ RolController::RolController(){
 		Rol^ rol = gcnew Rol(id, nombre);
 		rol->SetPermisos(listaPermisos);
 		listaRoles->Add(rol);
-	}*/
+	}
 
-	try {
+	/*try {
 		// Paso1: Establecer la conexion
 		abrirConexion();
 		// Paso2: Crear el comando SQL
@@ -61,7 +61,7 @@ RolController::RolController(){
 				for each (String ^ permisoBool in permisosBoolean)
 					listaPermisos->Add(Convert::ToBoolean(Convert::ToInt32(permisoBool)));
 			}
-			else listaPermisos = nullptr;*/
+			else listaPermisos = nullptr;
 			String^ permisosString = objData->GetString(2); // Permisos
 			List<bool>^ permisos = ConvertirStringAPermisos(permisosString);
 
@@ -77,7 +77,7 @@ RolController::RolController(){
 		Console::WriteLine("Error al conectar a la base de datos: " + ex->Message);
 		// En caso de cualquier error, crear lista vacía
 		this->listaRoles = gcnew List<Rol^>();
-	}
+	}*/
 
 }
 
@@ -111,10 +111,11 @@ void RolController::escribirArchivo(){
 	File::WriteAllLines(path, lineasArchivo);
 }
 
-bool RolController::agregarRol(Rol^ rol) {
+void RolController::agregarRol(Rol^ rol) {
 	this->listaRoles->Add(rol);
+	escribirArchivo();
 
-	String^ permisosTxt = ConvertirPermisosAString(rol->GetPermisos()); // ASUMIMOS ESTO
+	/*String^ permisosTxt = ConvertirPermisosAString(rol->GetPermisos()); // ASUMIMOS ESTO
 
 	String^ sSqlRol = "INSERT INTO Roles (Id, Nombre, ListaPermisos) ";
 	sSqlRol += " VALUES(" + rol->GetId() + ", ";
@@ -126,7 +127,7 @@ bool RolController::agregarRol(Rol^ rol) {
 	if (filasAfectadas > 0)
 		return true;
 	else
-		return false;
+		return false;*/
 }
 
 bool RolController::eliminarRol(int id) {
@@ -149,8 +150,10 @@ bool RolController::modificarRol(int id, String^ nombre, List<bool>^ listaPermis
 		// 2. Actualizar el objeto Rol en memoria
 		rol->SetNombre(nombre);
 		rol->SetPermisos(listaPermisos);
+		escribirArchivo();
+		return true;
 
-		// 3. Convertir la lista de permisos a un string para la BD (ej: "1|0|1|1")
+		/*/ 3. Convertir la lista de permisos a un string para la BD (ej: "1|0|1|1")
 		// Esta función debe estar definida en el controlador.
 		String^ permisosTxt = ConvertirPermisosAString(listaPermisos);
 
@@ -162,7 +165,7 @@ bool RolController::modificarRol(int id, String^ nombre, List<bool>^ listaPermis
 		sSqlRol += " WHERE Id = " + id;
 
 		// 5. Ejecutar la consulta SQL (usando la función que maneja la BD)
-		return executeSql(sSqlRol);
+		return executeSql(sSqlRol);*/
 	}
 	return false;
 }

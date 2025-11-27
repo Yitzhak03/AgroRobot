@@ -167,9 +167,9 @@ namespace AgroRobotView {
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Padding = System::Windows::Forms::Padding(15, 10, 15, 10);
+			this->menuStrip1->Padding = System::Windows::Forms::Padding(20, 12, 20, 12);
 			this->menuStrip1->RightToLeft = System::Windows::Forms::RightToLeft::No;
-			this->menuStrip1->Size = System::Drawing::Size(1180, 75);
+			this->menuStrip1->Size = System::Drawing::Size(1573, 79);
 			this->menuStrip1->TabIndex = 1;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -191,7 +191,7 @@ namespace AgroRobotView {
 			this->mantenimientoDeUsuariosToolStripMenuItem->Font = (gcnew System::Drawing::Font(L"Segoe UI", 18, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Pixel));
 			this->mantenimientoDeUsuariosToolStripMenuItem->Name = L"mantenimientoDeUsuariosToolStripMenuItem";
-			this->mantenimientoDeUsuariosToolStripMenuItem->Size = System::Drawing::Size(302, 30);
+			this->mantenimientoDeUsuariosToolStripMenuItem->Size = System::Drawing::Size(316, 30);
 			this->mantenimientoDeUsuariosToolStripMenuItem->Text = L"Mantenimiento de Usuarios";
 			this->mantenimientoDeUsuariosToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::mantenimientoDeUsuariosToolStripMenuItem_Click);
 			// 
@@ -200,7 +200,7 @@ namespace AgroRobotView {
 			this->mantenimientoDeRolesToolStripMenuItem->Font = (gcnew System::Drawing::Font(L"Segoe UI", 18, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Pixel));
 			this->mantenimientoDeRolesToolStripMenuItem->Name = L"mantenimientoDeRolesToolStripMenuItem";
-			this->mantenimientoDeRolesToolStripMenuItem->Size = System::Drawing::Size(302, 30);
+			this->mantenimientoDeRolesToolStripMenuItem->Size = System::Drawing::Size(316, 30);
 			this->mantenimientoDeRolesToolStripMenuItem->Text = L"Mantenimiento de Roles";
 			this->mantenimientoDeRolesToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::mantenimientoDeRolesToolStripMenuItem_Click);
 			// 
@@ -209,7 +209,7 @@ namespace AgroRobotView {
 			this->programaciónDeAlimentaciónToolStripMenuItem->Font = (gcnew System::Drawing::Font(L"Segoe UI", 18, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Pixel));
 			this->programaciónDeAlimentaciónToolStripMenuItem->Name = L"programaciónDeAlimentaciónToolStripMenuItem";
-			this->programaciónDeAlimentaciónToolStripMenuItem->Size = System::Drawing::Size(302, 30);
+			this->programaciónDeAlimentaciónToolStripMenuItem->Size = System::Drawing::Size(316, 30);
 			this->programaciónDeAlimentaciónToolStripMenuItem->Text = L"Gestión de Alimentación";
 			this->programaciónDeAlimentaciónToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::programaciónDeAlimentaciónToolStripMenuItem_Click);
 			// 
@@ -232,7 +232,7 @@ namespace AgroRobotView {
 			this->géstionDeDiagnosticosToolStripMenuItem->Font = (gcnew System::Drawing::Font(L"Segoe UI", 18, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Pixel));
 			this->géstionDeDiagnosticosToolStripMenuItem->Name = L"géstionDeDiagnosticosToolStripMenuItem";
-			this->géstionDeDiagnosticosToolStripMenuItem->Size = System::Drawing::Size(277, 30);
+			this->géstionDeDiagnosticosToolStripMenuItem->Size = System::Drawing::Size(291, 30);
 			this->géstionDeDiagnosticosToolStripMenuItem->Text = L"Gestión de Diagnosticos";
 			this->géstionDeDiagnosticosToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::géstionDeDiagnosticosToolStripMenuItem_Click);
 			// 
@@ -245,21 +245,21 @@ namespace AgroRobotView {
 			this->gestiónDeMuestrasToolStripMenuItem->Font = (gcnew System::Drawing::Font(L"Segoe UI", 18, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Pixel));
 			this->gestiónDeMuestrasToolStripMenuItem->Name = L"gestiónDeMuestrasToolStripMenuItem";
-			this->gestiónDeMuestrasToolStripMenuItem->Size = System::Drawing::Size(277, 30);
+			this->gestiónDeMuestrasToolStripMenuItem->Size = System::Drawing::Size(291, 30);
 			this->gestiónDeMuestrasToolStripMenuItem->Text = L"Gestión de Muestras";
 			this->gestiónDeMuestrasToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::gestiónDeMuestrasToolStripMenuItem_Click);
 			// 
 			// muestraDeHecesToolStripMenuItem
 			// 
 			this->muestraDeHecesToolStripMenuItem->Name = L"muestraDeHecesToolStripMenuItem";
-			this->muestraDeHecesToolStripMenuItem->Size = System::Drawing::Size(233, 30);
+			this->muestraDeHecesToolStripMenuItem->Size = System::Drawing::Size(247, 30);
 			this->muestraDeHecesToolStripMenuItem->Text = L"Muestra de Heces";
 			this->muestraDeHecesToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::muestraDeHecesToolStripMenuItem_Click);
 			// 
 			// muestraDeSangreToolStripMenuItem
 			// 
 			this->muestraDeSangreToolStripMenuItem->Name = L"muestraDeSangreToolStripMenuItem";
-			this->muestraDeSangreToolStripMenuItem->Size = System::Drawing::Size(233, 30);
+			this->muestraDeSangreToolStripMenuItem->Size = System::Drawing::Size(247, 30);
 			this->muestraDeSangreToolStripMenuItem->Text = L"Muestra de Sangre";
 			this->muestraDeSangreToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::muestraDeSangreToolStripMenuItem_Click);
 			// 
@@ -281,7 +281,7 @@ namespace AgroRobotView {
 			this->registroDeDietasToolStripMenuItem->Font = (gcnew System::Drawing::Font(L"Segoe UI", 18, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Pixel));
 			this->registroDeDietasToolStripMenuItem->Name = L"registroDeDietasToolStripMenuItem";
-			this->registroDeDietasToolStripMenuItem->Size = System::Drawing::Size(248, 30);
+			this->registroDeDietasToolStripMenuItem->Size = System::Drawing::Size(262, 30);
 			this->registroDeDietasToolStripMenuItem->Text = L"Registro de dietas";
 			this->registroDeDietasToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::registroDeDietasToolStripMenuItem_Click);
 			// 
@@ -290,7 +290,7 @@ namespace AgroRobotView {
 			this->registroDeAnimalesToolStripMenuItem->Font = (gcnew System::Drawing::Font(L"Segoe UI", 18, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Pixel));
 			this->registroDeAnimalesToolStripMenuItem->Name = L"registroDeAnimalesToolStripMenuItem";
-			this->registroDeAnimalesToolStripMenuItem->Size = System::Drawing::Size(248, 30);
+			this->registroDeAnimalesToolStripMenuItem->Size = System::Drawing::Size(262, 30);
 			this->registroDeAnimalesToolStripMenuItem->Text = L"Registro de animales";
 			this->registroDeAnimalesToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::registroDeAnimalesToolStripMenuItem_Click);
 			// 
@@ -312,7 +312,7 @@ namespace AgroRobotView {
 			this->registroInsumosGeneralToolStripMenuItem->Font = (gcnew System::Drawing::Font(L"Segoe UI", 18, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Pixel));
 			this->registroInsumosGeneralToolStripMenuItem->Name = L"registroInsumosGeneralToolStripMenuItem";
-			this->registroInsumosGeneralToolStripMenuItem->Size = System::Drawing::Size(328, 30);
+			this->registroInsumosGeneralToolStripMenuItem->Size = System::Drawing::Size(342, 30);
 			this->registroInsumosGeneralToolStripMenuItem->Text = L"Registro General de Insumos";
 			this->registroInsumosGeneralToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::registroInsumosGeneralToolStripMenuItem_Click);
 			// 
@@ -321,7 +321,7 @@ namespace AgroRobotView {
 			this->registroGeneralDeAlmacenesToolStripMenuItem->Font = (gcnew System::Drawing::Font(L"Segoe UI", 18, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Pixel));
 			this->registroGeneralDeAlmacenesToolStripMenuItem->Name = L"registroGeneralDeAlmacenesToolStripMenuItem";
-			this->registroGeneralDeAlmacenesToolStripMenuItem->Size = System::Drawing::Size(328, 30);
+			this->registroGeneralDeAlmacenesToolStripMenuItem->Size = System::Drawing::Size(342, 30);
 			this->registroGeneralDeAlmacenesToolStripMenuItem->Text = L"Registro General de Almacenes";
 			this->registroGeneralDeAlmacenesToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::registroGeneralDeAlmacenesToolStripMenuItem_Click);
 			// 
@@ -344,7 +344,7 @@ namespace AgroRobotView {
 			this->diagnósticosMédicosToolStripMenuItem->Font = (gcnew System::Drawing::Font(L"Segoe UI", 18, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Pixel));
 			this->diagnósticosMédicosToolStripMenuItem->Name = L"diagnósticosMédicosToolStripMenuItem";
-			this->diagnósticosMédicosToolStripMenuItem->Size = System::Drawing::Size(284, 30);
+			this->diagnósticosMédicosToolStripMenuItem->Size = System::Drawing::Size(298, 30);
 			this->diagnósticosMédicosToolStripMenuItem->Text = L"Diagnósticos Médicos";
 			this->diagnósticosMédicosToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::diagnósticosMédicosToolStripMenuItem_Click);
 			// 
@@ -353,7 +353,7 @@ namespace AgroRobotView {
 			this->planAlimenticioToolStripMenuItem->Font = (gcnew System::Drawing::Font(L"Segoe UI", 18, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Pixel));
 			this->planAlimenticioToolStripMenuItem->Name = L"planAlimenticioToolStripMenuItem";
-			this->planAlimenticioToolStripMenuItem->Size = System::Drawing::Size(284, 30);
+			this->planAlimenticioToolStripMenuItem->Size = System::Drawing::Size(298, 30);
 			this->planAlimenticioToolStripMenuItem->Text = L"Plan Alimenticio";
 			this->planAlimenticioToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::planAlimenticioToolStripMenuItem_Click);
 			// 
@@ -362,7 +362,7 @@ namespace AgroRobotView {
 			this->gestiónDeOrdenesDeAlimentaciónToolStripMenuItem->Font = (gcnew System::Drawing::Font(L"Segoe UI", 18, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Pixel));
 			this->gestiónDeOrdenesDeAlimentaciónToolStripMenuItem->Name = L"gestiónDeOrdenesDeAlimentaciónToolStripMenuItem";
-			this->gestiónDeOrdenesDeAlimentaciónToolStripMenuItem->Size = System::Drawing::Size(284, 30);
+			this->gestiónDeOrdenesDeAlimentaciónToolStripMenuItem->Size = System::Drawing::Size(298, 30);
 			this->gestiónDeOrdenesDeAlimentaciónToolStripMenuItem->Text = L"Ordenes de Alimentación";
 			this->gestiónDeOrdenesDeAlimentaciónToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::ordenesDeAlimentaciónToolStripMenuItem_Click);
 			// 
@@ -371,7 +371,7 @@ namespace AgroRobotView {
 			this->insumosPorAlmacénToolStripMenuItem->Font = (gcnew System::Drawing::Font(L"Segoe UI", 18, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Pixel));
 			this->insumosPorAlmacénToolStripMenuItem->Name = L"insumosPorAlmacénToolStripMenuItem";
-			this->insumosPorAlmacénToolStripMenuItem->Size = System::Drawing::Size(284, 30);
+			this->insumosPorAlmacénToolStripMenuItem->Size = System::Drawing::Size(298, 30);
 			this->insumosPorAlmacénToolStripMenuItem->Text = L"Insumos por Almacén";
 			this->insumosPorAlmacénToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::insumosPorAlmacénToolStripMenuItem_Click);
 			// 
@@ -380,7 +380,7 @@ namespace AgroRobotView {
 			this->alimentaciónPorEspecieToolStripMenuItem->Font = (gcnew System::Drawing::Font(L"Segoe UI", 18, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Pixel));
 			this->alimentaciónPorEspecieToolStripMenuItem->Name = L"alimentaciónPorEspecieToolStripMenuItem";
-			this->alimentaciónPorEspecieToolStripMenuItem->Size = System::Drawing::Size(284, 30);
+			this->alimentaciónPorEspecieToolStripMenuItem->Size = System::Drawing::Size(298, 30);
 			this->alimentaciónPorEspecieToolStripMenuItem->Text = L"Alimentación por Especie";
 			this->alimentaciónPorEspecieToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMenu::alimentaciónPorEspecieToolStripMenuItem_Click);
 			// 
@@ -397,14 +397,15 @@ namespace AgroRobotView {
 			// 
 			// frmMenu
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackColor = System::Drawing::SystemColors::Control;
+			this->BackColor = System::Drawing::SystemColors::ButtonShadow;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->ClientSize = System::Drawing::Size(1180, 642);
+			this->ClientSize = System::Drawing::Size(1573, 790);
 			this->Controls->Add(this->menuStrip1);
 			this->IsMdiContainer = true;
+			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->Name = L"frmMenu";
 			this->Text = L"Menú Principal";
 			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
@@ -425,21 +426,26 @@ namespace AgroRobotView {
 	// FUNCIÓN MÁGICA PARA GESTIÓN DE VENTANAS
 	// ==========================================================================
 	private: void AbrirFormulario(System::Windows::Forms::Form^ nuevoForm) {
-		// 1. Si ya hay un formulario activo, lo cerramos
+		// 1. Cerrar el anterior
 		if (this->formularioActivo != nullptr) {
 			this->formularioActivo->Close();
 		}
-
-		// 2. Guardamos la referencia del nuevo formulario
 		this->formularioActivo = nuevoForm;
 
-		// 3. Configuramos como hijo MDI (para que quede dentro del menú)
+		// 2. Configurar Padre
 		nuevoForm->MdiParent = this;
 
-		// 4. Ajustamos estilo para que se vea bien maximizado (opcional pero recomendado)
-		nuevoForm->Dock = DockStyle::Fill;
+		// 3. TRUCOS PARA PANTALLA COMPLETA:
+		// A) Quitar bordes para que parezca una página nativa
+		nuevoForm->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+		
+		// B) Desactivar que se encoja solo
+		nuevoForm->AutoSize = false;
 
-		// 5. Lo mostramos
+		// C) Ordenar que llene todo el espacio disponible
+		nuevoForm->Dock = DockStyle::Fill;
+		
+		// 4. Mostrar
 		nuevoForm->Show();
 	}
 		   //===============================================================================

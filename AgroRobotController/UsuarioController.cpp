@@ -5,127 +5,190 @@ using namespace AgroRobotController;
 using namespace System::IO;
 using namespace System::Runtime::Serialization::Formatters::Binary;
 
-UsuarioController::UsuarioController(){
+// ==========================================================================
+//  INTERRUPTOR MAESTRO DE DATOS
+//  1 = MODO BASE DE DATOS (SQL Server) -> Úsenlo en la pucp
+//  0 = MODO TEXTO (usuarios.txt)       -> Úsenlo en sus casitas
+// ==========================================================================
+#define USAR_BASE_DE_DATOS 0  // <--- cambien este número según el modo deseado
+
+
+UsuarioController::UsuarioController() {
 	this->listaUsuarios = gcnew List<Usuario^>();
-	
-	/*
-	String^ path = "usuarios.txt";
 
-	/*crea el txt de habilitados 
-	if (!File::Exists(path)) {
-		File::WriteAllText(path, "");
-	}
-
-	array<String^>^ lineas = File::ReadAllLines(path);
-
-	for each (String ^ linea in lineas) {
-		if (String::IsNullOrWhiteSpace(linea)) continue;
-		array<String^>^ datos = linea->Split(';');
-		int id = Convert::ToInt32(datos[0]);
-		String^ nombre = datos[1];
-		String^ email = datos[2];
-		String^ contrasenha = datos[3];
-		String^ ultimoAcceso = datos[4];
-		bool estadoCuenta = Convert::ToBoolean(datos[5]);
-		
-		int idRol = Convert::ToInt32(datos[6]);
-		RolController^ rolController = gcnew RolController();
-		Rol^ rol = rolController->obtenerRolPorId(idRol);
-		
-		Usuario^ user = gcnew Usuario(id, nombre, email, contrasenha, ultimoAcceso, estadoCuenta, rol);
-		listaUsuarios->Add(user);
-	}
-	*/
-
+#if USAR_BASE_DE_DATOS
+	// ====================================================
+	// LÓGICA: BASE DE DATOS SQL
+	// ====================================================
 	try {
-		// Paso1: Establecer la conexion
 		abrirConexion();
-
-		// Paso2: Crear el comando SQL
-		String^ sSqlUsuarios = "SELECT Id, Nombre, Email, Contrasenha, UltimoAcceso, EstadoCuenta, IdRol ";
-		sSqlUsuarios += " FROM Usuarios ";
-
-		// Paso3: Crear el SqlCommand, donde le paso la sentencia SQL y la conexion
+		String^ sSqlUsuarios = "SELECT Id, Nombre, Email, Contrasenha, UltimoAcceso, EstadoCuenta, IdRol FROM Usuarios ";
 		SqlCommand^ comando = gcnew SqlCommand(sSqlUsuarios, getObjConexion());
-
-		// Paso4: Ahora para ejecutar voy a utilizar ExecuteReader cuando la sentencia es SELECT
 		SqlDataReader^ objData = comando->ExecuteReader();
 
-		// Paso5: Leer los registros de la tabla
 		while (objData->Read()) {
-			int id = objData->GetInt32(0); // Id
-			String^ nombre = objData->GetString(1)->Trim(); // Nombre
-			String^ email = objData->GetString(2)->Trim(); // Email
-			String^ contrasenha = objData->GetString(3)->Trim(); // Contrasenha
-			String^ ultimoAcceso = objData->GetString(4)->Trim(); // UltimoAcceso
+			int id = objData->GetInt32(0);
+			String^ nombre = objData->GetString(1)->Trim();
+			String^ email = objData->GetString(2)->Trim();
+			String^ contrasenha = objData->GetString(3)->Trim();
+			String^ ultimoAcceso = objData->GetString(4)->Trim();
 			String^ estadoCuentaString = objData->GetString(5)->Trim();
+
 			bool estadoCuenta = false;
 			if (String::Equals(estadoCuentaString, "True", StringComparison::OrdinalIgnoreCase)) {
 				estadoCuenta = true;
 			}
-			int idRol = objData->GetInt32(6); // IdRol
-			// Obtener el Rol asociado
+
+			int idRol = objData->GetInt32(6);
+
 			RolController^ rolController = gcnew RolController();
 			Rol^ rol = rolController->obtenerRolPorId(idRol);
+
 			Usuario^ usuario = gcnew Usuario(id, nombre, email, contrasenha, ultimoAcceso, estadoCuenta, rol);
 			this->listaUsuarios->Add(usuario);
 		}
-		// Paso6: Cerrar el DataReader y la conexion
 		objData->Close();
 		cerrarConexion();
 	}
 	catch (Exception^ ex) {
-		Console::WriteLine("Error al conectar a la base de datos: " + ex->Message);
-		// En caso de cualquier error, crear lista vacía
-		this->listaUsuarios = gcnew List<Usuario^>();
+		Console::WriteLine("Error SQL: " + ex->Message);
+		// Si falla SQL, la lista queda vacía
 	}
+
+#else
+	// ====================================================
+	// LÓGICA: ARCHIVO DE TEXTO (OFFLINE)
+	// ====================================================
+	String^ path = "usuarios.txt";
+	if (!File::Exists(path)) File::WriteAllText(path, "");
+
+	try {
+		array<String^>^ lineas = File::ReadAllLines(path);
+		for each (String ^ linea in lineas) {
+			if (String::IsNullOrWhiteSpace(linea)) continue;
+			array<String^>^ datos = linea->Split(';');
+			if (datos->Length < 7) continue; // Validación básica
+
+			int id = Convert::ToInt32(datos[0]);
+			String^ nombre = datos[1];
+			String^ email = datos[2];
+			String^ contrasenha = datos[3];
+			String^ ultimoAcceso = datos[4];
+			bool estadoCuenta = Convert::ToBoolean(datos[5]);
+			int idRol = Convert::ToInt32(datos[6]);
+
+			Rol^ rol;
+			try {
+				RolController^ rc = gcnew RolController();
+				rol = rc->obtenerRolPorId(idRol);
+			}
+			catch (Exception^) { rol = gcnew Rol(idRol, "RolTxt"); }
+
+			Usuario^ user = gcnew Usuario(id, nombre, email, contrasenha, ultimoAcceso, estadoCuenta, rol);
+			listaUsuarios->Add(user);
+		}
+	}
+	catch (Exception^) {}
+#endif
 }
 
-void UsuarioController::escribirArchivo(){
+void UsuarioController::escribirArchivo() {
+	// Esta función solo sirve para el modo texto, pero la dejamos por si acaso
 	String^ path = "usuarios.txt";
-
-	// Preparamos el array de líneas con la misma cantidad que la lista
 	List<Usuario^>^ lista = this->listaUsuarios;
-
 	array<String^>^ lineasArchivo = gcnew array<String^>(lista->Count);
 
 	for (int i = 0; i < lista->Count; ++i) {
-		Usuario^ usuario = lista[i];
-		lineasArchivo[i] = usuario->GetId() + ";" + usuario->GetNombre() + ";" + usuario->GetEmail() + ";" +
-			usuario->GetContrasenha() + ";" + usuario->GetUltimoAcceso() + ";" + usuario->GetEstadoCuenta() + ";" +
-			 usuario->GetRol()->GetId();
+		Usuario^ u = lista[i];
+		int idRol = (u->GetRol() != nullptr) ? u->GetRol()->GetId() : 3;
+		lineasArchivo[i] = u->GetId() + ";" + u->GetNombre() + ";" + u->GetEmail() + ";" +
+			u->GetContrasenha() + ";" + u->GetUltimoAcceso() + ";" + u->GetEstadoCuenta() + ";" + idRol;
 	}
-	// Escribimos todas las líneas al archivo (sobrescribe)
 	File::WriteAllLines(path, lineasArchivo);
 }
 
-bool UsuarioController::agregarUsuario(Usuario^ usuario){
+void UsuarioController::agregarUsuario(Usuario^ usuario) {
 	this->listaUsuarios->Add(usuario);
-	//escribirArchivo();
-	
-	String^ sSqlUsuario = "INSERT INTO Usuarios (Id, Nombre, Email, Contrasenha, UltimoAcceso, EstadoCuenta) ";
+
+#if USAR_BASE_DE_DATOS
+	// --- MODO SQL ---
+	String^ sSqlUsuario = "INSERT INTO Usuarios (Id, Nombre, Email, Contrasenha, UltimoAcceso, EstadoCuenta, IdRol) ";
 	sSqlUsuario += " VALUES(" + usuario->GetId() + ", ";
 	sSqlUsuario += " '" + usuario->GetNombre() + "', ";
 	sSqlUsuario += " '" + usuario->GetEmail() + "', ";
 	sSqlUsuario += " '" + usuario->GetContrasenha() + "', ";
 	sSqlUsuario += " '" + usuario->GetUltimoAcceso() + "', ";
-	sSqlUsuario += " '" + usuario->GetEstadoCuenta() + "')";
-	int idDieta = insertSql(sSqlUsuario);
-	if (idDieta > 0)
-		return true;
-	else
-		return false;
+	sSqlUsuario += " '" + usuario->GetEstadoCuenta() + "', ";
+	sSqlUsuario += " " + usuario->GetRol()->GetId() + ")";
+
+	int res = insertSql(sSqlUsuario);
+	return (res > 0);
+#else
+	// --- MODO TXT ---
+	escribirArchivo();
+	//return true;
+#endif
 }
 
-List<Usuario^>^ UsuarioController::obtenerUsuariosPorEstado(Nullable<bool> estado) {
-    List<Usuario^>^ listaResultados = gcnew List<Usuario^>();
+void UsuarioController::actualizarUsuario(Usuario^ usuario) {
+	// Actualizar en memoria siempre
+	for (int i = 0; i < this->listaUsuarios->Count; ++i) {
+		if (this->listaUsuarios[i]->GetId() == usuario->GetId()) {
+			this->listaUsuarios[i] = usuario;
+			break;
+		}
+	}
 
-    for each (Usuario ^ usuario in this->listaUsuarios) {
-        if (!estado.HasValue || usuario->GetEstadoCuenta() == estado.Value) {
-            listaResultados->Add(usuario);
-        }
-    }
-    return listaResultados;
+#if USAR_BASE_DE_DATOS
+	// --- MODO SQL ---
+	String^ sSqlUsuario = "UPDATE Usuarios SET ";
+	sSqlUsuario += " Nombre = '" + usuario->GetNombre() + "', ";
+	sSqlUsuario += " Email = '" + usuario->GetEmail() + "', ";
+	sSqlUsuario += " Contrasenha = '" + usuario->GetContrasenha() + "', ";
+	sSqlUsuario += " UltimoAcceso = '" + usuario->GetUltimoAcceso() + "', ";
+	sSqlUsuario += " EstadoCuenta = '" + usuario->GetEstadoCuenta() + "' ";
+	sSqlUsuario += " WHERE Id = " + usuario->GetId();
+
+	executeSql(sSqlUsuario);
+#else
+	// --- MODO TXT ---
+	escribirArchivo();
+#endif
+}
+
+void UsuarioController::cambiarEstadoUsuario(int id) {
+	Usuario^ usuario = obtenerUsuarioPorId(id);
+	if (usuario != nullptr) {
+		/*bool nuevoEstado = !usuario->GetEstadoCuenta();
+		usuario->SetEstadoCuenta(nuevoEstado);*/
+
+#if USAR_BASE_DE_DATOS
+		// --- MODO SQL ---
+		String^ sSqlUsuario = "UPDATE Usuarios SET EstadoCuenta = '" + nuevoEstado.ToString() + "' WHERE Id = " + id;
+		executeSql(sSqlUsuario);
+#else
+		// --- MODO TXT ---
+		if (usuario->GetEstadoCuenta()) {
+			usuario->SetEstadoCuenta(false);
+		}
+		else {
+			usuario->SetEstadoCuenta(true);
+		}
+		escribirArchivo();
+#endif
+	}
+}
+
+// --- MÉTODOS COMUNES (No dependen de la BD) ---
+
+List<Usuario^>^ UsuarioController::obtenerUsuariosPorEstado(Nullable<bool> estado) {
+	List<Usuario^>^ listaResultados = gcnew List<Usuario^>();
+	for each (Usuario ^ usuario in this->listaUsuarios) {
+		if (!estado.HasValue || usuario->GetEstadoCuenta() == estado.Value) {
+			listaResultados->Add(usuario);
+		}
+	}
+	return listaResultados;
 }
 
 List<Usuario^>^ UsuarioController::obtenerUsuariosHabilitados() {
@@ -136,79 +199,20 @@ List<Usuario^>^ UsuarioController::obtenerUsuariosDeshabilitados() {
 	return obtenerUsuariosPorEstado(false);
 }
 
-void UsuarioController::cambiarEstadoUsuario(int id) {
-	// 1. Obtener el usuario de la lista/memoria (asumiendo que sigue siendo necesario por si se usa en la UI/código)
-	Usuario^ usuario = obtenerUsuarioPorId(id);
-
-	if (usuario != nullptr) {
-		// Determinar el nuevo estado
-		// invierte el estado actual del objeto Usuario en memoria
-		bool nuevoEstado = !usuario->GetEstadoCuenta();
-
-		// Actualizar el objeto Usuario en memoria
-		usuario->SetEstadoCuenta(nuevoEstado);
-
-		// Construir la consulta SQL para actualizar el estado en la base de datos
-		String^ sSqlUsuario = "UPDATE Usuarios SET EstadoCuenta = ";
-
-		// Convertir el booleano 'nuevoEstado' a un valor que la base de datos entienda (p.ej., 1 o 0)
-		// En el ejemplo de INSERT usaste '"+ usuario->GetEstadoCuenta() +"', 
-		// por lo que asumo que tu base de datos acepta directamente la representación string del booleano.
-		sSqlUsuario += " '" + nuevoEstado.ToString() + "' ";
-		sSqlUsuario += " WHERE Id = " + id;
-
-		// Ejecutar la consulta SQL de actualización
-		int filasAfectadas = executeSql(sSqlUsuario);
-
-	}
-}
-
-void UsuarioController::actualizarUsuario(Usuario^ usuario)
-{
-	//  Actualizar el objeto Usuario en la lista en memoria (Lógica existente)
-	for (int i = 0; i < this->listaUsuarios->Count; ++i) {
-		if (this->listaUsuarios[i]->GetId() == usuario->GetId()) {
-			this->listaUsuarios[i] = usuario;
-			break;
-		}
-	}
-
-	String^ sSqlUsuario = "UPDATE Usuarios SET ";
-	sSqlUsuario += " Nombre = '" + usuario->GetNombre() + "', ";
-	sSqlUsuario += " Email = '" + usuario->GetEmail() + "', ";
-	// Nota: Si la contraseña no se cambia en esta acción, es mejor no incluirla
-	// o usar un procedimiento almacenado. La incluyo basándome en tu INSERT previo.
-	sSqlUsuario += " Contrasenha = '" + usuario->GetContrasenha() + "', ";
-	sSqlUsuario += " UltimoAcceso = '" + usuario->GetUltimoAcceso() + "', ";
-	// EstadoCuenta puede o no actualizarse, pero se incluye para una actualización completa.
-	sSqlUsuario += " EstadoCuenta = '" + usuario->GetEstadoCuenta() + "' ";
-	sSqlUsuario += " WHERE Id = " + usuario->GetId();
-
-	// 3. Ejecutar la consulta SQL (Usando la función 'ejecutarSql' hipotética)
-	int filasAfectadas = executeSql(sSqlUsuario);
-}
-
-Usuario^ UsuarioController::obtenerUsuarioPorId(int id){
+Usuario^ UsuarioController::obtenerUsuarioPorId(int id) {
 	for each (Usuario ^ usuario in this->listaUsuarios) {
-		if (usuario->GetId() == id) {
-			return usuario;
-		}
+		if (usuario->GetId() == id) return usuario;
 	}
 	return nullptr;
 }
 
-List<Usuario^>^ UsuarioController::obtenerUsuarioPorNombreEstado(String^ nombre, Nullable<bool> estado){
+List<Usuario^>^ UsuarioController::obtenerUsuarioPorNombreEstado(String^ nombre, Nullable<bool> estado) {
 	List<Usuario^>^ resultados = gcnew List<Usuario^>();
-	List<Usuario^>^ listaBusqueda = gcnew List<Usuario^>();
+	List<Usuario^>^ listaBusqueda;
 
-	/*si no se escoge estado se busca en ambos, si se escoge se busca solo en una de ellas*/
-	if (!estado.HasValue) {
-		listaBusqueda = this->listaUsuarios;
-	}
-	else {
-		listaBusqueda = (estado.Value) ? obtenerUsuariosHabilitados() : obtenerUsuariosDeshabilitados();
-	}
-	
+	if (!estado.HasValue) listaBusqueda = this->listaUsuarios;
+	else listaBusqueda = (estado.Value) ? obtenerUsuariosHabilitados() : obtenerUsuariosDeshabilitados();
+
 	for each (Usuario ^ usuario in listaBusqueda) {
 		bool coincideNombre = (String::IsNullOrEmpty(nombre) || usuario->GetNombre() == nombre);
 		bool coincideEstado = (!estado.HasValue || usuario->GetEstadoCuenta() == estado.Value);
@@ -217,12 +221,10 @@ List<Usuario^>^ UsuarioController::obtenerUsuarioPorNombreEstado(String^ nombre,
 			resultados->Add(usuario);
 		}
 	}
-
 	return resultados;
 }
 
 void UsuarioController::escribirArchivoBINUsuarios() {
-	//Creamos el archivo
 	Stream^ stream = File::Open(this->archivo, FileMode::Create);
 	BinaryFormatter^ formateador = gcnew BinaryFormatter();
 	formateador->Serialize(stream, this->listaUsuarios);

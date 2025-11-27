@@ -2,11 +2,10 @@
 
 using namespace AgroRobotModel;
 
-
 Rol::Rol() {
-    this->Id = 0;
-    this->Nombre = "";
-    this->Permisos = nullptr;
+	this->Id = 0;
+	this->Nombre = "";
+	this->Permisos = nullptr;
 }
 
 Rol::Rol(int id, String^ nombre) {
@@ -16,27 +15,25 @@ Rol::Rol(int id, String^ nombre) {
 }
 
 int Rol::GetId() {
-    return this->Id;
+	return this->Id;
 }
 
 void Rol::SetId(int id) {
-    this->Id = id;
+	this->Id = id;
 }
 
 String^ Rol::GetNombre() {
-    return this->Nombre;
+	return this->Nombre;
 }
 
 void Rol::SetNombre(String^ nombre) {
-    this->Nombre = nombre;
+	this->Nombre = nombre;
 }
 
 List<bool>^ Rol::GetPermisos() {
-    return this->Permisos;
+	return this->Permisos;
 }
 
 void Rol::SetPermisos(List<bool>^ listaPermisos) {
-    this->Permisos = listaPermisos;
+	this->Permisos = listaPermisos;
 }
-
-

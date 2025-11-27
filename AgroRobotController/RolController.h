@@ -16,7 +16,7 @@ namespace AgroRobotController {
 
 		void escribirArchivo();
 		
-		bool agregarRol(Rol^ rol);
+		void agregarRol(Rol^ rol);
 		bool eliminarRol(int id);
 		bool modificarRol(int id, String^ nombre, List<bool>^ listPermisos);
 		Rol^ obtenerRolPorId(int id);
