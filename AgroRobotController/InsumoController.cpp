@@ -111,6 +111,26 @@ int InsumoController::generarNuevoId()
 	return maxId + 1;
 }
 // Métodos para base de datos
+List<Insumo^>^ InsumoController::read_BD()
+{
+	//Creacion de la lista para almacenar los insumos
+	List<Insumo^>^ listaInsumos = gcnew List<Insumo^>();
+	abrirConexion();
+	String^ sql = "Select * from Insumos;";
+	SqlCommand^ comando = gcnew SqlCommand(sql, this->objConexion);
+	SqlDataReader^ data = comando->ExecuteReader();
+	while (data->Read()) {
+		int id = safe_cast<int>(data[0]);
+		String^ nombre = safe_cast<String^>(data[1]);
+		String^ tipo = safe_cast<String^>(data[2]);
+		String^ unidad = safe_cast<String^>(data[3]);
+		Insumo^ insumo = gcnew Insumo(id, nombre, tipo, unidad);
+		listaInsumos->Add(insumo);
+	}
+	cerrarConexion();
+	data->Close();
+	return listaInsumos;
+}
 void InsumoController::agregarInsumo_BD(Insumo^ insumo)
 {
 	String^ nombre = insumo->Nombre;

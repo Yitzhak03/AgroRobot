@@ -13,11 +13,20 @@ SqlConnection^ BaseController::getObjConexion() {
 
 /*Procedimiento: Se abre conexión*/
 void BaseController::abrirConexion() {
-	// Credenciales de conexión
+	
+	// Credenciales de conexión BECQUER
 	String^ nombreServidor = "idb1inf53.cebvoopfg0y1.us-east-1.rds.amazonaws.com";
 	String^ nombreBD = "helloWorld";
 	String^ usuario = "admin";
 	String^ contrasena = "Becquer2003";
+	/*
+	// Credenciales de conexión EDUARDO
+	String^ nombreServidor = "--;
+	String^ nombreBD = "--";
+	String^ usuario = "--";
+	String^ contrasena = "--";
+	*/
+
 	// Construcción de la cadena de conexión
 	String^ connStr = "Server=" + nombreServidor + ";Database=" + nombreBD + ";User id=" + usuario + ";Password=" + contrasena + ";";
 	// Asignación de la cadena de conexión al objeto SqlConnection

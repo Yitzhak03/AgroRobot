@@ -521,7 +521,7 @@ namespace AgroRobotView {
 			lista = insumoCtrl->buscarPorTipo(currentFilter->Trim());
 		} else {
 			// Muestra todos
-			lista = insumoCtrl->readTxt();
+			lista = insumoCtrl->read_BD();
 		}
 
 		mostrarGrilla(lista);

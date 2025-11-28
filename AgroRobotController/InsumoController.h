@@ -18,6 +18,7 @@ namespace AgroRobotController {
 		int generarNuevoId();
 
 		// Métodos para base de datos
+		List<Insumo^>^ read_BD();
 		void agregarInsumo_BD(Insumo^ insumo);
 		void eliminarInsumo_BD(int id);
 		void actualizarInsumo_BD(Insumo^ insumo);
