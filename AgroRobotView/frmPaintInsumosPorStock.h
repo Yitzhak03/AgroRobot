@@ -84,9 +84,9 @@ namespace AgroRobotView {
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
-			this->panel2 = (gcnew System::Windows::Forms::Panel());
-			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->panel2 = (gcnew System::Windows::Forms::Panel());
 			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -175,13 +175,14 @@ namespace AgroRobotView {
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Datos del insumo";
 			// 
-			// panel2
+			// textBox4
 			// 
-			this->panel2->Location = System::Drawing::Point(220, 12);
-			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(154, 143);
-			this->panel2->TabIndex = 4;
-			this->panel2->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &frmPaintInsumosPorStock::panel2_Paint);
+			this->textBox4->Enabled = false;
+			this->textBox4->Location = System::Drawing::Point(86, 136);
+			this->textBox4->Margin = System::Windows::Forms::Padding(2);
+			this->textBox4->Name = L"textBox4";
+			this->textBox4->Size = System::Drawing::Size(95, 20);
+			this->textBox4->TabIndex = 6;
 			// 
 			// label4
 			// 
@@ -193,14 +194,13 @@ namespace AgroRobotView {
 			this->label4->TabIndex = 2;
 			this->label4->Text = L"Unidad:";
 			// 
-			// textBox4
+			// panel2
 			// 
-			this->textBox4->Enabled = false;
-			this->textBox4->Location = System::Drawing::Point(86, 136);
-			this->textBox4->Margin = System::Windows::Forms::Padding(2);
-			this->textBox4->Name = L"textBox4";
-			this->textBox4->Size = System::Drawing::Size(95, 20);
-			this->textBox4->TabIndex = 6;
+			this->panel2->Location = System::Drawing::Point(220, 12);
+			this->panel2->Name = L"panel2";
+			this->panel2->Size = System::Drawing::Size(154, 143);
+			this->panel2->TabIndex = 4;
+			this->panel2->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &frmPaintInsumosPorStock::panel2_Paint);
 			// 
 			// frmPaintInsumosPorStock
 			// 
@@ -211,7 +211,7 @@ namespace AgroRobotView {
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"frmPaintInsumosPorStock";
-			this->Text = L"frmPaintInsumosPorStock";
+			this->Text = L"Insumos Por Stock";
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
 			this->ResumeLayout(false);
