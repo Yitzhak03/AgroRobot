@@ -1,9 +1,10 @@
 #pragma once
+#include "BaseController.h"
 namespace AgroRobotController {
 	using namespace System::Collections::Generic;
 	using namespace AgroRobotModel;
 	using namespace System;
-	public ref class InsumoController {
+	public ref class InsumoController : public BaseController {
 	public:
 		InsumoController();
 		List<Insumo^>^ readTxt();
@@ -15,5 +16,13 @@ namespace AgroRobotController {
 		List<Insumo^>^ buscarPorTipo(String^ tipo);
 		List<String^>^ obtenerTiposInsumos();
 		int generarNuevoId();
+
+		// Métodos para base de datos
+		void agregarInsumo_BD(Insumo^ insumo);
+		void eliminarInsumo_BD(int id);
+		void actualizarInsumo_BD(Insumo^ insumo);
+		Insumo^ buscarPorId_BD(int id);
+		List<Insumo^>^ buscarPorTipo_BD(String^ tipo);
+		List<String^>^ obtenerTiposInsumos_BD();
 	};
 }

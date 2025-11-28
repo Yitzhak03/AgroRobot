@@ -13,9 +13,16 @@ SqlConnection^ BaseController::getObjConexion() {
 
 /*Procedimiento: Se abre conexión*/
 void BaseController::abrirConexion() {
-	/*cambien la base de dato*/
-	this->objConexion->ConnectionString = "Server=200.16.7.140;DataBase=a20232054;User id=a20232054;Password=P34YpxZ2";
-
+	// Credenciales de conexión
+	String^ nombreServidor = "idb1inf53.cebvoopfg0y1.us-east-1.rds.amazonaws.com";
+	String^ nombreBD = "helloWorld";
+	String^ usuario = "admin";
+	String^ contrasena = "Becquer2003";
+	// Construcción de la cadena de conexión
+	String^ connStr = "Server=" + nombreServidor + ";Database=" + nombreBD + ";User id=" + usuario + ";Password=" + contrasena + ";";
+	// Asignación de la cadena de conexión al objeto SqlConnection
+	this->objConexion->ConnectionString = connStr;
+	// Apertura de la conexión
 	this->objConexion->Open();
 }
 

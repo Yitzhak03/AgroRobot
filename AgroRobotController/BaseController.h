@@ -5,9 +5,8 @@ namespace AgroRobotController {
 	using namespace System::Data::SqlClient;
 
 	public ref class BaseController {
-	private:
+	protected:
 		SqlConnection^ objConexion;
-
 	public:
 		/*Constructor*/
 		BaseController();
