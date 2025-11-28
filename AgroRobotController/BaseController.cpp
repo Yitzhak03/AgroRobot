@@ -26,6 +26,27 @@ void BaseController::abrirConexion() {
 	String^ usuario = "--";
 	String^ contrasena = "--";
 	*/
+	/*
+	// Credenciales de conexión BRAYAN
+	String^ nombreServidor = "--;
+	String^ nombreBD = "--";
+	String^ usuario = "--";
+	String^ contrasena = "--";
+	*/
+	/*
+	// Credenciales de conexión LEONARDO
+	String^ nombreServidor = "--;
+	String^ nombreBD = "--";
+	String^ usuario = "--";
+	String^ contrasena = "--";
+	*/
+	/*
+	// Credenciales de conexión FARID
+	String^ nombreServidor = "--;
+	String^ nombreBD = "--";
+	String^ usuario = "--";
+	String^ contrasena = "--";
+	*/
 
 	// Construcción de la cadena de conexión
 	String^ connStr = "Server=" + nombreServidor + ";Database=" + nombreBD + ";User id=" + usuario + ";Password=" + contrasena + ";";
