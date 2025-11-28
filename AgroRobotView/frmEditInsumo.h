@@ -29,7 +29,7 @@ namespace AgroRobotView {
 			InitializeComponent();
 			//Se cargan los datos del insumo seleccionado
 			InsumoController^ insumoCtrl = gcnew InsumoController();
-			Insumo^ insumo = insumoCtrl->buscarPorId(idInsumo);
+			Insumo^ insumo = insumoCtrl->buscarPorId_BD(idInsumo);
 			this->textBox1->Text = Convert::ToString(insumo->Id);
 			this->textBox2->Text = insumo->Nombre;
 			this->textBox3->Text = insumo->Tipo;
@@ -238,7 +238,7 @@ namespace AgroRobotView {
 			this->textBox3->Text,
 			this->textBox5->Text
 		);
-		insumoCtrl->actualizarInsumo(insumo);
+		insumoCtrl->actualizarInsumo_BD(insumo);
 		this->Close();
 	}
 	private: System::Void frmEditInsumo_Load(System::Object^ sender, System::EventArgs^ e)

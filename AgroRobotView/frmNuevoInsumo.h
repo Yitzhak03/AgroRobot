@@ -318,7 +318,7 @@ namespace AgroRobotView {
 
 		// Crear el controlador y agregar el insumo
 		InsumoController^ insumoCtrl = gcnew InsumoController();
-		insumoCtrl->agregarInsumo(nuevoInsumo);
+		insumoCtrl->agregarInsumo_BD(nuevoInsumo);
 
 		// Mensaje de confirmación
 		MessageBox::Show("Insumo agregado correctamente.", "Confirmación", MessageBoxButtons::OK, MessageBoxIcon::Information);

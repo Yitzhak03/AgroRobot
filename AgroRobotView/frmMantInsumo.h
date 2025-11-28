@@ -4,7 +4,6 @@
 #include "frmPaintInsumosPorStock.h"
 #include "frmNuevoStock.h"
 namespace AgroRobotView {
-
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
@@ -12,7 +11,6 @@ namespace AgroRobotView {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-
 	/// <summary>
 	/// Resumen de frmMantInsumo
 	/// </summary>
@@ -26,7 +24,6 @@ namespace AgroRobotView {
 			//
 			currentFilter = nullptr;
 		}
-
 	protected:
 		/// <summary>
 		/// Limpiar los recursos que se estén usando.
@@ -39,32 +36,14 @@ namespace AgroRobotView {
 		}
 	private: System::Windows::Forms::Button^ button5;
 	protected:
-
 	private: System::Windows::Forms::Button^ button3;
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
-
-
-
-
-
 	private: System::Windows::Forms::GroupBox^ groupBox1;
-
-
-
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Button^ button4;
 	private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::ComboBox^ comboBox1;
-
-
-
-
-
-
-
-
-
 	private:
 		/// <summary>
 		/// Variable del diseñador necesaria.
@@ -78,30 +57,8 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
 	private: System::Windows::Forms::Panel^ panel1;
 	private: System::Windows::Forms::Label^ label2;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		   // Nuevo campo para recordar filtro actual (si null o vacío => mostrar todos)
 		   String^ currentFilter;
-
 #pragma region Windows Form Designer generated code
 		   /// <summary>
 		   /// Método necesario para admitir el Diseñador. No se puede modificar
@@ -219,7 +176,8 @@ namespace AgroRobotView {
 			   dataGridViewCellStyle2->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
 			   this->dataGridView1->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
 			   this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			   this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {
+			   this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4)
+			   {
 				   this->Column1,
 					   this->Column2, this->Column3, this->Column5
 			   });
@@ -455,9 +413,7 @@ namespace AgroRobotView {
 
 		   }
 #pragma endregion
-		   //===============================================================================
-		   //==============================Nuevo============================================
-		   //===============================================================================
+		   // Evento para el botón "Nuevo"
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		frmNuevoInsumo^ frm = gcnew frmNuevoInsumo();
@@ -465,9 +421,7 @@ namespace AgroRobotView {
 		// Después de crear, refrescar respetando el filtro actual (si hay)
 		RefreshGrid();
 	}
-		   //===============================================================================
-		   //==============================Eliminar=========================================
-		   //===============================================================================
+		   // Evento para el botón "Mostrar todos"
 	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		if (dataGridView1->SelectedRows->Count > 0) {
@@ -481,7 +435,7 @@ namespace AgroRobotView {
 			if (result == System::Windows::Forms::DialogResult::Yes) {
 				int id = Convert::ToInt32(dataGridView1->SelectedRows[0]->Cells[0]->Value);
 				InsumoController^ insumoCtrl = gcnew InsumoController();
-				insumoCtrl->eliminarInsumo(id);
+				insumoCtrl->eliminarInsumo_BD(id);
 				// En lugar de manipular directamente las filas, volvemos a cargar la grilla
 				RefreshGrid();
 			}
@@ -494,7 +448,7 @@ namespace AgroRobotView {
 			);
 		}
 	}
-		   //Método para mostrar todos los insumos en el DataGridView
+		   // Método para mostrar todos los insumos en el DataGridView
 	private: System::Void mostrarGrilla(List<Insumo^>^ lista)
 	{
 		//Limpiar el DataGridView
@@ -509,27 +463,21 @@ namespace AgroRobotView {
 			);
 		}
 	}
-
-		   // Nuevo método: refrescar la grilla respetando el filtro guardado
+		   // Método para refrescar la grilla respetando el filtro guardado
 	private: System::Void RefreshGrid()
 	{
 		InsumoController^ insumoCtrl = gcnew InsumoController();
 		List<Insumo^>^ lista;
-
 		if (!String::IsNullOrWhiteSpace(currentFilter)) {
 			// Aplica filtro guardado
-			lista = insumoCtrl->buscarPorTipo(currentFilter->Trim());
+			lista = insumoCtrl->buscarPorTipo_BD(currentFilter->Trim());
 		} else {
 			// Muestra todos
 			lista = insumoCtrl->read_BD();
 		}
-
 		mostrarGrilla(lista);
 	}
-
-		   //===============================================================================
-		   //==============================Buscar===========================================
-		   //===============================================================================
+		   // Evento para el botón "Buscar"
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		//Validar campo vacio con trim
@@ -547,10 +495,11 @@ namespace AgroRobotView {
 
 		//Crear el controlador
 		InsumoController^ insumoCtrl = gcnew InsumoController();
-		List<Insumo^>^ lista = insumoCtrl->buscarPorTipo(currentFilter);
+		List<Insumo^>^ lista = insumoCtrl->buscarPorTipo_BD(currentFilter);
 		//Cargar los insumos en el DataGridView
 		mostrarGrilla(lista);
 	}
+		   // Evento para eliminar fila desde el DataGridView
 	private: System::Void dataGridView1_UserDeletingRow(System::Object^ sender, System::Windows::Forms::DataGridViewRowCancelEventArgs^ e)
 	{
 		//Validar si realmente desea eliminar
@@ -566,14 +515,12 @@ namespace AgroRobotView {
 		} else {
 			int id = Convert::ToInt32(e->Row->Cells[0]->Value);
 			InsumoController^ insumoCtrl = gcnew InsumoController();
-			insumoCtrl->eliminarInsumo(id);
+			insumoCtrl->eliminarInsumo_BD(id);
 			RefreshGrid();
 		}
 
 	}
-		   //===============================================================================
-		   //==============================Editar===========================================
-		   //===============================================================================
+		   // Evento para el botón "Editar"
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		if (dataGridView1->SelectedRows->Count == 0) {
@@ -595,30 +542,30 @@ namespace AgroRobotView {
 		//Actualizar la vista respetando el filtro actual
 		RefreshGrid();
 	}
+		   // Evento para cargar los tipos de insumos en el comboBox al desplegar	
 	private: System::Void comboBox1_DropDown(System::Object^ sender, System::EventArgs^ e)
 	{
 		//Cargar los tipos de insumos en el comboBox
 		comboBox1->Items->Clear();
 		InsumoController^ insumoCtrl = gcnew InsumoController();
-		List<String^>^ tipos = insumoCtrl->obtenerTiposInsumos();
+		List<String^>^ tipos = insumoCtrl->obtenerTiposInsumos_BD();
 		for each (String ^ tipo in tipos) {
 			comboBox1->Items->Add(tipo);
 		}
 	}
+		   // Evento para el botón "Mostrar todos"
 	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		// Quitar filtro guardado y mostrar todos
 		currentFilter = nullptr;
 		RefreshGrid();
 	}
+		   // Evento para la carga del formulario
 	private: System::Void frmMantInsumo_Load(System::Object^ sender, System::EventArgs^ e)
 	{
-		// Al cargar el formulario, mostrar todos los insumos
 		RefreshGrid();
 	}
-		   //===============================================================================
-		   //==============================Ver stock=========================================
-		   //===============================================================================
+		   // Evento para el botón "Ver stock"
 	private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		if (dataGridView1->SelectedRows->Count == 0) {
@@ -638,9 +585,7 @@ namespace AgroRobotView {
 		frmPaintInsumosPorStock^ frm = gcnew frmPaintInsumosPorStock(insumo, stocks);
 		frm->ShowDialog();
 	}
-		   //===============================================================================
-		   //==============================Añadir stock=====================================
-		   //===============================================================================
+		   // Evento para el botón "Añadir stock"
 	private: System::Void button7_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		if (dataGridView1->SelectedRows->Count == 0) {
@@ -658,12 +603,11 @@ namespace AgroRobotView {
 		frmNuevoStock^ frm = gcnew frmNuevoStock(insumo);
 		frm->ShowDialog();
 	}
-
 		   // Se busca centrar todo el contenido al redimensionar
 	private: System::Void frmMantInsumo_Resize(System::Object^ sender, System::EventArgs^ e)
 	{
 		panel1->Left = (this->ClientSize.Width - panel1->Width) / 2;
 		panel1->Top = (this->ClientSize.Height - panel1->Height) / 2;
 	}
-};
+	};
 }
