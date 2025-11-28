@@ -1,7 +1,6 @@
 #pragma once
 
 namespace AgroRobotView {
-
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
