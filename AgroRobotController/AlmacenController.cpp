@@ -3,7 +3,6 @@ using namespace AgroRobotController;
 using namespace System::IO;
 using namespace System;
 using namespace System::Runtime::Serialization::Formatters::Binary;
-
 AlmacenController::AlmacenController()
 {
 	this->listaOrdenes = gcnew List<OrdenDistribucion^>();
@@ -13,7 +12,6 @@ AlmacenController::AlmacenController()
 	}
 	this->cargarOrdenesDesdeArchivo();
 }
-
 List<Almacen^>^ AlmacenController::readTxt()
 {
 	// Leer txt de la forma:
@@ -31,7 +29,6 @@ List<Almacen^>^ AlmacenController::readTxt()
 	}
 	return lista;
 }
-
 void AlmacenController::writeTxt(List<Almacen^>^ lista)
 {
 	String^ path = "almacenes.txt";
@@ -42,7 +39,6 @@ void AlmacenController::writeTxt(List<Almacen^>^ lista)
 	}
 	File::WriteAllLines(path, lineas->ToArray());
 }
-
 Almacen^ AlmacenController::buscarPorId(int id)
 {
 	List<Almacen^>^ lista = readTxt();
@@ -53,7 +49,6 @@ Almacen^ AlmacenController::buscarPorId(int id)
 	}
 	return nullptr;
 }
-
 void AlmacenController::agregarAlmacen(Almacen^ almacen)
 {
 	List<Almacen^>^ lista = readTxt();
@@ -61,7 +56,6 @@ void AlmacenController::agregarAlmacen(Almacen^ almacen)
 	// Escribir de nuevo el archivo
 	writeTxt(lista);
 }
-
 int AlmacenController::generarNuevoId()
 {
 	List<Almacen^>^ lista = readTxt();
@@ -112,6 +106,118 @@ int AlmacenController::buscarIdPorNombre(String^ nombre)
 	}
 	return -1;
 }
+
+// ========================Métodos para base de datos========================
+
+// Método para leer los almacenes desde la base de datos
+List<Almacen^>^ AlmacenController::read_BD(){
+	//Creacion de la lista para almacenar los almacenes
+	List<Almacen^>^ listaAlmacenes = gcnew List<Almacen^>();
+	abrirConexion();
+	String^ sql = "Select * from Almacenes;";
+	SqlCommand^ comando = gcnew SqlCommand(sql, this->objConexion);
+	SqlDataReader^ data = comando->ExecuteReader();
+	while (data->Read()) {
+		int id = safe_cast<int>(data[0]);
+		String^ nombre = safe_cast<String^>(data[1]);
+		String^ ubicacion = safe_cast<String^>(data[2]);
+		Almacen^ almacen = gcnew Almacen(id, nombre, ubicacion);
+		listaAlmacenes->Add(almacen);
+	}
+	cerrarConexion();
+	data->Close();
+	return listaAlmacenes;
+}
+// Método para agregar un nuevo almacén a la base de datos
+void AlmacenController::agregarAlmacen_BD(Almacen^ almacen){
+	String^ nombre = almacen->Nombre;
+	String^ ubicacion = almacen->Ubicacion;
+	abrirConexion();
+	String^ sql = "INSERT INTO Almacenes (nombre,ubicacion) VALUES ('" + nombre + "','" + ubicacion + "')";
+	SqlCommand^ comando = gcnew SqlCommand(sql, this->objConexion);
+	comando->ExecuteNonQuery();
+	cerrarConexion();
+}
+// Método para buscar un almacén por su ID en la base de datos
+Almacen^ AlmacenController::buscarPorId_BD(int id){
+	// Crear el objeto para almacenar el almacén encontrado 
+	Almacen^ almacen = nullptr;
+	abrirConexion();
+	String^ sql = "SELECT * FROM Almacenes WHERE id=" + id + ";";
+	SqlCommand^ comando = gcnew SqlCommand(sql, this->objConexion);
+	SqlDataReader^ data = comando->ExecuteReader();
+	if (data->Read()) {
+		int id = safe_cast<int>(data[0]);
+		String^ nombre = safe_cast<String^>(data[1]);
+		String^ ubicacion = safe_cast<String^>(data[2]);
+		almacen = gcnew Almacen(id, nombre, ubicacion);
+	}
+	cerrarConexion();
+	data->Close();
+	return almacen;
+}
+// Método para buscar el nombre de un almacén por su ID en la base de datos
+String^ AlmacenController::buscarNombrePorId_BD(int id){
+	abrirConexion();
+	String^ sql = "SELECT nombre FROM Almacenes WHERE id=" + id + ";";
+	SqlCommand^ comando = gcnew SqlCommand(sql, this->objConexion);
+	SqlDataReader^ data = comando->ExecuteReader();
+	String^ nombre = "";
+	if (data->Read()) {
+		nombre = safe_cast<String^>(data[0]);
+	}
+	cerrarConexion();
+	data->Close();
+	return nombre;
+}
+// Método para buscar el ID de un almacén por su nombre en la base de datos
+int AlmacenController::buscarIdPorNombre_BD(String^ nombre){
+	abrirConexion();
+	String^ sql = "SELECT id FROM Almacenes WHERE nombre='" + nombre + "';";
+	SqlCommand^ comando = gcnew SqlCommand(sql, this->objConexion);
+	SqlDataReader^ data = comando->ExecuteReader();
+	int id = -1;
+	if (data->Read()) {
+		id = safe_cast<int>(data[0]);
+	}
+	cerrarConexion();
+	data->Close();
+	return id;
+}
+// Método para obtener los nombres de todos los almacenes desde la base de datos
+List<String^>^ AlmacenController::obtenerNombresAlmacenes_BD(){
+	// Crear la lista para almacenar los nombres
+	List<String^>^ nombres = gcnew List<String^>();
+	abrirConexion();
+	String^ sql = "SELECT nombre FROM Almacenes;";
+	SqlCommand^ comando = gcnew SqlCommand(sql, this->objConexion);
+	SqlDataReader^ data = comando->ExecuteReader();
+	while (data->Read()) {
+		String^ nombre = safe_cast<String^>(data[0]);
+		nombres->Add(nombre);
+	}
+	cerrarConexion();
+	data->Close();
+	return nombres;
+}
+// Método para obtener un almacén por su nombre desde la base de datos
+Almacen^ AlmacenController::obtenerAlmacenPorNombre_BD(String^ nombre){
+	// Crear el objeto para almacenar el almacén encontrado
+	Almacen^ almacen = nullptr;
+	abrirConexion();
+	String^ sql = "SELECT * FROM Almacenes WHERE nombre='" + nombre + "';";
+	SqlCommand^ comando = gcnew SqlCommand(sql, this->objConexion);
+	SqlDataReader^ data = comando->ExecuteReader();
+	if (data->Read()) {
+		int id = safe_cast<int>(data[0]);
+		String^ nombre = safe_cast<String^>(data[1]);
+		String^ ubicacion = safe_cast<String^>(data[2]);
+		almacen = gcnew Almacen(id, nombre, ubicacion);
+	}
+	cerrarConexion();
+	data->Close();
+	return almacen;
+}
 //=====================================OTROS=================================================
 void AlmacenController::guardarOrdenesEnArchivo() {
 	List<String^>^ lineas = gcnew List<String^>();
@@ -126,7 +232,6 @@ void AlmacenController::guardarOrdenesEnArchivo() {
 	}
 	File::WriteAllLines("ordenes.txt", lineas->ToArray());
 }
-
 void AlmacenController::cargarOrdenesDesdeArchivo() {
 	this->listaOrdenes = gcnew List<OrdenDistribucion^>(); // Inicializar la lista
 
@@ -164,7 +269,6 @@ void AlmacenController::cargarOrdenesDesdeArchivo() {
 		this->listaOrdenes = gcnew List<OrdenDistribucion^>();
 	}
 }
-
 bool AlmacenController::registrarOrden(OrdenDistribucion^ orden) {
 	// 1. Agregar a la lista en memoria
 	this->listaOrdenes->Add(orden);
@@ -189,18 +293,15 @@ bool AlmacenController::registrarOrden(OrdenDistribucion^ orden) {
 		return false;
 	}
 }
-
 List <OrdenDistribucion^>^ AlmacenController::listarOrdenes() {
 	return this->listaOrdenes;
 }
-
 void AlmacenController::escribirArchivoBINOrdenes() {
 	Stream^ stream = File::Open(this->archivoOrdenes, FileMode::Create);
 	BinaryFormatter^ formateador = gcnew BinaryFormatter();
 	formateador->Serialize(stream, this->listaOrdenes);
 	stream->Close();
 }
-
 // **Función para agregar a AlmacenController.cpp**
 int AlmacenController::obtenerMaximoIdOrden() {
 	int maxId = 0;
