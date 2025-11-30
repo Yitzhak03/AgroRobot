@@ -341,8 +341,6 @@ namespace AgroRobotView {
 		StockInsumo^ stock = safe_cast<StockInsumo^>(picBox->Tag);
 		ShowStockDetails(stock);
 	}
-
-
 		   // Ventana de detalles (ejemplo simple con MessageBox)
 	private: void ShowStockDetails(StockInsumo^ stock)
 	{

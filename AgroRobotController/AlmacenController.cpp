@@ -10,7 +10,7 @@ AlmacenController::AlmacenController()
 	if (!File::Exists("ordenes.txt")) {
 		File::WriteAllText("ordenes.txt", "");
 	}
-	this->cargarOrdenesDesdeArchivo();
+	//this->cargarOrdenesDesdeArchivo();
 }
 List<Almacen^>^ AlmacenController::readTxt()
 {

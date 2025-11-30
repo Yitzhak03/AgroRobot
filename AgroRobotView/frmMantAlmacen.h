@@ -307,7 +307,7 @@ namespace AgroRobotView {
 	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		AlmacenController^ almacenCtrl = gcnew AlmacenController();
-		List<Almacen^>^ lista = almacenCtrl->readTxt();
+		List<Almacen^>^ lista = almacenCtrl->read_BD();
 		mostrarGrilla(lista);
 	}
 
@@ -362,7 +362,7 @@ namespace AgroRobotView {
 		}
 		int idAlmacen = Convert::ToInt32(dataGridView1->SelectedRows[0]->Cells[0]->Value);
 		AlmacenController^ almCtrl = gcnew AlmacenController();
-		Almacen^ almacen = almCtrl->buscarPorId(idAlmacen);
+		Almacen^ almacen = almCtrl->buscarPorId_BD(idAlmacen);
 		StockInsumoController^ stockCtrl = gcnew StockInsumoController();
 		List<StockInsumo^>^ stocks = stockCtrl->buscarPorIdAlmacen(idAlmacen);
 		frmPaintStockPorAlmacen^ frm = gcnew frmPaintStockPorAlmacen(almacen, stocks);
