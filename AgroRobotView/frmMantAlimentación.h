@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "frmProgreso.h"
+#include "frmRendimiento.h"
 
 namespace AgroRobotView {
 
@@ -21,6 +22,7 @@ namespace AgroRobotView {
 		{
 			InitializeComponent();
 			this->animalController = gcnew GestorNutricionalController();
+			this->rendimientoController = gcnew RendimientoController();
 
 			// Aplicar el diseño Menta/Bosque
 			AplicarEstiloProfesional();
@@ -43,8 +45,6 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::GroupBox^ groupBox2;
 	private: System::Windows::Forms::Button^ button3;
-	private: GestorNutricionalController^ animalController;
-	private: frmProgreso^ ventanaProgreso;
 	private: System::IO::Ports::SerialPort^ serialPort1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
@@ -53,6 +53,13 @@ namespace AgroRobotView {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column5;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column6;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column7;
+	private: System::Windows::Forms::GroupBox^ groupBox3;
+	private: System::Windows::Forms::Button^ btonMotores;
+	private: GestorNutricionalController^ animalController;
+	private: frmProgreso^ ventanaProgreso;
+	private: RendimientoController^ rendimientoController;
+
+
 	private: System::ComponentModel::Container^ components;
 
 		   // ===================================================================================
@@ -183,14 +190,20 @@ namespace AgroRobotView {
 			   this->button2 = (gcnew System::Windows::Forms::Button());
 			   this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
 			   this->button3 = (gcnew System::Windows::Forms::Button());
+			   this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
+			   this->btonMotores = (gcnew System::Windows::Forms::Button());
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			   this->groupBox1->SuspendLayout();
 			   this->groupBox2->SuspendLayout();
+			   this->groupBox3->SuspendLayout();
 			   this->SuspendLayout();
+			   // 
 			   // dataGridView1
+			   // 
 			   this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			   this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^ >(7) {
-				   this->Column1, this->Column2, this->Column3, this->Column4, this->Column5, this->Column6, this->Column7
+			   this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(7) {
+				   this->Column1,
+					   this->Column2, this->Column3, this->Column4, this->Column5, this->Column6, this->Column7
 			   });
 			   this->dataGridView1->Location = System::Drawing::Point(17, 132);
 			   this->dataGridView1->Name = L"dataGridView1";
@@ -199,15 +212,45 @@ namespace AgroRobotView {
 			   this->dataGridView1->Size = System::Drawing::Size(679, 229);
 			   this->dataGridView1->TabIndex = 13;
 			   this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &frmMantAlimentación::dataGridView1_CellContentClick);
-			   // Columnas
-			   this->Column1->HeaderText = L"ID Animal"; this->Column1->Visible = false;
+			   // 
+			   // Column1
+			   // 
+			   this->Column1->HeaderText = L"ID Animal";
+			   this->Column1->Name = L"Column1";
+			   this->Column1->Visible = false;
+			   // 
+			   // Column2
+			   // 
 			   this->Column2->HeaderText = L"Especie";
+			   this->Column2->Name = L"Column2";
+			   // 
+			   // Column3
+			   // 
 			   this->Column3->HeaderText = L"Peso";
+			   this->Column3->Name = L"Column3";
+			   // 
+			   // Column4
+			   // 
 			   this->Column4->HeaderText = L"Edad";
+			   this->Column4->Name = L"Column4";
+			   // 
+			   // Column5
+			   // 
 			   this->Column5->HeaderText = L"Estado de salud";
+			   this->Column5->Name = L"Column5";
+			   // 
+			   // Column6
+			   // 
 			   this->Column6->HeaderText = L"Ultima dieta";
+			   this->Column6->Name = L"Column6";
+			   // 
+			   // Column7
+			   // 
 			   this->Column7->HeaderText = L"Ultima Vez Alimentado";
-			   // groupBox1 (Búsqueda)
+			   this->Column7->Name = L"Column7";
+			   // 
+			   // groupBox1
+			   // 
 			   this->groupBox1->Controls->Add(this->button1);
 			   this->groupBox1->Controls->Add(this->textBox2);
 			   this->groupBox1->Controls->Add(this->label2);
@@ -217,7 +260,9 @@ namespace AgroRobotView {
 			   this->groupBox1->TabIndex = 14;
 			   this->groupBox1->TabStop = false;
 			   this->groupBox1->Text = L"Criterios de Búsqueda";
-			   // button1 (Buscar)
+			   // 
+			   // button1
+			   // 
 			   this->button1->Location = System::Drawing::Point(532, 44);
 			   this->button1->Name = L"button1";
 			   this->button1->Size = System::Drawing::Size(75, 24);
@@ -225,48 +270,80 @@ namespace AgroRobotView {
 			   this->button1->Text = L"Buscar";
 			   this->button1->UseVisualStyleBackColor = true;
 			   this->button1->Click += gcnew System::EventHandler(this, &frmMantAlimentación::button1_Click);
+			   // 
 			   // textBox2
+			   // 
 			   this->textBox2->Location = System::Drawing::Point(366, 47);
 			   this->textBox2->Name = L"textBox2";
 			   this->textBox2->Size = System::Drawing::Size(93, 20);
 			   this->textBox2->TabIndex = 3;
+			   // 
 			   // label2
+			   // 
 			   this->label2->AutoSize = true;
 			   this->label2->Location = System::Drawing::Point(282, 50);
 			   this->label2->Name = L"label2";
 			   this->label2->Size = System::Drawing::Size(51, 13);
 			   this->label2->TabIndex = 1;
 			   this->label2->Text = L"Especie: ";
-			   // button2 (Por Especie)
-			   this->button2->Location = System::Drawing::Point(33, 53);
+			   // 
+			   // button2
+			   // 
+			   this->button2->Location = System::Drawing::Point(33, 36);
 			   this->button2->Name = L"button2";
 			   this->button2->Size = System::Drawing::Size(90, 24);
 			   this->button2->TabIndex = 5;
 			   this->button2->Text = L"Por especie";
 			   this->button2->UseVisualStyleBackColor = true;
 			   this->button2->Click += gcnew System::EventHandler(this, &frmMantAlimentación::button2_Click);
-			   // groupBox2 (Alimentar)
+			   // 
+			   // groupBox2
+			   // 
 			   this->groupBox2->Controls->Add(this->button3);
 			   this->groupBox2->Controls->Add(this->button2);
 			   this->groupBox2->Location = System::Drawing::Point(713, 132);
 			   this->groupBox2->Name = L"groupBox2";
-			   this->groupBox2->Size = System::Drawing::Size(156, 229);
+			   this->groupBox2->Size = System::Drawing::Size(156, 133);
 			   this->groupBox2->TabIndex = 5;
 			   this->groupBox2->TabStop = false;
 			   this->groupBox2->Text = L"Alimentar";
-			   // button3 (Por Animal)
-			   this->button3->Location = System::Drawing::Point(33, 152);
+			   // 
+			   // button3
+			   // 
+			   this->button3->Location = System::Drawing::Point(33, 84);
 			   this->button3->Name = L"button3";
 			   this->button3->Size = System::Drawing::Size(90, 24);
 			   this->button3->TabIndex = 6;
 			   this->button3->Text = L"Por animal";
 			   this->button3->UseVisualStyleBackColor = true;
 			   this->button3->Click += gcnew System::EventHandler(this, &frmMantAlimentación::button3_Click);
-
+			   // 
+			   // groupBox3
+			   // 
+			   this->groupBox3->Controls->Add(this->btonMotores);
+			   this->groupBox3->Location = System::Drawing::Point(713, 283);
+			   this->groupBox3->Name = L"groupBox3";
+			   this->groupBox3->Size = System::Drawing::Size(156, 79);
+			   this->groupBox3->TabIndex = 7;
+			   this->groupBox3->TabStop = false;
+			   this->groupBox3->Text = L"Revisión de Robot";
+			   // 
+			   // btonMotores
+			   // 
+			   this->btonMotores->Location = System::Drawing::Point(33, 33);
+			   this->btonMotores->Name = L"btonMotores";
+			   this->btonMotores->Size = System::Drawing::Size(90, 24);
+			   this->btonMotores->TabIndex = 5;
+			   this->btonMotores->Text = L"Ver Motores";
+			   this->btonMotores->UseVisualStyleBackColor = true;
+			   this->btonMotores->Click += gcnew System::EventHandler(this, &frmMantAlimentación::btonMotores_Click);
+			   // 
 			   // frmMantAlimentación
+			   // 
 			   this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			   this->ClientSize = System::Drawing::Size(881, 385);
+			   this->Controls->Add(this->groupBox3);
 			   this->Controls->Add(this->groupBox2);
 			   this->Controls->Add(this->groupBox1);
 			   this->Controls->Add(this->dataGridView1);
@@ -278,7 +355,9 @@ namespace AgroRobotView {
 			   this->groupBox1->ResumeLayout(false);
 			   this->groupBox1->PerformLayout();
 			   this->groupBox2->ResumeLayout(false);
+			   this->groupBox3->ResumeLayout(false);
 			   this->ResumeLayout(false);
+
 		   }
 #pragma endregion
 
@@ -342,6 +421,12 @@ namespace AgroRobotView {
 	}
 
 	private: System::Void frmMantAlimentación_Load(System::Object^ sender, System::EventArgs^ e) {
+		//SOLO SI NO HAY UNA INSTANCIA DE RENDIMIENTO SE VA A CREAR, PUES SOLO SE NECESITA 1
+		if (this->rendimientoController->buscarTodos()->Count < 1) {
+			Rendimiento^ rendimiento = gcnew Rendimiento(1, 0, 0, 0);
+			this->rendimientoController->agregarRendimiento(rendimiento);
+		}
+		
 		List<Animal^>^ listaAnimales = this->animalController->obtenerTodosAnimales();
 		mostrarGrilla(listaAnimales);
 
@@ -364,6 +449,7 @@ namespace AgroRobotView {
 		}
 	}
 
+	//ALIMENTAR 1 ESPECIE ENTERA
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (this->dataGridView1->SelectedRows->Count > 0) {
 			int fila = this->dataGridView1->SelectedRows[0]->Index;
@@ -373,6 +459,7 @@ namespace AgroRobotView {
 			if (animal == nullptr) return;
 
 			int cantidad = this->animalController->consultarAnimalporIdEspecie(0, animal->Especie)->Count;
+			this->rendimientoController->actualizarxAnimal(cantidad);//se actualiza el rendimiento
 
 			if (!serialPort1->IsOpen) {
 				MessageBox::Show("Puerto cerrado.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -390,6 +477,7 @@ namespace AgroRobotView {
 		}
 	}
 
+	//ALIMENTAR 1 ANIMAL
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (this->dataGridView1->SelectedRows->Count > 0) {
 			int id = Convert::ToInt32(this->dataGridView1->Rows[this->dataGridView1->SelectedRows[0]->Index]->Cells[0]->Value);
@@ -404,6 +492,7 @@ namespace AgroRobotView {
 
 			String^ fecha = DateTime::Now.ToString("dd/MM/yyyy HH:mm");
 			this->animalController->modificarUltimaAlimentacion(id, fecha);
+			this->rendimientoController->actualizarxAnimal(1);
 		}
 		else {
 			MessageBox::Show("Seleccione un animal.", "Aviso", MessageBoxButtons::OK, MessageBoxIcon::Warning);
@@ -420,5 +509,9 @@ namespace AgroRobotView {
 		catch (...) {}
 	}
 	private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {}
-	};
+	
+	private: System::Void btonMotores_Click(System::Object^ sender, System::EventArgs^ e) {
+		frmRendimiento^ ventanaRendimiento = gcnew frmRendimiento();
+	}
+};
 }

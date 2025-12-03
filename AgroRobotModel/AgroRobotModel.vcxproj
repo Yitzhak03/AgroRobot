@@ -125,6 +125,7 @@
     <ClCompile Include="OrdenDistribucion.cpp" />
     <ClCompile Include="ParametroNutricional.cpp" />
     <ClCompile Include="RegistroActividad.cpp" />
+    <ClCompile Include="Rendimiento.cpp" />
     <ClCompile Include="Reporte.cpp" />
     <ClCompile Include="ReporteAlimentacion.cpp" />
     <ClCompile Include="ReporteData.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="OrdenDistribucion.h" />
     <ClInclude Include="ParametroNutricional.h" />
     <ClInclude Include="RegistroActividad.h" />
+    <ClInclude Include="Rendimiento.h" />
     <ClInclude Include="Reporte.h" />
     <ClInclude Include="ReporteAlimentacion.h" />
     <ClInclude Include="ReporteData.h" />
