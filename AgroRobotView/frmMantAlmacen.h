@@ -320,7 +320,7 @@ namespace AgroRobotView {
 				Convert::ToString(a->Id),
 				a->Nombre,
 				a->Ubicacion,
-				Convert::ToString(SICtrl->cantidadInsumosEnAlmacen(a->Id))
+				Convert::ToString(SICtrl->cantidadInsumosEnAlmacen_BD(a->Id))
 			);
 		}
 	}
@@ -364,7 +364,7 @@ namespace AgroRobotView {
 		AlmacenController^ almCtrl = gcnew AlmacenController();
 		Almacen^ almacen = almCtrl->buscarPorId_BD(idAlmacen);
 		StockInsumoController^ stockCtrl = gcnew StockInsumoController();
-		List<StockInsumo^>^ stocks = stockCtrl->buscarPorIdAlmacen(idAlmacen);
+		List<StockInsumo^>^ stocks = stockCtrl->buscarPorIdAlmacen_BD(idAlmacen);
 		frmPaintStockPorAlmacen^ frm = gcnew frmPaintStockPorAlmacen(almacen, stocks);
 		frm->ShowDialog();
 	}

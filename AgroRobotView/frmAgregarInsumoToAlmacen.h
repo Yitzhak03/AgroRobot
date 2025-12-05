@@ -512,7 +512,7 @@ namespace AgroRobotView {
 		Almacen^ almacen = aCtrl->obtenerAlmacenPorNombre(nombreAlmacen);
 		if (almacen != nullptr) {
 			StockInsumoController^ sCtrl = gcnew StockInsumoController();
-			List<StockInsumo^>^ listaStockInsumos = sCtrl->buscarPorIdAlmacen(almacen->Id);
+			List<StockInsumo^>^ listaStockInsumos = sCtrl->buscarPorIdAlmacen_BD(almacen->Id);
 			mostrarGrilla1(listaStockInsumos);
 		}
 	}
@@ -524,7 +524,7 @@ namespace AgroRobotView {
 		textBox2->Text = nombreAlmacen;
 		//Mostrar la grilla del almacén destino
 		StockInsumoController^ sCtrl = gcnew StockInsumoController();
-		List<StockInsumo^>^ listaStockInsumos = sCtrl->buscarPorIdAlmacen(this->idAlmacenDestino);
+		List<StockInsumo^>^ listaStockInsumos = sCtrl->buscarPorIdAlmacen_BD(this->idAlmacenDestino);
 		mostrarGrilla2(listaStockInsumos);
 	}
 
@@ -533,9 +533,9 @@ namespace AgroRobotView {
 		if (dataGridView1->SelectedRows->Count > 0) {
 			StockInsumoController^ sCtrl = gcnew StockInsumoController();
 			int idStock = Convert::ToInt32(dataGridView1->SelectedRows[0]->Cells[0]->Value);
-			StockInsumo^ stockOrigen = sCtrl->buscarPorId(idStock);
+			StockInsumo^ stockOrigen = sCtrl->buscarPorId_BD(idStock);
 
-			StockInsumo^ stockDestino = sCtrl->buscarPorIdInsumoYAlmacen(stockOrigen->Insumoo->Id, this->idAlmacenDestino);
+			StockInsumo^ stockDestino = sCtrl->buscarPorIdInsumoYAlmacen_BD(stockOrigen->Insumoo->Id, this->idAlmacenDestino);
 
 			if (stockDestino != nullptr) {
 				float cantidadATransferir;
@@ -554,8 +554,8 @@ namespace AgroRobotView {
 
 				stockOrigen->Stock -= cantidadATransferir;
 				stockDestino->Stock += cantidadATransferir;
-				sCtrl->actualizarStockInsumo(stockOrigen);
-				sCtrl->actualizarStockInsumo(stockDestino);
+				sCtrl->actualizarStockInsumo_BD(stockOrigen);
+				sCtrl->actualizarStockInsumo_BD(stockDestino);
 
 				button3_Click(nullptr, nullptr);
 				button4_Click(nullptr, nullptr);
@@ -582,7 +582,7 @@ namespace AgroRobotView {
 	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		StockInsumoController^ sCtrl = gcnew StockInsumoController();
-		List<StockInsumo^>^ listaStockInsumos = sCtrl->buscarPorIdAlmacen(this->idAlmacenDestino);
+		List<StockInsumo^>^ listaStockInsumos = sCtrl->buscarPorIdAlmacen_BD(this->idAlmacenDestino);
 		mostrarGrilla2(listaStockInsumos);
 	}
 	};

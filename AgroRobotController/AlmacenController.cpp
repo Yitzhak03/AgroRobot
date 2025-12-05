@@ -12,100 +12,6 @@ AlmacenController::AlmacenController()
 	}
 	//this->cargarOrdenesDesdeArchivo();
 }
-List<Almacen^>^ AlmacenController::readTxt()
-{
-	// Leer txt de la forma:
-	// Id(int);Nombre(String^);Ubicacion(String^)
-	List<Almacen^>^ lista = gcnew List<Almacen^>();
-	String^ path = "almacenes.txt";
-	array<String^>^ lineas = File::ReadAllLines(path);
-	for each (String ^ linea in lineas) {
-		array<String^>^ datos = linea->Split(';');
-		Almacen^ almacen = gcnew Almacen();
-		almacen->Id = Convert::ToInt32(datos[0]);
-		almacen->Nombre = datos[1];
-		almacen->Ubicacion = datos[2];
-		lista->Add(almacen);
-	}
-	return lista;
-}
-void AlmacenController::writeTxt(List<Almacen^>^ lista)
-{
-	String^ path = "almacenes.txt";
-	List<String^>^ lineas = gcnew List<String^>();
-	for each (Almacen ^ a in lista) {
-		String^ linea = Convert::ToString(a->Id) + ";" + a->Nombre + ";" + a->Ubicacion;
-		lineas->Add(linea);
-	}
-	File::WriteAllLines(path, lineas->ToArray());
-}
-Almacen^ AlmacenController::buscarPorId(int id)
-{
-	List<Almacen^>^ lista = readTxt();
-	for each (Almacen ^ a in lista) {
-		if (a->Id == id) {
-			return a;
-		}
-	}
-	return nullptr;
-}
-void AlmacenController::agregarAlmacen(Almacen^ almacen)
-{
-	List<Almacen^>^ lista = readTxt();
-	lista->Add(almacen);
-	// Escribir de nuevo el archivo
-	writeTxt(lista);
-}
-int AlmacenController::generarNuevoId()
-{
-	List<Almacen^>^ lista = readTxt();
-	int maxId = -1;
-	for each (Almacen ^ a in lista) {
-		if (a->Id > maxId) {
-			maxId = a->Id;
-		}
-	}
-	return maxId + 1;
-}
-List<String^>^ AlmacenController::obtenerNombresAlmacenes()
-{
-	List<Almacen^>^ lista = readTxt();
-	List<String^>^ nombres = gcnew List<String^>();
-	for each (Almacen ^ a in lista) {
-		nombres->Add(a->Nombre);
-	}
-	return nombres;
-}
-Almacen^ AlmacenController::obtenerAlmacenPorNombre(String^ nombre)
-{
-	List<Almacen^>^ lista = readTxt();
-	for each (Almacen ^ a in lista) {
-		if (a->Nombre == nombre) {
-			return a;
-		}
-	}
-	return nullptr;
-}
-String^ AlmacenController::buscarNombrePorId(int id)
-{
-	List<Almacen^>^ lista = readTxt();
-	for each (Almacen ^ a in lista) {
-		if (a->Id == id) {
-			return a->Nombre;
-		}
-	}
-	return "";
-}
-int AlmacenController::buscarIdPorNombre(String^ nombre)
-{
-	List<Almacen^>^ lista = readTxt();
-	for each (Almacen ^ a in lista) {
-		if (a->Nombre == nombre) {
-			return a->Id;
-		}
-	}
-	return -1;
-}
 
 // ========================Métodos para base de datos========================
 
@@ -218,7 +124,9 @@ Almacen^ AlmacenController::obtenerAlmacenPorNombre_BD(String^ nombre){
 	data->Close();
 	return almacen;
 }
-//=====================================OTROS=================================================
+
+//============================ Otros métodos ============================
+
 void AlmacenController::guardarOrdenesEnArchivo() {
 	List<String^>^ lineas = gcnew List<String^>();
 	for each (OrdenDistribucion ^ orden in this->listaOrdenes) {

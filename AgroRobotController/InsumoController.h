@@ -7,16 +7,6 @@ namespace AgroRobotController {
 	public ref class InsumoController : public BaseController {
 	public:
 		InsumoController();
-		List<Insumo^>^ readTxt();
-		void writeTxt(List<Insumo^>^ lista);
-		void agregarInsumo(Insumo^ insumo);
-		void eliminarInsumo(int id);
-		void actualizarInsumo(Insumo^ insumo);
-		Insumo^ buscarPorId(int id);
-		List<Insumo^>^ buscarPorTipo(String^ tipo);
-		List<String^>^ obtenerTiposInsumos();
-		int generarNuevoId();
-
 		// Métodos para base de datos
 		List<Insumo^>^ read_BD();
 		void agregarInsumo_BD(Insumo^ insumo);

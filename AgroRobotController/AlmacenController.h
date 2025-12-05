@@ -13,21 +13,6 @@ namespace AgroRobotController {
 
 	public:
 		AlmacenController();
-		List<Almacen^>^ readTxt();
-		void writeTxt(List<Almacen^>^ lista);
-		void agregarAlmacen(Almacen^ almacen);
-		Almacen^ buscarPorId(int id);
-		String^ buscarNombrePorId(int id);
-		int buscarIdPorNombre(String^ nombre);
-		int generarNuevoId();
-		List<String^>^ obtenerNombresAlmacenes();
-		Almacen^ obtenerAlmacenPorNombre(String^ nombre);
-		List<OrdenDistribucion^>^ listarOrdenes();
-		void cargarOrdenesDesdeArchivo();
-		void guardarOrdenesEnArchivo();
-		bool registrarOrden(OrdenDistribucion^ orden);
-		void escribirArchivoBINOrdenes();
-		int obtenerMaximoIdOrden();
 		// Métodos para base de datos
 		List<Almacen^>^ read_BD();
 		void agregarAlmacen_BD(Almacen^ almacen);
@@ -36,5 +21,12 @@ namespace AgroRobotController {
 		int buscarIdPorNombre_BD(String^ nombre);
 		List<String^>^ obtenerNombresAlmacenes_BD();
 		Almacen^ obtenerAlmacenPorNombre_BD(String^ nombre);
+		// Otros métodos
+		List<OrdenDistribucion^>^ listarOrdenes();
+		void cargarOrdenesDesdeArchivo();
+		void guardarOrdenesEnArchivo();
+		bool registrarOrden(OrdenDistribucion^ orden);
+		void escribirArchivoBINOrdenes();
+		int obtenerMaximoIdOrden();
 	};
 }

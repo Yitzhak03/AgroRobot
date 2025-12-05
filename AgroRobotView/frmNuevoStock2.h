@@ -308,22 +308,22 @@ namespace AgroRobotView {
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		StockInsumoController^ sCtrl = gcnew StockInsumoController();
-		int nuevoId = sCtrl->generarNuevoId();
+		//int nuevoId = sCtrl->generarNuevoId();
 		AlmacenController^ aCtrl = gcnew AlmacenController();
-		Almacen^ almacenDestino = aCtrl->buscarPorId(this->idAlmacen);
+		Almacen^ almacenDestino = aCtrl->buscarPorId_BD(this->idAlmacen);
 		//Crear el nuevo stockInsumo para el almacén destino
 		StockInsumo^ nuevoStockInsumo = gcnew StockInsumo(
-			nuevoId,
+			1,
 			this->stockOrigen->Insumoo,
 			almacenDestino,
 			Convert::ToSingle(textBox4->Text),
 			Convert::ToSingle(textBox5->Text),
 			Convert::ToSingle(textBox3->Text)
 		);
-		sCtrl->agregarStockInsumo(nuevoStockInsumo);
+		sCtrl->agregarStockInsumo_BD(nuevoStockInsumo);
 		//Actualizar el stock del almacén origen
 		this->stockOrigen->Stock -= Convert::ToSingle(textBox4->Text);
-		sCtrl->actualizarStockInsumo(stockOrigen);
+		sCtrl->actualizarStockInsumo_BD(stockOrigen);
 		MessageBox::Show("El insumo ha sido agregado al almacén destino correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
 		this->Close();
 	}

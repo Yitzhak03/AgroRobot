@@ -315,7 +315,7 @@ namespace AgroRobotView {
 		StockInsumoController^ stockCtrl = gcnew StockInsumoController();
 		AlmacenController^ almacenCtrl = gcnew AlmacenController();
 		int idAlmacen = almacenCtrl->buscarIdPorNombre("Principal");
-		StockInsumo^ stockExistente = stockCtrl->buscarPorIdInsumoYAlmacen(this->insumoSeleccionado->Id, idAlmacen);
+		StockInsumo^ stockExistente = stockCtrl->buscarPorIdInsumoYAlmacen_BD(this->insumoSeleccionado->Id, idAlmacen);
 		if (stockExistente != nullptr) {
 			// Indicar estado del stock
 			this->textBox2->Text = "Existente";
@@ -341,24 +341,23 @@ namespace AgroRobotView {
 		//Validar si agregar nuevo stock o actualizar existente por el estado
 		if (this->textBox2->Text == "Nuevo") {
 			//Agregar nuevo stock
-			int nuevoId = stockCtrl->generarNuevoId();
 			Almacen^ almacen = almacenCtrl->obtenerAlmacenPorNombre("Principal");
 			StockInsumo^ nuevoStock = gcnew StockInsumo(
-				nuevoId,
+				1,
 				this->insumoSeleccionado,
 				almacen,
 				Convert::ToSingle(this->textBox4->Text),
 				Convert::ToSingle(this->textBox5->Text),
 				Convert::ToSingle(this->textBox3->Text)
 			);
-			stockCtrl->agregarStockInsumo(nuevoStock);
+			stockCtrl->agregarStockInsumo_BD(nuevoStock);
 			MessageBox::Show("Stock agregado correctamente.");
 		} else {
-			int idAlmacen = almacenCtrl->buscarIdPorNombre(this->textBox1->Text);
-			StockInsumo^ stockExistente = stockCtrl->buscarPorIdInsumoYAlmacen(this->insumoSeleccionado->Id, idAlmacen);
+			int idAlmacen = almacenCtrl->buscarIdPorNombre_BD(this->textBox1->Text);
+			StockInsumo^ stockExistente = stockCtrl->buscarPorIdInsumoYAlmacen_BD(this->insumoSeleccionado->Id, idAlmacen);
 			//Actualizar el stock existente sumando el nuevo valor
 			stockExistente->Stock += Convert::ToSingle(this->textBox4->Text);
-			stockCtrl->actualizarStockInsumo(stockExistente);
+			stockCtrl->actualizarStockInsumo_BD(stockExistente);
 			MessageBox::Show("Stock actualizado correctamente.");
 		}
 		this->Close();

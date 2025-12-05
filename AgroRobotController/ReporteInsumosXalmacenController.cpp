@@ -17,7 +17,7 @@ List<ReporteInsumosXalmacen^>^ ReporteInsumosXalmacenController::generarReporte(
 	// Contar los insumos por cada almacen
 	StockInsumoController^ stockCtrl = gcnew StockInsumoController();
 	for each (Almacen^ a in almacenes) {
-		int cantInsumos = stockCtrl->cantidadInsumosEnAlmacen(a->Id);
+		int cantInsumos = stockCtrl->cantidadInsumosEnAlmacen_BD(a->Id);
 		ReporteInsumosXalmacen^ reporteItem = gcnew ReporteInsumosXalmacen(a->Nombre, cantInsumos);
 		reporte->Add(reporteItem);
 	}

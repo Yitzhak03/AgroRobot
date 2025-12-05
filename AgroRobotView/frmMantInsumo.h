@@ -581,7 +581,7 @@ namespace AgroRobotView {
 		InsumoController^ insumoCtrl = gcnew InsumoController();
 		Insumo^ insumo = insumoCtrl->buscarPorId_BD(idInsumo);
 		StockInsumoController^ stockCtrl = gcnew StockInsumoController();
-		List<StockInsumo^>^ stocks = stockCtrl->buscarPorIdInsumo(idInsumo);
+		List<StockInsumo^>^ stocks = stockCtrl->buscarPorIdInsumo_BD(idInsumo);
 		frmPaintInsumosPorStock^ frm = gcnew frmPaintInsumosPorStock(insumo, stocks);
 		frm->ShowDialog();
 	}
@@ -599,7 +599,7 @@ namespace AgroRobotView {
 		}
 		int idInsumo = Convert::ToInt32(dataGridView1->SelectedRows[0]->Cells[0]->Value);
 		InsumoController^ insumoCtrl = gcnew InsumoController();
-		Insumo^ insumo = insumoCtrl->buscarPorId(idInsumo);
+		Insumo^ insumo = insumoCtrl->buscarPorId_BD(idInsumo);
 		frmNuevoStock^ frm = gcnew frmNuevoStock(insumo);
 		frm->ShowDialog();
 	}
