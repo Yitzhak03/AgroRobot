@@ -320,7 +320,7 @@ namespace AgroRobotView {
 	private: System::Void btnReemplazarDer_Click(System::Object^ sender, System::EventArgs^ e) {
 		System::Windows::Forms::DialogResult resultado = System::Windows::Forms::MessageBox::Show(
 			"Está seguro que el motor derecho ha sido cambiado correctamente?",
-			"Confirmar Mantenimiento del Motor Izquierdo",
+			"Confirmar Mantenimiento del Motor Derecho",
 			System::Windows::Forms::MessageBoxButtons::YesNo,
 			System::Windows::Forms::MessageBoxIcon::Warning
 		);
@@ -336,7 +336,7 @@ namespace AgroRobotView {
 	private: System::Void btnReemplazarServo_Click(System::Object^ sender, System::EventArgs^ e) {
 		System::Windows::Forms::DialogResult resultado = System::Windows::Forms::MessageBox::Show(
 			"Está seguro que el servomotor ha sido cambiado correctamente?",
-			"Confirmar Mantenimiento del Motor Izquierdo",
+			"Confirmar Mantenimiento del Servomotor",
 			System::Windows::Forms::MessageBoxButtons::YesNo,
 			System::Windows::Forms::MessageBoxIcon::Warning
 		);
