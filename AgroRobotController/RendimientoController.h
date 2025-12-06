@@ -8,7 +8,7 @@ namespace AgroRobotController {
 	public ref class RendimientoController {
 	private:
 		const double segPorAlimentacion = 1.0;
-		List<Rendimiento^>^ listaRendimiento;
+		List<Rendimiento^>^ listaRendimiento = gcnew List<Rendimiento^>();
 	
 	public:
 		RendimientoController();

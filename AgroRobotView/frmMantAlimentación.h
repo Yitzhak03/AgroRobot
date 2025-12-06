@@ -511,7 +511,8 @@ namespace AgroRobotView {
 	private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {}
 	
 	private: System::Void btonMotores_Click(System::Object^ sender, System::EventArgs^ e) {
-		frmRendimiento^ ventanaRendimiento = gcnew frmRendimiento();
+		frmRendimiento^ ventanaRendimiento = gcnew frmRendimiento(rendimientoController);
+		ventanaRendimiento->Show();
 	}
 };
 }

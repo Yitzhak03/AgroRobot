@@ -17,7 +17,9 @@ RendimientoController::RendimientoController() {
 		int id = Convert::ToInt32(datos[0]);
 		double horasMotorIzquierdo = Convert::ToDouble(datos[1]);
 		double horasMotorDerecho = Convert::ToDouble(datos[2]);
-		long ciclosServo = Convert::ToInt64(datos[3]);
+		double vidaEstimada = Convert::ToDouble(datos[3]);
+		long ciclosServo = Convert::ToInt64(datos[4]);
+		long ciclosEstimados = Convert::ToInt64(datos[5]);
 
 		Rendimiento^ rendimiento = gcnew Rendimiento(id, horasMotorIzquierdo, horasMotorDerecho, ciclosServo);
 		this->listaRendimiento->Add(rendimiento);
@@ -30,6 +32,7 @@ List<Rendimiento^>^ RendimientoController::buscarTodos() {
 
 void RendimientoController::agregarRendimiento(Rendimiento^ rendimiento) {
 	this->listaRendimiento->Add(rendimiento);
+	escribirArchivo();
 }
 
 void RendimientoController::actualizarxAnimal(int cantidadAnimales) {

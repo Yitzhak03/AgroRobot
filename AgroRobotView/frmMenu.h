@@ -29,7 +29,7 @@ namespace AgroRobotView {
 	// !!!!Comentar esta clase y sus llamadas en el construcctor para poder usar el diseñador visual !!!!
 	// Renderer: mantiene hover por defecto, pinta un fondo semitransparente sólo al hacer click
 	
-	/*public ref class ClickTransparentToolStripRenderer : public System::Windows::Forms::ToolStripProfessionalRenderer {
+	public ref class ClickTransparentToolStripRenderer : public System::Windows::Forms::ToolStripProfessionalRenderer {
 	private:
 		System::Drawing::Color pressedColor;
 	public:
@@ -53,7 +53,7 @@ namespace AgroRobotView {
 			System::Windows::Forms::ToolStripProfessionalRenderer::OnRenderMenuItemBackground(e);
 		}
 	};
-	*/
+	
 	
 	/// <summary>
 	/// Resumen de frmMenu
@@ -64,7 +64,7 @@ namespace AgroRobotView {
 		frmMenu(void)
 		{
 			InitializeComponent();
-			//this->menuStrip1->Renderer = gcnew ClickTransparentToolStripRenderer(System::Drawing::Color::FromArgb(120, 0, 0, 0));
+			this->menuStrip1->Renderer = gcnew ClickTransparentToolStripRenderer(System::Drawing::Color::FromArgb(120, 0, 0, 0));
 			this->formularioActivo = nullptr; // Inicializamos en nulo
 			this->CerrarSesion = false; // Inicializar en falso
 		}
@@ -73,7 +73,7 @@ namespace AgroRobotView {
 		{
 			this->usuario = usuario;
 			InitializeComponent();
-			//this->menuStrip1->Renderer = gcnew ClickTransparentToolStripRenderer(System::Drawing::Color::FromArgb(120, 0, 0, 0));
+			this->menuStrip1->Renderer = gcnew ClickTransparentToolStripRenderer(System::Drawing::Color::FromArgb(120, 0, 0, 0));
 			this->CerrarSesion = false; // Inicializar en falso
 		}
 	protected:

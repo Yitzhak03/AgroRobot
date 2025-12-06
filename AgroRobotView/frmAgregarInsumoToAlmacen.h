@@ -470,7 +470,7 @@ namespace AgroRobotView {
 	{
 		comboBox1->Items->Clear();
 		AlmacenController^ almacenCtrl = gcnew AlmacenController();
-		List<String^>^ nombres = almacenCtrl->obtenerNombresAlmacenes();
+		List<String^>^ nombres = almacenCtrl->obtenerNombresAlmacenes_BD();
 		for each (String ^ nombre in nombres) {
 			comboBox1->Items->Add(nombre);
 		}
@@ -509,7 +509,7 @@ namespace AgroRobotView {
 	{
 		String^ nombreAlmacen = comboBox1->Text;
 		AlmacenController^ aCtrl = gcnew AlmacenController();
-		Almacen^ almacen = aCtrl->obtenerAlmacenPorNombre(nombreAlmacen);
+		Almacen^ almacen = aCtrl->obtenerAlmacenPorNombre_BD(nombreAlmacen);
 		if (almacen != nullptr) {
 			StockInsumoController^ sCtrl = gcnew StockInsumoController();
 			List<StockInsumo^>^ listaStockInsumos = sCtrl->buscarPorIdAlmacen_BD(almacen->Id);
@@ -520,7 +520,7 @@ namespace AgroRobotView {
 	private: System::Void frmAgregarInsumoToAlmacen_Load(System::Object^ sender, System::EventArgs^ e)
 	{
 		AlmacenController^ aCtrl = gcnew AlmacenController();
-		String^ nombreAlmacen = aCtrl->buscarNombrePorId(this->idAlmacenDestino);
+		String^ nombreAlmacen = aCtrl->buscarNombrePorId_BD(this->idAlmacenDestino);
 		textBox2->Text = nombreAlmacen;
 		//Mostrar la grilla del almacén destino
 		StockInsumoController^ sCtrl = gcnew StockInsumoController();

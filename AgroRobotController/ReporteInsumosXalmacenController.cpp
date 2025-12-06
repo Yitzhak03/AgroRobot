@@ -13,7 +13,7 @@ List<ReporteInsumosXalmacen^>^ ReporteInsumosXalmacenController::generarReporte(
 	List<ReporteInsumosXalmacen^>^ reporte = gcnew List<ReporteInsumosXalmacen^>();
 	// Obtener la lista de almacenes
 	AlmacenController^ almCtrl = gcnew AlmacenController();
-	List<Almacen^>^ almacenes = almCtrl->readTxt();
+	List<Almacen^>^ almacenes = almCtrl->read_BD();
 	// Contar los insumos por cada almacen
 	StockInsumoController^ stockCtrl = gcnew StockInsumoController();
 	for each (Almacen^ a in almacenes) {

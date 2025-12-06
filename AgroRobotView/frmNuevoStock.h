@@ -314,7 +314,7 @@ namespace AgroRobotView {
 		//Buscar si existe el stock para este insumo en el nombre de almacen "Principal"
 		StockInsumoController^ stockCtrl = gcnew StockInsumoController();
 		AlmacenController^ almacenCtrl = gcnew AlmacenController();
-		int idAlmacen = almacenCtrl->buscarIdPorNombre("Principal");
+		int idAlmacen = almacenCtrl->buscarIdPorNombre_BD("Principal");
 		StockInsumo^ stockExistente = stockCtrl->buscarPorIdInsumoYAlmacen_BD(this->insumoSeleccionado->Id, idAlmacen);
 		if (stockExistente != nullptr) {
 			// Indicar estado del stock
@@ -341,7 +341,7 @@ namespace AgroRobotView {
 		//Validar si agregar nuevo stock o actualizar existente por el estado
 		if (this->textBox2->Text == "Nuevo") {
 			//Agregar nuevo stock
-			Almacen^ almacen = almacenCtrl->obtenerAlmacenPorNombre("Principal");
+			Almacen^ almacen = almacenCtrl->obtenerAlmacenPorNombre_BD("Principal");
 			StockInsumo^ nuevoStock = gcnew StockInsumo(
 				1,
 				this->insumoSeleccionado,

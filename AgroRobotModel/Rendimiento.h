@@ -11,11 +11,11 @@ namespace AgroRobotModel {
 		//Motores
 		double horasMotorIzquierdo;
 		double horasMotorDerecho;
-		double vidaUtilEstimadaMotor = 5000.0;
+		double vidaUtilEstimadaMotor = 500.0;
 
 		//Servomotor
 		long ciclosOperacionServo;
-		long vidaUtilEstimadaServo = 100000;
+		long vidaUtilEstimadaServo = 1000;
 
 	public:
 		Rendimiento();
